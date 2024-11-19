@@ -1,6 +1,6 @@
-# Turborepo Design System Starter
+# Unnamed Design System
 
-This guide explains how to use a React design system starter powered by:
+This repository contains OGP's Unnamed Design System powered by:
 
 - 🏎 [Turborepo](https://turbo.build/repo) — High-performance build system for Monorepos
 - 🚀 [React](https://reactjs.org/) — JavaScript library for user interfaces
@@ -14,14 +14,6 @@ As well as a few others tools preconfigured:
 - [Prettier](https://prettier.io) for code formatting
 - [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
 - [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e design-system
-```
 
 ### Useful Commands
 
@@ -41,11 +33,10 @@ Using Turborepo simplifies managing your design system monorepo, as you can have
 
 This Turborepo includes the following packages and applications:
 
-- `apps/docs`: Component documentation site with Storybook
+- `apps/storybook`: Component documentation site with Storybook
 - `packages/ui`: Core React components
-- `packages/utils`: Shared React utilities
-- `packages/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
-- `packages/eslint-config`: ESLint preset
+- `tooling/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
+- `tooling/eslint-config`: ESLint preset
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `pnpm add`.
 
@@ -171,22 +162,4 @@ To generate your changelog, run `pnpm changeset` locally:
 
 ### Releasing
 
-When you push your code to GitHub, the [GitHub Action](https://github.com/changesets/action) will run the `release` script defined in the root `package.json`:
-
-```bash
-turbo run build --filter=docs^... && changeset publish
-```
-
-Turborepo runs the `build` script for all publishable packages (excluding docs) and publishes the packages to npm. By default, this example includes `acme` as the npm organization. To change this, do the following:
-
-- Rename folders in `packages/*` to replace `acme` with your desired scope
-- Search and replace `acme` with your desired scope
-- Re-run `pnpm install`
-
-To publish packages to a private npm organization scope, **remove** the following from each of the `package.json`'s
-
-```diff
-- "publishConfig": {
--  "access": "public"
-- },
-```
+TODO
