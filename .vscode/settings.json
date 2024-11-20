@@ -7,10 +7,13 @@
   "tailwindCSS.experimental.configFile": {
     "apps/storybook/tailwind.config.js": [
       "packages/theme/**/*",
-      "packages/ui/**/*"
-    ],
+      "packages/components/**/*"
+    ]
   },
   "tailwindCSS.experimental.classRegex": [
     ["([\"'`][^\"'`]*.*?[\"'`])", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ]
+  ],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

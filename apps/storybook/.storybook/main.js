@@ -7,7 +7,7 @@ function getAbsolutePath(value) {
 const config = {
   stories: [
     "./welcome.stories.mdx",
-    "../../../packages/ui/**/stories/**/*.stories.@(js|jsx|ts|tsx)",
+    "../../../packages/components/**/stories/**/*.stories.@(js|jsx|ts|tsx)",
     "../../../packages/theme/stories/*.stories.@(js|jsx|ts|tsx)",
   ],
   addons: [
@@ -27,12 +27,7 @@ const config = {
       ...config,
       define: { "process.env": {} },
       resolve: {
-        alias: [
-          {
-            find: "ui",
-            replacement: resolve(__dirname, "../../../packages/ui/"),
-          },
-        ],
+        alias: [],
       },
     };
   },

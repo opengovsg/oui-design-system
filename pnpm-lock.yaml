@@ -20,9 +20,9 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@unnamed/ui':
+      '@unnamed/components':
         specifier: workspace:*
-        version: link:../../packages/ui
+        version: link:../../packages/components
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -79,6 +79,40 @@ importers:
         specifier: ^5.1.4
         version: 5.2.11(@types/node@20.12.12)
 
+  packages/components:
+    dependencies:
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-aria-components:
+        specifier: ^1.4.1
+        version: 1.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.61
+        version: 18.3.2
+      '@types/react-dom':
+        specifier: ^18.2.19
+        version: 18.3.0
+      '@unnamed/eslint-config':
+        specifier: workspace:*
+        version: link:../../tooling/eslint-config
+      '@unnamed/theme':
+        specifier: workspace:*
+        version: link:../theme
+      '@unnamed/typescript-config':
+        specifier: workspace:*
+        version: link:../../tooling/typescript-config
+      eslint:
+        specifier: ^8.57.0
+        version: 8.57.0
+      tsup:
+        specifier: ^8.0.2
+        version: 8.0.2(postcss@8.4.49)(typescript@5.5.4)
+      typescript:
+        specifier: 5.5.4
+        version: 5.5.4
+
   packages/theme:
     dependencies:
       react:
@@ -109,40 +143,6 @@ importers:
       tailwindcss:
         specifier: ^3.4.15
         version: 3.4.15
-      tsup:
-        specifier: ^8.0.2
-        version: 8.0.2(postcss@8.4.49)(typescript@5.5.4)
-      typescript:
-        specifier: 5.5.4
-        version: 5.5.4
-
-  packages/ui:
-    dependencies:
-      '@unnamed/theme':
-        specifier: workspace:*
-        version: link:../theme
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-aria-components:
-        specifier: ^1.4.1
-        version: 1.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    devDependencies:
-      '@types/react':
-        specifier: ^18.2.61
-        version: 18.3.2
-      '@types/react-dom':
-        specifier: ^18.2.19
-        version: 18.3.0
-      '@unnamed/eslint-config':
-        specifier: workspace:*
-        version: link:../../tooling/eslint-config
-      '@unnamed/typescript-config':
-        specifier: workspace:*
-        version: link:../../tooling/typescript-config
-      eslint:
-        specifier: ^8.57.0
-        version: 8.57.0
       tsup:
         specifier: ^8.0.2
         version: 8.0.2(postcss@8.4.49)(typescript@5.5.4)
@@ -6885,26 +6885,26 @@ snapshots:
     dependencies:
       '@formatjs/fast-memoize': 2.2.3
       '@formatjs/intl-localematcher': 0.5.8
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/fast-memoize@2.2.3':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-messageformat-parser@2.9.4':
     dependencies:
       '@formatjs/ecma402-abstract': 2.2.4
       '@formatjs/icu-skeleton-parser': 1.8.8
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/icu-skeleton-parser@1.8.8':
     dependencies:
       '@formatjs/ecma402-abstract': 2.2.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@formatjs/intl-localematcher@0.5.8':
     dependencies:
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -10285,7 +10285,7 @@ snapshots:
       '@formatjs/ecma402-abstract': 2.2.4
       '@formatjs/fast-memoize': 2.2.3
       '@formatjs/icu-messageformat-parser': 2.9.4
-      tslib: 2.6.2
+      tslib: 2.8.1
 
   ipaddr.js@1.9.1: {}
 
