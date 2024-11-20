@@ -1,18 +1,13 @@
 {
-  "name": "@unnamed/ui",
+  "name": "@unnamed/theme",
   "version": "0.0.0",
+  "main": "src/index.ts",
   "sideEffects": false,
-  "license": "MIT",
-  "exports": {
-    "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
-    }
-  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsup --dts",
-    "dev": "tsup --watch",
+    "build": "tsup src --dts",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
@@ -22,14 +17,16 @@
     "@unnamed/eslint-config": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
     "eslint": "^8.57.0",
+    "tailwindcss": "^3.4.15",
     "tsup": "^8.0.2",
     "typescript": "5.5.4"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-aria-components": "^1.4.1"
+    "tailwind-merge": "^2.5.4",
+    "tailwind-variants": "^0.3.0"
   },
   "peerDependencies": {
-    "@unnamed/theme": "workspace:*"
+    "tailwindcss": "^3.4.15"
   }
 }
