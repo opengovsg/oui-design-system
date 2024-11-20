@@ -1,6 +1,6 @@
 import { Meta } from "@storybook/react";
 import { Button, ButtonProps } from "../button";
-import { button } from "@unnamed/theme";
+import { buttonStyles } from "@unnamed/theme";
 import { useState } from "react";
 
 export default {
@@ -78,7 +78,7 @@ export default {
 const defaultProps = {
   children: "Button",
   spinnerPlacement: "start",
-  ...button.defaultVariants,
+  ...buttonStyles.defaultVariants,
 };
 
 const StateTemplate = (args: ButtonProps) => {

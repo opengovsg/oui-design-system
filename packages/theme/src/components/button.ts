@@ -1,7 +1,7 @@
 import { dataFocusVisibleClasses } from "../utils/classes";
 import { tv } from "../utils/tv";
 
-export const button = tv({
+export const buttonStyles = tv({
   base: [
     "box-border",
     "block",
@@ -39,7 +39,7 @@ export const button = tv({
       variant: "solid",
       colorScheme: "default",
       className:
-        "bg-brand-canvas-inverse text-base-content-inverse active:bg-brand-interaction-pressed hover:bg-brand-interaction-hover hover:text-base-content-inverse",
+        "bg-primary text-base-content-inverse active:bg-brand-interaction-pressed hover:bg-brand-interaction-hover hover:text-base-content-inverse",
     },
     {
       variant: "solid",

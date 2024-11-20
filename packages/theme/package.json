@@ -7,7 +7,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup src --dts",
+    "build": "tsup --dts",
     "lint": "eslint . --max-warnings 0",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
@@ -24,7 +24,8 @@
   "dependencies": {
     "react": "^18.2.0",
     "tailwind-merge": "^2.5.4",
-    "tailwind-variants": "^0.3.0"
+    "tailwind-variants": "^0.3.0",
+    "tailwindcss-react-aria-components": "^1.1.6"
   },
   "peerDependencies": {
     "tailwindcss": "^3.4.15"

@@ -26,7 +26,7 @@ export const parameters: Preview["parameters"] = {
     },
   },
   darkMode: {
-    current: "dark",
+    current: "light",
     stylePreview: true,
     darkClass: "dark",
     lightClass: "light",

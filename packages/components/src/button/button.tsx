@@ -7,11 +7,11 @@ import {
   composeRenderProps,
 } from "react-aria-components";
 
-import { button, VariantProps } from "@unnamed/theme";
+import { buttonStyles, VariantProps } from "@unnamed/theme";
 
 export interface ButtonProps
   extends AriaButtonProps,
-    VariantProps<typeof button> {}
+    VariantProps<typeof buttonStyles> {}
 
 /**
  * You probaby do not want to use this component if you are rendering a link.
@@ -24,7 +24,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
         ref={ref}
         className={composeRenderProps(className, (className, renderProps) =>
-          button({
+          buttonStyles({
             ...renderProps,
             variant,
             size,

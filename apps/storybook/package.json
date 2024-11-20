@@ -10,9 +10,12 @@
     "lint": "eslint ./stories/*.stories.tsx --max-warnings 0"
   },
   "dependencies": {
+    "@storybook/theming": "^8.4.4",
     "@unnamed/components": "workspace:*",
+    "@unnamed/theme": "workspace:*",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "storybook-dark-mode": "^4.0.2"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^8.2.6",

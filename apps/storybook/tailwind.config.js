@@ -1,3 +1,6 @@
+const colors = require("tailwindcss/colors");
+const { config } = require("@unnamed/theme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -9,5 +12,6 @@ module.exports = {
     "../../packages/theme/stories/**/*.{js,jsx,ts,tsx}",
   ],
   darkMode: "class",
+  presets: [config],
   plugins: [],
 };

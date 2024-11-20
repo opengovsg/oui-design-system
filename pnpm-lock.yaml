@@ -20,15 +20,24 @@ importers:
 
   apps/storybook:
     dependencies:
+      '@storybook/theming':
+        specifier: ^8.4.4
+        version: 8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
       '@unnamed/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@unnamed/theme':
+        specifier: workspace:*
+        version: link:../../packages/theme
       react:
         specifier: ^18.2.0
         version: 18.3.1
       react-dom:
         specifier: ^18.2.0
         version: 18.3.1(react@18.3.1)
+      storybook-dark-mode:
+        specifier: ^4.0.2
+        version: 4.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
     devDependencies:
       '@storybook/addon-actions':
         specifier: ^8.2.6
@@ -88,6 +97,9 @@ importers:
         specifier: ^1.4.1
         version: 1.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     devDependencies:
+      '@storybook/react':
+        specifier: ^8.2.6
+        version: 8.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))(typescript@5.5.4)
       '@types/react':
         specifier: ^18.2.61
         version: 18.3.2
@@ -124,6 +136,9 @@ importers:
       tailwind-variants:
         specifier: ^0.3.0
         version: 0.3.0(tailwindcss@3.4.15)
+      tailwindcss-react-aria-components:
+        specifier: ^1.1.6
+        version: 1.1.6(tailwindcss@3.4.15)
     devDependencies:
       '@types/react':
         specifier: ^18.2.61
@@ -2027,6 +2042,11 @@ packages:
     peerDependencies:
       storybook: ^8.2.6
 
+  '@storybook/core-events@8.4.4':
+    resolution: {integrity: sha512-pkwr0UU95WSJtn9Q7q5ip0x8WxerLf5z4CWonvymGu9Z0bZyMXeA+GOEt/YQIJgqI4fbTK8Jqi+suC6ibUu9oQ==}
+    peerDependencies:
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
+
   '@storybook/core@8.2.6':
     resolution: {integrity: sha512-XY71g3AcpD6IiER9k9Lt+vlUMYfPIYgWekd7e0Ggzz2gJkPuLunKEdQccLGDSHf5OFAobHhrTJc7ZsvWhmDMag==}
 
@@ -2089,10 +2109,10 @@ packages:
       typescript:
         optional: true
 
-  '@storybook/theming@8.2.6':
-    resolution: {integrity: sha512-ICnYuLIVsYifVCMQljdHgrp+5vAquNybHxDGWiPeOxBicotwHF8rLhTckD2CdVQbMp0jk6r6jetvjXbFJ2MbvQ==}
+  '@storybook/theming@8.4.4':
+    resolution: {integrity: sha512-iq4yt3Fx35ZV5owNC//E6G+QPV19xHHVN2Ugi3p7KOSFK3chuXX9mxZ1rfir+t+U30a5EPOEnlsY3/1LXn7aTw==}
     peerDependencies:
-      storybook: ^8.2.6
+      storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
   '@swc/helpers@0.5.15':
     resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
@@ -5139,6 +5159,9 @@ packages:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
 
+  storybook-dark-mode@4.0.2:
+    resolution: {integrity: sha512-zjcwwQ01R5t1VsakA6alc2JDIRVtavryW8J3E3eKLDIlAMcvsgtpxlelWkZs2cuNspk6Z10XzhQVrUWtYc3F0w==}
+
   storybook@8.2.6:
     resolution: {integrity: sha512-8j30wDxQmkcqI0fWcSYFsUCjErsY1yTWbTW+yjbwM8DyW18Cud6CwbFRCxjFsH+2M0CjP6Pqs/m1PGI0vcQscQ==}
     hasBin: true
@@ -5246,6 +5269,11 @@ packages:
   tailwind-variants@0.3.0:
     resolution: {integrity: sha512-ho2k5kn+LB1fT5XdNS3Clb96zieWxbStE9wNLK7D0AV64kdZMaYzAKo0fWl6fXLPY99ffF9oBJnIj5escEl/8A==}
     engines: {node: '>=16.x', pnpm: '>=7.x'}
+    peerDependencies:
+      tailwindcss: '*'
+
+  tailwindcss-react-aria-components@1.1.6:
+    resolution: {integrity: sha512-w486YWkNi9E/bLZE0xNdy+xkY0MH3PgsI+WLcszLIHdnylDOE5Os0zcVDTRsKmf9KLfHOlNVu2mj4bDNIak9EQ==}
     peerDependencies:
       tailwindcss: '*'
 
@@ -8238,6 +8266,10 @@ snapshots:
     dependencies:
       storybook: 8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5))
 
+  '@storybook/core-events@8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))':
+    dependencies:
+      storybook: 8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5))
+
   '@storybook/core@8.2.6':
     dependencies:
       '@storybook/csf': 0.1.11
@@ -8319,7 +8351,7 @@ snapshots:
       '@storybook/manager-api': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
       '@storybook/preview-api': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
       '@storybook/react-dom-shim': 8.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
-      '@storybook/theming': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      '@storybook/theming': 8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
       '@types/node': 18.19.33
@@ -8341,7 +8373,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.5.4
 
-  '@storybook/theming@8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))':
+  '@storybook/theming@8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))':
     dependencies:
       storybook: 8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5))
 
@@ -12052,6 +12084,21 @@ snapshots:
 
   statuses@2.0.1: {}
 
+  storybook-dark-mode@4.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5))):
+    dependencies:
+      '@storybook/components': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      '@storybook/core-events': 8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      '@storybook/global': 5.0.0
+      '@storybook/icons': 1.2.9(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@storybook/manager-api': 8.2.6(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      '@storybook/theming': 8.4.4(storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)))
+      fast-deep-equal: 3.1.3
+      memoizerific: 1.11.3
+    transitivePeerDependencies:
+      - react
+      - react-dom
+      - storybook
+
   storybook@8.2.6(@babel/preset-env@7.24.5(@babel/core@7.24.5)):
     dependencies:
       '@babel/core': 7.24.5
@@ -12211,6 +12258,10 @@ snapshots:
   tailwind-variants@0.3.0(tailwindcss@3.4.15):
     dependencies:
       tailwind-merge: 2.5.4
+      tailwindcss: 3.4.15
+
+  tailwindcss-react-aria-components@1.1.6(tailwindcss@3.4.15):
+    dependencies:
       tailwindcss: 3.4.15
 
   tailwindcss@3.4.15:
