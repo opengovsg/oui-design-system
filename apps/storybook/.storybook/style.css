@@ -1,14 +1,3 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* 
-TODO: Inject with theme manager instead of hardcoding variables here. Or even import from a theme package.
- */
-:root {
-  --background-primary-default: #006bff;
-}
-
-:root.dark {
-  --background-primary-default: #1a202c;
-}

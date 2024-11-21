@@ -1,5 +1,6 @@
 const colors = require("tailwindcss/colors");
-const { config } = require("@unnamed/theme");
+const { basePreset } = require("@unnamed/theme");
+const { ogpDsColorPlugin } = require("@unnamed/theme/plugins");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,6 +13,18 @@ module.exports = {
     "../../packages/theme/stories/**/*.{js,jsx,ts,tsx}",
   ],
   darkMode: "class",
-  presets: [config],
-  plugins: [],
+  presets: [basePreset],
+  plugins: [
+    // Example of using a plugin from the theme package
+    ogpDsColorPlugin({
+      light: {
+        "bg-primary-default": "0 107 255",
+        "content-fg": "255 255 255",
+      },
+      dark: {
+        "bg-primary-default": "26 32 44",
+        "content-fg": "255 255 255",
+      },
+    }),
+  ],
 };

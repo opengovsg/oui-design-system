@@ -39,7 +39,7 @@ export const buttonStyles = tv({
       variant: "solid",
       colorScheme: "default",
       className:
-        "bg-primary text-base-content-inverse active:bg-brand-interaction-pressed hover:bg-brand-interaction-hover hover:text-base-content-inverse",
+        "bg-primary text-content-fg active:bg-brand-interaction-pressed hover:bg-brand-interaction-hover hover:text-content-fg",
     },
     {
       variant: "solid",
@@ -50,7 +50,7 @@ export const buttonStyles = tv({
       variant: "outline",
       colorScheme: "inverse",
       className:
-        "border border-base-divider-inverse text-base-content-inverse hover:bg-base-canvas-inverse-overlay/80 hover:text-base-content-inverse",
+        "border border-base-divider-inverse text-content-fg hover:bg-base-canvas-inverse-overlay/80 hover:text-content-fg",
     },
     {
       variant: "outline",
