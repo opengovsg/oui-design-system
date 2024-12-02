@@ -24,14 +24,18 @@
     "@unnamed/theme": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
     "eslint": "^8.57.0",
+    "motion": "^11.12.0",
     "tsup": "^8.0.2",
     "typescript": "5.5.4"
   },
   "dependencies": {
+    "@react-aria/utils": "^3.26.0",
+    "nanoid": "^5.0.9",
     "react": "^18.2.0",
     "react-aria-components": "^1.4.1"
   },
   "peerDependencies": {
-    "@unnamed/theme": "workspace:*"
+    "@unnamed/theme": "workspace:*",
+    "motion": ">=11.12.0 || >=12.0.0-alpha.1"
   }
 }

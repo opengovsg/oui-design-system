@@ -19,11 +19,15 @@ module.exports = {
     ogpDsColorPlugin({
       light: {
         "bg-primary-default": "0 107 255",
+        "bg-primary-hover": "5 82 196",
         "content-fg": "255 255 255",
+        "outline-focus": "0 107 255",
       },
       dark: {
-        "bg-primary-default": "26 32 44",
+        "bg-primary-default": "0 107 255",
+        "bg-primary-hover": "5 82 196",
         "content-fg": "255 255 255",
+        "outline-focus": "0 107 255",
       },
     }),
   ],

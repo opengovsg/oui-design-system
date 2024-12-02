@@ -11,6 +11,8 @@ export const buttonStyles = tv({
     "rounded",
     "text-center",
     "transition",
+    "overflow-hidden",
+    "relative",
     ...dataFocusVisibleClasses,
   ],
   variants: {
@@ -39,7 +41,7 @@ export const buttonStyles = tv({
       variant: "solid",
       colorScheme: "default",
       className:
-        "bg-primary text-content-fg active:bg-brand-interaction-pressed hover:bg-brand-interaction-hover hover:text-content-fg",
+        "bg-primary hover:bg-primary-hover active:bg-primary-active text-content-fg",
     },
     {
       variant: "solid",
@@ -68,18 +70,6 @@ export const buttonStyles = tv({
       size: "base",
       // -1 px for border
       className: "px-[19px] py-[11px]",
-    },
-    {
-      variant: "solid",
-      isFocusVisible: true,
-      className:
-        "bg-utility-highlight text-base-content-strong transition-none",
-    },
-    {
-      variant: "outline",
-      isFocusVisible: true,
-      className:
-        "bg-utility-highlight text-base-content-strong transition-none",
     },
   ],
   defaultVariants: {
