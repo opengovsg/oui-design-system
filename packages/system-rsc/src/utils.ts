@@ -1,12 +1,14 @@
 import { forwardRef as baseForwardRef } from "react";
 import type { WeakValidationMap } from "prop-types";
-import { As, MergeWithAs, PropsOf, RightJoinProps } from "./types";
+import type { As, MergeWithAs, PropsOf, RightJoinProps } from "./types";
 
-export type InternalForwardRefRenderFunction<
+export interface InternalForwardRefRenderFunction<
   Component extends As,
+  // eslint-disable-next-line @typescript-eslint/ban-types -- explicit object type
   Props extends object = {},
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
   OmitKeys extends keyof any = never,
-> = {
+> {
   <AsComponent extends As = Component>(
     props: MergeWithAs<
       React.ComponentPropsWithoutRef<Component>,
@@ -19,20 +21,22 @@ export type InternalForwardRefRenderFunction<
   defaultProps?: Partial<Props> | undefined;
   propTypes?: WeakValidationMap<Props> | undefined;
   displayName?: string | undefined;
-};
+}
 
 export function forwardRef<
   Component extends As,
   Props extends object,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
   OmitKeys extends keyof any = never,
 >(
   component: React.ForwardRefRenderFunction<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
     any,
     RightJoinProps<PropsOf<Component>, Props> & {
       as?: As;
     }
   >
-) {
+): InternalForwardRefRenderFunction<Component, Props, OmitKeys> {
   return baseForwardRef(component) as InternalForwardRefRenderFunction<
     Component,
     Props,
@@ -41,12 +45,14 @@ export function forwardRef<
 }
 
 export const mapPropsVariants = <
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
   T extends Record<string, any>,
   K extends keyof T,
 >(
   props: T,
   variantKeys?: K[],
   removeVariantProps = true
+  // eslint-disable-next-line @typescript-eslint/ban-types -- explicit object type
 ): readonly [Omit<T, K> | T, Pick<T, K> | {}] => {
   if (!variantKeys) {
     return [props, {}];
@@ -56,9 +62,8 @@ export const mapPropsVariants = <
     // Only include the key in `picked` if it exists in `props`
     if (key in props) {
       return { ...acc, [key]: props[key] };
-    } else {
-      return acc;
     }
+    return acc;
   }, {});
 
   if (removeVariantProps) {
@@ -67,7 +72,6 @@ export const mapPropsVariants = <
       .reduce((acc, key) => ({ ...acc, [key]: props[key as keyof T] }), {});
 
     return [omitted, picked] as [Omit<T, K>, Pick<T, K>];
-  } else {
-    return [props, picked] as [T, Pick<T, K>];
   }
+  return [props, picked] as [T, Pick<T, K>];
 };

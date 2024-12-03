@@ -14,10 +14,11 @@
     "build": "tsup --dts",
     "dev": "tsup --watch",
     "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --max-warnings 0 --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@storybook/react": "^8.2.6",
+    "@storybook/react": "8.4.6",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@unnamed/eslint-config": "workspace:*",
@@ -30,9 +31,9 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@unnamed/system-rsc": "workspace:*",
-    "@unnamed/internal-utils": "workspace:*",
     "@react-aria/utils": "^3.26.0",
+    "@unnamed/internal-utils": "workspace:*",
+    "@unnamed/system-rsc": "workspace:*",
     "nanoid": "^5.0.9",
     "react": "^18.2.0",
     "react-aria-components": "^1.4.1"

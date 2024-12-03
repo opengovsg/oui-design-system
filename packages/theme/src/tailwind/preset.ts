@@ -1,6 +1,5 @@
 import type { Config } from "tailwindcss";
 import racPlugin from "tailwindcss-react-aria-components";
-
 import { animations } from "./animations";
 
 /**

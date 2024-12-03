@@ -1,15 +1,14 @@
 import { useCallback, useState } from "react";
 import type { Key } from "react";
-
 import { nanoid } from "nanoid";
-import { PressEvent } from "react-aria-components";
+import type { PressEvent } from "react-aria-components";
 
-export type RippleType = {
+export interface RippleType {
   key: React.Key;
   x: number;
   y: number;
   size: number;
-};
+}
 
 export const useRipple = () => {
   const [ripples, setRipples] = useState<RippleType[]>([]);

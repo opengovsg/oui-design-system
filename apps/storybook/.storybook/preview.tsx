@@ -21,6 +21,7 @@ export const parameters: Preview["parameters"] = {
   },
   controls: {
     matchers: {
+      // eslint-disable-next-line prefer-named-capture-group -- unnecessary
       color: /(background|color)$/i,
       date: /Date$/,
     },
@@ -54,7 +55,8 @@ export const globalTypes: Preview["globalTypes"] = {
           locale
         ),
         right:
-          // @ts-ignore
+          // @ts-expect-error - Will always exist.
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unnecessary-condition -- may be undefined, taking the risk
           new Intl.Locale(locale)?.textInfo?.direction === "rtl"
             ? "Right to Left"
             : undefined,

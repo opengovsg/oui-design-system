@@ -26,14 +26,17 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      typescript: {
-        project,
-      },
+      typescript: [
+        "packages/*/tsconfig.json",
+        "apps/*/tsconfig.json",
+        "tooling/*/tsconfig.json",
+      ],
     },
   },
   ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js", "**/*.css"],
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
   },
 };

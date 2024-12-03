@@ -1,4 +1,4 @@
-import { VariantProps } from "tailwind-variants";
+import type { VariantProps } from "tailwind-variants";
 import { dataFocusVisibleClasses } from "../utils/classes";
 import { tv } from "../utils/tv";
 

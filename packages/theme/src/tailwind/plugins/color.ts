@@ -1,6 +1,7 @@
 import plugin from "tailwindcss/plugin";
 
 // TODO: decide between interface
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- TODO: remove this
 interface ColorTokensAlt {
   bg: {
     default: string;

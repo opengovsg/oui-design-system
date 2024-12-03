@@ -16,12 +16,12 @@ module.exports = {
     "plugin:storybook/recommended",
     "plugin:mdx/recommended",
     ...[
-      "@vercel/style-guide/eslint/node",
-      "@vercel/style-guide/eslint/typescript",
       "@vercel/style-guide/eslint/browser",
+      "@vercel/style-guide/eslint/typescript",
       "@vercel/style-guide/eslint/react",
     ].map(require.resolve),
   ],
+  ignorePatterns: ["!.storybook"],
   parserOptions: {
     project,
   },
@@ -32,14 +32,17 @@ module.exports = {
   },
   settings: {
     "import/resolver": {
-      typescript: {
-        project,
-      },
+      typescript: [
+        "packages/*/tsconfig.json",
+        "apps/*/tsconfig.json",
+        "tooling/*/tsconfig.json",
+      ],
     },
   },
   ignorePatterns: ["node_modules/", "dist/"],
   // add rules configurations here
   rules: {
     "import/no-default-export": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
   },
 };

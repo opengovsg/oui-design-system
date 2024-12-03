@@ -1,5 +1,6 @@
 import { objectToDeps } from "@unnamed/internal-utils";
-import { HtmlUiProps, mapPropsVariants, PropGetter } from "@unnamed/system-rsc";
+import type { HtmlUiProps, PropGetter } from "@unnamed/system-rsc";
+import { mapPropsVariants } from "@unnamed/system-rsc";
 import {
   clsx,
   spinnerStyles,
@@ -7,10 +8,11 @@ import {
   type SpinnerSlots,
   type SpinnerVariantProps,
 } from "@unnamed/theme";
-import { useMemo, useCallback, Ref } from "react";
+import type { Ref } from "react";
+import { useMemo, useCallback } from "react";
 
 export interface UseSpinnerProps
-  extends Omit<HtmlUiProps<"div">, "children">,
+  extends Omit<HtmlUiProps, "children">,
     SpinnerVariantProps {
   /**
    * Ref to the DOM node.
@@ -44,6 +46,7 @@ export const useSpinner = (originalProps: UseSpinnerProps) => {
 
   const slots = useMemo(
     () => spinnerStyles({ ...variantProps }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- explicit stringify
     [objectToDeps(variantProps)]
   );
 
@@ -51,6 +54,7 @@ export const useSpinner = (originalProps: UseSpinnerProps) => {
 
   const ariaLabel = useMemo(() => {
     return !otherProps["aria-label"] ? "Loading" : "";
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only need to check specific prop
   }, [otherProps["aria-label"]]);
 
   const getSpinnerProps = useCallback<PropGetter>(

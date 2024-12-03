@@ -1,9 +1,9 @@
-import { Meta } from "@storybook/react";
-import { Button, ButtonProps } from "../button";
+import type { Meta } from "@storybook/react";
 import { buttonStyles } from "@unnamed/theme";
 import { useState } from "react";
-
 import { AlertTriangle, HeadphonesIcon, User2Icon } from "lucide-react";
+import type { ButtonProps } from "../button";
+import { Button } from "../button";
 
 export default {
   title: "Components/Button",
@@ -83,11 +83,11 @@ const defaultProps = {
   ...buttonStyles.defaultVariants,
 };
 
-const StateTemplate = (args: ButtonProps) => {
+function StateTemplate(args: ButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePress = () => {
-    // eslint-disable-next-line no-console
+    // eslint-disable-next-line no-console -- storybook explicit log
     console.log("Pressed");
     setIsOpen((prev) => !prev);
   };
@@ -102,7 +102,7 @@ const StateTemplate = (args: ButtonProps) => {
       {isOpen ? "Close" : "Open"}
     </Button>
   );
-};
+}
 
 export const Default = {
   args: {

@@ -7,7 +7,7 @@
     "build": "storybook build --docs",
     "preview-storybook": "serve storybook-static",
     "clean": "rm -rf .turbo && rm -rf node_modules",
-    "lint": "eslint ./stories/*.stories.tsx --max-warnings 0"
+    "lint": "eslint .storybook --max-warnings 0"
   },
   "dependencies": {
     "@unnamed/components": "workspace:*",
@@ -20,9 +20,10 @@
     "@storybook/addon-actions": "8.4.6",
     "@storybook/addon-essentials": "8.4.6",
     "@storybook/addon-links": "8.4.6",
-    "@storybook/theming": "8.4.6",
     "@storybook/react": "8.4.6",
     "@storybook/react-vite": "8.4.6",
+    "@storybook/theming": "8.4.6",
+    "@types/node": "^22.10.1",
     "@unnamed/eslint-config": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
