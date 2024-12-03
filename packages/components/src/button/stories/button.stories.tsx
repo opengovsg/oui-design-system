@@ -148,11 +148,11 @@ export const IconButton = {
   },
 };
 
-export const IsLoading = {
+export const IsPending = {
   args: {
     ...defaultProps,
     color: "primary",
-    isLoading: true,
+    isPending: true,
   },
 };
 

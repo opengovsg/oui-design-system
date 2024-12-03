@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import type { ButtonProps as AriaButtonProps } from "react-aria-components";
 import {
   Button as AriaButton,
@@ -11,10 +11,15 @@ import { chain } from "@react-aria/utils";
 
 import { buttonStyles, VariantProps } from "@unnamed/theme";
 import { Ripple, useRipple } from "../ripple";
+import { Spinner, SpinnerProps } from "../spinner";
 
 export interface ButtonProps
   extends Omit<AriaButtonProps, "children">,
     VariantProps<typeof buttonStyles> {
+  /**
+   * Whether the button should display a ripple effect on press.
+   * @default false
+   */
   disableRipple?: boolean;
   children: React.ReactNode;
   /**
@@ -25,6 +30,17 @@ export interface ButtonProps
    * The button end content.
    */
   endContent?: React.ReactNode;
+  /**
+   * Spinner to display when loading.
+   * @default @unnamed/components/spinner
+   */
+  spinner?: React.ReactNode;
+
+  /**
+   * The spinner placement.
+   * @default "start"
+   */
+  spinnerPlacement?: "start" | "end";
 }
 
 /**
@@ -39,10 +55,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       colorScheme,
-      size,
+      size = "md",
+      spinnerPlacement = "start",
       onPress,
       children,
       disableRipple,
+      isPending,
+      spinner: spinnerProp,
       ...props
     },
     ref
@@ -53,9 +72,24 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       ripples,
     } = useRipple();
 
+    const spinner = useMemo(() => {
+      if (spinnerProp) {
+        return spinnerProp;
+      }
+      const buttonSpinnerSizeMap: Record<string, SpinnerProps["size"]> = {
+        sm: "sm",
+        md: "sm",
+        lg: "md",
+      };
+
+      const spinnerSize = buttonSpinnerSizeMap[size];
+      return <Spinner size={spinnerSize} />;
+    }, []);
+
     return (
       <AriaButton
         {...props}
+        isPending={isPending}
         ref={ref}
         onPress={chain(onPress, onPressRipple)}
         className={composeRenderProps(className, (className, renderProps) =>
@@ -69,7 +103,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       >
         {startContent}
+        {isPending && spinnerPlacement === "start" && spinner}
         {children}
+        {isPending && spinnerPlacement === "end" && spinner}
         {endContent}
         {!disableRipple && <Ripple ripples={ripples} onClear={onClearRipple} />}
       </AriaButton>

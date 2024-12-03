@@ -36,7 +36,7 @@ export const buttonStyles = tv({
       true: "cursor-not-allowed",
     },
     size: {
-      base: "prose-headline-base-medium min-h-12 px-5 py-3 gap-2",
+      md: "prose-headline-base-medium min-h-12 px-5 py-3 gap-2",
       lg: "prose-headline-lg-medium min-h-[3.25rem] px-6 py-3.5 gap-3",
     },
   },
@@ -71,7 +71,7 @@ export const buttonStyles = tv({
     },
     {
       variant: "outline",
-      size: "base",
+      size: "md",
       // -1 px for border
       className: "px-[19px] py-[11px]",
     },
@@ -79,7 +79,7 @@ export const buttonStyles = tv({
   defaultVariants: {
     variant: "solid",
     colorScheme: "default",
-    size: "base",
+    size: "md",
   },
 });
 
