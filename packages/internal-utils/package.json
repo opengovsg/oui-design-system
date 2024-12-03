@@ -1,0 +1,37 @@
+{
+  "name": "@unnamed/internal-utils",
+  "description": "Internal utils shared across packages",
+  "version": "0.0.0",
+  "sideEffects": false,
+  "main": "src/index.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup --dts",
+    "dev": "tsup --watch",
+    "lint": "eslint . --max-warnings 0",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@storybook/react": "^8.2.6",
+    "@types/react": "^18.2.61",
+    "@types/react-dom": "^18.2.19",
+    "@unnamed/eslint-config": "workspace:*",
+    "@unnamed/theme": "workspace:*",
+    "@unnamed/typescript-config": "workspace:*",
+    "eslint": "^8.57.0",
+    "tsup": "^8.0.2",
+    "typescript": "5.5.4"
+  },
+  "dependencies": {
+    "@react-aria/utils": "^3.26.0",
+    "nanoid": "^5.0.9",
+    "react": "^18.2.0",
+    "react-aria-components": "^1.4.1"
+  },
+  "peerDependencies": {
+    "@unnamed/theme": "workspace:*",
+    "motion": ">=11.12.0 || >=12.0.0-alpha.1"
+  }
+}
