@@ -3,7 +3,7 @@ import { Button, ButtonProps } from "../button";
 import { buttonStyles } from "@unnamed/theme";
 import { useState } from "react";
 
-import { AlertTriangle, User2Icon } from "lucide-react";
+import { AlertTriangle, HeadphonesIcon, User2Icon } from "lucide-react";
 
 export default {
   title: "Components/Button",
@@ -144,7 +144,7 @@ export const IconButton = {
   args: {
     ...defaultProps,
     isIconOnly: true,
-    // children: <HeadphonesIcon className="w-5 h-5" />,
+    children: <HeadphonesIcon className="w-5 h-5" />,
   },
 };
 

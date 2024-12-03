@@ -29,11 +29,23 @@ export const buttonStyles = tv({
       default: "",
       inverse: "",
     },
+    radius: {
+      none: "rounded-none",
+      sm: "rounded-sm",
+      default: "rounded",
+      md: "rounded-md",
+      lg: "rounded-lg",
+      full: "rounded-full",
+    },
     isFocusVisible: {
       true: "",
     },
     isDisabled: {
       true: "cursor-not-allowed",
+    },
+    isIconOnly: {
+      true: "px-0 !gap-0",
+      false: "[&>svg]:max-w-[theme(spacing.8)]",
     },
     size: {
       md: "prose-headline-base-medium min-h-12 px-5 py-3 gap-2",
@@ -75,11 +87,22 @@ export const buttonStyles = tv({
       // -1 px for border
       className: "px-[19px] py-[11px]",
     },
+    {
+      isIconOnly: true,
+      size: "md",
+      class: "min-w-10 w-10 h-10",
+    },
+    {
+      isIconOnly: true,
+      size: "lg",
+      class: "min-w-12 w-12 h-12",
+    },
   ],
   defaultVariants: {
     variant: "solid",
     colorScheme: "default",
     size: "md",
+    radius: "default",
   },
 });
 

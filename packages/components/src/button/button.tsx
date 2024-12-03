@@ -41,6 +41,11 @@ export interface ButtonProps
    * @default "start"
    */
   spinnerPlacement?: "start" | "end";
+
+  /**
+   * Display a button without text and show the icon passed to the `children` prop.
+   */
+  isIconOnly?: boolean;
 }
 
 /**
@@ -55,6 +60,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant,
       colorScheme,
+      radius,
       size = "md",
       spinnerPlacement = "start",
       onPress,
@@ -62,6 +68,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       disableRipple,
       isPending,
       spinner: spinnerProp,
+      isIconOnly,
       ...props
     },
     ref
@@ -99,12 +106,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             size,
             className,
             colorScheme,
+            radius,
           })
         )}
       >
         {startContent}
         {isPending && spinnerPlacement === "start" && spinner}
-        {children}
+        {isPending && isIconOnly ? null : children}
         {isPending && spinnerPlacement === "end" && spinner}
         {endContent}
         {!disableRipple && <Ripple ripples={ripples} onClear={onClearRipple} />}
