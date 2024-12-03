@@ -17,6 +17,14 @@ export interface ButtonProps
     VariantProps<typeof buttonStyles> {
   disableRipple?: boolean;
   children: React.ReactNode;
+  /**
+   * The button start content.
+   */
+  startContent?: React.ReactNode;
+  /**
+   * The button end content.
+   */
+  endContent?: React.ReactNode;
 }
 
 /**
@@ -26,6 +34,8 @@ export interface ButtonProps
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      startContent,
+      endContent,
       className,
       variant,
       colorScheme,
@@ -58,7 +68,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           })
         )}
       >
+        {startContent}
         {children}
+        {endContent}
         {!disableRipple && <Ripple ripples={ripples} onClear={onClearRipple} />}
       </AriaButton>
     );

@@ -24,6 +24,7 @@
     "@unnamed/theme": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
     "eslint": "^8.57.0",
+    "lucide-react": "^0.462.0",
     "motion": "^11.12.0",
     "tsup": "^8.0.2",
     "typescript": "5.5.4"

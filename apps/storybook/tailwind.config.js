@@ -20,14 +20,18 @@ module.exports = {
       light: {
         "bg-primary-default": "0 107 255",
         "bg-primary-hover": "5 82 196",
+        "bg-primary-active": "0 64 146",
         "content-fg": "255 255 255",
         "outline-focus": "0 107 255",
+        "bg-system-disabled": "245 245 245",
       },
       dark: {
         "bg-primary-default": "0 107 255",
         "bg-primary-hover": "5 82 196",
+        "bg-primary-active": "0 64 146",
         "content-fg": "255 255 255",
         "outline-focus": "0 107 255",
+        "bg-system-disabled": "26 26 26",
       },
     }),
   ],

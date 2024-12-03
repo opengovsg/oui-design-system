@@ -3,10 +3,13 @@ import { tv } from "../utils/tv";
 
 export const buttonStyles = tv({
   base: [
+    "group",
+    "inline-flex",
+    "items-center",
+    "justify-center",
     "box-border",
-    "block",
     "h-full",
-    "w-fit",
+    "min-w-max",
     "cursor-pointer",
     "rounded",
     "text-center",
@@ -32,8 +35,8 @@ export const buttonStyles = tv({
       true: "cursor-not-allowed",
     },
     size: {
-      base: "prose-headline-base-medium min-h-12 px-5 py-3",
-      lg: "prose-headline-lg-medium min-h-[3.25rem] px-6 py-3.5",
+      base: "prose-headline-base-medium min-h-12 px-5 py-3 gap-2",
+      lg: "prose-headline-lg-medium min-h-[3.25rem] px-6 py-3.5 gap-3",
     },
   },
   compoundVariants: [
@@ -41,7 +44,7 @@ export const buttonStyles = tv({
       variant: "solid",
       colorScheme: "default",
       className:
-        "bg-primary hover:bg-primary-hover active:bg-primary-active text-content-fg",
+        "bg-primary hover:bg-primary-hover text-content-fg disabled:bg-system-disabled",
     },
     {
       variant: "solid",

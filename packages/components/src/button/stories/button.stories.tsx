@@ -3,6 +3,8 @@ import { Button, ButtonProps } from "../button";
 import { buttonStyles } from "@unnamed/theme";
 import { useState } from "react";
 
+import { AlertTriangle, User2Icon } from "lucide-react";
+
 export default {
   title: "Components/Button",
   component: Button,
@@ -133,8 +135,8 @@ export const DisableRipple = {
 export const WithIcons = {
   args: {
     ...defaultProps,
-    // startContent: <Notification className="fill-current" />,
-    // endContent: <Camera className="fill-current" />,
+    startContent: <AlertTriangle className="fill-current" />,
+    endContent: <User2Icon className="fill-current" />,
   },
 };
 
