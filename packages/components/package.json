@@ -30,6 +30,8 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
+    "@unnamed/system-rsc": "workspace:*",
+    "@unnamed/internal-utils": "workspace:*",
     "@react-aria/utils": "^3.26.0",
     "nanoid": "^5.0.9",
     "react": "^18.2.0",

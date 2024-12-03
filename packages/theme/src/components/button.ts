@@ -1,3 +1,4 @@
+import { VariantProps } from "tailwind-variants";
 import { dataFocusVisibleClasses } from "../utils/classes";
 import { tv } from "../utils/tv";
 
@@ -81,3 +82,5 @@ export const buttonStyles = tv({
     size: "base",
   },
 });
+
+export type ButtonVariantProps = VariantProps<typeof buttonStyles>;
