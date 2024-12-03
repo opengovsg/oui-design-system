@@ -1,6 +1,5 @@
 const colors = require("tailwindcss/colors");
-const { basePreset } = require("@unnamed/theme");
-const { ogpDsColorPlugin } = require("@unnamed/theme/plugins");
+const { ogpDsColorPlugin, basePreset } = require("@unnamed/theme/tailwind");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

@@ -16,9 +16,9 @@
         "import": "./dist/index.mjs",
         "require": "./dist/index.js"
       },
-      "./plugins": {
-        "import": "./dist/plugins/index.mjs",
-        "require": "./dist/plugins/index.js"
+      "./tailwind": {
+        "import": "./dist/tailwind/index.mjs",
+        "require": "./dist/tailwind/index.js"
       }
     }
   },
@@ -27,9 +27,9 @@
       "import": "./src/index.ts",
       "require": "./src/index.ts"
     },
-    "./plugins": {
-      "import": "./src/plugins/index.ts",
-      "require": "./src/plugins/index.ts"
+    "./tailwind": {
+      "import": "./src/tailwind/index.ts",
+      "require": "./src/tailwind/index.ts"
     }
   },
   "scripts": {

@@ -1,6 +1,8 @@
 import type { Config } from "tailwindcss";
 import racPlugin from "tailwindcss-react-aria-components";
 
+import { animations } from "./animations";
+
 /**
  * Preset to set design tokens and plugins for the design system.
  */
@@ -9,6 +11,14 @@ export const basePreset: Config = {
   safelist: ["dark"],
   theme: {
     extend: {
+      borderWidth: {
+        1: "1px",
+        1.5: "1.5px",
+        3: "3px",
+        5: "5px",
+      },
+      animation: animations.animation,
+      keyframes: animations.keyframes,
       textColor: {
         content: {
           fg: "rgb(var(--content-fg))",
