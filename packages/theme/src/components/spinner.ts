@@ -5,21 +5,6 @@ import { tv } from "../utils/tv";
 // TODO: Use design tokens from design system
 // TODO: Add more color schemes
 
-/**
- * Spinner wrapper **Tailwind Variants** component
- *
- * ```
- * const {base, circle1, circle2 } = spinner({...})
- * ```
- *
- * @example
- * ```jsx
- * <div className={base())}>
- *    <i className={circle1()}/>
- *    <i className={circle2()}/>
- * </div>
- * ```
- */
 export const spinnerStyles = tv({
   slots: {
     base: "relative inline-flex flex-col gap-2 items-center justify-center",

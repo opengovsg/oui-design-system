@@ -16,7 +16,9 @@ const config: StorybookConfig = {
     options: {},
   },
 
-  core: {},
+  core: {
+    disableTelemetry: true,
+  },
 
   viteFinal(viteConfig) {
     // customize the Vite config here

@@ -1,4 +1,3 @@
-import { objectToDeps } from "@unnamed/internal-utils";
 import type { HtmlUiProps, PropGetter } from "@unnamed/system-rsc";
 import { mapPropsVariants } from "@unnamed/system-rsc";
 import {
@@ -8,6 +7,7 @@ import {
   type SpinnerSlots,
   type SpinnerVariantProps,
 } from "@unnamed/theme";
+import { useDeepCompareMemo } from "use-deep-compare";
 import type { Ref } from "react";
 import { useMemo, useCallback } from "react";
 
@@ -44,10 +44,9 @@ export const useSpinner = (originalProps: UseSpinnerProps) => {
 
   const { className, classNames, ...otherProps } = props;
 
-  const slots = useMemo(
+  const slots = useDeepCompareMemo(
     () => spinnerStyles({ ...variantProps }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- explicit stringify
-    [objectToDeps(variantProps)]
+    [variantProps]
   );
 
   const baseStyles = clsx(classNames?.base, className);

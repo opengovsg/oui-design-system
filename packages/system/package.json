@@ -1,6 +1,6 @@
 {
-  "name": "@unnamed/internal-utils",
-  "description": "Internal utils shared across packages",
+  "name": "@unnamed/system",
+  "description": "System primitives (might not be RSC compatible)",
   "version": "0.0.0",
   "sideEffects": false,
   "main": "src/index.ts",
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@storybook/react": "8.4.6",
+    "@types/prop-types": "^15.7.13",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@unnamed/eslint-config": "workspace:*",
@@ -25,6 +26,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
+    "@unnamed/system-rsc": "workspace:*",
     "@react-aria/utils": "^3.26.0",
     "nanoid": "^5.0.9",
     "react": "^18.2.0",
