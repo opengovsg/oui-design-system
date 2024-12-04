@@ -2,6 +2,7 @@
   "name": "@unnamed/eslint-config",
   "version": "0.0.0",
   "private": true,
+  "sideEffects": false,
   "files": [
     "library.js",
     "react.js",
