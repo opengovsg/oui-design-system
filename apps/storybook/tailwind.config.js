@@ -5,8 +5,8 @@ const { ogpDsColorPlugin, basePreset } = require("@unnamed/theme/tailwind");
 module.exports = {
   content: [
     "./.storybook/welcome.stories.mdx",
-    "../../packages/components/*/src/**/*.{js,jsx,ts,tsx}",
-    "../../packages/components/*/stories/**/*.{js,jsx,ts,tsx}",
+    "../../packages/components/src/**/*.{js,jsx,ts,tsx}",
+    "../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}",
     "../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}",
     "../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}",
     "../../packages/theme/stories/**/*.{js,jsx,ts,tsx}",
