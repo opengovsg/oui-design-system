@@ -26,8 +26,8 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@unnamed/system-rsc": "workspace:*",
     "@react-aria/utils": "^3.26.0",
+    "@unnamed/system-rsc": "workspace:*",
     "nanoid": "^5.0.9",
     "react": "^18.2.0",
     "react-aria-components": "^1.4.1"
