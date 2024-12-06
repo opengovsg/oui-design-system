@@ -126,8 +126,8 @@ export const DisableRipple: Story = {
 
 export const WithIcons: Story = {
   args: {
-    startContent: <AlertTriangle className="fill-current" />,
-    endContent: <User2Icon className="fill-current" />,
+    startContent: <AlertTriangle />,
+    endContent: <User2Icon />,
   },
 };
 
