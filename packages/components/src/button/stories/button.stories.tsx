@@ -1,7 +1,7 @@
-import type { Meta } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { buttonStyles } from "@unnamed/theme";
-import { useState } from "react";
 import { AlertTriangle, HeadphonesIcon, User2Icon } from "lucide-react";
+import { useState } from "react";
 import type { ButtonProps } from "../button";
 import { Button } from "../button";
 
@@ -75,13 +75,14 @@ export default {
       },
     },
   },
+  args: {
+    children: "Button",
+    spinnerPlacement: "start",
+    ...buttonStyles.defaultVariants,
+  },
 } as Meta<typeof Button>;
 
-const defaultProps = {
-  children: "Button",
-  spinnerPlacement: "start",
-  ...buttonStyles.defaultVariants,
-};
+type Story = StoryObj<typeof Button>;
 
 function StateTemplate(args: ButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -104,61 +105,47 @@ function StateTemplate(args: ButtonProps) {
   );
 }
 
-export const Default = {
-  args: {
-    ...defaultProps,
-  },
-};
+export const Default: Story = {};
 
-export const WithState = {
+export const WithState: Story = {
   render: StateTemplate,
-
-  args: {
-    ...defaultProps,
-  },
+  args: {},
 };
 
-export const IsDisabled = {
+export const IsDisabled: Story = {
   args: {
-    ...defaultProps,
     isDisabled: true,
   },
 };
 
-export const DisableRipple = {
+export const DisableRipple: Story = {
   args: {
-    ...defaultProps,
     disableRipple: true,
   },
 };
 
-export const WithIcons = {
+export const WithIcons: Story = {
   args: {
-    ...defaultProps,
     startContent: <AlertTriangle className="fill-current" />,
     endContent: <User2Icon className="fill-current" />,
   },
 };
 
-export const IconButton = {
+export const IconButton: Story = {
   args: {
-    ...defaultProps,
     isIconOnly: true,
     children: <HeadphonesIcon className="w-5 h-5" />,
   },
 };
 
-export const IsPending = {
+export const IsPending: Story = {
   args: {
-    ...defaultProps,
-    color: "primary",
     isPending: true,
   },
 };
 
-export const CustomWithClassNames = {
+export const CustomWithClassNames: Story = {
   args: {
-    ...defaultProps,
     radius: "full",
     className:
       "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
