@@ -57,7 +57,7 @@ export const buttonStyles = tv({
       variant: "solid",
       colorScheme: "default",
       className:
-        "bg-primary hover:bg-primary-hover text-content-fg disabled:bg-system-disabled",
+        "bg-btn-primary hover:bg-btn-primary-hover text-inverse disabled:bg-disabled disabled:text-disabled",
     },
     {
       variant: "solid",

@@ -2,6 +2,7 @@
   "name": "@unnamed/storybook",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build": "storybook build --docs",
@@ -10,6 +11,7 @@
     "lint": "eslint .storybook --max-warnings 0"
   },
   "dependencies": {
+    "@tailwindcss/vite": "4.0.0-beta.5",
     "@unnamed/components": "workspace:*",
     "@unnamed/theme": "workspace:*",
     "react": "^18.2.0",
@@ -31,10 +33,9 @@
     "eslint": "^8.57.0",
     "eslint-plugin-mdx": "^3.1.5",
     "eslint-plugin-storybook": "^0.11.1",
-    "postcss": "^8.4.49",
     "serve": "^14.2.1",
     "storybook": "8.4.6",
-    "tailwindcss": "^3.4.15",
+    "tailwindcss": "4.0.0-beta.5",
     "typescript": "5.5.4",
     "vite": "^5.1.4"
   }

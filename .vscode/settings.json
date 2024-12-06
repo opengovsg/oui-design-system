@@ -6,7 +6,11 @@
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "tailwindCSS.experimental.configFile": {
-    "apps/storybook/tailwind.config.js": [
+    "apps/storybook/tailwind.css": [
+      "packages/theme/**/*",
+      "packages/components/**/*"
+    ],
+    "packages/theme/src/tailwind.css": [
       "packages/theme/**/*",
       "packages/components/**/*"
     ]

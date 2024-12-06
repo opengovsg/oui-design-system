@@ -1,7 +1,7 @@
 import { themes } from "@storybook/theming";
 import type { Preview } from "@storybook/react";
 
-import "./style.css";
+import "../tailwind.css";
 
 export const decorators: Preview["decorators"] = [];
 

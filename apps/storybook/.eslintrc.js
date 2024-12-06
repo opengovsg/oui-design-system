@@ -6,4 +6,12 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: "module",
   },
+  overrides: [
+    {
+      files: [".eslintrc.js"],
+      env: {
+        node: true,
+      },
+    },
+  ],
 };
