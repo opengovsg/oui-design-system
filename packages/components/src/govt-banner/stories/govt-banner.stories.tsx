@@ -24,3 +24,12 @@ export const Expanded: Story = {
     defaultExpanded: true,
   },
 };
+
+export const CustomPadding: Story = {
+  args: {
+    classNames: {
+      banner: "px-20",
+      mainContentContainer: "py-20",
+    },
+  },
+};

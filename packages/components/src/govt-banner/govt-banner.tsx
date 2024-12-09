@@ -28,6 +28,29 @@ interface GovtBannerProps extends DisclosureProps {
     string
   >;
 
+  /**
+   * List of classes to change the className of the element.
+   *
+   * @example
+   * ```text
+   * Component: GovtBanner
+   *
+   * Class names:
+   * - banner: the wrapper of the full government banner component,
+   * - mainContentContainer: the wrapper of the main content of the banner
+   * - crest: the SVG of the government crest
+   * - mainContent: the main content of the banner
+   * - link: link stylings
+   * - identifyButton: for the "how to identify" button
+   * - chevron: the chevron icon beside the "how to identify" button
+   * - panel: the wrapper for the panel that appears when the "how to identify" button is clicked
+   * - panelGroup: the wrapper for the panel group containing the icon and the panel section
+   * - panelIcon: the icon in the panel group
+   * - panelSection: the wrapper for the panel section containing the header and content
+   * - panelHeader: the header in the panel section
+   * - inlineIcon: the icon in the panel content
+   * ```
+   */
   classNames?: SlotsToClasses<GovtBannerSlots>;
 }
 
@@ -109,7 +132,11 @@ export function GovtBanner({
       className={slots.banner({ className: classNames?.banner })}
       role="banner"
     >
-      <div className={slots.container({ className: classNames?.container })}>
+      <div
+        className={slots.mainContentContainer({
+          className: classNames?.mainContentContainer,
+        })}
+      >
         <svg
           className={slots.crest({ className: classNames?.crest })}
           version="1.1"
@@ -156,8 +183,8 @@ export function GovtBanner({
       <div ref={panelRef} {...panelProps}>
         <div className={slots.panel({ className: classNames?.panel })}>
           <div
-            className={slots.panelContainer({
-              className: classNames?.panelContainer,
+            className={slots.panelGroup({
+              className: classNames?.panelGroup,
             })}
           >
             <Landmark
@@ -198,8 +225,8 @@ export function GovtBanner({
             </div>
           </div>
           <div
-            className={slots.panelContainer({
-              className: classNames?.panelContainer,
+            className={slots.panelGroup({
+              className: classNames?.panelGroup,
             })}
           >
             <Lock
