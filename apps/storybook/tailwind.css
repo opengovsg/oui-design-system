@@ -1,11 +1,9 @@
 @import "@unnamed/theme/tailwind.css";
-
 @source "../../../packages/components/src/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
-
 /* This will be generated for other themes */
 @layer base {
   :root {
@@ -158,4 +156,207 @@
 
   .dark {
   }
+}
+
+@utility prose-subhead-4 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.006em;
+}
+@utility prose-subhead-5 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+}
+@utility prose-h7 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: -0.014em;
+}
+@utility prose-h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 3rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-h2 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  line-height: 2.75rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 2.25rem;
+  letter-spacing: -0.019em;
+}
+@utility prose-h4 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: -0.019em;
+}
+@utility prose-h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.75rem;
+  letter-spacing: -0.014em;
+}
+@utility prose-h6 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.014em;
+}
+@utility prose-subhead-1 {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: -0.006em;
+}
+@utility prose-subhead-2 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+}
+@utility prose-subhead-3 {
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  letter-spacing: 0.08em;
+}
+@utility prose-body-1 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5rem;
+  letter-spacing: -0.006em;
+}
+@utility prose-body-2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+}
+@utility prose-body-3 {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  letter-spacing: -0.006em;
+}
+@utility prose-caption-1 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0;
+}
+@utility prose-caption-2 {
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0;
+}
+@utility prose-caption-3 {
+  text-transform: uppercase;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1rem;
+  letter-spacing: 0.08em;
+}
+@utility prose-code-1 {
+  font-family: var(--font-ibmplexmono);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+}
+@utility prose-code-2 {
+  font-family: var(--font-ibmplexmono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  letter-spacing: 0;
+}
+@utility prose-legal {
+  font-size: 0.625rem;
+  font-weight: 400;
+  line-height: 0.75rem;
+  letter-spacing: 0;
+}
+@utility prose-responsive-heading-heavy-1280 {
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 3.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-heading-heavy-480 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 3rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-heading-heavy {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 2.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-heading-light-1280 {
+  font-size: 3rem;
+  font-weight: 300;
+  line-height: 3.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-heading-light-480 {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 3rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-heading-light {
+  font-size: 2rem;
+  font-weight: 300;
+  line-height: 2.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-heavy-1280 {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 4.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-heavy-480 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 4rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-heavy {
+  font-size: 2.5rem;
+  font-weight: 600;
+  line-height: 3rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-light-1280 {
+  font-size: 4rem;
+  font-weight: 300;
+  line-height: 4.5rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-light-480 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 4rem;
+  letter-spacing: -0.022em;
+}
+@utility prose-responsive-display-light {
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 3rem;
+  letter-spacing: -0.022em;
 }
