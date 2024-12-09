@@ -80,9 +80,9 @@ acme-core
 
 ## Components
 
-Each file inside of `acme-core/src` is a component inside our design system. For example:
+Each file inside of `@unnamed/components/src` is a component inside our design system. For example:
 
-```tsx:acme-core/src/Button.tsx
+```tsx:packages/components/src/Button.tsx
 import * as React from 'react';
 
 export interface ButtonProps {
@@ -98,10 +98,31 @@ Button.displayName = 'Button';
 
 When adding a new file, ensure the component is also exported from the entry `index.tsx` file:
 
-```tsx:acme-core/src/index.tsx
+```tsx:packages/components/src/index.tsx
 import * as React from "react";
 export { Button, type ButtonProps } from "./Button";
 // Add new component exports here
+```
+
+### Generating a new component
+
+To simplify the above process, you can use generate a new component with `turbo`.
+
+Run
+
+```bash
+turbo gen component
+```
+
+to generate a new component template. The generator will output the following files:
+
+```bash
+>>> Changes made:
+  • /packages/components/src/<component-name>/<component-name>.tsx (add)
+  • /packages/components/src/<component-name>/stories/<component-name>.stories.tsx (add)
+  • /packages/theme/src/components/<component-name>.ts (add)
+  • /packages/theme/src/components/index.ts (modify)
+  • /packages/components/package.json (append)
 ```
 
 ## Storybook
@@ -109,42 +130,45 @@ export { Button, type ButtonProps } from "./Button";
 Storybook provides us with an interactive UI playground for our components. This allows us to preview our components in the browser and instantly see changes when developing locally. This example preconfigures Storybook to:
 
 - Use Vite to bundle stories instantly (in milliseconds)
-- Automatically find any stories inside the `stories/` folder
-- Support using module path aliases like `@acme-core` for imports
+- Automatically find any stories with the `*.stories.*` file pattern
+- Support using module path aliases like `@unnamed/components` for imports
 - Write MDX for component documentation pages
 
 For example, here's the included Story for our `Button` component:
 
-```js:apps/docs/stories/button.stories.mdx
-import { Button } from '@acme-core/src';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+```js:packages/components/src/button/stories/button.stories.tsx
+import { buttonStyles } from "@unnamed/theme";
+import type { Meta, StoryObj } from "@storybook/react";
 
-<Meta title="Components/Button" component={Button} />
+import type { ButtonProps } from "../button";
+import { Button } from "../button";
 
-# Button
+export default {
+  title: "Components/Button",
+  component: Button,
+  // Rest omitted for brevity
+} as Meta<typeof Button>;
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur tempor, nisl nunc egestas nisi, euismod aliquam nisl nunc euismod.
+type Story = StoryObj<typeof Button>;
 
-## Props
+export const Default: Story = {};
 
-<Props of={Box} />
-
-## Examples
-
-<Preview>
-  <Story name="Default">
-    <Button>Hello</Button>
-  </Story>
-</Preview>
+export const IsDisabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+};
 ```
 
-This example includes a few helpful Storybook scripts:
+`@unnamed/storybook` includes these Storybook scripts:
 
 - `pnpm dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
 - `pnpm build`: Builds the Storybook UI and generates the static HTML files
 - `pnpm preview-storybook`: Starts a local server to view the generated Storybook UI
 
 ## Versioning & Publishing Packages
+
+> TODO: Verify and cleanup this section
 
 This example uses [Changesets](https://github.com/changesets/changesets) to manage versions, create changelogs, and publish to npm. It's preconfigured so you can start publishing packages immediately.
 
@@ -163,4 +187,4 @@ To generate your changelog, run `pnpm changeset` locally:
 
 ### Releasing
 
-TODO
+> TODO: Verify and cleanup this section
