@@ -16,6 +16,7 @@
     "@unnamed/theme": "workspace:*",
     "inter-ui": "^4.1.0",
     "react": "^18.2.0",
+    "react-aria-components": "^1.4.1",
     "react-dom": "^18.2.0",
     "storybook-dark-mode": "^4.0.2"
   },

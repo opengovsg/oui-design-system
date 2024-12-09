@@ -4,6 +4,7 @@
 @source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
+
 /* This will be generated for other themes */
 @layer base {
   :root {
@@ -101,7 +102,7 @@
     --theme-border-color-default: #000;
     --theme-border-color-subtle: #000;
     --theme-border-color-disabled: #000;
-    --theme-border-color-focus-ring: #000;
+    --theme-border-color-focus-ring: #1361f0;
     --theme-border-color-primary: #000;
     --theme-border-color-neutral: #000;
     --theme-border-color-warning: #000;

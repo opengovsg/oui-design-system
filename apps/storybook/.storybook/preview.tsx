@@ -1,9 +1,20 @@
 import { themes } from "@storybook/theming";
 import type { Preview } from "@storybook/react";
 
+import { I18nProvider } from "react-aria-components";
+
 import "../tailwind.css";
 
-export const decorators: Preview["decorators"] = [];
+export const decorators: Preview["decorators"] = [
+  (Story, { globals }) => {
+    const { locale } = globals;
+    return (
+      <I18nProvider locale={locale}>
+        <Story />
+      </I18nProvider>
+    );
+  },
+];
 
 const commonTheme = {
   brandTitle: "@Unnamed",
