@@ -4,6 +4,11 @@
   "sideEffects": false,
   "license": "MIT",
   "exports": {
+    "./govt-banner": {
+      "types": "./src/govt-banner.tsx",
+      "import": "./dist/govt-banner.mjs",
+      "require": "./dist/govt-banner.js"
+    },
     "./button": {
       "types": "./src/button.tsx",
       "import": "./dist/button.mjs",

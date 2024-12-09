@@ -17,6 +17,8 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --text-xs--line-height: 1rem;
+
   --animate-spinner-ease-spin: spinner-spin 0.8s ease infinite;
   --animate-spinner-linear-spin: spinner-spin 0.8s linear infinite;
 
@@ -28,6 +30,9 @@
       transform: rotate(360deg);
     }
   }
+
+  /* TODO: Add outline generation when generating border colors too */
+  --outline-color-focus-ring: var(--theme-border-color-focus-ring);
 
   --text-color-default: var(--theme-text-color-default);
   --text-color-strong: var(--theme-text-color-strong);
