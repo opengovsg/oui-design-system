@@ -21,8 +21,20 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
       },
       {
         type: "add",
+        path: "packages/components/src/{{ kebabCase name }}/index.tsx",
+        templateFile: "templates/component/index.hbs",
+      },
+      {
+        type: "add",
         path: "packages/components/src/{{ kebabCase name }}/stories/{{ kebabCase name }}.stories.tsx",
         templateFile: "templates/component/stories.hbs",
+      },
+      {
+        type: "modify",
+        path: "packages/components/src/index.ts",
+        pattern: /\/\/ Add new component exports here/g,
+        template:
+          'export * from "./{{kebabCase name}}";\n// Add new component exports here',
       },
       {
         type: "add",
@@ -35,16 +47,6 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         pattern: /\/\/ Add new theme exports here/g,
         template:
           'export * from "./{{kebabCase name}}";\n// Add new theme exports here',
-      },
-      {
-        type: "append",
-        path: "packages/components/package.json",
-        pattern: /"exports": {(?<insertion>)/g,
-        template: `    "./{{kebabCase name}}": {
-      "types": "./src/{{kebabCase name}}.tsx",
-      "import": "./dist/{{kebabCase name}}.mjs",
-      "require": "./dist/{{kebabCase name}}.js"
-    },`,
       },
     ],
   });

@@ -114,15 +114,16 @@ Run
 turbo gen component
 ```
 
-to generate a new component template. The generator will output the following files:
+to generate a new component template. The generator will add or modify the following files:
 
 ```bash
 >>> Changes made:
-  • /packages/components/src/<component-name>/<component-name>.tsx (add)
-  • /packages/components/src/<component-name>/stories/<component-name>.stories.tsx (add)
-  • /packages/theme/src/components/<component-name>.ts (add)
+  • /packages/components/src/[component-name]/[component-name].tsx (add)
+  • /packages/components/src/[component-name]/index.tsx (add)
+  • /packages/components/src/[component-name]/stories/[component-name].stories.tsx (add)
+  • /packages/components/src/index.ts (modify)
+  • /packages/theme/src/components/[component-name].ts (add)
   • /packages/theme/src/components/index.ts (modify)
-  • /packages/components/package.json (append)
 ```
 
 ## Storybook
