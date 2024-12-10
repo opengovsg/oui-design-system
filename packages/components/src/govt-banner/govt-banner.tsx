@@ -1,5 +1,3 @@
-"use client";
-
 import type { GovtBannerSlots, SlotsToClasses } from "@unnamed/theme";
 import { dataAttr, govtBannerStyles, twMerge } from "@unnamed/theme";
 import { ChevronDown, ExternalLink, Landmark, Lock } from "lucide-react";

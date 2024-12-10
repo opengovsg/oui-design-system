@@ -3,16 +3,19 @@
   "version": "0.0.0",
   "sideEffects": false,
   "license": "MIT",
+  "files": [
+    "dist"
+  ],
   "exports": {
-    "./govt-banner": {
-      "types": "./src/govt-banner.tsx",
-      "import": "./dist/govt-banner.mjs",
-      "require": "./dist/govt-banner.js"
-    },
-    "./button": {
-      "types": "./src/button.tsx",
-      "import": "./dist/button.mjs",
-      "require": "./dist/button.js"
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     }
   },
   "scripts": {

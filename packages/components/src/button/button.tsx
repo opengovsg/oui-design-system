@@ -1,5 +1,3 @@
-"use client";
-
 import { forwardRef, useMemo } from "react";
 import type { ButtonProps as AriaButtonProps } from "react-aria-components";
 import {
