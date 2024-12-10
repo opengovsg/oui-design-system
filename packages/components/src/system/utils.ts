@@ -19,6 +19,7 @@ export interface InternalForwardRefRenderFunction<
   ): React.ReactElement | null;
   readonly $$typeof: symbol;
   defaultProps?: Partial<Props> | undefined;
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- explicit type
   propTypes?: WeakValidationMap<Props> | undefined;
   displayName?: string | undefined;
 }

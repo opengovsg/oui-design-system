@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@storybook/react": "8.4.6",
+    "@types/prop-types": "^15.7.14",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@unnamed/eslint-config": "workspace:*",
@@ -47,8 +48,6 @@
     "@react-aria/calendar": "^3.6.0",
     "@react-aria/utils": "^3.26.0",
     "@react-stately/calendar": "^3.6.0",
-    "@unnamed/system": "workspace:*",
-    "@unnamed/system-rsc": "workspace:*",
     "nanoid": "^5.0.9",
     "react": "^18.2.0",
     "react-aria": "^3.36.0",

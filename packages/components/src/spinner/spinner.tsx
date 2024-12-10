@@ -1,8 +1,8 @@
-import { forwardRef } from "@unnamed/system-rsc";
-import type { UseSpinnerProps} from "./use-spinner";
+import { forwardRef } from "../system/utils";
+import type { UseSpinnerProps } from "./use-spinner";
 import { useSpinner } from "./use-spinner";
 
-export type SpinnerProps = UseSpinnerProps
+export type SpinnerProps = UseSpinnerProps;
 
 export const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
   const { slots, classNames, getSpinnerProps } = useSpinner(props);

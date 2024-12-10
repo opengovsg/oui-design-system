@@ -1,5 +1,3 @@
-import type { HtmlUiProps, PropGetter } from "@unnamed/system-rsc";
-import { mapPropsVariants } from "@unnamed/system-rsc";
 import {
   clsx,
   spinnerStyles,
@@ -10,6 +8,8 @@ import {
 import { useDeepCompareMemo } from "use-deep-compare";
 import type { Ref } from "react";
 import { useMemo, useCallback } from "react";
+import type { HtmlUiProps, PropGetter } from "../system/types";
+import { mapPropsVariants } from "../system/utils";
 
 export interface UseSpinnerProps
   extends Omit<HtmlUiProps, "children">,

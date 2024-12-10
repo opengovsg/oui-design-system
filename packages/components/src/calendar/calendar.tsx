@@ -1,4 +1,3 @@
-import { mapPropsVariants } from "@unnamed/system-rsc";
 import type {
   CalendarSlots,
   CalendarVariantProps,
@@ -23,6 +22,7 @@ import {
 } from "react-aria-components";
 import { useDeepCompareMemo } from "use-deep-compare";
 import { Button } from "../button/button";
+import { mapPropsVariants } from "../system/utils";
 
 export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
