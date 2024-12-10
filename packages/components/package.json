@@ -18,6 +18,9 @@
       }
     }
   },
+  "publishConfig": {
+    "registry": "http://localhost:4873"
+  },
   "scripts": {
     "build": "tsup --dts",
     "dev": "tsup --watch",
