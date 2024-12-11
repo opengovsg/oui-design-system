@@ -35,6 +35,12 @@ export interface ButtonProps
   spinner?: React.ReactNode;
 
   /**
+   * Text to show when the button is loading.
+   * If not provided, the button will only show the loading spinner.
+   */
+  loadingText?: string;
+
+  /**
    * The spinner placement.
    * @defaultValue "start"
    */
@@ -47,7 +53,7 @@ export interface ButtonProps
 }
 
 /**
- * You probaby do not want to use this component if you are rendering a link.
+ * You probably do not want to use this component if you are rendering a link.
  * Use `LinkButton` component instead.
  */
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -57,10 +63,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       endContent,
       className: classNameProp,
       variant,
-      colorScheme,
+      color,
+      layout,
       radius,
       size = "md",
       spinnerPlacement = "start",
+      loadingText,
       onPress,
       children,
       disableRipple,
@@ -100,8 +108,10 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             variant,
             size,
             className,
-            colorScheme,
+            layout,
+            color,
             radius,
+            isIconOnly,
           })
         )}
         isPending={isPending}
@@ -110,7 +120,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {startContent}
         {isPending && spinnerPlacement === "start" ? spinner : null}
-        {isPending && isIconOnly ? null : children}
+        {isPending ? null : children}
+        {isPending && loadingText ? loadingText : null}
         {isPending && spinnerPlacement === "end" ? spinner : null}
         {endContent}
         {!disableRipple && <Ripple onClear={onClearRipple} ripples={ripples} />}

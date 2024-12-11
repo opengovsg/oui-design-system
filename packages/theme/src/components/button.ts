@@ -1,6 +1,7 @@
 import type { VariantProps } from "tailwind-variants";
 import { dataFocusVisibleClasses } from "../utils/classes";
 import { tv } from "../utils/tv";
+import { colorVariants } from "../utils/variants";
 
 export const buttonStyles = tv({
   base: [
@@ -20,13 +21,24 @@ export const buttonStyles = tv({
     ...dataFocusVisibleClasses,
   ],
   variants: {
+    layout: {
+      stretch: "w-full",
+      default: "",
+    },
     variant: {
       solid: "",
+      reverse: "",
       outline: "",
+      clear: "",
       unstyled: "",
     },
-    colorScheme: {
-      default: "",
+    color: {
+      main: "",
+      success: "",
+      warning: "",
+      critical: "",
+      sub: "",
+      neutral: "",
       inverse: "",
     },
     radius: {
@@ -48,59 +60,142 @@ export const buttonStyles = tv({
       false: "[&>svg]:max-w-[theme(spacing.8)]",
     },
     size: {
-      md: "prose-headline-base-medium min-h-12 px-5 py-3 gap-2",
-      lg: "prose-headline-lg-medium min-h-[3.25rem] px-6 py-3.5 gap-3",
+      xs: "prose-subhead-2 h-9 px-4 py-2 gap-2 min-w-16",
+      sm: "prose-subhead-1 h-10 px-4 py-2 gap-2 min-w-20",
+      md: "prose-subhead-1 h-11 px-4 py-2.5 gap-3 min-w-24",
+      lg: "prose-subhead-1 h-14 px-4 py-4 gap-3 min-w-28",
     },
   },
   compoundVariants: [
+    // solid / color
     {
       variant: "solid",
-      colorScheme: "default",
-      className:
-        "bg-btn-primary hover:bg-btn-primary-hover text-inverse disabled:bg-disabled disabled:text-disabled",
+      color: "main",
+      className: colorVariants.solid.main,
     },
     {
       variant: "solid",
-      colorScheme: "inverse",
-      className: "bg-base-canvas text-base-content",
+      color: "sub",
+      className: colorVariants.solid.sub,
+    },
+    {
+      variant: "solid",
+      color: "neutral",
+      className: colorVariants.solid.neutral,
+    },
+    {
+      variant: "solid",
+      color: "critical",
+      className: colorVariants.solid.critical,
+    },
+    {
+      variant: "solid",
+      color: "warning",
+      className: colorVariants.solid.warning,
+    },
+    {
+      variant: "solid",
+      color: "success",
+      className: colorVariants.solid.success,
+    },
+    // reverse / color
+    {
+      variant: "reverse",
+      color: "main",
+      className: colorVariants.reverse.main,
+    },
+    {
+      variant: "reverse",
+      color: "critical",
+      className: colorVariants.reverse.critical,
+    },
+    {
+      variant: "reverse",
+      color: "sub",
+      className: colorVariants.reverse.sub,
+    },
+    {
+      variant: "reverse",
+      color: "neutral",
+      className: colorVariants.reverse.neutral,
+    },
+    // outline / color
+    {
+      variant: "outline",
+      color: "main",
+      className: colorVariants.outline.main,
     },
     {
       variant: "outline",
-      colorScheme: "inverse",
-      className:
-        "border border-base-divider-inverse text-content-fg hover:bg-base-canvas-inverse-overlay/80 hover:text-content-fg",
+      color: "critical",
+      className: colorVariants.outline.critical,
     },
     {
       variant: "outline",
-      colorScheme: "default",
-      className: "border border-brand-canvas-inverse text-brand-canvas-inverse",
+      color: "neutral",
+      className: colorVariants.outline.neutral,
     },
     {
       variant: "outline",
+      color: "sub",
+      className: colorVariants.outline.sub,
+    },
+    {
+      variant: "outline",
+      color: "inverse",
+      className: colorVariants.outline.inverse,
+    },
+    // clear / color
+    {
+      variant: "clear",
+      color: "main",
+      className: colorVariants.clear.main,
+    },
+    {
+      variant: "clear",
+      color: "critical",
+      className: colorVariants.clear.critical,
+    },
+    {
+      variant: "clear",
+      color: "neutral",
+      className: colorVariants.clear.neutral,
+    },
+    {
+      variant: "clear",
+      color: "sub",
+      className: colorVariants.clear.sub,
+    },
+    {
+      variant: "clear",
+      color: "inverse",
+      className: colorVariants.clear.inverse,
+    },
+    // iconbutton / size
+    {
+      isIconOnly: true,
       size: "lg",
-      // -1 px for border
-      className: "px-[23px] py-[13px]",
-    },
-    {
-      variant: "outline",
-      size: "md",
-      // -1 px for border
-      className: "px-[19px] py-[11px]",
+      class: "min-w-12 w-12 h-12 p-3 [&_svg]:w-6 [&_svg]:h-6",
     },
     {
       isIconOnly: true,
       size: "md",
-      class: "min-w-10 w-10 h-10",
+      class: "min-w-11 w-11 h-11 p-3  [&_svg]:w-5 [&_svg]:h-5",
     },
     {
       isIconOnly: true,
-      size: "lg",
-      class: "min-w-12 w-12 h-12",
+      size: "sm",
+      class: "min-w-10 w-10 h-10 p-2.5  [&_svg]:w-5 [&_svg]:h-5",
+    },
+    {
+      isIconOnly: true,
+      size: "xs",
+      class: "min-w-9 w-9 h-9 p-2.5  [&_svg]:w-4 [&_svg]:h-4",
     },
   ],
   defaultVariants: {
     variant: "solid",
-    colorScheme: "default",
+    color: "main",
     size: "md",
     radius: "default",
   },
