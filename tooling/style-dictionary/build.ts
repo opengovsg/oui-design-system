@@ -123,10 +123,9 @@ StyleDictionary.registerFormat({
     );
 
     // Add utility classes for typography
-    css.push("@utility prose {\n");
 
     for (const [key, value] of Object.entries(typography)) {
-      css.push(`  .${key} {`);
+      css.push(`@utility prose-${key} {`);
       // @ts-ignore
       const cssValues = Object.entries(value.value);
       cssValues.forEach(([cssKey, cssValue]) => {
@@ -134,8 +133,6 @@ StyleDictionary.registerFormat({
       });
       css.push("  }\n");
     }
-
-    css.push("}\n");
 
     return css.join("\n");
   },

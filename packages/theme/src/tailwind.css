@@ -4,6 +4,8 @@
 @import "inter-ui/inter.css";
 @import "inter-ui/inter-variable.css";
 
+@import "./variants/base.css";
+
 @layer base {
   :root {
     --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
