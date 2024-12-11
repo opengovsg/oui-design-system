@@ -3,7 +3,7 @@ import type {
   CalendarVariantProps,
   SlotsToClasses,
 } from "@unnamed/theme";
-import { calendarStyles, clsx } from "@unnamed/theme";
+import { calendarStyles, cn } from "@unnamed/theme";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type {
   CalendarProps as AriaCalendarProps,
@@ -89,7 +89,7 @@ export function Calendar<T extends DateValue>(originalProps: CalendarProps<T>) {
       {...restProps}
       className={composeRenderProps(classNameProp, (className, renderProps) =>
         slots.base({
-          className: clsx(classNames?.base, className),
+          className: cn(classNames?.base, className),
           ...renderProps,
         })
       )}

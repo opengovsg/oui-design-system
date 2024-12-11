@@ -1,5 +1,5 @@
 import {
-  clsx,
+  cn,
   spinnerStyles,
   type SlotsToClasses,
   type SpinnerSlots,
@@ -49,7 +49,7 @@ export const useSpinner = (originalProps: UseSpinnerProps) => {
     [variantProps]
   );
 
-  const baseStyles = clsx(classNames?.base, className);
+  const baseStyles = cn(classNames?.base, className);
 
   const ariaLabel = useMemo(() => {
     return !otherProps["aria-label"] ? "Loading" : "";

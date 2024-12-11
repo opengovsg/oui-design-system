@@ -2,5 +2,5 @@ export { dataFocusVisibleClasses } from "./classes";
 export { customTwMergeConfig, twMerge } from "./tw-merge";
 export { tv } from "./tv";
 export * from "./types";
-export { clsx } from "./clsx";
+export { cn } from "./cn";
 export * from "./data-attr";
