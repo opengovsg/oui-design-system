@@ -1,7 +1,7 @@
-import { extendTailwindMerge, validators } from "tailwind-merge";
+import { extendTailwindMerge, validators } from "tailwind-merge"
 
-type MergeConfig = Parameters<typeof extendTailwindMerge>[0];
-type AdditionalClassGroupIds = "prose";
+type MergeConfig = Parameters<typeof extendTailwindMerge>[0]
+type AdditionalClassGroupIds = "prose"
 
 // Exported for used in tailwind-variants too.
 export const customTwMergeConfig = {
@@ -12,7 +12,7 @@ export const customTwMergeConfig = {
       prose: [{ prose: [validators.isAny] }],
     },
   },
-} satisfies MergeConfig;
+} satisfies MergeConfig
 
 export const twMerge =
-  extendTailwindMerge<AdditionalClassGroupIds>(customTwMergeConfig);
+  extendTailwindMerge<AdditionalClassGroupIds>(customTwMergeConfig)

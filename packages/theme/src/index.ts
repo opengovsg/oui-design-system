@@ -1,4 +1,4 @@
-export * from "./components";
-export * from "./utils";
+export * from "./components"
+export * from "./utils"
 
-export type { VariantProps, TV } from "tailwind-variants";
+export type { VariantProps, TV } from "tailwind-variants"

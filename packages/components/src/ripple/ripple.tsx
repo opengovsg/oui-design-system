@@ -1,14 +1,15 @@
-import { clamp } from "motion";
-import { AnimatePresence, LazyMotion, domAnimation } from "motion/react";
-import * as m from "motion/react-m";
-import type { CSSProperties } from "react";
-import type { RippleType, UseRippleReturn } from "./use-ripple";
+import type { CSSProperties } from "react"
+import { clamp } from "motion"
+import { AnimatePresence, domAnimation, LazyMotion } from "motion/react"
+import * as m from "motion/react-m"
+
+import type { RippleType, UseRippleReturn } from "./use-ripple"
 
 export interface RippleProps {
-  ripples: RippleType[];
-  color?: CSSProperties["backgroundColor"];
-  style?: CSSProperties;
-  onClear: UseRippleReturn["onClear"];
+  ripples: RippleType[]
+  color?: CSSProperties["backgroundColor"]
+  style?: CSSProperties
+  onClear: UseRippleReturn["onClear"]
 }
 
 export function Ripple({
@@ -23,8 +24,8 @@ export function Ripple({
         const duration = clamp(
           0.2,
           ripple.size > 100 ? 0.75 : 0.5,
-          0.01 * ripple.size
-        );
+          0.01 * ripple.size,
+        )
         return (
           <LazyMotion features={domAnimation} key={ripple.key}>
             <AnimatePresence mode="popLayout">
@@ -33,7 +34,7 @@ export function Ripple({
                 exit={{ opacity: 0 }}
                 initial={{ transform: "scale(0)", opacity: 0.35 }}
                 onAnimationComplete={() => {
-                  onClear(ripple.key);
+                  onClear(ripple.key)
                 }}
                 style={{
                   position: "absolute",
@@ -53,8 +54,8 @@ export function Ripple({
               />
             </AnimatePresence>
           </LazyMotion>
-        );
+        )
       })}
     </>
-  );
+  )
 }

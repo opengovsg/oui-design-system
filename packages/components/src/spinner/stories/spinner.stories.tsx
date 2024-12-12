@@ -1,6 +1,7 @@
-import type { Meta } from "@storybook/react";
-import { spinnerStyles } from "@unnamed/theme";
-import { Spinner } from "../spinner";
+import type { Meta } from "@storybook/react"
+import { spinnerStyles } from "@unnamed/theme"
+
+import { Spinner } from "../spinner"
 
 export default {
   title: "Components/Spinner",
@@ -26,14 +27,14 @@ export default {
       </div>
     ),
   ],
-} as Meta<typeof Spinner>;
+} as Meta<typeof Spinner>
 
 const defaultProps = {
   ...spinnerStyles.defaultVariants,
-};
+}
 
 export const Default = {
   args: {
     ...defaultProps,
   },
-};
+}

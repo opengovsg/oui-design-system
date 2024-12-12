@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { GovtBanner } from "../govt-banner";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import { GovtBanner } from "../govt-banner"
 
 // TODO: Add viewport and locale modes for testing
 export default {
@@ -13,17 +14,17 @@ export default {
       options: ["staging", "production", "uat"],
     },
   },
-} as Meta<typeof GovtBanner>;
+} as Meta<typeof GovtBanner>
 
-type Story = StoryObj<typeof GovtBanner>;
+type Story = StoryObj<typeof GovtBanner>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Expanded: Story = {
   args: {
     defaultExpanded: true,
   },
-};
+}
 
 export const CustomPadding: Story = {
   args: {
@@ -32,4 +33,4 @@ export const CustomPadding: Story = {
       mainContentContainer: "py-20",
     },
   },
-};
+}

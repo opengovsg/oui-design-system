@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { AlertTriangle, User2Icon } from "lucide-react";
-import { useState } from "react";
-import type { ButtonProps } from "../button";
-import { Button } from "../button";
+import type { Meta, StoryObj } from "@storybook/react"
+import { useState } from "react"
+import { AlertTriangle, User2Icon } from "lucide-react"
+
+import type { ButtonProps } from "../button"
+import { Button } from "../button"
 
 export default {
   title: "Components/Button/Button",
@@ -76,18 +77,18 @@ export default {
   args: {
     children: "Button",
   },
-} as Meta<typeof Button>;
+} as Meta<typeof Button>
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof Button>
 
 function StateTemplate(args: ButtonProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const handlePress = () => {
     // eslint-disable-next-line no-console -- storybook explicit log
-    console.log("Pressed");
-    setIsOpen((prev) => !prev);
-  };
+    console.log("Pressed")
+    setIsOpen((prev) => !prev)
+  }
 
   return (
     <Button
@@ -98,10 +99,10 @@ function StateTemplate(args: ButtonProps) {
     >
       {isOpen ? "Close" : "Open"}
     </Button>
-  );
+  )
 }
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Sizes: Story = {
   render: (args: ButtonProps) => {
@@ -120,10 +121,10 @@ export const Sizes: Story = {
           Large
         </Button>
       </div>
-    );
+    )
   },
   args: {},
-};
+}
 
 function ColorTemplate(args: ButtonProps) {
   return (
@@ -198,7 +199,7 @@ function ColorTemplate(args: ButtonProps) {
         </Button>
       </div>
     </div>
-  );
+  )
 }
 
 export const SolidColors: Story = {
@@ -206,53 +207,53 @@ export const SolidColors: Story = {
   args: {
     variant: "solid",
   },
-};
+}
 
 export const OutlineColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "outline",
   },
-};
+}
 
 export const ClearColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "clear",
   },
-};
+}
 
 export const ReverseColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "reverse",
   },
-};
+}
 
 export const WithState: Story = {
   render: StateTemplate,
   args: {},
-};
+}
 
 export const WithLoadingText: Story = {
   args: {
     isPending: true,
     loadingText: "Loading",
   },
-};
+}
 
 export const DisableRipple: Story = {
   args: {
     disableRipple: true,
   },
-};
+}
 
 export const WithIcons: Story = {
   args: {
     startContent: <AlertTriangle />,
     endContent: <User2Icon />,
   },
-};
+}
 
 export const CustomWithClassNames: Story = {
   args: {
@@ -260,4 +261,4 @@ export const CustomWithClassNames: Story = {
     className:
       "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
   },
-};
+}

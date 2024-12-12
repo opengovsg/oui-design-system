@@ -1,8 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import { HeadphonesIcon } from "lucide-react";
-import type { ButtonProps } from "../button";
-import { Button } from "../button";
-import buttonMeta from "./button.stories";
+import type { Meta, StoryObj } from "@storybook/react"
+import { HeadphonesIcon } from "lucide-react"
+
+import type { ButtonProps } from "../button"
+import { Button } from "../button"
+import buttonMeta from "./button.stories"
 
 export default {
   title: "Components/Button/IconButton",
@@ -28,11 +29,11 @@ export default {
     children: <HeadphonesIcon />,
     isIconOnly: true,
   },
-} as Meta<typeof Button>;
+} as Meta<typeof Button>
 
-type Story = StoryObj<typeof Button>;
+type Story = StoryObj<typeof Button>
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Sizes: Story = {
   render: (args: ButtonProps) => {
@@ -43,9 +44,9 @@ export const Sizes: Story = {
         <Button {...args} size="md" />
         <Button {...args} size="lg" />
       </div>
-    );
+    )
   },
-};
+}
 
 function ColorTemplate(args: ButtonProps) {
   return (
@@ -78,7 +79,7 @@ function ColorTemplate(args: ButtonProps) {
         <Button {...args} color="inverse" isPending />
       </div>
     </div>
-  );
+  )
 }
 
 export const SolidColors: Story = {
@@ -86,34 +87,34 @@ export const SolidColors: Story = {
   args: {
     variant: "solid",
   },
-};
+}
 
 export const OutlineColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "outline",
   },
-};
+}
 
 export const ClearColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "clear",
   },
-};
+}
 
 export const ReverseColors: Story = {
   render: ColorTemplate,
   args: {
     variant: "reverse",
   },
-};
+}
 
 export const DisableRipple: Story = {
   args: {
     disableRipple: true,
   },
-};
+}
 
 export const CustomWithClassNames: Story = {
   args: {
@@ -121,4 +122,4 @@ export const CustomWithClassNames: Story = {
     className:
       "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
   },
-};
+}

@@ -1,15 +1,13 @@
-import { forwardRef, useMemo } from "react";
-import type { ButtonProps as AriaButtonProps } from "react-aria-components";
-import {
-  Button as AriaButton,
-  composeRenderProps,
-} from "react-aria-components";
-import { chain } from "@react-aria/utils";
-import { buttonStyles } from "@unnamed/theme";
-import type { VariantProps } from "@unnamed/theme";
-import { Ripple, useRipple } from "../ripple";
-import type { SpinnerProps } from "../spinner";
-import { Spinner } from "../spinner";
+import type { VariantProps } from "@unnamed/theme"
+import type { ButtonProps as AriaButtonProps } from "react-aria-components"
+import { forwardRef, useMemo } from "react"
+import { chain } from "@react-aria/utils"
+import { buttonStyles } from "@unnamed/theme"
+import { Button as AriaButton, composeRenderProps } from "react-aria-components"
+
+import type { SpinnerProps } from "../spinner"
+import { Ripple, useRipple } from "../ripple"
+import { Spinner } from "../spinner"
 
 export interface ButtonProps
   extends Omit<AriaButtonProps, "children">,
@@ -18,38 +16,38 @@ export interface ButtonProps
    * Whether the button should display a ripple effect on press.
    * @defaultValue false
    */
-  disableRipple?: boolean;
-  children: React.ReactNode;
+  disableRipple?: boolean
+  children: React.ReactNode
   /**
    * The button start content.
    */
-  startContent?: React.ReactNode;
+  startContent?: React.ReactNode
   /**
    * The button end content.
    */
-  endContent?: React.ReactNode;
+  endContent?: React.ReactNode
   /**
    * Spinner to display when loading.
    * @defaultValue \@unnamed/components/spinner
    */
-  spinner?: React.ReactNode;
+  spinner?: React.ReactNode
 
   /**
    * Text to show when the button is loading.
    * If not provided, the button will only show the loading spinner.
    */
-  loadingText?: string;
+  loadingText?: string
 
   /**
    * The spinner placement.
    * @defaultValue "start"
    */
-  spinnerPlacement?: "start" | "end";
+  spinnerPlacement?: "start" | "end"
 
   /**
    * Display a button without text and show the icon passed to the `children` prop.
    */
-  isIconOnly?: boolean;
+  isIconOnly?: boolean
 }
 
 /**
@@ -77,27 +75,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isIconOnly,
       ...props
     },
-    ref
+    ref,
   ) => {
     const {
       onPress: onPressRipple,
       onClear: onClearRipple,
       ripples,
-    } = useRipple();
+    } = useRipple()
 
     const spinner = useMemo(() => {
       if (spinnerProp) {
-        return spinnerProp;
+        return spinnerProp
       }
       const buttonSpinnerSizeMap: Record<string, SpinnerProps["size"]> = {
         sm: "sm",
         md: "sm",
         lg: "md",
-      };
+      }
 
-      const spinnerSize = buttonSpinnerSizeMap[size];
-      return <Spinner size={spinnerSize} />;
-    }, [size, spinnerProp]);
+      const spinnerSize = buttonSpinnerSizeMap[size]
+      return <Spinner size={spinnerSize} />
+    }, [size, spinnerProp])
 
     return (
       <AriaButton
@@ -112,7 +110,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             color,
             radius,
             isIconOnly,
-          })
+          }),
         )}
         isPending={isPending}
         onPress={chain(onPress, onPressRipple)}
@@ -126,8 +124,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {endContent}
         {!disableRipple && <Ripple onClear={onClearRipple} ripples={ripples} />}
       </AriaButton>
-    );
-  }
-);
+    )
+  },
+)
 
-Button.displayName = "Button";
+Button.displayName = "Button"

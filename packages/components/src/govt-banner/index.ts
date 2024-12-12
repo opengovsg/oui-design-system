@@ -1,1 +1,1 @@
-export * from "./govt-banner";
+export * from "./govt-banner"

@@ -6,4 +6,4 @@ module.exports = {
     tsconfigRootDir: __dirname,
     sourceType: "module",
   },
-};
+}

@@ -1,7 +1,8 @@
-import type { VariantProps } from "tailwind-variants";
-import { dataFocusVisibleClasses } from "../utils/classes";
-import { tv } from "../utils/tv";
-import { colorVariants } from "../utils/variants";
+import type { VariantProps } from "tailwind-variants"
+
+import { dataFocusVisibleClasses } from "../utils/classes"
+import { tv } from "../utils/tv"
+import { colorVariants } from "../utils/variants"
 
 export const buttonStyles = tv({
   base: [
@@ -56,14 +57,14 @@ export const buttonStyles = tv({
       true: "cursor-not-allowed",
     },
     isIconOnly: {
-      true: "px-0 !gap-0",
+      true: "!gap-0 px-0",
       false: "[&>svg]:max-w-[theme(spacing.8)]",
     },
     size: {
-      xs: "prose-subhead-2 h-9 px-4 py-2 gap-2 min-w-16",
-      sm: "prose-subhead-1 h-10 px-4 py-2 gap-2 min-w-20",
-      md: "prose-subhead-1 h-11 px-4 py-2.5 gap-3 min-w-24",
-      lg: "prose-subhead-1 h-14 px-4 py-4 gap-3 min-w-28",
+      xs: "prose-subhead-2 h-9 min-w-16 gap-2 px-4 py-2",
+      sm: "prose-subhead-1 h-10 min-w-20 gap-2 px-4 py-2",
+      md: "prose-subhead-1 h-11 min-w-24 gap-3 px-4 py-2.5",
+      lg: "prose-subhead-1 h-14 min-w-28 gap-3 px-4 py-4",
     },
   },
   compoundVariants: [
@@ -175,22 +176,22 @@ export const buttonStyles = tv({
     {
       isIconOnly: true,
       size: "lg",
-      class: "min-w-12 w-12 h-12 p-3 [&_svg]:w-6 [&_svg]:h-6",
+      class: "h-12 w-12 min-w-12 p-3 [&_svg]:h-6 [&_svg]:w-6",
     },
     {
       isIconOnly: true,
       size: "md",
-      class: "min-w-11 w-11 h-11 p-3  [&_svg]:w-5 [&_svg]:h-5",
+      class: "h-11 w-11 min-w-11 p-3 [&_svg]:h-5 [&_svg]:w-5",
     },
     {
       isIconOnly: true,
       size: "sm",
-      class: "min-w-10 w-10 h-10 p-2.5  [&_svg]:w-5 [&_svg]:h-5",
+      class: "h-10 w-10 min-w-10 p-2.5 [&_svg]:h-5 [&_svg]:w-5",
     },
     {
       isIconOnly: true,
       size: "xs",
-      class: "min-w-9 w-9 h-9 p-2.5  [&_svg]:w-4 [&_svg]:h-4",
+      class: "h-9 w-9 min-w-9 p-2.5 [&_svg]:h-4 [&_svg]:w-4",
     },
   ],
   defaultVariants: {
@@ -199,6 +200,6 @@ export const buttonStyles = tv({
     size: "md",
     radius: "default",
   },
-});
+})
 
-export type ButtonVariantProps = VariantProps<typeof buttonStyles>;
+export type ButtonVariantProps = VariantProps<typeof buttonStyles>

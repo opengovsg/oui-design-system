@@ -1,18 +1,18 @@
-import type { GovtBannerSlots, SlotsToClasses } from "@unnamed/theme";
-import { dataAttr, govtBannerStyles, twMerge } from "@unnamed/theme";
-import { ChevronDown, ExternalLink, Landmark, Lock } from "lucide-react";
-import { useRef } from "react";
-import type { LocalizedStrings } from "react-aria";
+import type { GovtBannerSlots, SlotsToClasses } from "@unnamed/theme"
+import type { LocalizedStrings } from "react-aria"
+import type { DisclosureProps } from "react-stately"
+import type { LiteralUnion } from "type-fest"
+import { useRef } from "react"
+import { dataAttr, govtBannerStyles, twMerge } from "@unnamed/theme"
+import { ChevronDown, ExternalLink, Landmark, Lock } from "lucide-react"
 import {
   mergeProps,
   useButton,
   useDisclosure,
   useFocusRing,
   useMessageFormatter,
-} from "react-aria";
-import type { DisclosureProps } from "react-stately";
-import { useDisclosureState } from "react-stately";
-import type { LiteralUnion } from "type-fest";
+} from "react-aria"
+import { useDisclosureState } from "react-stately"
 
 interface GovtBannerProps extends DisclosureProps {
   /**
@@ -24,7 +24,7 @@ interface GovtBannerProps extends DisclosureProps {
   environment?: LiteralUnion<
     "production" | "staging" | "uat" | "preview",
     string
-  >;
+  >
 
   /**
    * List of classes to change the className of the element.
@@ -49,7 +49,7 @@ interface GovtBannerProps extends DisclosureProps {
    * - inlineIcon: the icon in the panel content
    * ```
    */
-  classNames?: SlotsToClasses<GovtBannerSlots>;
+  classNames?: SlotsToClasses<GovtBannerSlots>
 }
 
 // TODO: Add strings for other localisations
@@ -102,28 +102,28 @@ const i18nStrings: LocalizedStrings = {
     secureContent:
       "Look for a <boldThis>lock</boldThis> {icon} or https:// as an added precaution. Share sensitive information only on official, secure websites.",
   },
-};
+}
 
 export function GovtBanner({
   environment,
   classNames,
   ...props
 }: GovtBannerProps) {
-  const formatMessage = useMessageFormatter(i18nStrings);
+  const formatMessage = useMessageFormatter(i18nStrings)
 
-  const state = useDisclosureState(props);
-  const panelRef = useRef<HTMLDivElement | null>(null);
-  const triggerRef = useRef<HTMLButtonElement | null>(null);
+  const state = useDisclosureState(props)
+  const panelRef = useRef<HTMLDivElement | null>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
 
   const { buttonProps: triggerProps, panelProps } = useDisclosure(
     props,
     state,
-    panelRef
-  );
-  const { buttonProps } = useButton(triggerProps, triggerRef);
-  const { isFocusVisible, focusProps } = useFocusRing();
+    panelRef,
+  )
+  const { buttonProps } = useButton(triggerProps, triggerRef)
+  const { isFocusVisible, focusProps } = useFocusRing()
 
-  const slots = govtBannerStyles();
+  const slots = govtBannerStyles()
 
   return (
     <div
@@ -264,5 +264,5 @@ export function GovtBanner({
         </div>
       </div>
     </div>
-  );
+  )
 }

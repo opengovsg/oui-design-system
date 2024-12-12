@@ -1,5 +1,6 @@
-import type { VariantProps } from "tailwind-variants";
-import { tv } from "../utils/tv";
+import type { VariantProps } from "tailwind-variants"
+
+import { tv } from "../utils/tv"
 
 // TODO: Use typography from design system
 // TODO: Use design tokens from design system
@@ -21,10 +22,10 @@ export const calendarStyles = tv({
     variant: {},
     isSelected: {
       false: {
-        cell: "text-zinc-900 dark:text-zinc-200 hover:bg-gray-100 dark:hover:bg-zinc-700 pressed:bg-gray-200 dark:pressed:bg-zinc-600",
+        cell: "pressed:bg-gray-200 dark:pressed:bg-zinc-600 text-zinc-900 hover:bg-gray-100 dark:text-zinc-200 dark:hover:bg-zinc-700",
       },
       true: {
-        cell: "bg-blue-600 invalid:bg-red-600 text-white forced-colors:bg-[Highlight] forced-colors:invalid:bg-[Mark] forced-colors:text-[HighlightText]",
+        cell: "bg-blue-600 text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
       },
     },
   },
@@ -35,7 +36,7 @@ export const calendarStyles = tv({
       class: "",
     },
   ],
-});
+})
 
-export type CalendarVariantProps = VariantProps<typeof calendarStyles>;
-export type CalendarSlots = keyof ReturnType<typeof calendarStyles>;
+export type CalendarVariantProps = VariantProps<typeof calendarStyles>
+export type CalendarSlots = keyof ReturnType<typeof calendarStyles>

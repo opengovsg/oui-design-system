@@ -1,26 +1,25 @@
-import { themes } from "@storybook/theming";
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react"
+import { themes } from "@storybook/theming"
+import { I18nProvider } from "react-aria-components"
 
-import { I18nProvider } from "react-aria-components";
-
-import "../tailwind.css";
+import "../tailwind.css"
 
 export const decorators: Preview["decorators"] = [
   (Story, { globals }) => {
-    const { locale } = globals;
+    const { locale } = globals
     return (
       <I18nProvider locale={locale}>
         <Story />
       </I18nProvider>
-    );
+    )
   },
-];
+]
 
 const commonTheme = {
   brandTitle: "@Unnamed",
   brandUrl: "https://design.open.gov.sg",
   brandTarget: "_self",
-};
+}
 
 export const parameters: Preview["parameters"] = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -52,9 +51,9 @@ export const parameters: Preview["parameters"] = {
       ...commonTheme,
     },
   },
-};
+}
 
-const locales = ["en-SG", "zh-SG", "ms-SG", "ta-SG"];
+const locales = ["en-SG", "zh-SG", "ms-SG", "ta-SG"]
 
 export const globalTypes: Preview["globalTypes"] = {
   locale: {
@@ -63,7 +62,7 @@ export const globalTypes: Preview["globalTypes"] = {
       items: locales.map((locale) => ({
         value: locale,
         title: new Intl.DisplayNames(undefined, { type: "language" }).of(
-          locale
+          locale,
         ),
         right:
           // @ts-expect-error - Will always exist.
@@ -85,5 +84,5 @@ export const globalTypes: Preview["globalTypes"] = {
       ],
     },
   },
-};
-export const tags = ["autodocs"];
+}
+export const tags = ["autodocs"]

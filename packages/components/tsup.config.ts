@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsup"
 
 export default defineConfig((options) => ({
   clean: true,
@@ -9,4 +9,4 @@ export default defineConfig((options) => ({
   treeshake: true,
   external: ["react"],
   ...options,
-}));
+}))

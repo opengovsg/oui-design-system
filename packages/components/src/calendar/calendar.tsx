@@ -2,13 +2,13 @@ import type {
   CalendarSlots,
   CalendarVariantProps,
   SlotsToClasses,
-} from "@unnamed/theme";
-import { calendarStyles, cn } from "@unnamed/theme";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+} from "@unnamed/theme"
 import type {
   CalendarProps as AriaCalendarProps,
   DateValue,
-} from "react-aria-components";
+} from "react-aria-components"
+import { calendarStyles, cn } from "@unnamed/theme"
+import { ChevronLeft, ChevronRight } from "lucide-react"
 import {
   Calendar as AriaCalendar,
   CalendarGridHeader as AriaCalendarGridHeader,
@@ -19,15 +19,16 @@ import {
   composeRenderProps,
   Heading,
   useLocale,
-} from "react-aria-components";
-import { useDeepCompareMemo } from "use-deep-compare";
-import { Button } from "../button/button";
-import { mapPropsVariants } from "../system/utils";
+} from "react-aria-components"
+import { useDeepCompareMemo } from "use-deep-compare"
+
+import { Button } from "../button/button"
+import { mapPropsVariants } from "../system/utils"
 
 export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
     CalendarVariantProps {
-  errorMessage?: string;
+  errorMessage?: string
   /**
    * List of classes to change the classNames of the element.
    * if `className` is passed, it will be added to the base slot.
@@ -63,26 +64,26 @@ export interface CalendarProps<T extends DateValue>
    * }} />
    * ```
    */
-  classNames?: SlotsToClasses<CalendarSlots>;
+  classNames?: SlotsToClasses<CalendarSlots>
 }
 
 export function Calendar<T extends DateValue>(originalProps: CalendarProps<T>) {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
-    calendarStyles.variantKeys
-  );
+    calendarStyles.variantKeys,
+  )
 
   const {
     errorMessage,
     className: classNameProp,
     classNames,
     ...restProps
-  } = props;
+  } = props
 
   const slots = useDeepCompareMemo(
     () => calendarStyles(variantProps),
-    [variantProps]
-  );
+    [variantProps],
+  )
 
   return (
     <AriaCalendar
@@ -91,7 +92,7 @@ export function Calendar<T extends DateValue>(originalProps: CalendarProps<T>) {
         slots.base({
           className: cn(classNames?.base, className),
           ...renderProps,
-        })
+        }),
       )}
     >
       <CalendarHeader />
@@ -106,7 +107,7 @@ export function Calendar<T extends DateValue>(originalProps: CalendarProps<T>) {
                   slots.cell({
                     className,
                     ...renderProps,
-                  })
+                  }),
               )}
               date={date}
             />
@@ -114,11 +115,11 @@ export function Calendar<T extends DateValue>(originalProps: CalendarProps<T>) {
         </CalendarGridBody>
       </CalendarGrid>
     </AriaCalendar>
-  );
+  )
 }
 
 export function CalendarHeader() {
-  const { direction } = useLocale();
+  const { direction } = useLocale()
 
   return (
     <header>
@@ -138,7 +139,7 @@ export function CalendarHeader() {
         )}
       </Button>
     </header>
-  );
+  )
 }
 
 export function CalendarGridHeader() {
@@ -146,5 +147,5 @@ export function CalendarGridHeader() {
     <AriaCalendarGridHeader>
       {(day) => <CalendarHeaderCell>{day}</CalendarHeaderCell>}
     </AriaCalendarGridHeader>
-  );
+  )
 }

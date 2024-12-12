@@ -1,5 +1,6 @@
-import type { VariantProps } from "tailwind-variants";
-import { tv } from "../utils/tv";
+import type { VariantProps } from "tailwind-variants"
+
+import { tv } from "../utils/tv"
 
 // TODO: Use typography from design system
 // TODO: Use design tokens from design system
@@ -7,7 +8,7 @@ import { tv } from "../utils/tv";
 
 export const spinnerStyles = tv({
   slots: {
-    base: "relative inline-flex flex-col gap-2 items-center justify-center",
+    base: "relative inline-flex flex-col items-center justify-center gap-2",
     wrapper: "relative flex",
     circle1: [
       "absolute",
@@ -38,17 +39,17 @@ export const spinnerStyles = tv({
   variants: {
     size: {
       sm: {
-        wrapper: "w-5 h-5",
+        wrapper: "h-5 w-5",
         circle1: "border-2",
         circle2: "border-2",
       },
       md: {
-        wrapper: "w-8 h-8",
+        wrapper: "h-8 w-8",
         circle1: "border-3",
         circle2: "border-3",
       },
       lg: {
-        wrapper: "w-10 h-10",
+        wrapper: "h-10 w-10",
         circle1: "border-3",
         circle2: "border-3",
       },
@@ -68,7 +69,7 @@ export const spinnerStyles = tv({
     size: "md",
     color: "current",
   },
-});
+})
 
-export type SpinnerVariantProps = VariantProps<typeof spinnerStyles>;
-export type SpinnerSlots = keyof ReturnType<typeof spinnerStyles>;
+export type SpinnerVariantProps = VariantProps<typeof spinnerStyles>
+export type SpinnerSlots = keyof ReturnType<typeof spinnerStyles>

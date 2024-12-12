@@ -1,5 +1,6 @@
-import type { ClassValue } from "clsx";
-import { clsx } from "clsx";
-import { twMerge } from "./tw-merge";
+import type { ClassValue } from "clsx"
+import { clsx } from "clsx"
 
-export const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes));
+import { twMerge } from "./tw-merge"
+
+export const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes))

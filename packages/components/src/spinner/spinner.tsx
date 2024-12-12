@@ -1,11 +1,11 @@
-import { forwardRef } from "../system/utils";
-import type { UseSpinnerProps } from "./use-spinner";
-import { useSpinner } from "./use-spinner";
+import type { UseSpinnerProps } from "./use-spinner"
+import { forwardRef } from "../system/utils"
+import { useSpinner } from "./use-spinner"
 
-export type SpinnerProps = UseSpinnerProps;
+export type SpinnerProps = UseSpinnerProps
 
 export const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
-  const { slots, classNames, getSpinnerProps } = useSpinner(props);
+  const { slots, classNames, getSpinnerProps } = useSpinner(props)
 
   return (
     <div ref={ref} {...getSpinnerProps()}>
@@ -14,5 +14,5 @@ export const Spinner = forwardRef<"div", SpinnerProps>((props, ref) => {
         <i className={slots.circle2({ class: classNames?.circle2 })} />
       </div>
     </div>
-  );
-});
+  )
+})

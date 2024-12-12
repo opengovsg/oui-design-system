@@ -1,2 +1,2 @@
-export * from "./spinner";
-export * from "./use-spinner";
+export * from "./spinner"
+export * from "./use-spinner"

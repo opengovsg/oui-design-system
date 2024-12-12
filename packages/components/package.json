@@ -26,6 +26,8 @@
     "dev": "tsup --watch",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --max-warnings 0 --fix",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
@@ -34,11 +36,13 @@
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
     "@unnamed/eslint-config": "workspace:*",
+    "@unnamed/prettier-config": "workspace:*",
     "@unnamed/theme": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
     "eslint": "^8.57.0",
     "lucide-react": "^0.462.0",
     "motion": "^11.12.0",
+    "prettier": "^3.3.3",
     "tsup": "^8.0.2",
     "type-fest": "^4.30.0",
     "typescript": "5.5.4"
@@ -58,5 +62,6 @@
   "peerDependencies": {
     "@unnamed/theme": "workspace:*",
     "motion": ">=11.12.0 || >=12.0.0-alpha.1"
-  }
+  },
+  "prettier": "@unnamed/prettier-config"
 }
