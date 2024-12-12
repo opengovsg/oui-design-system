@@ -59,6 +59,7 @@ export const useSpinner = (originalProps: UseSpinnerProps) => {
   const getSpinnerProps = useCallback<PropGetter>(
     () => ({
       "aria-label": ariaLabel,
+      role: "progressbar",
       className: slots.base({
         class: baseStyles,
       }),
