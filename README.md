@@ -1,6 +1,6 @@
-# Turborepo Design System Starter
+# Unnamed Design System
 
-This guide explains how to use a React design system starter powered by:
+This repository contains OGP's Unnamed Design System powered by:
 
 - 🏎 [Turborepo](https://turbo.build/repo) — High-performance build system for Monorepos
 - 🚀 [React](https://reactjs.org/) — JavaScript library for user interfaces
@@ -14,14 +14,6 @@ As well as a few others tools preconfigured:
 - [Prettier](https://prettier.io) for code formatting
 - [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
 - [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest -e design-system
-```
 
 ### Useful Commands
 
@@ -41,11 +33,11 @@ Using Turborepo simplifies managing your design system monorepo, as you can have
 
 This Turborepo includes the following packages and applications:
 
-- `apps/docs`: Component documentation site with Storybook
-- `packages/ui`: Core React components
-- `packages/utils`: Shared React utilities
-- `packages/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
-- `packages/eslint-config`: ESLint preset
+- `apps/storybook`: Component documentation site with Storybook
+- `packages/components`: Core React components
+- `packages/theme`: Theming config (using TailwindCSS) for components and design system
+- `tooling/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
+- `tooling/eslint-config`: ESLint preset
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `pnpm add`.
 
@@ -88,9 +80,9 @@ acme-core
 
 ## Components
 
-Each file inside of `acme-core/src` is a component inside our design system. For example:
+Each file inside of `@unnamed/components/src` is a component inside our design system. For example:
 
-```tsx:acme-core/src/Button.tsx
+```tsx:packages/components/src/Button.tsx
 import * as React from 'react';
 
 export interface ButtonProps {
@@ -106,10 +98,32 @@ Button.displayName = 'Button';
 
 When adding a new file, ensure the component is also exported from the entry `index.tsx` file:
 
-```tsx:acme-core/src/index.tsx
+```tsx:packages/components/src/index.tsx
 import * as React from "react";
 export { Button, type ButtonProps } from "./Button";
 // Add new component exports here
+```
+
+### Generating a new component
+
+To simplify the above process, you can use generate a new component with `turbo`.
+
+Run
+
+```bash
+turbo gen component
+```
+
+to generate a new component template. The generator will add or modify the following files:
+
+```bash
+>>> Changes made:
+  • /packages/components/src/[component-name]/[component-name].tsx (add)
+  • /packages/components/src/[component-name]/index.tsx (add)
+  • /packages/components/src/[component-name]/stories/[component-name].stories.tsx (add)
+  • /packages/components/src/index.ts (modify)
+  • /packages/theme/src/components/[component-name].ts (add)
+  • /packages/theme/src/components/index.ts (modify)
 ```
 
 ## Storybook
@@ -117,42 +131,45 @@ export { Button, type ButtonProps } from "./Button";
 Storybook provides us with an interactive UI playground for our components. This allows us to preview our components in the browser and instantly see changes when developing locally. This example preconfigures Storybook to:
 
 - Use Vite to bundle stories instantly (in milliseconds)
-- Automatically find any stories inside the `stories/` folder
-- Support using module path aliases like `@acme-core` for imports
+- Automatically find any stories with the `*.stories.*` file pattern
+- Support using module path aliases like `@unnamed/components` for imports
 - Write MDX for component documentation pages
 
 For example, here's the included Story for our `Button` component:
 
-```js:apps/docs/stories/button.stories.mdx
-import { Button } from '@acme-core/src';
-import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+```js:packages/components/src/button/stories/button.stories.tsx
+import { buttonStyles } from "@unnamed/theme";
+import type { Meta, StoryObj } from "@storybook/react";
 
-<Meta title="Components/Button" component={Button} />
+import type { ButtonProps } from "../button";
+import { Button } from "../button";
 
-# Button
+export default {
+  title: "Components/Button",
+  component: Button,
+  // Rest omitted for brevity
+} as Meta<typeof Button>;
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget consectetur tempor, nisl nunc egestas nisi, euismod aliquam nisl nunc euismod.
+type Story = StoryObj<typeof Button>;
 
-## Props
+export const Default: Story = {};
 
-<Props of={Box} />
-
-## Examples
-
-<Preview>
-  <Story name="Default">
-    <Button>Hello</Button>
-  </Story>
-</Preview>
+export const IsDisabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+};
 ```
 
-This example includes a few helpful Storybook scripts:
+`@unnamed/storybook` includes these Storybook scripts:
 
 - `pnpm dev`: Starts Storybook in dev mode with hot reloading at `localhost:6006`
 - `pnpm build`: Builds the Storybook UI and generates the static HTML files
 - `pnpm preview-storybook`: Starts a local server to view the generated Storybook UI
 
 ## Versioning & Publishing Packages
+
+> TODO: Verify and cleanup this section
 
 This example uses [Changesets](https://github.com/changesets/changesets) to manage versions, create changelogs, and publish to npm. It's preconfigured so you can start publishing packages immediately.
 
@@ -171,22 +188,4 @@ To generate your changelog, run `pnpm changeset` locally:
 
 ### Releasing
 
-When you push your code to GitHub, the [GitHub Action](https://github.com/changesets/action) will run the `release` script defined in the root `package.json`:
-
-```bash
-turbo run build --filter=docs^... && changeset publish
-```
-
-Turborepo runs the `build` script for all publishable packages (excluding docs) and publishes the packages to npm. By default, this example includes `acme` as the npm organization. To change this, do the following:
-
-- Rename folders in `packages/*` to replace `acme` with your desired scope
-- Search and replace `acme` with your desired scope
-- Re-run `pnpm install`
-
-To publish packages to a private npm organization scope, **remove** the following from each of the `package.json`'s
-
-```diff
-- "publishConfig": {
--  "access": "public"
-- },
-```
+> TODO: Verify and cleanup this section

@@ -1,0 +1,50 @@
+{
+  "name": "@unnamed/storybook",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "storybook build --docs",
+    "preview-storybook": "serve storybook-static",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format:fix": "prettier --write . --ignore-path ../../.gitignore",
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "lint": "eslint .storybook --max-warnings 0"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "4.0.0-beta.5",
+    "@unnamed/components": "workspace:*",
+    "@unnamed/prettier-config": "workspace:*",
+    "@unnamed/theme": "workspace:*",
+    "inter-ui": "^4.1.0",
+    "react": "^18.2.0",
+    "react-aria-components": "^1.4.1",
+    "react-dom": "^18.2.0",
+    "storybook-dark-mode": "^4.0.2"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "8.4.7",
+    "@storybook/addon-actions": "8.4.7",
+    "@storybook/addon-essentials": "8.4.7",
+    "@storybook/addon-links": "8.4.7",
+    "@storybook/react": "8.4.7",
+    "@storybook/react-vite": "8.4.7",
+    "@storybook/theming": "8.4.7",
+    "@types/node": "^22.10.1",
+    "@unnamed/eslint-config": "workspace:*",
+    "@unnamed/typescript-config": "workspace:*",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8.57.0",
+    "eslint-plugin-mdx": "^3.1.5",
+    "eslint-plugin-storybook": "^0.11.1",
+    "prettier": "^3.3.3",
+    "serve": "^14.2.1",
+    "storybook": "8.4.7",
+    "tailwindcss": "4.0.0-beta.5",
+    "typescript": "5.5.4",
+    "vite": "^5.1.4"
+  },
+  "prettier": "@unnamed/prettier-config"
+}
