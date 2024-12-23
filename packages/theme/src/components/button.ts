@@ -1,26 +1,14 @@
 import type { VariantProps } from "tailwind-variants"
 
-import { dataFocusVisibleClasses } from "../utils/classes"
+import { cn, focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
 import { colorVariants } from "../utils/variants"
 
 export const buttonStyles = tv({
-  base: [
-    "group",
-    "inline-flex",
-    "items-center",
-    "justify-center",
-    "box-border",
-    "h-full",
-    "min-w-max",
-    "cursor-pointer",
-    "rounded",
-    "text-center",
-    "transition",
-    "overflow-hidden",
-    "relative",
-    ...dataFocusVisibleClasses,
-  ],
+  base: cn(
+    "group relative box-border inline-flex h-full min-w-max cursor-pointer items-center justify-center overflow-hidden rounded text-center transition",
+    focusVisibleClasses,
+  ),
   variants: {
     layout: {
       stretch: "w-full",
