@@ -34,7 +34,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         path: "packages/components/src/index.ts",
         pattern: /\/\/ Add new component exports here/g,
         template:
-          'export * from "./{{kebabCase name}}";\n// Add new component exports here',
+          'export * from "./{{kebabCase name}}"\n// Add new component exports here',
       },
       {
         type: "add",
@@ -46,7 +46,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
         path: "packages/theme/src/components/index.ts",
         pattern: /\/\/ Add new theme exports here/g,
         template:
-          'export * from "./{{kebabCase name}}";\n// Add new theme exports here',
+          'export * from "./{{kebabCase name}}"\n// Add new theme exports here',
       },
     ],
   });
