@@ -27,7 +27,6 @@ export interface InternalForwardRefRenderFunction<
   ): React.ReactElement | null
   readonly $$typeof: symbol
   defaultProps?: Partial<Props> | undefined
-
   propTypes?: WeakValidationMap<Props> | undefined
   displayName?: string | undefined
 }
@@ -84,7 +83,6 @@ export const mapPropsVariants = <
   }
 
   const picked = variantKeys.reduce((acc, key) => {
-    // Only include the key in `picked` if it exists in `props`
     if (key in props) {
       return { ...acc, [key]: props[key] }
     }
