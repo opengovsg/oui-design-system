@@ -44,6 +44,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
+    "@react-types/calendar": "^3.5.0",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/chromatic": "workspace:*",
     "@oui/eslint-config": "workspace:*",

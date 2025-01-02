@@ -1,5 +1,6 @@
 import type { VariantProps } from "tailwind-variants"
 
+import { focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
 
 // TODO: Use typography from design system
@@ -8,24 +9,41 @@ import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
   slots: {
-    base: "",
+    base: "relative inline-block w-fit max-w-full overflow-x-auto overflow-y-hidden px-2",
     prevButton: "",
     nextButton: "",
-    header: "",
+    header: "flex items-center justify-between",
     title: "",
     content: "",
-    cell: "bg-red-500",
+    cell: [
+      "text-base-content-default disabled:text-interaction-support-disabled-content my-0.5 flex cursor-pointer items-center justify-center rounded-full disabled:cursor-default",
+      ...focusVisibleClasses,
+    ],
     cellButton: "",
     errorMessage: "",
+    gridHeader: "",
+    gridHeaderCell: "text-base-content-default",
   },
   variants: {
     variant: {},
     isSelected: {
       false: {
-        cell: "pressed:bg-gray-200 dark:pressed:bg-zinc-600 text-zinc-900 hover:bg-gray-100 dark:text-zinc-200 dark:hover:bg-zinc-700",
+        cell: "pressed:bg-interaction-muted-main-active hover:bg-interaction-muted-main-hover text-zinc-900",
       },
       true: {
-        cell: "bg-blue-600 text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
+        cell: "bg-interaction-main-default text-base-content-inverse invalid:bg-interaction-critical-default forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
+      },
+    },
+    size: {
+      sm: {
+        gridHeaderCell: "prose-caption-1 w-11 p-2.5",
+        header: "prose-subhead-2 px-4 pt-3",
+        cell: "prose-body-2 mx-auto h-10 w-10",
+      },
+      md: {
+        gridHeaderCell: "prose-subhead-2 w-[52px] p-3",
+        header: "prose-subhead-2 px-4 pt-3",
+        cell: "prose-body-1 mx-auto h-11 w-11",
       },
     },
   },
@@ -36,6 +54,9 @@ export const calendarStyles = tv({
       class: "",
     },
   ],
+  defaultVariants: {
+    size: "md",
+  },
 })
 
 export type CalendarVariantProps = VariantProps<typeof calendarStyles>
