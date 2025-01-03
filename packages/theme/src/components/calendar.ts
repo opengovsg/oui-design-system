@@ -9,7 +9,7 @@ import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
   slots: {
-    base: "relative inline-block w-fit max-w-full overflow-x-auto overflow-y-hidden px-2",
+    base: "relative inline-block w-fit max-w-full overflow-x-auto overflow-y-hidden rounded-sm shadow-sm",
     prevButton: "",
     nextButton: "",
     header: "flex items-center justify-between",
@@ -36,13 +36,15 @@ export const calendarStyles = tv({
     },
     size: {
       sm: {
+        base: "px-2 py-2",
         gridHeaderCell: "prose-caption-1 w-11 p-2.5",
-        header: "prose-subhead-2 px-4 pt-3",
+        header: "prose-subhead-2 px-4",
         cell: "prose-body-2 mx-auto h-10 w-10",
       },
       md: {
+        base: "px-2 py-3",
         gridHeaderCell: "prose-subhead-2 w-[52px] p-3",
-        header: "prose-subhead-2 px-4 pt-3",
+        header: "prose-subhead-2 px-4",
         cell: "prose-body-1 mx-auto h-11 w-11",
       },
     },
