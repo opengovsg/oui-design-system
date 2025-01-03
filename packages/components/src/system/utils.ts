@@ -5,9 +5,9 @@ import type { As, MergeWithAs, PropsOf, RightJoinProps } from "./types"
 
 export interface InternalForwardRefRenderFunction<
   Component extends As,
-  // eslint-disable-next-line @typescript-eslint/ban-types -- explicit object type
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   Props extends object = {},
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   OmitKeys extends keyof any = never,
 > {
   <AsComponent extends As = Component>(
@@ -20,7 +20,7 @@ export interface InternalForwardRefRenderFunction<
   ): React.ReactElement | null
   readonly $$typeof: symbol
   defaultProps?: Partial<Props> | undefined
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- explicit type
+
   propTypes?: WeakValidationMap<Props> | undefined
   displayName?: string | undefined
 }
@@ -28,11 +28,11 @@ export interface InternalForwardRefRenderFunction<
 export function forwardRef<
   Component extends As,
   Props extends object,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   OmitKeys extends keyof any = never,
 >(
   component: React.ForwardRefRenderFunction<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
     RightJoinProps<PropsOf<Component>, Props> & {
       as?: As
@@ -47,14 +47,14 @@ export function forwardRef<
 }
 
 export const mapPropsVariants = <
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any -- explicit any type
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T extends Record<string, any>,
   K extends keyof T,
 >(
   props: T,
   variantKeys?: K[],
   removeVariantProps = true,
-  // eslint-disable-next-line @typescript-eslint/ban-types -- explicit object type
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 ): readonly [Omit<T, K> | T, Pick<T, K> | {}] => {
   if (!variantKeys) {
     return [props, {}]

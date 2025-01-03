@@ -10,7 +10,8 @@
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "clean": "rm -rf .turbo && rm -rf node_modules",
-    "lint": "eslint .storybook --max-warnings 0"
+    "lint": "eslint .storybook --max-warnings 0",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@tailwindcss/vite": "4.0.0-beta.5",
@@ -36,10 +37,8 @@
     "@unnamed/typescript-config": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.0",
-    "eslint-plugin-mdx": "^3.1.5",
-    "eslint-plugin-storybook": "^0.11.1",
-    "prettier": "^3.3.3",
+    "eslint": "^9.17.0",
+    "prettier": "^3.4.2",
     "serve": "^14.2.1",
     "storybook": "8.4.7",
     "tailwindcss": "4.0.0-beta.5",

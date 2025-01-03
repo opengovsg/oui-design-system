@@ -202,7 +202,6 @@ export function GovtBanner({
               </div>
               <article>
                 {formatMessage("officialLinkContent", {
-                  // eslint-disable-next-line react/no-unstable-nested-components -- This is a valid use case
                   boldThis: (content: string) => <b>{content}</b>,
                 })}{" "}
                 <a
@@ -244,7 +243,6 @@ export function GovtBanner({
               </p>
               <article>
                 {formatMessage("secureContent", {
-                  // eslint-disable-next-line react/no-unstable-nested-components -- This is a valid use case
                   boldThis: (content: string) => <b>{content}</b>,
                   icon: (
                     <span aria-hidden>

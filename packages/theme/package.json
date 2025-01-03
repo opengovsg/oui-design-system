@@ -33,6 +33,7 @@
   "scripts": {
     "build": "tsup",
     "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
@@ -43,9 +44,9 @@
     "@unnamed/eslint-config": "workspace:*",
     "@unnamed/prettier-config": "workspace:*",
     "@unnamed/typescript-config": "workspace:*",
-    "eslint": "^8.57.0",
+    "eslint": "^9.17.0",
     "inter-ui": "^4.1.0",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "tailwindcss": "4.0.0-beta.5",
     "tsup": "^8.0.2",
     "typescript": "5.5.4",

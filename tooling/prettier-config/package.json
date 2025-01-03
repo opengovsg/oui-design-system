@@ -13,12 +13,11 @@
   },
   "peerDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.5"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.2.1",
-    "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.5"
   }
 }
