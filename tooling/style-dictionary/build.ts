@@ -1,20 +1,11 @@
-import { fileHeader } from "style-dictionary/utils";
-import { dirname, join } from "path";
-import type { TransformedTokens } from "style-dictionary";
 import { flatten } from "flat";
-import {
-  camelCase,
-  cloneDeep,
-  isObject,
-  kebabCase,
-  merge,
-  omit,
-  pick,
-} from "lodash-es";
+import { cloneDeep, isObject, kebabCase, merge, omit, pick } from "lodash-es";
+import { dirname, join } from "path";
 import StyleDictionary from "style-dictionary";
 import tinycolor from "tinycolor2";
 
 import { fontWeightToNumber, percentToEm, pxToRem } from "./utils";
+import { TransformedTokens } from "style-dictionary/types";
 
 // Convert shadow to css format.
 StyleDictionary.registerTransform({
@@ -61,7 +52,7 @@ StyleDictionary.registerTransform({
   type: "value",
   filter(prop) {
     return ["spacing", "border-radius", "border-width", "sizing"].includes(
-      String(prop.attributes?.category) ?? ""
+      String(prop.attributes?.category)
     );
   },
   transform(prop) {
@@ -120,13 +111,12 @@ StyleDictionary.registerFormat({
     const typography = merge(
       cloneDeep(omit(dictionary.tokens.typography, unneededTypographyKeys)),
       responsiveTypography
-    );
+    ) as TransformedTokens;
 
     // Add utility classes for typography
 
     for (const [key, value] of Object.entries(typography)) {
       css.push(`@utility prose-${key} {`);
-      // @ts-ignore
       const cssValues = Object.entries(value.value);
       cssValues.forEach(([cssKey, cssValue]) => {
         css.push(`    ${kebabCase(cssKey)}: ${cssValue};`);

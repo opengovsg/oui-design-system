@@ -1,22 +1,29 @@
 {
   "name": "@unnamed/eslint-config",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "sideEffects": false,
-  "files": [
-    "library.js",
-    "react.js",
-    "storybook.js"
-  ],
-  "dependencies": {
-    "@vercel/style-guide": "^5.2.0",
-    "eslint-config-turbo": "^2.0.0",
-    "eslint-plugin-mdx": "^3.1.5",
-    "eslint-plugin-only-warn": "^1.1.0",
-    "eslint-plugin-storybook": "^0.11.1"
+  "exports": {
+    "./base": "./base.js",
+    "./storybook": "./storybook.js",
+    "./react-internal": "./react-internal.js"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1"
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-storybook": "^0.11.2",
+    "eslint-plugin-turbo": "^2.3.0",
+    "globals": "^15.12.0",
+    "typescript": "catalog:",
+    "typescript-eslint": "^8.15.0"
+  },
+  "peerDependencies": {
+    "eslint": "catalog:"
   }
 }

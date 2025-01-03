@@ -13,7 +13,6 @@ export function composeRenderProps<T, U, V extends T>(
   wrap: (prevValue: T, renderProps: U) => V,
 ): (renderProps: U) => V {
   return (renderProps) =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     wrap(typeof value === "function" ? value(renderProps) : value, renderProps)
 }
 

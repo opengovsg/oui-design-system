@@ -85,7 +85,6 @@ function StateTemplate(args: ButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   const handlePress = () => {
-    // eslint-disable-next-line no-console -- storybook explicit log
     console.log("Pressed")
     setIsOpen((prev) => !prev)
   }
