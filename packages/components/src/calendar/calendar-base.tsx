@@ -3,6 +3,7 @@ import type {
   CalendarGridProps,
   DateValue,
 } from "react-aria-components"
+import { ForwardedRef } from "react"
 import { cn } from "@unnamed/theme"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import {
@@ -23,10 +24,13 @@ import { useCalendarContext } from "./calendar-context"
 
 export interface CalendarBaseProps<T extends DateValue>
   extends AriaCalendarProps<T>,
-    Pick<CalendarGridProps, "weekdayStyle"> {}
+    Pick<CalendarGridProps, "weekdayStyle"> {
+  calendarRef: ForwardedRef<HTMLDivElement>
+}
 
 export function CalendarBase<T extends DateValue>({
   weekdayStyle = "narrow",
+  calendarRef,
   ...props
 }: CalendarBaseProps<T>) {
   const { slots, className, classNames } = useCalendarContext()
@@ -34,6 +38,7 @@ export function CalendarBase<T extends DateValue>({
   return (
     <AriaCalendar
       {...props}
+      ref={calendarRef}
       className={composeRenderProps(className, (className, renderProps) =>
         slots.base({
           className: cn(classNames?.base, className),

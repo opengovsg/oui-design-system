@@ -6,8 +6,8 @@ import type {
 import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
+  DateValue,
 } from "react-aria-components"
-import { DateValue } from "@react-types/calendar"
 import { calendarStyles } from "@unnamed/theme"
 import { useDeepCompareMemo } from "use-deep-compare"
 
@@ -72,8 +72,14 @@ export function useCalendar<T extends DateValue>(
   )
 
   return {
-    context: { slots, classNames, className, size: variantProps.size },
-    calendarProps: restProps,
+    context: {
+      slots,
+      classNames,
+      className,
+      size: variantProps.size,
+      errorMessage,
+    },
+    calendarProps: { ...restProps, onChange: restProps.onChange },
   }
 }
 
