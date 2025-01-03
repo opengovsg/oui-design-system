@@ -14,14 +14,14 @@
     "lint:fix": "eslint . --fix"
   },
   "dependencies": {
-    "@tailwindcss/vite": "4.0.0-beta.5",
+    "@tailwindcss/vite": "catalog:",
     "@unnamed/components": "workspace:*",
     "@unnamed/prettier-config": "workspace:*",
     "@unnamed/theme": "workspace:*",
     "inter-ui": "^4.1.0",
-    "react": "^18.2.0",
+    "react": "catalog:",
     "react-aria-components": "^1.4.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "catalog:",
     "storybook-dark-mode": "^4.0.2"
   },
   "devDependencies": {
@@ -37,12 +37,12 @@
     "@unnamed/typescript-config": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9.17.0",
-    "prettier": "^3.4.2",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
     "serve": "^14.2.1",
     "storybook": "8.4.7",
-    "tailwindcss": "4.0.0-beta.5",
-    "typescript": "5.5.4",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
     "vite": "^5.1.4"
   },
   "prettier": "@unnamed/prettier-config"

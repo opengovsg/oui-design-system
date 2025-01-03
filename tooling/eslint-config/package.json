@@ -20,10 +20,10 @@
     "eslint-plugin-storybook": "^0.11.2",
     "eslint-plugin-turbo": "^2.3.0",
     "globals": "^15.12.0",
-    "typescript": "5.5.4",
+    "typescript": "catalog:",
     "typescript-eslint": "^8.15.0"
   },
   "peerDependencies": {
-    "eslint": "^9.15.0"
+    "eslint": "catalog:"
   }
 }
