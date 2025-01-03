@@ -45,14 +45,17 @@ export const Toggle = ({
 
   const slots = toggleStyles(variantProps)
 
-  const clonedThumbIcon = useCallback((renderProps: SwitchRenderProps) => {
-    const baseProps: Pick<ToggleThumbIconProps, "className"> = {
-      className: slots.thumbIcon({ className: classNames?.thumbIcon }),
-    }
-    return typeof thumbIcon === "function"
-      ? thumbIcon(mergeProps(baseProps, renderProps))
-      : thumbIcon && cloneElement(thumbIcon, baseProps)
-  }, [])
+  const clonedThumbIcon = useCallback(
+    (renderProps: SwitchRenderProps) => {
+      const baseProps: Pick<ToggleThumbIconProps, "className"> = {
+        className: slots.thumbIcon({ className: classNames?.thumbIcon }),
+      }
+      return typeof thumbIcon === "function"
+        ? thumbIcon(mergeProps(baseProps, renderProps))
+        : thumbIcon && cloneElement(thumbIcon, baseProps)
+    },
+    [classNames?.thumbIcon, slots, thumbIcon],
+  )
 
   return (
     <AriaSwitch
