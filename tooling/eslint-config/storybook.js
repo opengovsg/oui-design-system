@@ -1,49 +1,32 @@
-const { resolve } = require("node:path");
+import { config as baseConfig } from "./react-internal.js";
+import pluginStorybook from "eslint-plugin-storybook";
+import pluginMdx from "eslint-plugin-mdx";
 
-const project = resolve(process.cwd(), "tsconfig.json");
-
-/*
- * This is a custom ESLint configuration for use with
- * typescript packages.
+/**
+ * A custom ESLint configuration for libraries that use Storybook.
  *
- * This config extends the Vercel Engineering Style Guide.
- * For more information, see https://github.com/vercel/style-guide
- *
- */
-
-module.exports = {
-  extends: [
-    "plugin:storybook/recommended",
-    "plugin:mdx/recommended",
-    ...[
-      "@vercel/style-guide/eslint/browser",
-      "@vercel/style-guide/eslint/typescript",
-      "@vercel/style-guide/eslint/react",
-    ],
-    "prettier",
-  ],
-  ignorePatterns: ["!.storybook"],
-  parserOptions: {
-    project,
+ * @type {import("eslint").Linter.Config}
+ * */
+export const storybookConfig = [
+  ...baseConfig,
+  ...pluginStorybook.configs["flat/recommended"],
+  {
+    ...pluginMdx.flat,
+    // optional, if you want to lint code blocks at the same
+    processor: pluginMdx.createRemarkProcessor({
+      lintCodeBlocks: true,
+      // optional, if you want to disable language mapper, set it to `false`
+      // if you want to override the default language mapper inside, you can provide your own
+      languageMapper: {},
+    }),
   },
-  plugins: ["only-warn"],
-  globals: {
-    React: true,
-    JSX: true,
-  },
-  settings: {
-    "import/resolver": {
-      typescript: [
-        "packages/*/tsconfig.json",
-        "apps/*/tsconfig.json",
-        "tooling/*/tsconfig.json",
-      ],
+  {
+    ...pluginMdx.flatCodeBlocks,
+    rules: {
+      ...pluginMdx.flatCodeBlocks.rules,
+      // if you want to override some rules for code blocks
+      "no-var": "error",
+      "prefer-const": "error",
     },
   },
-  ignorePatterns: ["node_modules/", "dist/"],
-  // add rules configurations here
-  rules: {
-    "import/no-default-export": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-  },
-};
+];
