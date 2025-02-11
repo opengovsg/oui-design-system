@@ -31,7 +31,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@storybook/react": "8.4.7",
+    "@storybook/react": "8.5.3",
     "@types/prop-types": "^15.7.14",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
