@@ -28,6 +28,7 @@ export default {
     ...buttonMeta.args,
     children: <HeadphonesIcon />,
     isIconOnly: true,
+    "aria-label": "Example icon button",
   },
 } as Meta<typeof Button>
 
