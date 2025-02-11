@@ -36,6 +36,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
+      - name: Install Playwright browsers
+        run: pnpx playwright install --with-deps
       - name: Run tests
         run: pnpm test
         env:
