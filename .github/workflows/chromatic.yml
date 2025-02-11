@@ -27,3 +27,14 @@ jobs:
           # Skip running Chromatic on dependabot PRs
           skip: dependabot/**
           buildScriptName: "build"
+  test:
+    needs: chromatic
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./github/actions/setup
+      - name: Run tests
+        run: pnpm test
+        env:
+          SB_URL: "${{ needs.chromatic.outputs.storybook_url }}"
