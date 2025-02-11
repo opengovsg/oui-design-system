@@ -11,7 +11,8 @@
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint .storybook --max-warnings 0",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "chromatic": "pnpx chromatic --build-script-name=build"
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:",
@@ -37,6 +38,7 @@
     "@unnamed/typescript-config": "workspace:*",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.20",
+    "chromatic": "^11.25.2",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "serve": "^14.2.1",
