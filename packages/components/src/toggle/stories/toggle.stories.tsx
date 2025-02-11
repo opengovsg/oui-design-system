@@ -25,7 +25,7 @@ export default {
 type Story = StoryObj<typeof Toggle>
 
 export const Default: Story = {
-  args: {},
+  args: { "aria-label": "Toggle" },
 }
 
 export const WithLabel: Story = {
@@ -39,6 +39,7 @@ export const WithThumbIcon: Story = {
     docs: {
       source: {
         code: `<Toggle
+  aria-label="Toggle"
   thumbIcon={({ isSelected, className }) =>
     isSelected ? (
       <Check className={className} />
@@ -53,6 +54,7 @@ export const WithThumbIcon: Story = {
     },
   },
   args: {
+    "aria-label": "Toggle",
     thumbIcon: (props) => {
       const { isSelected, className } = props
       return isSelected ? (
@@ -67,10 +69,11 @@ export const WithThumbIcon: Story = {
 const ToggleWithThumbIcon = (props: ToggleProps) => {
   return (
     <Toggle
-      {...props}
+      aria-label="Toggle"
       thumbIcon={({ isSelected, className }) =>
         isSelected && <Lock className={className} />
       }
+      {...props}
     />
   )
 }
@@ -106,5 +109,7 @@ export const SizesAndStates: Story = {
       </div>
     )
   },
-  args: {},
+  args: {
+    "aria-label": "Toggle",
+  },
 }

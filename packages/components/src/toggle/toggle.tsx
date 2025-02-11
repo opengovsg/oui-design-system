@@ -19,11 +19,10 @@ export interface ToggleThumbIconProps extends SwitchRenderProps {
   className: string
 }
 
-export interface ToggleProps
+interface _ToggleProps
   extends Omit<AriaSwitchProps, "children">,
     VariantProps<typeof toggleStyles> {
   classNames?: SlotsToClasses<ToggleSlots>
-  children?: React.ReactNode
   /**
    * The icon to be displayed inside the thumb.
    */
@@ -31,6 +30,18 @@ export interface ToggleProps
     | React.ReactElement
     | ((props: ToggleThumbIconProps) => React.ReactNode)
 }
+
+export type ToggleProps = _ToggleProps &
+  (
+    | {
+        children: React.ReactNode
+        "aria-label"?: string
+      }
+    | {
+        children?: never
+        "aria-label": string
+      }
+  )
 
 export const Toggle = ({
   children,
