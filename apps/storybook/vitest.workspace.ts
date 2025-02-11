@@ -18,7 +18,7 @@ export default defineWorkspace([
       // See options at: https://storybook.js.org/docs/writing-tests/test-addon#storybooktest
       storybookTest({
         configDir: path.join(dirname, ".storybook"),
-        storybookUrl: process.env.SB_URL,
+        storybookUrl: process.env.SB_URL || "http://localhost:6006",
       }),
     ],
     test: {
@@ -26,11 +26,7 @@ export default defineWorkspace([
       browser: {
         enabled: true,
         headless: true,
-        instances: [
-          {
-            browser: "chromium",
-          },
-        ],
+        instances: [{ browser: "chromium" }],
         provider: "playwright",
       },
       setupFiles: [".storybook/vitest.setup.ts"],
