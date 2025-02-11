@@ -11,8 +11,7 @@
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint .storybook --max-warnings 0",
-    "lint:fix": "eslint . --fix",
-    "chromatic": "pnpx chromatic --build-script-name=build"
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:",
