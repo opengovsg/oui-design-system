@@ -1,5 +1,5 @@
 {
-  "name": "@unnamed/theme",
+  "name": "@oui/theme",
   "version": "0.0.0",
   "sideEffects": false,
   "files": [
@@ -41,9 +41,9 @@
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
-    "@unnamed/eslint-config": "workspace:*",
-    "@unnamed/prettier-config": "workspace:*",
-    "@unnamed/typescript-config": "workspace:*",
+    "@oui/eslint-config": "workspace:*",
+    "@oui/prettier-config": "workspace:*",
+    "@oui/typescript-config": "workspace:*",
     "eslint": "catalog:",
     "inter-ui": "^4.1.0",
     "prettier": "catalog:",
@@ -63,5 +63,5 @@
     "inter-ui": ">=4.1.0",
     "tailwindcss": ">=catalog:"
   },
-  "prettier": "@unnamed/prettier-config"
+  "prettier": "@oui/prettier-config"
 }

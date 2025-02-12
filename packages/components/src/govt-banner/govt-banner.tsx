@@ -1,9 +1,9 @@
-import type { GovtBannerSlots, SlotsToClasses } from "@unnamed/theme"
+import type { GovtBannerSlots, SlotsToClasses } from "@oui/theme"
 import type { LocalizedStrings } from "react-aria"
 import type { DisclosureProps } from "react-stately"
 import type { LiteralUnion } from "type-fest"
 import { useRef } from "react"
-import { dataAttr, govtBannerStyles, twMerge } from "@unnamed/theme"
+import { dataAttr, govtBannerStyles, twMerge } from "@oui/theme"
 import { ChevronDown, ExternalLink, Landmark, Lock } from "lucide-react"
 import {
   mergeProps,

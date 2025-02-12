@@ -1,5 +1,5 @@
 import type { Meta } from "@storybook/react"
-import { spinnerStyles } from "@unnamed/theme"
+import { spinnerStyles } from "@oui/theme"
 
 import { Spinner } from "../spinner"
 

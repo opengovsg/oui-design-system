@@ -29,7 +29,6 @@ jobs:
           autoAcceptChanges: main
           # Skip running Chromatic on dependabot PRs
           skip: dependabot/**
-          buildScriptName: "build"
   test:
     needs: chromatic
     timeout-minutes: 10

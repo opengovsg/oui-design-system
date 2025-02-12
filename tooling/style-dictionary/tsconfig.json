@@ -1,5 +1,5 @@
 {
-  "extends": "@unnamed/typescript-config/base.json",
+  "extends": "@oui/typescript-config/base.json",
   "compilerOptions": {
     "allowJs": true,
     "declaration": false,

@@ -1,8 +1,8 @@
-import type { VariantProps } from "@unnamed/theme"
+import type { VariantProps } from "@oui/theme"
 import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { forwardRef, useMemo } from "react"
 import { chain } from "@react-aria/utils"
-import { buttonStyles } from "@unnamed/theme"
+import { buttonStyles } from "@oui/theme"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 
 import type { SpinnerProps } from "../spinner"
@@ -28,7 +28,7 @@ interface _ButtonProps
   endContent?: React.ReactNode
   /**
    * Spinner to display when loading.
-   * @defaultValue \@unnamed/components/spinner
+   * @defaultValue \@oui/components/spinner
    */
   spinner?: React.ReactNode
 

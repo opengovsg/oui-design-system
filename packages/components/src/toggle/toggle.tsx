@@ -5,7 +5,7 @@ import {
   ToggleSlots,
   toggleStyles,
   VariantProps,
-} from "@unnamed/theme"
+} from "@oui/theme"
 import { mergeProps } from "react-aria"
 import {
   Switch as AriaSwitch,
