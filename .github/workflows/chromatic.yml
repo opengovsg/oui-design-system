@@ -39,8 +39,8 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
-      - name: Install Playwright browsers
-        run: pnpx playwright install --with-deps
+      - name: Install Playwright Chromium browser
+        run: pnpx playwright install chromium --only-shell
       - name: Run tests
         run: pnpm test
         env:

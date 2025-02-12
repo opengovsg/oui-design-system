@@ -18,7 +18,7 @@ export default defineWorkspace([
       // See options at: https://storybook.js.org/docs/writing-tests/test-addon#storybooktest
       storybookTest({
         configDir: path.join(dirname, ".storybook"),
-        storybookUrl: process.env.SB_URL || "http://localhost:6006",
+        storybookUrl: process.env.TARGET_URL || "http://localhost:6006",
       }),
     ],
     test: {
