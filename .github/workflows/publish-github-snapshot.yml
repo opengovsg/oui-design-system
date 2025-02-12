@@ -25,9 +25,7 @@ jobs:
 
       - name: Setup .npmrc
         run: |
-          cat << EOF > "$HOME/.npmrc"
-            //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
-          EOF
+          echo '@opengovsg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > $HOME/.npmrc
       - name: Create Release PR or Publish to Github
         id: changesets
         uses: changesets/action@v1
