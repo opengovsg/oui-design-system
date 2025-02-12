@@ -9,7 +9,7 @@ import type { SpinnerProps } from "../spinner"
 import { Ripple, useRipple } from "../ripple"
 import { Spinner } from "../spinner"
 
-export interface ButtonProps
+interface _ButtonProps
   extends Omit<AriaButtonProps, "children">,
     VariantProps<typeof buttonStyles> {
   /**
@@ -43,12 +43,13 @@ export interface ButtonProps
    * @defaultValue "start"
    */
   spinnerPlacement?: "start" | "end"
-
-  /**
-   * Display a button without text and show the icon passed to the `children` prop.
-   */
-  isIconOnly?: boolean
 }
+
+export type ButtonProps = Omit<_ButtonProps, "aria-label"> &
+  (
+    | { isIconOnly: true; "aria-label": string }
+    | { isIconOnly?: false; "aria-label"?: string }
+  )
 
 /**
  * You probably do not want to use this component if you are rendering a link.

@@ -22,6 +22,16 @@ const commonTheme = {
 }
 
 export const parameters: Preview["parameters"] = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: "region",
+          enabled: false,
+        },
+      ],
+    },
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
     storySort: {
@@ -84,4 +94,12 @@ export const globalTypes: Preview["globalTypes"] = {
     },
   },
 }
+
+// Fixes concurrent axe instances. See https://github.com/storybookjs/storybook/issues/30385.
+export const initialGlobals: Preview["initialGlobals"] = {
+  a11y: {
+    manual: true,
+  },
+}
+
 export const tags = ["autodocs"]

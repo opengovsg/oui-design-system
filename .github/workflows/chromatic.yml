@@ -10,6 +10,8 @@ jobs:
   chromatic:
     name: Run Chromatic
     runs-on: ubuntu-latest
+    outputs:
+      storybookUrl: ${{ steps.chromatic.outputs.storybookUrl }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,6 +19,7 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/setup
       - name: Run Chromatic
+        id: chromatic
         uses: chromaui/action@latest
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
@@ -27,3 +30,18 @@ jobs:
           # Skip running Chromatic on dependabot PRs
           skip: dependabot/**
           buildScriptName: "build"
+  test:
+    needs: chromatic
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Install Playwright Chromium browser
+        run: pnpx playwright install chromium --only-shell
+      - name: Run tests
+        run: pnpm test
+        env:
+          TARGET_URL: "${{ needs.chromatic.outputs.storybookUrl }}"
