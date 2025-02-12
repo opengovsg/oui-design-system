@@ -1,5 +1,10 @@
 name: "Setup and install"
 description: "Common setup steps for Actions"
+inputs:
+  registry-url:
+    description: "Pass registry URL to setup-node action"
+    default: "https://registry.npmjs.org"
+    required: false
 
 runs:
   using: composite
@@ -10,6 +15,7 @@ runs:
       with:
         node-version: 22
         cache: "pnpm"
+        registry-url: ${{ inputs.registry_url }}
     - name: Install dependencies
+      run: pnpm install --frozen-lockfile
       shell: bash
-      run: pnpm install
