@@ -10,9 +10,9 @@ jobs:
     permissions:
       contents: write
       packages: write
-      # For changeset to generate changelog
+      # For changeset to generate changelog and create a PR
       statuses: read
-      pull-requests: read
+      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
