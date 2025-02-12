@@ -25,6 +25,14 @@ export interface InternalForwardRefRenderFunction<
   displayName?: string | undefined
 }
 
+type PropsWithoutRef<Props> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Props extends any
+    ? "ref" extends keyof Props
+      ? Omit<Props, "ref">
+      : Props
+    : Props
+
 export function forwardRef<
   Component extends As,
   Props extends object,
@@ -34,9 +42,11 @@ export function forwardRef<
   component: React.ForwardRefRenderFunction<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any,
-    RightJoinProps<PropsOf<Component>, Props> & {
-      as?: As
-    }
+    PropsWithoutRef<
+      RightJoinProps<PropsOf<Component>, Props> & {
+        as?: As
+      }
+    >
   >,
 ): InternalForwardRefRenderFunction<Component, Props, OmitKeys> {
   return baseForwardRef(component) as InternalForwardRefRenderFunction<

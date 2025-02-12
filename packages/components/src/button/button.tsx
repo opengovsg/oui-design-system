@@ -1,8 +1,8 @@
 import type { VariantProps } from "@oui/theme"
 import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { forwardRef, useMemo } from "react"
-import { chain } from "@react-aria/utils"
 import { buttonStyles } from "@oui/theme"
+import { chain } from "@react-aria/utils"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 
 import type { SpinnerProps } from "../spinner"
