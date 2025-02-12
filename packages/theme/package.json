@@ -39,24 +39,24 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
     "@oui/eslint-config": "workspace:*",
     "@oui/prettier-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "eslint": "catalog:",
     "inter-ui": "^4.1.0",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
-    "tsup": "^8.0.2",
+    "tsup": "^8.3.6",
     "typescript": "catalog:"
   },
   "dependencies": {
     "@tailwindcss/vite": "catalog:",
     "clsx": "^2.1.1",
     "react": "catalog:",
-    "tailwind-merge": "^2.5.4",
-    "tailwind-variants": "^0.3.0",
+    "tailwind-merge": "^3.0.1",
+    "tailwind-variants": "^0.3.1",
     "tailwindcss-react-aria-components": "^1.2.0"
   },
   "peerDependencies": {

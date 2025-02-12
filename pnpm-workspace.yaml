@@ -3,12 +3,12 @@ packages:
   - packages/*
   - tooling/*
 catalog:
-  typescript: 5.7.2
-  react-dom: ^18.2.0
-  react: ^18.2.0
-  "@types/react": ^18.2.61
-  "@types/react-dom": ^18.2.19
-  eslint: ^9.17.0
-  prettier: ^3.4.2
-  tailwindcss: 4.0.0-beta.8
-  "@tailwindcss/vite": 4.0.0-beta.8
+  typescript: 5.7.3
+  react-dom: ^19.0.0
+  react: ^19.0.0
+  "@types/react": ^19.0.8
+  "@types/react-dom": ^19.0.3
+  eslint: ^9.20.1
+  prettier: ^3.5.0
+  tailwindcss: 4.0.6
+  "@tailwindcss/vite": 4.0.6

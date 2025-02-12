@@ -22,8 +22,8 @@
   "dependencies": {
     "flat": "^6.0.1",
     "lodash-es": "^4.17.21",
-    "sd-tailwindcss-transformer": "^2.0.0",
-    "style-dictionary": "^4.2.0",
+    "sd-tailwindcss-transformer": "^2.1.0",
+    "style-dictionary": "^4.3.3",
     "tinycolor2": "^1.6.0"
   }
 }
