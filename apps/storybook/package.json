@@ -16,9 +16,9 @@
     "test:vitest": "vitest --project=storybook"
   },
   "dependencies": {
-    "@oui/components": "workspace:*",
+    "@opengovsg/oui": "workspace:*",
+    "@opengovsg/oui-theme": "workspace:*",
     "@oui/prettier-config": "workspace:*",
-    "@oui/theme": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "inter-ui": "^4.1.0",
     "react": "catalog:",

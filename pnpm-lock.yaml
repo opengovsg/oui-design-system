@@ -50,15 +50,15 @@ importers:
 
   apps/storybook:
     dependencies:
-      '@oui/components':
+      '@opengovsg/oui':
         specifier: workspace:*
         version: link:../../packages/components
+      '@opengovsg/oui-theme':
+        specifier: workspace:*
+        version: link:../../packages/theme
       '@oui/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier-config
-      '@oui/theme':
-        specifier: workspace:*
-        version: link:../../packages/theme
       '@tailwindcss/vite':
         specifier: 'catalog:'
         version: 4.0.6(vite@6.1.0(@types/node@22.13.1)(jiti@2.4.2)(lightningcss@1.29.1)(tsx@4.19.2)(yaml@2.7.0))
@@ -193,15 +193,15 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0(react@19.0.0)
     devDependencies:
+      '@opengovsg/oui-theme':
+        specifier: workspace:*
+        version: link:../theme
       '@oui/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint-config
       '@oui/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier-config
-      '@oui/theme':
-        specifier: workspace:*
-        version: link:../theme
       '@oui/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript-config

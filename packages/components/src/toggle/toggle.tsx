@@ -5,7 +5,7 @@ import {
   ToggleSlots,
   toggleStyles,
   VariantProps,
-} from "@oui/theme"
+} from "@opengovsg/oui-theme"
 import { mergeProps } from "react-aria"
 import {
   Switch as AriaSwitch,
