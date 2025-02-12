@@ -16,7 +16,7 @@ export const decorators: Preview["decorators"] = [
 ]
 
 const commonTheme = {
-  brandTitle: "@Unnamed",
+  brandTitle: "@oui",
   brandUrl: "https://design.open.gov.sg",
   brandTarget: "_self",
 }

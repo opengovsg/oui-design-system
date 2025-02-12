@@ -1,5 +1,5 @@
 {
-  "name": "@unnamed/style-dictionary",
+  "name": "@oui/style-dictionary",
   "description": "Tool to generate tailwind variables from design tokens",
   "version": "0.0.0",
   "type": "module",
@@ -11,8 +11,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@unnamed/eslint-config": "workspace:*",
-    "@unnamed/typescript-config": "workspace:*",
+    "@oui/eslint-config": "workspace:*",
+    "@oui/typescript-config": "workspace:*",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "token-transformer": "^0.0.33",

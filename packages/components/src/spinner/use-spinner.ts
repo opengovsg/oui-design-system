@@ -2,10 +2,10 @@ import type {
   SlotsToClasses,
   SpinnerSlots,
   SpinnerVariantProps,
-} from "@unnamed/theme"
+} from "@oui/theme"
 import type { Ref } from "react"
 import { useCallback, useMemo } from "react"
-import { cn, spinnerStyles } from "@unnamed/theme"
+import { cn, spinnerStyles } from "@oui/theme"
 import { useDeepCompareMemo } from "use-deep-compare"
 
 import type { HtmlUiProps, PropGetter } from "../system/types"

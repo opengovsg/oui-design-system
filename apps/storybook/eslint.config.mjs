@@ -1,4 +1,4 @@
-import { config as baseConfig } from "@unnamed/eslint-config/storybook"
+import { config as baseConfig } from "@oui/eslint-config/storybook"
 
 /**
  * @type {import("eslint").Linter.Config}
