@@ -1,7 +1,7 @@
-import type { VariantProps } from "@oui/theme"
+import type { VariantProps } from "@opengovsg/oui-theme"
 import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { forwardRef, useMemo } from "react"
-import { buttonStyles } from "@oui/theme"
+import { buttonStyles } from "@opengovsg/oui-theme"
 import { chain } from "@react-aria/utils"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 
@@ -28,7 +28,7 @@ interface _ButtonProps
   endContent?: React.ReactNode
   /**
    * Spinner to display when loading.
-   * @defaultValue \@oui/components/spinner
+   * @defaultValue \@opengovsg/oui/components/spinner
    */
   spinner?: React.ReactNode
 

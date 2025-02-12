@@ -80,7 +80,7 @@ acme-core
 
 ## Components
 
-Each file inside of `@oui/components/src` is a component inside our design system. For example:
+Each file inside of `packages/components/src` is a component inside our design system. For example:
 
 ```tsx:packages/components/src/Button.tsx
 import * as React from 'react';
@@ -132,13 +132,13 @@ Storybook provides us with an interactive UI playground for our components. This
 
 - Use Vite to bundle stories instantly (in milliseconds)
 - Automatically find any stories with the `*.stories.*` file pattern
-- Support using module path aliases like `@oui/components` for imports
+- Support using module path aliases like `@opengovsg/oui` for imports
 - Write MDX for component documentation pages
 
 For example, here's the included Story for our `Button` component:
 
 ```js:packages/components/src/button/stories/button.stories.tsx
-import { buttonStyles } from "@oui/theme";
+import { buttonStyles } from "@opengovsg/oui-theme";
 import type { Meta, StoryObj } from "@storybook/react";
 
 import type { ButtonProps } from "../button";

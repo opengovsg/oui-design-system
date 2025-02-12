@@ -28,9 +28,9 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
+    "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
     "@oui/prettier-config": "workspace:*",
-    "@oui/theme": "workspace:*",
     "@oui/typescript-config": "workspace:*",
     "@storybook/react": "8.5.4",
     "@types/prop-types": "^15.7.14",
@@ -57,7 +57,7 @@
     "use-deep-compare": "^1.3.0"
   },
   "peerDependencies": {
-    "@oui/theme": "workspace:*",
+    "@opengovsg/oui-theme": "workspace:*",
     "motion": ">=11.12.0 || >=12.0.0-alpha.1"
   },
   "prettier": "@oui/prettier-config"
