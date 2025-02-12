@@ -22,6 +22,16 @@ const commonTheme = {
 }
 
 export const parameters: Preview["parameters"] = {
+  a11y: {
+    config: {
+      rules: [
+        {
+          id: "region",
+          enabled: false,
+        },
+      ],
+    },
+  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   options: {
     storySort: {
