@@ -5,7 +5,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "pnpx token-transformer raw/tokens.json tokens/base.json global && tsx build.ts",
+    "generate": "pnpx token-transformer raw/tokens.json tokens/base.json global && tsx build.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
