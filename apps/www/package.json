@@ -9,7 +9,7 @@
     "dev": "pnpm run /^dev:/",
     "build:content": "velite --clean",
     "build:next": "next build",
-    "build": "pnpm run --sequentially /^build:/",
+    "build": "pnpm run --sequential /^build:/",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --check . --ignore-path ../../.gitignore",
