@@ -45,7 +45,6 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "eslint": "catalog:",
-    "inter-ui": "^4.1.0",
     "prettier": "catalog:",
     "tailwindcss": "catalog:",
     "tsup": "^8.3.6",
@@ -60,7 +59,6 @@
     "tailwindcss-react-aria-components": "^1.2.0"
   },
   "peerDependencies": {
-    "inter-ui": ">=4.1.0",
     "tailwindcss": ">=catalog:"
   },
   "prettier": "@oui/prettier-config"

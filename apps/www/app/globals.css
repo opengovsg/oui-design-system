@@ -1,0 +1,24 @@
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../../../packages/components/src/**/*.{js,jsx,ts,tsx}";
+@source "../../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}";
+@source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
+@source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
+@source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}

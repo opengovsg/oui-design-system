@@ -1,10 +1,11 @@
-interface {{ pascalCase name }}Props {
-}
+import { {{ camelCase name }}Styles, VariantProps } from "@opengovsg/oui-theme"
+
+interface {{ pascalCase name }}Props extends VariantProps<typeof {{ camelCase name }}Styles> {}
 
 export const {{ pascalCase name }} = ({  }: {{ pascalCase name }}Props) => {
   return (
     <div>
       <h1>{{ name }}</h1>
     </div>
-  );
+  )
 }
