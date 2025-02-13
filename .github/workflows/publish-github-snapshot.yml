@@ -24,7 +24,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
 
       - name: Build packages
-        run: pnpm build
+        run: pnpm build --filter=@opengovsg/oui
 
       - name: Setup .npmrc
         run: |
