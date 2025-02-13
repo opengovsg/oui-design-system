@@ -5,9 +5,18 @@
 @source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
 
+@import "inter-ui/inter.css";
+@import "inter-ui/inter-variable.css";
+
 /* This will be generated for other themes */
 @layer base {
   :root {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    @supports (font-variation-settings: normal) {
+      --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif;
+    }
+
     --theme-text-color-default: #454953;
     --theme-text-color-strong: #2c2e34;
     --theme-text-color-white: #ffffff;
