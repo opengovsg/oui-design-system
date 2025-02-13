@@ -7,10 +7,7 @@ import remarkMath from "remark-math"
 import { visit } from "unist-util-visit"
 import { defineCollection, defineConfig, s } from "velite"
 
-const computedFields = <T extends { slug: string }>(data: T) => ({
-  ...data,
-  slugAsParams: data.slug.split("/").slice(1).join("/"),
-})
+import { docsConfig } from "./config/docs.config"
 
 export const docs = defineCollection({
   name: "Docs",
@@ -20,16 +17,40 @@ export const docs = defineCollection({
       slug: s.path(),
       title: s.string(),
       description: s.string(),
-      published: s.boolean().default(false),
-      date: s.coerce.date().default(new Date()),
+      published: s.boolean().default(true),
       label: s.enum(["New", "Updated"]).optional(),
       body: s.mdx(),
       toc: s.object({
         content: s.toc(),
         visible: s.boolean().default(true),
       }),
+      links: s
+        .object({
+          source: s.string().optional(),
+          storybook: s.string().optional(),
+          theme: s.string().optional(),
+        })
+        .optional(),
     })
-    .transform(computedFields),
+    .transform((data) => {
+      const links = data.links ?? {}
+      return {
+        ...data,
+        slugAsParams: data.slug.split("/").slice(1).join("/"),
+        links: {
+          ...links,
+          source: links.source
+            ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/components/src/${links.source}`
+            : undefined,
+          storybook: links.storybook
+            ? `${docsConfig.storybookUrl}/?path=/story/${links.storybook}`
+            : undefined,
+          theme: links.theme
+            ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/theme/src/components/${links.source}.ts`
+            : undefined,
+        },
+      }
+    }),
 })
 
 export default defineConfig({

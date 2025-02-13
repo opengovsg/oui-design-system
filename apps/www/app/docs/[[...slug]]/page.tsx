@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
 import { docsConfig } from "@/config/docs.config"
@@ -78,6 +79,21 @@ export default async function DocPage({ params }: DynamicPageProps) {
             ))}
           </BreadcrumbList>
         </Breadcrumb> */}
+
+        <div>
+          <ul>
+            {Object.entries(doc.links).map(
+              ([key, value]) =>
+                value && (
+                  <li key={key}>
+                    <Link href={value} target="_blank">
+                      {key}
+                    </Link>
+                  </li>
+                ),
+            )}
+          </ul>
+        </div>
 
         <div className="space-y-2">
           <h1 className={cn("scroll-m-20 text-3xl font-bold tracking-tight")}>
