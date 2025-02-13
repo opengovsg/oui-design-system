@@ -8,19 +8,31 @@
   ],
   "exports": {
     ".": {
+      "source": "./src/index.ts",
       "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/esm/index.js"
       },
       "require": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
+        "types": "./dist/types/index.d.ts",
+        "default": "./dist/cjs/index.cjs"
+      }
+    },
+    "./*": {
+      "source": "./src/*/index.ts",
+      "import": {
+        "types": "./dist/types/*/index.d.ts",
+        "default": "./dist/esm/*/index.js"
+      },
+      "require": {
+        "types": "./dist/types/*/index.d.ts",
+        "default": "./dist/cjs/*/index.cjs"
       }
     }
   },
   "scripts": {
-    "build": "tsup --dts",
-    "dev": "tsup --watch",
+    "build": "tsx ../../tooling/build-scripts/main.ts --dts --clean",
+    "dev": "tsx ../../tooling/build-scripts/main.ts --watch",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "format": "prettier --check . --ignore-path ../../.gitignore",
@@ -40,7 +52,7 @@
     "lucide-react": "^0.475.0",
     "motion": "^12.4.2",
     "prettier": "catalog:",
-    "tsup": "^8.3.6",
+    "tsx": "^4.19.2",
     "type-fest": "^4.34.1",
     "typescript": "catalog:"
   },

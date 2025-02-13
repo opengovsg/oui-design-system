@@ -1,3 +1,5 @@
+"use client"
+
 import { cloneElement, useCallback } from "react"
 import {
   composeTailwindRenderProps,

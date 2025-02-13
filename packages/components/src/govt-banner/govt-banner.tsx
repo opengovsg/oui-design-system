@@ -1,3 +1,5 @@
+"use client"
+
 import type { GovtBannerSlots, SlotsToClasses } from "@opengovsg/oui-theme"
 import type { LocalizedStrings } from "react-aria"
 import type { DisclosureProps } from "react-stately"

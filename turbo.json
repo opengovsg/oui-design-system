@@ -6,6 +6,9 @@
       "outputs": ["dist/**", "storybook-static/**"],
       "dependsOn": ["^build"]
     },
+    "@oui/www#build": {
+      "dependsOn": ["@opengovsg/oui#build"]
+    },
     "test": {
       "dependsOn": ["^test"]
     },

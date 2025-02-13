@@ -1,3 +1,5 @@
+"use client"
+
 import type { UseSpinnerProps } from "./use-spinner"
 import { forwardRef } from "../system/utils"
 import { useSpinner } from "./use-spinner"
