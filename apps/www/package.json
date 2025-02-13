@@ -1,0 +1,41 @@
+{
+  "name": "@oui/www",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev:content": "velite --watch",
+    "dev:next": "next dev --turbopack",
+    "dev": "pnpm run /^dev:/",
+    "build:content": "velite --clean",
+    "build:next": "next build",
+    "build": "pnpm run --sequentially /^build:/",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --check . --ignore-path ../../.gitignore",
+    "format:fix": "prettier --write . --ignore-path ../../.gitignore"
+  },
+  "dependencies": {
+    "@opengovsg/oui-theme": "workspace:*",
+    "@oui/prettier-config": "workspace:*",
+    "@oui/eslint-config": "workspace:*",
+    "@tailwindcss/postcss": "^4.0.6",
+    "inter-ui": "^4.1.0",
+    "next": "15.1.7",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^22",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "eslint": "catalog:",
+    "eslint-config-next": "15.1.7",
+    "postcss": "^8.5.2",
+    "prettier": "catalog:",
+    "tailwindcss": "catalog:",
+    "typescript": "catalog:",
+    "velite": "^0.2.2"
+  },
+  "prettier": "@oui/prettier-config"
+}
