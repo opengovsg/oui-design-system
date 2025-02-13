@@ -1,3 +1,5 @@
+"use client"
+
 import type { Key } from "react"
 import type { PressEvent } from "react-aria-components"
 import { useCallback, useState } from "react"

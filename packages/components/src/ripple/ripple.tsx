@@ -1,3 +1,5 @@
+"use client"
+
 import type { CSSProperties } from "react"
 import { clamp } from "motion"
 import { AnimatePresence, domAnimation, LazyMotion } from "motion/react"

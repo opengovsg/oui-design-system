@@ -1,3 +1,5 @@
+"use client"
+
 import type { VariantProps } from "@opengovsg/oui-theme"
 import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { forwardRef, useMemo } from "react"
