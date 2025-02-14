@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev:content": "velite --watch",
-    "dev:next": "next dev --turbopack",
+    "dev:next": "next dev",
     "dev": "pnpm run /^dev:/",
     "build:content": "velite --clean",
     "build:next": "next build",

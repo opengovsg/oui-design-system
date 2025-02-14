@@ -4,21 +4,25 @@
 @source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
+@source "../**/*.{js,jsx,ts,tsx}";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --header-height: 57px;
+  --content-height: calc(100dvh - var(--header-height));
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@utility scrollbar-default {
+  scrollbar-width: auto;
+  -ms-overflow-style: auto;
+  &::-webkit-scrollbar {
+    display: block;
+  }
 }

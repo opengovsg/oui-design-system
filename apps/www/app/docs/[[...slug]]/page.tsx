@@ -51,8 +51,8 @@ export default async function DocPage({ params }: DynamicPageProps) {
   }
 
   return (
-    <main className="relative p-2 md:p-4 lg:gap-10 lg:px-8 lg:py-6 xl:grid xl:grid-cols-[1fr_200px]">
-      <div className="mx-auto w-full min-w-0">
+    <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-10 xl:max-w-5xl xl:grid-cols-[minmax(0,1fr)_var(--container-2xs)]">
+      <div className="px-4 pt-10 pb-24 sm:px-6 xl:pr-0">
         {/* <Breadcrumb className="mb-4">
           <BreadcrumbList>
             {doc.slug.split("/").map((slug, index) => (
@@ -107,14 +107,29 @@ export default async function DocPage({ params }: DynamicPageProps) {
           <MdxContentRenderer code={doc.body} />
         </div>
       </div>
-      <div className="hidden text-sm xl:block">
-        <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] pt-4">
-          {doc.toc.visible && (
-            <>{JSON.stringify(doc.toc.content)}</>
-            // <DashboardTableOfContents toc={doc.toc.content} />
-          )}
+      <div className="max-xl:hidden">
+        <div className="sticky top-14 max-h-[calc(100svh-3.5rem)] overflow-x-hidden px-6 pt-10 pb-24">
+          <div className="flex flex-col gap-3">
+            <h3 className="font-mono text-sm/6 font-medium tracking-widest text-gray-500 uppercase sm:text-xs/6 dark:text-gray-400">
+              On this page
+            </h3>
+            {doc.toc.visible && (
+              <ul className="flex flex-col gap-2 border-l border-[color-mix(in_oklab,_var(--color-gray-950),white_90%)] dark:border-[color-mix(in_oklab,_var(--color-gray-950),white_20%)]">
+                {doc.toc.content.map((item) => (
+                  <li
+                    className="-ml-px flex flex-col items-start gap-2"
+                    key={item.title}
+                  >
+                    <a className="inline-block border-l border-transparent pl-5 text-base/8 text-gray-600 hover:border-gray-950/25 hover:text-gray-950 aria-[current]:border-gray-950 aria-[current]:font-semibold aria-[current]:text-gray-950 sm:pl-4 sm:text-sm/6 dark:text-gray-300 dark:hover:border-white/25 dark:hover:text-white dark:aria-[current]:border-white dark:aria-[current]:text-white">
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
