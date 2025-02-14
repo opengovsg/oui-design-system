@@ -16,6 +16,7 @@
     "format:fix": "prettier --write . --ignore-path ../../.gitignore"
   },
   "dependencies": {
+    "@icons-pack/react-simple-icons": "^11.2.0",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",

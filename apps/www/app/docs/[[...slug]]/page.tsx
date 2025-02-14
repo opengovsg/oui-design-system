@@ -6,6 +6,8 @@ import { docsConfig } from "@/config/docs.config"
 import { cn } from "@opengovsg/oui-theme"
 import { docs } from "#site/content"
 
+import { PageHeader } from "./components/page-header"
+
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>
 }
@@ -53,56 +55,7 @@ export default async function DocPage({ params }: DynamicPageProps) {
   return (
     <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-10 xl:max-w-5xl xl:grid-cols-[minmax(0,1fr)_var(--container-2xs)]">
       <div className="px-4 pt-10 pb-24 sm:px-6 xl:pr-0">
-        {/* <Breadcrumb className="mb-4">
-          <BreadcrumbList>
-            {doc.slug.split("/").map((slug, index) => (
-              <div className="flex items-center gap-2" key={index}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    href={`/${doc.slug
-                      .split("/")
-                      .slice(0, index + 1)
-                      .join("/")}`}
-                    className={cn(
-                      index === doc.slug.split("/").length - 1
-                        ? "text-foreground"
-                        : "text-muted-foreground",
-                    )}
-                  >
-                    {slug.charAt(0).toUpperCase() + slug.slice(1)}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                {index < doc.slug.split("/").length - 1 && (
-                  <BreadcrumbSeparator />
-                )}
-              </div>
-            ))}
-          </BreadcrumbList>
-        </Breadcrumb> */}
-
-        <div>
-          <ul>
-            {Object.entries(doc.links).map(
-              ([key, value]) =>
-                value && (
-                  <li key={key}>
-                    <Link href={value} target="_blank">
-                      {key}
-                    </Link>
-                  </li>
-                ),
-            )}
-          </ul>
-        </div>
-
-        <div className="space-y-2">
-          <h1 className={cn("scroll-m-20 text-3xl font-bold tracking-tight")}>
-            {doc.title}
-          </h1>
-          {doc && (
-            <p className="text-muted-foreground text-base">{doc.description}</p>
-          )}
-        </div>
+        <PageHeader {...doc} />
         <div className="pt-8 pb-12">
           <MdxContentRenderer code={doc.body} />
         </div>
