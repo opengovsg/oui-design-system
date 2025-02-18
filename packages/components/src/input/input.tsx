@@ -1,11 +1,34 @@
-import { inputStyles, VariantProps } from "@opengovsg/oui-theme"
+import { forwardRef } from "react"
+import {
+  composeRenderProps,
+  inputStyles,
+  VariantProps,
+} from "@opengovsg/oui-theme"
+import {
+  Input as AriaInput,
+  InputProps as AriaInputProps,
+} from "react-aria-components"
 
-interface InputProps extends VariantProps<typeof inputStyles> {}
+interface InputProps
+  extends VariantProps<typeof inputStyles>,
+    Omit<AriaInputProps, "size"> {}
 
-export const Input = ({  }: InputProps) => {
-  return (
-    <div>
-      <h1>input</h1>
-    </div>
-  )
-}
+/**
+ * This component should not be used by itself. Use the `TextField` component from `@opengovsg/oui/text-field` instead.
+ */
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ size, variant, ...props }, ref) => {
+    return (
+      <AriaInput
+        {...props}
+        className={composeRenderProps(
+          props.className,
+          (className, renderProps) =>
+            inputStyles({ ...renderProps, className, size, variant }),
+        )}
+        ref={ref}
+      />
+    )
+  },
+)
+Input.displayName = "Input"

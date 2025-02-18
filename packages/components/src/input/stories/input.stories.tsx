@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+
 import { Input } from "../input"
 
 export default {
@@ -9,5 +10,5 @@ export default {
 type Story = StoryObj<typeof Input>
 
 export const Default: Story = {
-  args: {},
+  args: { placeholder: "test placeholder" },
 }
