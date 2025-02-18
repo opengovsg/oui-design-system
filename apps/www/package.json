@@ -22,6 +22,8 @@
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
     "@oui/prettier-config": "workspace:*",
+    "@shikijs/rehype": "^2.4.2",
+    "@shikijs/transformers": "^2.4.2",
     "@tailwindcss/postcss": "^4.0.6",
     "fs-extra": "^11.3.0",
     "inter-ui": "^4.1.0",

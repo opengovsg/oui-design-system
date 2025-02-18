@@ -1,3 +1,11 @@
+import rehypeShiki from "@shikijs/rehype"
+import {
+  transformerMetaHighlight,
+  transformerNotationDiff,
+  transformerNotationFocus,
+  transformerNotationHighlight,
+  transformerNotationWordHighlight,
+} from "@shikijs/transformers"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
@@ -62,6 +70,19 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
+      [
+        rehypeShiki,
+        {
+          transformers: [
+            transformerNotationDiff(),
+            transformerNotationFocus(),
+            transformerNotationHighlight(),
+            transformerNotationWordHighlight(),
+            transformerMetaHighlight(),
+          ],
+          theme: "aurora-x",
+        },
+      ],
       [
         rehypeAutolinkHeadings,
         {
