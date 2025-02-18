@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "./globals.css"
+import "./shiki.css"
 
 import { cookies } from "next/headers"
 import { docsConfig } from "@/config/docs.config"

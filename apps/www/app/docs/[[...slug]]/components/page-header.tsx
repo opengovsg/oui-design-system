@@ -15,11 +15,11 @@ interface PageHeaderProps {
 const LinkIcon = ({ type }: { type: string }) => {
   switch (type) {
     case "source":
-      return <SiGithub className="size-4" />
+      return <SiGithub className="fill=[#181717] size-4" />
     case "storybook":
-      return <SiStorybook className="size-4" />
+      return <SiStorybook className="size-4 fill-[#FF4785]" />
     case "theme":
-      return <SiGithub className="size-4" />
+      return <SiGithub className="fill=[#181717] size-4" />
   }
 }
 
@@ -30,8 +30,9 @@ export const PageHeader = ({ title, description, links }: PageHeaderProps) => {
       <p>{description}</p>
       {links && (
         <div className="flex flex-wrap gap-4">
-          {Object.entries(links).map(([title, url]) => (
+          {Object.entries(links).map(([title, url], i) => (
             <Link
+              key={i}
               className="flex items-center gap-1 p-1 text-xs capitalize underline-offset-2 hover:underline"
               href={url}
               target="_blank"

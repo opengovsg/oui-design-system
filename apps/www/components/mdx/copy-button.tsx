@@ -1,9 +1,16 @@
 "use client"
 
 import React, { useState } from "react"
+import { cn } from "@opengovsg/oui-theme"
 import { Copy, CopyCheck } from "lucide-react"
 
-export const CopyButton = ({ children }: { children: React.ReactNode }) => {
+export const CopyButton = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode
+  className?: string
+}) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const copy = async () => {
@@ -13,7 +20,7 @@ export const CopyButton = ({ children }: { children: React.ReactNode }) => {
 
     setTimeout(() => {
       setIsCopied(false)
-    }, 10000)
+    }, 3000)
   }
 
   const extractSourceCode = (node: React.ReactNode): string => {
@@ -39,10 +46,10 @@ export const CopyButton = ({ children }: { children: React.ReactNode }) => {
     <button
       disabled={isCopied}
       onClick={copy}
-      className="text-muted-foreground"
+      className={cn("text-muted-foreground cursor-pointer", className)}
     >
       {isCopied ? (
-        <CopyCheck size={16} strokeWidth={1.5} />
+        <CopyCheck className="text-green-200" size={16} strokeWidth={1.5} />
       ) : (
         <Copy size={16} strokeWidth={1.5} />
       )}

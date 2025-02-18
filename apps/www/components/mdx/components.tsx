@@ -1,11 +1,11 @@
 import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 import { CircleAlertIcon } from "lucide-react"
 
 import { CodeBlock } from "./code-block"
+import { ComponentPreview } from "./component-preview"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -188,5 +188,5 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Button,
+  ComponentPreview,
 }

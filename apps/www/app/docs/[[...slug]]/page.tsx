@@ -1,9 +1,6 @@
 import type { Metadata } from "next"
-import Link from "next/link"
 import { notFound } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
-import { docsConfig } from "@/config/docs.config"
-import { cn } from "@opengovsg/oui-theme"
 import { docs } from "#site/content"
 
 import { PageHeader } from "./components/page-header"
