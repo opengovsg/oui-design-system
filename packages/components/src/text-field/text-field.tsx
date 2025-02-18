@@ -1,20 +1,14 @@
 import {
-  cn,
   composeTailwindRenderProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { CircleAlert } from "lucide-react"
 import {
-  FieldError as AriaFieldError,
   TextField as AriaTextField,
   TextFieldProps as AriaTextFieldProps,
-  FieldErrorProps,
-  Label,
-  Text,
-  TextProps,
   ValidationResult,
 } from "react-aria-components"
 
+import { Description, FieldError, Label } from "../field"
 import { Input, InputProps } from "../input"
 
 export interface TextFieldProps extends AriaTextFieldProps {
@@ -25,33 +19,6 @@ export interface TextFieldProps extends AriaTextFieldProps {
     "base" | "label" | "input" | "description" | "error"
   >
   inputProps?: InputProps
-}
-
-export function Description(props: TextProps) {
-  return (
-    <Text
-      {...props}
-      slot="description"
-      className={cn("prose-body-2 text-base-content-medium", props.className)}
-    />
-  )
-}
-
-export function FieldError({ children, className, ...props }: FieldErrorProps) {
-  return (
-    <AriaFieldError
-      {...props}
-      className={composeTailwindRenderProps(
-        className,
-        "prose-body-2 text-utility-feedback-critical flex flex-row flex-wrap items-center gap-2",
-      )}
-    >
-      <>
-        <CircleAlert className="h-4 w-4" />
-        {children}
-      </>
-    </AriaFieldError>
-  )
 }
 
 export function TextField({
@@ -68,10 +35,10 @@ export function TextField({
       {...props}
       className={composeTailwindRenderProps(
         className ?? classNames?.base,
-        "flex flex-col gap-1",
+        "flex flex-col gap-2",
       )}
     >
-      {label && <Label>{label}</Label>}
+      {label && <Label className={classNames?.label}>{label}</Label>}
       <Input className={classNames?.input} {...inputProps} />
       {description && (
         <Description className={classNames?.description}>
