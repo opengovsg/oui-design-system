@@ -7,4 +7,6 @@ export * from "./skip-nav-link"
 export * from "./input"
 export * from "./text-field"
 export * from "./field"
+export * from "./text-area"
+export * from "./text-area-field"
 // Add new component exports here
