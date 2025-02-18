@@ -9,7 +9,7 @@ import {
   InputProps as AriaInputProps,
 } from "react-aria-components"
 
-interface InputProps
+export interface InputProps
   extends VariantProps<typeof inputStyles>,
     Omit<AriaInputProps, "size"> {}
 
@@ -17,10 +17,11 @@ interface InputProps
  * This component should not be used by itself. Use the `TextField` component from `@opengovsg/oui/text-field` instead.
  */
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ size, variant, ...props }, ref) => {
+  ({ size, variant, isDisabled, ...props }, ref) => {
     return (
       <AriaInput
         {...props}
+        disabled={isDisabled}
         className={composeRenderProps(
           props.className,
           (className, renderProps) =>
