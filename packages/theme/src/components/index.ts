@@ -6,4 +6,5 @@ export * from "./toggle"
 export * from "./skip-nav-link"
 export * from "./input"
 export * from "./text-area"
+export * from "./combo-box"
 // Add new theme exports here
