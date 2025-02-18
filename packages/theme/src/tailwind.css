@@ -3,7 +3,7 @@
 
 @import "./variants/base.css";
 
-@variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --text-xs--line-height: 1rem;
@@ -25,7 +25,6 @@
 
   --text-color-default: var(--theme-text-color-default);
   --text-color-strong: var(--theme-text-color-strong);
-  --text-color-white: var(--theme-text-color-white);
   --text-color-subtle: var(--theme-text-color-subtle);
   --text-color-placeholder: var(--theme-text-color-placeholder);
   --text-color-disabled: var(--theme-text-color-disabled);

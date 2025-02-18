@@ -6,7 +6,7 @@ import { Button } from "../button"
 import buttonMeta from "./button.stories"
 
 export default {
-  title: "Components/Button/IconButton",
+  title: "Components/IconButton",
   parameters: {
     docs: {
       description: {

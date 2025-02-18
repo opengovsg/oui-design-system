@@ -14,7 +14,8 @@
     "packages/theme/src/tailwind.css": [
       "packages/theme/**/*",
       "packages/components/**/*"
-    ]
+    ],
+    "apps/www/app/globals.css": ["apps/www/**/*"]
   },
   "tailwindCSS.experimental.classRegex": [
     [

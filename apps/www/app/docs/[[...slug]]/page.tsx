@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
-import { docsConfig } from "@/config/docs.config"
-import { cn } from "@opengovsg/oui-theme"
+import { flattenToc } from "@/lib/flatten-toc"
 import { docs } from "#site/content"
+
+import { PageHeader } from "./components/page-header"
+import { Toc } from "./components/toc"
 
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>
@@ -50,55 +52,20 @@ export default async function DocPage({ params }: DynamicPageProps) {
   }
 
   return (
-    <main className="relative p-2 md:p-4 lg:gap-10 lg:px-8 lg:py-6 xl:grid xl:grid-cols-[1fr_200px]">
-      <div className="mx-auto w-full min-w-0">
-        {/* <Breadcrumb className="mb-4">
-          <BreadcrumbList>
-            {doc.slug.split("/").map((slug, index) => (
-              <div className="flex items-center gap-2" key={index}>
-                <BreadcrumbItem>
-                  <BreadcrumbLink
-                    href={`/${doc.slug
-                      .split("/")
-                      .slice(0, index + 1)
-                      .join("/")}`}
-                    className={cn(
-                      index === doc.slug.split("/").length - 1
-                        ? "text-foreground"
-                        : "text-muted-foreground",
-                    )}
-                  >
-                    {slug.charAt(0).toUpperCase() + slug.slice(1)}
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                {index < doc.slug.split("/").length - 1 && (
-                  <BreadcrumbSeparator />
-                )}
-              </div>
-            ))}
-          </BreadcrumbList>
-        </Breadcrumb> */}
-
-        <div className="space-y-2">
-          <h1 className={cn("scroll-m-20 text-3xl font-bold tracking-tight")}>
-            {doc.title}
-          </h1>
-          {doc && (
-            <p className="text-muted-foreground text-base">{doc.description}</p>
-          )}
-        </div>
+    <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-10 xl:max-w-5xl xl:grid-cols-[minmax(0,1fr)_var(--container-2xs)]">
+      <div className="px-4 pt-10 pb-24 sm:px-6 xl:pr-0">
+        <PageHeader {...doc} />
         <div className="pt-8 pb-12">
           <MdxContentRenderer code={doc.body} />
         </div>
       </div>
-      <div className="hidden text-sm xl:block">
-        <div className="sticky top-16 -mt-10 h-[calc(100vh-3.5rem)] pt-4">
-          {doc.toc.visible && (
-            <>{JSON.stringify(doc.toc.content)}</>
-            // <DashboardTableOfContents toc={doc.toc.content} />
-          )}
-        </div>
+      <div className="max-xl:hidden">
+        {doc.toc.visible && (
+          <div className="sticky top-14 max-h-[calc(100svh-3.5rem)] overflow-x-hidden px-6 pt-10 pb-24">
+            <Toc items={flattenToc(doc.toc.content)} />
+          </div>
+        )}
       </div>
-    </main>
+    </div>
   )
 }

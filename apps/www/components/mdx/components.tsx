@@ -1,11 +1,11 @@
 import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 import { CircleAlertIcon } from "lucide-react"
 
 import { CodeBlock } from "./code-block"
+import { ComponentPreview } from "./component-preview"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -150,10 +150,7 @@ export const mdxComponents = {
   pre: CodeBlock,
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className={cn(
-        "relative rounded border px-[0.3rem] py-[0.2rem] font-mono text-sm",
-        className,
-      )}
+      className={cn("rounded-md font-mono text-sm", className)}
       {...props}
     />
   ),
@@ -188,5 +185,5 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  Button,
+  ComponentPreview,
 }

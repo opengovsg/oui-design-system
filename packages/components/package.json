@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "sideEffects": false,
   "license": "MIT",
+  "type": "module",
   "files": [
     "dist"
   ],

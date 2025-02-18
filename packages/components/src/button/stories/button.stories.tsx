@@ -6,7 +6,7 @@ import type { ButtonProps } from "../button"
 import { Button } from "../button"
 
 export default {
-  title: "Components/Button/Button",
+  title: "Components/Button",
   component: Button,
   argTypes: {
     variant: {
