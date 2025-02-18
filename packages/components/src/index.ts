@@ -5,4 +5,5 @@ export * from "./spinner"
 export * from "./toggle"
 export * from "./skip-nav-link"
 export * from "./input"
+export * from "./text-field"
 // Add new component exports here
