@@ -4,4 +4,5 @@ export * from "./calendar"
 export * from "./govt-banner"
 export * from "./toggle"
 export * from "./skip-nav-link"
+export * from "./input"
 // Add new theme exports here
