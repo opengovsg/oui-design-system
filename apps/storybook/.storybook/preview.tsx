@@ -9,7 +9,9 @@ export const decorators: Preview["decorators"] = [
     const { locale } = globals
     return (
       <I18nProvider locale={locale}>
-        <Story />
+        <div className="antialiased">
+          <Story />
+        </div>
       </I18nProvider>
     )
   },
