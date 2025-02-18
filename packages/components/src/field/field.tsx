@@ -1,3 +1,5 @@
+"use client"
+
 import { cn, composeTailwindRenderProps } from "@opengovsg/oui-theme"
 import { CircleAlert } from "lucide-react"
 import {
