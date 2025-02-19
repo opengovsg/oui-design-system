@@ -1,3 +1,5 @@
+"use client"
+
 import { useDeferredValue, useMemo } from "react"
 import {
   comboBoxFuzzyHighlightedTextStyles,
