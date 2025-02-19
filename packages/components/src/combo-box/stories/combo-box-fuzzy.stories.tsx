@@ -63,5 +63,3 @@ const ControlledTemplate = ({ items }: ComboBoxProps) => {
 export const Default: Story = {
   render: ControlledTemplate,
 }
-
-export const Test: Story = {}
