@@ -1,6 +1,6 @@
 "use client"
 
-import { JSX, useMemo } from "react"
+import React, { JSX, useMemo } from "react"
 import {
   cn,
   ComboBoxItemSlots,
@@ -22,6 +22,8 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxItemProps,
+  ListBoxItemRenderProps,
+  ListBoxProps,
   ListLayoutOptions,
   Popover,
   Text,
@@ -53,6 +55,9 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   listLayoutOptions?: ListLayoutOptions
 
   children?: (item: T) => JSX.Element
+
+  /** Values that should invalidate the item cache when using dynamic collections. */
+  dependencies?: ListBoxProps<T>["dependencies"]
 }
 
 const calculateEstimatedRowHeight = (
@@ -79,6 +84,7 @@ export function ComboBox<T extends ComboBoxItem>({
   size,
   listLayoutOptions,
   children,
+  dependencies,
   ...props
 }: ComboBoxProps<T>) {
   const styles = comboBoxStyles({ size })
@@ -149,7 +155,9 @@ export function ComboBox<T extends ComboBoxItem>({
                   (className, renderProps) =>
                     styles.list({ ...renderProps, className }),
                 )}
+                dependencies={dependencies}
               >
+                {/* {children} */}
                 {(item: T) => {
                   if (children) {
                     return children(item)
@@ -159,6 +167,7 @@ export function ComboBox<T extends ComboBoxItem>({
                       size={size}
                       id={item.value}
                       label={item.name}
+                      textValue={item.name}
                       description={item.description}
                       classNames={itemClassNames}
                     />
@@ -176,11 +185,13 @@ export function ComboBox<T extends ComboBoxItem>({
 export interface ComboBoxItemProps
   extends ListBoxItemProps,
     ComboBoxItemVariantProps {
-  label: string
+  label: React.ReactNode | ((props: ListBoxItemRenderProps) => React.ReactNode)
   /**
    * Description for the item, if any
    */
-  description?: string
+  description?:
+    | React.ReactNode
+    | ((props: ListBoxItemRenderProps) => React.ReactNode)
   classNames?: SlotsToClasses<ComboBoxItemSlots>
 }
 
@@ -196,24 +207,34 @@ export function ComboBoxItem({
   return (
     <ListBoxItem
       {...props}
-      textValue={label}
       className={composeRenderProps(
         className ?? classNames?.container,
         (className, renderProps) =>
           styles.container({ ...renderProps, className }),
       )}
     >
-      <Text className={cn(styles.label(), classNames?.label)} slot="label">
-        {label}
-      </Text>
-      {description && (
-        <Text
-          className={cn(styles.description(), classNames?.description)}
-          slot="description"
-        >
-          {description}
-        </Text>
-      )}
+      {(renderProps) => {
+        return (
+          <>
+            <Text
+              className={cn(styles.label(), classNames?.label)}
+              slot="label"
+            >
+              {typeof label === "function" ? label(renderProps) : label}
+            </Text>
+            {description && (
+              <Text
+                className={cn(styles.description(), classNames?.description)}
+                slot="description"
+              >
+                {typeof description === "function"
+                  ? description(renderProps)
+                  : description}
+              </Text>
+            )}
+          </>
+        )
+      }}
     </ListBoxItem>
   )
 }
