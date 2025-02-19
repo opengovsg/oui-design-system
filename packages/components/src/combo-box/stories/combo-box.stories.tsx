@@ -9,10 +9,16 @@ export default {
   component: ComboBox,
   args: {
     label: "Ice cream flavour",
-    items: [...Array(2000)].map((_, i) => ({
-      value: String(i),
-      name: `Item ${i}`,
-    })),
+    items: [
+      {
+        value: "very long",
+        name: "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",
+      },
+      ...[...Array(2000)].map((_, i) => ({
+        value: String(i),
+        name: `Item ${i}`,
+      })),
+    ],
     isDisabled: false,
   },
 } as Meta<typeof ComboBox>
@@ -21,6 +27,13 @@ type Story = StoryObj<typeof ComboBox>
 
 export const Default: Story = {
   args: {},
+}
+
+export const WithSelection: Story = {
+  args: {
+    inputValue: "Item 1",
+    selectedKey: "1",
+  },
 }
 
 export const Disabled: Story = {

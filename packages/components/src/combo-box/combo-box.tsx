@@ -1,12 +1,14 @@
 import { useMemo } from "react"
 import {
   cn,
+  comboBoxItemStyles,
+  ComboBoxItemVariantProps,
   ComboBoxSlots,
   comboBoxStyles,
+  ComboBoxVariantProps,
   composeRenderProps,
   composeTailwindRenderProps,
   SlotsToClasses,
-  VariantProps,
 } from "@opengovsg/oui-theme"
 import { ChevronDown, ChevronUp } from "lucide-react"
 import {
@@ -17,6 +19,7 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxItemProps,
+  ListLayoutOptions,
   Popover,
   Text,
   UNSTABLE_ListLayout,
@@ -28,13 +31,32 @@ import { FieldError, FieldGroup, Label } from "../field"
 
 export interface ComboBoxProps<
   T extends { value: string; name: string } = { value: string; name: string },
-> extends VariantProps<typeof comboBoxStyles>,
+> extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
   label?: string
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
   items: T[]
   classNames?: SlotsToClasses<ComboBoxSlots>
+  /**
+   * Any additional props to be spread to the list layout.
+   */
+  listLayoutOptions?: ListLayoutOptions
+}
+
+const calculateEstimatedRowHeight = (
+  size: NonNullable<ComboBoxVariantProps["size"]>,
+): number => {
+  switch (size) {
+    case "xs":
+      return 48
+    case "sm":
+      return 48
+    case "md":
+      return 48
+    case "lg":
+      return 48
+  }
 }
 
 export function ComboBox<T extends { value: string; name: string }>({
@@ -44,14 +66,16 @@ export function ComboBox<T extends { value: string; name: string }>({
   items,
   classNames,
   size,
+  listLayoutOptions,
   ...props
 }: ComboBoxProps<T>) {
   const styles = comboBoxStyles({ size })
   const layout = useMemo(() => {
     return new UNSTABLE_ListLayout({
-      rowHeight: 25,
+      estimatedRowHeight: calculateEstimatedRowHeight(size ?? "md"),
+      ...listLayoutOptions,
     })
-  }, [])
+  }, [listLayoutOptions, size])
 
   return (
     <AriaComboBox
@@ -100,23 +124,27 @@ export function ComboBox<T extends { value: string; name: string }>({
           {description && <Text slot="description">{description}</Text>}
           <FieldError>{errorMessage}</FieldError>
           <UNSTABLE_Virtualizer layout={layout}>
-            <Popover className="w-(--trigger-width)">
-              {({ trigger }) => {
-                console.log("trigger", trigger)
-                return (
-                  <ListBox
-                    className={cn(
-                      "block max-h-[300px] min-h-[100px] w-[250px] overflow-y-auto",
-                      trigger === "ComboBox" && "w-[unset]",
-                    )}
-                    items={items}
-                  >
-                    {(item) => (
-                      <ComboBoxItem id={item.value}>{item.name}</ComboBoxItem>
-                    )}
-                  </ListBox>
-                )
-              }}
+            <Popover
+              className={composeRenderProps(
+                classNames?.popover,
+                (className, renderProps) =>
+                  styles.popover({ ...renderProps, className }),
+              )}
+            >
+              <ListBox
+                className={composeRenderProps(
+                  classNames?.list,
+                  (className, renderProps) =>
+                    styles.list({ ...renderProps, className }),
+                )}
+                items={items}
+              >
+                {(item) => (
+                  <ComboBoxItem size={size} id={item.value}>
+                    {item.name}
+                  </ComboBoxItem>
+                )}
+              </ListBox>
             </Popover>
           </UNSTABLE_Virtualizer>
         </>
@@ -125,13 +153,17 @@ export function ComboBox<T extends { value: string; name: string }>({
   )
 }
 
-export function ComboBoxItem(props: ListBoxItemProps) {
+export interface ComboBoxItemProps
+  extends ListBoxItemProps,
+    ComboBoxItemVariantProps {}
+
+export function ComboBoxItem({ className, size, ...props }: ComboBoxItemProps) {
   return (
     <ListBoxItem
       {...props}
-      className={({ isFocused, isSelected }) =>
-        cn(isFocused && "bg-gray-200", isSelected && "bg-gray-300")
-      }
+      className={composeRenderProps(className, (className, renderProps) =>
+        comboBoxItemStyles({ ...renderProps, className, size }),
+      )}
     />
   )
 }

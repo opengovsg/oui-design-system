@@ -6,6 +6,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  /* TODO: Split up theme specific variables */
+  --shadow-sm: 0px 0px 10px 0px rgba(191, 191, 191, 0.5);
+
   --text-xs--line-height: 1rem;
 
   --animate-spinner-ease-spin: spinner-spin 0.8s ease infinite;
