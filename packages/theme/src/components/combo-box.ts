@@ -24,16 +24,21 @@ export const comboBoxStyles = tv({
     },
     size: {
       xs: {
-        group: inputStyles.variants.size.xs,
+        field: "px-3",
+        group: [inputStyles.variants.size.xs, "gap-1 px-0"],
+        expandButton: "-my-2 h-9 px-3",
+        expandIcon: "h-4 w-4",
       },
       sm: {
-        group: inputStyles.variants.size.sm,
+        field: "px-3",
+        group: [inputStyles.variants.size.sm, "gap-1 px-0"],
+        expandButton: "-my-2.5 h-10 px-3",
         expandIcon: "h-4 w-4",
       },
       md: {
         group: [inputStyles.variants.size.md, "gap-1 px-0"],
         field: "px-4",
-        expandButton: "-my-2 h-10 px-4",
+        expandButton: "-my-2 h-11 px-4",
         expandIcon: "h-5 w-5",
       },
     },

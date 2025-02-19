@@ -51,3 +51,16 @@ export const IsReadOnly: Story = {
     isReadOnly: true,
   },
 }
+
+export const Sizes: Story = {
+  args: { description: "This is a description" },
+  render(args) {
+    return (
+      <div className="space-y-4">
+        <TextAreaField {...args} label={`${args.label} (xs)`} size="xs" />
+        <TextAreaField {...args} label={`${args.label} (sm)`} size="sm" />
+        <TextAreaField {...args} label={`${args.label} (md)`} size="md" />
+      </div>
+    )
+  },
+}

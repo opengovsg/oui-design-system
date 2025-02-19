@@ -31,7 +31,7 @@ import {
   ValidationResult,
 } from "react-aria-components"
 
-import { FieldError, FieldGroup, Label } from "../field"
+import { Description, FieldError, FieldGroup, Label } from "../field"
 
 export type ComboBoxItem = {
   value: string
@@ -104,7 +104,7 @@ export function ComboBox<T extends ComboBoxItem>({
         <>
           <Label
             size={size}
-            className={styles.label({ className: classNames?.label })}
+            className={styles.label({ className: classNames?.label, size })}
           >
             {label}
           </Label>
@@ -112,14 +112,14 @@ export function ComboBox<T extends ComboBoxItem>({
             className={composeRenderProps(
               classNames?.group,
               (className, renderProps) =>
-                styles.group({ ...renderProps, className }),
+                styles.group({ ...renderProps, className, size }),
             )}
           >
             <Input
               className={composeRenderProps(
                 classNames?.field,
                 (className, renderProps) =>
-                  styles.field({ ...renderProps, className }),
+                  styles.field({ ...renderProps, className, size }),
               )}
             />
             <Button
@@ -127,26 +127,28 @@ export function ComboBox<T extends ComboBoxItem>({
               className={composeRenderProps(
                 classNames?.expandButton,
                 (className, renderProps) =>
-                  styles.expandButton({ ...renderProps, className }),
+                  styles.expandButton({ ...renderProps, className, size }),
               )}
             >
               {isOpen ? (
                 <ChevronUp
                   className={styles.expandIcon({
                     className: classNames?.expandIcon,
+                    size,
                   })}
                 />
               ) : (
                 <ChevronDown
                   className={styles.expandIcon({
                     className: classNames?.expandIcon,
+                    size,
                   })}
                 />
               )}
             </Button>
           </FieldGroup>
-          {description && <Text slot="description">{description}</Text>}
-          <FieldError>{errorMessage}</FieldError>
+          {description && <Description size={size}>{description}</Description>}
+          <FieldError size={size}>{errorMessage}</FieldError>
           <UNSTABLE_Virtualizer layout={layout}>
             <Popover
               className={composeRenderProps(

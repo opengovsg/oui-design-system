@@ -127,3 +127,15 @@ export const FullyControlled: Story = {
     ],
   },
 }
+
+export const Sizes: Story = {
+  render(args) {
+    return (
+      <div className="space-y-4">
+        <ComboBox {...args} label={`${args.label} (xs)`} size="xs" />
+        <ComboBox {...args} label={`${args.label} (sm)`} size="sm" />
+        <ComboBox {...args} label={`${args.label} (md)`} size="md" />
+      </div>
+    )
+  },
+}
