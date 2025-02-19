@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { JSX, useMemo } from "react"
 import {
   cn,
   comboBoxItemStyles,
@@ -42,6 +42,8 @@ export interface ComboBoxProps<
    * Any additional props to be spread to the list layout.
    */
   listLayoutOptions?: ListLayoutOptions
+
+  children?: (item: T) => JSX.Element
 }
 
 const calculateEstimatedRowHeight = (
@@ -67,6 +69,7 @@ export function ComboBox<T extends { value: string; name: string }>({
   classNames,
   size,
   listLayoutOptions,
+  children,
   ...props
 }: ComboBoxProps<T>) {
   const styles = comboBoxStyles({ size })
@@ -139,11 +142,16 @@ export function ComboBox<T extends { value: string; name: string }>({
                 )}
                 items={items}
               >
-                {(item) => (
-                  <ComboBoxItem size={size} id={item.value}>
-                    {item.name}
-                  </ComboBoxItem>
-                )}
+                {(item) => {
+                  if (children) {
+                    return children(item)
+                  }
+                  return (
+                    <ComboBoxItem size={size} id={item.value}>
+                      {item.name}
+                    </ComboBoxItem>
+                  )
+                }}
               </ListBox>
             </Popover>
           </UNSTABLE_Virtualizer>

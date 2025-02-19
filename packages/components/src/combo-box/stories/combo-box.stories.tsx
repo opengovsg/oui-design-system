@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
+import { ListBoxItem } from "react-aria-components"
 
 import { ComboBox, ComboBoxProps } from "../combo-box"
 
@@ -9,16 +10,10 @@ export default {
   component: ComboBox,
   args: {
     label: "Ice cream flavour",
-    items: [
-      {
-        value: "very long",
-        name: "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",
-      },
-      ...[...Array(2000)].map((_, i) => ({
-        value: String(i),
-        name: `Item ${i}`,
-      })),
-    ],
+    items: [...Array(10)].map((_, i) => ({
+      value: String(i),
+      name: `Item ${i}`,
+    })),
     isDisabled: false,
   },
 } as Meta<typeof ComboBox>
@@ -47,6 +42,31 @@ export const WithError: Story = {
   args: {
     errorMessage: "Something went wrong",
     isInvalid: true,
+  },
+}
+
+export const CustomComboboxItem: Story = {
+  args: {
+    children: (item) => (
+      <ListBoxItem className="bg-red-400" id={item.value}>
+        {item.name}
+      </ListBoxItem>
+    ),
+  },
+}
+
+export const Virtualised: Story = {
+  args: {
+    items: [
+      {
+        value: "very long",
+        name: "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",
+      },
+      ...[...Array(2000)].map((_, i) => ({
+        value: String(i),
+        name: `Item ${i}`,
+      })),
+    ],
   },
 }
 
