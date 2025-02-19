@@ -1,12 +1,19 @@
 import { useMemo } from "react"
-import { cn, comboBoxStyles, VariantProps } from "@opengovsg/oui-theme"
-import { Button } from "@opengovsg/oui/button"
+import {
+  cn,
+  ComboBoxSlots,
+  comboBoxStyles,
+  composeRenderProps,
+  composeTailwindRenderProps,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
+import { ChevronDown, ChevronUp } from "lucide-react"
 import {
   ComboBox as AriaComboBox,
   ComboBoxProps as AriaComboBoxProps,
-  FieldError,
+  Button,
   Input,
-  Label,
   ListBox,
   ListBoxItem,
   ListBoxItemProps,
@@ -17,6 +24,8 @@ import {
   ValidationResult,
 } from "react-aria-components"
 
+import { FieldError, FieldGroup, Label } from "../field"
+
 export interface ComboBoxProps<
   T extends { value: string; name: string } = { value: string; name: string },
 > extends VariantProps<typeof comboBoxStyles>,
@@ -25,6 +34,7 @@ export interface ComboBoxProps<
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
   items: T[]
+  classNames?: SlotsToClasses<ComboBoxSlots>
 }
 
 export function ComboBox<T extends { value: string; name: string }>({
@@ -32,8 +42,11 @@ export function ComboBox<T extends { value: string; name: string }>({
   description,
   errorMessage,
   items,
+  classNames,
+  size,
   ...props
 }: ComboBoxProps<T>) {
+  const styles = comboBoxStyles({ size })
   const layout = useMemo(() => {
     return new UNSTABLE_ListLayout({
       rowHeight: 25,
@@ -41,18 +54,53 @@ export function ComboBox<T extends { value: string; name: string }>({
   }, [])
 
   return (
-    <AriaComboBox {...props}>
+    <AriaComboBox
+      className={composeTailwindRenderProps(
+        props.className ?? classNames?.base,
+        styles.container(),
+      )}
+      {...props}
+    >
       {({ isOpen }) => (
         <>
           <Label>{label}</Label>
-          <div className="my-combobox-container">
-            <Input />
-            <Button>{isOpen ? "▲" : "▼"}</Button>
-          </div>
+          <FieldGroup
+            className={composeRenderProps(
+              classNames?.group,
+              (className, renderProps) =>
+                styles.group({ ...renderProps, className }),
+            )}
+          >
+            <Input
+              className={composeRenderProps(
+                classNames?.field,
+                (className, renderProps) =>
+                  styles.field({ ...renderProps, className }),
+              )}
+            />
+            <Button
+              aria-label={isOpen ? "open popover" : "close popover"}
+              className={composeRenderProps(
+                classNames?.expandButton,
+                (className, renderProps) =>
+                  styles.expandButton({ ...renderProps, className }),
+              )}
+            >
+              {isOpen ? (
+                <ChevronUp
+                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                />
+              ) : (
+                <ChevronDown
+                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                />
+              )}
+            </Button>
+          </FieldGroup>
           {description && <Text slot="description">{description}</Text>}
           <FieldError>{errorMessage}</FieldError>
           <UNSTABLE_Virtualizer layout={layout}>
-            <Popover className="w-[var(--trigger-width)]">
+            <Popover className="w-(--trigger-width)">
               {({ trigger }) => {
                 console.log("trigger", trigger)
                 return (

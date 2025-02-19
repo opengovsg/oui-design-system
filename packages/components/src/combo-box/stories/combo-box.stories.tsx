@@ -7,17 +7,33 @@ import { ComboBox, ComboBoxProps } from "../combo-box"
 export default {
   title: "Components/ComboBox",
   component: ComboBox,
-} as Meta<typeof ComboBox>
-
-type Story = StoryObj<typeof ComboBox>
-
-export const Default: Story = {
   args: {
     label: "Ice cream flavour",
     items: [...Array(2000)].map((_, i) => ({
       value: String(i),
       name: `Item ${i}`,
     })),
+    isDisabled: false,
+  },
+} as Meta<typeof ComboBox>
+
+type Story = StoryObj<typeof ComboBox>
+
+export const Default: Story = {
+  args: {},
+}
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+    inputValue: "Item 1",
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    errorMessage: "Something went wrong",
+    isInvalid: true,
   },
 }
 

@@ -1,11 +1,18 @@
 "use client"
 
-import { cn, composeTailwindRenderProps } from "@opengovsg/oui-theme"
+import {
+  cn,
+  composeRenderProps,
+  composeTailwindRenderProps,
+  fieldGroupStyles,
+} from "@opengovsg/oui-theme"
 import { CircleAlert } from "lucide-react"
 import {
   FieldError as AriaFieldError,
   Label as AriaLabel,
   FieldErrorProps,
+  Group,
+  GroupProps,
   LabelProps,
   Text,
   TextProps,
@@ -47,5 +54,16 @@ export function FieldError({ children, className, ...props }: FieldErrorProps) {
         {children}
       </>
     </AriaFieldError>
+  )
+}
+
+export function FieldGroup(props: GroupProps) {
+  return (
+    <Group
+      {...props}
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        fieldGroupStyles({ ...renderProps, className }),
+      )}
+    />
   )
 }
