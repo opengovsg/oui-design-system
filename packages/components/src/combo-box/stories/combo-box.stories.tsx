@@ -10,7 +10,7 @@ export default {
   component: ComboBox,
   args: {
     label: "Ice cream flavour",
-    items: [...Array(10)].map((_, i) => ({
+    defaultItems: [...Array(10)].map((_, i) => ({
       value: String(i),
       name: `Item ${i}`,
     })),
@@ -57,7 +57,7 @@ export const CustomComboboxItem: Story = {
 
 export const Virtualised: Story = {
   args: {
-    items: [
+    defaultItems: [
       {
         value: "very long",
         name: "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",

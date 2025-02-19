@@ -3,6 +3,7 @@
 import { JSX, useMemo } from "react"
 import {
   cn,
+  ComboBoxItemSlots,
   comboBoxItemStyles,
   ComboBoxItemVariantProps,
   ComboBoxSlots,
@@ -31,15 +32,21 @@ import {
 
 import { FieldError, FieldGroup, Label } from "../field"
 
-export interface ComboBoxProps<
-  T extends { value: string; name: string } = { value: string; name: string },
-> extends ComboBoxVariantProps,
+export type ComboBoxItem = {
+  value: string
+  name: string
+  description?: string
+}
+
+export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
+  extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
   label?: string
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
   items: T[]
   classNames?: SlotsToClasses<ComboBoxSlots>
+  itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
    * Any additional props to be spread to the list layout.
    */
@@ -63,12 +70,12 @@ const calculateEstimatedRowHeight = (
   }
 }
 
-export function ComboBox<T extends { value: string; name: string }>({
+export function ComboBox<T extends ComboBoxItem>({
   label,
   description,
   errorMessage,
-  items,
   classNames,
+  itemClassNames,
   size,
   listLayoutOptions,
   children,
@@ -142,16 +149,19 @@ export function ComboBox<T extends { value: string; name: string }>({
                   (className, renderProps) =>
                     styles.list({ ...renderProps, className }),
                 )}
-                items={items}
               >
-                {(item) => {
+                {(item: T) => {
                   if (children) {
                     return children(item)
                   }
                   return (
-                    <ComboBoxItem size={size} id={item.value}>
-                      {item.name}
-                    </ComboBoxItem>
+                    <ComboBoxItem
+                      size={size}
+                      id={item.value}
+                      label={item.name}
+                      description={item.description}
+                      classNames={itemClassNames}
+                    />
                   )
                 }}
               </ListBox>
@@ -165,15 +175,45 @@ export function ComboBox<T extends { value: string; name: string }>({
 
 export interface ComboBoxItemProps
   extends ListBoxItemProps,
-    ComboBoxItemVariantProps {}
+    ComboBoxItemVariantProps {
+  label: string
+  /**
+   * Description for the item, if any
+   */
+  description?: string
+  classNames?: SlotsToClasses<ComboBoxItemSlots>
+}
 
-export function ComboBoxItem({ className, size, ...props }: ComboBoxItemProps) {
+export function ComboBoxItem({
+  className,
+  size,
+  description,
+  label,
+  classNames,
+  ...props
+}: ComboBoxItemProps) {
+  const styles = comboBoxItemStyles({ size })
   return (
     <ListBoxItem
       {...props}
-      className={composeRenderProps(className, (className, renderProps) =>
-        comboBoxItemStyles({ ...renderProps, className, size }),
+      textValue={label}
+      className={composeRenderProps(
+        className ?? classNames?.container,
+        (className, renderProps) =>
+          styles.container({ ...renderProps, className }),
       )}
-    />
+    >
+      <Text className={cn(styles.label(), classNames?.label)} slot="label">
+        {label}
+      </Text>
+      {description && (
+        <Text
+          className={cn(styles.description(), classNames?.description)}
+          slot="description"
+        >
+          {description}
+        </Text>
+      )}
+    </ListBoxItem>
   )
 }

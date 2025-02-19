@@ -11,7 +11,7 @@ export const comboBoxStyles = tv({
     expandIcon: "",
     field: "h-full w-full overflow-ellipsis outline-hidden",
     popover: "mt-0.5 w-(--trigger-width) overflow-hidden bg-white shadow-sm",
-    list: "w-unset block max-h-[300px] min-h-[100px] overflow-y-auto",
+    list: "w-unset block max-h-[300px] min-h-0 overflow-y-auto",
   },
   base: [],
   variants: {
@@ -49,29 +49,33 @@ export type ComboBoxVariantProps = VariantProps<typeof comboBoxStyles>
 export type ComboBoxSlots = keyof ReturnType<typeof comboBoxStyles>
 
 export const comboBoxItemStyles = tv({
-  base: "cursor-pointer",
+  slots: {
+    container: "text-base-content-strong flex cursor-pointer flex-col",
+    label: "",
+    description: "text-base-content-medium",
+  },
   variants: {
     size: {
       xs: "",
       sm: "",
-      md: "prose-body-1 px-4 py-3",
+      md: { container: "prose-body-1 px-4 py-3", description: "prose-body-2" },
       lg: "",
     },
     isFocused: {
-      true: "bg-interaction-muted-main-hover",
+      true: { container: "bg-interaction-muted-main-hover" },
     },
     isSelected: {
-      true: "bg-interaction-muted-main-active",
+      true: { container: "bg-interaction-muted-main-active" },
     },
     isDisabled: {
-      true: "cursor-not-allowed",
+      true: { container: "cursor-not-allowed" },
     },
   },
   compoundVariants: [
     {
       size: "md",
       isSelected: true,
-      className: "prose-subhead-1",
+      className: { container: "prose-subhead-1" },
     },
   ],
   defaultVariants: {
@@ -80,3 +84,4 @@ export const comboBoxItemStyles = tv({
 })
 
 export type ComboBoxItemVariantProps = VariantProps<typeof comboBoxItemStyles>
+export type ComboBoxItemSlots = keyof ReturnType<typeof comboBoxItemStyles>
