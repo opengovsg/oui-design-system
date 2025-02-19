@@ -1,3 +1,5 @@
+"use client"
+
 import { JSX, useMemo } from "react"
 import {
   cn,
