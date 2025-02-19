@@ -2,7 +2,6 @@
 
 import React, { JSX, useMemo } from "react"
 import {
-  cn,
   ComboBoxItemSlots,
   comboBoxItemStyles,
   ComboBoxItemVariantProps,
@@ -70,8 +69,6 @@ const calculateEstimatedRowHeight = (
       return 48
     case "md":
       return 48
-    case "lg":
-      return 48
   }
 }
 
@@ -105,7 +102,12 @@ export function ComboBox<T extends ComboBoxItem>({
     >
       {({ isOpen }) => (
         <>
-          <Label>{label}</Label>
+          <Label
+            size={size}
+            className={styles.label({ className: classNames?.label })}
+          >
+            {label}
+          </Label>
           <FieldGroup
             className={composeRenderProps(
               classNames?.group,
@@ -130,11 +132,15 @@ export function ComboBox<T extends ComboBoxItem>({
             >
               {isOpen ? (
                 <ChevronUp
-                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                  className={styles.expandIcon({
+                    className: classNames?.expandIcon,
+                  })}
                 />
               ) : (
                 <ChevronDown
-                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                  className={styles.expandIcon({
+                    className: classNames?.expandIcon,
+                  })}
                 />
               )}
             </Button>
@@ -217,14 +223,16 @@ export function ComboBoxItem({
         return (
           <>
             <Text
-              className={cn(styles.label(), classNames?.label)}
+              className={styles.label({ className: classNames?.label })}
               slot="label"
             >
               {typeof label === "function" ? label(renderProps) : label}
             </Text>
             {description && (
               <Text
-                className={cn(styles.description(), classNames?.description)}
+                className={styles.description({
+                  className: classNames?.description,
+                })}
                 slot="description"
               >
                 {typeof description === "function"

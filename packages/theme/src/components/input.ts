@@ -7,9 +7,8 @@ export const inputStyles = tv({
   variants: {
     size: {
       xs: "prose-caption-2 placeholder:prose-subhead-5 h-[2.25rem] px-2",
-      sm: "prose-caption-2 h-10 px-2 py-2.5 text-[1rem]",
+      sm: "prose-caption-2 h-10 px-2 py-2.5",
       md: "prose-body-1 h-10 px-3 py-2",
-      lg: "h-12 px-3 py-2.5 text-2xl",
     },
     variant: {
       outline:

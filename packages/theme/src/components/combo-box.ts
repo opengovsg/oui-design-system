@@ -6,6 +6,7 @@ import { inputStyles } from "./input"
 export const comboBoxStyles = tv({
   slots: {
     container: "group flex flex-col gap-2",
+    label: "",
     group: "",
     expandButton: "h-full cursor-pointer",
     expandIcon: "",
@@ -34,9 +35,6 @@ export const comboBoxStyles = tv({
         field: "px-4",
         expandButton: "-my-2 h-10 px-4",
         expandIcon: "h-5 w-5",
-      },
-      lg: {
-        group: inputStyles.variants.size.lg,
       },
     },
   },

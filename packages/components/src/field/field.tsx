@@ -1,56 +1,71 @@
 "use client"
 
 import {
-  cn,
   composeRenderProps,
-  composeTailwindRenderProps,
+  descriptionStyles,
+  DescriptionVariantProps,
+  FieldErrorSlots,
+  fieldErrorStyles,
+  FieldErrorVariantProps,
   fieldGroupStyles,
+  labelStyles,
+  LabelVariantProps,
+  SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { CircleAlert } from "lucide-react"
 import {
   FieldError as AriaFieldError,
+  FieldErrorProps as AriaFieldErrorProps,
   Label as AriaLabel,
-  FieldErrorProps,
+  LabelProps as AriaLabelProps,
   Group,
   GroupProps,
-  LabelProps,
   Text,
   TextProps,
 } from "react-aria-components"
 
-export function Label(props: LabelProps) {
-  return (
-    <AriaLabel
-      {...props}
-      className={cn(
-        "prose-subhead-1 text-base-content-strong w-fit cursor-default",
-        props.className,
-      )}
-    />
-  )
+export interface LabelProps extends AriaLabelProps, LabelVariantProps {}
+
+export function Label({ size, className, ...props }: LabelProps) {
+  return <AriaLabel {...props} className={labelStyles({ className, size })} />
 }
 
-export function Description(props: TextProps) {
+export interface DescriptionProps extends TextProps, DescriptionVariantProps {}
+
+export function Description({ size, className, ...props }: DescriptionProps) {
   return (
     <Text
       {...props}
       slot="description"
-      className={cn("prose-body-2 text-base-content-medium", props.className)}
+      className={descriptionStyles({ className, size })}
     />
   )
 }
 
-export function FieldError({ children, className, ...props }: FieldErrorProps) {
+export interface FieldErrorProps
+  extends AriaFieldErrorProps,
+    FieldErrorVariantProps {
+  classNames?: SlotsToClasses<FieldErrorSlots>
+}
+
+export function FieldError({
+  children,
+  className,
+  size,
+  classNames,
+  ...props
+}: FieldErrorProps) {
+  const styles = fieldErrorStyles({ size })
   return (
     <AriaFieldError
       {...props}
-      className={composeTailwindRenderProps(
-        className,
-        "prose-body-2 text-utility-feedback-critical flex flex-row flex-wrap items-center gap-2",
+      className={composeRenderProps(
+        className ?? classNames?.text,
+        (className, renderProps) => styles.text({ ...renderProps, className }),
       )}
     >
       <>
-        <CircleAlert className="h-4 w-4" />
+        <CircleAlert className={styles.icon({ className: classNames?.icon })} />
         {children}
       </>
     </AriaFieldError>

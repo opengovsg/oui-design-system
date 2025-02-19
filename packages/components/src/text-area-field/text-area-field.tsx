@@ -3,6 +3,7 @@
 import {
   composeTailwindRenderProps,
   SlotsToClasses,
+  TextAreaVariantProps,
 } from "@opengovsg/oui-theme"
 import {
   TextField as AriaTextField,
@@ -13,7 +14,9 @@ import {
 import { Description, FieldError, Label } from "../field"
 import { TextArea, TextAreaProps } from "../text-area"
 
-export interface TextAreaFieldProps extends AriaTextFieldProps {
+export interface TextAreaFieldProps
+  extends AriaTextFieldProps,
+    TextAreaVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -30,6 +33,8 @@ export function TextAreaField({
   classNames,
   className,
   inputProps,
+  size,
+  variant,
   ...props
 }: TextAreaFieldProps) {
   return (
@@ -40,14 +45,25 @@ export function TextAreaField({
         "flex flex-col gap-2",
       )}
     >
-      {label && <Label className={classNames?.label}>{label}</Label>}
-      <TextArea className={classNames?.input} {...inputProps} />
+      {label && (
+        <Label size={size} className={classNames?.label}>
+          {label}
+        </Label>
+      )}
+      <TextArea
+        size={size}
+        variant={variant}
+        className={classNames?.input}
+        {...inputProps}
+      />
       {description && (
-        <Description className={classNames?.description}>
+        <Description size={size} className={classNames?.description}>
           {description}
         </Description>
       )}
-      <FieldError className={classNames?.error}>{errorMessage}</FieldError>
+      <FieldError size={size} className={classNames?.error}>
+        {errorMessage}
+      </FieldError>
     </AriaTextField>
   )
 }
