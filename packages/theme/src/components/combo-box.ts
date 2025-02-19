@@ -30,6 +30,7 @@ export const comboBoxStyles = tv({
         expandIcon: "h-4 w-4",
       },
       sm: {
+        popover: "mt-1",
         field: "px-3",
         group: [inputStyles.variants.size.sm, "gap-1 px-0"],
         expandButton: "-my-2.5 h-10 px-3",
@@ -59,10 +60,15 @@ export const comboBoxItemStyles = tv({
   },
   variants: {
     size: {
-      xs: "",
-      sm: "",
+      xs: {
+        container: "prose-body-2 px-3 py-3",
+        description: "prose-body-2",
+      },
+      sm: {
+        container: "prose-body-2 px-3 py-3",
+        description: "prose-body-2",
+      },
       md: { container: "prose-body-1 px-4 py-3", description: "prose-body-2" },
-      lg: "",
     },
     isFocused: {
       true: { container: "bg-interaction-muted-main-hover" },
@@ -79,6 +85,11 @@ export const comboBoxItemStyles = tv({
       size: "md",
       isSelected: true,
       className: { container: "prose-subhead-1" },
+    },
+    {
+      size: ["sm", "xs"],
+      isSelected: true,
+      className: { container: "prose-subhead-2" },
     },
   ],
   defaultVariants: {
