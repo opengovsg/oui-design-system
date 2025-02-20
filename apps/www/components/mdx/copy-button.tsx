@@ -46,7 +46,7 @@ export const CopyButton = ({
     <button
       disabled={isCopied}
       onClick={copy}
-      className={cn("text-muted-foreground cursor-pointer", className)}
+      className={cn("cursor-pointer text-white", className)}
     >
       {isCopied ? (
         <CopyCheck className="text-green-200" size={16} strokeWidth={1.5} />

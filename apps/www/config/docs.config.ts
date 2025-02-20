@@ -3,8 +3,8 @@ const docsLinks: NavItem = {
   url: "docs",
   items: [
     {
-      title: "Get Started",
-      url: "get-started",
+      title: "Getting Started",
+      url: "getting-started",
       items: [
         {
           title: "Overview",
