@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
+import { expect, waitFor, within } from "@storybook/test"
 import { ListBoxItem, useFilter } from "react-aria-components"
 
 import { ComboBox, ComboBoxProps } from "../combo-box"
@@ -59,6 +60,24 @@ export const CustomComboboxItem: Story = {
         {item.name}
       </ListBoxItem>
     ),
+  },
+}
+
+export const WithExpandedSuggestions: Story = {
+  play: async ({ canvasElement }) => {
+    if (!canvasElement.parentElement) {
+      throw new Error("Canvas element not found")
+    }
+    const canvas = within(canvasElement.parentElement)
+    const expandElem = canvas.getByRole("button", {
+      name: /show suggestions ice cream flavour/i,
+    })
+    expandElem.click()
+    waitFor(() => {
+      expect(
+        canvas.getByRole("option", { name: /item 0/i }),
+      ).toBeInTheDocument()
+    })
   },
 }
 
