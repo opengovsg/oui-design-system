@@ -10,7 +10,7 @@ export default {
   component: ComboBoxFuzzy,
   args: {
     label: "Ice cream flavour",
-    items: [...Array(200)].map((_, i) => ({
+    items: [...Array(1000)].map((_, i) => ({
       value: String(i),
       name: `Item ${i}`,
       description: `Description ${i}`,
@@ -49,7 +49,7 @@ const ControlledTemplate = ({ items }: ComboBoxProps) => {
       <p>Current selected major id: {fieldState.selectedKey}</p>
       <p>Current input text: {fieldState.inputValue}</p>
       <ComboBoxFuzzy
-        label="Pick a engineering major"
+        label="Pick an engineering major"
         items={items}
         selectedKey={fieldState.selectedKey}
         inputValue={fieldState.inputValue}
@@ -62,4 +62,49 @@ const ControlledTemplate = ({ items }: ComboBoxProps) => {
 
 export const Default: Story = {
   render: ControlledTemplate,
+  parameters: {
+    docs: {
+      source: {
+        code: `const ControlledTemplate = ({ items }: ComboBoxProps) => {
+  const [fieldState, setFieldState] = useState<{
+    selectedKey: Key | null
+    inputValue: string
+  }>({
+    selectedKey: null,
+    inputValue: "",
+  })
+
+  const onSelectionChange = (id: Key | null) => {
+    setFieldState({
+      inputValue: items.find((o) => o.value === id)?.name ?? "",
+      selectedKey: id,
+    })
+  }
+
+  const onInputChange = (value: string) => {
+    setFieldState((prevState) => ({
+      inputValue: value,
+      selectedKey: value === "" ? null : prevState.selectedKey,
+    }))
+  }
+
+  return (
+    <>
+      <p>Current selected major id: {fieldState.selectedKey}</p>
+      <p>Current input text: {fieldState.inputValue}</p>
+      <ComboBoxFuzzy
+        label="Pick an engineering major"
+        items={items}
+        selectedKey={fieldState.selectedKey}
+        inputValue={fieldState.inputValue}
+        onSelectionChange={onSelectionChange}
+        onInputChange={onInputChange}
+      />
+    </>
+  )
+}
+`,
+      },
+    },
+  },
 }

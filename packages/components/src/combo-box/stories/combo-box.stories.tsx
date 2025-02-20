@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
-import { ListBoxItem } from "react-aria-components"
+import { ListBoxItem, useFilter } from "react-aria-components"
 
 import { ComboBox, ComboBoxProps } from "../combo-box"
 
@@ -15,6 +15,7 @@ export default {
       name: `Item ${i}`,
     })),
     isDisabled: false,
+    onClear: undefined,
   },
 } as Meta<typeof ComboBox>
 
@@ -45,6 +46,12 @@ export const WithError: Story = {
   },
 }
 
+export const WithDescription: Story = {
+  args: {
+    description: "Pick your favourite flavour",
+  },
+}
+
 export const CustomComboboxItem: Story = {
   args: {
     children: (item) => (
@@ -70,7 +77,14 @@ export const Virtualised: Story = {
   },
 }
 
-const ControlledComboBoxTemplate = ({ items }: ComboBoxProps) => {
+export const TriggerOnFocus: Story = {
+  args: {
+    menuTrigger: "focus",
+  },
+}
+
+const ControlledComboBoxTemplate = ({ items, ...props }: ComboBoxProps) => {
+  const { contains } = useFilter({ sensitivity: "base" })
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null
     inputValue: string
@@ -78,12 +92,15 @@ const ControlledComboBoxTemplate = ({ items }: ComboBoxProps) => {
     selectedKey: null,
     inputValue: "",
   })
+  const [filteredItems, setFilteredItems] = useState(items)
 
   const onSelectionChange = (id: Key | null) => {
     setFieldState({
       inputValue: items.find((o) => o.value === id)?.name ?? "",
       selectedKey: id,
     })
+    // Reset items
+    setFilteredItems(items)
   }
 
   const onInputChange = (value: string) => {
@@ -91,6 +108,14 @@ const ControlledComboBoxTemplate = ({ items }: ComboBoxProps) => {
       inputValue: value,
       selectedKey: value === "" ? null : prevState.selectedKey,
     }))
+    setFilteredItems(
+      items.filter((item) => contains(item.name, fieldState.inputValue)),
+    )
+  }
+
+  const onClear = () => {
+    setFieldState({ selectedKey: null, inputValue: "" })
+    setFilteredItems(items)
   }
 
   return (
@@ -98,12 +123,14 @@ const ControlledComboBoxTemplate = ({ items }: ComboBoxProps) => {
       <p>Current selected major id: {fieldState.selectedKey}</p>
       <p>Current input text: {fieldState.inputValue}</p>
       <ComboBox
-        label="Pick a engineering major"
-        items={items}
+        {...props}
+        label="Pick an engineering major"
+        items={filteredItems}
         selectedKey={fieldState.selectedKey}
         inputValue={fieldState.inputValue}
         onSelectionChange={onSelectionChange}
         onInputChange={onInputChange}
+        onClear={onClear}
       />
     </>
   )
@@ -112,6 +139,69 @@ const ControlledComboBoxTemplate = ({ items }: ComboBoxProps) => {
 export const FullyControlled: Story = {
   render(args) {
     return <ControlledComboBoxTemplate {...args} />
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `import { useState } from "react"
+import { Key, useFilter } from "react-aria-components"
+
+const ControlledComboBoxTemplate = ({ items, ...props }: ComboBoxProps) => {
+  const { contains } = useFilter({ sensitivity: "base" })
+  const [fieldState, setFieldState] = useState<{
+    selectedKey: Key | null
+    inputValue: string
+  }>({
+    selectedKey: null,
+    inputValue: "",
+  })
+  const [filteredItems, setFilteredItems] = useState(items)
+
+  const onSelectionChange = (id: Key | null) => {
+    setFieldState({
+      inputValue: items.find((o) => o.value === id)?.name ?? "",
+      selectedKey: id,
+    })
+    // Reset items
+    setFilteredItems(items)
+  }
+
+  const onInputChange = (value: string) => {
+    setFieldState((prevState) => ({
+      inputValue: value,
+      selectedKey: value === "" ? null : prevState.selectedKey,
+    }))
+    setFilteredItems(
+      items.filter((item) => contains(item.name, fieldState.inputValue)),
+    )
+  }
+
+  const onClear = () => {
+    setFieldState({ selectedKey: null, inputValue: "" })
+    setFilteredItems(items)
+  }
+
+  return (
+    <>
+      <p>Current selected major id: {fieldState.selectedKey}</p>
+      <p>Current input text: {fieldState.inputValue}</p>
+      <ComboBox
+        {...props}
+        label="Pick an engineering major"
+        items={filteredItems}
+        selectedKey={fieldState.selectedKey}
+        inputValue={fieldState.inputValue}
+        onSelectionChange={onSelectionChange}
+        onInputChange={onInputChange}
+        onClear={onClear}
+      />
+    </>
+  )
+}`,
+        language: "jsx",
+        type: "auto",
+      },
+    },
   },
   args: {
     items: [
@@ -125,6 +215,7 @@ export const FullyControlled: Story = {
       { value: String(8), name: "Agricultural" },
       { value: String(9), name: "Electrical" },
     ],
+    size: "md",
   },
 }
 
@@ -137,5 +228,8 @@ export const Sizes: Story = {
         <ComboBox {...args} label={`${args.label} (md)`} size="md" />
       </div>
     )
+  },
+  args: {
+    onClear: () => {},
   },
 }
