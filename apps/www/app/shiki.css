@@ -5,14 +5,6 @@ pre.shiki {
   background-color: transparent !important;
 }
 
-pre.shiki code * {
-  font-size: 0.82rem;
-  hyphens: none;
-  white-space: pre;
-  font-style: normal !important;
-  font-family: var(--font-geist-mono);
-}
-
 code .diff {
   transition: background-color 0.5s;
   margin: 0 -12px;
@@ -53,12 +45,9 @@ code .diff.add:before {
 
 code {
   span[data-highlighted-line] {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border-width: 1px;
-    border-color: #4c4c4c;
-    padding: 1px 2px;
-    margin: -1px -3px;
-    border-radius: 4px;
+    background: #c8c8ff1a !important;
+    padding: 1px 10px;
+    margin-inline: -10px;
   }
 
   mark[data-highlighted-chars] {
