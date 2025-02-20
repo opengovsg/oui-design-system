@@ -100,7 +100,10 @@ export const TriggerOnFocus: Story = {
   },
 }
 
-const ControlledComboBoxTemplate = ({ items, ...props }: ComboBoxProps) => {
+const ControlledComboBoxTemplate = ({
+  items = [],
+  ...props
+}: ComboBoxProps) => {
   const { contains } = useFilter({ sensitivity: "base" })
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null
@@ -163,7 +166,10 @@ export const FullyControlled: Story = {
         code: `import { useState } from "react"
 import { Key, useFilter } from "react-aria-components"
 
-const ControlledComboBoxTemplate = ({ items, ...props }: ComboBoxProps) => {
+const ControlledComboBoxTemplate = ({
+  items = [],
+  ...props
+}: ComboBoxProps) => {
   const { contains } = useFilter({ sensitivity: "base" })
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null
