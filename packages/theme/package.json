@@ -59,7 +59,7 @@
     "tailwindcss-react-aria-components": "^1.2.0"
   },
   "peerDependencies": {
-    "tailwindcss": ">=catalog:"
+    "tailwindcss": ">=4"
   },
   "prettier": "@oui/prettier-config"
 }
