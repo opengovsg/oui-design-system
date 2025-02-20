@@ -2,7 +2,6 @@
 
 import React, { JSX, useMemo } from "react"
 import {
-  cn,
   ComboBoxItemSlots,
   comboBoxItemStyles,
   ComboBoxItemVariantProps,
@@ -32,7 +31,7 @@ import {
   ValidationResult,
 } from "react-aria-components"
 
-import { FieldError, FieldGroup, Label } from "../field"
+import { Description, FieldError, FieldGroup, Label } from "../field"
 
 export type ComboBoxItem = {
   value: string
@@ -70,8 +69,6 @@ const calculateEstimatedRowHeight = (
       return 48
     case "md":
       return 48
-    case "lg":
-      return 48
   }
 }
 
@@ -105,19 +102,24 @@ export function ComboBox<T extends ComboBoxItem>({
     >
       {({ isOpen }) => (
         <>
-          <Label>{label}</Label>
+          <Label
+            size={size}
+            className={styles.label({ className: classNames?.label, size })}
+          >
+            {label}
+          </Label>
           <FieldGroup
             className={composeRenderProps(
               classNames?.group,
               (className, renderProps) =>
-                styles.group({ ...renderProps, className }),
+                styles.group({ ...renderProps, className, size }),
             )}
           >
             <Input
               className={composeRenderProps(
                 classNames?.field,
                 (className, renderProps) =>
-                  styles.field({ ...renderProps, className }),
+                  styles.field({ ...renderProps, className, size }),
               )}
             />
             <Button
@@ -125,22 +127,28 @@ export function ComboBox<T extends ComboBoxItem>({
               className={composeRenderProps(
                 classNames?.expandButton,
                 (className, renderProps) =>
-                  styles.expandButton({ ...renderProps, className }),
+                  styles.expandButton({ ...renderProps, className, size }),
               )}
             >
               {isOpen ? (
                 <ChevronUp
-                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                  className={styles.expandIcon({
+                    className: classNames?.expandIcon,
+                    size,
+                  })}
                 />
               ) : (
                 <ChevronDown
-                  className={cn(classNames?.expandIcon, styles.expandIcon())}
+                  className={styles.expandIcon({
+                    className: classNames?.expandIcon,
+                    size,
+                  })}
                 />
               )}
             </Button>
           </FieldGroup>
-          {description && <Text slot="description">{description}</Text>}
-          <FieldError>{errorMessage}</FieldError>
+          {description && <Description size={size}>{description}</Description>}
+          <FieldError size={size}>{errorMessage}</FieldError>
           <UNSTABLE_Virtualizer layout={layout}>
             <Popover
               className={composeRenderProps(
@@ -217,14 +225,16 @@ export function ComboBoxItem({
         return (
           <>
             <Text
-              className={cn(styles.label(), classNames?.label)}
+              className={styles.label({ className: classNames?.label })}
               slot="label"
             >
               {typeof label === "function" ? label(renderProps) : label}
             </Text>
             {description && (
               <Text
-                className={cn(styles.description(), classNames?.description)}
+                className={styles.description({
+                  className: classNames?.description,
+                })}
                 slot="description"
               >
                 {typeof description === "function"

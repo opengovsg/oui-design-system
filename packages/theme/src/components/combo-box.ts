@@ -6,6 +6,7 @@ import { inputStyles } from "./input"
 export const comboBoxStyles = tv({
   slots: {
     container: "group flex flex-col gap-2",
+    label: "",
     group: "",
     expandButton: "h-full cursor-pointer",
     expandIcon: "",
@@ -23,20 +24,23 @@ export const comboBoxStyles = tv({
     },
     size: {
       xs: {
-        group: inputStyles.variants.size.xs,
+        field: "px-3",
+        group: [inputStyles.variants.size.xs, "gap-1 px-0"],
+        expandButton: "-my-2 h-9 px-3",
+        expandIcon: "h-4 w-4",
       },
       sm: {
-        group: inputStyles.variants.size.sm,
+        popover: "mt-1",
+        field: "px-3",
+        group: [inputStyles.variants.size.sm, "gap-1 px-0"],
+        expandButton: "-my-2.5 h-10 px-3",
         expandIcon: "h-4 w-4",
       },
       md: {
         group: [inputStyles.variants.size.md, "gap-1 px-0"],
         field: "px-4",
-        expandButton: "-my-2 h-10 px-4",
+        expandButton: "-my-2 h-11 px-4",
         expandIcon: "h-5 w-5",
-      },
-      lg: {
-        group: inputStyles.variants.size.lg,
       },
     },
   },
@@ -56,10 +60,15 @@ export const comboBoxItemStyles = tv({
   },
   variants: {
     size: {
-      xs: "",
-      sm: "",
+      xs: {
+        container: "prose-body-2 px-3 py-3",
+        description: "prose-body-2",
+      },
+      sm: {
+        container: "prose-body-2 px-3 py-3",
+        description: "prose-body-2",
+      },
       md: { container: "prose-body-1 px-4 py-3", description: "prose-body-2" },
-      lg: "",
     },
     isFocused: {
       true: { container: "bg-interaction-muted-main-hover" },
@@ -76,6 +85,11 @@ export const comboBoxItemStyles = tv({
       size: "md",
       isSelected: true,
       className: { container: "prose-subhead-1" },
+    },
+    {
+      size: ["sm", "xs"],
+      isSelected: true,
+      className: { container: "prose-subhead-2" },
     },
   ],
   defaultVariants: {

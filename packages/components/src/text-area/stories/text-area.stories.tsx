@@ -16,3 +16,15 @@ type Story = StoryObj<typeof TextArea>
 export const Default: Story = {
   args: {},
 }
+
+export const Sizes: Story = {
+  render(args) {
+    return (
+      <div className="space-y-4">
+        <TextArea {...args} placeholder="xs" size="xs" />
+        <TextArea {...args} placeholder="sm" size="sm" />
+        <TextArea {...args} placeholder="md" size="md" />
+      </div>
+    )
+  },
+}

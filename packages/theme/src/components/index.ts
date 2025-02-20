@@ -9,4 +9,5 @@ export * from "./text-area"
 export * from "./combo-box"
 export * from "./combo-box-fuzzy"
 export * from "./field-group"
+export * from "./field"
 // Add new theme exports here

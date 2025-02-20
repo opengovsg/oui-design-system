@@ -12,7 +12,6 @@ export const textAreaStyles = tv({
       xs: "h-auto",
       sm: "h-auto",
       md: "h-auto",
-      lg: "h-auto",
     },
   },
   defaultVariants: {},
