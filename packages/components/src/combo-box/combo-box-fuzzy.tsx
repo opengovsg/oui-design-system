@@ -40,10 +40,14 @@ function HighlightedText({
   ))
 }
 
-interface ComboBoxFuzzyProps<T extends ComboBoxItem>
+export interface ComboBoxFuzzyProps<T extends ComboBoxItem = ComboBoxItem>
   extends SetRequired<
     ComboBoxProps<T>,
-    "inputValue" | "onInputChange" | "onSelectionChange" | "selectedKey"
+    | "inputValue"
+    | "onInputChange"
+    | "onSelectionChange"
+    | "selectedKey"
+    | "items"
   > {
   itemClassNames?: ComboBoxProps<T>["itemClassNames"] &
     SlotsToClasses<"highlight">
@@ -52,7 +56,7 @@ interface ComboBoxFuzzyProps<T extends ComboBoxItem>
 /**
  * Controlled variant of ComboBox, allows for fuzzy search and item highlight.
  */
-export function ComboBoxFuzzy<T extends ComboBoxItem>({
+export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>({
   items,
   itemClassNames,
   onSelectionChange: onSelectionChangeProp,
@@ -61,10 +65,12 @@ export function ComboBoxFuzzy<T extends ComboBoxItem>({
 }: ComboBoxFuzzyProps<T>) {
   const deferredInputValue = useDeferredValue(props.inputValue)
   const preparedItems = useMemo(() => {
-    return items.map((item) => ({
-      ...item,
-      prepared: fuzzysort.prepare(item.name),
-    }))
+    return (
+      items?.map((item) => ({
+        ...item,
+        prepared: fuzzysort.prepare(item.name),
+      })) ?? []
+    )
   }, [items])
   const [filteredResults, setFilteredResults] = useState({ items, result: {} })
 

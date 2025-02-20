@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
 
-import { ComboBoxProps } from "../combo-box"
-import { ComboBoxFuzzy } from "../combo-box-fuzzy"
+import { ComboBoxFuzzy, ComboBoxFuzzyProps } from "../combo-box-fuzzy"
 
 export default {
   title: "Components/ComboBoxFuzzy",
@@ -21,7 +20,7 @@ export default {
 
 type Story = StoryObj<typeof ComboBoxFuzzy>
 
-const ControlledTemplate = ({ items }: ComboBoxProps) => {
+const ControlledTemplate = ({ items }: ComboBoxFuzzyProps) => {
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null
     inputValue: string
