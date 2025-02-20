@@ -45,9 +45,12 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
   label?: string
+  /** The list of ComboBox items (uncontrolled). */
+  defaultItems?: T[]
+  /** The list of ComboBox items (controlled). */
+  items?: T[]
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
-  items: T[]
   classNames?: SlotsToClasses<ComboBoxSlots> & SlotsToClasses<"clearButton">
   itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
