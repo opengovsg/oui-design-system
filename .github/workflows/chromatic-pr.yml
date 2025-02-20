@@ -1,9 +1,8 @@
-name: "Chromatic"
+name: "Chromatic (PR)"
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [opened, reopened, synchronize]
 
 jobs:
   changed-files:
@@ -40,6 +39,10 @@ jobs:
       - name: Run Chromatic
         id: chromatic
         uses: chromaui/action@latest
+        env:
+          CHROMATIC_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+          CHROMATIC_SHA: ${{ github.event.pull_request.head.sha || github.ref }}
+          CHROMATIC_SLUG: ${{ github.repository }}
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           workingDir: apps/storybook

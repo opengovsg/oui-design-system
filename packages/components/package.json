@@ -62,6 +62,7 @@
     "@react-aria/calendar": "^3.7.0",
     "@react-aria/utils": "^3.27.0",
     "@react-stately/calendar": "^3.7.0",
+    "fuzzysort": "^3.1.0",
     "nanoid": "^5.0.9",
     "react": "catalog:",
     "react-aria": "^3.37.0",

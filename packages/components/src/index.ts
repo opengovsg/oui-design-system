@@ -9,4 +9,5 @@ export * from "./text-field"
 export * from "./field"
 export * from "./text-area"
 export * from "./text-area-field"
+export * from "./combo-box"
 // Add new component exports here
