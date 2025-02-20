@@ -64,11 +64,9 @@ export const CustomComboboxItem: Story = {
 }
 
 export const WithExpandedSuggestions: Story = {
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   play: async ({ canvasElement }) => {
-    if (!canvasElement.parentElement) {
-      throw new Error("Canvas element not found")
-    }
-    const canvas = within(canvasElement.parentElement)
+    const canvas = within(canvasElement.parentElement!)
     const expandElem = canvas.getByRole("button", {
       name: /show suggestions ice cream flavour/i,
     })
