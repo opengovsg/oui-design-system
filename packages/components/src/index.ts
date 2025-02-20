@@ -11,4 +11,5 @@ export * from "./text-area"
 export * from "./text-area-field"
 export * from "./combo-box"
 export * from "./banner"
+export * from "./tag-field"
 // Add new component exports here
