@@ -1,17 +1,13 @@
-import rehypeShiki from "@shikijs/rehype"
-import {
-  transformerMetaHighlight,
-  transformerNotationDiff,
-  transformerNotationFocus,
-  transformerNotationHighlight,
-  transformerNotationWordHighlight,
-} from "@shikijs/transformers"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
+import rehypePrettyCode, { Options } from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
+import { createHighlighter, getHighlighter } from "shiki"
+import { visit } from "unist-util-visit"
 import { defineCollection, defineConfig, s } from "velite"
 
 import { docsConfig } from "./config/docs.config"
+import { rehypeNpmCommand } from "./plugins/rehype-npm-command"
 
 export const docs = defineCollection({
   name: "Docs",
@@ -24,10 +20,12 @@ export const docs = defineCollection({
       published: s.boolean().default(true),
       label: s.enum(["New", "Updated"]).optional(),
       body: s.mdx(),
-      toc: s.object({
-        content: s.toc(),
-        visible: s.boolean().default(true),
-      }),
+      toc: s
+        .object({
+          content: s.toc(),
+          visible: s.boolean().default(true),
+        })
+        .default({}),
       links: s
         .object({
           source: s.string().optional(),
@@ -70,19 +68,68 @@ export default defineConfig({
   mdx: {
     rehypePlugins: [
       rehypeSlug,
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === "element" && node?.tagName === "pre") {
+            const [codeEl] = node.children
+            if (codeEl.tagName !== "code") {
+              return
+            }
+
+            if (codeEl.data?.meta) {
+              // Extract event from meta and pass it down the tree.
+              const regex = /event="([^"]*)"/
+              const match = codeEl.data?.meta.match(regex)
+              if (match) {
+                node.__event__ = match ? match[1] : null
+                codeEl.data.meta = codeEl.data.meta.replace(regex, "")
+              }
+            }
+
+            node.__rawString__ = codeEl.children?.[0].value
+            node.__src__ = node.properties?.__src__
+            node.__style__ = node.properties?.__style__
+          }
+        })
+      },
       [
-        rehypeShiki,
+        rehypePrettyCode,
         {
-          transformers: [
-            transformerNotationDiff(),
-            transformerNotationFocus(),
-            transformerNotationHighlight(),
-            transformerNotationWordHighlight(),
-            transformerMetaHighlight(),
-          ],
           theme: "aurora-x",
-        },
+          getHighlighter,
+        } as Options,
       ],
+      () => (tree) => {
+        visit(tree, (node) => {
+          if (node?.type === "element" && node?.tagName === "figure") {
+            if (!("data-rehype-pretty-code-figure" in node.properties)) {
+              return
+            }
+            const preElement = node.children.at(-1)
+            if (preElement.tagName !== "pre") {
+              return
+            }
+
+            preElement.properties["__withMeta__"] =
+              node.children.at(0).tagName === "div"
+            preElement.properties["__rawString__"] = node.__rawString__
+
+            if (node.__src__) {
+              preElement.properties["__src__"] = node.__src__
+            }
+
+            if (node.__event__) {
+              preElement.properties["__event__"] = node.__event__
+            }
+
+            if (node.__style__) {
+              preElement.properties["__style__"] = node.__style__
+            }
+          }
+        })
+      },
+
+      rehypeNpmCommand,
       [
         rehypeAutolinkHeadings,
         {

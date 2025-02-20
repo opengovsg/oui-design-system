@@ -6,6 +6,24 @@
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
 @source "../**/*.{js,jsx,ts,tsx}";
 
+@layer utilities {
+  .step {
+    counter-increment: step;
+  }
+
+  .step:before {
+    @apply absolute inline-flex size-6 items-center justify-center rounded-full bg-black text-center -indent-px font-mono text-base font-medium text-white;
+    @apply mt-[2px] ml-[-45px];
+    content: counter(step);
+  }
+
+  .dark {
+    .step:before {
+      @apply bg-white text-black;
+    }
+  }
+}
+
 :root {
   --header-height: 57px;
   --content-height: calc(100dvh - var(--header-height));
@@ -25,4 +43,12 @@
   &::-webkit-scrollbar {
     display: block;
   }
+}
+
+.mdx > .steps:first-child > h3:first-child {
+  @apply mt-0;
+}
+
+.steps > h3 {
+  @apply mt-8 mb-4 text-base font-semibold;
 }
