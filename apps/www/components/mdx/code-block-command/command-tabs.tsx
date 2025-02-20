@@ -30,27 +30,30 @@ export const CommandTabs = ({ tabContentHtmls, tabs }: CommandTabsProps) => {
         })
       }}
     >
-      <TabList className="flex h-7 translate-y-[2px] gap-3 bg-transparent p-0 pl-1">
-        {Object.entries(tabs).map(([key]) => {
-          return (
-            <Tab
-              id={key}
-              key={key}
-              className="selected:border-b-zinc-50 selected:bg-transparent selected:text-zinc-50 rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 font-mono text-zinc-400"
-            >
-              {key}
-            </Tab>
-          )
-        })}
-      </TabList>
-      {Object.entries(tabs).map(([key, value], index) => {
+      <div className="flex justify-between gap-2 px-4 py-2">
+        <TabList className="flex h-7 flex-1 translate-y-[2px] gap-3 bg-transparent p-0 pl-1">
+          {Object.entries(tabs).map(([key]) => {
+            return (
+              <Tab
+                id={key}
+                key={key}
+                className="selected:border-b-zinc-50 selected:bg-transparent selected:text-zinc-50 rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 font-mono text-zinc-400"
+              >
+                {key}
+              </Tab>
+            )
+          })}
+        </TabList>
+
+        <CopyButton>{tabs[config.packageManager]}</CopyButton>
+      </div>
+      {Object.entries(tabs).map(([key], index) => {
         return (
           <TabPanel key={key} id={key} className="relative mt-0">
             <div
-              className="code-highlight"
+              className="code-highlight px-4 pt-2 pb-6"
               dangerouslySetInnerHTML={{ __html: tabContentHtmls[index] }}
             />
-            <CopyButton className="absolute top-0 right-4">{value}</CopyButton>
           </TabPanel>
         )
       })}

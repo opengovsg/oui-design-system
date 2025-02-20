@@ -1,8 +1,8 @@
 pre.shiki {
   position: relative;
   line-height: 1.25 !important;
-  padding-inline: 2rem;
-  padding-block: 1.5rem;
+
+  background-color: transparent !important;
 }
 
 pre.shiki code * {
