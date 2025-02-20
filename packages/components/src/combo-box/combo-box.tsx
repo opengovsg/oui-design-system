@@ -2,6 +2,7 @@
 
 import React, { JSX, useMemo } from "react"
 import {
+  comboBoxClearButtonStyles,
   ComboBoxItemSlots,
   comboBoxItemStyles,
   ComboBoxItemVariantProps,
@@ -12,11 +13,12 @@ import {
   composeTailwindRenderProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { ChevronDown, ChevronUp } from "lucide-react"
+import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
+import { LocalizedStrings, useMessageFormatter } from "react-aria"
 import {
+  Button as AriaButton,
   ComboBox as AriaComboBox,
   ComboBoxProps as AriaComboBoxProps,
-  Button,
   Input,
   ListBox,
   ListBoxItem,
@@ -46,7 +48,7 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
   items: T[]
-  classNames?: SlotsToClasses<ComboBoxSlots>
+  classNames?: SlotsToClasses<ComboBoxSlots> & SlotsToClasses<"clearButton">
   itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
    * Any additional props to be spread to the list layout.
@@ -57,6 +59,16 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
 
   /** Values that should invalidate the item cache when using dynamic collections. */
   dependencies?: ListBoxProps<T>["dependencies"]
+
+  /**
+   * If provided, a clear button will be rendered next to the expand button.
+   *
+   * This callback will be called when the clear button is clicked.
+   *
+   * To use this, this component must be a controlled component with externally
+   * handled `inputValue`, `onInputChange`, `selectedKey` and `onSelectionChange` state.
+   */
+  onClear?: () => void
 }
 
 const calculateEstimatedRowHeight = (
@@ -64,12 +76,27 @@ const calculateEstimatedRowHeight = (
 ): number => {
   switch (size) {
     case "xs":
-      return 48
+      return 44
     case "sm":
-      return 48
+      return 44
     case "md":
       return 48
   }
+}
+
+const i18nStrings: LocalizedStrings = {
+  "en-SG": {
+    clear: "Clear",
+  },
+  "zh-SG": {
+    clear: "清除",
+  },
+  "ms-SG": {
+    clear: "Jelas",
+  },
+  "ta-SG": {
+    clear: "தெளிவு",
+  },
 }
 
 export function ComboBox<T extends ComboBoxItem>({
@@ -82,8 +109,10 @@ export function ComboBox<T extends ComboBoxItem>({
   listLayoutOptions,
   children,
   dependencies,
+  onClear,
   ...props
 }: ComboBoxProps<T>) {
+  const formatMessage = useMessageFormatter(i18nStrings)
   const styles = comboBoxStyles({ size })
   const layout = useMemo(() => {
     return new UNSTABLE_ListLayout({
@@ -98,9 +127,10 @@ export function ComboBox<T extends ComboBoxItem>({
         props.className ?? classNames?.base,
         styles.container(),
       )}
+      shouldFocusWrap
       {...props}
     >
-      {({ isOpen }) => (
+      {({ isOpen, isDisabled: isComboBoxDisabled }) => (
         <>
           <Label
             size={size}
@@ -108,45 +138,77 @@ export function ComboBox<T extends ComboBoxItem>({
           >
             {label}
           </Label>
-          <FieldGroup
-            className={composeRenderProps(
-              classNames?.group,
-              (className, renderProps) =>
-                styles.group({ ...renderProps, className, size }),
-            )}
-          >
-            <Input
+          <div className="flex flex-row">
+            <FieldGroup
               className={composeRenderProps(
-                classNames?.field,
+                classNames?.group,
                 (className, renderProps) =>
-                  styles.field({ ...renderProps, className, size }),
-              )}
-            />
-            <Button
-              aria-label={isOpen ? "open popover" : "close popover"}
-              className={composeRenderProps(
-                classNames?.expandButton,
-                (className, renderProps) =>
-                  styles.expandButton({ ...renderProps, className, size }),
+                  styles.group({
+                    ...renderProps,
+                    className,
+                    size,
+                    isClearable: !!onClear,
+                  }),
               )}
             >
-              {isOpen ? (
-                <ChevronUp
-                  className={styles.expandIcon({
-                    className: classNames?.expandIcon,
+              <Input
+                className={composeRenderProps(
+                  classNames?.field,
+                  (className, renderProps) =>
+                    styles.field({ ...renderProps, className, size }),
+                )}
+              />
+              <AriaButton
+                className={composeRenderProps(
+                  classNames?.expandButton,
+                  (className, renderProps) =>
+                    styles.expandButton({ ...renderProps, className, size }),
+                )}
+              >
+                {isOpen ? (
+                  <ChevronUp
+                    className={styles.icon({
+                      className: classNames?.icon,
+                      size,
+                    })}
+                  />
+                ) : (
+                  <ChevronDown
+                    className={styles.icon({
+                      className: classNames?.icon,
+                      size,
+                    })}
+                  />
+                )}
+              </AriaButton>
+            </FieldGroup>
+            {!!onClear && (
+              <AriaButton
+                slot={null}
+                onPress={onClear}
+                isDisabled={isComboBoxDisabled}
+                aria-label={formatMessage("clear")}
+                className={composeRenderProps(
+                  classNames?.clearButton,
+                  (className, renderProps) =>
+                    comboBoxClearButtonStyles({
+                      ...renderProps,
+                      className,
+                      size,
+                      isInactive: !props.inputValue,
+                      isDisabled: renderProps.isDisabled,
+                    }),
+                )}
+              >
+                <XIcon
+                  className={styles.icon({
+                    className: classNames?.icon,
                     size,
                   })}
                 />
-              ) : (
-                <ChevronDown
-                  className={styles.expandIcon({
-                    className: classNames?.expandIcon,
-                    size,
-                  })}
-                />
-              )}
-            </Button>
-          </FieldGroup>
+              </AriaButton>
+            )}
+          </div>
           {description && <Description size={size}>{description}</Description>}
           <FieldError size={size}>{errorMessage}</FieldError>
           <UNSTABLE_Virtualizer layout={layout}>

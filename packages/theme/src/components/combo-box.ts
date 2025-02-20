@@ -5,21 +5,26 @@ import { inputStyles } from "./input"
 
 export const comboBoxStyles = tv({
   slots: {
-    container: "group flex flex-col gap-2",
+    container: "group isolate flex flex-col gap-2",
     label: "",
-    group: "",
+    group: "z-10 flex-1",
     expandButton: "h-full cursor-pointer",
-    expandIcon: "",
+    icon: "",
     field: "h-full w-full overflow-ellipsis outline-hidden",
     popover: "mt-0.5 w-(--trigger-width) overflow-hidden bg-white shadow-sm",
     list: "w-unset block max-h-[300px] min-h-0 overflow-y-auto",
   },
   base: [],
   variants: {
-    variant: {},
+    isClearable: {
+      true: {
+        group: "rounded-r-none",
+      },
+    },
     isDisabled: {
       true: {
-        expandButton: "cursor-default",
+        expandButton:
+          "text-interaction-support-disabled-content cursor-default",
       },
     },
     size: {
@@ -27,20 +32,20 @@ export const comboBoxStyles = tv({
         field: "px-3",
         group: [inputStyles.variants.size.xs, "gap-1 px-0"],
         expandButton: "-my-2 h-9 px-3",
-        expandIcon: "h-4 w-4",
+        icon: "h-4 w-4",
       },
       sm: {
         popover: "mt-1",
         field: "px-3",
         group: [inputStyles.variants.size.sm, "gap-1 px-0"],
         expandButton: "-my-2.5 h-10 px-3",
-        expandIcon: "h-4 w-4",
+        icon: "h-4 w-4",
       },
       md: {
         group: [inputStyles.variants.size.md, "gap-1 px-0"],
         field: "px-4",
         expandButton: "-my-2 h-11 px-4",
-        expandIcon: "h-5 w-5",
+        icon: "h-5 w-5",
       },
     },
   },
@@ -99,3 +104,32 @@ export const comboBoxItemStyles = tv({
 
 export type ComboBoxItemVariantProps = VariantProps<typeof comboBoxItemStyles>
 export type ComboBoxItemSlots = keyof ReturnType<typeof comboBoxItemStyles>
+
+export const comboBoxClearButtonStyles = tv({
+  base: "border-base-divider-strong text-base-content-strong z-0 -ml-px cursor-pointer rounded-sm rounded-l-none border outline-hidden transition",
+  variants: {
+    isDisabled: {
+      true: "bg-interaction-support-disabled text-interaction-support-disabled-content cursor-default",
+    },
+    isInactive: {
+      true: "text-interaction-support-disabled-content",
+    },
+    isHovered: {
+      true: "bg-interaction-muted-main-hover",
+    },
+    isFocused: {
+      true: "border-utility-focus-default shadow-utility-focus-default z-20 shadow-[0_0_0_1px]",
+    },
+    isPressed: {
+      true: "text-base-content-strong",
+    },
+    size: {
+      xs: "h-9 px-2.5",
+      sm: "h-10 px-2.5",
+      md: "h-11 px-3",
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+})

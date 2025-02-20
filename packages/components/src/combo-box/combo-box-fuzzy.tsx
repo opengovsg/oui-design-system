@@ -1,12 +1,13 @@
 "use client"
 
-import { useDeferredValue, useMemo } from "react"
+import { useCallback, useDeferredValue, useMemo, useState } from "react"
 import {
   comboBoxFuzzyHighlightedTextStyles,
   ComboBoxFuzzyVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import fuzzysort from "fuzzysort"
+import { Key } from "react-aria"
 import { SetRequired } from "type-fest"
 
 import { ComboBox, ComboBoxItem, ComboBoxProps } from "./combo-box"
@@ -54,38 +55,59 @@ interface ComboBoxFuzzyProps<T extends ComboBoxItem>
 export function ComboBoxFuzzy<T extends ComboBoxItem>({
   items,
   itemClassNames,
+  onSelectionChange: onSelectionChangeProp,
+  onInputChange: onInputChangeProp,
   ...props
 }: ComboBoxFuzzyProps<T>) {
   const deferredInputValue = useDeferredValue(props.inputValue)
-
   const preparedItems = useMemo(() => {
     return items.map((item) => ({
       ...item,
       prepared: fuzzysort.prepare(item.name),
     }))
   }, [items])
+  const [filteredResults, setFilteredResults] = useState({ items, result: {} })
 
-  const fuzzyResults = useMemo(() => {
-    if (!deferredInputValue) return { items, result: {} }
-    const results = fuzzysort.go(deferredInputValue, preparedItems, {
-      key: "prepared",
-    })
+  const onSelectionChange = useCallback(
+    (key: Key | null) => {
+      onSelectionChangeProp(key)
+      // Reset items
+      setFilteredResults({ items: preparedItems, result: {} })
+    },
+    [onSelectionChangeProp, preparedItems],
+  )
 
-    return results.reduce(
-      (acc, result) => {
-        acc.items.push(result.obj)
-        acc.result[result.obj.name] = result
-        return acc
-      },
-      { items: [] as T[], result: {} as Record<string, Fuzzysort.Result> },
-    )
-  }, [deferredInputValue, items, preparedItems])
+  const onInputChange = useCallback(
+    (value: string) => {
+      onInputChangeProp(value)
+      if (!value) {
+        setFilteredResults({ items: preparedItems, result: {} })
+        return
+      }
+      const results = fuzzysort
+        .go(value, preparedItems, {
+          key: "prepared",
+        })
+        .reduce(
+          (acc, result) => {
+            acc.items.push(result.obj)
+            acc.result[result.obj.name] = result
+            return acc
+          },
+          { items: [] as T[], result: {} as Record<string, Fuzzysort.Result> },
+        )
+      setFilteredResults(results)
+    },
+    [onInputChangeProp, preparedItems],
+  )
 
   return (
     <ComboBox
       {...props}
-      items={fuzzyResults.items}
+      items={filteredResults.items}
       dependencies={[deferredInputValue]}
+      onSelectionChange={onSelectionChange}
+      onInputChange={onInputChange}
     >
       {(item) => (
         <ComboBoxItem
@@ -94,7 +116,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem>({
           label={({ isSelected, isFocused }) => (
             <HighlightedText
               className={itemClassNames?.highlight}
-              result={fuzzyResults.result?.[item.name]}
+              result={filteredResults.result?.[item.name]}
               originalText={item.name}
               isSelected={isSelected}
               isFocused={isFocused}
