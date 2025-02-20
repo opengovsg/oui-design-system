@@ -29,7 +29,7 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
   return (
     <div className="flex flex-col gap-2">
       {title && <div className="flex flex-col ps-4 font-semibold">{title}</div>}
-      <div className="flex gap-px">
+      <div className="flex flex-col gap-px">
         {items.map((item, index) => (
           <SidenavItem key={index}>
             {({ className }) => {

@@ -1,0 +1,109 @@
+---
+title: Installation
+description: How to install and set up OUI in your project
+---
+
+## Framework Guide
+
+OUI works in your favorite framework. Click in to see the docs for the specific framework.
+
+<CardGroup className="grid-cols-3">
+<Card
+  title="Next.js"
+  href="/docs/getting-started/frameworks/next"
+  icon="nextjs"
+>
+  Use OUI with Next.js apps
+</Card>
+
+<Card title="Vite" href="/docs/getting-started/frameworks/vite" icon="vite">
+  Use OUI with Vite
+</Card>
+
+{/* TODO */}
+
+<Card title="Stackblitz" href="https://stackblitz.com/" icon="stackblitz">
+  Try OUI in a sandbox
+</Card>
+
+</CardGroup>
+
+> The minimum node version required is Node.20.x
+
+## Installation
+
+To manually set up OUI in your project, follow the steps below.
+
+<Steps>
+
+<Step>
+Install `@opengovsg/oui`, `@opengovsg/oui-theme` and its peer dependencies.
+
+```bash
+npm install @opengovsg/oui @opengovsg/oui-theme tailwindcss react-aria-components motion
+```
+
+</Step>
+
+<Step>
+Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
+
+```css title="styles/tailwind.css"
+@import "@opengovsg/oui-theme/tailwind.css";
+```
+
+> Read the respective framework guides for specific instructions on how to consume TailwindCSS in your project.
+
+</Step>
+
+<Step>
+> Not implemented yet, there will eventually be a way to generate the theme file.
+
+Add your product's theme overrides below the `@opengovsg/oui-theme/tailwind.css` import.
+
+```css title="styles/tailwind.css" {2}
+@import "@opengovsg/oui-theme/tailwind.css";
+@import "./your-product-theme.css";
+```
+
+```css title="styles/tailwind.css" {4-16}
+@import "@opengovsg/oui-theme/tailwind.css";
+
+/* Or add your theme variables directly below `oui-theme`'s import */
+@layer base {
+  :root {
+    /* .... */
+    --text-color-default: #333;
+    --text-color-strong: #000;
+    /* .... */
+  }
+  .dark {
+    /* .... */
+    --text-color-default: #fff;
+    --text-color-strong: #fff;
+    /* .... */
+  }
+}
+```
+
+</Step>
+
+<Step>
+Done! Start importing and using OUI components alongside TailwindCSS in your project.
+
+```tsx
+import { Button } from "@opengovsg/oui"
+
+const Demo = () => {
+  return (
+    <div className="flex flex-row gap-4">
+      <Button>Click me</Button>
+      <Button>Click me</Button>
+    </div>
+  )
+}
+```
+
+</Step>
+
+</Steps>

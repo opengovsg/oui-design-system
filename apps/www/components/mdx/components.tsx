@@ -1,10 +1,13 @@
 import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
+import { NpmCommands } from "@/types/unist"
 import { cn } from "@opengovsg/oui-theme"
 import { CircleAlertIcon } from "lucide-react"
 
+import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
+import { CodeBlockCommand } from "./code-block-command"
 import { ComponentPreview } from "./component-preview"
 
 export const mdxComponents = {
@@ -64,13 +67,10 @@ export const mdxComponents = {
   ),
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a
-      className={cn("font-medium underline underline-offset-4", className)}
-      {...props}
-    />
-  ),
-  p: ({ className, ...props }: React.HTMLAttributes<HTMLParagraphElement>) => (
-    <p
-      className={cn("leading-7 [&:not(:first-child)]:mt-6", className)}
+      className={cn(
+        "font-medium underline-offset-4 hover:underline focus:underline",
+        className,
+      )}
       {...props}
     />
   ),
@@ -94,7 +94,7 @@ export const mdxComponents = {
       )}
       {...props}
     >
-      <div className="mt-1 flex-shrink-0">
+      <div className="flex-shrink-0">
         <CircleAlertIcon
           size={20}
           className="fill-blue-500 stroke-zinc-100 dark:stroke-zinc-800"
@@ -147,7 +147,36 @@ export const mdxComponents = {
       {...props}
     />
   ),
-  pre: CodeBlock,
+  pre: (
+    props: React.HTMLAttributes<HTMLPreElement> & {
+      __rawString__?: string
+      __src__?: string
+    } & NpmCommands,
+  ) => {
+    const {
+      __rawString__,
+      __npmCommand__,
+      __yarnCommand__,
+      __pnpmCommand__,
+      __bunCommand__,
+      __src__,
+      ...rest
+    } = props
+    const isNpmCommand =
+      __npmCommand__ && __yarnCommand__ && __pnpmCommand__ && __bunCommand__
+
+    if (isNpmCommand) {
+      return (
+        <CodeBlockCommand
+          __npmCommand__={__npmCommand__}
+          __yarnCommand__={__yarnCommand__}
+          __pnpmCommand__={__pnpmCommand__}
+          __bunCommand__={__bunCommand__}
+        />
+      )
+    }
+    return <CodeBlock {...rest} />
+  },
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn("rounded-md font-mono text-sm", className)}
@@ -158,7 +187,7 @@ export const mdxComponents = {
   Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
     <h3
       className={cn(
-        "font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+        "step font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
         className,
       )}
       {...props}
@@ -166,7 +195,7 @@ export const mdxComponents = {
   ),
   Steps: ({ ...props }) => (
     <div
-      className="[&>h3]:step steps mb-12 ml-4 border-l pl-8 [counter-reset:step]"
+      className="steps mb-12 ml-4 border-l pl-8 [counter-reset:step]"
       {...props}
     />
   ),
@@ -185,5 +214,7 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  Card,
+  CardGroup,
   ComponentPreview,
 }

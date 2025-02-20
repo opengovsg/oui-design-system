@@ -56,7 +56,7 @@
     "react": "catalog:",
     "tailwind-merge": "^3.0.1",
     "tailwind-variants": "^0.3.1",
-    "tailwindcss-react-aria-components": "^1.2.0"
+    "tailwindcss-react-aria-components": "3.0.0-nightly-412a51816-250219"
   },
   "peerDependencies": {
     "tailwindcss": ">=4"

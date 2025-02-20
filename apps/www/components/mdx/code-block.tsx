@@ -14,7 +14,7 @@ export const CodeBlock = ({
       </div>
       <div className="w-full p-[2px]">
         <pre
-          className={cn("overflow-x-auto rounded-md py-4 font-mono", className)}
+          className={cn("overflow-x-auto rounded-md p-4 font-mono", className)}
           {...props}
         >
           <code>{children}</code>

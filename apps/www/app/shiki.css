@@ -1,16 +1,8 @@
 pre.shiki {
   position: relative;
   line-height: 1.25 !important;
-  padding-inline: 2rem;
-  padding-block: 1.5rem;
-}
 
-pre.shiki code * {
-  font-size: 0.82rem;
-  hyphens: none;
-  white-space: pre;
-  font-style: normal !important;
-  font-family: var(--font-geist-mono);
+  background-color: transparent !important;
 }
 
 code .diff {
@@ -51,29 +43,19 @@ code .diff.add:before {
   color: #3dd68c;
 }
 
-code .highlighted {
-  background-color: rgb(255 255 255 / 0.1) !important;
-  transition: background-color 0.5s;
-  margin: 0 -12px;
-  padding: 0 12px;
-  box-shadow: 2px 0 0px 0px rgb(162, 162, 162) inset;
-  width: calc(100% + 24px);
-  display: inline-block;
-
-  & span {
-    background-color: transparent !important;
+code {
+  span[data-highlighted-line] {
+    background: #c8c8ff1a !important;
+    padding: 1px 10px;
+    margin-inline: -10px;
   }
-}
 
-code .highlighted-word {
-  background: rgba(255, 255, 255, 0.1) !important;
-  border-width: 1px;
-  border-color: #4c4c4c;
-  padding: 1px 2px;
-  margin: -1px -3px;
-  border-radius: 4px;
-
-  + span {
-    background: transparent !important;
+  mark[data-highlighted-chars] {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-width: 1px;
+    border-color: #4c4c4c;
+    padding: 1px 2px;
+    margin: -1px -3px;
+    border-radius: 4px;
   }
 }
