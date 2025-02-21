@@ -8,7 +8,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons"
 export const Header = () => {
   const route = useRoute()
 
-  const primaryNavItems = useMemo(() => route.getPrimaryNavItems(), [route])
+  const secondaryNavItems = useMemo(() => route.getSecondaryNavItems(), [route])
 
   return (
     <div className="fixed inset-x-0 top-0 z-10 border-b border-gray-950/5 dark:border-white/10">
@@ -18,6 +18,19 @@ export const Header = () => {
             <a className="shrink-0" aria-label="Home" href="/">
               OUI
             </a>
+          </div>
+          <div className="flex flex-1 items-center gap-6">
+            {secondaryNavItems.map((item) => (
+              <a
+                className="current:after:font-medium invisible relative text-sm/6 font-medium text-gray-950 after:visible after:absolute after:inset-0 after:font-normal after:content-[attr(content)] dark:text-white"
+                key={item.title}
+                data-current={item.current ? true : undefined}
+                href={item.url}
+                content={item.title}
+              >
+                {item.title}
+              </a>
+            ))}
           </div>
           <div className="flex items-center gap-6 max-md:hidden">
             <button
@@ -42,16 +55,6 @@ export const Header = () => {
                 Ctrl&nbsp;K
               </kbd>
             </button>
-            {primaryNavItems.map((item) => (
-              <a
-                className="current:font-medium text-sm/6 text-gray-950 dark:text-white"
-                key={item.title}
-                data-current={item.current ? true : undefined}
-                href={item.url}
-              >
-                {item.title}
-              </a>
-            ))}
             <a aria-label="GitHub repository" href={route.repoUrl}>
               <SiGithub className="size-5 fill-black/40 hover:fill-black dark:fill-gray-400 dark:hover:fill-gray-200" />
             </a>

@@ -51,7 +51,7 @@ export const CommandTabs = ({ tabContentHtmls, tabs }: CommandTabsProps) => {
         return (
           <TabPanel key={key} id={key} className="relative mt-0">
             <div
-              className="code-highlight px-4 pt-2 pb-6 font-mono text-sm"
+              className="code-highlight px-4 pt-2 pb-6 font-mono text-sm font-normal"
               dangerouslySetInnerHTML={{ __html: tabContentHtmls[index] }}
             />
           </TabPanel>

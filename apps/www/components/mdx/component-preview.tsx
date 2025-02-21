@@ -40,7 +40,7 @@ const Code = async ({
   return (
     <>
       <div
-        className="code-highlight"
+        className="code-highlight overflow-x-auto rounded-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {showCopy && (

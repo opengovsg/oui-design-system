@@ -8,29 +8,15 @@ const docsLinks: NavItem = {
       items: [
         {
           title: "Overview",
-          items: [
-            { title: "Installation", url: "installation" },
-            { title: "Migration", url: "migration" },
-            { title: "CLI", url: "cli" },
-            { title: "Contributing", url: "contributing" },
-            { title: "Showcase", url: "/showcase", external: true },
-          ],
+          items: [{ title: "Installation", url: "installation" }],
         },
         {
           title: "Frameworks",
           url: "frameworks",
           items: [
-            { title: "Next.js (App)", url: "next-app" },
-            { title: "Storybook", url: "storybook" },
+            { title: "Next.js (App)", url: "next" },
             { title: "Vite", url: "vite" },
-          ],
-        },
-        {
-          title: "Environments",
-          url: "environments",
-          items: [
-            { title: "Shadow DOM", url: "shadow-dom" },
-            { title: "Iframe", url: "iframe" },
+            { title: "Storybook", url: "storybook" },
           ],
         },
       ],
