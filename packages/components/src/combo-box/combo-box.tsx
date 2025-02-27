@@ -1,7 +1,8 @@
 "use client"
 
-import React, { JSX, useMemo } from "react"
+import React, { JSX, useCallback, useMemo } from "react"
 import {
+  cn,
   comboBoxClearButtonStyles,
   ComboBoxItemSlots,
   comboBoxItemStyles,
@@ -25,6 +26,7 @@ import {
   ListBoxItemProps,
   ListBoxItemRenderProps,
   ListBoxProps,
+  ListBoxRenderProps,
   ListLayoutOptions,
   Popover,
   Text,
@@ -51,7 +53,8 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   items?: T[]
   description?: string | null
   errorMessage?: string | ((validation: ValidationResult) => string)
-  classNames?: SlotsToClasses<ComboBoxSlots> & SlotsToClasses<"clearButton">
+  classNames?: SlotsToClasses<ComboBoxSlots> &
+    SlotsToClasses<"clearButton" | "emptyState">
   itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
    * Any additional props to be spread to the list layout.
@@ -72,6 +75,8 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
    * handled `inputValue`, `onInputChange`, `selectedKey` and `onSelectionChange` state.
    */
   onClear?: () => void
+
+  renderEmptyState?: ListBoxProps<T>["renderEmptyState"]
 }
 
 const calculateEstimatedRowHeight = (
@@ -90,16 +95,38 @@ const calculateEstimatedRowHeight = (
 const i18nStrings: LocalizedStrings = {
   "en-SG": {
     clear: "Clear",
+    empty: "No matching results",
   },
   "zh-SG": {
     clear: "清除",
+    empty: "没有匹配的结果",
   },
   "ms-SG": {
     clear: "Jelas",
+    empty: "Tiada hasil yang sepadan",
   },
   "ta-SG": {
     clear: "தெளிவு",
+    empty: "பொருந்தும் முடிவுகள் இல்லை",
   },
+}
+
+export function ComboBoxEmptyState({
+  size,
+  className,
+}: Pick<ComboBoxVariantProps, "size"> & { className?: string }) {
+  const styles = comboBoxItemStyles({ size })
+  const formatMessage = useMessageFormatter(i18nStrings)
+  return (
+    <div
+      aria-hidden
+      className={styles.container({
+        className: cn("cursor-default italic", className),
+      })}
+    >
+      {formatMessage("empty")}
+    </div>
+  )
 }
 
 export function ComboBox<T extends ComboBoxItem>({
@@ -113,6 +140,7 @@ export function ComboBox<T extends ComboBoxItem>({
   children,
   dependencies,
   onClear,
+  renderEmptyState: renderEmptyStateProp,
   ...props
 }: ComboBoxProps<T>) {
   const formatMessage = useMessageFormatter(i18nStrings)
@@ -124,6 +152,18 @@ export function ComboBox<T extends ComboBoxItem>({
     })
   }, [listLayoutOptions, size])
 
+  const renderEmptyState = useCallback(
+    (props: ListBoxRenderProps) => {
+      if (renderEmptyStateProp) {
+        return renderEmptyStateProp(props)
+      }
+      return (
+        <ComboBoxEmptyState size={size} className={classNames?.emptyState} />
+      )
+    },
+    [classNames?.emptyState, renderEmptyStateProp, size],
+  )
+
   return (
     <AriaComboBox
       className={composeTailwindRenderProps(
@@ -131,6 +171,7 @@ export function ComboBox<T extends ComboBoxItem>({
         styles.container(),
       )}
       shouldFocusWrap
+      allowsEmptyCollection
       {...props}
     >
       {({ isOpen, isDisabled: isComboBoxDisabled }) => (
@@ -229,8 +270,8 @@ export function ComboBox<T extends ComboBoxItem>({
                     styles.list({ ...renderProps, className }),
                 )}
                 dependencies={dependencies}
+                renderEmptyState={renderEmptyState}
               >
-                {/* {children} */}
                 {(item: T) => {
                   if (children) {
                     return children(item)

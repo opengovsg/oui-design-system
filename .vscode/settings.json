@@ -5,6 +5,17 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
   },
+  "tailwindCSS.experimental.configFile": {
+    "apps/storybook/tailwind.css": [
+      "packages/theme/**/*",
+      "packages/components/**/*"
+    ],
+    "packages/theme/src/tailwind.css": [
+      "packages/theme/**/*",
+      "packages/components/**/*"
+    ],
+    "apps/www/app/globals.css": ["apps/www/**/*"]
+  },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "tailwindCSS.experimental.classRegex": [
     [

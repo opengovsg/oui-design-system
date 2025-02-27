@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
-import { expect, waitFor, within } from "@storybook/test"
+import { expect, userEvent, waitFor, within } from "@storybook/test"
 import { ListBoxItem, useFilter } from "react-aria-components"
 
 import { ComboBox, ComboBoxProps } from "../combo-box"
@@ -30,6 +30,19 @@ export const WithSelection: Story = {
   args: {
     inputValue: "Item 1",
     selectedKey: "1",
+  },
+}
+
+export const NoMatch: Story = {
+  args: {},
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.parentElement!)
+    const inputElem = canvas.getByRole("combobox")
+    await userEvent.type(inputElem, "No match")
+
+    waitFor(() => {
+      expect(canvas.getByText("No matching results")).toBeInTheDocument()
+    })
   },
 }
 
