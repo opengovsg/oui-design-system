@@ -48,7 +48,8 @@ npm install @opengovsg/oui @opengovsg/oui-theme tailwindcss react-aria-component
 <Step>
 Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
 
-```css title="styles/tailwind.css"
+```css
+/* styles/tailwind.css */
 @import "@opengovsg/oui-theme/tailwind.css";
 ```
 
@@ -61,12 +62,14 @@ Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
 
 Add your product's theme overrides below the `@opengovsg/oui-theme/tailwind.css` import.
 
-```css title="styles/tailwind.css" {2}
+```css {3}
+/* styles/tailwind.css */
 @import "@opengovsg/oui-theme/tailwind.css";
 @import "./your-product-theme.css";
 ```
 
-```css title="styles/tailwind.css" {4-16}
+```css {5-17}
+/* styles/tailwind.css */
 @import "@opengovsg/oui-theme/tailwind.css";
 
 /* Or add your theme variables directly below `oui-theme`'s import */

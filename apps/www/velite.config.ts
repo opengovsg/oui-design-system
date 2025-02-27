@@ -2,7 +2,7 @@ import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode, { Options } from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
-import { createHighlighter, getHighlighter } from "shiki"
+import { createHighlighter } from "shiki"
 import { visit } from "unist-util-visit"
 import { defineCollection, defineConfig, s } from "velite"
 
@@ -96,7 +96,7 @@ export default defineConfig({
         rehypePrettyCode,
         {
           theme: "aurora-x",
-          getHighlighter,
+          getHighlighter: createHighlighter,
         } as Options,
       ],
       () => (tree) => {
