@@ -34,7 +34,7 @@ export const WithSelection: Story = {
 }
 
 export const NoMatch: Story = {
-  args: {},
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement.parentElement!)
     const inputElem = canvas.getByRole("combobox")
