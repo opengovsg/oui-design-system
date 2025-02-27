@@ -118,14 +118,13 @@ export function ComboBoxEmptyState({
   const styles = comboBoxItemStyles({ size })
   const formatMessage = useMessageFormatter(i18nStrings)
   return (
-    <div
-      aria-hidden
+    <span
       className={styles.container({
         className: cn("cursor-default italic", className),
       })}
     >
       {formatMessage("empty")}
-    </div>
+    </span>
   )
 }
 
