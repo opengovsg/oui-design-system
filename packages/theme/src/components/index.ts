@@ -10,4 +10,5 @@ export * from "./combo-box"
 export * from "./combo-box-fuzzy"
 export * from "./field-group"
 export * from "./field"
+export * from "./banner"
 // Add new theme exports here
