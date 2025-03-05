@@ -93,13 +93,13 @@ const docsLinks: NavItem = {
 }
 
 export const docsConfig: DocsConfig = {
-  storybookUrl: "https://ui.open.gov.sg/storybook",
+  storybookUrl: "https://storybook.oui.open.gov.sg",
   copyright:
     "Copyright © {{date}} Open Government Products. All Rights Reserved.",
   title: "Open UI",
   titleTemplate: "%s | Open UI",
   description: "Accessible UI components for React applications",
-  url: "https://ui.open.gov.sg",
+  url: "https://oui.open.gov.sg",
   repoUrl: "https://github.com/opengovsg/oui-design-system",
   repoBranch: "main",
   get editUrl() {
