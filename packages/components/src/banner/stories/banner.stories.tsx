@@ -30,7 +30,7 @@ export const SizesAndVariants: Story = {
     isDismissable: true,
   },
   parameters: {
-    chromatic: withChromaticModes,
+    chromatic: withChromaticModes(["mobileSmall", "desktop"]),
   },
   render: (args) => (
     <div className="flex flex-col gap-4">
