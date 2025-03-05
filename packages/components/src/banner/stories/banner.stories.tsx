@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { withChromaticModes } from "@oui/chromatic"
 
 import { Banner } from "../banner"
 
@@ -27,6 +28,9 @@ export const IsDismissable: Story = {
 export const SizesAndVariants: Story = {
   args: {
     isDismissable: true,
+  },
+  parameters: {
+    chromatic: withChromaticModes,
   },
   render: (args) => (
     <div className="flex flex-col gap-4">
