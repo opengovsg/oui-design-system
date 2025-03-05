@@ -1,4 +1,5 @@
 import type { Preview } from "@storybook/react"
+import { viewport } from "@oui/chromatic"
 import { themes } from "@storybook/theming"
 import { I18nProvider } from "react-aria-components"
 
@@ -19,11 +20,12 @@ export const decorators: Preview["decorators"] = [
 
 const commonTheme = {
   brandTitle: "@oui",
-  brandUrl: "https://design.open.gov.sg",
+  brandUrl: "https://oui.open.gov.sg",
   brandTarget: "_self",
 }
 
 export const parameters: Preview["parameters"] = {
+  viewport,
   a11y: {
     config: {
       rules: [
@@ -61,6 +63,20 @@ export const parameters: Preview["parameters"] = {
       ...themes.light,
       ...commonTheme,
     },
+  },
+  /**
+   * If tablet view is needed, add it on a per-story basis.
+   * @example
+   * ```
+   * export const SomeStory: Story = {
+   *   parameters: {
+   *     chromatic: withChromaticModes(["mobile", "tablet", "desktop"]),
+   *   }
+   * }
+   * ```
+   */
+  chromatic: {
+    prefersReducedMotion: "reduce",
   },
 }
 
