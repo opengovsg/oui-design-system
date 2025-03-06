@@ -6,14 +6,11 @@ import { AriaComboBoxProps, Key, useFilter } from "react-aria"
 import {
   ComboBoxRenderProps,
   LabelContext,
-  ListBox,
-  ListBoxItem,
   Popover,
   PopoverContext,
   Provider,
   SlotProps,
   UNSTABLE_ListLayout,
-  UNSTABLE_Virtualizer,
 } from "react-aria-components"
 import { useListData } from "react-stately"
 
@@ -89,10 +86,25 @@ function MultipleComboBox<T extends TagFieldItem>({
   })
 
   const filteredItems = useMemo(() => {
-    if (!inputValue) return list.items
+    const selectedKeys = list.selectedKeys
+    if (selectedKeys === "all") {
+      return hideSelectedItems ? [] : list.items
+    }
     const filterFn = defaultFilter ?? contains
-    return list.items.filter((item) => filterFn(item.textValue, inputValue))
-  }, [contains, defaultFilter, inputValue, list.items])
+    return list.items.filter((item) => {
+      if (hideSelectedItems && selectedKeys.has(item.key)) {
+        return false
+      }
+      return filterFn(item.textValue, inputValue)
+    })
+  }, [
+    contains,
+    defaultFilter,
+    hideSelectedItems,
+    inputValue,
+    list.items,
+    list.selectedKeys,
+  ])
 
   const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
     useMultipleSelection({
@@ -264,9 +276,6 @@ function MultipleComboBox<T extends TagFieldItem>({
                   {...getItemProps({ item, index })}
                 >
                   <span>{item.textValue}</span>
-                  {/* <span className="text-sm text-gray-700">
-                  {item.}
-                </span> */}
                 </li>
               ))}
           </ul>
