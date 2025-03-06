@@ -70,8 +70,8 @@ function MultipleComboBox<T extends TagFieldItem>({
   defaultFilter,
   ...props
 }: TagFieldProps<T>) {
-  const [inputValue, setInputValue] = useControllableState({
-    defaultValue: props.defaultInputValue ?? "",
+  const [inputValue, setInputValue] = useControllableState<string>({
+    defaultValue: props.defaultInputValue,
     value: props.inputValue,
     onChange: props.onInputChange,
   })
@@ -82,18 +82,17 @@ function MultipleComboBox<T extends TagFieldItem>({
   const listBoxRef = useRef<HTMLUListElement>(null)
   const labelRef = useRef<HTMLLabelElement>(null)
 
-  // const state = useListState({
-  //   items: props.items,
-  //   defaultSelectedKeys: props.defaultSelectedKeys,
-  //   selectedKeys: props.selectedKeys,
-  //   selectionMode: "multiple",
-  // })
-
   const list = useListData<TagFieldItem>({
     initialItems: Array.from(props.items ?? props.defaultItems ?? []),
     initialSelectedKeys: props.defaultSelectedKeys,
     getKey: (item) => item.key,
   })
+
+  const filteredItems = useMemo(() => {
+    if (!inputValue) return list.items
+    const filterFn = defaultFilter ?? contains
+    return list.items.filter((item) => filterFn(item.textValue, inputValue))
+  }, [contains, defaultFilter, inputValue, list.items])
 
   const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
     useMultipleSelection({
@@ -113,20 +112,7 @@ function MultipleComboBox<T extends TagFieldItem>({
       },
     })
 
-  const filteredItems = useMemo(() => {
-    const items = list.items
-    const filter = defaultFilter ?? contains
-    const { selectedKeys } = list
-    if (selectedKeys === "all") return []
-    return items.filter((item) => {
-      if (hideSelectedItems) {
-        return !selectedKeys.has(item.key) && filter(item.textValue, inputValue)
-      }
-      return filter(item.textValue, inputValue)
-    })
-  }, [list, defaultFilter, hideSelectedItems, contains, inputValue])
-
-  // Make menu width match input + button
+  // Make menu width match field group
   const [menuWidth, setMenuWidth] = useState<string | null>(null)
   const onResize = useCallback(() => {
     if (fieldRef.current) {
@@ -151,27 +137,9 @@ function MultipleComboBox<T extends TagFieldItem>({
     selectedItem,
   } = useCombobox({
     items: filteredItems,
-    itemToString(item) {
-      return item ? item.textValue : ""
-    },
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
     selectedItem: null,
     inputValue,
-    // stateReducer(state, actionAndChanges) {
-    //   const { changes, type } = actionAndChanges
-
-    //   switch (type) {
-    //     case useCombobox.stateChangeTypes.InputKeyDownEnter:
-    //     case useCombobox.stateChangeTypes.ItemClick:
-    //       return {
-    //         ...changes,
-    //         isOpen: true, // keep the menu open after selection.
-    //         highlightedIndex: 0, // with the first option highlighted.
-    //       }
-    //     default:
-    //       return changes
-    //   }
-    // },
     onStateChange({
       inputValue: newInputValue,
       type,
@@ -185,13 +153,11 @@ function MultipleComboBox<T extends TagFieldItem>({
             list.setSelectedKeys(
               new Set([...list.selectedKeys, newSelectedItem.key]),
             )
-            setInputValue("")
           }
+          setInputValue("")
           break
-
         case useCombobox.stateChangeTypes.InputChange:
           setInputValue(newInputValue ?? "")
-
           break
         default:
           break
@@ -258,9 +224,15 @@ function MultipleComboBox<T extends TagFieldItem>({
               <input
                 placeholder="Best book ever"
                 className="w-full"
-                {...getInputProps(
-                  getDropdownProps({ preventKeyAction: isOpen }),
-                )}
+                {...getInputProps({
+                  ...getDropdownProps({ preventKeyAction: isOpen }),
+                  // Somehow adding this will allow the input to be updated properly, else
+                  // it may sometimes lag behind a single state.
+                  // Was also in the previous downshift docs but they removed it for some reason.
+                  // See https://github.com/downshift-js/downshift/pull/1576/files#diff-d32b6994832dda99d96f207e964a0ef27102128c532ea9492949f21ec0cf58d3
+                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
+                    setInputValue(e.target.value),
+                })}
               />
               <button
                 aria-label="toggle menu"
@@ -273,7 +245,6 @@ function MultipleComboBox<T extends TagFieldItem>({
             </div>
           </div>
         </div>
-        {/* <UNSTABLE_Virtualizer layout={layout}> */}
         <Popover isOpen={isOpen} ref={popoverRef}>
           <ul
             className={`w-(--trigger-width) absolute z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md ${
@@ -300,36 +271,12 @@ function MultipleComboBox<T extends TagFieldItem>({
               ))}
           </ul>
         </Popover>
+        {/* <UNSTABLE_Virtualizer layout={layout}> */}
         {/* </UNSTABLE_Virtualizer> */}
       </div>
     </Provider>
   )
 }
-
-// ;<ul
-//   className={`w-inherit absolute z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md ${
-//     !(isOpen && filteredItems.length) && "hidden"
-//   }`}
-//   {...getMenuProps()}
-// >
-//   {isOpen &&
-//     filteredItems.map((item, index) => (
-//       <li
-//         className={cn(
-//           highlightedIndex === index && "bg-blue-300",
-//           selectedItem?.key === item.key && "font-bold",
-//           "flex flex-col px-3 py-2 shadow-sm",
-//         )}
-//         key={item.key}
-//         {...getItemProps({ item, index })}
-//       >
-//         <span>{item.textValue}</span>
-//         {/* <span className="text-sm text-gray-700">
-//                   {item.}
-//                 </span> */}
-//       </li>
-//     ))}
-// </ul>
 
 export function TagField() {
   const books: TagFieldItem[] = [
@@ -339,166 +286,6 @@ export function TagField() {
     { key: "The Great Gatsby", textValue: "The Great Gatsby" },
   ]
 
-  // function MultipleComboBox() {
-  //   const [inputValue, setInputValue] = useState("")
-  //   const [selectedItems, setSelectedItems] = useState(initialSelectedItems)
-  //   const { contains } = useFilter({ sensitivity: "base" })
-  //   const items = useMemo(
-  //     () => books.filter((book) => contains(book.title, inputValue)),
-  //     [contains, inputValue],
-  //   )
-  //   const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
-  //     useMultipleSelection({
-  //       selectedItems,
-  //       onStateChange({ selectedItems: newSelectedItems, type }) {
-  //         switch (type) {
-  //           case useMultipleSelection.stateChangeTypes
-  //             .SelectedItemKeyDownBackspace:
-  //           case useMultipleSelection.stateChangeTypes
-  //             .SelectedItemKeyDownDelete:
-  //           case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-  //           case useMultipleSelection.stateChangeTypes
-  //             .FunctionRemoveSelectedItem:
-  //             setSelectedItems(newSelectedItems)
-  //             break
-  //           default:
-  //             break
-  //         }
-  //       },
-  //     })
-  //   const {
-  //     isOpen,
-  //     getToggleButtonProps,
-  //     getLabelProps,
-  //     getMenuProps,
-  //     getInputProps,
-  //     highlightedIndex,
-  //     getItemProps,
-  //     selectedItem,
-  //   } = useCombobox({
-  //     items,
-  //     itemToString(item) {
-  //       return item ? item.title : ""
-  //     },
-  //     defaultHighlightedIndex: 0, // after selection, highlight the first item.
-  //     selectedItem: null,
-  //     inputValue,
-  //     stateReducer(state, actionAndChanges) {
-  //       const { changes, type } = actionAndChanges
-
-  //       switch (type) {
-  //         case useCombobox.stateChangeTypes.InputKeyDownEnter:
-  //         case useCombobox.stateChangeTypes.ItemClick:
-  //           return {
-  //             ...changes,
-  //             isOpen: true, // keep the menu open after selection.
-  //             highlightedIndex: 0, // with the first option highlighted.
-  //           }
-  //         default:
-  //           return changes
-  //       }
-  //     },
-  //     onStateChange({
-  //       inputValue: newInputValue,
-  //       type,
-  //       selectedItem: newSelectedItem,
-  //     }) {
-  //       switch (type) {
-  //         case useCombobox.stateChangeTypes.InputKeyDownEnter:
-  //         case useCombobox.stateChangeTypes.ItemClick:
-  //         case useCombobox.stateChangeTypes.InputBlur:
-  //           if (newSelectedItem) {
-  //             setSelectedItems([...selectedItems, newSelectedItem])
-  //             setInputValue("")
-  //           }
-  //           break
-
-  //         case useCombobox.stateChangeTypes.InputChange:
-  //           setInputValue(newInputValue)
-
-  //           break
-  //         default:
-  //           break
-  //       }
-  //     },
-  //   })
-
-  //   return (
-  //     <div className="w-[592px]">
-  //       <div className="flex flex-col gap-1">
-  //         <label className="w-fit" {...getLabelProps()}>
-  //           Pick some books:
-  //         </label>
-  //         <div className="inline-flex flex-wrap items-center gap-2 bg-white p-1.5 shadow-sm">
-  //           {selectedItems.map(
-  //             function renderSelectedItem(selectedItemForRender, index) {
-  //               return (
-  //                 <span
-  //                   className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
-  //                   key={`selected-item-${index}`}
-  //                   {...getSelectedItemProps({
-  //                     selectedItem: selectedItemForRender,
-  //                     index,
-  //                   })}
-  //                 >
-  //                   {selectedItemForRender.title}
-  //                   <span
-  //                     className="cursor-pointer px-1"
-  //                     onClick={(e) => {
-  //                       e.stopPropagation()
-  //                       removeSelectedItem(selectedItemForRender)
-  //                     }}
-  //                   >
-  //                     &#10005;
-  //                   </span>
-  //                 </span>
-  //               )
-  //             },
-  //           )}
-  //           <div className="flex grow gap-0.5">
-  //             <input
-  //               placeholder="Best book ever"
-  //               className="w-full"
-  //               {...getInputProps(
-  //                 getDropdownProps({ preventKeyAction: isOpen }),
-  //               )}
-  //             />
-  //             <button
-  //               aria-label="toggle menu"
-  //               className="px-2"
-  //               type="button"
-  //               {...getToggleButtonProps()}
-  //             >
-  //               &#8595;
-  //             </button>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       <ul
-  //         className={`w-inherit absolute z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md ${
-  //           !(isOpen && items.length) && "hidden"
-  //         }`}
-  //         {...getMenuProps()}
-  //       >
-  //         {isOpen &&
-  //           items.map((item, index) => (
-  //             <li
-  //               className={cn(
-  //                 highlightedIndex === index && "bg-blue-300",
-  //                 selectedItem === item && "font-bold",
-  //                 "flex flex-col px-3 py-2 shadow-sm",
-  //               )}
-  //               key={`${item.value}${index}`}
-  //               {...getItemProps({ item, index })}
-  //             >
-  //               <span>{item.title}</span>
-  //               <span className="text-sm text-gray-700">{item.author}</span>
-  //             </li>
-  //           ))}
-  //       </ul>
-  //     </div>
-  //   )
-  // }
   return (
     <MultipleComboBox
       items={[...Array(3000)].map((_, i) => ({
