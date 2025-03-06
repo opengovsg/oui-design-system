@@ -47,11 +47,11 @@ type TagFieldItem = {
 interface TagFieldRenderProps<T extends object>
   extends ComboBoxRenderProps,
     Pick<
-      UseMultipleSelectionReturnValue<Key>,
+      UseMultipleSelectionReturnValue<T>,
       "getSelectedItemProps" | "removeSelectedItem"
     > {
   highlightedIndex?: number
-  selectedItems: Key[]
+  selectedItems: T[]
   items?: T[]
 }
 
@@ -97,231 +97,6 @@ export interface TagFieldProps<T extends object>
   defaultSelectedKeys?: Key[]
 }
 
-export function MultipleComboBox<T extends TagFieldItem>({
-  hideSelectedItems = true,
-  defaultFilter,
-  ...props
-}: TagFieldProps<T>) {
-  const [inputValue, setInputValue] = useControllableState<string>({
-    defaultValue: props.defaultInputValue ?? "",
-    value: props.inputValue,
-    onChange: props.onInputChange,
-  })
-  const { contains } = useFilter({ sensitivity: "base" })
-
-  const fieldRef = useRef<HTMLDivElement>(null)
-  const popoverRef = useRef<HTMLElement>(null)
-  const listBoxRef = useRef<HTMLUListElement>(null)
-  const labelRef = useRef<HTMLLabelElement>(null)
-
-  const list = useListData<TagFieldItem>({
-    initialItems: Array.from(props.items ?? props.defaultItems ?? []),
-    initialSelectedKeys: props.defaultSelectedKeys,
-    getKey: (item) => item.key,
-  })
-
-  const filteredItems = useMemo(() => {
-    const selectedKeys = list.selectedKeys
-    if (selectedKeys === "all") {
-      return hideSelectedItems ? [] : list.items
-    }
-    const filterFn = defaultFilter ?? contains
-    return list.items.filter((item) => {
-      if (hideSelectedItems && selectedKeys.has(item.key)) {
-        return false
-      }
-      return filterFn(item.textValue, inputValue)
-    })
-  }, [
-    contains,
-    defaultFilter,
-    hideSelectedItems,
-    inputValue,
-    list.items,
-    list.selectedKeys,
-  ])
-
-  const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
-    useMultipleSelection({
-      selectedItems: [...list.selectedKeys],
-      onStateChange({ selectedItems: newSelectedItems, type }) {
-        switch (type) {
-          case useMultipleSelection.stateChangeTypes
-            .SelectedItemKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-          case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-            list.setSelectedKeys(new Set(newSelectedItems))
-            break
-          default:
-            break
-        }
-      },
-    })
-
-  // Make menu width match field group
-  const [menuWidth, setMenuWidth] = useState<string | null>(null)
-  const onResize = useCallback(() => {
-    if (fieldRef.current) {
-      const fieldRect = fieldRef.current.getBoundingClientRect()
-      setMenuWidth(fieldRect.right - fieldRect.left + "px")
-    }
-  }, [])
-
-  useResizeObserver({
-    ref: fieldRef,
-    onResize,
-  })
-
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    highlightedIndex,
-    getItemProps,
-    selectedItem,
-  } = useCombobox({
-    items: filteredItems,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
-    selectedItem: null,
-    inputValue,
-    onStateChange({
-      inputValue: newInputValue,
-      type,
-      selectedItem: newSelectedItem,
-    }) {
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur:
-          if (newSelectedItem) {
-            list.setSelectedKeys(
-              new Set([...list.selectedKeys, newSelectedItem.key]),
-            )
-          }
-          setInputValue("")
-          break
-        case useCombobox.stateChangeTypes.InputChange:
-          setInputValue(newInputValue ?? "")
-          break
-        default:
-          break
-      }
-    },
-  })
-  const layout = useMemo(() => {
-    return new UNSTABLE_ListLayout({
-      estimatedRowHeight: 48,
-    })
-  }, [])
-
-  return (
-    <Provider
-      values={[
-        [LabelContext, { ...getLabelProps({ ref: labelRef }) }],
-        [
-          PopoverContext,
-          {
-            ref: popoverRef,
-            triggerRef: fieldRef,
-            scrollRef: listBoxRef,
-            placement: "bottom start",
-            isNonModal: true,
-            trigger: "TagField",
-            style: { "--trigger-width": menuWidth } as React.CSSProperties,
-          },
-        ],
-      ]}
-    >
-      <div className="w-[592px]">
-        <div className="flex flex-col gap-1">
-          <Label>hehe</Label>
-          <div
-            className="inline-flex flex-wrap items-center gap-2 bg-white p-1.5 shadow-sm"
-            ref={fieldRef}
-          >
-            {[...list.selectedKeys].map(
-              function renderSelectedItem(selectedItemForRender, index) {
-                return (
-                  <span
-                    className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
-                    key={`selected-item-${index}`}
-                    {...getSelectedItemProps({
-                      selectedItem: selectedItemForRender,
-                      index,
-                    })}
-                  >
-                    {selectedItemForRender.toString()}
-                    <span
-                      className="cursor-pointer px-1"
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        removeSelectedItem(selectedItemForRender)
-                      }}
-                    >
-                      &#10005;
-                    </span>
-                  </span>
-                )
-              },
-            )}
-            <div className="flex grow gap-0.5">
-              <input
-                placeholder="Best book ever"
-                className="w-full"
-                {...getInputProps({
-                  ...getDropdownProps({ preventKeyAction: isOpen }),
-                  // Somehow adding this will allow the input to be updated properly, else
-                  // it may sometimes lag behind a single state.
-                  // Was also in the previous downshift docs but they removed it for some reason.
-                  // See https://github.com/downshift-js/downshift/pull/1576/files#diff-d32b6994832dda99d96f207e964a0ef27102128c532ea9492949f21ec0cf58d3
-                  onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setInputValue(e.target.value),
-                })}
-              />
-              <button
-                aria-label="toggle menu"
-                className="px-2"
-                type="button"
-                {...getToggleButtonProps()}
-              >
-                &#8595;
-              </button>
-            </div>
-          </div>
-        </div>
-        <Popover isOpen={isOpen} ref={popoverRef}>
-          <ul
-            className={`w-(--trigger-width) absolute z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md ${
-              !(isOpen && filteredItems.length) && "hidden"
-            }`}
-            {...getMenuProps({ ref: listBoxRef }, { suppressRefError: true })}
-          >
-            {isOpen &&
-              filteredItems.map((item, index) => (
-                <li
-                  className={cn(
-                    highlightedIndex === index && "bg-blue-300",
-                    selectedItem?.key === item.key && "font-bold",
-                    "flex flex-col px-3 py-2 shadow-sm",
-                  )}
-                  key={item.key}
-                  {...getItemProps({ item, index })}
-                >
-                  <span>{item.textValue}</span>
-                </li>
-              ))}
-          </ul>
-        </Popover>
-        {/* <UNSTABLE_Virtualizer layout={layout}> */}
-        {/* </UNSTABLE_Virtualizer> */}
-      </div>
-    </Provider>
-  )
-}
-
 interface TagFieldChipProps<T = any> extends Partial<TagFieldChipContextValue> {
   item: T
   index: number
@@ -335,27 +110,27 @@ interface TagFieldChipContextValue
 export const TagFieldChipListContext =
   createContext<ContextValue<TagFieldChipContextValue, HTMLLIElement>>(null)
 
-const TagFieldChip = forwardRef<"span", TagFieldChipProps>(
-  ({ item, index }, ref) => {
-    return (
-      <span
-        className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
-        key={`selected-item-${index}`}
-      >
-        {selectedItemForRender.toString()}
-        <span
-          className="cursor-pointer px-1"
-          onClick={(e) => {
-            e.stopPropagation()
-            removeSelectedItem(selectedItemForRender)
-          }}
-        >
-          &#10005;
-        </span>
-      </span>
-    )
-  },
-)
+// const TagFieldChip = forwardRef<"span", TagFieldChipProps>(
+//   ({ item, index }, ref) => {
+//     return (
+//       <span
+//         className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
+//         key={`selected-item-${index}`}
+//       >
+//         {selectedItemForRender.toString()}
+//         <span
+//           className="cursor-pointer px-1"
+//           onClick={(e) => {
+//             e.stopPropagation()
+//             removeSelectedItem(selectedItemForRender)
+//           }}
+//         >
+//           &#10005;
+//         </span>
+//       </span>
+//     )
+//   },
+// )
 
 export function TagField() {
   const books: TagFieldItem[] = [
@@ -375,7 +150,7 @@ export function TagField() {
       {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
         <>
           <Label>hehe</Label>
-          <FieldGroup>
+          <FieldGroup className="flex-wrap gap-1">
             {selectedItems.map((selectedItem, index) => {
               return (
                 <span
@@ -386,7 +161,7 @@ export function TagField() {
                     index,
                   })}
                 >
-                  {selectedItem.toString()}
+                  {selectedItem.textValue}
                   <span
                     className="cursor-pointer px-1"
                     onClick={(e) => {
@@ -399,7 +174,7 @@ export function TagField() {
                 </span>
               )
             })}
-            <Input />
+            <Input className="min-w-[56px]" />
             <TagFieldTrigger>&#8595;</TagFieldTrigger>
           </FieldGroup>
           <Popover>
@@ -418,13 +193,13 @@ export function TagField() {
 interface TagFieldState<T = any>
   extends Pick<UseComboboxReturnValue<T>, "getItemProps">,
     Pick<
-      UseMultipleSelectionReturnValue<Key>,
+      UseMultipleSelectionReturnValue<T>,
       "getSelectedItemProps" | "removeSelectedItem"
     > {
   inputValue: string
   isOpen: boolean
   highlightedIndex: number
-  selectedKeys: Selection
+  selectedItems: T[]
 }
 
 interface TagFieldTriggerProps extends SlotProps {}
@@ -519,6 +294,19 @@ function TagFieldRoot<T extends TagFieldItem>({
     value: props.inputValue,
     onChange: props.onInputChange,
   })
+
+  const [items] = useControllableState<T[]>({
+    defaultValue: Array.from(props.defaultItems ?? []),
+    value: props.items,
+  })
+  const [selectedItems, setSelectedItems] = useControllableState<T[]>({
+    defaultValue: [],
+  })
+  const selectedKeys = useMemo(
+    () => new Set(selectedItems.map((item) => item.key)),
+    [selectedItems],
+  )
+
   const { contains } = useFilter({ sensitivity: "base" })
 
   const fieldRef = useRef<HTMLDivElement>(null)
@@ -527,20 +315,9 @@ function TagFieldRoot<T extends TagFieldItem>({
   const labelRef = useRef<HTMLLabelElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-
-  const list = useListData({
-    initialItems: Array.from(props.items ?? props.defaultItems ?? []),
-    initialSelectedKeys: props.defaultSelectedKeys,
-    getKey: (item) => item.key,
-  })
-
   const filteredItems = useMemo(() => {
-    const selectedKeys = list.selectedKeys
-    if (selectedKeys === "all") {
-      return hideSelectedItems ? [] : list.items
-    }
     const filterFn = defaultFilter ?? contains
-    return list.items.filter((item) => {
+    return items.filter((item) => {
       if (hideSelectedItems && selectedKeys.has(item.key)) {
         return false
       }
@@ -551,13 +328,13 @@ function TagFieldRoot<T extends TagFieldItem>({
     defaultFilter,
     hideSelectedItems,
     inputValue,
-    list.items,
-    list.selectedKeys,
+    items,
+    selectedKeys,
   ])
 
   const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
     useMultipleSelection({
-      selectedItems: [...list.selectedKeys],
+      selectedItems,
       onStateChange({ selectedItems: newSelectedItems, type }) {
         switch (type) {
           case useMultipleSelection.stateChangeTypes
@@ -565,7 +342,7 @@ function TagFieldRoot<T extends TagFieldItem>({
           case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
           case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
           case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-            list.setSelectedKeys(new Set(newSelectedItems))
+            setSelectedItems(newSelectedItems ?? [])
             break
           default:
             break
@@ -610,9 +387,7 @@ function TagFieldRoot<T extends TagFieldItem>({
         case useCombobox.stateChangeTypes.ItemClick:
         case useCombobox.stateChangeTypes.InputBlur:
           if (newSelectedItem) {
-            list.setSelectedKeys(
-              new Set([...list.selectedKeys, newSelectedItem.key]),
-            )
+            setSelectedItems((prev) => [...prev, newSelectedItem])
           }
           setInputValue("")
           break
@@ -633,7 +408,7 @@ function TagFieldRoot<T extends TagFieldItem>({
       highlightedIndex,
       getSelectedItemProps,
       removeSelectedItem,
-      selectedKeys: list.selectedKeys,
+      selectedItems,
     }
   }, [
     getItemProps,
@@ -641,7 +416,7 @@ function TagFieldRoot<T extends TagFieldItem>({
     highlightedIndex,
     inputValue,
     isOpen,
-    list.selectedKeys,
+    selectedKeys,
     removeSelectedItem,
   ])
 
@@ -713,7 +488,7 @@ function TagFieldRoot<T extends TagFieldItem>({
             highlightedIndex,
             getSelectedItemProps,
             removeSelectedItem,
-            selectedItems: [...list.selectedKeys],
+            selectedItems,
           })
         : children}
     </Provider>
