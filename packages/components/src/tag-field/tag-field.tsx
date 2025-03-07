@@ -53,6 +53,11 @@ import {
 import { cn } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
 import {
+  useVirtualizer,
+  VirtualItem,
+  Virtualizer,
+} from "@tanstack/react-virtual"
+import {
   UseComboboxPropGetters,
   UseMultipleSelectionReturnValue,
 } from "downshift"
@@ -176,9 +181,16 @@ export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
           <FieldError>{props.errorMessage}</FieldError>
           <Popover>
             <TagFieldList<T>>
-              {({ item, index }) => (
-                <TagFieldListItem item={item} index={index} key={item.id} />
-              )}
+              {({ item, index, key, style }) => {
+                return (
+                  <TagFieldListItem
+                    item={item}
+                    index={index}
+                    key={key}
+                    style={style}
+                  />
+                )
+              }}
             </TagFieldList>
           </Popover>
         </>
@@ -195,6 +207,8 @@ interface TagFieldTriggerContextValue
 interface TagFieldListRenderProps<T> {
   item: T
   index: number
+  key: VirtualItem["key"]
+  style: React.CSSProperties
 }
 
 interface TagFieldListProps<T extends TagFieldItem>
@@ -202,9 +216,6 @@ interface TagFieldListProps<T extends TagFieldItem>
   className?: string
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
-interface TagFieldListContextValue
-  extends SlotProps,
-    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {}
 
 export const TagFieldStateContext = createContext<
   (TagFieldState<any> & { isOpen: boolean }) | null
@@ -212,8 +223,14 @@ export const TagFieldStateContext = createContext<
 export const TagFieldTriggerContext = createContext<
   ContextValue<TagFieldTriggerContextValue, HTMLButtonElement>
 >({})
+
+interface TagFieldListContextValue
+  extends SlotProps,
+    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {
+  rowVirtualizer: Virtualizer<HTMLElement, Element>
+}
 export const TagFieldListContext =
-  createContext<ContextValue<AriaListBoxOptions<any>, HTMLUListElement>>(null)
+  createContext<ContextValue<TagFieldListContextValue, HTMLUListElement>>(null)
 
 type TagFieldListItemContextValue<T extends TagFieldItem> =
   TagFieldAria<T>["listItemProps"]
@@ -230,32 +247,45 @@ const TagFieldListInner = <T extends TagFieldItem>(
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
-  const { items, isOpen } = useContext(TagFieldStateContext)!
+  const { items } = useContext(TagFieldStateContext)!
 
-  const { slot, className, ...rest } = props
+  const { slot, className, rowVirtualizer, ...rest } = props
 
-  if (!isOpen) {
-    return null
-  }
   return (
     <ul
       slot={slot ?? undefined}
       ref={ref}
       {...rest}
       className={cn(
-        "w-(--trigger-width) absolute z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md",
+        "w-(--trigger-width) relative z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md",
         className,
       )}
     >
-      {items?.map((item, index) => {
-        if (typeof props.children === "function") {
-          return props.children({
-            item,
-            index,
-          })
-        }
-        return props.children
-      })}
+      {props.children !== undefined && typeof props.children !== "function" ? (
+        props.children
+      ) : (
+        <>
+          <li
+            key="total-size"
+            style={{ height: rowVirtualizer?.getTotalSize() }}
+          />
+          {rowVirtualizer?.getVirtualItems().map((virtualRow) => {
+            const childProps = {
+              item: items[virtualRow.index],
+              index: virtualRow.index,
+              key: virtualRow.key,
+              style: {
+                height: virtualRow.size,
+                transform: `translateY(${virtualRow.start}px)`,
+              },
+            }
+            if (typeof props.children === "function") {
+              return props.children(childProps)
+            }
+            return <TagFieldListItem {...childProps} key={childProps.key} />
+          })}
+        </>
+      )}
     </ul>
   )
 }
@@ -339,6 +369,7 @@ function TagFieldRoot<T extends TagFieldItem>({
     errorMessageProps,
     chipsProps,
     isOpen,
+    rowVirtualizer,
     ...validation
   } = useTagField(
     {
@@ -384,7 +415,7 @@ function TagFieldRoot<T extends TagFieldItem>({
       values={[
         [TagFieldStateContext, { ...state, isOpen }],
         [LabelContext, labelProps],
-        [TagFieldListContext, listBoxProps],
+        [TagFieldListContext, { ...listBoxProps, rowVirtualizer }],
         [TagFieldTriggerContext, buttonProps],
         [
           PopoverContext,
@@ -439,6 +470,8 @@ function TagFieldRoot<T extends TagFieldItem>({
 interface TagFieldListItemProps<T extends TagFieldItem> {
   item: T
   index: number
+  className?: string
+  style?: React.CSSProperties
 }
 
 const TagFieldListItemInner = <T extends TagFieldItem>(
@@ -454,13 +487,14 @@ const TagFieldListItemInner = <T extends TagFieldItem>(
   return (
     <li
       ref={ref}
-      className={cn(
-        highlightedIndex === index && "bg-blue-300",
-        "flex flex-col px-3 py-2 shadow-sm",
-      )}
       key={itemToKey(item)}
       {...getItemProps({ item, index })}
       {...props}
+      className={cn(
+        highlightedIndex === index && "bg-blue-300",
+        "absolute left-0 top-0 flex w-full flex-col px-3 py-2 shadow-sm",
+        props.className,
+      )}
     >
       <span>{itemToText(item)}</span>
     </li>

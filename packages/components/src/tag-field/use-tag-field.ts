@@ -1,8 +1,10 @@
-import { InputHTMLAttributes, useMemo, useRef } from "react"
+import { InputHTMLAttributes, useCallback, useMemo, useRef } from "react"
 import { mergeProps } from "@react-aria/utils"
 import { DOMAttributes, RefObject, ValidationResult } from "@react-types/shared"
+import { useVirtualizer, Virtualizer } from "@tanstack/react-virtual"
 import {
   useCombobox,
+  UseComboboxPropGetters,
   UseComboboxReturnValue,
   useMultipleSelection,
   UseMultipleSelectionReturnValue,
@@ -35,7 +37,7 @@ export interface TagFieldAria<T> extends ValidationResult {
   /** Props for the combo box input element. */
   inputProps: InputHTMLAttributes<HTMLInputElement>
   /** Props for the list box */
-  listBoxProps: AriaListBoxOptions<T>
+  listBoxProps: ReturnType<UseComboboxPropGetters<T>["getMenuProps"]>
 
   /** Props for the list box items. */
   listItemProps: Pick<
@@ -58,6 +60,8 @@ export interface TagFieldAria<T> extends ValidationResult {
 
   /** Whether the popover is open. */
   isOpen: boolean
+
+  rowVirtualizer: Virtualizer<HTMLElement, Element>
 }
 
 /**
@@ -120,6 +124,17 @@ export function useTagField<T>(
     return new Set(disabledKeys)
   }, [disabledKeys])
 
+  const rowVirtualizer = useVirtualizer({
+    count: items.length,
+    getScrollElement: () => listBoxRef.current,
+    estimateSize: () => 44,
+    getItemKey: useCallback(
+      (index: number) => itemToKey(items[index]),
+      [itemToKey, items],
+    ),
+    overscan: 2,
+  })
+
   const {
     isOpen,
     getToggleButtonProps,
@@ -137,18 +152,29 @@ export function useTagField<T>(
     },
     isItemDisabled: (item) => disabledKeysSet.has(itemToKey(item)),
     items,
+    scrollIntoView: () => {},
+    onHighlightedIndexChange: ({ highlightedIndex, type }) => {
+      if (
+        type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
+        highlightedIndex >= 0
+      ) {
+        rowVirtualizer.scrollToIndex(highlightedIndex)
+      }
+    },
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
     selectedItem: null,
     inputValue,
     stateReducer(_state, actionAndChanges) {
       const { changes, type } = actionAndChanges
-
       switch (type) {
-        case useCombobox.stateChangeTypes.InputBlur:
+        case useCombobox.stateChangeTypes.ItemClick:
+        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.InputBlur: {
           return {
             ...changes,
             isOpen: shouldCloseOnBlur === false ? true : changes.isOpen,
           }
+        }
         default:
           return changes
       }
@@ -159,9 +185,9 @@ export function useTagField<T>(
       selectedItem: newSelectedItem,
     }) {
       switch (type) {
+        case useCombobox.stateChangeTypes.InputBlur:
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur: {
+        case useCombobox.stateChangeTypes.ItemClick: {
           if (newSelectedItem) {
             setSelectedItems((prev) => [...new Set([...prev, newSelectedItem])])
           }
@@ -232,5 +258,6 @@ export function useTagField<T>(
       getSelectedItemProps,
       removeSelectedItem,
     },
+    rowVirtualizer,
   }
 }

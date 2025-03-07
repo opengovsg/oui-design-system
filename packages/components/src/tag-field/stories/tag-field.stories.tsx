@@ -112,3 +112,12 @@ export const WithDescription: Story = {
     description: "Pick your favourite flavour",
   },
 }
+
+export const Virtualized: Story = {
+  args: {
+    defaultItems: [...Array(3000)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+    })),
+  },
+}
