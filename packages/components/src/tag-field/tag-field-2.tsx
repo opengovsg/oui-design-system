@@ -61,6 +61,7 @@ import { AriaComboBoxProps, Key, useFilter } from "react-aria"
 import {
   ComboBoxRenderProps,
   ContextValue,
+  FieldErrorContext,
   FormContext,
   GroupContext,
   InputContext,
@@ -69,17 +70,22 @@ import {
   PopoverContext,
   Provider,
   SlotProps,
+  TextContext,
   useContextProps,
   useSlottedContext,
 } from "react-aria-components"
 
-import { FieldGroup, Label } from "../field"
+import { Description, FieldGroup, Label } from "../field"
 import { Input } from "../input"
 import { RenderProps } from "../system/types"
-import { forwardRef, forwardRefGeneric } from "../system/utils"
+import {
+  forwardRef,
+  forwardRefGeneric,
+  removeDataAttributes,
+} from "../system/utils"
 import { TagFieldProps } from "./types"
 import { TagFieldAria, useTagField } from "./use-tag-field"
-import { useTagFieldState } from "./use-tag-field-state"
+import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
 export type TagFieldItem = {
   textValue: string
@@ -142,13 +148,14 @@ interface TagFieldProps2<T> {
   onInputChange?: (value: string) => void
 }
 
-export function TagField<T extends object>(props: TagFieldProps2<T>) {
+export function TagField<T extends object>(props: TagFieldProps<T>) {
   return (
     <TagFieldRoot
       defaultItems={[...Array(100)].map((_, i) => ({
         id: String(i),
         textValue: `Item ${i}`,
       }))}
+      {...props}
     >
       {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
         <>
@@ -180,6 +187,7 @@ export function TagField<T extends object>(props: TagFieldProps2<T>) {
             <Input className="min-w-[56px]" />
             <TagFieldTrigger>&#8595;</TagFieldTrigger>
           </FieldGroup>
+          {props.description && <Description>{props.description}</Description>}
           <Popover>
             <TagFieldList<T>>
               {({ item, index }) => (
@@ -191,18 +199,6 @@ export function TagField<T extends object>(props: TagFieldProps2<T>) {
       )}
     </TagFieldRoot>
   )
-}
-
-interface TagFieldState<T extends object>
-  extends Pick<UseComboboxReturnValue<T>, "getItemProps">,
-    Pick<
-      UseMultipleSelectionReturnValue<T>,
-      "getSelectedItemProps" | "removeSelectedItem"
-    > {
-  inputValue: string
-  isOpen: boolean
-  highlightedIndex: number
-  selectedItems: T[]
 }
 
 interface TagFieldTriggerProps extends SlotProps {}
@@ -240,9 +236,7 @@ export const TagFieldListContext =
     null,
   )
 
-type TagFieldListItemContextValue<T extends object> = Required<
-  Pick<TagFieldProps<T>, "itemToKey" | "itemToText">
-> &
+type TagFieldListItemContextValue<T extends object> =
   TagFieldAria<T>["listItemProps"]
 
 export const TagFieldListItemContext =
@@ -306,6 +300,7 @@ const TagFieldTrigger = forwardRef<"button", TagFieldTriggerProps>(
 
 function TagFieldRoot<T extends TagFieldItem>({
   children,
+  description,
   ...props
 }: TagFieldRootProps<T>) {
   const { itemToKey: defaultItemToKey, itemToText: defaultItemToText } = props
@@ -372,6 +367,7 @@ function TagFieldRoot<T extends TagFieldItem>({
     ...validation
   } = useTagField(
     {
+      ...removeDataAttributes(props),
       itemToKey,
       itemToText,
       inputRef,
@@ -384,24 +380,6 @@ function TagFieldRoot<T extends TagFieldItem>({
     },
     state,
   )
-
-  // const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
-  //   useMultipleSelection({
-  //     selectedItems,
-  //     onStateChange({ selectedItems: newSelectedItems, type }) {
-  //       switch (type) {
-  //         case useMultipleSelection.stateChangeTypes
-  //           .SelectedItemKeyDownBackspace:
-  //         case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-  //         case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-  //         case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-  //           setSelectedItems(newSelectedItems ?? [])
-  //           break
-  //         default:
-  //           break
-  //       }
-  //     },
-  //   })
 
   // Make menu width match field group
   const [menuWidth, setMenuWidth] = useState<string | null>(null)
@@ -416,68 +394,6 @@ function TagFieldRoot<T extends TagFieldItem>({
     ref: fieldRef,
     onResize,
   })
-
-  // const {
-  //   isOpen,
-  //   getToggleButtonProps,
-  //   getLabelProps,
-  //   getMenuProps,
-  //   getInputProps,
-  //   highlightedIndex,
-  //   getItemProps,
-  // } = useCombobox({
-  //   items,
-  //   defaultHighlightedIndex: 0, // after selection, highlight the first item.
-  //   selectedItem: null,
-  //   inputValue,
-  //   onStateChange({
-  //     inputValue: newInputValue,
-  //     type,
-  //     selectedItem: newSelectedItem,
-  //   }) {
-  //     switch (type) {
-  //       case useCombobox.stateChangeTypes.InputKeyDownEnter:
-  //       case useCombobox.stateChangeTypes.ItemClick:
-  //       case useCombobox.stateChangeTypes.InputBlur:
-  //         if (newSelectedItem) {
-  //           setSelectedItems((prev) => [...prev, newSelectedItem])
-  //         }
-  //         setInputValue("")
-  //         break
-  //       case useCombobox.stateChangeTypes.InputChange:
-  //         setInputValue(newInputValue ?? "")
-  //         break
-  //       default:
-  //         break
-  //     }
-  //   },
-  // })
-
-  // const state: TagFieldState = useMemo(() => {
-  //   return {
-  //     inputValue,
-  //     isOpen,
-  //     getItemProps,
-  //     highlightedIndex,
-  //     getSelectedItemProps,
-  //     removeSelectedItem,
-  //     selectedItems,
-  //   }
-  // }, [
-  //   getItemProps,
-  //   getSelectedItemProps,
-  //   highlightedIndex,
-  //   inputValue,
-  //   isOpen,
-  //   selectedKeys,
-  //   removeSelectedItem,
-  // ])
-
-  // const layout = useMemo(() => {
-  //   return new UNSTABLE_ListLayout({
-  //     estimatedRowHeight: 48,
-  //   })
-  // }, [])
 
   return (
     <Provider
@@ -499,15 +415,26 @@ function TagFieldRoot<T extends TagFieldItem>({
             style: { "--trigger-width": menuWidth } as React.CSSProperties,
           },
         ],
-        [TagFieldListItemContext, { ...listItemProps, itemToKey, itemToText }],
+        [TagFieldListItemContext, listItemProps],
         [InputContext, inputProps],
+        [
+          TextContext,
+          {
+            slots: {
+              description: descriptionProps,
+              errorMessage: errorMessageProps,
+            },
+          },
+        ],
         [
           GroupContext,
           {
             isDisabled: props.isDisabled || false,
+            isInvalid: validation.isInvalid,
             ref: fieldRef,
           },
         ],
+        [FieldErrorContext, validation],
       ]}
     >
       {typeof children === "function"
@@ -537,9 +464,11 @@ const TagFieldListItemInner = <T extends object>(
   { item, index, ...props }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { getItemProps, highlightedIndex, itemToKey, itemToText } = useContext(
+  const { getItemProps, highlightedIndex } = useContext(
     TagFieldListItemContext,
   )!
+
+  const { itemToKey, itemToText } = useContext(TagFieldStateContext)!
 
   return (
     <li

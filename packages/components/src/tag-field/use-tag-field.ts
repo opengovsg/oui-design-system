@@ -28,6 +28,7 @@ import {
 } from "react-aria"
 import { SetRequired } from "type-fest"
 
+import { pickAriaAttributes } from "../system/utils"
 import { TagFieldProps } from "./types"
 import { TagFieldState } from "./use-tag-field-state"
 
@@ -207,8 +208,18 @@ export function useTagField<T>(
       setInputValue(e.target.value),
   })
 
-  const { labelProps, descriptionProps, errorMessageProps } = useTextField(
+  const {
+    labelProps,
+    inputProps: newInputProps,
+    descriptionProps,
+    errorMessageProps,
+  } = useTextField(
     {
+      isReadOnly: props.isReadOnly,
+      isDisabled: props.isDisabled,
+      errorMessage: props.errorMessage,
+      isInvalid: props.isInvalid,
+      description: props.description,
       ...inputProps,
       onChange: (v) => setInputValue(v),
       value: state.inputValue,
@@ -218,7 +229,8 @@ export function useTagField<T>(
 
   return {
     labelProps: mergeProps(getLabelProps({ ref: labelRef }), labelProps),
-    inputProps: inputProps,
+    // Only pick aria attributes so downshift's event handlers will not be overridden
+    inputProps: mergeProps(inputProps, pickAriaAttributes(newInputProps)),
     buttonProps: getToggleButtonProps({ ref: buttonRef }),
     listBoxProps: {
       ...getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),

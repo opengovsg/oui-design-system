@@ -12,7 +12,9 @@ export default {
 type Story = StoryObj<typeof TagField>
 
 export const Default: Story = {
-  args: {},
+  args: {
+    description: "A tag field component.",
+  },
 }
 
 type FieldState = {
