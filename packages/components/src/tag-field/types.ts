@@ -1,5 +1,4 @@
 import {
-  CollectionBase,
   FocusableProps,
   HelpTextProps,
   InputBase,
@@ -17,11 +16,8 @@ export interface TagFieldValidationValue {
   inputValue: string
 }
 
-export type MenuTriggerAction = "focus" | "input" | "manual"
-
 export interface TagFieldProps<T>
-  extends CollectionBase<T>,
-    Omit<
+  extends Omit<
       MultipleSelection,
       | "disallowEmptySelection"
       | "onSelectionChange"
@@ -48,15 +44,15 @@ export interface TagFieldProps<T>
    */
   itemToKey?: (item: T) => Key
   /** The currently selected keys in the collection (controlled). */
-  selectedKeys?: Key[]
+  selectedKeys?: Set<Key>
   /** The initial selected keys in the collection (uncontrolled). */
-  defaultSelectedKeys?: Key[]
+  defaultSelectedKeys?: Set<Key>
   /** The list of TagField items (uncontrolled). */
   defaultItems?: T[]
   /** The list of TagField items (controlled). */
   items?: T[]
   /** Method that is called when the open state of the menu changes. Returns the new open state and the action that caused the opening of the menu. */
-  onOpenChange?: (isOpen: boolean, menuTrigger?: MenuTriggerAction) => void
+  onOpenChange?: (isOpen: boolean) => void
   /** Handler that is called when the selection changes. */
   onSelectionChange?: (keys: Set<Key>) => void
   /** The value of the TagField input (controlled). */
