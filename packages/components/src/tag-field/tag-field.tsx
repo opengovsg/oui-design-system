@@ -1,5 +1,48 @@
+// Expected API of the component
+// const Template: Story = () => {
+//   const items: TagFieldItem[] = []
+//   const [fieldState, setFieldState] = useState<FieldState>({
+//     selectedKeys: new Set(),
+//     inputValue: "",
+//     items,
+//   })
+
+//   const { startsWith } = useFilter({ sensitivity: "base" })
+
+//   const onSelectionChange = (keys: Set<React.Key>) => {
+//     setFieldState({
+//       inputValue: "",
+//       selectedKeys: keys,
+//       items: items.filter((item) => keys.has(item.key)),
+//     })
+//   }
+
+//   // Specify how each of the Autocomplete values should change when the input
+//   // field is altered by the user
+//   const onInputChange = (value: string) => {
+//     setFieldState((prevState) => ({
+//       inputValue: value,
+//       selectedKeys: prevState.selectedKeys,
+//       items: items.filter((item) => startsWith(item.textValue, value)),
+//     }))
+//   }
+
+//   return (
+//     <TagField
+//       inputValue={fieldState.inputValue}
+//       items={fieldState.items}
+//       selectedKeys={fieldState.selectedKeys}
+//       onInputChange={onInputChange}
+//       onSelectionChange={onSelectionChange}
+//     >
+//       {(item) => <TagFieldItem key={item.key} item={item} />}
+//     </TagField>
+//   )
+// }
+
 import {
   createContext,
+  ForwardedRef,
   ReactNode,
   useCallback,
   useContext,
@@ -10,16 +53,16 @@ import {
 import { cn } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
 import {
-  useCombobox,
   UseComboboxPropGetters,
-  UseComboboxReturnValue,
-  useMultipleSelection,
   UseMultipleSelectionReturnValue,
 } from "downshift"
-import { AriaComboBoxProps, Key, useFilter } from "react-aria"
+import { get } from "lodash-es"
+import { AriaListBoxOptions, Key, useFilter } from "react-aria"
 import {
   ComboBoxRenderProps,
   ContextValue,
+  FieldErrorContext,
+  FormContext,
   GroupContext,
   InputContext,
   LabelContext,
@@ -27,24 +70,31 @@ import {
   PopoverContext,
   Provider,
   SlotProps,
-  UNSTABLE_ListLayout,
+  TextContext,
   useContextProps,
+  useSlottedContext,
 } from "react-aria-components"
-import { Selection, useListData } from "react-stately"
 
-import { FieldGroup, Label } from "../field"
-import { useControllableState } from "../hooks"
+import { Description, FieldGroup, Label } from "../field"
 import { Input } from "../input"
 import { RenderProps } from "../system/types"
-import { forwardRef } from "../system/utils"
+import {
+  forwardRef,
+  forwardRefGeneric,
+  removeDataAttributes,
+} from "../system/utils"
+import { TagFieldProps } from "./types"
+import { useSlot } from "./use-slot"
+import { TagFieldAria, useTagField } from "./use-tag-field"
+import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
-type TagFieldItem = {
+export type TagFieldItem = {
   textValue: string
-  key: Key
+  id: Key
   description?: string
 }
 
-interface TagFieldRenderProps<T extends object>
+interface TagFieldRenderProps<T extends TagFieldItem>
   extends ComboBoxRenderProps,
     Pick<
       UseMultipleSelectionReturnValue<T>,
@@ -53,48 +103,6 @@ interface TagFieldRenderProps<T extends object>
   highlightedIndex?: number
   selectedItems: T[]
   items?: T[]
-}
-
-export interface TagFieldProps<T extends object>
-  extends Omit<
-      AriaComboBoxProps<T>,
-      | "children"
-      | "placeholder"
-      | "label"
-      | "description"
-      | "errorMessage"
-      | "validationState"
-      | "validationBehavior"
-      | "isDisabled"
-      | "isInvalid"
-      | "isRequired"
-      | "selectedKey"
-      | "defaultSelectedKey"
-      | "items"
-    >,
-    TagFieldRenderProps<T>,
-    SlotProps {
-  /** The filter function used to determine if a option should be included in the combo box list. */
-  defaultFilter?: (textValue: string, inputValue: string) => boolean
-  /**
-   * Whether the text or key of the selected item is submitted as part of an HTML form.
-   * When `allowsCustomValue` is `true`, this option does not apply and the text is always submitted.
-   * @default 'key'
-   */
-  formValue?: "text" | "key"
-  /** Whether the combo box allows the menu to be open when the collection is empty. */
-  allowsEmptyCollection?: boolean
-
-  /**
-   * Whether to hide selected items from the dropdown.
-   * @defaultValue `true`
-   */
-  hideSelectedItems?: boolean
-
-  items?: T[]
-
-  selectedKeys?: Key[]
-  defaultSelectedKeys?: Key[]
 }
 
 interface TagFieldChipProps<T = any> extends Partial<TagFieldChipContextValue> {
@@ -132,21 +140,9 @@ export const TagFieldChipListContext =
 //   },
 // )
 
-export function TagField() {
-  const books: TagFieldItem[] = [
-    { key: "To Kill a Mockingbird", textValue: "To Kill a Mockingbird" },
-    { key: "1984", textValue: "1984" },
-    { key: "The Catcher in the Rye", textValue: "The Catcher in the Rye" },
-    { key: "The Great Gatsby", textValue: "The Great Gatsby" },
-  ]
-
+export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
   return (
-    <TagFieldRoot
-      items={[...Array(100)].map((_, i) => ({
-        key: String(i),
-        textValue: `Item ${i}`,
-      }))}
-    >
+    <TagFieldRoot {...props}>
       {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
         <>
           <Label>hehe</Label>
@@ -177,10 +173,11 @@ export function TagField() {
             <Input className="min-w-[56px]" />
             <TagFieldTrigger>&#8595;</TagFieldTrigger>
           </FieldGroup>
+          {props.description && <Description>{props.description}</Description>}
           <Popover>
-            <TagFieldList>
+            <TagFieldList<T>>
               {({ item, index }) => (
-                <TagFieldListItem item={item} index={index} key={item.key} />
+                <TagFieldListItem item={item} index={index} key={item.id} />
               )}
             </TagFieldList>
           </Popover>
@@ -188,18 +185,6 @@ export function TagField() {
       )}
     </TagFieldRoot>
   )
-}
-
-interface TagFieldState<T = any>
-  extends Pick<UseComboboxReturnValue<T>, "getItemProps">,
-    Pick<
-      UseMultipleSelectionReturnValue<T>,
-      "getSelectedItemProps" | "removeSelectedItem"
-    > {
-  inputValue: string
-  isOpen: boolean
-  highlightedIndex: number
-  selectedItems: T[]
 }
 
 interface TagFieldTriggerProps extends SlotProps {}
@@ -212,33 +197,42 @@ interface TagFieldListRenderProps<T> {
   index: number
 }
 
-interface TagFieldListProps<T = any> extends Partial<TagFieldListContextValue> {
+interface TagFieldListProps<T extends TagFieldItem>
+  extends Partial<TagFieldListContextValue> {
+  className?: string
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
 interface TagFieldListContextValue
   extends SlotProps,
-    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {
-  items: TagFieldItem[]
-  isOpen: boolean
-}
+    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {}
 
-export const TagFieldContext =
-  createContext<ContextValue<TagFieldProps<any>, HTMLDivElement>>(null)
-export const TagFieldStateContext = createContext<TagFieldState | null>(null)
+export const TagFieldStateContext = createContext<
+  (TagFieldState<any> & { isOpen: boolean }) | null
+>(null)
 export const TagFieldTriggerContext = createContext<
   ContextValue<TagFieldTriggerContextValue, HTMLButtonElement>
 >({})
 export const TagFieldListContext =
-  createContext<ContextValue<TagFieldListContextValue, HTMLUListElement>>(null)
+  createContext<ContextValue<AriaListBoxOptions<any>, HTMLUListElement>>(null)
+
+type TagFieldListItemContextValue<T extends TagFieldItem> =
+  TagFieldAria<T>["listItemProps"]
+
+export const TagFieldListItemContext =
+  createContext<TagFieldListItemContextValue<any> | null>(null)
 
 interface TagFieldRootProps<T extends TagFieldItem>
-  extends TagFieldProps<T>,
+  extends Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRenderProps<T>> {}
 
-const TagFieldList = forwardRef<"ul", TagFieldListProps>((props, ref) => {
+const TagFieldListInner = <T extends TagFieldItem>(
+  props: TagFieldListProps<T>,
+  ref: ForwardedRef<HTMLUListElement>,
+) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
+  const { items, isOpen } = useContext(TagFieldStateContext)!
 
-  const { isOpen, items, slot, className, ...rest } = props
+  const { slot, className, ...rest } = props
 
   if (!isOpen) {
     return null
@@ -264,7 +258,8 @@ const TagFieldList = forwardRef<"ul", TagFieldListProps>((props, ref) => {
       })}
     </ul>
   )
-})
+}
+const TagFieldList = forwardRefGeneric(TagFieldListInner)
 
 const TagFieldTrigger = forwardRef<"button", TagFieldTriggerProps>(
   (props, ref) => {
@@ -284,71 +279,83 @@ const TagFieldTrigger = forwardRef<"button", TagFieldTriggerProps>(
 )
 
 function TagFieldRoot<T extends TagFieldItem>({
-  hideSelectedItems = true,
-  defaultFilter,
   children,
   ...props
 }: TagFieldRootProps<T>) {
-  const [inputValue, setInputValue] = useControllableState<string>({
-    defaultValue: props.defaultInputValue ?? "",
-    value: props.inputValue,
-    onChange: props.onInputChange,
-  })
-
-  const [items] = useControllableState<T[]>({
-    defaultValue: Array.from(props.defaultItems ?? []),
-    value: props.items,
-  })
-  const [selectedItems, setSelectedItems] = useControllableState<T[]>({
-    defaultValue: [],
-  })
-  const selectedKeys = useMemo(
-    () => new Set(selectedItems.map((item) => item.key)),
-    [selectedItems],
+  const { itemToKey: defaultItemToKey, itemToText: defaultItemToText } = props
+  const { contains } = useFilter({ sensitivity: "base" })
+  const itemToText = useCallback(
+    (item: T) => {
+      if (defaultItemToText) return defaultItemToText(item)
+      return String(get(item, "textValue") ?? String(item))
+    },
+    [defaultItemToText],
   )
 
-  const { contains } = useFilter({ sensitivity: "base" })
+  const itemToKey = useCallback(
+    (item: T) => {
+      if (defaultItemToKey) return defaultItemToKey(item)
+      return String(get(item, "id") ?? String(item))
+    },
+    [defaultItemToKey],
+  )
+
+  const onSelectionChange = useCallback(
+    (nextItems: T[]) => {
+      if (props.onSelectionChange) {
+        props.onSelectionChange(new Set(nextItems.map(itemToKey)))
+      }
+    },
+    [props, itemToKey],
+  )
+
+  const state = useTagFieldState({
+    ...props,
+    itemToKey,
+    itemToText,
+    onSelectionChange,
+    defaultFilter: props.defaultFilter || contains,
+  })
+
+  const { validationBehavior: formValidationBehavior } =
+    useSlottedContext(FormContext) || {}
+  const validationBehavior =
+    props.validationBehavior ?? formValidationBehavior ?? "native"
 
   const fieldRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
   const listBoxRef = useRef<HTMLUListElement>(null)
-  const labelRef = useRef<HTMLLabelElement>(null)
+
+  const [, label] = useSlot<HTMLLabelElement>(
+    !props["aria-label"] && !props["aria-labelledby"],
+  )
   const inputRef = useRef<HTMLInputElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
-  const filteredItems = useMemo(() => {
-    const filterFn = defaultFilter ?? contains
-    return items.filter((item) => {
-      if (hideSelectedItems && selectedKeys.has(item.key)) {
-        return false
-      }
-      return filterFn(item.textValue, inputValue)
-    })
-  }, [
-    contains,
-    defaultFilter,
-    hideSelectedItems,
-    inputValue,
-    items,
-    selectedKeys,
-  ])
 
-  const { getSelectedItemProps, getDropdownProps, removeSelectedItem } =
-    useMultipleSelection({
-      selectedItems,
-      onStateChange({ selectedItems: newSelectedItems, type }) {
-        switch (type) {
-          case useMultipleSelection.stateChangeTypes
-            .SelectedItemKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.SelectedItemKeyDownDelete:
-          case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
-          case useMultipleSelection.stateChangeTypes.FunctionRemoveSelectedItem:
-            setSelectedItems(newSelectedItems ?? [])
-            break
-          default:
-            break
-        }
-      },
-    })
+  const {
+    buttonProps,
+    inputProps,
+    labelProps,
+    listBoxProps,
+    listItemProps,
+    descriptionProps,
+    errorMessageProps,
+    chipsProps,
+    isOpen,
+    ...validation
+  } = useTagField(
+    {
+      ...removeDataAttributes(props),
+      itemToKey,
+      itemToText,
+      inputRef,
+      listBoxRef,
+      label,
+      buttonRef,
+      validationBehavior,
+    },
+    state,
+  )
 
   // Make menu width match field group
   const [menuWidth, setMenuWidth] = useState<string | null>(null)
@@ -364,85 +371,24 @@ function TagFieldRoot<T extends TagFieldItem>({
     onResize,
   })
 
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getInputProps,
-    highlightedIndex,
-    getItemProps,
-  } = useCombobox({
-    items: filteredItems,
-    defaultHighlightedIndex: 0, // after selection, highlight the first item.
-    selectedItem: null,
-    inputValue,
-    onStateChange({
-      inputValue: newInputValue,
-      type,
-      selectedItem: newSelectedItem,
-    }) {
-      switch (type) {
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
-        case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputBlur:
-          if (newSelectedItem) {
-            setSelectedItems((prev) => [...prev, newSelectedItem])
-          }
-          setInputValue("")
-          break
-        case useCombobox.stateChangeTypes.InputChange:
-          setInputValue(newInputValue ?? "")
-          break
-        default:
-          break
-      }
-    },
-  })
-
-  const state: TagFieldState = useMemo(() => {
-    return {
-      inputValue,
+  // Only expose a subset of state to renderProps function to avoid infinite render loop
+  const renderPropsState = useMemo(
+    () => ({
       isOpen,
-      getItemProps,
-      highlightedIndex,
-      getSelectedItemProps,
-      removeSelectedItem,
-      selectedItems,
-    }
-  }, [
-    getItemProps,
-    getSelectedItemProps,
-    highlightedIndex,
-    inputValue,
-    isOpen,
-    selectedKeys,
-    removeSelectedItem,
-  ])
-
-  const layout = useMemo(() => {
-    return new UNSTABLE_ListLayout({
-      estimatedRowHeight: 48,
-    })
-  }, [])
+      isDisabled: props.isDisabled || false,
+      isInvalid: validation.isInvalid || false,
+      isRequired: props.isRequired || false,
+    }),
+    [isOpen, props.isDisabled, props.isRequired, validation.isInvalid],
+  )
 
   return (
     <Provider
       values={[
-        [TagFieldStateContext, state],
-        [LabelContext, getLabelProps({ ref: labelRef })],
-        [
-          TagFieldListContext,
-          {
-            ...getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),
-            isOpen,
-            items: filteredItems,
-          },
-        ],
-        [
-          TagFieldTriggerContext,
-          { ...getToggleButtonProps({ ref: buttonRef }) },
-        ],
+        [TagFieldStateContext, { ...state, isOpen }],
+        [LabelContext, labelProps],
+        [TagFieldListContext, listBoxProps],
+        [TagFieldTriggerContext, buttonProps],
         [
           PopoverContext,
           {
@@ -456,66 +402,71 @@ function TagFieldRoot<T extends TagFieldItem>({
             style: { "--trigger-width": menuWidth } as React.CSSProperties,
           },
         ],
+        [TagFieldListItemContext, listItemProps],
+        [InputContext, inputProps],
         [
-          InputContext,
-          getInputProps({
-            ...getDropdownProps({ preventKeyAction: isOpen, ref: inputRef }),
-            // Somehow adding this will allow the input to be updated properly, else
-            // it may sometimes lag behind a single state.
-            // Was also in the previous downshift docs but they removed it for some reason.
-            // See https://github.com/downshift-js/downshift/pull/1576/files#diff-d32b6994832dda99d96f207e964a0ef27102128c532ea9492949f21ec0cf58d3
-            onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
-              setInputValue(e.target.value),
-          }),
+          TextContext,
+          {
+            slots: {
+              description: descriptionProps,
+              errorMessage: errorMessageProps,
+            },
+          },
         ],
         [
           GroupContext,
           {
             isDisabled: props.isDisabled || false,
+            isInvalid: validation.isInvalid,
             ref: fieldRef,
           },
         ],
+        [FieldErrorContext, validation],
       ]}
     >
       {typeof children === "function"
         ? children({
-            isOpen,
-            isDisabled: props.isDisabled,
-            isInvalid: props.isInvalid,
-            isRequired: props.isRequired,
+            ...renderPropsState,
             defaultChildren: null,
-            items: filteredItems,
-            highlightedIndex,
-            getSelectedItemProps,
-            removeSelectedItem,
-            selectedItems,
+            items: state.items,
+            highlightedIndex: listItemProps.highlightedIndex,
+            getSelectedItemProps: chipsProps.getSelectedItemProps,
+            removeSelectedItem: chipsProps.removeSelectedItem,
+            selectedItems: state.selectedItems,
           })
         : children}
     </Provider>
   )
 }
 
-interface TagFieldListItemProps {
-  item: TagFieldItem
+interface TagFieldListItemProps<T extends TagFieldItem> {
+  item: T
   index: number
 }
 
-const TagFieldListItem = forwardRef<"li", TagFieldListItemProps>(
-  ({ item, index, ...props }, ref) => {
-    const { getItemProps, highlightedIndex } = useContext(TagFieldStateContext)!
-    return (
-      <li
-        ref={ref}
-        className={cn(
-          highlightedIndex === index && "bg-blue-300",
-          "flex flex-col px-3 py-2 shadow-sm",
-        )}
-        key={item.key}
-        {...getItemProps({ item, index })}
-        {...props}
-      >
-        <span>{item.textValue}</span>
-      </li>
-    )
-  },
-)
+const TagFieldListItemInner = <T extends TagFieldItem>(
+  { item, index, ...props }: TagFieldListItemProps<T>,
+  ref: ForwardedRef<HTMLLIElement>,
+) => {
+  const { getItemProps, highlightedIndex } = useContext(
+    TagFieldListItemContext,
+  )!
+
+  const { itemToKey, itemToText } = useContext(TagFieldStateContext)!
+
+  return (
+    <li
+      ref={ref}
+      className={cn(
+        highlightedIndex === index && "bg-blue-300",
+        "flex flex-col px-3 py-2 shadow-sm",
+      )}
+      key={itemToKey(item)}
+      {...getItemProps({ item, index })}
+      {...props}
+    >
+      <span>{itemToText(item)}</span>
+    </li>
+  )
+}
+const TagFieldListItem = forwardRefGeneric(TagFieldListItemInner)
