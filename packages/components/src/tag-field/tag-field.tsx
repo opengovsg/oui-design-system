@@ -75,7 +75,7 @@ import {
   useSlottedContext,
 } from "react-aria-components"
 
-import { Description, FieldGroup, Label } from "../field"
+import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
 import { RenderProps } from "../system/types"
 import {
@@ -84,7 +84,6 @@ import {
   removeDataAttributes,
 } from "../system/utils"
 import { TagFieldProps } from "./types"
-import { useSlot } from "./use-slot"
 import { TagFieldAria, useTagField } from "./use-tag-field"
 import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
@@ -145,7 +144,7 @@ export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
     <TagFieldRoot {...props}>
       {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
         <>
-          <Label>hehe</Label>
+          <Label>{props.label}</Label>
           <FieldGroup className="flex-wrap gap-1">
             {selectedItems.map((selectedItem, index) => {
               return (
@@ -174,6 +173,7 @@ export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
             <TagFieldTrigger>&#8595;</TagFieldTrigger>
           </FieldGroup>
           {props.description && <Description>{props.description}</Description>}
+          <FieldError>{props.errorMessage}</FieldError>
           <Popover>
             <TagFieldList<T>>
               {({ item, index }) => (
@@ -325,10 +325,7 @@ function TagFieldRoot<T extends TagFieldItem>({
   const fieldRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
   const listBoxRef = useRef<HTMLUListElement>(null)
-
-  const [, label] = useSlot<HTMLLabelElement>(
-    !props["aria-label"] && !props["aria-labelledby"],
-  )
+  const labelRef = useRef<HTMLLabelElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -350,7 +347,7 @@ function TagFieldRoot<T extends TagFieldItem>({
       itemToText,
       inputRef,
       listBoxRef,
-      label,
+      labelRef,
       buttonRef,
       validationBehavior,
     },

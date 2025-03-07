@@ -20,7 +20,7 @@ export interface AriaTagFieldOptions<T>
     "itemToKey" | "itemToText"
   > {
   /** The ref for the optional label element. */
-  labelRef?: RefObject<HTMLLabelElement>
+  labelRef?: RefObject<HTMLLabelElement | null>
   /** The ref for the input element. */
   inputRef: RefObject<HTMLInputElement | null>
   /** The ref for the list box. */
@@ -182,6 +182,8 @@ export function useTagField<T>(
 
   const inputProps = getInputProps({
     ref: inputRef,
+    "aria-label": props["aria-label"],
+    "aria-labelledby": props["aria-labelledby"],
     ...getDropdownProps({ preventKeyAction: isOpen }), // Somehow adding this will allow the input to be updated properly, else
     // it may sometimes lag behind a single state.
     // Was also in the previous downshift docs but they removed it for some reason.

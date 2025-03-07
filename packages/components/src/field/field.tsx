@@ -56,6 +56,9 @@ export function FieldError({
   ...props
 }: FieldErrorProps) {
   const styles = fieldErrorStyles({ size })
+
+  if (!children) return null
+
   return (
     <AriaFieldError
       {...props}
