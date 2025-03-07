@@ -1,26 +1,14 @@
-import { useCallback, useMemo, useState } from "react"
-import { getChildNodes } from "@react-stately/collections"
+import { useMemo } from "react"
 import {
   FormValidationState,
   useFormValidationState,
 } from "@react-stately/form"
-import { ListCollection } from "@react-stately/list"
 import { useControlledState } from "@react-stately/utils"
-import {
-  Collection,
-  CollectionStateBase,
-  FocusStrategy,
-  Key,
-  MultipleSelection,
-  Node,
-  Selection,
-} from "@react-types/shared"
-import { get, keyBy } from "lodash-es"
-import { ListState, useListState } from "react-stately"
+import { Key } from "@react-types/shared"
 import { SetRequired } from "type-fest"
 
 import { useControllableState } from "../hooks"
-import { MenuTriggerAction, TagFieldProps } from "./types"
+import { TagFieldProps } from "./types"
 
 export interface TagFieldListState<T> {
   /** Sets the selected items. */
@@ -57,10 +45,6 @@ export interface TagFieldStateOptions<T>
   defaultFilter?: FilterFn
   /** Handler that is called when the selection changes. */
   onSelectionChange?: (nextItems: T[]) => void
-  /** Whether the combo box allows the menu to be open when the collection is empty. */
-  allowsEmptyCollection?: boolean
-  /** Whether the combo box menu should close on blur. */
-  shouldCloseOnBlur?: boolean
 }
 
 export interface TagFieldListProps<T> {
@@ -102,15 +86,8 @@ export function useTagFieldState<T extends object>(
     itemToText,
     itemToKey,
     defaultFilter,
-    menuTrigger = "input",
-    allowsEmptyCollection = false,
-    allowsCustomValue,
-    shouldCloseOnBlur = true,
+    // allowsCustomValue,
   } = props
-
-  const [showAllItems, setShowAllItems] = useState(false)
-  const [isFocused, setFocusedState] = useState(false)
-  const [focusStrategy, setFocusStrategy] = useState<FocusStrategy | null>(null)
 
   const { setSelectedItems, selectedItems, disabledKeys } =
     useTagFieldListState({

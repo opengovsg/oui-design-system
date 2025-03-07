@@ -1,31 +1,13 @@
-import {
-  InputHTMLAttributes,
-  useCallback,
-  useMemo,
-  useRef,
-  useState,
-} from "react"
-import { mergeProps, useResizeObserver } from "@react-aria/utils"
-import {
-  DOMAttributes,
-  Key,
-  LayoutDelegate,
-  RefObject,
-  ValidationResult,
-} from "@react-types/shared"
+import { InputHTMLAttributes, useMemo, useRef } from "react"
+import { mergeProps } from "@react-aria/utils"
+import { DOMAttributes, RefObject, ValidationResult } from "@react-types/shared"
 import {
   useCombobox,
   UseComboboxReturnValue,
   useMultipleSelection,
   UseMultipleSelectionReturnValue,
 } from "downshift"
-import {
-  AriaButtonProps,
-  AriaComboBoxProps,
-  AriaListBoxOptions,
-  ListKeyboardDelegate,
-  useTextField,
-} from "react-aria"
+import { AriaListBoxOptions, useTextField } from "react-aria"
 import { SetRequired } from "type-fest"
 
 import { pickAriaAttributes } from "../system/utils"
@@ -37,24 +19,14 @@ export interface AriaTagFieldOptions<T>
     Omit<TagFieldProps<T>, "children">,
     "itemToKey" | "itemToText"
   > {
-  /** The ref for the field group element. */
-  fieldRef: RefObject<HTMLElement | null>
   /** The ref for the optional label element. */
-  labelRef?: RefObject<HTMLLabelElement | null>
+  labelRef?: RefObject<HTMLLabelElement>
   /** The ref for the input element. */
   inputRef: RefObject<HTMLInputElement | null>
-  /** The ref for the list box popover. */
-  popoverRef: RefObject<Element | null>
   /** The ref for the list box. */
   listBoxRef: RefObject<HTMLElement | null>
   /** The ref for the optional list box popup trigger button.  */
   buttonRef?: RefObject<HTMLButtonElement | null>
-  /**
-   * A delegate object that provides layout information for items in the collection.
-   * By default this uses the DOM, but this can be overridden to implement things like
-   * virtualized scrolling.
-   */
-  layoutDelegate?: LayoutDelegate
 }
 
 export interface TagFieldAria<T> extends ValidationResult {
@@ -63,10 +35,7 @@ export interface TagFieldAria<T> extends ValidationResult {
   /** Props for the combo box input element. */
   inputProps: InputHTMLAttributes<HTMLInputElement>
   /** Props for the list box */
-  listBoxProps: AriaListBoxOptions<T> & {
-    isOpen: boolean
-    items: T[]
-  }
+  listBoxProps: AriaListBoxOptions<T>
 
   /** Props for the list box items. */
   listItemProps: Pick<
@@ -103,16 +72,16 @@ export function useTagField<T>(
 ): TagFieldAria<T> {
   let { buttonRef } = props
   const {
-    popoverRef,
     inputRef,
     listBoxRef,
     labelRef,
-    fieldRef,
-    layoutDelegate,
-    isReadOnly,
-    isDisabled,
+    shouldCloseOnBlur,
+    // TODO: Handle these states
+    // isReadOnly,
+    // isDisabled,
     itemToKey,
     itemToText,
+    label,
   } = props
 
   const backupBtnRef = useRef(null)
@@ -171,6 +140,19 @@ export function useTagField<T>(
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
     selectedItem: null,
     inputValue,
+    stateReducer(_state, actionAndChanges) {
+      const { changes, type } = actionAndChanges
+
+      switch (type) {
+        case useCombobox.stateChangeTypes.InputBlur:
+          return {
+            ...changes,
+            isOpen: shouldCloseOnBlur === false ? true : changes.isOpen,
+          }
+        default:
+          return changes
+      }
+    },
     onStateChange({
       inputValue: newInputValue,
       type,
@@ -220,6 +202,7 @@ export function useTagField<T>(
       errorMessage: props.errorMessage,
       isInvalid: props.isInvalid,
       description: props.description,
+      label,
       ...inputProps,
       onChange: (v) => setInputValue(v),
       value: state.inputValue,
@@ -232,11 +215,7 @@ export function useTagField<T>(
     // Only pick aria attributes so downshift's event handlers will not be overridden
     inputProps: mergeProps(inputProps, pickAriaAttributes(newInputProps)),
     buttonProps: getToggleButtonProps({ ref: buttonRef }),
-    listBoxProps: {
-      ...getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),
-      isOpen,
-      items,
-    },
+    listBoxProps: getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),
     listItemProps: {
       getItemProps,
       highlightedIndex,

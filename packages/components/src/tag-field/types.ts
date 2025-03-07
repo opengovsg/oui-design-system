@@ -67,9 +67,10 @@ export interface TagFieldProps<T>
   onInputChange?: (value: string) => void
   /** Whether the TagField allows a non-item matching chip to be created and selected via a custom input. */
   allowsCustomValue?: boolean
+
   /**
-   * The interaction required to display the TagField menu.
-   * @default 'input'
+   * Whether the tag field menu should close on blur.
+   * If not provided, the menu will close on blur when the user clicks outside the tag field.
    */
-  menuTrigger?: MenuTriggerAction
+  shouldCloseOnBlur?: boolean
 }

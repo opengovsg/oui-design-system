@@ -7,6 +7,12 @@ import { TagField, TagFieldItem } from "../tag-field-2"
 export default {
   title: "Components/TagField2",
   component: TagField,
+  args: {
+    defaultItems: [...Array(100)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+    })),
+  },
 } as Meta<typeof TagField>
 
 type Story = StoryObj<typeof TagField>

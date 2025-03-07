@@ -46,6 +46,7 @@ import {
   ReactNode,
   useCallback,
   useContext,
+  useMemo,
   useRef,
   useState,
 } from "react"
@@ -53,11 +54,10 @@ import { cn } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
 import {
   UseComboboxPropGetters,
-  UseComboboxReturnValue,
   UseMultipleSelectionReturnValue,
 } from "downshift"
 import { get } from "lodash-es"
-import { AriaComboBoxProps, Key, useFilter } from "react-aria"
+import { AriaListBoxOptions, Key, useFilter } from "react-aria"
 import {
   ComboBoxRenderProps,
   ContextValue,
@@ -84,6 +84,7 @@ import {
   removeDataAttributes,
 } from "../system/utils"
 import { TagFieldProps } from "./types"
+import { useSlot } from "./use-slot"
 import { TagFieldAria, useTagField } from "./use-tag-field"
 import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
@@ -93,7 +94,7 @@ export type TagFieldItem = {
   description?: string
 }
 
-interface TagFieldRenderProps<T extends object>
+interface TagFieldRenderProps<T extends TagFieldItem>
   extends ComboBoxRenderProps,
     Pick<
       UseMultipleSelectionReturnValue<T>,
@@ -139,24 +140,9 @@ export const TagFieldChipListContext =
 //   },
 // )
 
-interface TagFieldProps2<T> {
-  items?: T[]
-  defaultItems?: T[]
-  selectedKeys?: Set<Key>
-  defaultSelectedKeys?: Set<Key>
-  onSelectionChange?: (keys: Set<Key>) => void
-  onInputChange?: (value: string) => void
-}
-
-export function TagField<T extends object>(props: TagFieldProps<T>) {
+export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
   return (
-    <TagFieldRoot
-      defaultItems={[...Array(100)].map((_, i) => ({
-        id: String(i),
-        textValue: `Item ${i}`,
-      }))}
-      {...props}
-    >
+    <TagFieldRoot {...props}>
       {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
         <>
           <Label>hehe</Label>
@@ -211,32 +197,25 @@ interface TagFieldListRenderProps<T> {
   index: number
 }
 
-interface TagFieldListProps<T extends object>
-  extends Partial<TagFieldListContextValue<T>> {
+interface TagFieldListProps<T extends TagFieldItem>
+  extends Partial<TagFieldListContextValue> {
   className?: string
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
-interface TagFieldListContextValue<T>
+interface TagFieldListContextValue
   extends SlotProps,
-    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {
-  items: T[]
-  isOpen: boolean
-}
+    ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {}
 
-export const TagFieldContext =
-  createContext<ContextValue<TagFieldProps<any>, HTMLDivElement>>(null)
-export const TagFieldStateContext = createContext<TagFieldState<any> | null>(
-  null,
-)
+export const TagFieldStateContext = createContext<
+  (TagFieldState<any> & { isOpen: boolean }) | null
+>(null)
 export const TagFieldTriggerContext = createContext<
   ContextValue<TagFieldTriggerContextValue, HTMLButtonElement>
 >({})
 export const TagFieldListContext =
-  createContext<ContextValue<TagFieldListContextValue<any>, HTMLUListElement>>(
-    null,
-  )
+  createContext<ContextValue<AriaListBoxOptions<any>, HTMLUListElement>>(null)
 
-type TagFieldListItemContextValue<T extends object> =
+type TagFieldListItemContextValue<T extends TagFieldItem> =
   TagFieldAria<T>["listItemProps"]
 
 export const TagFieldListItemContext =
@@ -246,13 +225,14 @@ interface TagFieldRootProps<T extends TagFieldItem>
   extends Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRenderProps<T>> {}
 
-const TagFieldListInner = <T extends object>(
+const TagFieldListInner = <T extends TagFieldItem>(
   props: TagFieldListProps<T>,
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
+  const { items, isOpen } = useContext(TagFieldStateContext)!
 
-  const { isOpen, items, slot, className, ...rest } = props
+  const { slot, className, ...rest } = props
 
   if (!isOpen) {
     return null
@@ -270,7 +250,7 @@ const TagFieldListInner = <T extends object>(
       {items?.map((item, index) => {
         if (typeof props.children === "function") {
           return props.children({
-            item: item,
+            item,
             index,
           })
         }
@@ -300,7 +280,6 @@ const TagFieldTrigger = forwardRef<"button", TagFieldTriggerProps>(
 
 function TagFieldRoot<T extends TagFieldItem>({
   children,
-  description,
   ...props
 }: TagFieldRootProps<T>) {
   const { itemToKey: defaultItemToKey, itemToText: defaultItemToText } = props
@@ -329,6 +308,7 @@ function TagFieldRoot<T extends TagFieldItem>({
     },
     [props, itemToKey],
   )
+
   const state = useTagFieldState({
     ...props,
     itemToKey,
@@ -336,11 +316,6 @@ function TagFieldRoot<T extends TagFieldItem>({
     onSelectionChange,
     defaultFilter: props.defaultFilter || contains,
   })
-
-  // const selectedKeys = useMemo(
-  //   () => new Set(selectedItems.map((item) => item.key)),
-  //   [selectedItems],
-  // )
 
   const { validationBehavior: formValidationBehavior } =
     useSlottedContext(FormContext) || {}
@@ -350,7 +325,10 @@ function TagFieldRoot<T extends TagFieldItem>({
   const fieldRef = useRef<HTMLDivElement>(null)
   const popoverRef = useRef<HTMLElement>(null)
   const listBoxRef = useRef<HTMLUListElement>(null)
-  const labelRef = useRef<HTMLLabelElement>(null)
+
+  const [, label] = useSlot<HTMLLabelElement>(
+    !props["aria-label"] && !props["aria-labelledby"],
+  )
   const inputRef = useRef<HTMLInputElement>(null)
   const buttonRef = useRef<HTMLButtonElement>(null)
 
@@ -371,10 +349,8 @@ function TagFieldRoot<T extends TagFieldItem>({
       itemToKey,
       itemToText,
       inputRef,
-      fieldRef,
       listBoxRef,
-      labelRef,
-      popoverRef,
+      label,
       buttonRef,
       validationBehavior,
     },
@@ -395,10 +371,21 @@ function TagFieldRoot<T extends TagFieldItem>({
     onResize,
   })
 
+  // Only expose a subset of state to renderProps function to avoid infinite render loop
+  const renderPropsState = useMemo(
+    () => ({
+      isOpen,
+      isDisabled: props.isDisabled || false,
+      isInvalid: validation.isInvalid || false,
+      isRequired: props.isRequired || false,
+    }),
+    [isOpen, props.isDisabled, props.isRequired, validation.isInvalid],
+  )
+
   return (
     <Provider
       values={[
-        [TagFieldStateContext, state],
+        [TagFieldStateContext, { ...state, isOpen }],
         [LabelContext, labelProps],
         [TagFieldListContext, listBoxProps],
         [TagFieldTriggerContext, buttonProps],
@@ -439,10 +426,7 @@ function TagFieldRoot<T extends TagFieldItem>({
     >
       {typeof children === "function"
         ? children({
-            isOpen,
-            isDisabled: props.isDisabled,
-            isInvalid: props.isInvalid,
-            isRequired: props.isRequired,
+            ...renderPropsState,
             defaultChildren: null,
             items: state.items,
             highlightedIndex: listItemProps.highlightedIndex,
@@ -455,12 +439,12 @@ function TagFieldRoot<T extends TagFieldItem>({
   )
 }
 
-interface TagFieldListItemProps<T extends object> {
+interface TagFieldListItemProps<T extends TagFieldItem> {
   item: T
   index: number
 }
 
-const TagFieldListItemInner = <T extends object>(
+const TagFieldListItemInner = <T extends TagFieldItem>(
   { item, index, ...props }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
