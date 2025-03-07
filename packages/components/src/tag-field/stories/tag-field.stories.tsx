@@ -8,11 +8,11 @@ export default {
   title: "Components/TagField",
   component: TagField,
   args: {
+    label: "Tag Field",
     defaultItems: [...Array(100)].map((_, i) => ({
       id: String(i),
       textValue: `Item ${i}`,
     })),
-    disabledKeys: ["1", "3", "5", "7", "9"],
   },
 } as Meta<typeof TagField>
 
@@ -24,13 +24,19 @@ export const Default: Story = {
   },
 }
 
+export const DisabledKeys: Story = {
+  args: {
+    disabledKeys: ["1", "3", "5", "7", "9"],
+  },
+}
+
 type FieldState = {
   selectedKeys: Set<Key>
   inputValue: string
   // items: TagFieldItem[]
 }
 
-const ControlledTemplate = () => {
+const ControlledTemplate = (args: Story["args"]) => {
   const defaultItems = [...Array(100)].map((_, i) => ({
     id: String(i),
     textValue: `Item ${i}`,
@@ -64,6 +70,7 @@ const ControlledTemplate = () => {
 
   return (
     <TagField
+      {...args}
       defaultItems={defaultItems}
       // items={fieldState.items}
       inputValue={fieldState.inputValue}
@@ -76,5 +83,32 @@ const ControlledTemplate = () => {
 
 // Expected API of the component
 export const Controlled: Story = {
+  args: {},
   render: ControlledTemplate,
+}
+
+export const WithSelection: Story = {
+  args: {
+    selectedKeys: new Set(["1", "3"]),
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+    selectedKeys: new Set(["1", "3"]),
+  },
+}
+
+export const WithError: Story = {
+  args: {
+    errorMessage: "Something went wrong",
+    isInvalid: true,
+  },
+}
+
+export const WithDescription: Story = {
+  args: {
+    description: "Pick your favourite flavour",
+  },
 }
