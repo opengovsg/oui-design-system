@@ -1,5 +1,5 @@
 import type { WeakValidationMap } from "prop-types"
-import { forwardRef as baseForwardRef, useMemo } from "react"
+import React, { forwardRef as baseForwardRef, useMemo } from "react"
 
 import type {
   As,
@@ -60,6 +60,13 @@ export function forwardRef<
     Props,
     OmitKeys
   >
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export function forwardRefGeneric<T, P = {}>(
+  render: (props: P, ref: React.Ref<T>) => React.ReactNode,
+): (props: P & React.RefAttributes<T>) => React.ReactNode {
+  return forwardRef(render)
 }
 
 export const mapPropsVariants = <
