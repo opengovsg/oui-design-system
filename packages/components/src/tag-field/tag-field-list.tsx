@@ -1,5 +1,5 @@
 import { createContext, ForwardedRef, ReactNode, useContext } from "react"
-import { cn } from "@opengovsg/oui-theme"
+import { dataAttr, SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
 import { Virtualizer } from "@tanstack/react-virtual"
 import { UseComboboxPropGetters } from "downshift"
 import { ContextValue, SlotProps, useContextProps } from "react-aria-components"
@@ -19,7 +19,7 @@ export const TagFieldListContext =
 
 interface TagFieldListProps<T extends TagFieldItem>
   extends Partial<TagFieldListContextValue> {
-  className?: string
+  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "list" | "listItem">
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
 
@@ -39,11 +39,8 @@ const TagFieldListItemInner = <T extends TagFieldItem>(
       ref={ref}
       key={itemToKey(item)}
       {...itemProps}
-      className={cn(
-        isHighlighted && "bg-blue-300",
-        "flex flex-col px-3 py-2 shadow-sm",
-        itemProps.className,
-      )}
+      data-rac
+      data-hovered={dataAttr(isHighlighted)}
     >
       <span>{itemToText(item)}</span>
     </li>
@@ -59,17 +56,14 @@ const TagFieldListInner = <T extends TagFieldItem>(
   const { items, getItemProps, highlightedIndex } =
     useContext(TagFieldStateContext)!
 
-  const { slot, className, rowVirtualizer, ...rest } = props
+  const { slot, classNames, rowVirtualizer, ...rest } = props
 
   return (
     <ul
       slot={slot ?? undefined}
       ref={ref}
       {...rest}
-      className={cn(
-        "w-(--trigger-width) relative z-10 mt-1 max-h-80 overflow-scroll bg-white p-0 shadow-md",
-        className,
-      )}
+      className={classNames?.list}
     >
       {props.children !== undefined && typeof props.children !== "function" ? (
         props.children
@@ -84,6 +78,7 @@ const TagFieldListInner = <T extends TagFieldItem>(
             const itemProps = getItemProps({
               item,
               index: virtualRow.index,
+              className: classNames?.listItem,
               style: {
                 position: "absolute",
                 top: 0,

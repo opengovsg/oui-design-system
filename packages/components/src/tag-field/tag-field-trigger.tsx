@@ -22,7 +22,6 @@ export const TagFieldTrigger = forwardRef<"button", TagFieldTriggerProps>(
     return (
       <button
         aria-label="toggle menu"
-        className="px-2"
         type="button"
         {...props}
         slot={props.slot || undefined}

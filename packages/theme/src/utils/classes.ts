@@ -9,6 +9,15 @@ export const focusVisibleClasses = [
   "focus-visible:outline-2",
 ] as const
 
+export const focusClasses = [
+  "outline-none",
+  "outline-transparent",
+  "outline-offset-2",
+  "focus:outline-focus-ring",
+  "focus:outline-solid",
+  "focus:outline-2",
+] as const
+
 export const groupFocusVisibleClasses = [
   "in-focus-visible:z-10",
   "in-focus-visible:outline-2",

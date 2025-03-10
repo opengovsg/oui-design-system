@@ -1,5 +1,7 @@
 import { useCallback, useContext } from "react"
+import { SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
 import { UseMultipleSelectionReturnValue } from "downshift"
+import { XIcon } from "lucide-react"
 
 import { TagFieldStateContext } from "./tag-field-state-context"
 import { TagFieldItem } from "./types"
@@ -15,15 +17,16 @@ interface TagFieldTagListRenderProps<T> {
 }
 
 export interface TagFieldTagListProps<T extends TagFieldItem> {
-  className?: string
+  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "tag" | "tagIcon">
   children?:
     | React.ReactNode
     | ((values: TagFieldTagListRenderProps<T>) => React.ReactNode)
 }
 
-export const TagFieldTagList = <T extends TagFieldItem>(
-  props: TagFieldTagListProps<T>,
-) => {
+export const TagFieldTagList = <T extends TagFieldItem>({
+  classNames,
+  ...props
+}: TagFieldTagListProps<T>) => {
   const {
     selectedItems,
     getSelectedItemProps,
@@ -64,20 +67,18 @@ export const TagFieldTagList = <T extends TagFieldItem>(
 
     return (
       <span
-        className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
+        className={classNames?.tag}
         key={`selected-item-${index}`}
         {...itemProps}
       >
         {selectedItem.textValue}
-        <span
-          className="cursor-pointer px-1"
+        <XIcon
+          className={classNames?.tagIcon}
           onClick={(e) => {
             e.stopPropagation()
             handleRemoveSelectedItem(selectedItem)()
           }}
-        >
-          &#10005;
-        </span>
+        />
       </span>
     )
   })

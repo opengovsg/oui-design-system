@@ -1,6 +1,7 @@
 "use client"
 
 import { tagFieldStyles } from "@opengovsg/oui-theme"
+import { ChevronDown } from "lucide-react"
 import { composeRenderProps, Popover } from "react-aria-components"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
@@ -19,8 +20,10 @@ export function TagField<T extends TagFieldItem>({
 
   return (
     <TagFieldRoot {...props}>
-      <div className="flex flex-col gap-2">
-        <Label>{props.label}</Label>
+      <div className={styles.root({ className: classNames?.root })}>
+        <Label className={styles.label({ className: classNames?.label })}>
+          {props.label}
+        </Label>
         <FieldGroup
           className={composeRenderProps(
             classNames?.group,
@@ -28,22 +31,52 @@ export function TagField<T extends TagFieldItem>({
               styles.group({ className, ...renderProps }),
           )}
         >
-          <TagFieldTagList />
-          <Input
-            variant="unstyled"
-            className={composeRenderProps(
-              classNames?.input,
-              (className, renderProps) =>
-                styles.input({ className, ...renderProps }),
-            )}
-          />
-          <TagFieldTrigger>&#8595;</TagFieldTrigger>
+          <div className="flex flex-1 flex-row flex-wrap gap-1">
+            <TagFieldTagList
+              classNames={{
+                tag: styles.tag({ className: classNames?.tag }),
+                tagIcon: styles.tagIcon({ className: classNames?.tagIcon }),
+              }}
+            />
+            <Input
+              variant="unstyled"
+              className={composeRenderProps(
+                classNames?.input,
+                (className, renderProps) =>
+                  styles.input({ className, ...renderProps }),
+              )}
+            />
+          </div>
+          <TagFieldTrigger
+            className={styles.trigger({ className: classNames?.trigger })}
+          >
+            <ChevronDown />
+          </TagFieldTrigger>
         </FieldGroup>
-        {props.description && <Description>{props.description}</Description>}
-        <FieldError>{props.errorMessage}</FieldError>
+        {props.description && (
+          <Description
+            className={styles.description({
+              className: classNames?.description,
+            })}
+          >
+            {props.description}
+          </Description>
+        )}
+        <FieldError
+          className={styles.error({
+            className: classNames?.error,
+          })}
+        >
+          {props.errorMessage}
+        </FieldError>
       </div>
       <Popover>
-        <TagFieldList />
+        <TagFieldList
+          classNames={{
+            list: styles.list({ className: classNames?.list }),
+            listItem: styles.listItem({ className: classNames?.listItem }),
+          }}
+        />
       </Popover>
     </TagFieldRoot>
   )
