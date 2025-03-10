@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import {
   FormValidationState,
   useFormValidationState,
@@ -47,33 +47,6 @@ export interface TagFieldStateOptions<T>
   onSelectionChange?: (nextItems: T[]) => void
 }
 
-export interface TagFieldListProps<T> {
-  /** The currently selected items in the collection (controlled). */
-  selectedItems?: T[]
-  /** The initial selected keys in the collection (uncontrolled). */
-  defaultSelectedItems?: T[]
-  /** Handler that is called when the selection changes. */
-  onSelectionChange?: (items: T[]) => void
-  /** The currently disabled keys in the collection (controlled). */
-  disabledKeys?: Iterable<Key>
-}
-
-function useTagFieldListState<T extends object>(
-  props: TagFieldListProps<T>,
-): TagFieldListState<T> {
-  const [selectedItems, setSelectedItems] = useControllableState({
-    defaultValue: props.defaultSelectedItems ?? [],
-    value: props.selectedItems,
-    onChange: props.onSelectionChange,
-  })
-
-  return {
-    disabledKeys: props.disabledKeys,
-    selectedItems,
-    setSelectedItems,
-  }
-}
-
 /**
  * Provides state management for a tag field component. Handles building a collection
  * of items from props and manages the option selection state of the tag field. In addition, it tracks the input value,
@@ -89,11 +62,32 @@ export function useTagFieldState<T extends object>(
     // allowsCustomValue,
   } = props
 
-  const { setSelectedItems, selectedItems, disabledKeys } =
-    useTagFieldListState({
-      ...props,
-      disabledKeys: props.disabledKeys,
-    })
+  const itemsByKey = useMemo(() => {
+    const items = props.items ?? props.defaultItems ?? []
+    return (
+      items.reduce(
+        (acc, item) => {
+          acc[itemToKey(item)] = item
+          return acc
+        },
+        {} as Record<Key, T>,
+      ) ?? {}
+    )
+  }, [itemToKey, props.defaultItems, props.items])
+
+  const getSelectedItemsByKey = useCallback(
+    (keys?: Set<Key>) => {
+      if (!keys) return
+      return [...keys].map((key) => itemsByKey[key])
+    },
+    [itemsByKey],
+  )
+
+  const [selectedItems, setSelectedItems] = useControllableState({
+    defaultValue: getSelectedItemsByKey(props.defaultSelectedKeys) ?? [],
+    value: getSelectedItemsByKey(props.selectedKeys),
+    onChange: props.onSelectionChange,
+  })
 
   const defaultInputValue = props.defaultInputValue ?? ""
 
@@ -130,7 +124,7 @@ export function useTagFieldState<T extends object>(
 
   return {
     items: filteredItems,
-    disabledKeys,
+    disabledKeys: props.disabledKeys,
     inputValue,
     setInputValue,
     selectedItems,
