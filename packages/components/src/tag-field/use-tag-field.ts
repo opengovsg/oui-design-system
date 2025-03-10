@@ -9,7 +9,7 @@ import {
   useMultipleSelection,
   UseMultipleSelectionReturnValue,
 } from "downshift"
-import { AriaListBoxOptions, useTextField } from "react-aria"
+import { useTextField } from "react-aria"
 import { SetRequired } from "type-fest"
 
 import { pickAriaAttributes } from "../system/utils"

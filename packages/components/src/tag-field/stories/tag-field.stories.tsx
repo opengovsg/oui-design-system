@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria"
 import { useState } from "react"
+import { cn } from "@opengovsg/oui-theme"
 
 import { TagField } from "../tag-field"
 
@@ -119,5 +120,19 @@ export const Virtualized: Story = {
       id: String(i),
       textValue: `Item ${i}`,
     })),
+  },
+}
+
+export const CustomItem: Story = {
+  args: {
+    children: ({ item, itemProps, key, isHighlighted }) => (
+      <div
+        {...itemProps}
+        key={key}
+        className={cn(isHighlighted && "bg-blue-200")}
+      >
+        {item.textValue}
+      </div>
+    ),
   },
 }

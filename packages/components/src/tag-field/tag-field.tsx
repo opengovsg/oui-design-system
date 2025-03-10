@@ -1,45 +1,9 @@
-// Expected API of the component
-// const Template: Story = () => {
-//   const items: TagFieldItem[] = []
-//   const [fieldState, setFieldState] = useState<FieldState>({
-//     selectedKeys: new Set(),
-//     inputValue: "",
-//     items,
-//   })
-
-//   const { startsWith } = useFilter({ sensitivity: "base" })
-
-//   const onSelectionChange = (keys: Set<React.Key>) => {
-//     setFieldState({
-//       inputValue: "",
-//       selectedKeys: keys,
-//       items: items.filter((item) => keys.has(item.key)),
-//     })
-//   }
-
-//   // Specify how each of the Autocomplete values should change when the input
-//   // field is altered by the user
-//   const onInputChange = (value: string) => {
-//     setFieldState((prevState) => ({
-//       inputValue: value,
-//       selectedKeys: prevState.selectedKeys,
-//       items: items.filter((item) => startsWith(item.textValue, value)),
-//     }))
-//   }
-
-//   return (
-//     <TagField
-//       inputValue={fieldState.inputValue}
-//       items={fieldState.items}
-//       selectedKeys={fieldState.selectedKeys}
-//       onInputChange={onInputChange}
-//       onSelectionChange={onSelectionChange}
-//     >
-//       {(item) => <TagFieldItem key={item.key} item={item} />}
-//     </TagField>
-//   )
-// }
-
+import type { Virtualizer } from "@tanstack/react-virtual"
+import type {
+  UseComboboxPropGetters,
+  UseComboboxReturnValue,
+  UseMultipleSelectionReturnValue,
+} from "downshift"
 import {
   createContext,
   ForwardedRef,
@@ -52,17 +16,8 @@ import {
 } from "react"
 import { cn } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
-import {
-  useVirtualizer,
-  VirtualItem,
-  Virtualizer,
-} from "@tanstack/react-virtual"
-import {
-  UseComboboxPropGetters,
-  UseMultipleSelectionReturnValue,
-} from "downshift"
 import { get } from "lodash-es"
-import { AriaListBoxOptions, Key, useFilter } from "react-aria"
+import { Key, useFilter } from "react-aria"
 import {
   ComboBoxRenderProps,
   ContextValue,
@@ -88,7 +43,7 @@ import {
   forwardRefGeneric,
   removeDataAttributes,
 } from "../system/utils"
-import { TagFieldProps } from "./types"
+import { TagFieldListRenderProps, TagFieldProps } from "./types"
 import { TagFieldAria, useTagField } from "./use-tag-field"
 import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
@@ -98,7 +53,7 @@ export type TagFieldItem = {
   description?: string
 }
 
-interface TagFieldRenderProps<T extends TagFieldItem>
+interface TagFieldRootRenderProps<T extends TagFieldItem>
   extends ComboBoxRenderProps,
     Pick<
       UseMultipleSelectionReturnValue<T>,
@@ -109,117 +64,111 @@ interface TagFieldRenderProps<T extends TagFieldItem>
   items?: T[]
 }
 
-interface TagFieldChipProps<T = any> extends Partial<TagFieldChipContextValue> {
-  item: T
-  index: number
-}
-interface TagFieldChipContextValue
-  extends SlotProps,
-    Required<
-      Pick<UseMultipleSelectionReturnValue<Key>, "getSelectedItemProps">
-    > {}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type TagFieldChipContextValue<T = any> = Required<
+  Pick<
+    UseMultipleSelectionReturnValue<T>,
+    "getSelectedItemProps" | "selectedItems" | "removeSelectedItem"
+  >
+>
 
 export const TagFieldChipListContext =
-  createContext<ContextValue<TagFieldChipContextValue, HTMLLIElement>>(null)
+  createContext<TagFieldChipContextValue | null>(null)
 
-// const TagFieldChip = forwardRef<"span", TagFieldChipProps>(
-//   ({ item, index }, ref) => {
-//     return (
-//       <span
-//         className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
-//         key={`selected-item-${index}`}
-//       >
-//         {selectedItemForRender.toString()}
-//         <span
-//           className="cursor-pointer px-1"
-//           onClick={(e) => {
-//             e.stopPropagation()
-//             removeSelectedItem(selectedItemForRender)
-//           }}
-//         >
-//           &#10005;
-//         </span>
-//       </span>
-//     )
-//   },
-// )
+interface TagFieldChipListProps<T extends TagFieldItem> {
+  className?: string
+  children?: ReactNode | ((values: TagFieldChipListRenderProps<T>) => ReactNode)
+}
+
+const TagFieldChipList = <T extends TagFieldItem>(
+  props: TagFieldChipListProps<T>,
+) => {
+  const { selectedItems, getSelectedItemProps, removeSelectedItem } =
+    useContext(TagFieldChipListContext)!
+
+  if (props.children !== undefined && typeof props.children !== "function") {
+    return props.children
+  }
+
+  return selectedItems.map((selectedItem, index) => {
+    if (typeof props.children === "function") {
+      return props.children({
+        item: selectedItem,
+        itemProps: getSelectedItemProps({
+          selectedItem,
+          index,
+        }),
+      })
+    }
+
+    return (
+      <span
+        className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
+        key={`selected-item-${index}`}
+        {...getSelectedItemProps({
+          selectedItem,
+          index,
+        })}
+      >
+        {selectedItem.textValue}
+        <span
+          className="cursor-pointer px-1"
+          onClick={(e) => {
+            e.stopPropagation()
+            removeSelectedItem(selectedItem)
+          }}
+        >
+          &#10005;
+        </span>
+      </span>
+    )
+  })
+}
 
 export function TagField<T extends TagFieldItem>(props: TagFieldProps<T>) {
   return (
     <TagFieldRoot {...props}>
-      {({ selectedItems, getSelectedItemProps, removeSelectedItem }) => (
-        <>
-          <Label>{props.label}</Label>
-          <FieldGroup className="flex-wrap gap-1">
-            {selectedItems.map((selectedItem, index) => {
-              return (
-                <span
-                  className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
-                  key={`selected-item-${index}`}
-                  {...getSelectedItemProps({
-                    selectedItem,
-                    index,
-                  })}
-                >
-                  {selectedItem.textValue}
-                  <span
-                    className="cursor-pointer px-1"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      removeSelectedItem(selectedItem)
-                    }}
-                  >
-                    &#10005;
-                  </span>
-                </span>
-              )
-            })}
-            <Input className="min-w-[56px]" />
-            <TagFieldTrigger>&#8595;</TagFieldTrigger>
-          </FieldGroup>
-          {props.description && <Description>{props.description}</Description>}
-          <FieldError>{props.errorMessage}</FieldError>
-          <Popover>
-            <TagFieldList<T>>
-              {({ item, index, key, style }) => {
-                return (
-                  <TagFieldListItem
-                    item={item}
-                    index={index}
-                    key={key}
-                    style={style}
-                  />
-                )
-              }}
-            </TagFieldList>
-          </Popover>
-        </>
-      )}
+      <Label>{props.label}</Label>
+      <FieldGroup className="flex-wrap gap-1">
+        <TagFieldChipList />
+        <Input className="min-w-[56px]" />
+        <TagFieldTrigger>&#8595;</TagFieldTrigger>
+      </FieldGroup>
+      {props.description && <Description>{props.description}</Description>}
+      <FieldError>{props.errorMessage}</FieldError>
+      <Popover>
+        <TagFieldList />
+      </Popover>
     </TagFieldRoot>
   )
 }
 
-interface TagFieldTriggerProps extends SlotProps {}
+type TagFieldTriggerProps = SlotProps
 interface TagFieldTriggerContextValue
   extends TagFieldTriggerProps,
     ReturnType<UseComboboxPropGetters<object>["getToggleButtonProps"]> {}
 
-interface TagFieldListRenderProps<T> {
+interface TagFieldChipListRenderProps<T> {
   item: T
-  index: number
-  key: VirtualItem["key"]
-  style: React.CSSProperties
+  itemProps: ReturnType<
+    UseMultipleSelectionReturnValue<T>["getSelectedItemProps"]
+  >
 }
-
 interface TagFieldListProps<T extends TagFieldItem>
   extends Partial<TagFieldListContextValue> {
   className?: string
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
 
-export const TagFieldStateContext = createContext<
-  (TagFieldState<any> & { isOpen: boolean }) | null
->(null)
+interface TagFieldStateContextValue<T>
+  extends TagFieldState<T>,
+    Pick<UseComboboxReturnValue<T>, "getItemProps" | "highlightedIndex"> {
+  isOpen: boolean
+}
+
+export const TagFieldStateContext =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  createContext<TagFieldStateContextValue<any> | null>(null)
 export const TagFieldTriggerContext = createContext<
   ContextValue<TagFieldTriggerContextValue, HTMLButtonElement>
 >({})
@@ -236,18 +185,20 @@ type TagFieldListItemContextValue<T extends TagFieldItem> =
   TagFieldAria<T>["listItemProps"]
 
 export const TagFieldListItemContext =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   createContext<TagFieldListItemContextValue<any> | null>(null)
 
 interface TagFieldRootProps<T extends TagFieldItem>
   extends Omit<TagFieldProps<T>, "children">,
-    RenderProps<TagFieldRenderProps<T>> {}
+    RenderProps<TagFieldRootRenderProps<T>> {}
 
 const TagFieldListInner = <T extends TagFieldItem>(
   props: TagFieldListProps<T>,
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
-  const { items } = useContext(TagFieldStateContext)!
+  const { items, getItemProps, highlightedIndex } =
+    useContext(TagFieldStateContext)!
 
   const { slot, className, rowVirtualizer, ...rest } = props
 
@@ -270,14 +221,24 @@ const TagFieldListInner = <T extends TagFieldItem>(
             style={{ height: rowVirtualizer?.getTotalSize() }}
           />
           {rowVirtualizer?.getVirtualItems().map((virtualRow) => {
-            const childProps = {
-              item: items[virtualRow.index],
+            const item = items[virtualRow.index]
+            const itemProps = getItemProps({
+              item,
               index: virtualRow.index,
-              key: virtualRow.key,
               style: {
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
                 height: virtualRow.size,
                 transform: `translateY(${virtualRow.start}px)`,
               },
+            })
+            const childProps = {
+              item,
+              itemProps,
+              isHighlighted: highlightedIndex === virtualRow.index,
+              key: virtualRow.key,
             }
             if (typeof props.children === "function") {
               return props.children(childProps)
@@ -413,9 +374,17 @@ function TagFieldRoot<T extends TagFieldItem>({
   return (
     <Provider
       values={[
-        [TagFieldStateContext, { ...state, isOpen }],
+        [TagFieldStateContext, { ...state, ...listItemProps, isOpen }],
         [LabelContext, labelProps],
         [TagFieldListContext, { ...listBoxProps, rowVirtualizer }],
+        [
+          TagFieldChipListContext,
+          {
+            getSelectedItemProps: chipsProps.getSelectedItemProps,
+            removeSelectedItem: chipsProps.removeSelectedItem,
+            selectedItems: state.selectedItems,
+          },
+        ],
         [TagFieldTriggerContext, buttonProps],
         [
           PopoverContext,
@@ -467,33 +436,26 @@ function TagFieldRoot<T extends TagFieldItem>({
   )
 }
 
-interface TagFieldListItemProps<T extends TagFieldItem> {
-  item: T
-  index: number
-  className?: string
-  style?: React.CSSProperties
-}
+type TagFieldListItemProps<T extends TagFieldItem> = Omit<
+  TagFieldListRenderProps<T>,
+  "key"
+>
 
 const TagFieldListItemInner = <T extends TagFieldItem>(
-  { item, index, ...props }: TagFieldListItemProps<T>,
+  { item, isHighlighted, itemProps }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { getItemProps, highlightedIndex } = useContext(
-    TagFieldListItemContext,
-  )!
-
   const { itemToKey, itemToText } = useContext(TagFieldStateContext)!
 
   return (
     <li
       ref={ref}
       key={itemToKey(item)}
-      {...getItemProps({ item, index })}
-      {...props}
+      {...itemProps}
       className={cn(
-        highlightedIndex === index && "bg-blue-300",
-        "absolute left-0 top-0 flex w-full flex-col px-3 py-2 shadow-sm",
-        props.className,
+        isHighlighted && "bg-blue-300",
+        "flex flex-col px-3 py-2 shadow-sm",
+        itemProps.className,
       )}
     >
       <span>{itemToText(item)}</span>

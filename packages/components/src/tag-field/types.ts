@@ -1,4 +1,4 @@
-import {
+import type {
   FocusableProps,
   HelpTextProps,
   InputBase,
@@ -8,6 +8,9 @@ import {
   TextInputBase,
   Validation,
 } from "@react-types/shared"
+import type { VirtualItem } from "@tanstack/react-virtual"
+import type { ReactNode } from "react"
+import { UseComboboxReturnValue } from "downshift"
 
 export interface TagFieldValidationValue {
   /** The selected key in the TagField. */
@@ -15,6 +18,19 @@ export interface TagFieldValidationValue {
   /** The value of the TagField input. */
   inputValue: string
 }
+
+export interface TagFieldListRenderProps<T> {
+  item: T
+  key: VirtualItem["key"]
+  isHighlighted: boolean
+  itemProps: ReturnType<UseComboboxReturnValue<T>["getItemProps"]> & {
+    style?: React.CSSProperties
+    className?: string
+  }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface TagFieldRenderProps<T> extends TagFieldListRenderProps<T> {}
 
 export interface TagFieldProps<T>
   extends Omit<
@@ -31,6 +47,7 @@ export interface TagFieldProps<T>
     FocusableProps<HTMLInputElement>,
     LabelableProps,
     HelpTextProps {
+  children?: (values: TagFieldRenderProps<T>) => ReactNode
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: (textValue: string, inputValue: string) => boolean
   /**
