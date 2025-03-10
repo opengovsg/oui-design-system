@@ -4,7 +4,7 @@ import { UseMultipleSelectionReturnValue } from "downshift"
 import { TagFieldStateContext } from "./tag-field-state-context"
 import { TagFieldItem } from "./types"
 
-interface TagFieldChipListRenderProps<T> {
+interface TagFieldTagListRenderProps<T> {
   item: T
   itemProps: ReturnType<
     UseMultipleSelectionReturnValue<T>["getSelectedItemProps"]
@@ -14,15 +14,15 @@ interface TagFieldChipListRenderProps<T> {
   isReadOnly: boolean
 }
 
-export interface TagFieldChipListProps<T extends TagFieldItem> {
+export interface TagFieldTagListProps<T extends TagFieldItem> {
   className?: string
   children?:
     | React.ReactNode
-    | ((values: TagFieldChipListRenderProps<T>) => React.ReactNode)
+    | ((values: TagFieldTagListRenderProps<T>) => React.ReactNode)
 }
 
-export const TagFieldChipList = <T extends TagFieldItem>(
-  props: TagFieldChipListProps<T>,
+export const TagFieldTagList = <T extends TagFieldItem>(
+  props: TagFieldTagListProps<T>,
 ) => {
   const {
     selectedItems,

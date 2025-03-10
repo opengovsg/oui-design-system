@@ -10,6 +10,11 @@ import type {
 } from "@react-types/shared"
 import type { VirtualItem } from "@tanstack/react-virtual"
 import type { ReactNode } from "react"
+import {
+  SlotsToClasses,
+  TagFieldSlots,
+  TagFieldVariantProps,
+} from "@opengovsg/oui-theme"
 import { UseComboboxReturnValue } from "downshift"
 
 export interface TagFieldValidationValue {
@@ -52,7 +57,9 @@ export interface TagFieldProps<T>
     Validation<TagFieldValidationValue>,
     FocusableProps<HTMLInputElement>,
     LabelableProps,
-    HelpTextProps {
+    HelpTextProps,
+    TagFieldVariantProps {
+  classNames?: SlotsToClasses<TagFieldSlots>
   children?: (values: TagFieldRenderProps<T>) => ReactNode
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: (textValue: string, inputValue: string) => boolean
