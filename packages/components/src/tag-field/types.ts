@@ -93,6 +93,10 @@ export interface TagFieldProps<T>
   onInputChange?: (value: string) => void
 
   /**
+   * If provided, virtual row height will be set to given value.
+   */
+  virtualRowHeight?: number
+  /**
    * Whether the tag field menu should close on blur.
    * If not provided, the menu will close on blur when the user clicks outside the tag field.
    */

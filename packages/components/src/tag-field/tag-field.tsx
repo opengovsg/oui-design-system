@@ -6,7 +6,7 @@ import { composeRenderProps, Popover } from "react-aria-components"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
-import { TagFieldList } from "./tag-field-list"
+import { TagFieldList, TagFieldListItem } from "./tag-field-list"
 import { TagFieldRoot } from "./tag-field-root"
 import { TagFieldTagList } from "./tag-field-tag-list"
 import { TagFieldTrigger } from "./tag-field-trigger"
@@ -14,6 +14,7 @@ import { TagFieldItem, TagFieldProps } from "./types"
 
 export function TagField<T extends TagFieldItem>({
   classNames,
+  children,
   ...props
 }: TagFieldProps<T>) {
   const styles = tagFieldStyles(props)
@@ -71,12 +72,20 @@ export function TagField<T extends TagFieldItem>({
         </FieldError>
       </div>
       <Popover>
-        <TagFieldList
+        <TagFieldList<T>
           classNames={{
             list: styles.list({ className: classNames?.list }),
             listItem: styles.listItem({ className: classNames?.listItem }),
           }}
-        />
+        >
+          {({ key, ...props }) =>
+            children ? (
+              children({ key, ...props })
+            ) : (
+              <TagFieldListItem {...props} key={key} />
+            )
+          }
+        </TagFieldList>
       </Popover>
     </TagFieldRoot>
   )

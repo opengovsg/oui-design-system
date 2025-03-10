@@ -136,14 +136,27 @@ export const Virtualized: Story = {
 
 export const CustomItem: Story = {
   args: {
-    children: ({ item, itemProps, key, isHighlighted }) => (
-      <div
-        {...itemProps}
-        key={key}
-        className={cn(isHighlighted && "bg-blue-200")}
-      >
-        {item.textValue}
-      </div>
-    ),
+    defaultItems: [...Array(3000)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+      description: "This item has a description",
+    })),
+    virtualRowHeight: 72,
+    children: ({ item, itemProps, key, isHighlighted }) => {
+      return (
+        <div
+          {...itemProps}
+          ref={itemProps.ref}
+          key={key}
+          className={cn(
+            "flex flex-col gap-2 p-2",
+            isHighlighted && "bg-blue-200",
+          )}
+        >
+          <span>{item.textValue}</span>
+          <span className="text-gray-500">{item.description}</span>
+        </div>
+      )
+    },
   },
 }

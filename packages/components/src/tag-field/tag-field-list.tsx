@@ -46,7 +46,7 @@ const TagFieldListItemInner = <T extends TagFieldItem>(
     </li>
   )
 }
-const TagFieldListItem = forwardRefGeneric(TagFieldListItemInner)
+export const TagFieldListItem = forwardRefGeneric(TagFieldListItemInner)
 
 const TagFieldListInner = <T extends TagFieldItem>(
   props: TagFieldListProps<T>,

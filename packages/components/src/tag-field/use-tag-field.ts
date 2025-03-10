@@ -87,6 +87,7 @@ export function useTagField<T>(
     itemToKey,
     itemToText,
     label,
+    virtualRowHeight = 40,
   } = props
 
   const backupBtnRef = useRef(null)
@@ -129,7 +130,7 @@ export function useTagField<T>(
   const rowVirtualizer = useVirtualizer({
     count: items.length,
     getScrollElement: () => listBoxRef.current,
-    estimateSize: () => 44,
+    estimateSize: () => virtualRowHeight,
     getItemKey: useCallback(
       (index: number) => itemToKey(items[index]),
       [itemToKey, items],
