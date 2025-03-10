@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria"
 import { useState } from "react"
 import { cn } from "@opengovsg/oui-theme"
+import { withChromaticModes } from "@oui/chromatic"
 
 import { TagField } from "../tag-field"
 
@@ -88,16 +89,26 @@ export const Controlled: Story = {
   render: ControlledTemplate,
 }
 
-export const WithSelection: Story = {
+export const WithDefaultSelection: Story = {
   args: {
-    selectedKeys: new Set(["1", "3"]),
+    defaultSelectedKeys: new Set(["1", "3", "5", "7", "9"]),
+  },
+  parameters: {
+    chromatic: withChromaticModes(["mobileSmall", "desktop"]),
   },
 }
 
 export const Disabled: Story = {
   args: {
     isDisabled: true,
-    selectedKeys: new Set(["1", "3"]),
+    defaultSelectedKeys: new Set(["1", "3"]),
+  },
+}
+
+export const ReadOnly: Story = {
+  args: {
+    isReadOnly: true,
+    defaultSelectedKeys: new Set(["2", "5"]),
   },
 }
 

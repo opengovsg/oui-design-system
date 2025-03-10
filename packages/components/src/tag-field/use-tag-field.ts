@@ -9,10 +9,10 @@ import {
   useMultipleSelection,
   UseMultipleSelectionReturnValue,
 } from "downshift"
+import { omit } from "lodash-es"
 import { useTextField } from "react-aria"
 import { SetRequired } from "type-fest"
 
-import { pickAriaAttributes } from "../system/utils"
 import { TagFieldProps } from "./types"
 import { TagFieldState } from "./use-tag-field-state"
 
@@ -39,17 +39,21 @@ export interface TagFieldAria<T> extends ValidationResult {
   /** Props for the list box */
   listBoxProps: ReturnType<UseComboboxPropGetters<T>["getMenuProps"]>
 
-  /** Props for the list box items. */
-  listItemProps: Pick<
+  /** Props to augment tag field state. */
+  tagFieldProps: Pick<
     UseComboboxReturnValue<T>,
     "getItemProps" | "highlightedIndex"
-  >
-
-  /** Props for the chips in the tag field. */
-  chipsProps: Pick<
-    UseMultipleSelectionReturnValue<T>,
-    "getSelectedItemProps" | "removeSelectedItem"
-  >
+  > &
+    Pick<
+      UseMultipleSelectionReturnValue<T>,
+      "getSelectedItemProps" | "removeSelectedItem"
+    > & {
+      /** Whether the popover is open. */
+      isOpen: boolean
+      isInvalid: boolean
+      isDisabled: boolean
+      isReadOnly: boolean
+    }
 
   /** Props for the optional trigger button, to be passed to [useButton](useButton.html). */
   buttonProps: ReturnType<UseComboboxReturnValue<T>["getToggleButtonProps"]>
@@ -57,9 +61,6 @@ export interface TagFieldAria<T> extends ValidationResult {
   descriptionProps: DOMAttributes
   /** Props for the combo box error message element, if any. */
   errorMessageProps: DOMAttributes
-
-  /** Whether the popover is open. */
-  isOpen: boolean
 
   rowVirtualizer: Virtualizer<HTMLElement, Element>
 }
@@ -81,8 +82,8 @@ export function useTagField<T>(
     labelRef,
     shouldCloseOnBlur,
     // TODO: Handle these states
-    // isReadOnly,
-    // isDisabled,
+    isReadOnly,
+    isDisabled,
     itemToKey,
     itemToText,
     label,
@@ -111,6 +112,7 @@ export function useTagField<T>(
           case useMultipleSelection.stateChangeTypes.DropdownKeyDownBackspace:
           case useMultipleSelection.stateChangeTypes
             .FunctionRemoveSelectedItem: {
+            if (isDisabled) return
             setSelectedItems(newSelectedItems ?? [])
             break
           }
@@ -150,7 +152,8 @@ export function useTagField<T>(
       }
       return itemToText(item)
     },
-    isItemDisabled: (item) => disabledKeysSet.has(itemToKey(item)),
+    isItemDisabled: (item) =>
+      isDisabled || isReadOnly || disabledKeysSet.has(itemToKey(item)),
     items,
     scrollIntoView: () => {},
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
@@ -225,39 +228,43 @@ export function useTagField<T>(
     errorMessageProps,
   } = useTextField(
     {
-      isReadOnly: props.isReadOnly,
-      isDisabled: props.isDisabled,
+      isReadOnly,
+      isDisabled,
+      isInvalid,
       errorMessage: props.errorMessage,
-      isInvalid: props.isInvalid,
       description: props.description,
       label,
       ...inputProps,
-      onChange: (v) => setInputValue(v),
+      onChange: () => {},
       value: state.inputValue,
     },
     inputRef,
   )
 
   return {
-    labelProps: mergeProps(getLabelProps({ ref: labelRef }), labelProps),
-    // Only pick aria attributes so downshift's event handlers will not be overridden
-    inputProps: mergeProps(inputProps, pickAriaAttributes(newInputProps)),
-    buttonProps: getToggleButtonProps({ ref: buttonRef }),
-    listBoxProps: getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),
-    listItemProps: {
+    tagFieldProps: {
+      isDisabled: newInputProps.disabled ?? false,
+      isReadOnly: newInputProps.readOnly ?? false,
+      isInvalid,
       getItemProps,
       highlightedIndex,
-    },
-    descriptionProps,
-    errorMessageProps,
-    isOpen,
-    isInvalid,
-    validationErrors,
-    validationDetails,
-    chipsProps: {
+      isOpen,
       getSelectedItemProps,
       removeSelectedItem,
     },
+    labelProps: mergeProps(getLabelProps({ ref: labelRef }), labelProps),
+    // Remove onKeyDown from newInputProps to prevent it from being called twice, resulting in arrow keys moving two items.
+    inputProps: mergeProps(inputProps, omit(newInputProps, "onKeyDown")),
+    buttonProps: getToggleButtonProps({
+      ref: buttonRef,
+      disabled: isDisabled,
+    }),
+    listBoxProps: getMenuProps({ ref: listBoxRef }, { suppressRefError: true }),
+    descriptionProps,
+    errorMessageProps,
+    isInvalid,
+    validationErrors,
+    validationDetails,
     rowVirtualizer,
   }
 }

@@ -44,7 +44,7 @@ import {
   removeDataAttributes,
 } from "../system/utils"
 import { TagFieldListRenderProps, TagFieldProps } from "./types"
-import { TagFieldAria, useTagField } from "./use-tag-field"
+import { useTagField } from "./use-tag-field"
 import { TagFieldState, useTagFieldState } from "./use-tag-field-state"
 
 export type TagFieldItem = {
@@ -64,17 +64,6 @@ interface TagFieldRootRenderProps<T extends TagFieldItem>
   items?: T[]
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type TagFieldChipContextValue<T = any> = Required<
-  Pick<
-    UseMultipleSelectionReturnValue<T>,
-    "getSelectedItemProps" | "selectedItems" | "removeSelectedItem"
-  >
->
-
-export const TagFieldChipListContext =
-  createContext<TagFieldChipContextValue | null>(null)
-
 interface TagFieldChipListProps<T extends TagFieldItem> {
   className?: string
   children?: ReactNode | ((values: TagFieldChipListRenderProps<T>) => ReactNode)
@@ -83,21 +72,41 @@ interface TagFieldChipListProps<T extends TagFieldItem> {
 const TagFieldChipList = <T extends TagFieldItem>(
   props: TagFieldChipListProps<T>,
 ) => {
-  const { selectedItems, getSelectedItemProps, removeSelectedItem } =
-    useContext(TagFieldChipListContext)!
+  const {
+    selectedItems,
+    getSelectedItemProps,
+    removeSelectedItem,
+    isDisabled,
+    isReadOnly,
+  } = useContext(TagFieldStateContext)!
+
+  const handleRemoveSelectedItem = useCallback(
+    (item: T) => () => {
+      if (isDisabled || isReadOnly) return
+      removeSelectedItem(item)
+    },
+    [isDisabled, isReadOnly, removeSelectedItem],
+  )
 
   if (props.children !== undefined && typeof props.children !== "function") {
     return props.children
   }
 
   return selectedItems.map((selectedItem, index) => {
+    const itemProps = getSelectedItemProps({
+      disabled: isDisabled,
+      readOnly: isReadOnly,
+      selectedItem,
+      index,
+    })
+
     if (typeof props.children === "function") {
       return props.children({
         item: selectedItem,
-        itemProps: getSelectedItemProps({
-          selectedItem,
-          index,
-        }),
+        removeSelectedItem: handleRemoveSelectedItem(selectedItem),
+        isDisabled,
+        isReadOnly,
+        itemProps,
       })
     }
 
@@ -105,17 +114,14 @@ const TagFieldChipList = <T extends TagFieldItem>(
       <span
         className="rounded-md bg-gray-100 px-1 focus:bg-red-400"
         key={`selected-item-${index}`}
-        {...getSelectedItemProps({
-          selectedItem,
-          index,
-        })}
+        {...itemProps}
       >
         {selectedItem.textValue}
         <span
           className="cursor-pointer px-1"
           onClick={(e) => {
             e.stopPropagation()
-            removeSelectedItem(selectedItem)
+            handleRemoveSelectedItem(selectedItem)()
           }}
         >
           &#10005;
@@ -153,6 +159,9 @@ interface TagFieldChipListRenderProps<T> {
   itemProps: ReturnType<
     UseMultipleSelectionReturnValue<T>["getSelectedItemProps"]
   >
+  removeSelectedItem: () => void
+  isDisabled: boolean
+  isReadOnly: boolean
 }
 interface TagFieldListProps<T extends TagFieldItem>
   extends Partial<TagFieldListContextValue> {
@@ -162,8 +171,15 @@ interface TagFieldListProps<T extends TagFieldItem>
 
 interface TagFieldStateContextValue<T>
   extends TagFieldState<T>,
-    Pick<UseComboboxReturnValue<T>, "getItemProps" | "highlightedIndex"> {
+    Pick<UseComboboxReturnValue<T>, "getItemProps" | "highlightedIndex">,
+    Pick<
+      UseMultipleSelectionReturnValue<T>,
+      "getSelectedItemProps" | "removeSelectedItem"
+    > {
   isOpen: boolean
+  isInvalid: boolean
+  isDisabled: boolean
+  isReadOnly: boolean
 }
 
 export const TagFieldStateContext =
@@ -180,14 +196,6 @@ interface TagFieldListContextValue
 }
 export const TagFieldListContext =
   createContext<ContextValue<TagFieldListContextValue, HTMLUListElement>>(null)
-
-type TagFieldListItemContextValue<T extends TagFieldItem> =
-  TagFieldAria<T>["listItemProps"]
-
-export const TagFieldListItemContext =
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  createContext<TagFieldListItemContextValue<any> | null>(null)
-
 interface TagFieldRootProps<T extends TagFieldItem>
   extends Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRootRenderProps<T>> {}
@@ -321,15 +329,13 @@ function TagFieldRoot<T extends TagFieldItem>({
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   const {
+    tagFieldProps,
     buttonProps,
     inputProps,
     labelProps,
     listBoxProps,
-    listItemProps,
     descriptionProps,
     errorMessageProps,
-    chipsProps,
-    isOpen,
     rowVirtualizer,
     ...validation
   } = useTagField(
@@ -363,28 +369,25 @@ function TagFieldRoot<T extends TagFieldItem>({
   // Only expose a subset of state to renderProps function to avoid infinite render loop
   const renderPropsState = useMemo(
     () => ({
-      isOpen,
+      isOpen: tagFieldProps.isOpen,
       isDisabled: props.isDisabled || false,
       isInvalid: validation.isInvalid || false,
       isRequired: props.isRequired || false,
     }),
-    [isOpen, props.isDisabled, props.isRequired, validation.isInvalid],
+    [
+      tagFieldProps.isOpen,
+      props.isDisabled,
+      props.isRequired,
+      validation.isInvalid,
+    ],
   )
 
   return (
     <Provider
       values={[
-        [TagFieldStateContext, { ...state, ...listItemProps, isOpen }],
+        [TagFieldStateContext, { ...state, ...tagFieldProps }],
         [LabelContext, labelProps],
         [TagFieldListContext, { ...listBoxProps, rowVirtualizer }],
-        [
-          TagFieldChipListContext,
-          {
-            getSelectedItemProps: chipsProps.getSelectedItemProps,
-            removeSelectedItem: chipsProps.removeSelectedItem,
-            selectedItems: state.selectedItems,
-          },
-        ],
         [TagFieldTriggerContext, buttonProps],
         [
           PopoverContext,
@@ -393,13 +396,12 @@ function TagFieldRoot<T extends TagFieldItem>({
             triggerRef: fieldRef,
             scrollRef: listBoxRef,
             placement: "bottom start",
-            isOpen,
+            isOpen: tagFieldProps.isOpen,
             isNonModal: true,
             trigger: "TagField",
             style: { "--trigger-width": menuWidth } as React.CSSProperties,
           },
         ],
-        [TagFieldListItemContext, listItemProps],
         [InputContext, inputProps],
         [
           TextContext,
@@ -426,10 +428,10 @@ function TagFieldRoot<T extends TagFieldItem>({
             ...renderPropsState,
             defaultChildren: null,
             items: state.items,
-            highlightedIndex: listItemProps.highlightedIndex,
-            getSelectedItemProps: chipsProps.getSelectedItemProps,
-            removeSelectedItem: chipsProps.removeSelectedItem,
             selectedItems: state.selectedItems,
+            highlightedIndex: tagFieldProps.highlightedIndex,
+            getSelectedItemProps: tagFieldProps.getSelectedItemProps,
+            removeSelectedItem: tagFieldProps.removeSelectedItem,
           })
         : children}
     </Provider>
