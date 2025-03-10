@@ -92,14 +92,19 @@ export function useTagFieldState<T extends object>(
     props.onInputChange,
   )
 
+  const controlledSelectedKeys = useMemo(
+    () => new Set(selectedItems.map(itemToKey)),
+    [itemToKey, selectedItems],
+  )
+
   const validation = useFormValidationState({
     ...props,
     value: useMemo(
       () => ({
         inputValue,
-        selectedKeys: new Set(selectedItems.map(itemToKey)),
+        selectedKeys: controlledSelectedKeys,
       }),
-      [inputValue, itemToKey, selectedItems],
+      [controlledSelectedKeys, inputValue],
     ),
   })
 
@@ -112,9 +117,19 @@ export function useTagFieldState<T extends object>(
             items: props.defaultItems ?? [],
             inputValue,
             itemToText,
+            itemToKey,
+            selectedKeys: controlledSelectedKeys,
             filter: defaultFilter,
           }),
-    [props.items, props.defaultItems, defaultFilter, inputValue, itemToText],
+    [
+      props.items,
+      props.defaultItems,
+      defaultFilter,
+      inputValue,
+      itemToText,
+      itemToKey,
+      controlledSelectedKeys,
+    ],
   )
 
   return {
@@ -134,12 +149,21 @@ function filterItems<T extends object>({
   items,
   inputValue,
   itemToText,
+  itemToKey,
   filter,
+  selectedKeys,
 }: {
   items: T[]
   inputValue: string
   itemToText: (item: T) => string
+  itemToKey: (item: T) => Key
   filter: FilterFn
+  selectedKeys?: Set<Key>
 }): T[] {
-  return items.filter((item) => filter(itemToText(item), inputValue))
+  return items.filter((item) => {
+    const isSelected = selectedKeys ? selectedKeys.has(itemToKey(item)) : false
+    if (isSelected) return false
+    const matchesFilter = filter(itemToText(item), inputValue)
+    return matchesFilter
+  })
 }
