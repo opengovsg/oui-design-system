@@ -36,6 +36,7 @@ export function TagField<T extends TagFieldItem>({
             <TagFieldTagList
               classNames={{
                 tag: styles.tag({ className: classNames?.tag }),
+                tagText: styles.tagText({ className: classNames?.tagText }),
                 tagIcon: styles.tagIcon({ className: classNames?.tagIcon }),
               }}
             />
@@ -76,6 +77,9 @@ export function TagField<T extends TagFieldItem>({
           classNames={{
             list: styles.list({ className: classNames?.list }),
             listItem: styles.listItem({ className: classNames?.listItem }),
+            listItemText: styles.listItemText({
+              className: classNames?.listItemText,
+            }),
           }}
         >
           {({ key, ...props }) =>

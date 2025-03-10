@@ -12,15 +12,16 @@ export const tagFieldStyles = tv({
       ...focusClasses,
       "bg-interaction-main-subtle-default hover:bg-interaction-main-subtle-hover text-interaction-main-default flex cursor-pointer flex-row items-center gap-1 rounded-md transition",
     ],
-    tagIcon: "cursor-pointer",
+    tagText: "line-clamp-1",
+    tagIcon: "shrink-0 cursor-pointer",
     input: "h-auto min-w-24 p-0",
     trigger: "flex items-center aria-expanded:rotate-180",
     description: "",
     error: "",
-    popover: "",
-    list: "relative z-10 mt-1 max-h-80 w-(--trigger-width) overflow-scroll bg-white p-0 shadow-md",
+    list: "relative z-10 max-h-80 w-(--trigger-width) overflow-y-auto rounded-b-sm bg-white p-0 shadow-sm",
     listItem:
       "aria-disabled:text-interaction-support-disabled-content hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active flex flex-col",
+    listItemText: "line-clamp-1",
   },
   variants: {
     isDisabled: {
@@ -35,7 +36,7 @@ export const tagFieldStyles = tv({
         input: "prose-body-2 py-1",
         tag: "prose-subhead-2 px-2 py-1",
         tagIcon: "size-4",
-        trigger: "h-full w-5",
+        trigger: "h-7 w-5",
         listItem: "prose-body-1 px-3 py-2",
       },
     },

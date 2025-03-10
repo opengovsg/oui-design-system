@@ -17,7 +17,10 @@ interface TagFieldTagListRenderProps<T> {
 }
 
 export interface TagFieldTagListProps<T extends TagFieldItem> {
-  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "tag" | "tagIcon">
+  classNames?: Pick<
+    SlotsToClasses<TagFieldSlots>,
+    "tag" | "tagIcon" | "tagText"
+  >
   children?:
     | React.ReactNode
     | ((values: TagFieldTagListRenderProps<T>) => React.ReactNode)
@@ -71,7 +74,7 @@ export const TagFieldTagList = <T extends TagFieldItem>({
         key={`selected-item-${index}`}
         {...itemProps}
       >
-        {selectedItem.textValue}
+        <span className={classNames?.tagText}>{selectedItem.textValue}</span>
         <XIcon
           className={classNames?.tagIcon}
           onClick={(e) => {

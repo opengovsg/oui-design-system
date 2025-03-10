@@ -129,7 +129,7 @@ export const Virtualized: Story = {
   args: {
     defaultItems: [...Array(3000)].map((_, i) => ({
       id: String(i),
-      textValue: `Item ${i}`,
+      textValue: `Very very Item ${i} Very very Very very Very very Very very Very very Very very `,
     })),
   },
 }

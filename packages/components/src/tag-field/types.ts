@@ -30,8 +30,8 @@ export interface TagFieldListRenderProps<T> {
   isHighlighted: boolean
   itemProps: ReturnType<UseComboboxReturnValue<T>["getItemProps"]> & {
     style?: React.CSSProperties
-    className?: string
   }
+  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "listItem" | "listItemText">
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

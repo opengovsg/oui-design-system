@@ -19,7 +19,10 @@ export const TagFieldListContext =
 
 interface TagFieldListProps<T extends TagFieldItem>
   extends Partial<TagFieldListContextValue> {
-  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "list" | "listItem">
+  classNames?: Pick<
+    SlotsToClasses<TagFieldSlots>,
+    "list" | "listItem" | "listItemText"
+  >
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
 
@@ -29,20 +32,20 @@ type TagFieldListItemProps<T extends TagFieldItem> = Omit<
 >
 
 const TagFieldListItemInner = <T extends TagFieldItem>(
-  { item, isHighlighted, itemProps }: TagFieldListItemProps<T>,
+  { item, isHighlighted, itemProps, classNames }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { itemToKey, itemToText } = useContext(TagFieldStateContext)!
+  const { itemToText } = useContext(TagFieldStateContext)!
 
   return (
     <li
       ref={ref}
-      key={itemToKey(item)}
       {...itemProps}
+      className={classNames?.listItem}
       data-rac
       data-hovered={dataAttr(isHighlighted)}
     >
-      <span>{itemToText(item)}</span>
+      <span className={classNames?.listItemText}>{itemToText(item)}</span>
     </li>
   )
 }
@@ -78,7 +81,6 @@ const TagFieldListInner = <T extends TagFieldItem>(
             const itemProps = getItemProps({
               item,
               index: virtualRow.index,
-              className: classNames?.listItem,
               style: {
                 position: "absolute",
                 top: 0,
@@ -93,6 +95,10 @@ const TagFieldListInner = <T extends TagFieldItem>(
               itemProps,
               isHighlighted: highlightedIndex === virtualRow.index,
               key: virtualRow.key,
+              classNames: {
+                listItem: classNames?.listItem,
+                listItemText: classNames?.listItemText,
+              },
             }
             if (typeof props.children === "function") {
               return props.children(childProps)
