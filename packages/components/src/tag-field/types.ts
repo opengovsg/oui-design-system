@@ -32,6 +32,12 @@ export interface TagFieldListRenderProps<T> {
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface TagFieldRenderProps<T> extends TagFieldListRenderProps<T> {}
 
+export type TagFieldItem = {
+  textValue: string
+  id: Key
+  description?: string
+}
+
 export interface TagFieldProps<T>
   extends Omit<
       MultipleSelection,
@@ -78,8 +84,6 @@ export interface TagFieldProps<T>
   defaultInputValue?: string
   /** Handler that is called when the TagField input value changes. */
   onInputChange?: (value: string) => void
-  /** Whether the TagField allows a non-item matching chip to be created and selected via a custom input. */
-  allowsCustomValue?: boolean
 
   /**
    * Whether the tag field menu should close on blur.

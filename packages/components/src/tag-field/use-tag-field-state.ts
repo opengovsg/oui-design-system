@@ -55,12 +55,7 @@ export interface TagFieldStateOptions<T>
 export function useTagFieldState<T extends object>(
   props: TagFieldStateOptions<T>,
 ): TagFieldState<T> {
-  const {
-    itemToText,
-    itemToKey,
-    defaultFilter,
-    // allowsCustomValue,
-  } = props
+  const { itemToText, itemToKey, defaultFilter } = props
 
   const itemsByKey = useMemo(() => {
     const items = props.items ?? props.defaultItems ?? []
