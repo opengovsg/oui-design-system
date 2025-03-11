@@ -139,6 +139,18 @@ export const Virtualized: Story = {
   },
 }
 
+export const Sizes: Story = {
+  render(args) {
+    return (
+      <div className="space-y-4">
+        <TagField {...args} label={`${args.label} (xs)`} size="xs" />
+        <TagField {...args} label={`${args.label} (sm)`} size="sm" />
+        <TagField {...args} label={`${args.label} (md)`} size="md" />
+      </div>
+    )
+  },
+}
+
 export const CustomItem: Story = {
   args: {
     defaultItems: [...Array(3000)].map((_, i) => ({

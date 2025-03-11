@@ -22,7 +22,10 @@ export function TagField<T extends TagFieldItem>({
   return (
     <TagFieldRoot {...props}>
       <div className={styles.root({ className: classNames?.root })}>
-        <Label className={styles.label({ className: classNames?.label })}>
+        <Label
+          size={props.size}
+          className={styles.label({ className: classNames?.label })}
+        >
           {props.label}
         </Label>
         <FieldGroup
@@ -42,10 +45,11 @@ export function TagField<T extends TagFieldItem>({
             />
             <Input
               variant="unstyled"
+              size={props.size}
               className={composeRenderProps(
-                classNames?.input,
+                classNames?.field,
                 (className, renderProps) =>
-                  styles.input({ className, ...renderProps }),
+                  styles.field({ className, ...renderProps }),
               )}
             />
           </div>
@@ -57,6 +61,7 @@ export function TagField<T extends TagFieldItem>({
         </FieldGroup>
         {props.description && (
           <Description
+            size={props.size}
             className={styles.description({
               className: classNames?.description,
             })}
@@ -65,6 +70,7 @@ export function TagField<T extends TagFieldItem>({
           </Description>
         )}
         <FieldError
+          size={props.size}
           className={styles.error({
             className: classNames?.error,
           })}
