@@ -41,6 +41,10 @@ const calculateEstimatedRowHeight = (
   size: NonNullable<TagFieldVariantProps["size"]>,
 ): number => {
   switch (size) {
+    case "xs":
+      return 44
+    case "sm":
+      return 44
     case "md":
       return 48
   }
