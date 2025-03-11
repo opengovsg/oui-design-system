@@ -170,7 +170,7 @@ export const CustomItem: Story = {
           )}
         >
           <span>{item.textValue}</span>
-          <span className="text-gray-500">{item.description}</span>
+          <span className="text-black">{item.description}</span>
         </div>
       )
     },
