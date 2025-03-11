@@ -27,12 +27,12 @@ import {
   ListBoxItemRenderProps,
   ListBoxProps,
   ListBoxRenderProps,
+  ListLayout,
   ListLayoutOptions,
   Popover,
   Text,
-  UNSTABLE_ListLayout,
-  UNSTABLE_Virtualizer,
   ValidationResult,
+  Virtualizer,
 } from "react-aria-components"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
@@ -145,7 +145,7 @@ export function ComboBox<T extends ComboBoxItem>({
   const formatMessage = useMessageFormatter(i18nStrings)
   const styles = comboBoxStyles({ size })
   const layout = useMemo(() => {
-    return new UNSTABLE_ListLayout({
+    return new ListLayout({
       estimatedRowHeight: calculateEstimatedRowHeight(size ?? "md"),
       ...listLayoutOptions,
     })
@@ -254,7 +254,7 @@ export function ComboBox<T extends ComboBoxItem>({
           </div>
           {description && <Description size={size}>{description}</Description>}
           <FieldError size={size}>{errorMessage}</FieldError>
-          <UNSTABLE_Virtualizer layout={layout}>
+          <Virtualizer layout={layout}>
             <Popover
               className={composeRenderProps(
                 classNames?.popover,
@@ -288,7 +288,7 @@ export function ComboBox<T extends ComboBoxItem>({
                 }}
               </ListBox>
             </Popover>
-          </UNSTABLE_Virtualizer>
+          </Virtualizer>
         </>
       )}
     </AriaComboBox>
