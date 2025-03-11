@@ -1,5 +1,6 @@
 import type { UseMultipleSelectionReturnValue } from "downshift"
 import { useCallback, useMemo, useRef, useState } from "react"
+import { TagFieldVariantProps } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
 import { get } from "lodash-es"
 import { useFilter } from "react-aria"
@@ -36,15 +37,29 @@ interface TagFieldRootRenderProps<T extends TagFieldItem>
   items?: T[]
 }
 
+const calculateEstimatedRowHeight = (
+  size: NonNullable<TagFieldVariantProps["size"]>,
+): number => {
+  switch (size) {
+    case "md":
+      return 48
+  }
+}
+
 export interface TagFieldRootProps<T extends TagFieldItem>
   extends Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRootRenderProps<T>> {}
 
 export function TagFieldRoot<T extends TagFieldItem>({
   children,
+  virtualRowHeight: _virtualRowHeight,
   ...props
 }: TagFieldRootProps<T>) {
   const { itemToKey: defaultItemToKey, itemToText: defaultItemToText } = props
+  const virtualRowHeight = useMemo(
+    () => _virtualRowHeight ?? calculateEstimatedRowHeight(props.size ?? "md"),
+    [_virtualRowHeight, props.size],
+  )
   const { contains } = useFilter({ sensitivity: "base" })
   const itemToText = useCallback(
     (item: T) => {
@@ -104,6 +119,7 @@ export function TagFieldRoot<T extends TagFieldItem>({
   } = useTagField(
     {
       ...removeDataAttributes(props),
+      virtualRowHeight,
       itemToKey,
       itemToText,
       inputRef,
@@ -148,7 +164,15 @@ export function TagFieldRoot<T extends TagFieldItem>({
   return (
     <Provider
       values={[
-        [TagFieldStateContext, { ...state, ...tagFieldProps }],
+        [
+          TagFieldStateContext,
+          {
+            ...state,
+            ...tagFieldProps,
+            size: props.size,
+            variant: props.variant,
+          },
+        ],
         [LabelContext, labelProps],
         [TagFieldListContext, { ...listBoxProps, rowVirtualizer }],
         [TagFieldTriggerContext, buttonProps],

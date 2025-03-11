@@ -12,6 +12,7 @@ import type { VirtualItem } from "@tanstack/react-virtual"
 import type { ReactNode } from "react"
 import {
   SlotsToClasses,
+  TagFieldItemSlots,
   TagFieldSlots,
   TagFieldVariantProps,
 } from "@opengovsg/oui-theme"
@@ -30,7 +31,8 @@ export interface TagFieldListRenderProps<T>
   key: VirtualItem["key"]
   isHighlighted: boolean
   style?: React.CSSProperties
-  classNames?: Pick<SlotsToClasses<TagFieldSlots>, "listItem" | "listItemText">
+  className?: string
+  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -59,6 +61,7 @@ export interface TagFieldProps<T>
     HelpTextProps,
     TagFieldVariantProps {
   classNames?: SlotsToClasses<TagFieldSlots>
+  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
   children?: (values: TagFieldRenderProps<T>) => ReactNode
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: (textValue: string, inputValue: string) => boolean

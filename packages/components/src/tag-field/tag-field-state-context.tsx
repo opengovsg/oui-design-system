@@ -3,6 +3,7 @@ import type {
   UseMultipleSelectionReturnValue,
 } from "downshift"
 import { createContext } from "react"
+import { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
 import { TagFieldState } from "./use-tag-field-state"
 
@@ -12,7 +13,8 @@ interface TagFieldStateContextValue<T>
     Pick<
       UseMultipleSelectionReturnValue<T>,
       "getSelectedItemProps" | "removeSelectedItem"
-    > {
+    >,
+    TagFieldVariantProps {
   isOpen: boolean
   isInvalid: boolean
   isDisabled: boolean

@@ -74,13 +74,8 @@ export function TagField<T extends TagFieldItem>({
       </div>
       <Popover>
         <TagFieldList<T>
-          classNames={{
-            list: styles.list({ className: classNames?.list }),
-            listItem: styles.listItem({ className: classNames?.listItem }),
-            listItemText: styles.listItemText({
-              className: classNames?.listItemText,
-            }),
-          }}
+          className={styles.list({ className: classNames?.list })}
+          itemClassNames={props.itemClassNames}
         >
           {({ key, ...props }) =>
             children ? (
