@@ -75,6 +75,7 @@ const TagFieldListInner = <T extends TagFieldItem>(
         <>
           <li
             key="total-size"
+            aria-hidden
             style={{ height: rowVirtualizer?.getTotalSize() }}
           />
           {rowVirtualizer?.getVirtualItems().map((virtualRow) => {
