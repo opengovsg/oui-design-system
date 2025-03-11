@@ -4,6 +4,7 @@
   "type": "module",
   "private": true,
   "sideEffects": false,
+  "license": "SEE LICENSE IN LICENSE.md",
   "exports": {
     "./base": "./base.js",
     "./storybook": "./storybook.js",
