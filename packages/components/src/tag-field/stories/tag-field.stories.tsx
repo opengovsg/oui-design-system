@@ -3,6 +3,7 @@ import type { Key } from "react-aria"
 import { useState } from "react"
 import { cn } from "@opengovsg/oui-theme"
 import { withChromaticModes } from "@oui/chromatic"
+import { userEvent } from "@storybook/test"
 
 import { TagField } from "../tag-field"
 
@@ -27,8 +28,12 @@ export const Default: Story = {
 }
 
 export const DisabledKeys: Story = {
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   args: {
     disabledKeys: ["1", "3", "5", "7", "9"],
+  },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Tag Field"))
   },
 }
 
@@ -142,11 +147,10 @@ export const CustomItem: Story = {
       description: "This item has a description",
     })),
     virtualRowHeight: 72,
-    children: ({ item, itemProps, key, isHighlighted }) => {
+    children: ({ item, key, isHighlighted, ...itemProps }) => {
       return (
         <div
           {...itemProps}
-          ref={itemProps.ref}
           key={key}
           className={cn(
             "flex flex-col gap-2 p-2",

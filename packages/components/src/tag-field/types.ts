@@ -24,13 +24,12 @@ export interface TagFieldValidationValue {
   inputValue: string
 }
 
-export interface TagFieldListRenderProps<T> {
+export interface TagFieldListRenderProps<T>
+  extends ReturnType<UseComboboxReturnValue<T>["getItemProps"]> {
   item: T
   key: VirtualItem["key"]
   isHighlighted: boolean
-  itemProps: ReturnType<UseComboboxReturnValue<T>["getItemProps"]> & {
-    style?: React.CSSProperties
-  }
+  style?: React.CSSProperties
   classNames?: Pick<SlotsToClasses<TagFieldSlots>, "listItem" | "listItemText">
 }
 

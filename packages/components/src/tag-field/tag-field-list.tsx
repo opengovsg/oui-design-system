@@ -32,7 +32,7 @@ type TagFieldListItemProps<T extends TagFieldItem> = Omit<
 >
 
 const TagFieldListItemInner = <T extends TagFieldItem>(
-  { item, isHighlighted, itemProps, classNames }: TagFieldListItemProps<T>,
+  { item, isHighlighted, classNames, ...itemProps }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
   const { itemToText } = useContext(TagFieldStateContext)!
@@ -92,9 +92,9 @@ const TagFieldListInner = <T extends TagFieldItem>(
             })
             const childProps = {
               item,
-              itemProps,
               isHighlighted: highlightedIndex === virtualRow.index,
               key: virtualRow.key,
+              ...itemProps,
               classNames: {
                 listItem: classNames?.listItem,
                 listItemText: classNames?.listItemText,
