@@ -1,0 +1,88 @@
+import { useCallback, useContext } from "react"
+import { SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
+import { UseMultipleSelectionReturnValue } from "downshift"
+import { XIcon } from "lucide-react"
+
+import { TagFieldStateContext } from "./tag-field-state-context"
+import { TagFieldItem } from "./types"
+
+interface TagFieldTagListRenderProps<T> {
+  item: T
+  itemProps: ReturnType<
+    UseMultipleSelectionReturnValue<T>["getSelectedItemProps"]
+  >
+  removeSelectedItem: () => void
+  isDisabled: boolean
+  isReadOnly: boolean
+}
+
+export interface TagFieldTagListProps<T extends TagFieldItem> {
+  classNames?: Pick<
+    SlotsToClasses<TagFieldSlots>,
+    "tag" | "tagIcon" | "tagText"
+  >
+  children?:
+    | React.ReactNode
+    | ((values: TagFieldTagListRenderProps<T>) => React.ReactNode)
+}
+
+export const TagFieldTagList = <T extends TagFieldItem>({
+  classNames,
+  ...props
+}: TagFieldTagListProps<T>) => {
+  const {
+    selectedItems,
+    getSelectedItemProps,
+    removeSelectedItem,
+    isDisabled,
+    isReadOnly,
+  } = useContext(TagFieldStateContext)!
+
+  const handleRemoveSelectedItem = useCallback(
+    (item: T) => () => {
+      if (isDisabled || isReadOnly) return
+      removeSelectedItem(item)
+    },
+    [isDisabled, isReadOnly, removeSelectedItem],
+  )
+
+  if (props.children !== undefined && typeof props.children !== "function") {
+    return props.children
+  }
+
+  return selectedItems.map((selectedItem, index) => {
+    const itemProps = getSelectedItemProps({
+      disabled: isDisabled,
+      readOnly: isReadOnly,
+      selectedItem,
+      index,
+    })
+
+    if (typeof props.children === "function") {
+      return props.children({
+        item: selectedItem,
+        removeSelectedItem: handleRemoveSelectedItem(selectedItem),
+        isDisabled,
+        isReadOnly,
+        itemProps,
+      })
+    }
+
+    return (
+      <span
+        className={classNames?.tag}
+        key={`selected-item-${index}`}
+        {...itemProps}
+      >
+        <span className={classNames?.tagText}>{selectedItem.textValue}</span>
+        <XIcon
+          className={classNames?.tagIcon}
+          onClick={(e) => {
+            e.stopPropagation()
+            handleRemoveSelectedItem(selectedItem)()
+          }}
+        />
+      </span>
+    )
+  })
+}
