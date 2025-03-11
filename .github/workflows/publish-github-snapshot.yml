@@ -1,4 +1,4 @@
-name: Publish snapshot to Github registry
+name: Publish to Github registry
 on:
   push:
     branches:
