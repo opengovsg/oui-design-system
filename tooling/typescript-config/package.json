@@ -2,7 +2,7 @@
   "name": "@oui/typescript-config",
   "version": "0.0.0",
   "private": true,
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE.md",
   "publishConfig": {
     "access": "public"
   }
