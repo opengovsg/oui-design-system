@@ -28,10 +28,10 @@ export const Default: Story = {
 }
 
 export const DisabledKeys: Story = {
-  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   args: {
     disabledKeys: ["1", "3", "5", "7", "9"],
   },
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   play: async ({ canvas }) => {
     userEvent.click(canvas.getByLabelText("Tag Field"))
   },
@@ -174,5 +174,9 @@ export const CustomItem: Story = {
         </div>
       )
     },
+  },
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Tag Field"))
   },
 }
