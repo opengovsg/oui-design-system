@@ -20,7 +20,7 @@ import {
 } from "react-aria-components"
 
 import { Button } from "../button/button"
-import { useCalendarContext } from "./calendar-context"
+import { useCalendarStyleContext } from "./calendar-style-context"
 
 export interface CalendarBaseProps<T extends DateValue>
   extends AriaCalendarProps<T>,
@@ -33,7 +33,7 @@ export function CalendarBase<T extends DateValue>({
   calendarRef,
   ...props
 }: CalendarBaseProps<T>) {
-  const { slots, className, classNames } = useCalendarContext()
+  const { slots, className, classNames } = useCalendarStyleContext()
 
   return (
     <AriaCalendar
@@ -71,11 +71,13 @@ export function CalendarBase<T extends DateValue>({
 
 export function CalendarHeader() {
   const { direction } = useLocale()
-  const { slots, classNames, size } = useCalendarContext()
+  const { slots, classNames, size } = useCalendarStyleContext()
+
+  // TODO: Add components to control the current date
 
   return (
     <header className={slots.header({ className: classNames?.header })}>
-      <Heading />
+      <Heading></Heading>
       <Group>
         <Button
           size={size}
@@ -109,7 +111,7 @@ export function CalendarHeader() {
 }
 
 export function CalendarGridHeader() {
-  const { slots, classNames } = useCalendarContext()
+  const { slots, classNames } = useCalendarStyleContext()
   return (
     <AriaCalendarGridHeader
       className={slots.gridHeader({ className: classNames?.gridHeader })}

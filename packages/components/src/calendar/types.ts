@@ -8,12 +8,8 @@ import type {
   CalendarGridProps,
   DateValue,
 } from "react-aria-components"
-import { calendarStyles } from "@opengovsg/oui-theme"
-import { useDeepCompareMemo } from "use-deep-compare"
 
-import { mapPropsVariants } from "../system/utils"
-
-export interface UseCalendarProps<T extends DateValue>
+export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
     CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle"> {
@@ -55,32 +51,3 @@ export interface UseCalendarProps<T extends DateValue>
    */
   classNames?: SlotsToClasses<CalendarSlots>
 }
-
-export function useCalendar<T extends DateValue>(
-  originalProps: UseCalendarProps<T>,
-) {
-  const [props, variantProps] = mapPropsVariants(
-    originalProps,
-    calendarStyles.variantKeys,
-  )
-
-  const { errorMessage, className, classNames, ...restProps } = props
-
-  const slots = useDeepCompareMemo(
-    () => calendarStyles(variantProps),
-    [variantProps],
-  )
-
-  return {
-    context: {
-      slots,
-      classNames,
-      className,
-      size: variantProps.size,
-      errorMessage,
-    },
-    calendarProps: { ...restProps, onChange: restProps.onChange },
-  }
-}
-
-export type UseCalendarReturn = ReturnType<typeof useCalendar>

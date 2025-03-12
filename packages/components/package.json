@@ -44,12 +44,12 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "devDependencies": {
-    "@react-types/calendar": "^3.5.0",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/chromatic": "workspace:*",
     "@oui/eslint-config": "workspace:*",
     "@oui/prettier-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
+    "@react-types/calendar": "^3.6.1",
     "@storybook/react": "8.6.4",
     "@storybook/test": "8.6.4",
     "@types/lodash-es": "^4.17.12",

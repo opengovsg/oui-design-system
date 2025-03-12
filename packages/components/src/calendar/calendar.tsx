@@ -1,20 +1,23 @@
 import type { ForwardedRef, ReactElement } from "react"
-import { DateValue } from "@react-types/calendar"
+import type { DateValue } from "react-aria-components"
 
 import { forwardRef } from "../system/utils"
 import { CalendarBase } from "./calendar-base"
-import { CalendarProvider } from "./calendar-context"
-import { useCalendar, UseCalendarProps } from "./use-calendar"
+import {
+  CalendarStyleProvider,
+  useProvideCalendarStyles,
+} from "./calendar-style-context"
+import { CalendarProps } from "./types"
 
 export const Calendar = forwardRef(function Calendar<T extends DateValue>(
-  props: UseCalendarProps<T>,
+  props: CalendarProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const { calendarProps, context } = useCalendar<T>(props)
+  const { calendarProps, context } = useProvideCalendarStyles<T>(props)
 
   return (
-    <CalendarProvider value={context}>
+    <CalendarStyleProvider value={context}>
       <CalendarBase calendarRef={ref} {...calendarProps} />
-    </CalendarProvider>
+    </CalendarStyleProvider>
   )
-}) as <T extends DateValue>(props: UseCalendarProps<T>) => ReactElement
+}) as <T extends DateValue>(props: CalendarProps<T>) => ReactElement

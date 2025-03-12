@@ -369,7 +369,7 @@ importers:
         specifier: workspace:*
         version: link:../../tooling/typescript-config
       '@react-types/calendar':
-        specifier: ^3.5.0
+        specifier: ^3.6.1
         version: 3.6.1(react@19.0.0)
       '@storybook/react':
         specifier: 8.6.4
