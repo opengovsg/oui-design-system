@@ -28,7 +28,7 @@ jobs:
         run: |
           echo -e "@opengovsg:registry=https://registry.npmjs.org\n//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > $HOME/.npmrc
 
-      - name: Create Release PR or Publish to Github
+      - name: Create Release PR or Publish to npm
         id: changesets
         uses: changesets/action@v1
         with:
