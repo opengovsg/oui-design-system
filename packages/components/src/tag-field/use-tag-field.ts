@@ -211,6 +211,7 @@ export function useTagField<T>(
     state.displayValidation
 
   const inputProps = getInputProps({
+    placeholder: props.placeholder,
     ref: inputRef,
     "aria-label": props["aria-label"],
     "aria-labelledby": props["aria-labelledby"],
