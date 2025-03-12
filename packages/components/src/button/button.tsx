@@ -46,6 +46,12 @@ export interface ButtonProps
    * @defaultValue "start"
    */
   spinnerPlacement?: "start" | "end"
+
+  /**
+   * Whether the button only contains an icon.
+   * If true, you must provide an `aria-label` for accessibility.
+   */
+  isIconOnly?: boolean
 }
 
 /**

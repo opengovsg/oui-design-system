@@ -2,13 +2,13 @@ import type {
   CalendarSlots,
   CalendarVariantProps,
   SlotsToClasses,
-} from "@unnamed/theme"
+} from "@opengovsg/oui-theme"
 import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
   DateValue,
 } from "react-aria-components"
-import { calendarStyles } from "@unnamed/theme"
+import { calendarStyles } from "@opengovsg/oui-theme"
 import { useDeepCompareMemo } from "use-deep-compare"
 
 import { mapPropsVariants } from "../system/utils"

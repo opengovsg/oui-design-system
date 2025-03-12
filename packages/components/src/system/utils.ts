@@ -82,12 +82,15 @@ export const mapPropsVariants = <
     return [props, {} as Pick<T, K>]
   }
 
-  const picked = variantKeys.reduce((acc, key) => {
-    if (key in props) {
-      return { ...acc, [key]: props[key] }
-    }
-    return acc
-  }, {})
+  const picked = variantKeys.reduce(
+    (acc, key) => {
+      if (key in props) {
+        return { ...acc, [key]: props[key] }
+      }
+      return acc
+    },
+    {} as Pick<T, K>,
+  )
 
   if (removeVariantProps) {
     const omitted = Object.keys(props)
