@@ -8,11 +8,9 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     permissions:
-      contents: write
-      packages: write
-      # For changeset to generate changelog and create a PR
+      contents: write # For changeset to create a release
+      pull-requests: write # For changeset to generate changelog and create a PR
       statuses: read
-      pull-requests: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
