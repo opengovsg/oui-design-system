@@ -9,10 +9,10 @@ import type {
   Validation,
 } from "@react-types/shared"
 import type { VirtualItem } from "@tanstack/react-virtual"
+import type { UseComboboxReturnValue } from "downshift"
 import type { ReactNode } from "react"
-import { UseComboboxReturnValue } from "downshift"
 
-import {
+import type {
   SlotsToClasses,
   TagFieldItemSlots,
   TagFieldSlots,

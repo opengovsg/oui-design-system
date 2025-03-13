@@ -1,20 +1,25 @@
-import { InputHTMLAttributes, useCallback, useMemo, useRef } from "react"
-import { mergeProps } from "@react-aria/utils"
-import { DOMAttributes, RefObject, ValidationResult } from "@react-types/shared"
-import { useVirtualizer, Virtualizer } from "@tanstack/react-virtual"
-import {
-  useCombobox,
+import type {
+  DOMAttributes,
+  RefObject,
+  ValidationResult,
+} from "@react-types/shared"
+import type { Virtualizer } from "@tanstack/react-virtual"
+import type {
   UseComboboxPropGetters,
   UseComboboxReturnValue,
-  useMultipleSelection,
   UseMultipleSelectionReturnValue,
 } from "downshift"
+import type { InputHTMLAttributes } from "react"
+import type { SetRequired } from "type-fest"
+import { useCallback, useMemo, useRef } from "react"
+import { mergeProps } from "@react-aria/utils"
+import { useVirtualizer } from "@tanstack/react-virtual"
+import { useCombobox, useMultipleSelection } from "downshift"
 import { omit } from "lodash-es"
 import { useTextField } from "react-aria"
-import { SetRequired } from "type-fest"
 
-import { TagFieldProps } from "./types"
-import { TagFieldState } from "./use-tag-field-state"
+import type { TagFieldProps } from "./types"
+import type { TagFieldState } from "./use-tag-field-state"
 
 export interface AriaTagFieldOptions<T>
   extends SetRequired<

@@ -1,20 +1,19 @@
 "use client"
 
-import { cloneElement, useCallback } from "react"
-import { mergeProps } from "react-aria"
-import {
-  Switch as AriaSwitch,
+import type {
   SwitchProps as AriaSwitchProps,
   SwitchRenderProps,
 } from "react-aria-components"
+import { cloneElement, useCallback } from "react"
+import { mergeProps } from "react-aria"
+import { Switch as AriaSwitch } from "react-aria-components"
 
-import {
-  composeTailwindRenderProps,
+import type {
   SlotsToClasses,
   ToggleSlots,
-  toggleStyles,
   VariantProps,
 } from "@opengovsg/oui-theme"
+import { composeTailwindRenderProps, toggleStyles } from "@opengovsg/oui-theme"
 
 import { mapPropsVariants } from "../system/utils"
 

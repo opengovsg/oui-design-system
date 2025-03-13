@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Check, Lock, X } from "lucide-react"
 import { Text } from "react-aria-components"
 
-import { Toggle, ToggleProps } from "../toggle"
+import type { ToggleProps } from "../toggle"
+import { Toggle } from "../toggle"
 
 export default {
   title: "Components/Toggle",

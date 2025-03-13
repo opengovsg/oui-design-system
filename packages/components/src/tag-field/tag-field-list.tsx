@@ -1,18 +1,16 @@
-import { createContext, ForwardedRef, ReactNode, useContext } from "react"
-import { Virtualizer } from "@tanstack/react-virtual"
-import { UseComboboxPropGetters } from "downshift"
-import { ContextValue, SlotProps, useContextProps } from "react-aria-components"
+import type { Virtualizer } from "@tanstack/react-virtual"
+import type { UseComboboxPropGetters } from "downshift"
+import type { ForwardedRef, ReactNode } from "react"
+import type { ContextValue, SlotProps } from "react-aria-components"
+import { createContext, useContext } from "react"
+import { useContextProps } from "react-aria-components"
 
-import {
-  dataAttr,
-  SlotsToClasses,
-  TagFieldItemSlots,
-  tagFieldItemStyles,
-} from "@opengovsg/oui-theme"
+import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
+import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
 
+import type { TagFieldItem, TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
 import { TagFieldStateContext } from "./tag-field-state-context"
-import { TagFieldItem, TagFieldListRenderProps } from "./types"
 
 export interface TagFieldListContextValue
   extends SlotProps,

@@ -1,10 +1,10 @@
 import type { UseMultipleSelectionReturnValue } from "downshift"
+import type { ComboBoxRenderProps } from "react-aria-components"
 import { useCallback, useMemo, useRef, useState } from "react"
 import { useResizeObserver } from "@react-aria/utils"
 import { get } from "lodash-es"
 import { useFilter } from "react-aria"
 import {
-  ComboBoxRenderProps,
   FieldErrorContext,
   FormContext,
   GroupContext,
@@ -16,14 +16,14 @@ import {
   useSlottedContext,
 } from "react-aria-components"
 
-import { TagFieldVariantProps } from "@opengovsg/oui-theme"
+import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
-import { RenderProps } from "../system/types"
+import type { RenderProps } from "../system/types"
+import type { TagFieldItem, TagFieldProps } from "./types"
 import { removeDataAttributes } from "../system/utils"
 import { TagFieldListContext } from "./tag-field-list"
 import { TagFieldStateContext } from "./tag-field-state-context"
 import { TagFieldTriggerContext } from "./tag-field-trigger"
-import { TagFieldItem, TagFieldProps } from "./types"
 import { useTagField } from "./use-tag-field"
 import { useTagFieldState } from "./use-tag-field-state"
 

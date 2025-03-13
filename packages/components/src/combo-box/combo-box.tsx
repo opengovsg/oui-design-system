@@ -1,39 +1,45 @@
 "use client"
 
-import React, { JSX, useCallback, useMemo } from "react"
-import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
-import { LocalizedStrings, useMessageFormatter } from "react-aria"
-import {
-  Button as AriaButton,
-  ComboBox as AriaComboBox,
+import type { JSX } from "react"
+import type { LocalizedStrings } from "react-aria"
+import type {
   ComboBoxProps as AriaComboBoxProps,
-  Input,
-  ListBox,
-  ListBoxItem,
   ListBoxItemProps,
   ListBoxItemRenderProps,
   ListBoxProps,
   ListBoxRenderProps,
-  ListLayout,
   ListLayoutOptions,
+  ValidationResult,
+} from "react-aria-components"
+import React, { useCallback, useMemo } from "react"
+import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
+import { useMessageFormatter } from "react-aria"
+import {
+  Button as AriaButton,
+  ComboBox as AriaComboBox,
+  Input,
+  ListBox,
+  ListBoxItem,
+  ListLayout,
   Popover,
   Text,
-  ValidationResult,
   Virtualizer,
 } from "react-aria-components"
 
+import type {
+  ComboBoxItemSlots,
+  ComboBoxItemVariantProps,
+  ComboBoxSlots,
+  ComboBoxVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 import {
   cn,
   comboBoxClearButtonStyles,
-  ComboBoxItemSlots,
   comboBoxItemStyles,
-  ComboBoxItemVariantProps,
-  ComboBoxSlots,
   comboBoxStyles,
-  ComboBoxVariantProps,
   composeRenderProps,
   composeTailwindRenderProps,
-  SlotsToClasses,
 } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"

@@ -5,13 +5,13 @@ import { composeRenderProps, Popover } from "react-aria-components"
 
 import { tagFieldStyles } from "@opengovsg/oui-theme"
 
+import type { TagFieldItem, TagFieldProps } from "./types"
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
 import { TagFieldList, TagFieldListItem } from "./tag-field-list"
 import { TagFieldRoot } from "./tag-field-root"
 import { TagFieldTagList } from "./tag-field-tag-list"
 import { TagFieldTrigger } from "./tag-field-trigger"
-import { TagFieldItem, TagFieldProps } from "./types"
 
 export function TagField<T extends TagFieldItem>({
   classNames,
