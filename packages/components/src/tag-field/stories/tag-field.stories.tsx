@@ -38,13 +38,12 @@ export const DisabledKeys: Story = {
   },
 }
 
-type FieldState = {
-  selectedKeys: Set<Key>
-  inputValue: string
-  // items: TagFieldItem[]
-}
-
 const ControlledTemplate = (args: Story["args"]) => {
+  type FieldState = {
+    selectedKeys: Set<Key>
+    inputValue: string
+    // items: TagFieldItem[]
+  }
   const defaultItems = [...Array(100)].map((_, i) => ({
     id: String(i),
     textValue: `Item ${i}`,
@@ -89,7 +88,6 @@ const ControlledTemplate = (args: Story["args"]) => {
   )
 }
 
-// Expected API of the component
 export const Controlled: Story = {
   args: {},
   render: ControlledTemplate,

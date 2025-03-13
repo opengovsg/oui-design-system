@@ -1,6 +1,6 @@
 "use client"
 
-import type { VariantProps } from "@opengovsg/oui-theme"
+import type { ButtonVariantProps } from "@opengovsg/oui-theme"
 import type { ButtonProps as AriaButtonProps } from "react-aria-components"
 import { forwardRef, useMemo } from "react"
 import { buttonStyles } from "@opengovsg/oui-theme"
@@ -11,9 +11,9 @@ import type { SpinnerProps } from "../spinner"
 import { Ripple, useRipple } from "../ripple"
 import { Spinner } from "../spinner"
 
-interface _ButtonProps
+export interface ButtonProps
   extends Omit<AriaButtonProps, "children">,
-    VariantProps<typeof buttonStyles> {
+    ButtonVariantProps {
   /**
    * Whether the button should display a ripple effect on press.
    * @defaultValue false
@@ -46,12 +46,6 @@ interface _ButtonProps
    */
   spinnerPlacement?: "start" | "end"
 }
-
-export type ButtonProps = Omit<_ButtonProps, "aria-label"> &
-  (
-    | { isIconOnly: true; "aria-label": string }
-    | { isIconOnly?: false; "aria-label"?: string }
-  )
 
 /**
  * You probably do not want to use this component if you are rendering a link.

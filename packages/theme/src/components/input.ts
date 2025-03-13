@@ -12,7 +12,7 @@ export const inputStyles = tv({
     },
     variant: {
       outline:
-        "border-base-divider-strong invalid:border-interaction-critical invalid:border-interaction-critical-default focus:border-utility-focus-default shadow-utility-focus-default border not-motion-reduce:transition-shadow focus:shadow-[0_0_0_1px]",
+        "border-base-divider-strong invalid:border-interaction-critical-default focus:border-utility-focus-default shadow-utility-focus-default border not-motion-reduce:transition-shadow focus:shadow-[0_0_0_1px]",
       unstyled: "",
     },
     isDisabled: {
