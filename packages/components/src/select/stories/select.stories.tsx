@@ -36,24 +36,6 @@ export const WithLabelAndDescription: Story = {
   },
 }
 
-export const WithSearch: Story = {
-  args: {
-    label: "Language",
-    showSearch: true,
-    searchPlaceholder: "Search for a language",
-  },
-  play: async ({ canvasElement }) => {
-    // Because popover is rendered outside of the story canvas
-    const canvas = within(canvasElement.parentElement!)
-    userEvent.click(canvas.getByLabelText("Language"))
-
-    // Wait for the search input to appear
-    const searchElem = await canvas.findByLabelText("Search")
-    userEvent.click(searchElem)
-    userEvent.type(searchElem, "ish")
-  },
-}
-
 export const Disabled: Story = {
   args: {
     label: "Language",
@@ -121,11 +103,12 @@ export const CustomClasses: Story = {
 
 export const Virtualized: Story = {
   args: {
-    items: Array.from({ length: 3000 }).map((_, number) => ({
-      textValue: `Item ${number + 1}`,
-      id: number + 1,
+    placeholder: "YYYY",
+    items: Array.from({ length: 1000 }).map((_, number) => ({
+      textValue: `${number + 1900}`,
+      id: number + 1900,
     })),
-    label: "Numbers",
+    label: "Year of birth",
   },
 }
 

@@ -2,6 +2,15 @@ import type { VariantProps } from "tailwind-variants"
 
 import { tv } from "../utils/tv"
 
+export const selectSearchStyles = tv({
+  slots: {
+    base: "",
+    icon: "",
+    input: "",
+    clear: "",
+  },
+})
+
 export const selectItemStyles = tv({
   slots: {
     base: "text-base-content-strong group flex cursor-default items-center gap-2 rounded-sm px-4 py-2 outline-hidden select-none",

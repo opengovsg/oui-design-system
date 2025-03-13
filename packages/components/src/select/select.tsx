@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useMemo } from "react"
+import { useMemo } from "react"
 import {
   composeRenderProps,
   SelectItemVariantSlots,
@@ -10,27 +10,22 @@ import {
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { ChevronsUpDownIcon, SearchIcon, XIcon } from "lucide-react"
-import { Key, useFilter } from "react-aria"
+import { ChevronsUpDownIcon } from "lucide-react"
+import { Key } from "react-aria"
 import {
-  Button as AriaButton,
   Select as AriaSelect,
   SelectProps as AriaSelectProps,
-  Autocomplete,
-  AutocompleteProps,
   ListBox,
   ListBoxProps,
   ListLayout,
   ListLayoutOptions,
   Popover,
-  SearchField,
   SelectValue,
   Virtualizer,
 } from "react-aria-components"
 
 import { Button } from "../button"
 import { Description, Label } from "../field"
-import { Input } from "../input"
 import { mapPropsVariants } from "../system/utils"
 import { SelectItem } from "./select-item"
 
@@ -47,22 +42,6 @@ export interface SelectProps<T extends SelectItemType = SelectItemType>
 
   label?: string
   description?: string | null
-  /**
-   * An optional filter function used to determine if an option should be included in the autocomplete list.
-   * @precondition `showSearch` is true
-   * @defaultValue `useFilter#contains`
-   */
-  searchFilter?: AutocompleteProps["filter"]
-
-  /**
-   * Whether or not to allow the search bar to be displayed in the select component.
-   */
-  showSearch?: boolean
-  /**
-   * Placeholder text for the search bar.
-   * @precondition `showSearch` is true
-   */
-  searchPlaceholder?: string
 
   /** The list of Select options to render */
   items: NonNullable<ListBoxProps<T>["items"]>
@@ -88,44 +67,6 @@ const calculateEstimatedRowHeight = (
   }
 }
 
-const SearchAutocomplete = <T extends SelectItemType = SelectItemType>({
-  children,
-  showSearch,
-  searchFilter,
-  searchPlaceholder,
-}: Pick<SelectProps<T>, "searchFilter" | "searchPlaceholder" | "showSearch"> & {
-  children: React.ReactNode
-}) => {
-  const { contains } = useFilter({ sensitivity: "base" })
-
-  if (!showSearch) {
-    return children
-  }
-
-  return (
-    <Autocomplete filter={searchFilter ?? contains}>
-      <SearchField
-        aria-label="Search"
-        autoFocus
-        className="has-focus:border-sky-600 group m-1 flex items-center rounded-full border-2 border-gray-300 bg-white forced-colors:bg-[Field]"
-      >
-        <SearchIcon
-          aria-hidden
-          className="ml-2 h-4 w-4 text-gray-600 forced-colors:text-[ButtonText]"
-        />
-        <Input
-          placeholder={searchPlaceholder}
-          className="min-w-0 flex-1 border-none bg-white px-2 py-1 font-[inherit] text-base text-gray-800 placeholder-gray-500 outline outline-0 [&::-webkit-search-cancel-button]:hidden"
-        />
-        <AriaButton className="pressed:bg-black/10 mr-1 flex w-6 items-center justify-center rounded-full border-0 bg-transparent p-1 text-center text-sm text-gray-600 transition hover:bg-black/[5%] group-empty:invisible">
-          <XIcon aria-hidden className="h-4 w-4" />
-        </AriaButton>
-      </SearchField>
-      {children}
-    </Autocomplete>
-  )
-}
-
 export function Select<T extends SelectItemType>({
   label,
   description,
@@ -137,15 +78,7 @@ export function Select<T extends SelectItemType>({
     originalProps,
     selectStyles.variantKeys,
   )
-  const {
-    searchFilter,
-    showSearch,
-    searchPlaceholder,
-    items,
-    children,
-    listLayoutOptions,
-    ...props
-  } = _props
+  const { items, children, listLayoutOptions, ...props } = _props
   const styles = selectStyles(variantProps)
 
   const layout = useMemo(() => {
@@ -195,37 +128,32 @@ export function Select<T extends SelectItemType>({
         </Description>
       )}
       <Popover className={styles.popover({ className: classNames?.popover })}>
-        <SearchAutocomplete
-          showSearch={showSearch}
-          searchFilter={searchFilter}
-          searchPlaceholder={searchPlaceholder}
-        >
-          <Virtualizer layout={layout}>
-            <ListBox
-              items={items}
-              shouldFocusWrap
-              className={composeRenderProps(
-                classNames?.list,
-                (className, renderProps) =>
-                  styles.list({ className, ...renderProps }),
-              )}
-            >
-              {(item) => {
-                if (typeof children === "function") {
-                  return children(item)
-                }
-                return (
-                  <SelectItem
-                    classNames={itemClassNames}
-                    size={variantProps.size}
-                  >
-                    {item.textValue}
-                  </SelectItem>
-                )
-              }}
-            </ListBox>
-          </Virtualizer>
-        </SearchAutocomplete>
+        {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
+        <Virtualizer layout={layout}>
+          <ListBox
+            items={items}
+            shouldFocusWrap
+            className={composeRenderProps(
+              classNames?.list,
+              (className, renderProps) =>
+                styles.list({ className, ...renderProps }),
+            )}
+          >
+            {(item) => {
+              if (typeof children === "function") {
+                return children(item)
+              }
+              return (
+                <SelectItem
+                  classNames={itemClassNames}
+                  size={variantProps.size}
+                >
+                  {item.textValue}
+                </SelectItem>
+              )
+            }}
+          </ListBox>
+        </Virtualizer>
       </Popover>
     </AriaSelect>
   )
