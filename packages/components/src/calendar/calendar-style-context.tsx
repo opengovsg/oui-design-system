@@ -38,11 +38,9 @@ export type UseProvideCalendarStylesReturn = ReturnType<
   typeof useProvideCalendarStyles
 >
 
-export const [CalendarStyleProvider, useCalendarStyleContext] = createContext<
+export const [CalendarStyleContext, useCalendarStyleContext] = createContext<
   UseProvideCalendarStylesReturn["context"]
 >({
   name: "CalendarStyleContext",
   strict: true,
-  errorMessage:
-    "useContext: `context` is undefined. Seems you forgot to wrap component within the CalendarStyleProvider",
 })

@@ -3,10 +3,6 @@ import type { VariantProps } from "tailwind-variants"
 import { focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
 
-// TODO: Use typography from design system
-// TODO: Use design tokens from design system
-// TODO: Actually add theme
-
 export const calendarStyles = tv({
   slots: {
     base: "relative inline-block w-fit max-w-full overflow-x-auto overflow-y-hidden rounded-sm shadow-sm",
@@ -16,7 +12,7 @@ export const calendarStyles = tv({
     title: "",
     content: "",
     cell: [
-      "text-base-content-default disabled:text-interaction-support-disabled-content unavailable:text-interaction-support-disabled-content unavailable:line-through unavailable:cursor-default my-0.5 flex cursor-pointer items-center justify-center rounded-full disabled:cursor-default",
+      "text-base-content-default disabled:text-interaction-support-disabled-content unavailable:text-interaction-support-disabled-content unavailable:line-through unavailable:cursor-default my-0.5 flex cursor-pointer items-center justify-center rounded-full transition-colors duration-150 disabled:cursor-default",
       ...focusVisibleClasses,
     ],
     cellButton: "",
@@ -30,7 +26,7 @@ export const calendarStyles = tv({
     variant: {},
     isSelected: {
       false: {
-        cell: "pressed:bg-interaction-muted-main-active not-unavailable:hover:bg-interaction-muted-main-hover text-zinc-900",
+        cell: "not-unavailable:hover:bg-interaction-muted-main-hover not-unavailable:pressed:bg-interaction-muted-main-active",
       },
       true: {
         cell: "bg-interaction-main-default text-base-content-inverse invalid:bg-interaction-critical-default forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
