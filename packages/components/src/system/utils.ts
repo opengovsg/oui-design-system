@@ -77,10 +77,9 @@ export const mapPropsVariants = <
   props: T,
   variantKeys?: K[],
   removeVariantProps = true,
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-): readonly [Omit<T, K> | T, Pick<T, K> | {}] => {
+): readonly [Omit<T, K> | T, Pick<T, K>] => {
   if (!variantKeys) {
-    return [props, {}]
+    return [props, {} as Pick<T, K>]
   }
 
   const picked = variantKeys.reduce((acc, key) => {

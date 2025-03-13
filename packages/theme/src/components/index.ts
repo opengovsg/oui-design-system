@@ -12,4 +12,5 @@ export * from "./field-group"
 export * from "./field"
 export * from "./banner"
 export * from "./tag-field"
+export * from "./select"
 // Add new theme exports here
