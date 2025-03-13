@@ -2,6 +2,7 @@ import { Index } from "@/__registry__"
 import { readRegistryFile } from "@/lib/mdx"
 import { highlightCode } from "@/lib/shiki"
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
+
 import { cn } from "@opengovsg/oui-theme"
 
 import { CopyButton } from "./copy-button"

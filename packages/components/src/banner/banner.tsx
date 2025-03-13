@@ -1,12 +1,6 @@
 "use client"
 
 import { ReactNode, useMemo, useRef } from "react"
-import {
-  BannerSlots,
-  bannerStyles,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
 import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
 import {
   AriaDisclosureProps,
@@ -15,6 +9,13 @@ import {
   useMessageFormatter,
 } from "react-aria"
 import { useDisclosureState } from "react-stately"
+
+import {
+  BannerSlots,
+  bannerStyles,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 

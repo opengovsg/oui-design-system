@@ -1,3 +1,6 @@
+import { CheckIcon } from "lucide-react"
+import { ListBoxItem, ListBoxItemProps } from "react-aria-components"
+
 import {
   composeRenderProps,
   selectItemStyles,
@@ -5,8 +8,6 @@ import {
   SelectItemVariantSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { CheckIcon } from "lucide-react"
-import { ListBoxItem, ListBoxItemProps } from "react-aria-components"
 
 import { mapPropsVariants } from "../system/utils"
 

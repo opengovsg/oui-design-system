@@ -1,13 +1,14 @@
 import { createContext, ForwardedRef, ReactNode, useContext } from "react"
+import { Virtualizer } from "@tanstack/react-virtual"
+import { UseComboboxPropGetters } from "downshift"
+import { ContextValue, SlotProps, useContextProps } from "react-aria-components"
+
 import {
   dataAttr,
   SlotsToClasses,
   TagFieldItemSlots,
   tagFieldItemStyles,
 } from "@opengovsg/oui-theme"
-import { Virtualizer } from "@tanstack/react-virtual"
-import { UseComboboxPropGetters } from "downshift"
-import { ContextValue, SlotProps, useContextProps } from "react-aria-components"
 
 import { forwardRefGeneric } from "../system/utils"
 import { TagFieldStateContext } from "./tag-field-state-context"

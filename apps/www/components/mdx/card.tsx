@@ -5,8 +5,9 @@ import {
   SiStackblitz,
   SiVite,
 } from "@icons-pack/react-simple-icons"
-import { cn } from "@opengovsg/oui-theme"
 import { ChevronRight } from "lucide-react"
+
+import { cn } from "@opengovsg/oui-theme"
 
 import { NextIcon, ViteIcon } from "../icons/framework-icons"
 

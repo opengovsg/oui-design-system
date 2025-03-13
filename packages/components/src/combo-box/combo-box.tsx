@@ -1,19 +1,6 @@
 "use client"
 
 import React, { JSX, useCallback, useMemo } from "react"
-import {
-  cn,
-  comboBoxClearButtonStyles,
-  ComboBoxItemSlots,
-  comboBoxItemStyles,
-  ComboBoxItemVariantProps,
-  ComboBoxSlots,
-  comboBoxStyles,
-  ComboBoxVariantProps,
-  composeRenderProps,
-  composeTailwindRenderProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
 import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
 import { LocalizedStrings, useMessageFormatter } from "react-aria"
 import {
@@ -34,6 +21,20 @@ import {
   ValidationResult,
   Virtualizer,
 } from "react-aria-components"
+
+import {
+  cn,
+  comboBoxClearButtonStyles,
+  ComboBoxItemSlots,
+  comboBoxItemStyles,
+  ComboBoxItemVariantProps,
+  ComboBoxSlots,
+  comboBoxStyles,
+  ComboBoxVariantProps,
+  composeRenderProps,
+  composeTailwindRenderProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
 

@@ -1,15 +1,6 @@
 "use client"
 
 import { useMemo } from "react"
-import {
-  composeRenderProps,
-  SelectItemVariantSlots,
-  selectStyles,
-  SelectVariantProps,
-  SelectVariantSlots,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
 import { ChevronsUpDownIcon } from "lucide-react"
 import { Key } from "react-aria"
 import {
@@ -23,6 +14,16 @@ import {
   SelectValue,
   Virtualizer,
 } from "react-aria-components"
+
+import {
+  composeRenderProps,
+  SelectItemVariantSlots,
+  selectStyles,
+  SelectVariantProps,
+  SelectVariantSlots,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, Label } from "../field"

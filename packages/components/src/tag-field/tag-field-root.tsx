@@ -1,6 +1,5 @@
 import type { UseMultipleSelectionReturnValue } from "downshift"
 import { useCallback, useMemo, useRef, useState } from "react"
-import { TagFieldVariantProps } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
 import { get } from "lodash-es"
 import { useFilter } from "react-aria"
@@ -16,6 +15,8 @@ import {
   TextContext,
   useSlottedContext,
 } from "react-aria-components"
+
+import { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
 import { RenderProps } from "../system/types"
 import { removeDataAttributes } from "../system/utils"

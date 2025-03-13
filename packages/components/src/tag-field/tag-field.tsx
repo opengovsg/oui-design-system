@@ -1,8 +1,9 @@
 "use client"
 
-import { tagFieldStyles } from "@opengovsg/oui-theme"
 import { ChevronDown } from "lucide-react"
 import { composeRenderProps, Popover } from "react-aria-components"
+
+import { tagFieldStyles } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"

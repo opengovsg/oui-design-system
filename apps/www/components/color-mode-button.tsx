@@ -1,7 +1,8 @@
 "use client"
 
-import { cn } from "@opengovsg/oui-theme"
 import { Moon as MoonIcon, SunMedium as SunIcon } from "lucide-react"
+
+import { cn } from "@opengovsg/oui-theme"
 
 export const ColorModeButton = ({ className = "" }: { className?: string }) => {
   const toggleTheme = () => {

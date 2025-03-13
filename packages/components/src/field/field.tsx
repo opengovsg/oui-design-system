@@ -1,5 +1,17 @@
 "use client"
 
+import { CircleAlert } from "lucide-react"
+import {
+  FieldError as AriaFieldError,
+  FieldErrorProps as AriaFieldErrorProps,
+  Label as AriaLabel,
+  LabelProps as AriaLabelProps,
+  Group,
+  GroupProps,
+  Text,
+  TextProps,
+} from "react-aria-components"
+
 import {
   composeRenderProps,
   descriptionStyles,
@@ -12,17 +24,6 @@ import {
   LabelVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { CircleAlert } from "lucide-react"
-import {
-  FieldError as AriaFieldError,
-  FieldErrorProps as AriaFieldErrorProps,
-  Label as AriaLabel,
-  LabelProps as AriaLabelProps,
-  Group,
-  GroupProps,
-  Text,
-  TextProps,
-} from "react-aria-components"
 
 export interface LabelProps extends AriaLabelProps, LabelVariantProps {}
 

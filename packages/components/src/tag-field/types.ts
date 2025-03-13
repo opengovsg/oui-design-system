@@ -10,13 +10,14 @@ import type {
 } from "@react-types/shared"
 import type { VirtualItem } from "@tanstack/react-virtual"
 import type { ReactNode } from "react"
+import { UseComboboxReturnValue } from "downshift"
+
 import {
   SlotsToClasses,
   TagFieldItemSlots,
   TagFieldSlots,
   TagFieldVariantProps,
 } from "@opengovsg/oui-theme"
-import { UseComboboxReturnValue } from "downshift"
 
 export interface TagFieldValidationValue {
   /** The selected key in the TagField. */

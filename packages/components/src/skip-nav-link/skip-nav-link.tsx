@@ -1,4 +1,5 @@
 import { AnchorHTMLAttributes } from "react"
+
 import { skipNavLinkStyles, VariantProps } from "@opengovsg/oui-theme"
 
 interface SkipNavLinkProps

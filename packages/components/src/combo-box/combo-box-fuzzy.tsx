@@ -1,14 +1,15 @@
 "use client"
 
 import { useCallback, useDeferredValue, useMemo, useState } from "react"
+import fuzzysort from "fuzzysort"
+import { Key } from "react-aria"
+import { SetRequired } from "type-fest"
+
 import {
   comboBoxFuzzyHighlightedTextStyles,
   ComboBoxFuzzyVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import fuzzysort from "fuzzysort"
-import { Key } from "react-aria"
-import { SetRequired } from "type-fest"
 
 import { ComboBox, ComboBoxItem, ComboBoxProps } from "./combo-box"
 

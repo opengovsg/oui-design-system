@@ -2,8 +2,9 @@ import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
 import { NpmCommands } from "@/types/unist"
-import { cn } from "@opengovsg/oui-theme"
 import { CircleAlertIcon } from "lucide-react"
+
+import { cn } from "@opengovsg/oui-theme"
 
 import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"

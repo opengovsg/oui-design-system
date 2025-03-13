@@ -1,15 +1,16 @@
 "use client"
 
 import {
-  composeTailwindRenderProps,
-  SlotsToClasses,
-  TextAreaVariantProps,
-} from "@opengovsg/oui-theme"
-import {
   TextField as AriaTextField,
   TextFieldProps as AriaTextFieldProps,
   ValidationResult,
 } from "react-aria-components"
+
+import {
+  composeTailwindRenderProps,
+  SlotsToClasses,
+  TextAreaVariantProps,
+} from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
 import { TextArea, TextAreaProps } from "../text-area"

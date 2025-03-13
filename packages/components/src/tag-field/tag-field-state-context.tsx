@@ -3,6 +3,7 @@ import type {
   UseMultipleSelectionReturnValue,
 } from "downshift"
 import { createContext } from "react"
+
 import { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
 import { TagFieldState } from "./use-tag-field-state"

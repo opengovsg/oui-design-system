@@ -1,8 +1,15 @@
+import { createRequire } from "node:module";
+
 /** @typedef {import("prettier").Config} PrettierConfig */
 /** @typedef {import("prettier-plugin-tailwindcss").PluginOptions} TailwindConfig */
 /** @typedef {import("@ianvs/prettier-plugin-sort-imports").PluginConfig} SortImportsConfig */
 
-/** @type { PrettierConfig | SortImportsConfig | TailwindConfig } */
+const require = createRequire(import.meta.url);
+
+/**
+ * @see https://prettier.io/docs/configuration
+ * @type { PrettierConfig | SortImportsConfig | TailwindConfig }
+ */
 const config = {
   plugins: [
     require.resolve("@ianvs/prettier-plugin-sort-imports"),
@@ -20,8 +27,10 @@ const config = {
     "^(expo(.*)$)|^(expo$)",
     "<THIRD_PARTY_MODULES>",
     "",
-    "<TYPES>^@isomer",
-    "^@isomer/(.*)$",
+    "<TYPES>^@opengovsg/oui",
+    "<TYPES>^@opengovsg/oui-theme",
+    "^@opengovsg/oui(.*)$",
+    // "^@opengovsg/oui-theme(.*)$",
     "",
     "<TYPES>^[.|..|~]",
     "^~/",
@@ -29,7 +38,7 @@ const config = {
     "^[./]",
   ],
   importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-  importOrderTypeScriptVersion: "5.5.3",
+  importOrderTypeScriptVersion: "5.7.3",
 };
 
-module.exports = config;
+export default config;
