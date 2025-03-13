@@ -8,12 +8,19 @@ import { config as baseConfig } from "./base.js";
 
 /**
  * A custom ESLint configuration for libraries that use React.
- *
- * @type {import("eslint").Linter.Config} */
+ */
 export const config = tseslint.config(
   baseConfig,
-  pluginReact.configs.flat.recommended,
   {
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    ...pluginReact.configs.flat.recommended,
     languageOptions: {
       ...pluginReact.configs.flat.recommended.languageOptions,
       globals: {
@@ -23,14 +30,16 @@ export const config = tseslint.config(
     },
   },
   {
-    plugins: {
-      "react-hooks": pluginReactHooks,
-    },
-    settings: { react: { version: "detect" } },
+    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    ...pluginReact.configs.flat["jsx-runtime"],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
+    plugins: { "react-hooks": pluginReactHooks },
+    ignores: ["**/*.stories.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
     rules: {
-      ...pluginReactHooks.configs.recommended.rules,
-      // React scope no longer necessary with new JSX transform.
-      "react/react-in-jsx-scope": "off",
+      "react-hooks/rules-of-hooks": "error",
+      "react-hooks/exhaustive-deps": "warn",
     },
   }
 );

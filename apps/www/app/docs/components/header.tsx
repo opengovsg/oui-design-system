@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import Link from "next/link"
 import { ColorModeButton } from "@/components/color-mode-button"
 import { useRoute } from "@/lib/use-route"
 import { SiGithub } from "@icons-pack/react-simple-icons"
@@ -15,9 +16,9 @@ export const Header = () => {
       <div className="bg-white dark:bg-gray-950">
         <div className="flex h-14 items-center justify-between gap-8 px-4 sm:px-6">
           <div className="flex gap-4">
-            <a className="shrink-0" aria-label="Home" href="/">
+            <Link className="shrink-0" aria-label="Home" href="/">
               OUI
-            </a>
+            </Link>
           </div>
           <div className="flex flex-1 items-center gap-6">
             {secondaryNavItems.map((item) => (

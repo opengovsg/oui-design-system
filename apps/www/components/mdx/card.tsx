@@ -1,10 +1,8 @@
-import React, { HTMLAttributes } from "react"
-import Link, { LinkProps } from "next/link"
-import {
-  SiNextdotjs,
-  SiStackblitz,
-  SiVite,
-} from "@icons-pack/react-simple-icons"
+import type { HTMLAttributes } from "react";
+import type React from "react"
+import type { LinkProps } from "next/link";
+import Link from "next/link"
+import { SiStackblitz } from "@icons-pack/react-simple-icons"
 import { ChevronRight } from "lucide-react"
 
 import { cn } from "@opengovsg/oui-theme"

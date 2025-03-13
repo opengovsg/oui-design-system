@@ -1,7 +1,7 @@
+import type { NpmCommands } from "@/types/unist"
 import type { ImageProps } from "next/image"
 import Image from "next/image"
 import Link from "next/link"
-import { NpmCommands } from "@/types/unist"
 import { CircleAlertIcon } from "lucide-react"
 
 import { cn } from "@opengovsg/oui-theme"
@@ -155,11 +155,13 @@ export const mdxComponents = {
     } & NpmCommands,
   ) => {
     const {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       __rawString__,
       __npmCommand__,
       __yarnCommand__,
       __pnpmCommand__,
       __bunCommand__,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       __src__,
       ...rest
     } = props

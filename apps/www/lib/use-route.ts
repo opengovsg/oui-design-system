@@ -1,5 +1,6 @@
+import type { FlattenNavItem, NavItem } from "@/config/docs.config"
 import { usePathname } from "next/navigation"
-import { docsConfig, FlattenNavItem, NavItem } from "@/config/docs.config"
+import { docsConfig } from "@/config/docs.config"
 
 const join = (...args: Array<string | undefined>) =>
   `/${args.filter(Boolean).join("/")}`
@@ -29,7 +30,7 @@ export function useRoute() {
 
   function getSecondaryNav() {
     const nav = getPrimaryNav()
-    return nav?.items?.find((item) => item.url === secondaryHref)!
+    return nav?.items?.find((item) => item.url === secondaryHref)
   }
 
   function getSecondaryNavItems() {

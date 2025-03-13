@@ -11,7 +11,7 @@ import type {
   ListLayoutOptions,
   ValidationResult,
 } from "react-aria-components"
-import React, { useCallback, useMemo } from "react"
+import { useCallback, useMemo } from "react"
 import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
 import { useMessageFormatter } from "react-aria"
 import {

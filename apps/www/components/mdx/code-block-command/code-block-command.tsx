@@ -1,5 +1,5 @@
 import { highlightCode } from "@/lib/shiki"
-import { NpmCommands } from "@/types/unist"
+import type { NpmCommands } from "@/types/unist"
 
 import { CommandTabs } from "./command-tabs"
 
