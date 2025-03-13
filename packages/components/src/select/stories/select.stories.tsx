@@ -29,9 +29,10 @@ export const Default: Story = {
   args: {},
 }
 
-export const WithLabel: Story = {
+export const WithLabelAndDescription: Story = {
   args: {
     label: "Language",
+    description: "Select your preferred language",
   },
 }
 
@@ -57,6 +58,12 @@ export const Disabled: Story = {
   args: {
     label: "Language",
     isDisabled: true,
+  },
+}
+
+export const Invalid: Story = {
+  args: {
+    isInvalid: true,
   },
 }
 
@@ -94,5 +101,42 @@ export const Controlled: Story = {
   render: ControlledTemplate,
   args: {
     label: "Languages (controlled)",
+  },
+}
+
+export const CustomClasses: Story = {
+  args: {
+    label: "Custom classes",
+    classNames: {
+      base: "bg-blue-100",
+      trigger: "bg-red-200 pressed:bg-red-300",
+      popover: "bg-green-300 w-[400px]",
+      selectedText: "text-gray-800",
+    },
+  },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Custom classes"))
+  },
+}
+
+export const Virtualized: Story = {
+  args: {
+    items: Array.from({ length: 3000 }).map((_, number) => ({
+      textValue: `Item ${number + 1}`,
+      id: number + 1,
+    })),
+    label: "Numbers",
+  },
+}
+
+export const Sizes: Story = {
+  render: (args) => {
+    return (
+      <div className="space-y-4">
+        <Select {...args} size="xs" label="Extra small" />
+        <Select {...args} size="sm" label="Small" />
+        <Select {...args} size="md" label="Medium" />
+      </div>
+    )
   },
 }

@@ -1,9 +1,11 @@
 "use client"
 
-import React from "react"
+import React, { useMemo } from "react"
 import {
   composeRenderProps,
+  SelectItemVariantSlots,
   selectStyles,
+  SelectVariantProps,
   SelectVariantSlots,
   SlotsToClasses,
   VariantProps,
@@ -18,13 +20,16 @@ import {
   AutocompleteProps,
   ListBox,
   ListBoxProps,
+  ListLayout,
+  ListLayoutOptions,
   Popover,
   SearchField,
   SelectValue,
+  Virtualizer,
 } from "react-aria-components"
 
 import { Button } from "../button"
-import { Label } from "../field"
+import { Description, Label } from "../field"
 import { Input } from "../input"
 import { mapPropsVariants } from "../system/utils"
 import { SelectItem } from "./select-item"
@@ -33,8 +38,15 @@ export interface SelectProps<T extends SelectItemType = SelectItemType>
   extends Omit<AriaSelectProps, "children">,
     VariantProps<typeof selectStyles> {
   classNames?: SlotsToClasses<SelectVariantSlots>
-  label?: string
+  itemClassNames?: SlotsToClasses<SelectItemVariantSlots>
 
+  /**
+   * Any additional props to be spread to the list layout.
+   */
+  listLayoutOptions?: ListLayoutOptions
+
+  label?: string
+  description?: string | null
   /**
    * An optional filter function used to determine if an option should be included in the autocomplete list.
    * @precondition `showSearch` is true
@@ -52,6 +64,7 @@ export interface SelectProps<T extends SelectItemType = SelectItemType>
    */
   searchPlaceholder?: string
 
+  /** The list of Select options to render */
   items: NonNullable<ListBoxProps<T>["items"]>
 
   children?: ListBoxProps<T>["children"]
@@ -60,6 +73,19 @@ export interface SelectProps<T extends SelectItemType = SelectItemType>
 type SelectItemType = {
   textValue: string
   id: Key
+}
+
+const calculateEstimatedRowHeight = (
+  size: NonNullable<SelectVariantProps["size"]>,
+): number => {
+  switch (size) {
+    case "xs":
+      return 44
+    case "sm":
+      return 44
+    case "md":
+      return 48
+  }
 }
 
 const SearchAutocomplete = <T extends SelectItemType = SelectItemType>({
@@ -102,7 +128,9 @@ const SearchAutocomplete = <T extends SelectItemType = SelectItemType>({
 
 export function Select<T extends SelectItemType>({
   label,
+  description,
   classNames,
+  itemClassNames,
   ...originalProps
 }: SelectProps<T>) {
   const [_props, variantProps] = mapPropsVariants(
@@ -115,9 +143,19 @@ export function Select<T extends SelectItemType>({
     searchPlaceholder,
     items,
     children,
+    listLayoutOptions,
     ...props
   } = _props
   const styles = selectStyles(variantProps)
+
+  const layout = useMemo(() => {
+    return new ListLayout({
+      estimatedRowHeight: calculateEstimatedRowHeight(
+        variantProps.size ?? "md",
+      ),
+      ...listLayoutOptions,
+    })
+  }, [listLayoutOptions, variantProps.size])
 
   return (
     <AriaSelect
@@ -126,8 +164,13 @@ export function Select<T extends SelectItemType>({
       )}
       {...props}
     >
-      {label && <Label className={classNames?.label}>{label}</Label>}
+      {label && (
+        <Label size={variantProps.size} className={classNames?.label}>
+          {label}
+        </Label>
+      )}
       <Button
+        size={variantProps.size}
         variant={variantProps.variant ?? selectStyles.defaultVariants.variant}
         color={variantProps.color ?? selectStyles.defaultVariants.color}
         className={composeRenderProps(
@@ -143,24 +186,45 @@ export function Select<T extends SelectItemType>({
         />
         <ChevronsUpDownIcon className="h-4 w-4" />
       </Button>
-      <Popover className="entering:animate-in entering:fade-in exiting:animate-out exiting:fade-out w-(--trigger-width) flex !max-h-80 flex-col rounded-md bg-white text-base shadow-lg ring-1 ring-black/5">
+      {description && (
+        <Description
+          size={variantProps.size}
+          className={classNames?.description}
+        >
+          {description}
+        </Description>
+      )}
+      <Popover className={styles.popover({ className: classNames?.popover })}>
         <SearchAutocomplete
           showSearch={showSearch}
           searchFilter={searchFilter}
           searchPlaceholder={searchPlaceholder}
         >
-          <ListBox
-            items={items}
-            shouldFocusWrap
-            className="outline-hidden flex-1 scroll-pb-1 overflow-auto p-1"
-          >
-            {(item) => {
-              if (typeof children === "function") {
-                return children(item)
-              }
-              return <SelectItem>{item.textValue}</SelectItem>
-            }}
-          </ListBox>
+          <Virtualizer layout={layout}>
+            <ListBox
+              items={items}
+              shouldFocusWrap
+              className={composeRenderProps(
+                classNames?.list,
+                (className, renderProps) =>
+                  styles.list({ className, ...renderProps }),
+              )}
+            >
+              {(item) => {
+                if (typeof children === "function") {
+                  return children(item)
+                }
+                return (
+                  <SelectItem
+                    classNames={itemClassNames}
+                    size={variantProps.size}
+                  >
+                    {item.textValue}
+                  </SelectItem>
+                )
+              }}
+            </ListBox>
+          </Virtualizer>
         </SearchAutocomplete>
       </Popover>
     </AriaSelect>

@@ -20,6 +20,7 @@ export function SelectItem({ classNames, ...originalProps }: SelectItemProps) {
     originalProps,
     selectItemStyles.variantKeys,
   )
+
   const styles = selectItemStyles(variantProps)
 
   return (
@@ -41,14 +42,17 @@ export function SelectItem({ classNames, ...originalProps }: SelectItemProps) {
           >
             {props.children}
           </span>
-          <span
-            className={styles.icon({
-              className: classNames?.icon,
-              ...renderProps,
-            })}
-          >
-            {renderProps.isSelected && <CheckIcon />}
-          </span>
+          {renderProps.isSelected && (
+            <span
+              aria-hidden
+              className={styles.icon({
+                className: classNames?.icon,
+                ...renderProps,
+              })}
+            >
+              <CheckIcon />
+            </span>
+          )}
         </>
       )}
     </ListBoxItem>
