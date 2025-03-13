@@ -1,20 +1,18 @@
 "use client"
 
-import { ReactNode, useMemo, useRef } from "react"
-import {
+import type { ReactNode } from "react"
+import type { AriaDisclosureProps, LocalizedStrings } from "react-aria"
+import { useMemo, useRef } from "react"
+import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
+import { useDisclosure, useMessageFormatter } from "react-aria"
+import { useDisclosureState } from "react-stately"
+
+import type {
   BannerSlots,
-  bannerStyles,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
-import {
-  AriaDisclosureProps,
-  LocalizedStrings,
-  useDisclosure,
-  useMessageFormatter,
-} from "react-aria"
-import { useDisclosureState } from "react-stately"
+import { bannerStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 

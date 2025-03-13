@@ -1,5 +1,6 @@
 import type { WeakValidationMap } from "prop-types"
-import React, { forwardRef as baseForwardRef, useMemo } from "react"
+import type React from "react"
+import { forwardRef as baseForwardRef, useMemo } from "react"
 
 import type {
   As,

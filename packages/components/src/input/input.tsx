@@ -1,15 +1,11 @@
 "use client"
 
+import type { InputProps as AriaInputProps } from "react-aria-components"
 import { forwardRef } from "react"
-import {
-  composeRenderProps,
-  inputStyles,
-  VariantProps,
-} from "@opengovsg/oui-theme"
-import {
-  Input as AriaInput,
-  InputProps as AriaInputProps,
-} from "react-aria-components"
+import { Input as AriaInput } from "react-aria-components"
+
+import type { VariantProps } from "@opengovsg/oui-theme"
+import { composeRenderProps, inputStyles } from "@opengovsg/oui-theme"
 
 export interface InputProps
   extends VariantProps<typeof inputStyles>,

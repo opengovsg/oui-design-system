@@ -1,9 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import type { Key } from "react-aria-components"
 import { useState } from "react"
 import { userEvent } from "@storybook/test"
-import { Key, ListBoxItem } from "react-aria-components"
+import { ListBoxItem } from "react-aria-components"
 
-import { Select, SelectProps } from "../select"
+import type { SelectProps } from "../select"
+import { Select } from "../select"
 
 export default {
   title: "Components/Select",

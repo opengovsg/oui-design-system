@@ -9,10 +9,20 @@ import onlyWarn from "eslint-plugin-only-warn";
  *
  * @type {import("eslint").Linter.Config}
  * */
-export const config = [
+export const config = tseslint.config(
   js.configs.recommended,
   eslintConfigPrettier,
-  ...tseslint.configs.recommended,
+  tseslint.configs.recommended,
+  {
+    rules: {
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        {
+          fixStyle: "separate-type-imports",
+        },
+      ],
+    },
+  },
   {
     plugins: {
       turbo: turboPlugin,
@@ -28,5 +38,5 @@ export const config = [
   },
   {
     ignores: ["dist/**"],
-  },
-];
+  }
+);

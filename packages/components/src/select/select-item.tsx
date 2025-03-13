@@ -1,12 +1,13 @@
-import {
-  composeRenderProps,
-  selectItemStyles,
+import type { ListBoxItemProps } from "react-aria-components"
+import { CheckIcon } from "lucide-react"
+import { ListBoxItem } from "react-aria-components"
+
+import type {
   SelectItemVariantProps,
   SelectItemVariantSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { CheckIcon } from "lucide-react"
-import { ListBoxItem, ListBoxItemProps } from "react-aria-components"
+import { composeRenderProps, selectItemStyles } from "@opengovsg/oui-theme"
 
 import { mapPropsVariants } from "../system/utils"
 

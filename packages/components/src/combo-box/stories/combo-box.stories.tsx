@@ -4,7 +4,8 @@ import { useState } from "react"
 import { expect, userEvent, waitFor, within } from "@storybook/test"
 import { ListBoxItem, useFilter } from "react-aria-components"
 
-import { ComboBox, ComboBoxProps } from "../combo-box"
+import type { ComboBoxProps } from "../combo-box"
+import { ComboBox } from "../combo-box"
 
 export default {
   title: "Components/ComboBox",

@@ -5,7 +5,7 @@ import StyleDictionary from "style-dictionary";
 import tinycolor from "tinycolor2";
 
 import { fontWeightToNumber, percentToEm, pxToRem } from "./utils";
-import { TransformedTokens } from "style-dictionary/types";
+import type { TransformedTokens } from "style-dictionary/types";
 
 // Convert shadow to css format.
 StyleDictionary.registerTransform({

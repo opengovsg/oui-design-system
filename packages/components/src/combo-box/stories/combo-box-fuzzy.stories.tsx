@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
 
-import { ComboBoxFuzzy, ComboBoxFuzzyProps } from "../combo-box-fuzzy"
+import type { ComboBoxFuzzyProps } from "../combo-box-fuzzy"
+import { ComboBoxFuzzy } from "../combo-box-fuzzy"
 
 export default {
   title: "Components/ComboBoxFuzzy",

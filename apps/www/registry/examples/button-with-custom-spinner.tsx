@@ -1,5 +1,6 @@
-import { Button } from "@opengovsg/oui"
 import { Loader } from "lucide-react"
+
+import { Button } from "@opengovsg/oui"
 
 export default function ButtonWithDisabled() {
   return (

@@ -1,15 +1,11 @@
 "use client"
 
+import type { TextAreaProps as AriaTextAreaProps } from "react-aria-components"
 import { forwardRef } from "react"
-import {
-  composeRenderProps,
-  textAreaStyles,
-  VariantProps,
-} from "@opengovsg/oui-theme"
-import {
-  TextArea as AriaTextArea,
-  TextAreaProps as AriaTextAreaProps,
-} from "react-aria-components"
+import { TextArea as AriaTextArea } from "react-aria-components"
+
+import type { VariantProps } from "@opengovsg/oui-theme"
+import { composeRenderProps, textAreaStyles } from "@opengovsg/oui-theme"
 
 export interface TextAreaProps
   extends VariantProps<typeof textAreaStyles>,

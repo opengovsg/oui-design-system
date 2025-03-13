@@ -10,11 +10,8 @@ import { config as baseConfig } from "./base.js";
  * A custom ESLint configuration for libraries that use React.
  *
  * @type {import("eslint").Linter.Config} */
-export const config = [
-  ...baseConfig,
-  js.configs.recommended,
-  eslintConfigPrettier,
-  ...tseslint.configs.recommended,
+export const config = tseslint.config(
+  baseConfig,
   pluginReact.configs.flat.recommended,
   {
     languageOptions: {
@@ -35,5 +32,5 @@ export const config = [
       // React scope no longer necessary with new JSX transform.
       "react/react-in-jsx-scope": "off",
     },
-  },
-];
+  }
+);

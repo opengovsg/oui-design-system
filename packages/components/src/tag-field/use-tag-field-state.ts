@@ -1,14 +1,12 @@
+import type { FormValidationState } from "@react-stately/form"
+import type { Key } from "@react-types/shared"
+import type { SetRequired } from "type-fest"
 import { useCallback, useMemo } from "react"
-import {
-  FormValidationState,
-  useFormValidationState,
-} from "@react-stately/form"
+import { useFormValidationState } from "@react-stately/form"
 import { useControlledState } from "@react-stately/utils"
-import { Key } from "@react-types/shared"
-import { SetRequired } from "type-fest"
 
+import type { TagFieldProps } from "./types"
 import { useControllableState } from "../hooks"
-import { TagFieldProps } from "./types"
 
 export interface TagFieldListState<T> {
   /** Sets the selected items. */

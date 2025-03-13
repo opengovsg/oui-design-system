@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useState } from "react"
-import { cn } from "@opengovsg/oui-theme"
 import { Copy, CopyCheck } from "lucide-react"
+
+import { cn } from "@opengovsg/oui-theme"
 
 export const CopyButton = ({
   children,

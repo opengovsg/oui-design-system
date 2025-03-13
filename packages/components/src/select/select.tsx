@@ -1,28 +1,30 @@
 "use client"
 
+import type { Key } from "react-aria"
+import type {
+  SelectProps as AriaSelectProps,
+  ListBoxProps,
+  ListLayoutOptions,
+} from "react-aria-components"
 import { useMemo } from "react"
+import { ChevronsUpDownIcon } from "lucide-react"
 import {
-  composeRenderProps,
+  Select as AriaSelect,
+  ListBox,
+  ListLayout,
+  Popover,
+  SelectValue,
+  Virtualizer,
+} from "react-aria-components"
+
+import type {
   SelectItemVariantSlots,
-  selectStyles,
   SelectVariantProps,
   SelectVariantSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { ChevronsUpDownIcon } from "lucide-react"
-import { Key } from "react-aria"
-import {
-  Select as AriaSelect,
-  SelectProps as AriaSelectProps,
-  ListBox,
-  ListBoxProps,
-  ListLayout,
-  ListLayoutOptions,
-  Popover,
-  SelectValue,
-  Virtualizer,
-} from "react-aria-components"
+import { composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, Label } from "../field"

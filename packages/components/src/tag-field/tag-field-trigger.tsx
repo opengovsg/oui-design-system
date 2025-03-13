@@ -1,6 +1,7 @@
+import type { UseComboboxPropGetters } from "downshift"
+import type { ContextValue, SlotProps } from "react-aria-components"
 import { createContext } from "react"
-import { UseComboboxPropGetters } from "downshift"
-import { ContextValue, SlotProps, useContextProps } from "react-aria-components"
+import { useContextProps } from "react-aria-components"
 
 import { forwardRef } from "../system/utils"
 

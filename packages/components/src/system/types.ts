@@ -1,9 +1,9 @@
-import type * as CSS from "csstype"
-import type { JSX, ReactNode } from "react"
-import {
+import type {
   AriaLabelingProps,
   DOMProps as SharedDOMProps,
 } from "@react-types/shared"
+import type * as CSS from "csstype"
+import type { JSX, ReactNode } from "react"
 
 /**
  * Explicit re-export to fix error:

@@ -3,11 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "sideEffects": false,
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.mjs",
   "license": "SEE LICENSE IN LICENSE.md",
-  "files": [
-    "index.js"
-  ],
   "scripts": {
     "clean": "rm -rf .turbo node_modules",
     "format": "prettier --check . --ignore-path ../../.gitignore"
@@ -16,5 +14,8 @@
     "@ianvs/prettier-plugin-sort-imports": "^4.4.1",
     "prettier": "catalog:",
     "prettier-plugin-tailwindcss": "^0.6.11"
+  },
+  "peerDependencies": {
+    "prettier": "catalog:"
   }
 }
