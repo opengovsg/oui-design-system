@@ -67,6 +67,7 @@
   "dependencies": {
     "@internationalized/date": "^3.7.0",
     "@react-aria/calendar": "^3.7.0",
+    "@react-aria/i18n": "^3.12.7",
     "@react-aria/utils": "^3.27.0",
     "@react-stately/calendar": "^3.7.0",
     "@react-stately/collections": "^3.12.2",

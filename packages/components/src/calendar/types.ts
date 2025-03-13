@@ -1,13 +1,14 @@
 import type {
-  CalendarSlots,
-  CalendarVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
   DateValue,
 } from "react-aria-components"
+
+import type {
+  CalendarSlots,
+  CalendarVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 
 export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
@@ -50,4 +51,15 @@ export interface CalendarProps<T extends DateValue>
    * ```
    */
   classNames?: SlotsToClasses<CalendarSlots>
+
+  /**
+   * The minimum allowed date that a user may select.
+   * @defaultValue `new CalendarDate(1900, 0, 1)`
+   */
+  minValue?: DateValue
+  /**
+   * The maximum allowed date that a user may select.
+   * @defaultValue `new CalendarDate(2100, 12, 31)`
+   */
+  maxValue?: DateValue
 }
