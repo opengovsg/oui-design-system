@@ -371,9 +371,6 @@ importers:
       '@oui/typescript-config':
         specifier: workspace:*
         version: link:../../tooling/typescript-config
-      '@react-types/calendar':
-        specifier: ^3.6.1
-        version: 3.6.1(react@19.0.0)
       '@storybook/react':
         specifier: 8.6.4
         version: 8.6.4(@storybook/test@8.6.4(storybook@8.6.4(prettier@3.5.0)))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.4(prettier@3.5.0))(typescript@5.7.3)
