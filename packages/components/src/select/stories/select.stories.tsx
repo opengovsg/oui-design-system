@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
-import { userEvent, within } from "@storybook/test"
+import { userEvent } from "@storybook/test"
 import { Key, ListBoxItem } from "react-aria-components"
 
 import { Select, SelectProps } from "../select"
@@ -53,7 +53,7 @@ export const WithCustomItem: Story = {
   args: {
     label: "Language",
     children: (item) => (
-      <ListBoxItem className="bg-blue-300 focus:bg-blue-400">
+      <ListBoxItem className="bg-blue-100 focus:bg-blue-200">
         {item.textValue}
       </ListBoxItem>
     ),
