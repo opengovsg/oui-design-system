@@ -77,6 +77,7 @@ export function CalendarBase<T extends DateValue>({
 }
 
 const CalendarMonthDaySelector = () => {
+  const { slots } = useCalendarStyleContext()
   const state = useContext(CalendarStateContext)!
 
   const yearRange = useMemo(() => {
@@ -95,25 +96,11 @@ const CalendarMonthDaySelector = () => {
   return (
     <Group className="flex flex-row gap-0.5">
       <Select
-        variant="clear"
-        items={years}
-        selectedKey={state.focusedDate.year}
-        aria-label="Select year TODO: Add aria label i18n"
-        onSelectionChange={(year) => {
-          state.setFocusedDate(
-            new CalendarDate(
-              Number(year),
-              state.focusedDate.month,
-              state.focusedDate.day,
-            ),
-          )
-        }}
-      />
-      <Select
         items={months}
         variant="clear"
         classNames={{
-          trigger: "min-w-[12ch]",
+          trigger: slots.monthSelector(),
+          popover: "min-w-[13ch]",
         }}
         selectedKey={state.focusedDate.month}
         aria-label="Select month TODO: Add aria label i18n"
@@ -122,6 +109,24 @@ const CalendarMonthDaySelector = () => {
             new CalendarDate(
               state.focusedDate.year,
               Number(month),
+              state.focusedDate.day,
+            ),
+          )
+        }}
+      />
+      <Select
+        variant="clear"
+        items={years}
+        classNames={{
+          trigger: slots.yearSelector(),
+        }}
+        selectedKey={state.focusedDate.year}
+        aria-label="Select year TODO: Add aria label i18n"
+        onSelectionChange={(year) => {
+          state.setFocusedDate(
+            new CalendarDate(
+              Number(year),
+              state.focusedDate.month,
               state.focusedDate.day,
             ),
           )
@@ -145,6 +150,7 @@ export function CalendarHeader() {
           variant="clear"
           color="sub"
           slot="previous"
+          className={slots.prevButton()}
         >
           {direction === "rtl" ? (
             <ChevronRight aria-hidden />
@@ -152,7 +158,14 @@ export function CalendarHeader() {
             <ChevronLeft aria-hidden />
           )}
         </Button>
-        <Button size={size} variant="clear" color="sub" isIconOnly slot="next">
+        <Button
+          size={size}
+          variant="clear"
+          color="sub"
+          isIconOnly
+          slot="next"
+          className={slots.nextButton()}
+        >
           {direction === "rtl" ? (
             <ChevronLeft aria-hidden />
           ) : (

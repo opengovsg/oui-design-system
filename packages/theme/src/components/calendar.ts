@@ -23,6 +23,8 @@ export const calendarStyles = tv({
     errorMessage: "",
     gridHeader: "",
     gridHeaderCell: "text-base-content-default",
+    yearSelector: "",
+    monthSelector: "",
   },
   variants: {
     variant: {},
@@ -46,16 +48,12 @@ export const calendarStyles = tv({
         gridHeaderCell: "prose-subhead-2 w-[52px] p-3",
         header: "prose-subhead-2 px-4",
         cell: "prose-body-1 mx-auto h-11 w-11",
+        monthSelector: "-ml-2 px-2",
+        yearSelector: "px-2",
+        nextButton: "-mr-2",
       },
     },
   },
-  compoundVariants: [],
-  compoundSlots: [
-    {
-      slots: ["prevButton", "nextButton"],
-      class: "",
-    },
-  ],
   defaultVariants: {
     size: "md",
   },

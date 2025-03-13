@@ -1,10 +1,11 @@
 import type { DateValue } from "react-aria-components"
-import { calendarStyles } from "@opengovsg/oui-theme"
 import { useDeepCompareMemo } from "use-deep-compare"
 
+import { calendarStyles } from "@opengovsg/oui-theme"
+
+import type { CalendarProps } from "./types"
 import { createContext } from "../system/react-utils"
 import { mapPropsVariants } from "../system/utils"
-import { CalendarProps } from "./types"
 
 export function useProvideCalendarStyles<T extends DateValue>(
   originalProps: CalendarProps<T>,

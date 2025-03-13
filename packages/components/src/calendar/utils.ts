@@ -1,11 +1,16 @@
+import type { DateFormatterOptions } from "@react-aria/i18n"
 import { useMemo } from "react"
 import { CalendarDate } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
-export function useLocalizedMonths(timeZone: string) {
+export function useLocalizedMonths(
+  timeZone: string,
+  formatterOptions?: DateFormatterOptions,
+) {
   const formatter = useDateFormatter({
     month: "long",
     timeZone,
+    ...formatterOptions,
   })
 
   return useMemo(() => {
@@ -25,10 +30,12 @@ export function useLocalizedYears(
   yearStart: number,
   yearEnd: number,
   timeZone: string,
+  formatterOptions?: DateFormatterOptions,
 ) {
   const formatter = useDateFormatter({
     year: "numeric",
     timeZone,
+    ...formatterOptions,
   })
 
   return useMemo(() => {

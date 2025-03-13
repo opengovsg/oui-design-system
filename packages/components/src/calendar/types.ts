@@ -10,6 +10,9 @@ import type {
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 
+/** Imported to ensure pnpm portability */
+import type {} from "@react-types/calendar"
+
 export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
     CalendarVariantProps,
