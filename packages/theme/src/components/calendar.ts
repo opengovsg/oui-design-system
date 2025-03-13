@@ -16,7 +16,7 @@ export const calendarStyles = tv({
     title: "",
     content: "",
     cell: [
-      "text-base-content-default disabled:text-interaction-support-disabled-content my-0.5 flex cursor-pointer items-center justify-center rounded-full disabled:cursor-default",
+      "text-base-content-default disabled:text-interaction-support-disabled-content unavailable:text-interaction-support-disabled-content unavailable:line-through unavailable:cursor-default my-0.5 flex cursor-pointer items-center justify-center rounded-full disabled:cursor-default",
       ...focusVisibleClasses,
     ],
     cellButton: "",
@@ -30,7 +30,7 @@ export const calendarStyles = tv({
     variant: {},
     isSelected: {
       false: {
-        cell: "pressed:bg-interaction-muted-main-active hover:bg-interaction-muted-main-hover text-zinc-900",
+        cell: "pressed:bg-interaction-muted-main-active not-unavailable:hover:bg-interaction-muted-main-hover text-zinc-900",
       },
       true: {
         cell: "bg-interaction-main-default text-base-content-inverse invalid:bg-interaction-critical-default forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
