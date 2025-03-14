@@ -1,6 +1,7 @@
+import type { ForwardedRef, ReactElement } from "react"
 import type { ListBoxItemProps } from "react-aria-components"
 import { CheckIcon } from "lucide-react"
-import { ListBoxItem } from "react-aria-components"
+import { ListBoxItem, useContextProps } from "react-aria-components"
 
 import type {
   SelectItemVariantProps,
@@ -9,14 +10,25 @@ import type {
 } from "@opengovsg/oui-theme"
 import { composeRenderProps, selectItemStyles } from "@opengovsg/oui-theme"
 
-import { mapPropsVariants } from "../system/utils"
+import { forwardRef, mapPropsVariants } from "../system/utils"
+import { SelectVariantContext } from "./select-variant-context"
 
-interface SelectItemProps extends ListBoxItemProps, SelectItemVariantProps {
+interface SelectItemProps<T extends object>
+  extends ListBoxItemProps<T>,
+    SelectItemVariantProps {
   classNames?: SlotsToClasses<SelectItemVariantSlots>
-  children: string
 }
 
-export function SelectItem({ classNames, ...originalProps }: SelectItemProps) {
+export const SelectItem = forwardRef(function SelectItem<T extends object>(
+  { classNames, ...originalProps }: SelectItemProps<T>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ref: ForwardedRef<any>,
+) {
+  ;[originalProps, ref] = useContextProps(
+    originalProps,
+    ref,
+    SelectVariantContext,
+  )
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     selectItemStyles.variantKeys,
@@ -27,35 +39,40 @@ export function SelectItem({ classNames, ...originalProps }: SelectItemProps) {
   return (
     <ListBoxItem
       {...props}
-      textValue={props.children}
+      ref={ref}
       className={composeRenderProps(
         props.className ?? classNames?.base,
         (className, renderProps) => styles.base({ className, ...renderProps }),
       )}
     >
-      {(renderProps) => (
-        <>
-          <span
-            className={styles.text({
-              className: classNames?.text,
-              ...renderProps,
-            })}
-          >
-            {props.children}
-          </span>
-          {renderProps.isSelected && (
+      {(renderProps) => {
+        if (typeof props.children === "function") {
+          return props.children(renderProps)
+        }
+        return (
+          <>
             <span
-              aria-hidden
-              className={styles.icon({
-                className: classNames?.icon,
+              className={styles.text({
+                className: classNames?.text,
                 ...renderProps,
               })}
             >
-              <CheckIcon />
+              {props.children}
             </span>
-          )}
-        </>
-      )}
+            {renderProps.isSelected && (
+              <span
+                aria-hidden
+                className={styles.icon({
+                  className: classNames?.icon,
+                  ...renderProps,
+                })}
+              >
+                <CheckIcon />
+              </span>
+            )}
+          </>
+        )
+      }}
     </ListBoxItem>
   )
-}
+}) as <T extends object>(props: SelectItemProps<T>) => ReactElement
