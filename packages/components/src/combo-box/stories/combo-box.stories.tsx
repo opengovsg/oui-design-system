@@ -5,7 +5,8 @@ import { expect, userEvent, waitFor, within } from "@storybook/test"
 import { ListBoxItem, useFilter } from "react-aria-components"
 
 import type { ComboBoxProps } from "../combo-box"
-import { ComboBox, ComboBoxItem } from "../combo-box"
+import { ComboBox } from "../combo-box"
+import { ComboBoxItem } from "../combo-box-item"
 
 const defaultItems = [...Array(10)].map((_, i) => ({
   id: String(i),
@@ -275,5 +276,6 @@ export const Sizes: Story = {
   },
   args: {
     onClear: () => {},
+    menuTrigger: "focus",
   },
 }
