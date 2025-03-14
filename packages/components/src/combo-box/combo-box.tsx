@@ -1,11 +1,9 @@
 "use client"
 
-import type { JSX } from "react"
 import type { LocalizedStrings } from "react-aria"
 import type {
   ComboBoxProps as AriaComboBoxProps,
   ListBoxItemProps,
-  ListBoxItemRenderProps,
   ListBoxProps,
   ListBoxRenderProps,
   ListLayoutOptions,
@@ -44,13 +42,7 @@ import {
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
 
-export type ComboBoxItem = {
-  value: string
-  name: string
-  description?: string
-}
-
-export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
+export interface ComboBoxProps<T extends object>
   extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
   label?: string
@@ -62,13 +54,10 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   errorMessage?: string | ((validation: ValidationResult) => string)
   classNames?: SlotsToClasses<ComboBoxSlots> &
     SlotsToClasses<"clearButton" | "emptyState">
-  itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
    * Any additional props to be spread to the list layout.
    */
   listLayoutOptions?: ListLayoutOptions
-
-  children?: (item: T) => JSX.Element
 
   /** Values that should invalidate the item cache when using dynamic collections. */
   dependencies?: ListBoxProps<T>["dependencies"]
@@ -84,6 +73,8 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   onClear?: () => void
 
   renderEmptyState?: ListBoxProps<T>["renderEmptyState"]
+
+  children?: ListBoxProps<T>["children"]
 }
 
 const calculateEstimatedRowHeight = (
@@ -135,12 +126,11 @@ export function ComboBoxEmptyState({
   )
 }
 
-export function ComboBox<T extends ComboBoxItem>({
+export function ComboBox<T extends object>({
   label,
   description,
   errorMessage,
   classNames,
-  itemClassNames,
   size,
   listLayoutOptions,
   children,
@@ -261,14 +251,14 @@ export function ComboBox<T extends ComboBoxItem>({
           </div>
           {description && <Description size={size}>{description}</Description>}
           <FieldError size={size}>{errorMessage}</FieldError>
-          <Virtualizer layout={layout}>
-            <Popover
-              className={composeRenderProps(
-                classNames?.popover,
-                (className, renderProps) =>
-                  styles.popover({ ...renderProps, className }),
-              )}
-            >
+          <Popover
+            className={composeRenderProps(
+              classNames?.popover,
+              (className, renderProps) =>
+                styles.popover({ ...renderProps, className }),
+            )}
+          >
+            <Virtualizer layout={layout}>
               <ListBox
                 className={composeRenderProps(
                   classNames?.list,
@@ -278,24 +268,10 @@ export function ComboBox<T extends ComboBoxItem>({
                 dependencies={dependencies}
                 renderEmptyState={renderEmptyState}
               >
-                {(item: T) => {
-                  if (children) {
-                    return children(item)
-                  }
-                  return (
-                    <ComboBoxItem
-                      size={size}
-                      id={item.value}
-                      label={item.name}
-                      textValue={item.name}
-                      description={item.description}
-                      classNames={itemClassNames}
-                    />
-                  )
-                }}
+                {children}
               </ListBox>
-            </Popover>
-          </Virtualizer>
+            </Virtualizer>
+          </Popover>
         </>
       )}
     </AriaComboBox>
@@ -305,13 +281,10 @@ export function ComboBox<T extends ComboBoxItem>({
 export interface ComboBoxItemProps
   extends ListBoxItemProps,
     ComboBoxItemVariantProps {
-  label: React.ReactNode | ((props: ListBoxItemRenderProps) => React.ReactNode)
   /**
    * Description for the item, if any
    */
-  description?:
-    | React.ReactNode
-    | ((props: ListBoxItemRenderProps) => React.ReactNode)
+  description?: React.ReactNode
   classNames?: SlotsToClasses<ComboBoxItemSlots>
 }
 
@@ -319,7 +292,7 @@ export function ComboBoxItem({
   className,
   size,
   description,
-  label,
+  children,
   classNames,
   ...props
 }: ComboBoxItemProps) {
@@ -334,13 +307,16 @@ export function ComboBoxItem({
       )}
     >
       {(renderProps) => {
+        if (typeof children === "function") {
+          return children(renderProps)
+        }
         return (
           <>
             <Text
               className={styles.label({ className: classNames?.label })}
               slot="label"
             >
-              {typeof label === "function" ? label(renderProps) : label}
+              {children}
             </Text>
             {description && (
               <Text
@@ -349,9 +325,7 @@ export function ComboBoxItem({
                 })}
                 slot="description"
               >
-                {typeof description === "function"
-                  ? description(renderProps)
-                  : description}
+                {description}
               </Text>
             )}
           </>
