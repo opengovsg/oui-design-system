@@ -112,7 +112,12 @@ export const Virtualised: Story = {
 
 export const TriggerOnFocus: Story = {
   args: {
+    label: "Click on the input to automatically trigger the menu",
     menuTrigger: "focus",
+  },
+  play: async ({ canvas }) => {
+    const inputElem = canvas.getByRole("combobox")
+    userEvent.click(inputElem)
   },
 }
 
