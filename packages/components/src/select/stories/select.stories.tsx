@@ -6,26 +6,30 @@ import { ListBoxItem } from "react-aria-components"
 
 import type { SelectProps } from "../select"
 import { Select } from "../select"
+import { SelectItem } from "../select-item"
+
+const defaultItems = [
+  { textValue: "English", id: "en" },
+  { textValue: "Spanish", id: "es" },
+  { textValue: "French", id: "fr" },
+  { textValue: "German", id: "de" },
+  { textValue: "Italian", id: "it" },
+  { textValue: "Japanese", id: "ja" },
+  { textValue: "Korean", id: "ko" },
+  { textValue: "Chinese", id: "zh" },
+]
 
 export default {
   title: "Components/Select",
   component: Select,
   args: {
     "aria-label": "Label added for a11y, please add a label prop if using",
-    items: [
-      { textValue: "English", id: "en" },
-      { textValue: "Spanish", id: "es" },
-      { textValue: "French", id: "fr" },
-      { textValue: "German", id: "de" },
-      { textValue: "Italian", id: "it" },
-      { textValue: "Japanese", id: "ja" },
-      { textValue: "Korean", id: "ko" },
-      { textValue: "Chinese", id: "zh" },
-    ],
+    items: defaultItems,
+    children: (item) => <SelectItem>{item.textValue}</SelectItem>,
   },
-} as Meta<typeof Select>
+} as Meta<typeof Select<(typeof defaultItems)[0]>>
 
-type Story = StoryObj<typeof Select>
+type Story = StoryObj<typeof Select<(typeof defaultItems)[0]>>
 
 export const Default: Story = {
   args: {},
@@ -65,7 +69,7 @@ export const WithCustomItem: Story = {
   },
 }
 
-const ControlledTemplate = (args: SelectProps) => {
+const ControlledTemplate = (args: SelectProps<(typeof defaultItems)[0]>) => {
   const [selectedKey, setSelectedKey] = useState<Key>("it")
 
   return (
@@ -107,8 +111,8 @@ export const Virtualized: Story = {
   args: {
     placeholder: "YYYY",
     items: Array.from({ length: 1000 }).map((_, number) => ({
-      textValue: `${number + 1900}`,
-      id: number + 1900,
+      textValue: String(number + 1900),
+      id: String(number + 1900),
     })),
     label: "Year of birth",
   },
