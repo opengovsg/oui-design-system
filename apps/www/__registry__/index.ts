@@ -1,6 +1,6 @@
 // TODO: Autogenerate this from the registry folder
 
-import React from "react"
+import { lazy } from "react"
 
 type RegistryComponent = {
   name: string
@@ -22,7 +22,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-demo.tsx",
       },
     ],
-    component: React.lazy(() => import("@/registry/examples/button-demo.tsx")),
+    component: lazy(() => import("@/registry/examples/button-demo.tsx")),
   },
   "button-with-sizes": {
     name: "button-with-sizes",
@@ -33,9 +33,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-sizes.tsx",
       },
     ],
-    component: React.lazy(
-      () => import("@/registry/examples/button-with-sizes.tsx"),
-    ),
+    component: lazy(() => import("@/registry/examples/button-with-sizes.tsx")),
   },
   "button-with-variants": {
     name: "button-with-variants",
@@ -46,7 +44,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-variants.tsx",
       },
     ],
-    component: React.lazy(
+    component: lazy(
       () => import("@/registry/examples/button-with-variants.tsx"),
     ),
   },
@@ -59,9 +57,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-icons.tsx",
       },
     ],
-    component: React.lazy(
-      () => import("@/registry/examples/button-with-icons.tsx"),
-    ),
+    component: lazy(() => import("@/registry/examples/button-with-icons.tsx")),
   },
   "button-with-color": {
     name: "button-with-color",
@@ -72,9 +68,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-color.tsx",
       },
     ],
-    component: React.lazy(
-      () => import("@/registry/examples/button-with-color.tsx"),
-    ),
+    component: lazy(() => import("@/registry/examples/button-with-color.tsx")),
   },
   "button-with-disabled": {
     name: "button-with-disabled",
@@ -85,7 +79,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-disabled.tsx",
       },
     ],
-    component: React.lazy(
+    component: lazy(
       () => import("@/registry/examples/button-with-disabled.tsx"),
     ),
   },
@@ -98,7 +92,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-loading.tsx",
       },
     ],
-    component: React.lazy(
+    component: lazy(
       () => import("@/registry/examples/button-with-loading.tsx"),
     ),
   },
@@ -111,7 +105,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-spinner-placement.tsx",
       },
     ],
-    component: React.lazy(
+    component: lazy(
       () => import("@/registry/examples/button-with-spinner-placement.tsx"),
     ),
   },
@@ -124,7 +118,7 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-custom-spinner.tsx",
       },
     ],
-    component: React.lazy(
+    component: lazy(
       () => import("@/registry/examples/button-with-custom-spinner.tsx"),
     ),
   },
@@ -137,8 +131,6 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-radius.tsx",
       },
     ],
-    component: React.lazy(
-      () => import("@/registry/examples/button-with-radius.tsx"),
-    ),
+    component: lazy(() => import("@/registry/examples/button-with-radius.tsx")),
   },
 }

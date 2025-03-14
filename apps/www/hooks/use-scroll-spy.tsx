@@ -36,7 +36,7 @@ export const useScrollSpy = (selectors: string[]) => {
       if (element) observer.current?.observe(element)
     }
     return () => observer.current?.disconnect()
-  }, [selectors, previousId, activeId])
+  }, [activeId, previousId, selectors])
 
   return activeId
 }

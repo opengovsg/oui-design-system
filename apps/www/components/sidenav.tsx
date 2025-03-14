@@ -1,7 +1,6 @@
-import { JSX } from "react"
-import Link, { LinkProps } from "next/link"
-
-import { tv } from "@opengovsg/oui-theme"
+import type { LinkProps } from "next/link"
+import type { JSX } from "react"
+import Link from "next/link"
 
 interface SidenavItem {
   title: React.ReactNode

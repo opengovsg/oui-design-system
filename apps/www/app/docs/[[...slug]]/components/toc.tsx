@@ -1,6 +1,6 @@
 "use client"
 
-import { CSSProperties } from "react"
+import type { CSSProperties } from "react"
 import { useScrollSpy } from "@/hooks/use-scroll-spy"
 
 interface TocItem {

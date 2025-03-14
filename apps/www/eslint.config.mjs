@@ -1,21 +1,16 @@
-import { dirname } from "path"
-import { fileURLToPath } from "url"
 import { FlatCompat } from "@eslint/eslintrc"
 import { config as baseConfig } from "@oui/eslint-config/react-internal"
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+import tseslint from "typescript-eslint"
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
+  baseDirectory: import.meta.dirname,
 })
 
-/**
- * @type {import("eslint").Linter.Config}
- */
-const config = [
-  ...baseConfig,
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-]
+const config = tseslint.config(
+  baseConfig,
+  compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"],
+  }),
+)
 
 export default config

@@ -8,7 +8,8 @@ import { cn } from "@opengovsg/oui-theme"
 import { CopyButton } from "./copy-button"
 import { PreviewErrorBoundary } from "./preview-error-boundary"
 
-interface ComponentPreviewProps extends React.HTMLAttributes<HTMLDivElement> {
+interface ComponentPreviewProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   name: string
 }
 
@@ -55,7 +56,6 @@ const Code = async ({
 
 export function ComponentPreview({
   name,
-  children,
   className,
   ...props
 }: ComponentPreviewProps) {
