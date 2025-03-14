@@ -297,8 +297,20 @@ export function ComboBoxItem({
   ...props
 }: ComboBoxItemProps) {
   const styles = comboBoxItemStyles({ size })
+
+  const defaultTextValue = useMemo(() => {
+    if (props.textValue) {
+      return props.textValue
+    }
+    if (typeof children === "string") {
+      return children
+    }
+    return undefined
+  }, [children, props.textValue])
+
   return (
     <ListBoxItem
+      textValue={defaultTextValue}
       {...props}
       className={composeRenderProps(
         className ?? classNames?.container,

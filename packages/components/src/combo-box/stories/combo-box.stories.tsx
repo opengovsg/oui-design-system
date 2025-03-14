@@ -20,9 +20,7 @@ export default {
     defaultItems: defaultItems,
     isDisabled: false,
     onClear: undefined,
-    children: (item) => (
-      <ComboBoxItem textValue={item.textValue}>{item.textValue}</ComboBoxItem>
-    ),
+    children: (item) => <ComboBoxItem>{item.textValue}</ComboBoxItem>,
   },
 } as Meta<typeof ComboBox<(typeof defaultItems)[0]>>
 
