@@ -1,3 +1,5 @@
+"use client"
+
 import type { Virtualizer } from "@tanstack/react-virtual"
 import type { UseComboboxPropGetters } from "downshift"
 import type { ForwardedRef, ReactNode } from "react"

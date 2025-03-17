@@ -1,3 +1,5 @@
+"use client"
+
 import type { UseComboboxPropGetters } from "downshift"
 import type { ContextValue, SlotProps } from "react-aria-components"
 import { createContext } from "react"
