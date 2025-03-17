@@ -4,6 +4,10 @@
 name: Skip checks
 on:
   pull_request:
+    paths-ignore:
+      - "apps/storybook/**"
+      - "packages/components/src/**"
+      - "packages/theme/src/**"
 
 jobs:
   chromatic:
