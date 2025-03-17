@@ -1,0 +1,13 @@
+# Workaround for required checks when file patterns don't match.
+# See https://github.com/orgs/community/discussions/26857#discussioncomment-6429953
+
+name: Skip checks
+on:
+  pull_request:
+
+jobs:
+  chromatic:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do nothing
+        run: exit 0
