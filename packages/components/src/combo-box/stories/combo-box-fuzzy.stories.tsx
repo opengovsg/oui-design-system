@@ -11,8 +11,8 @@ export default {
   args: {
     label: "Ice cream flavour",
     items: [...Array(1000)].map((_, i) => ({
-      value: String(i),
-      name: `Item ${i}`,
+      id: String(i),
+      textValue: `Item ${i}`,
       description: `Description ${i}`,
     })),
     isDisabled: false,
@@ -32,7 +32,7 @@ const ControlledTemplate = ({ items }: ComboBoxFuzzyProps) => {
 
   const onSelectionChange = (id: Key | null) => {
     setFieldState({
-      inputValue: items.find((o) => o.value === id)?.name ?? "",
+      inputValue: items.find((o) => o.id === id)?.textValue ?? "",
       selectedKey: id,
     })
   }

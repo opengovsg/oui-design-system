@@ -4,20 +4,34 @@ import type { Key } from "react-aria"
 import type { SetRequired } from "type-fest"
 import { useCallback, useDeferredValue, useMemo, useState } from "react"
 import fuzzysort from "fuzzysort"
+import { Text } from "react-aria-components"
 
 import type {
   ComboBoxFuzzyVariantProps,
+  ComboBoxItemSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { comboBoxFuzzyHighlightedTextStyles } from "@opengovsg/oui-theme"
+import {
+  comboBoxFuzzyHighlightedTextStyles,
+  comboBoxItemStyles,
+  comboBoxStyles,
+} from "@opengovsg/oui-theme"
 
 import type { ComboBoxProps } from "./combo-box"
-import { ComboBox, ComboBoxItem } from "./combo-box"
+import { mapPropsVariants } from "../system/utils"
+import { ComboBox } from "./combo-box"
+import { ComboBoxItem } from "./combo-box-item"
 
 interface HighlightedTextProps extends ComboBoxFuzzyVariantProps {
   result?: Fuzzysort.Result
   originalText?: string
   className?: string
+}
+
+type ComboBoxItem = {
+  id: Key
+  textValue: string
+  description?: string
 }
 
 function HighlightedText({
@@ -51,26 +65,36 @@ export interface ComboBoxFuzzyProps<T extends ComboBoxItem = ComboBoxItem>
     | "selectedKey"
     | "items"
   > {
-  itemClassNames?: ComboBoxProps<T>["itemClassNames"] &
+  itemClassNames?: SlotsToClasses<ComboBoxItemSlots> &
     SlotsToClasses<"highlight">
 }
 
 /**
  * Controlled variant of ComboBox, allows for fuzzy search and item highlight.
+ * @deprecated Use ComboBox instead (and bring your own fuzzysearch).
  */
-export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>({
-  items,
-  itemClassNames,
-  onSelectionChange: onSelectionChangeProp,
-  onInputChange: onInputChangeProp,
-  ...props
-}: ComboBoxFuzzyProps<T>) {
-  const deferredInputValue = useDeferredValue(props.inputValue)
+export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
+  originalProps: ComboBoxFuzzyProps<T>,
+) {
+  const [_props, variantProps] = mapPropsVariants(
+    originalProps,
+    comboBoxStyles.variantKeys,
+  )
+  const {
+    items,
+    itemClassNames,
+    onSelectionChange: onSelectionChangeProp,
+    onInputChange: onInputChangeProp,
+    inputValue,
+    ...props
+  } = _props
+
+  const deferredInputValue = useDeferredValue(inputValue)
   const preparedItems = useMemo(() => {
     return (
       items?.map((item) => ({
         ...item,
-        prepared: fuzzysort.prepare(item.name),
+        prepared: fuzzysort.prepare(item.textValue),
       })) ?? []
     )
   }, [items])
@@ -99,7 +123,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>({
         .reduce(
           (acc, result) => {
             acc.items.push(result.obj)
-            acc.result[result.obj.name] = result
+            acc.result[result.obj.textValue] = result
             return acc
           },
           { items: [] as T[], result: {} as Record<string, Fuzzysort.Result> },
@@ -109,31 +133,48 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>({
     [onInputChangeProp, preparedItems],
   )
 
+  const comboboxItemStyles = comboBoxItemStyles(variantProps)
+
   return (
     <ComboBox
       {...props}
+      inputValue={inputValue}
       items={filteredResults.items}
       dependencies={[deferredInputValue]}
       onSelectionChange={onSelectionChange}
       onInputChange={onInputChange}
     >
       {(item) => (
-        <ComboBoxItem
-          classNames={itemClassNames}
-          key={item.name}
-          label={({ isSelected, isFocused }) => (
-            <HighlightedText
-              className={itemClassNames?.highlight}
-              result={filteredResults.result?.[item.name]}
-              originalText={item.name}
-              isSelected={isSelected}
-              isFocused={isFocused}
-            />
+        <ComboBoxItem key={item.id} textValue={item.textValue} id={item.id}>
+          {({ isSelected, isFocused }) => (
+            <>
+              <Text
+                className={comboboxItemStyles.label({
+                  className: itemClassNames?.label,
+                })}
+                slot="label"
+              >
+                <HighlightedText
+                  className={itemClassNames?.highlight}
+                  result={filteredResults.result?.[item.textValue]}
+                  originalText={item.textValue}
+                  isSelected={isSelected}
+                  isFocused={isFocused}
+                />
+              </Text>
+              {item.description && (
+                <Text
+                  className={comboboxItemStyles.description({
+                    className: itemClassNames?.description,
+                  })}
+                  slot="description"
+                >
+                  {item.description}
+                </Text>
+              )}
+            </>
           )}
-          description={item.description}
-          textValue={item.name}
-          id={item.value}
-        />
+        </ComboBoxItem>
       )}
     </ComboBox>
   )
