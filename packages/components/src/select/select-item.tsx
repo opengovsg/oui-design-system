@@ -1,3 +1,5 @@
+"use client"
+
 import type { ForwardedRef, ReactElement } from "react"
 import type { ListBoxItemProps } from "react-aria-components"
 import { CheckIcon } from "lucide-react"
