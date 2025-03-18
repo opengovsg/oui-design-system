@@ -43,7 +43,7 @@ export const badgeStyles = tv({
         base: "border",
       },
       dot: {
-        base: "text-base-content-default",
+        base: "text-base-content-default dark:text-base-content-inverse",
         dot: "mr-1 rounded-full",
       },
     },

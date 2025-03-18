@@ -41,7 +41,10 @@ const docsLinks: NavItem = {
         },
         {
           title: "Components",
-          items: [{ title: "Button", url: "button" }],
+          items: [
+            { title: "Button", url: "button" },
+            { title: "Badge", url: "badge", status: "new" },
+          ],
         },
         {
           title: "Utilities",
