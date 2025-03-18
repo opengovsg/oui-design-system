@@ -8,6 +8,7 @@
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "pnpm run /^dev:/",
+    "generate:registry": "pnpx tsx scripts/generate-registry.ts",
     "build:content": "velite --clean",
     "build:next": "next build",
     "build": "pnpm run --sequential /^build:/",

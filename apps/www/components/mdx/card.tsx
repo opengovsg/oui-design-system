@@ -1,6 +1,6 @@
-import type { HTMLAttributes } from "react";
+import type { LinkProps } from "next/link"
+import type { HTMLAttributes } from "react"
 import type React from "react"
-import type { LinkProps } from "next/link";
 import Link from "next/link"
 import { SiStackblitz } from "@icons-pack/react-simple-icons"
 import { ChevronRight } from "lucide-react"
