@@ -2,7 +2,7 @@ import type { VariantProps } from "tailwind-variants"
 
 import { cn, focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
-import { colorVariants } from "../utils/variants"
+import { colorVariantsWithState } from "../utils/variants"
 
 export const buttonStyles = tv({
   base: cn(
@@ -60,105 +60,105 @@ export const buttonStyles = tv({
     {
       variant: "solid",
       color: "main",
-      className: colorVariants.solid.main,
+      className: colorVariantsWithState.solid.main,
     },
     {
       variant: "solid",
       color: "sub",
-      className: colorVariants.solid.sub,
+      className: colorVariantsWithState.solid.sub,
     },
     {
       variant: "solid",
       color: "neutral",
-      className: colorVariants.solid.neutral,
+      className: colorVariantsWithState.solid.neutral,
     },
     {
       variant: "solid",
       color: "critical",
-      className: colorVariants.solid.critical,
+      className: colorVariantsWithState.solid.critical,
     },
     {
       variant: "solid",
       color: "warning",
-      className: colorVariants.solid.warning,
+      className: colorVariantsWithState.solid.warning,
     },
     {
       variant: "solid",
       color: "success",
-      className: colorVariants.solid.success,
+      className: colorVariantsWithState.solid.success,
     },
     // reverse / color
     {
       variant: "reverse",
       color: "main",
-      className: colorVariants.reverse.main,
+      className: colorVariantsWithState.reverse.main,
     },
     {
       variant: "reverse",
       color: "critical",
-      className: colorVariants.reverse.critical,
+      className: colorVariantsWithState.reverse.critical,
     },
     {
       variant: "reverse",
       color: "sub",
-      className: colorVariants.reverse.sub,
+      className: colorVariantsWithState.reverse.sub,
     },
     {
       variant: "reverse",
       color: "neutral",
-      className: colorVariants.reverse.neutral,
+      className: colorVariantsWithState.reverse.neutral,
     },
     // outline / color
     {
       variant: "outline",
       color: "main",
-      className: colorVariants.outline.main,
+      className: colorVariantsWithState.outline.main,
     },
     {
       variant: "outline",
       color: "critical",
-      className: colorVariants.outline.critical,
+      className: colorVariantsWithState.outline.critical,
     },
     {
       variant: "outline",
       color: "neutral",
-      className: colorVariants.outline.neutral,
+      className: colorVariantsWithState.outline.neutral,
     },
     {
       variant: "outline",
       color: "sub",
-      className: colorVariants.outline.sub,
+      className: colorVariantsWithState.outline.sub,
     },
     {
       variant: "outline",
       color: "inverse",
-      className: colorVariants.outline.inverse,
+      className: colorVariantsWithState.outline.inverse,
     },
     // clear / color
     {
       variant: "clear",
       color: "main",
-      className: colorVariants.clear.main,
+      className: colorVariantsWithState.clear.main,
     },
     {
       variant: "clear",
       color: "critical",
-      className: colorVariants.clear.critical,
+      className: colorVariantsWithState.clear.critical,
     },
     {
       variant: "clear",
       color: "neutral",
-      className: colorVariants.clear.neutral,
+      className: colorVariantsWithState.clear.neutral,
     },
     {
       variant: "clear",
       color: "sub",
-      className: colorVariants.clear.sub,
+      className: colorVariantsWithState.clear.sub,
     },
     {
       variant: "clear",
       color: "inverse",
-      className: colorVariants.clear.inverse,
+      className: colorVariantsWithState.clear.inverse,
     },
     // iconbutton / size
     {

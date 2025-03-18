@@ -13,4 +13,5 @@ export * from "./field"
 export * from "./banner"
 export * from "./tag-field"
 export * from "./select"
+export * from "./badge"
 // Add new theme exports here

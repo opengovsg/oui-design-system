@@ -14,4 +14,5 @@ export * from "./combo-box"
 export * from "./banner"
 export * from "./tag-field"
 export * from "./select"
+export * from "./badge"
 // Add new component exports here

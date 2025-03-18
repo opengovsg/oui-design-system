@@ -59,7 +59,7 @@ export const WithCustomItem: Story = {
   args: {
     label: "Language",
     children: (item) => (
-      <ListBoxItem className="bg-blue-50 focus:bg-blue-100">
+      <ListBoxItem className="bg-blue-50 text-black focus:bg-blue-100">
         {item.textValue}
       </ListBoxItem>
     ),

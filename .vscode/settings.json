@@ -18,6 +18,7 @@
   },
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "tailwindCSS.experimental.classRegex": [
+    ":\\s*?[\"'`]([^\"'`]*).*?,",
     [
       "classNames:\\s*{([\\s\\S]*?)}",
       "\\s?[\\w].*:\\s*?[\"'`]([^\"'`]*).*?,?\\s?"
