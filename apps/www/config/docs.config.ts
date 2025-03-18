@@ -29,68 +29,11 @@ const docsLinks: NavItem = {
       url: "components",
       items: [
         {
-          title: "Concepts",
-          url: "concepts",
-          items: [],
-        },
-        {
-          title: "Layout",
-          items: [],
-        },
-        {
-          title: "Typography",
-          items: [],
-        },
-        {
           title: "Components",
           items: [
             { title: "Button", url: "button" },
             { title: "Badge", url: "badge", status: "new" },
           ],
-        },
-        {
-          title: "Utilities",
-          items: [],
-        },
-      ],
-    },
-
-    {
-      title: "Styling",
-      url: "styling",
-      items: [
-        {
-          title: "Concepts",
-          items: [
-            { title: "Overview", url: "overview" },
-            { title: "Dark Mode", url: "dark-mode" },
-          ],
-        },
-      ],
-    },
-
-    {
-      title: "Theming",
-      url: "theming",
-      items: [
-        {
-          title: "Concepts",
-          items: [
-            { title: "Overview", url: "overview" },
-            { title: "Tokens", url: "tokens" },
-            { title: "Semantic Tokens", url: "semantic-tokens" },
-            { title: "Variants", url: "variants" },
-            { title: "Compound Variants", url: "compound-variants" },
-          ],
-        },
-        {
-          title: "Design Tokens",
-          items: [],
-        },
-        {
-          title: "Customization",
-          url: "customization",
-          items: [{ title: "Overview", url: "overview" }],
         },
       ],
     },
