@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { CheckIcon } from "lucide-react"
+import { Bell, CheckIcon } from "lucide-react"
 
 import { Badge } from "../badge"
 
@@ -29,7 +29,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["xs", "sm", "md", "lg"],
+      options: ["xs", "sm"],
     },
     isDisabled: {
       control: {
@@ -44,6 +44,7 @@ export default {
   },
   args: {
     children: "Badge",
+    onClose: undefined,
   },
 } as Meta<typeof Badge>
 
@@ -61,11 +62,7 @@ export const Disabled: Story = {
 
 export const StartContent = {
   args: {
-    startContent: (
-      <span aria-label="celebration" className="ml-1" role="img">
-        🎉
-      </span>
-    ),
+    startContent: <Bell className="size-3" />,
   },
 }
 
@@ -92,23 +89,101 @@ export const CustomCloseIcon = {
   },
 }
 
-export const Sizes: Story = {
-  render: ({ children, ...args }) => {
-    return (
-      <div className="space-x-4">
-        <Badge {...args} size="xs">
-          {children} xs
-        </Badge>
-        <Badge {...args} size="sm">
-          {children} sm
-        </Badge>
-        <Badge {...args} size="md">
-          {children} md
-        </Badge>
-        <Badge {...args} size="lg">
-          {children} lg
-        </Badge>
-      </div>
-    )
+// eslint-disable-next-line react/prop-types
+const SizesTemplate: Story["render"] = ({ children, ...args }) => {
+  return (
+    <div className="space-x-4">
+      <Badge {...args} size="xs">
+        {children} xs
+      </Badge>
+      <Badge {...args} size="sm">
+        {children} sm
+      </Badge>
+      <Badge {...args} size="md">
+        {children} md
+      </Badge>
+    </div>
+  )
+}
+
+const ColorsTemplate: Story["render"] = (args) => {
+  return (
+    <div className="space-x-4">
+      <Badge {...args} color="main">
+        Main
+      </Badge>
+      <Badge {...args} color="sub">
+        Sub
+      </Badge>
+      <Badge {...args} color="neutral">
+        Neutral
+      </Badge>
+      <Badge {...args} color="success">
+        Success
+      </Badge>
+      <Badge {...args} color="warning">
+        Warning
+      </Badge>
+      <Badge {...args} color="critical">
+        Critical
+      </Badge>
+    </div>
+  )
+}
+
+export const SolidColors: Story = {
+  args: {
+    variant: "solid",
   },
+  render: ColorsTemplate,
+}
+
+export const SolidSizes: Story = {
+  args: {
+    variant: "solid",
+    isCloseable: true,
+  },
+  render: SizesTemplate,
+}
+
+export const SubtleColors: Story = {
+  args: {
+    variant: "subtle",
+  },
+  render: ColorsTemplate,
+}
+
+export const SubtleSizes: Story = {
+  args: {
+    variant: "subtle",
+  },
+  render: SizesTemplate,
+}
+
+export const OutlineColors: Story = {
+  args: {
+    variant: "outline",
+  },
+  render: ColorsTemplate,
+}
+
+export const OutlineSizes: Story = {
+  args: {
+    variant: "outline",
+  },
+  render: SizesTemplate,
+}
+
+export const DotColors: Story = {
+  args: {
+    variant: "dot",
+  },
+  render: ColorsTemplate,
+}
+
+export const DotSizes: Story = {
+  args: {
+    variant: "dot",
+  },
+  render: SizesTemplate,
 }

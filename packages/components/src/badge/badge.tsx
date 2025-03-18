@@ -19,16 +19,27 @@ export const Badge = forwardRef<HTMLDivElement, UseBadgeProps>((props, ref) => {
     isCloseable,
   } = useBadge({ ...props, ref })
 
+  const start = useMemo(() => {
+    if (props.variant === "dot" && !startContent) {
+      return <span className={slots.dot({ className: classNames?.dot })} />
+    }
+    return startContent
+  }, [props.variant, startContent, slots, classNames?.dot])
+
   const end = useMemo(() => {
     if (isCloseable) {
-      return <span {...getCloseButtonProps()}>{endContent ?? <XIcon />}</span>
+      return (
+        <span {...getCloseButtonProps()}>
+          {endContent ?? <XIcon className="size-full" />}
+        </span>
+      )
     }
     return endContent
   }, [endContent, getCloseButtonProps, isCloseable])
 
   return (
     <Component {...getChipProps()}>
-      {startContent}
+      {start}
       <span className={slots.content({ className: classNames?.content })}>
         {children}
       </span>

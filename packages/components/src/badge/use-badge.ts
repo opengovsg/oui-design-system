@@ -94,7 +94,7 @@ export function useBadge(originalProps: UseBadgeProps) {
 
   const formatMessage = useMessageFormatter(i18nStrings)
 
-  const isCloseable = !!onClose
+  const isCloseable = variantProps.isCloseable || !!onClose
 
   const {
     focusProps: closeFocusProps,
@@ -119,7 +119,7 @@ export function useBadge(originalProps: UseBadgeProps) {
       isValidElement(content)
         ? cloneElement(content, {
             // @ts-expect-error types are not full
-            className: cn("max-h-[80%]", content.props?.className),
+            className: content.props?.className,
           })
         : null,
     [],
@@ -138,6 +138,7 @@ export function useBadge(originalProps: UseBadgeProps) {
       role: "button",
       tabIndex: 0,
       className: slots.closeButton({
+        size: variantProps?.size,
         className: classNames?.closeButton,
         isFocusVisible: isCloseButtonFocusVisible,
       }),
@@ -151,6 +152,7 @@ export function useBadge(originalProps: UseBadgeProps) {
     formatMessage,
     isCloseButtonFocusVisible,
     slots,
+    variantProps?.size,
   ])
 
   return {
