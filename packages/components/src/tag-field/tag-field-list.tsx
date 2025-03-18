@@ -93,12 +93,12 @@ const TagFieldListInner = <T extends TagFieldItem>(
                 transform: `translateY(${virtualRow.start}px)`,
               },
             })
-            const childProps = {
+            const childProps: TagFieldListRenderProps<T> = {
               item,
               isHighlighted: highlightedIndex === virtualRow.index,
               key: virtualRow.key,
+              itemClassNames,
               ...itemProps,
-              classNames: itemClassNames,
             }
             if (typeof props.children === "function") {
               return props.children(childProps)
