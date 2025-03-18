@@ -129,9 +129,10 @@ export function useBadge(originalProps: UseBadgeProps) {
     return {
       ref: domRef,
       className: slots.base({ className: baseClassName }),
+      "aria-disabled": variantProps?.isDisabled,
       ...props,
     }
-  }, [baseClassName, domRef, props, slots])
+  }, [baseClassName, domRef, props, slots, variantProps?.isDisabled])
 
   const getCloseButtonProps: PropGetter = useCallback(() => {
     return {
