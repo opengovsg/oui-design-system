@@ -58,35 +58,12 @@ Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
 </Step>
 
 <Step>
-> Not implemented yet, there will eventually be a way to generate the theme file.
-
-Add your product's theme overrides below the `@opengovsg/oui-theme/tailwind.css` import.
+If you are using oui in a monorepo, you might need to add the following `@source` directive to point to the installation directory `@opengovsg/oui-theme`, or Tailwind might not detect the class names of oui components.
 
 ```css {3}
 /* styles/tailwind.css */
 @import "@opengovsg/oui-theme/tailwind.css";
-@import "./your-product-theme.css";
-```
-
-```css {5-17}
-/* styles/tailwind.css */
-@import "@opengovsg/oui-theme/tailwind.css";
-
-/* Or add your theme variables directly below `oui-theme`'s import */
-@layer base {
-  :root {
-    /* .... */
-    --text-color-default: #333;
-    --text-color-strong: #000;
-    /* .... */
-  }
-  .dark {
-    /* .... */
-    --text-color-default: #fff;
-    --text-color-strong: #fff;
-    /* .... */
-  }
-}
+@source "../path/to/node_modules/@opengovsg/oui-theme";
 ```
 
 </Step>
