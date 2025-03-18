@@ -142,6 +142,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
     renderEmptyState: renderEmptyStateProp,
     ...props
   } = _props
+
   const styles = comboBoxStyles(variantProps)
 
   const layout = useMemo(() => {
@@ -172,6 +173,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
         )}
         shouldFocusWrap
         allowsEmptyCollection
+        isDisabled={variantProps.isDisabled}
         {...props}
       >
         {({ isOpen, isDisabled: isComboBoxDisabled }) => (
@@ -184,6 +186,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
             </Label>
             <div className="flex flex-row">
               <FieldGroup
+                isDisabled={isComboBoxDisabled}
                 className={composeRenderProps(
                   classNames?.group,
                   (className, renderProps) =>
@@ -233,10 +236,10 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
                     classNames?.clearButton,
                     (className, renderProps) =>
                       comboBoxClearButtonStyles({
+                        ...variantProps,
                         ...renderProps,
                         className,
                         isInactive: !props.inputValue,
-                        isDisabled: renderProps.isDisabled,
                       }),
                   )}
                 >
