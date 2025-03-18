@@ -4,6 +4,7 @@ import Link from "next/link"
 import { NavItem } from "@/config/docs.config"
 
 import { Badge } from "@opengovsg/oui"
+import { cn } from "@opengovsg/oui-theme"
 
 interface SidenavItem extends Omit<NavItem, "items" | "url"> {
   url: LinkProps["href"] | undefined
@@ -24,8 +25,23 @@ const NewBadge = () => {
       }}
       variant="solid"
       radius="full"
+      size="xs"
     >
       New
+    </Badge>
+  )
+}
+
+const WipBadge = () => {
+  return (
+    <Badge
+      variant="outline"
+      radius="full"
+      color="neutral"
+      className="decoration-inherit"
+      size="xs"
+    >
+      WIP
     </Badge>
   )
 }
@@ -36,7 +52,8 @@ const SidenavItem = ({
   children: ({ className }: { className: string }) => JSX.Element
 }) => {
   return children({
-    className: "flex py-1.5 ps-4 pe-3 rounded-sm current:font-medium gap-2",
+    className:
+      "flex py-1.5 ps-4 pe-3 rounded-sm current:font-medium gap-2 items-center",
   })
 }
 
@@ -64,8 +81,15 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
                   href={item.url!}
                   aria-current={item.url === currentUrl ? "page" : undefined}
                 >
-                  {item.title}
+                  <span
+                    className={cn(
+                      item.status === "wip" && "line-through opacity-50",
+                    )}
+                  >
+                    {item.title}
+                  </span>
                   {item.status === "new" && <NewBadge />}
+                  {item.status === "wip" && <WipBadge />}
                 </Link>
               )
             }}
