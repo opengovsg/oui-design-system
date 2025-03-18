@@ -1,11 +1,8 @@
 "use client"
 
-import type { JSX } from "react"
 import type { LocalizedStrings } from "react-aria"
 import type {
   ComboBoxProps as AriaComboBoxProps,
-  ListBoxItemProps,
-  ListBoxItemRenderProps,
   ListBoxProps,
   ListBoxRenderProps,
   ListLayoutOptions,
@@ -19,16 +16,13 @@ import {
   ComboBox as AriaComboBox,
   Input,
   ListBox,
-  ListBoxItem,
   ListLayout,
   Popover,
-  Text,
+  Provider,
   Virtualizer,
 } from "react-aria-components"
 
 import type {
-  ComboBoxItemSlots,
-  ComboBoxItemVariantProps,
   ComboBoxSlots,
   ComboBoxVariantProps,
   SlotsToClasses,
@@ -43,14 +37,10 @@ import {
 } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import { mapPropsVariants } from "../system/utils"
+import { ComboBoxVariantContext } from "./combo-box-variant-context"
 
-export type ComboBoxItem = {
-  value: string
-  name: string
-  description?: string
-}
-
-export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
+export interface ComboBoxProps<T extends object>
   extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
   label?: string
@@ -62,13 +52,10 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   errorMessage?: string | ((validation: ValidationResult) => string)
   classNames?: SlotsToClasses<ComboBoxSlots> &
     SlotsToClasses<"clearButton" | "emptyState">
-  itemClassNames?: SlotsToClasses<ComboBoxItemSlots>
   /**
    * Any additional props to be spread to the list layout.
    */
   listLayoutOptions?: ListLayoutOptions
-
-  children?: (item: T) => JSX.Element
 
   /** Values that should invalidate the item cache when using dynamic collections. */
   dependencies?: ListBoxProps<T>["dependencies"]
@@ -84,6 +71,8 @@ export interface ComboBoxProps<T extends ComboBoxItem = ComboBoxItem>
   onClear?: () => void
 
   renderEmptyState?: ListBoxProps<T>["renderEmptyState"]
+
+  children?: ListBoxProps<T>["children"]
 }
 
 const calculateEstimatedRowHeight = (
@@ -135,133 +124,137 @@ export function ComboBoxEmptyState({
   )
 }
 
-export function ComboBox<T extends ComboBoxItem>({
-  label,
-  description,
-  errorMessage,
-  classNames,
-  itemClassNames,
-  size,
-  listLayoutOptions,
-  children,
-  dependencies,
-  onClear,
-  renderEmptyState: renderEmptyStateProp,
-  ...props
-}: ComboBoxProps<T>) {
+export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
   const formatMessage = useMessageFormatter(i18nStrings)
-  const styles = comboBoxStyles({ size })
+  const [_props, variantProps] = mapPropsVariants(
+    originalProps,
+    comboBoxStyles.variantKeys,
+  )
+  const {
+    label,
+    description,
+    errorMessage,
+    classNames,
+    listLayoutOptions,
+    children,
+    dependencies,
+    onClear,
+    renderEmptyState: renderEmptyStateProp,
+    ...props
+  } = _props
+
+  const styles = comboBoxStyles(variantProps)
+
   const layout = useMemo(() => {
     return new ListLayout({
-      estimatedRowHeight: calculateEstimatedRowHeight(size ?? "md"),
+      estimatedRowHeight: calculateEstimatedRowHeight(
+        variantProps.size ?? "md",
+      ),
       ...listLayoutOptions,
     })
-  }, [listLayoutOptions, size])
+  }, [listLayoutOptions, variantProps.size])
 
   const renderEmptyState = useCallback(
     (props: ListBoxRenderProps) => {
       if (renderEmptyStateProp) {
         return renderEmptyStateProp(props)
       }
-      return (
-        <ComboBoxEmptyState size={size} className={classNames?.emptyState} />
-      )
+      return <ComboBoxEmptyState className={classNames?.emptyState} />
     },
-    [classNames?.emptyState, renderEmptyStateProp, size],
+    [classNames?.emptyState, renderEmptyStateProp],
   )
 
   return (
-    <AriaComboBox
-      className={composeTailwindRenderProps(
-        props.className ?? classNames?.base,
-        styles.container(),
-      )}
-      shouldFocusWrap
-      allowsEmptyCollection
-      {...props}
-    >
-      {({ isOpen, isDisabled: isComboBoxDisabled }) => (
-        <>
-          <Label
-            size={size}
-            className={styles.label({ className: classNames?.label, size })}
-          >
-            {label}
-          </Label>
-          <div className="flex flex-row">
-            <FieldGroup
-              className={composeRenderProps(
-                classNames?.group,
-                (className, renderProps) =>
-                  styles.group({
-                    ...renderProps,
-                    className,
-                    size,
-                    isClearable: !!onClear,
-                  }),
-              )}
+    <Provider values={[[ComboBoxVariantContext, variantProps]]}>
+      <AriaComboBox
+        className={composeTailwindRenderProps(
+          props.className ?? classNames?.base,
+          styles.container(),
+        )}
+        shouldFocusWrap
+        allowsEmptyCollection
+        isDisabled={variantProps.isDisabled}
+        {...props}
+      >
+        {({ isOpen, isDisabled: isComboBoxDisabled }) => (
+          <>
+            <Label
+              size={variantProps.size}
+              className={styles.label({ className: classNames?.label })}
             >
-              <Input
-                className={composeRenderProps(
-                  classNames?.field,
-                  (className, renderProps) =>
-                    styles.field({ ...renderProps, className, size }),
-                )}
-              />
-              <AriaButton
-                className={composeRenderProps(
-                  classNames?.expandButton,
-                  (className, renderProps) =>
-                    styles.expandButton({ ...renderProps, className, size }),
-                )}
-              >
-                {isOpen ? (
-                  <ChevronUp
-                    className={styles.icon({
-                      className: classNames?.icon,
-                      size,
-                    })}
-                  />
-                ) : (
-                  <ChevronDown
-                    className={styles.icon({
-                      className: classNames?.icon,
-                      size,
-                    })}
-                  />
-                )}
-              </AriaButton>
-            </FieldGroup>
-            {!!onClear && (
-              <AriaButton
-                slot={null}
-                onPress={onClear}
+              {label}
+            </Label>
+            <div className="flex flex-row">
+              <FieldGroup
                 isDisabled={isComboBoxDisabled}
-                aria-label={formatMessage("clear")}
                 className={composeRenderProps(
-                  classNames?.clearButton,
+                  classNames?.group,
                   (className, renderProps) =>
-                    comboBoxClearButtonStyles({
+                    styles.group({
                       ...renderProps,
                       className,
-                      size,
-                      isInactive: !props.inputValue,
-                      isDisabled: renderProps.isDisabled,
+                      isClearable: !!onClear,
                     }),
                 )}
               >
-                <XIcon
-                  className={styles.icon({
-                    className: classNames?.icon,
-                    size,
-                  })}
+                <Input
+                  className={composeRenderProps(
+                    classNames?.field,
+                    (className, renderProps) =>
+                      styles.field({ ...renderProps, className }),
+                  )}
                 />
-              </AriaButton>
+                <AriaButton
+                  className={composeRenderProps(
+                    classNames?.expandButton,
+                    (className, renderProps) =>
+                      styles.expandButton({ ...renderProps, className }),
+                  )}
+                >
+                  {isOpen ? (
+                    <ChevronUp
+                      className={styles.icon({
+                        className: classNames?.icon,
+                      })}
+                    />
+                  ) : (
+                    <ChevronDown
+                      className={styles.icon({
+                        className: classNames?.icon,
+                      })}
+                    />
+                  )}
+                </AriaButton>
+              </FieldGroup>
+              {!!onClear && (
+                <AriaButton
+                  slot={null}
+                  onPress={onClear}
+                  isDisabled={isComboBoxDisabled}
+                  aria-label={formatMessage("clear")}
+                  className={composeRenderProps(
+                    classNames?.clearButton,
+                    (className, renderProps) =>
+                      comboBoxClearButtonStyles({
+                        ...variantProps,
+                        ...renderProps,
+                        className,
+                        isInactive: !props.inputValue,
+                      }),
+                  )}
+                >
+                  <XIcon
+                    className={styles.icon({
+                      className: classNames?.icon,
+                    })}
+                  />
+                </AriaButton>
+              )}
+            </div>
+            {description && (
+              <Description size={variantProps.size}>{description}</Description>
             )}
-          </div>
-          {description && <Description size={size}>{description}</Description>}
-          <FieldError size={size}>{errorMessage}</FieldError>
-          <Virtualizer layout={layout}>
+            <FieldError size={variantProps.size}>{errorMessage}</FieldError>
             <Popover
               className={composeRenderProps(
                 classNames?.popover,
@@ -269,94 +262,23 @@ export function ComboBox<T extends ComboBoxItem>({
                   styles.popover({ ...renderProps, className }),
               )}
             >
-              <ListBox
-                className={composeRenderProps(
-                  classNames?.list,
-                  (className, renderProps) =>
-                    styles.list({ ...renderProps, className }),
-                )}
-                dependencies={dependencies}
-                renderEmptyState={renderEmptyState}
-              >
-                {(item: T) => {
-                  if (children) {
-                    return children(item)
-                  }
-                  return (
-                    <ComboBoxItem
-                      size={size}
-                      id={item.value}
-                      label={item.name}
-                      textValue={item.name}
-                      description={item.description}
-                      classNames={itemClassNames}
-                    />
-                  )
-                }}
-              </ListBox>
+              <Virtualizer layout={layout}>
+                <ListBox
+                  className={composeRenderProps(
+                    classNames?.list,
+                    (className, renderProps) =>
+                      styles.list({ ...renderProps, className }),
+                  )}
+                  dependencies={dependencies}
+                  renderEmptyState={renderEmptyState}
+                >
+                  {children}
+                </ListBox>
+              </Virtualizer>
             </Popover>
-          </Virtualizer>
-        </>
-      )}
-    </AriaComboBox>
-  )
-}
-
-export interface ComboBoxItemProps
-  extends ListBoxItemProps,
-    ComboBoxItemVariantProps {
-  label: React.ReactNode | ((props: ListBoxItemRenderProps) => React.ReactNode)
-  /**
-   * Description for the item, if any
-   */
-  description?:
-    | React.ReactNode
-    | ((props: ListBoxItemRenderProps) => React.ReactNode)
-  classNames?: SlotsToClasses<ComboBoxItemSlots>
-}
-
-export function ComboBoxItem({
-  className,
-  size,
-  description,
-  label,
-  classNames,
-  ...props
-}: ComboBoxItemProps) {
-  const styles = comboBoxItemStyles({ size })
-  return (
-    <ListBoxItem
-      {...props}
-      className={composeRenderProps(
-        className ?? classNames?.container,
-        (className, renderProps) =>
-          styles.container({ ...renderProps, className }),
-      )}
-    >
-      {(renderProps) => {
-        return (
-          <>
-            <Text
-              className={styles.label({ className: classNames?.label })}
-              slot="label"
-            >
-              {typeof label === "function" ? label(renderProps) : label}
-            </Text>
-            {description && (
-              <Text
-                className={styles.description({
-                  className: classNames?.description,
-                })}
-                slot="description"
-              >
-                {typeof description === "function"
-                  ? description(renderProps)
-                  : description}
-              </Text>
-            )}
           </>
-        )
-      }}
-    </ListBoxItem>
+        )}
+      </AriaComboBox>
+    </Provider>
   )
 }

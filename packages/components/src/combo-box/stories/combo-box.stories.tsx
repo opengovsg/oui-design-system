@@ -6,22 +6,26 @@ import { ListBoxItem, useFilter } from "react-aria-components"
 
 import type { ComboBoxProps } from "../combo-box"
 import { ComboBox } from "../combo-box"
+import { ComboBoxItem } from "../combo-box-item"
+
+const defaultItems = [...Array(10)].map((_, i) => ({
+  id: String(i),
+  textValue: `Item ${i}`,
+}))
 
 export default {
   title: "Components/ComboBox",
   component: ComboBox,
   args: {
     label: "Ice cream flavour",
-    defaultItems: [...Array(10)].map((_, i) => ({
-      value: String(i),
-      name: `Item ${i}`,
-    })),
+    defaultItems: defaultItems,
     isDisabled: false,
     onClear: undefined,
+    children: (item) => <ComboBoxItem>{item.textValue}</ComboBoxItem>,
   },
-} as Meta<typeof ComboBox>
+} as Meta<typeof ComboBox<(typeof defaultItems)[0]>>
 
-type Story = StoryObj<typeof ComboBox>
+type Story = StoryObj<typeof ComboBox<(typeof defaultItems)[0]>>
 
 export const Default: Story = {
   args: {},
@@ -70,9 +74,7 @@ export const WithDescription: Story = {
 export const CustomComboboxItem: Story = {
   args: {
     children: (item) => (
-      <ListBoxItem className="bg-red-400" id={item.value}>
-        {item.name}
-      </ListBoxItem>
+      <ListBoxItem className="bg-red-400">{item.textValue}</ListBoxItem>
     ),
   },
 }
@@ -97,12 +99,13 @@ export const Virtualised: Story = {
   args: {
     defaultItems: [
       {
-        value: "very long",
-        name: "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",
+        id: "very long",
+        textValue:
+          "very longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery longvery long",
       },
       ...[...Array(2000)].map((_, i) => ({
-        value: String(i),
-        name: `Item ${i}`,
+        id: String(i),
+        textValue: `Item ${i}`,
       })),
     ],
   },
@@ -110,14 +113,19 @@ export const Virtualised: Story = {
 
 export const TriggerOnFocus: Story = {
   args: {
+    label: "Click on the input to automatically trigger the menu",
     menuTrigger: "focus",
+  },
+  play: async ({ canvas }) => {
+    const inputElem = canvas.getByRole("combobox")
+    userEvent.click(inputElem)
   },
 }
 
 const ControlledComboBoxTemplate = ({
   items = [],
   ...props
-}: ComboBoxProps) => {
+}: ComboBoxProps<(typeof defaultItems)[0]>) => {
   const { contains } = useFilter({ sensitivity: "base" })
   const [fieldState, setFieldState] = useState<{
     selectedKey: Key | null
@@ -130,7 +138,7 @@ const ControlledComboBoxTemplate = ({
 
   const onSelectionChange = (id: Key | null) => {
     setFieldState({
-      inputValue: items.find((o) => o.value === id)?.name ?? "",
+      inputValue: items.find((o) => o.id === id)?.textValue ?? "",
       selectedKey: id,
     })
     // Reset items
@@ -143,7 +151,7 @@ const ControlledComboBoxTemplate = ({
       selectedKey: value === "" ? null : prevState.selectedKey,
     }))
     setFilteredItems(
-      items.filter((item) => contains(item.name, fieldState.inputValue)),
+      items.filter((item) => contains(item.textValue, fieldState.inputValue)),
     )
   }
 
@@ -242,15 +250,15 @@ const ControlledComboBoxTemplate = ({
   },
   args: {
     items: [
-      { value: String(1), name: "Aerospace" },
-      { value: String(2), name: "Mechanical" },
-      { value: String(3), name: "Civil" },
-      { value: String(4), name: "Biomedical" },
-      { value: String(5), name: "Nuclear" },
-      { value: String(6), name: "Industrial" },
-      { value: String(7), name: "Chemical" },
-      { value: String(8), name: "Agricultural" },
-      { value: String(9), name: "Electrical" },
+      { id: String(1), textValue: "Aerospace" },
+      { id: String(2), textValue: "Mechanical" },
+      { id: String(3), textValue: "Civil" },
+      { id: String(4), textValue: "Biomedical" },
+      { id: String(5), textValue: "Nuclear" },
+      { id: String(6), textValue: "Industrial" },
+      { id: String(7), textValue: "Chemical" },
+      { id: String(8), textValue: "Agricultural" },
+      { id: String(9), textValue: "Electrical" },
     ],
     size: "md",
   },
@@ -268,5 +276,6 @@ export const Sizes: Story = {
   },
   args: {
     onClear: () => {},
+    menuTrigger: "focus",
   },
 }

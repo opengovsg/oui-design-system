@@ -1,3 +1,5 @@
+"use client"
+
 import type { ContextValue } from "react-aria-components"
 
 import type { SelectVariantProps } from "@opengovsg/oui-theme"
