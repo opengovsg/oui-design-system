@@ -35,6 +35,7 @@
   },
   "scripts": {
     "build": "tsx ../../tooling/build-scripts/main.ts --dts --clean",
+    "changeset": "cd ../.. && pnpm changeset",
     "dev": "tsx ../../tooling/build-scripts/main.ts --watch",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
