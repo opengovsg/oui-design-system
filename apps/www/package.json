@@ -36,7 +36,8 @@
     "react": "catalog:",
     "react-aria-components": "^1.7.1",
     "react-dom": "catalog:",
-    "shiki": "^2.3.2"
+    "shiki": "^2.3.2",
+    "type-fest": "^4.34.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

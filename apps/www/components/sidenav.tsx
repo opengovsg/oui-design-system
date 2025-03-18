@@ -1,12 +1,12 @@
 import type { LinkProps } from "next/link"
 import type { JSX } from "react"
 import Link from "next/link"
+import { NavItem } from "@/config/docs.config"
 
-interface SidenavItem {
-  title: React.ReactNode
+import { Badge } from "@opengovsg/oui"
+
+interface SidenavItem extends Omit<NavItem, "items" | "url"> {
   url: LinkProps["href"] | undefined
-  external?: boolean
-  status?: string
 }
 
 interface SidenavProps {
@@ -15,13 +15,28 @@ interface SidenavProps {
   items: SidenavItem[]
 }
 
+const NewBadge = () => {
+  return (
+    <Badge
+      classNames={{
+        base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+        content: "drop-shadow shadow-black text-white",
+      }}
+      variant="solid"
+      radius="full"
+    >
+      New
+    </Badge>
+  )
+}
+
 const SidenavItem = ({
   children,
 }: {
   children: ({ className }: { className: string }) => JSX.Element
 }) => {
   return children({
-    className: "flex py-1.5 ps-4 pe-3 rounded-sm current:font-medium",
+    className: "flex py-1.5 ps-4 pe-3 rounded-sm current:font-medium gap-2",
   })
 }
 
@@ -50,6 +65,7 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
                   aria-current={item.url === currentUrl ? "page" : undefined}
                 >
                   {item.title}
+                  {item.status === "new" && <NewBadge />}
                 </Link>
               )
             }}

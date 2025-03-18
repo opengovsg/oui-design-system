@@ -1,3 +1,5 @@
+import type { LiteralUnion } from "type-fest"
+
 const docsLinks: NavItem = {
   title: "Docs",
   url: "docs",
@@ -128,7 +130,7 @@ export interface NavItem {
   title: string
   url?: string
   external?: boolean
-  status?: string
+  status?: LiteralUnion<"new" | "updated", string>
   items?: NavItem[]
 }
 
