@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { MdxContentRenderer } from "@/components/mdx/content-renderer"
 import { SiGithub, SiStorybook } from "@icons-pack/react-simple-icons"
 import { ArrowUpRight } from "lucide-react"
 
@@ -27,7 +28,7 @@ export const PageHeader = ({ title, description, links }: PageHeaderProps) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-      <p>{description}</p>
+      <MdxContentRenderer code={description} />
       {links && (
         <div className="flex flex-wrap gap-4">
           {Object.entries(links).map(([title, url], i) => (

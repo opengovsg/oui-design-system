@@ -8,6 +8,7 @@
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "pnpm run /^dev:/",
+    "generate:registry": "pnpx tsx scripts/generate-registry.ts",
     "build:content": "velite --clean",
     "build:next": "next build",
     "build": "pnpm run --sequential /^build:/",
@@ -35,7 +36,8 @@
     "react": "catalog:",
     "react-aria-components": "^1.7.1",
     "react-dom": "catalog:",
-    "shiki": "^2.3.2"
+    "shiki": "^2.3.2",
+    "type-fest": "^4.34.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

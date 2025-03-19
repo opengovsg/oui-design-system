@@ -1,3 +1,5 @@
+import type { LiteralUnion } from "type-fest"
+
 const docsLinks: NavItem = {
   title: "Docs",
   url: "docs",
@@ -27,65 +29,53 @@ const docsLinks: NavItem = {
       url: "components",
       items: [
         {
-          title: "Concepts",
-          url: "concepts",
-          items: [],
-        },
-        {
-          title: "Layout",
-          items: [],
-        },
-        {
-          title: "Typography",
-          items: [],
-        },
-        {
           title: "Components",
-          items: [{ title: "Button", url: "button" }],
-        },
-        {
-          title: "Utilities",
-          items: [],
-        },
-      ],
-    },
-
-    {
-      title: "Styling",
-      url: "styling",
-      items: [
-        {
-          title: "Concepts",
           items: [
-            { title: "Overview", url: "overview" },
-            { title: "Dark Mode", url: "dark-mode" },
+            { title: "Accordion", url: "accordion", status: "wip" },
+            {
+              title: "AttachmentField",
+              url: "attachment-field",
+              status: "wip",
+            },
+            { title: "Avatar", url: "avatar", status: "wip" },
+            { title: "Badge", url: "badge", status: "new" },
+            { title: "Banner", url: "banner", status: "new" },
+            { title: "Breadcrumb", url: "breadcrumb", status: "wip" },
+            { title: "Button", url: "button" },
+            { title: "Card", url: "card", status: "wip" },
+            { title: "ComboBox", url: "combo-box", status: "new" },
+            { title: "CheckboxGroup", url: "checkbox-group", status: "wip" },
+            { title: "Checkbox", url: "checkbox", status: "wip" },
+            { title: "DateField", url: "date-field", status: "wip" },
+            { title: "Dropdown", url: "dropdown", status: "wip" },
+            { title: "Field", url: "field" },
+            { title: "Infobox", url: "infobox", status: "wip" },
+            { title: "Link", url: "link", status: "wip" },
+            { title: "Modal", url: "modal", status: "wip" },
+            { title: "NumberField", url: "number-field", status: "wip" },
+            { title: "Pagination", url: "pagination", status: "wip" },
+            {
+              title: "PhoneNumberField",
+              url: "phone-number-field",
+              status: "wip",
+            },
+            { title: "Progress", url: "progress", status: "wip" },
+            { title: "RadioGroup", url: "radio-group", status: "wip" },
+            { title: "SearchInput", url: "search-input", status: "wip" },
+            { title: "Sidebar", url: "sidebar", status: "wip" },
+            { title: "Skeleton", url: "skeleton", status: "wip" },
+            { title: "Table", url: "table", status: "wip" },
+            { title: "Tabs", url: "tabs", status: "wip" },
+            { title: "TagField", url: "tag-field", status: "new" },
+            { title: "TagGroup", url: "tag-group", status: "wip" },
+            { title: "TextAreaField", url: "text-area-field" },
+            { title: "TextField", url: "text-field" },
+            { title: "Tile", url: "tile", status: "wip" },
+            { title: "TimeField", url: "time-field", status: "wip" },
+            { title: "Toast", url: "toast", status: "wip" },
+            { title: "Toggle", url: "toggle" },
+            { title: "Tooltip", url: "tooltip", status: "wip" },
           ],
-        },
-      ],
-    },
-
-    {
-      title: "Theming",
-      url: "theming",
-      items: [
-        {
-          title: "Concepts",
-          items: [
-            { title: "Overview", url: "overview" },
-            { title: "Tokens", url: "tokens" },
-            { title: "Semantic Tokens", url: "semantic-tokens" },
-            { title: "Variants", url: "variants" },
-            { title: "Compound Variants", url: "compound-variants" },
-          ],
-        },
-        {
-          title: "Design Tokens",
-          items: [],
-        },
-        {
-          title: "Customization",
-          url: "customization",
-          items: [{ title: "Overview", url: "overview" }],
         },
       ],
     },
@@ -125,7 +115,7 @@ export interface NavItem {
   title: string
   url?: string
   external?: boolean
-  status?: string
+  status?: LiteralUnion<"new" | "updated" | "wip", string>
   items?: NavItem[]
 }
 

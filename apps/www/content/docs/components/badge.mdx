@@ -1,0 +1,75 @@
+---
+title: Badge
+description: A static visual indicator which can be used to represent numeric values, statuses, labels.
+toc:
+  visible: true
+links:
+  source: badge
+  storybook: components-badge--default
+  theme: badge
+---
+
+<ComponentPreview name="badge-demo" />
+
+## Usage
+
+### Sizes
+
+Defaults to `sm` size.
+
+<ComponentPreview name="badge-sizes" />
+
+### Radius
+
+- **none**: No border radius.
+- **sm**: Small border radius.
+- **md**: Medium border radius.
+- **lg**: Large border radius.
+- **full**: Fully rounded border radius.
+
+Defaults to `sm` radius.
+
+<ComponentPreview name="badge-radii" />
+
+### Variants (and Colors)
+
+Defaults to `solid` variant and `main` color.
+
+#### Solid
+
+<ComponentPreview name="badge-solid-colors" />
+
+#### Subtle
+
+<ComponentPreview name="badge-subtle-colors" />
+
+#### Outline
+
+<ComponentPreview name="badge-outline-colors" />
+
+#### Dot
+
+<ComponentPreview name="badge-dot-colors" />
+
+### Start & End Content
+
+<ComponentPreview name="badge-start-end-content" />
+
+### With Close Button
+
+If you pass the `onClose` prop, the close button will be visible. You can override the close icon by passing the `endContent` prop.
+
+<ComponentPreview name="badge-with-close-button" />
+
+## Slots
+
+- **base**: The base slot of the badge, it is the container of the badge.
+- **content**: The content slot of the badge, it is the container of the badge children.
+- **dot**: Small dot on the left side of the badge. It is visible when the `variant=dot` prop is passed.
+- **closeButton**: Close button classes of the badge. It is visible when the `onClose` prop is passed.
+
+### Custom Styles
+
+You can customize the `Badge` component by passing custom Tailwind CSS classes to the component slots.
+
+<ComponentPreview name="badge-custom-styles" />
