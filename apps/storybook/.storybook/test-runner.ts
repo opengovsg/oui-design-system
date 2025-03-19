@@ -7,6 +7,9 @@ import { checkA11y, configureAxe, injectAxe } from "axe-playwright"
  * to learn more about the test-runner hooks API.
  */
 const config: TestRunnerConfig = {
+  tags: {
+    skip: ["skip-test"],
+  },
   async preVisit(page) {
     await injectAxe(page)
   },
