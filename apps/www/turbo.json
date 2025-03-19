@@ -4,7 +4,7 @@
   "tasks": {
     "generate:registry": {},
     "build": {
-      "dependsOn": ["generate:registry"]
+      "dependsOn": ["^build", "generate:registry"]
     }
   }
 }
