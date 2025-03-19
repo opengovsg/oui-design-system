@@ -16,7 +16,7 @@ export const docs = defineCollection({
     .object({
       slug: s.path(),
       title: s.string(),
-      description: s.string(),
+      description: s.mdx({ copyLinkedFiles: false }),
       published: s.boolean().default(true),
       label: s.enum(["New", "Updated"]).optional(),
       body: s.mdx(),
@@ -48,7 +48,7 @@ export const docs = defineCollection({
             ? `${docsConfig.storybookUrl}/?path=/story/${links.storybook}`
             : undefined,
           theme: links.theme
-            ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/theme/src/components/${links.source}.ts`
+            ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/theme/src/components/${links.theme}.ts`
             : undefined,
         },
       }

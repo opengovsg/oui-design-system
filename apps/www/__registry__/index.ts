@@ -122,6 +122,17 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/badge-with-close-button.tsx")),
   },
+  "banner-demo": {
+    name: "banner-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/banner-demo.tsx")),
+  },
   "button-demo": {
     name: "button-demo",
     description: "",
@@ -231,5 +242,38 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/button-with-variants.tsx")),
+  },
+  "text-area-field-demo": {
+    name: "text-area-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/text-area-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/text-area-field-demo.tsx")),
+  },
+  "text-field-demo": {
+    name: "text-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/text-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/text-field-demo.tsx")),
+  },
+  "toggle-demo": {
+    name: "toggle-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toggle-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toggle-demo.tsx")),
   }
 }
