@@ -8,7 +8,8 @@ import { tagFieldStyles } from "@opengovsg/oui-theme"
 import type { TagFieldProps } from "./types"
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
-import { TagFieldList, TagFieldListItem } from "./tag-field-list"
+import { TagFieldItem } from "./tag-field-item"
+import { TagFieldList } from "./tag-field-list"
 import { TagFieldRoot } from "./tag-field-root"
 import { TagFieldTagList } from "./tag-field-tag-list"
 import { TagFieldTrigger } from "./tag-field-trigger"
@@ -84,15 +85,11 @@ export function TagField<T extends object>({
           className={styles.list({ className: classNames?.list })}
           itemClassNames={props.itemClassNames}
         >
-          {({ key, itemClassNames, ...props }) =>
+          {({ key, itemProps, ...props }) =>
             children ? (
-              children({ key, itemClassNames, ...props })
+              children({ key, itemProps, ...props })
             ) : (
-              <TagFieldListItem
-                {...props}
-                classNames={itemClassNames}
-                key={key}
-              />
+              <TagFieldItem {...props} {...itemProps} key={key} />
             )
           }
         </TagFieldList>

@@ -39,6 +39,12 @@ export const DisabledKeys: Story = {
   },
 }
 
+export const DefaultSelectedKeys: Story = {
+  args: {
+    defaultSelectedKeys: new Set(["1", "3", "5", "7", "9"]),
+  },
+}
+
 const ControlledTemplate = (args: Story["args"]) => {
   type FieldState = {
     selectedKeys: Set<Key>
@@ -161,14 +167,7 @@ export const CustomItem: StoryObj<
       description: "This item has a description",
     })),
     virtualRowHeight: 72,
-    children: ({
-      item,
-      key,
-      isHighlighted,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      itemClassNames: _optionalToUse,
-      ...itemProps
-    }) => {
+    children: ({ item, key, isHighlighted, itemProps }) => {
       return (
         <div
           {...itemProps}

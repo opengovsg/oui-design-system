@@ -7,11 +7,10 @@ import type { ContextValue, SlotProps } from "react-aria-components"
 import { createContext, useContext } from "react"
 import { useContextProps } from "react-aria-components"
 
-import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
-import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
-
+import type { TagFieldItemProps } from "./tag-field-item"
 import type { TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
+import { TagFieldItem } from "./tag-field-item"
 import { TagFieldStateContext } from "./tag-field-state-context"
 
 export interface TagFieldListContextValue
@@ -26,37 +25,9 @@ export const TagFieldListContext =
 interface TagFieldListProps<T extends object>
   extends Partial<TagFieldListContextValue> {
   className?: string
-  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
+  itemClassNames?: TagFieldItemProps<T>["classNames"]
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
-
-interface TagFieldListItemProps<T extends object>
-  extends Omit<TagFieldListRenderProps<T>, "key"> {
-  classNames?: TagFieldListProps<T>["itemClassNames"]
-}
-
-const TagFieldListItemInner = <T extends object>(
-  { item, isHighlighted, classNames, ...itemProps }: TagFieldListItemProps<T>,
-  ref: ForwardedRef<HTMLLIElement>,
-) => {
-  const { itemToText, size } = useContext(TagFieldStateContext)!
-  const styles = tagFieldItemStyles({ size })
-
-  return (
-    <li
-      ref={ref}
-      {...itemProps}
-      className={styles.container({ className: classNames?.container })}
-      data-rac
-      data-hovered={dataAttr(isHighlighted)}
-    >
-      <span className={styles.label({ className: classNames?.label })}>
-        {itemToText(item)}
-      </span>
-    </li>
-  )
-}
-export const TagFieldListItem = forwardRefGeneric(TagFieldListItemInner)
 
 const TagFieldListInner = <T extends object>(
   props: TagFieldListProps<T>,
@@ -93,17 +64,22 @@ const TagFieldListInner = <T extends object>(
                 transform: `translateY(${virtualRow.start}px)`,
               },
             })
-            const childProps: TagFieldListRenderProps<T> = {
+            const childProps: Omit<TagFieldListRenderProps<T>, "itemProps"> = {
               item,
               isHighlighted: highlightedIndex === virtualRow.index,
               key: virtualRow.key,
-              itemClassNames,
-              ...itemProps,
+              classNames: itemClassNames,
             }
             if (typeof props.children === "function") {
-              return props.children(childProps)
+              return props.children({ ...childProps, itemProps })
             }
-            return <TagFieldListItem {...childProps} key={childProps.key} />
+            return (
+              <TagFieldItem
+                {...childProps}
+                {...itemProps}
+                key={childProps.key}
+              />
+            )
           })}
         </>
       )}
