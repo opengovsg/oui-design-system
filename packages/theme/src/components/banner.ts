@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const bannerStyles = tv({
   slots: {
-    base: "flex justify-between",
+    base: "flex w-full justify-between",
     startContentWrapper: "",
     childrenWrapper: "",
     content: "flex",
