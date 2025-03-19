@@ -10,7 +10,7 @@ import { useContextProps } from "react-aria-components"
 import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
 import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
 
-import type { TagFieldItem, TagFieldListRenderProps } from "./types"
+import type { TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
 import { TagFieldStateContext } from "./tag-field-state-context"
 
@@ -23,19 +23,19 @@ export interface TagFieldListContextValue
 export const TagFieldListContext =
   createContext<ContextValue<TagFieldListContextValue, HTMLUListElement>>(null)
 
-interface TagFieldListProps<T extends TagFieldItem>
+interface TagFieldListProps<T extends object>
   extends Partial<TagFieldListContextValue> {
   className?: string
   itemClassNames?: SlotsToClasses<TagFieldItemSlots>
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)
 }
 
-interface TagFieldListItemProps<T extends TagFieldItem>
+interface TagFieldListItemProps<T extends object>
   extends Omit<TagFieldListRenderProps<T>, "key"> {
   classNames?: TagFieldListProps<T>["itemClassNames"]
 }
 
-const TagFieldListItemInner = <T extends TagFieldItem>(
+const TagFieldListItemInner = <T extends object>(
   { item, isHighlighted, classNames, ...itemProps }: TagFieldListItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
@@ -58,7 +58,7 @@ const TagFieldListItemInner = <T extends TagFieldItem>(
 }
 export const TagFieldListItem = forwardRefGeneric(TagFieldListItemInner)
 
-const TagFieldListInner = <T extends TagFieldItem>(
+const TagFieldListInner = <T extends object>(
   props: TagFieldListProps<T>,
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
