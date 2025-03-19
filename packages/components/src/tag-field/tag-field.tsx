@@ -84,11 +84,15 @@ export function TagField<T extends object>({
           className={styles.list({ className: classNames?.list })}
           itemClassNames={props.itemClassNames}
         >
-          {({ key, ...props }) =>
+          {({ key, itemClassNames, ...props }) =>
             children ? (
-              children({ key, ...props })
+              children({ key, itemClassNames, ...props })
             ) : (
-              <TagFieldListItem {...props} key={key} />
+              <TagFieldListItem
+                {...props}
+                classNames={itemClassNames}
+                key={key}
+              />
             )
           }
         </TagFieldList>
