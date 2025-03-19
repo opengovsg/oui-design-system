@@ -8,7 +8,7 @@ import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
 import type { TagFieldState } from "./use-tag-field-state"
 
-interface TagFieldStateContextValue<T>
+export interface TagFieldStateContextValue<T>
   extends TagFieldState<T>,
     Pick<UseComboboxReturnValue<T>, "getItemProps" | "highlightedIndex">,
     Pick<

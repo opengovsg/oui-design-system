@@ -1,9 +1,11 @@
 import type { UseMultipleSelectionReturnValue } from "downshift"
+import type { Context } from "react"
 import { useCallback, useContext } from "react"
 import { XIcon } from "lucide-react"
 
 import type { SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
 
+import type { TagFieldStateContextValue } from "./tag-field-state-context"
 import { TagFieldStateContext } from "./tag-field-state-context"
 
 interface TagFieldTagListRenderProps<T> {
@@ -36,7 +38,8 @@ export const TagFieldTagList = <T extends object>({
     removeSelectedItem,
     isDisabled,
     isReadOnly,
-  } = useContext(TagFieldStateContext)!
+    itemToText,
+  } = useContext(TagFieldStateContext)! as TagFieldStateContextValue<T>
 
   const handleRemoveSelectedItem = useCallback(
     (item: T) => () => {
@@ -74,7 +77,7 @@ export const TagFieldTagList = <T extends object>({
         key={`selected-item-${index}`}
         {...itemProps}
       >
-        <span className={classNames?.tagText}>{selectedItem.textValue}</span>
+        <span className={classNames?.tagText}>{itemToText(selectedItem)}</span>
         <XIcon
           className={classNames?.tagIcon}
           onClick={(e) => {

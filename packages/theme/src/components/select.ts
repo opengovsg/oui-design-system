@@ -73,7 +73,9 @@ export const selectStyles = tv({
     variant: {
       solid: "",
       reverse: "",
-      outline: "",
+      outline: {
+        trigger: "group-invalid:border-interaction-critical-default",
+      },
       clear: "",
       unstyled: "",
     },
@@ -102,10 +104,34 @@ export const selectStyles = tv({
     },
   },
   compoundVariants: [
+    // outline / color
     {
-      variant: ["outline"],
+      variant: "outline",
+      color: "main",
       className: {
-        trigger: "group-invalid:border-interaction-critical-default",
+        trigger: "pressed:bg-interaction-tinted-main-hover",
+      },
+    },
+    {
+      variant: "outline",
+      color: "sub",
+      className: {
+        trigger: "pressed:bg-interaction-tinted-sub-hover",
+      },
+    },
+    // clear / color
+    {
+      variant: "clear",
+      color: "main",
+      className: {
+        trigger: "pressed:bg-interaction-tinted-main-hover",
+      },
+    },
+    {
+      variant: "clear",
+      color: "sub",
+      className: {
+        trigger: "pressed:bg-interaction-tinted-sub-hover",
       },
     },
   ],
