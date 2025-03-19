@@ -9,4 +9,64 @@ links:
   theme: tag-field
 ---
 
-# Docs to be updated
+## Usage
+
+OUI exports 2 tag-field-related components:
+
+- **TagField**: The main component.
+- **TagFieldItem**: The component that represents the tag field item. You most likely won't need to use this directly.
+
+<ComponentPreview name="tag-field-demo" />
+
+If the tag field does not have a visible label, an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+### Sizes
+
+Defaults to `md` size.
+
+<ComponentPreview name="tag-field-sizes" />
+
+## Content
+
+Contrary to other [collection components](https://react-spectrum.adobe.com/react-aria/collections.html), TagField only accepts the "dynamic collection" method of populating its options.
+
+As seen below, an iterable list of options is passed to the ComboBox using the `defaultItems` (or `items`) prop. Each item accepts the `id` and `textValue` props, which are passed to the `onSelectionChange` handler to identify the selected items.
+
+<ComponentPreview name="tag-field-content-example" />
+
+If the item does not have the `id` prop, you will need to pass in a `itemToKey` function uniquely identify the selected item, and if the item does not have the `textValue` prop, you will need to pass in a `itemToString` function to display the selected item. The below example demonstrates this.
+
+<ComponentPreview name="tag-field-custom-content-example" />
+
+### Description
+
+The `description` prop can be used to associate additional help text below the input.
+
+<ComponentPreview name="tag-field-description" />
+
+### Custom item
+
+You can also pass a custom item renderer to the `children` prop. This allows you to customize the appearance of the items in the list.
+Take note to use the `key` prop on the custom item due to virtualisation. Additionally, the `itemProps` prop should be spread onto the custom item to ensure that the item is selectable.
+
+Due to virtualisation, if the custom item results in a taller height for each item, you will need to pass in a `virtualRowHeight` prop with the correct height to the TagField to ensure that the items are displayed correctly.
+
+<ComponentPreview name="tag-field-custom-children" />
+
+## Disabled
+
+A TagField can be fully disabled using the `isDisabled` prop.
+
+<ComponentPreview name="tag-field-disabled" />
+
+### Disabled options
+
+You can disable specific options by providing an array of keys to TagField via the `disabledKeys` prop. This will prevent options with matching keys from being pressable and receiving keyboard focus as shown in the example below.
+
+<ComponentPreview name="tag-field-disabled-options" />
+
+## Validation
+
+To display validation errors, pass in both `isInvalid` and `errorMessage` props to TagField. This allows you to render error messages from all of the above sources with consistent custom styles. Additionally, ensure that the `errorMessage` prop is a string that describes the validation error clearly to the user.
+
+<ComponentPreview name="tag-field-validation" />

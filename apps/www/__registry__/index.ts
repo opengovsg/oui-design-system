@@ -243,6 +243,105 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/button-with-variants.tsx")),
   },
+  "tag-field-content-example": {
+    name: "tag-field-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-content-example.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-content-example.tsx")),
+  },
+  "tag-field-custom-children": {
+    name: "tag-field-custom-children",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-custom-children.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-custom-children.tsx")),
+  },
+  "tag-field-custom-content-example": {
+    name: "tag-field-custom-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-custom-content-example.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-custom-content-example.tsx")),
+  },
+  "tag-field-demo": {
+    name: "tag-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-demo.tsx")),
+  },
+  "tag-field-description": {
+    name: "tag-field-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-description.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-description.tsx")),
+  },
+  "tag-field-disabled-options": {
+    name: "tag-field-disabled-options",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-disabled-options.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-disabled-options.tsx")),
+  },
+  "tag-field-disabled": {
+    name: "tag-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-disabled.tsx")),
+  },
+  "tag-field-sizes": {
+    name: "tag-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-sizes.tsx")),
+  },
+  "tag-field-validation": {
+    name: "tag-field-validation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-validation.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tag-field-validation.tsx")),
+  },
   "text-area-field-demo": {
     name: "text-area-field-demo",
     description: "",
