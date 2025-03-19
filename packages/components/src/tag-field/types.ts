@@ -26,14 +26,17 @@ export interface TagFieldValidationValue {
   inputValue: string
 }
 
-export interface TagFieldListRenderProps<T>
+export interface TagFieldBaseItemProps<T>
   extends ReturnType<UseComboboxReturnValue<T>["getItemProps"]> {
+  style?: React.CSSProperties
+}
+
+export interface TagFieldListRenderProps<T> {
   item: T
   key: VirtualItem["key"]
   isHighlighted: boolean
-  style?: React.CSSProperties
-  className?: string
-  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
+  classNames?: SlotsToClasses<TagFieldItemSlots>
+  itemProps: TagFieldBaseItemProps<T>
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
