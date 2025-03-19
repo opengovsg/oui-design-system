@@ -16,10 +16,10 @@ export const docs = defineCollection({
     .object({
       slug: s.path(),
       title: s.string(),
-      description: s.mdx({ copyLinkedFiles: false }),
+      description: s.string(),
       published: s.boolean().default(true),
       label: s.enum(["New", "Updated"]).optional(),
-      body: s.mdx(),
+      body: s.mdx({ copyLinkedFiles: false }),
       toc: s
         .object({
           content: s.toc(),

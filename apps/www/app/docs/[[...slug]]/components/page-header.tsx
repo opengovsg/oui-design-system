@@ -28,7 +28,7 @@ export const PageHeader = ({ title, description, links }: PageHeaderProps) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-3xl font-bold tracking-tight">{title}</h2>
-      <MdxContentRenderer code={description} />
+      <p>{description}</p>
       {links && (
         <div className="flex flex-wrap gap-4">
           {Object.entries(links).map(([title, url], i) => (
