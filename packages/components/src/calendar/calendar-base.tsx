@@ -20,7 +20,7 @@ import { cn } from "@opengovsg/oui-theme"
 
 import type { CalendarProps } from "./types"
 import { Button } from "../button/button"
-import { Select } from "../select"
+import { Select, SelectItem } from "../select"
 import { useCalendarStyleContext } from "./calendar-style-context"
 import { useLocalizedMonths, useLocalizedYears } from "./utils"
 
@@ -113,7 +113,9 @@ const CalendarMonthDaySelector = () => {
             ),
           )
         }}
-      />
+      >
+        {(month) => <SelectItem>{month.textValue}</SelectItem>}
+      </Select>
       <Select
         variant="clear"
         items={years}
@@ -131,7 +133,9 @@ const CalendarMonthDaySelector = () => {
             ),
           )
         }}
-      />
+      >
+        {(year) => <SelectItem>{year.textValue}</SelectItem>}
+      </Select>
     </Group>
   )
 }
