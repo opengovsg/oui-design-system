@@ -167,14 +167,7 @@ export const CustomItem: StoryObj<
       description: "This item has a description",
     })),
     virtualRowHeight: 72,
-    children: ({
-      item,
-      key,
-      isHighlighted,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      classNames: _optionalToUse,
-      ...itemProps
-    }) => {
+    children: ({ item, key, isHighlighted, itemProps }) => {
       return (
         <div
           {...itemProps}
