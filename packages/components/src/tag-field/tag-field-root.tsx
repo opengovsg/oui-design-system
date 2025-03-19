@@ -19,7 +19,7 @@ import {
 import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
 
 import type { RenderProps } from "../system/types"
-import type { TagFieldItem, TagFieldProps } from "./types"
+import type { TagFieldProps } from "./types"
 import { removeDataAttributes } from "../system/utils"
 import { TagFieldListContext } from "./tag-field-list"
 import { TagFieldStateContext } from "./tag-field-state-context"
@@ -27,7 +27,7 @@ import { TagFieldTriggerContext } from "./tag-field-trigger"
 import { useTagField } from "./use-tag-field"
 import { useTagFieldState } from "./use-tag-field-state"
 
-interface TagFieldRootRenderProps<T extends TagFieldItem>
+interface TagFieldRootRenderProps<T extends object>
   extends ComboBoxRenderProps,
     Pick<
       UseMultipleSelectionReturnValue<T>,
@@ -51,11 +51,11 @@ const calculateEstimatedRowHeight = (
   }
 }
 
-export interface TagFieldRootProps<T extends TagFieldItem>
+export interface TagFieldRootProps<T extends object>
   extends Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRootRenderProps<T>> {}
 
-export function TagFieldRoot<T extends TagFieldItem>({
+export function TagFieldRoot<T extends object>({
   children,
   virtualRowHeight: _virtualRowHeight,
   ...props

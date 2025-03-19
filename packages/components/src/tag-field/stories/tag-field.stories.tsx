@@ -151,7 +151,9 @@ export const Sizes: Story = {
   },
 }
 
-export const CustomItem: Story = {
+export const CustomItem: StoryObj<
+  typeof TagField<{ id: string; textValue: string; description: string }>
+> = {
   args: {
     defaultItems: [...Array(3000)].map((_, i) => ({
       id: String(i),

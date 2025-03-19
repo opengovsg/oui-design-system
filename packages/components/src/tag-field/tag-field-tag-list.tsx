@@ -4,7 +4,6 @@ import { XIcon } from "lucide-react"
 
 import type { SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
 
-import type { TagFieldItem } from "./types"
 import { TagFieldStateContext } from "./tag-field-state-context"
 
 interface TagFieldTagListRenderProps<T> {
@@ -17,7 +16,7 @@ interface TagFieldTagListRenderProps<T> {
   isReadOnly: boolean
 }
 
-export interface TagFieldTagListProps<T extends TagFieldItem> {
+export interface TagFieldTagListProps<T extends object> {
   classNames?: Pick<
     SlotsToClasses<TagFieldSlots>,
     "tag" | "tagIcon" | "tagText"
@@ -27,7 +26,7 @@ export interface TagFieldTagListProps<T extends TagFieldItem> {
     | ((values: TagFieldTagListRenderProps<T>) => React.ReactNode)
 }
 
-export const TagFieldTagList = <T extends TagFieldItem>({
+export const TagFieldTagList = <T extends object>({
   classNames,
   ...props
 }: TagFieldTagListProps<T>) => {

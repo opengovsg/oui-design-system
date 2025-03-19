@@ -39,12 +39,6 @@ export interface TagFieldListRenderProps<T>
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface TagFieldRenderProps<T> extends TagFieldListRenderProps<T> {}
 
-export type TagFieldItem = {
-  textValue: string
-  id: Key
-  description?: string
-}
-
 export interface TagFieldProps<T>
   extends Omit<
       MultipleSelection,
