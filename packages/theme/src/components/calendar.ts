@@ -60,6 +60,7 @@ export const calendarStyles = tv({
         nextButton: "-mr-4",
         selectors: "-ml-2",
         bottomContentWrapper: "-mx-2 px-2 pt-2",
+        calendar: "pb-2",
       },
       md: {
         base: "px-2 py-3",
@@ -72,6 +73,7 @@ export const calendarStyles = tv({
         nextButton: "-mr-4",
         selectors: "-ml-1.5",
         bottomContentWrapper: "-mx-2 -mb-1 px-2 pt-2",
+        calendar: "pb-3",
       },
     },
   },
