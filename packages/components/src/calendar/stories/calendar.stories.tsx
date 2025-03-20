@@ -2,6 +2,7 @@ import type { DateValue } from "@react-aria/calendar"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useCallback } from "react"
 import { CalendarDate, isWeekend } from "@internationalized/date"
+import { withChromaticModes } from "@oui/chromatic"
 import { useLocale } from "react-aria"
 
 import { Calendar } from "../calendar"
@@ -29,6 +30,9 @@ export const Default: Story = {}
 export const MultipleMonths: Story = {
   args: {
     visibleDuration: { months: 2 },
+  },
+  parameters: {
+    chromatic: withChromaticModes(["desktop", "mobileSmall"]),
   },
 }
 
@@ -65,4 +69,12 @@ export const CustomFirstDayOfWeek: Story = {
 
 export const HideTodayButton: Story = {
   args: { showTodayButton: false },
+}
+
+export const HideOutsideMonths: Story = {
+  args: {
+    classNames: {
+      cell: "outside-month:hidden",
+    },
+  },
 }

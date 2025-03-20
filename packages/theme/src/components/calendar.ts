@@ -19,7 +19,7 @@ export const calendarStyles = tv({
     ],
     grid: "",
     calendar: "",
-    gridWrapper: "flex flex-wrap gap-4",
+    gridWrapper: "flex gap-x-4 max-sm:block",
     gridHeader: "",
     gridHeaderCell: "text-base-content-default",
     gridBody: "",
