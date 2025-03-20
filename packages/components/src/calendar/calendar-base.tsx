@@ -84,19 +84,25 @@ export function CalendarBase<T extends DateValue>({
       )}
     >
       <div
-        className={slots.gridContainer({
-          className: classNames?.gridContainer,
+        className={slots.gridWrapper({
+          className: classNames?.gridWrapper,
         })}
       >
         {Array.from({ length: numberOfVisibleMonths }).map((_, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            className={slots.calendar({ className: classNames?.calendar })}
+          >
             <CalendarHeader offsetMonths={index} />
             <CalendarGrid
+              className={slots.grid({ className: classNames?.grid })}
               weekdayStyle={weekdayStyle}
               offset={{ months: index }}
             >
               <CalendarGridHeader />
-              <CalendarGridBody>
+              <CalendarGridBody
+                className={slots.gridBody({ className: classNames?.gridBody })}
+              >
                 {(date) => (
                   <CalendarCell
                     className={composeRenderProps(
@@ -178,6 +184,7 @@ const CalendarMonthDaySelector = () => {
                 trigger: slots.monthSelector({
                   className: classNames?.monthSelector,
                 }),
+                list: slots.monthList({ className: classNames?.monthList }),
                 selectedText: slots.selectorText({
                   className: classNames?.selectorText,
                 }),
@@ -205,6 +212,7 @@ const CalendarMonthDaySelector = () => {
               trigger: slots.yearSelector({
                 className: classNames?.yearSelector,
               }),
+              list: slots.yearList({ className: classNames?.yearList }),
               selectedText: slots.selectorText({
                 className: classNames?.selectorText,
               }),
@@ -248,14 +256,16 @@ export function CalendarHeader({ offsetMonths = 0 }: CalendarHeaderProps) {
     return (
       <div className={slots.header({ className: classNames?.header })}>
         <CalendarMonthDaySelector />
-        <Group className="justify-self-end">
+        <Group
+          className={slots.buttonGroup({ className: classNames?.buttonGroup })}
+        >
           <Button
             size={size}
             isIconOnly
             variant="clear"
             color="sub"
             slot="previous"
-            className={slots.prevButton()}
+            className={slots.prevButton({ className: classNames?.prevButton })}
           >
             {direction === "rtl" ? (
               <ChevronRight aria-hidden />
@@ -269,7 +279,9 @@ export function CalendarHeader({ offsetMonths = 0 }: CalendarHeaderProps) {
             color="sub"
             isIconOnly
             slot="next"
-            className={slots.nextButton()}
+            className={slots.nextButton({
+              className: classNames?.nextButton,
+            })}
           >
             {direction === "rtl" ? (
               <ChevronLeft aria-hidden />
