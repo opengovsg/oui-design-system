@@ -40,6 +40,9 @@ export const SelectItem = forwardRef(function SelectItem<T extends object>(
 
   return (
     <ListBoxItem
+      textValue={
+        typeof props.children === "string" ? props.children : undefined
+      }
       {...props}
       ref={ref}
       className={composeRenderProps(
