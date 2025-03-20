@@ -27,7 +27,7 @@ export function useProvideCalendarStyles<T extends DateValue>(
       slots,
       classNames,
       className,
-      size: variantProps.size,
+      size: variantProps.size ?? calendarStyles.defaultVariants.size,
       errorMessage,
     },
     calendarProps: { ...restProps, onChange: restProps.onChange },

@@ -23,9 +23,16 @@ type Story = StoryObj<typeof Calendar>
 
 export const Default: Story = {}
 
-export const Sizes: Story = {
+export const MultipleMonths: Story = {
   args: {
-    size: "sm",
+    visibleDuration: { months: 2 },
+  },
+}
+
+export const MediumSizeMultipleMonths: Story = {
+  args: {
+    size: "md",
+    visibleDuration: { months: 2 },
   },
 }
 

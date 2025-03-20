@@ -3,7 +3,27 @@ import { useMemo } from "react"
 import { CalendarDate } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
-export function useLocalizedMonths(
+export function getEraFormat(
+  date: CalendarDate | undefined,
+): "short" | undefined {
+  return date?.calendar.identifier === "gregory" && date.era === "BC"
+    ? "short"
+    : undefined
+}
+
+export function useLocalizedMonthYear(date: CalendarDate, timeZone: string) {
+  const era = getEraFormat(date)
+  const monthFormatter = useDateFormatter({
+    month: "long",
+    year: "numeric",
+    era,
+    calendar: date.calendar.identifier,
+    timeZone,
+  })
+  return monthFormatter.format(date.toDate(timeZone))
+}
+
+export function useGenerateLocalizedMonths(
   timeZone: string,
   formatterOptions?: DateFormatterOptions,
 ) {
@@ -26,7 +46,7 @@ export function useLocalizedMonths(
   }, [formatter, timeZone])
 }
 
-export function useLocalizedYears(
+export function useGenerateLocalizedYears(
   yearStart: number,
   yearEnd: number,
   timeZone: string,
