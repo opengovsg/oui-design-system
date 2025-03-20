@@ -1,7 +1,7 @@
 import type { DateValue } from "@react-aria/calendar"
 import type { Meta, StoryObj } from "@storybook/react"
 import { useCallback } from "react"
-import { isWeekend } from "@internationalized/date"
+import { CalendarDate, isWeekend } from "@internationalized/date"
 import { useLocale } from "react-aria"
 
 import { Calendar } from "../calendar"
@@ -16,6 +16,9 @@ export default {
       },
       options: ["sm", "md"],
     },
+  },
+  parameters: {
+    mockDate: new CalendarDate(2025, 3, 20),
   },
 } as Meta<typeof Calendar>
 
@@ -51,5 +54,11 @@ export const UnavailableDates: Story = {
         isDateUnavailable={isDateUnavailable}
       />
     )
+  },
+}
+
+export const CustomFirstDayOfWeek: Story = {
+  args: {
+    firstDayOfWeek: "fri",
   },
 }
