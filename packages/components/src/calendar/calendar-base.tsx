@@ -36,6 +36,9 @@ export interface CalendarBaseProps<T extends DateValue>
   calendarRef: ForwardedRef<HTMLDivElement>
 }
 
+// TODO: Add aria label i18n
+// TODO: Add preset buttons ala https://www.heroui.com/docs/components/calendar#presets
+
 export function CalendarBase<T extends DateValue>({
   weekdayStyle = "narrow",
   calendarRef,
