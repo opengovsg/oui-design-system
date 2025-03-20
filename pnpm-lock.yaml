@@ -186,6 +186,9 @@ importers:
       '@icons-pack/react-simple-icons':
         specifier: ^11.2.0
         version: 11.2.0(react@19.0.0)
+      '@internationalized/date':
+        specifier: ^3.7.0
+        version: 3.7.0
       '@opengovsg/oui':
         specifier: workspace:*
         version: link:../../packages/components

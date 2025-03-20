@@ -243,6 +243,127 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/button-with-variants.tsx")),
   },
+  "calendar-controlled": {
+    name: "calendar-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-controlled.tsx")),
+  },
+  "calendar-demo": {
+    name: "calendar-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-demo.tsx")),
+  },
+  "calendar-disabled": {
+    name: "calendar-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-disabled.tsx")),
+  },
+  "calendar-first-day-of-week": {
+    name: "calendar-first-day-of-week",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-first-day-of-week.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-first-day-of-week.tsx")),
+  },
+  "calendar-hide-today-button": {
+    name: "calendar-hide-today-button",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-hide-today-button.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-hide-today-button.tsx")),
+  },
+  "calendar-international": {
+    name: "calendar-international",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-international.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-international.tsx")),
+  },
+  "calendar-max-value": {
+    name: "calendar-max-value",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-max-value.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-max-value.tsx")),
+  },
+  "calendar-min-value": {
+    name: "calendar-min-value",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-min-value.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-min-value.tsx")),
+  },
+  "calendar-page-behaviour": {
+    name: "calendar-page-behaviour",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-page-behaviour.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-page-behaviour.tsx")),
+  },
+  "calendar-unavailable-dates": {
+    name: "calendar-unavailable-dates",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-unavailable-dates.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-unavailable-dates.tsx")),
+  },
+  "calendar-visible-duration": {
+    name: "calendar-visible-duration",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-visible-duration.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/calendar-visible-duration.tsx")),
+  },
   "tag-field-content-example": {
     name: "tag-field-content-example",
     description: "",

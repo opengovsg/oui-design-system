@@ -1,0 +1,138 @@
+---
+title: Calendar
+description: A calendar displays one or more date grids and allows users to select a single date.
+toc:
+  visible: true
+links:
+  source: calendar
+  storybook: components-calendar--default
+  theme: calendar
+---
+
+## Usage
+
+A Calendar has no selection by default. An initial, uncontrolled value can be provided to the Calendar using the `defaultValue` prop. Alternatively, a controlled value can be provided using the `value` prop.
+
+Date values are provided using objects in the `@internationalized/date` package. This library handles correct international date manipulation across calendars, time zones, and other localization concerns.
+
+<ComponentPreview name="calendar-demo" />
+
+### Disabled
+
+The `isDisabled` boolean prop makes the Calendar disabled. Cells cannot be focused or selected.
+
+<ComponentPreview name="calendar-disabled" />
+
+### Controlled
+
+A Calendar has no selection by default. An initial, uncontrolled value can be provided to the Calendar using the `defaultValue` prop. Alternatively, a controlled value can be provided using the `value` prop.
+
+<ComponentPreview name="calendar-controlled" />
+
+### Min Date Value
+
+The `minValue` can be used to prevent the user from selecting dates outside a certain range.
+
+By default, Calendar allows selecting any date between 1 Jan 1900 and 31 December 2100. Override this with the `minValue` prop.
+
+This example only accepts dates after today.
+
+<ComponentPreview name="calendar-min-value" />
+
+### Max Date Value
+
+The `maxValue` can also be used to prevent the user from selecting dates outside a certain range.
+
+By default, Calendar allows selecting any date between 1 Jan 1900 and 31 December 2100. Override this with the `minValue` prop.
+
+This example only accepts dates before today.
+
+<ComponentPreview name="calendar-max-value" />
+
+### Unavailable Dates
+
+Calendar supports marking certain dates as unavailable. These dates remain focusable with the keyboard so that navigation is consistent, but cannot be selected by the user. The `isDateUnavailable` prop accepts a callback that is called to evaluate whether each visible date is unavailable.
+
+By default, unavailable dates are displayed with a strike-through style. This can be overridden by the `classNames#cell` prop:
+
+```tsx
+<Calendar
+  classNames={{
+    cell: "unavailable:no-underline unavailable:text-red-300",
+  }}
+/>
+```
+
+<ComponentPreview name="calendar-unavailable-dates" />
+
+### International Calendars
+
+Calendar supports selecting dates in many calendar systems used around the world, including Gregorian, Hebrew, Indian, Islamic, Buddhist, and more. Dates are automatically displayed in the appropriate calendar system for the user's locale. The calendar system can be overridden using the Unicode calendar locale extension, passed to the `Provider` component.
+
+<ComponentPreview name="calendar-international" />
+
+### Visible Duration
+
+By default, the Calendar displays a single month. The `visibleDuration` prop can be used to display multiple months (or specific number of days and weeks) at once.
+Going above 3 months is not recommended as UX may be affected due to clutter.
+
+<ComponentPreview name="calendar-visible-duration" />
+
+### Custom first day of week
+
+By default, the first day of the week is automatically set based on the current locale. This can be changed by setting the `firstDayOfWeek` prop to `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, or `'sat'`.
+
+<ComponentPreview name="calendar-first-day-of-week" />
+
+### Page Behaviour
+
+By default, when pressing the next or previous buttons, pagination will advance by a single month. This behavior can be changed to paginate by the number of visible months instead, by setting `pageBehavior` to `visible`.
+
+<ComponentPreview name="calendar-page-behaviour" />
+
+### Hiding "Today" Button
+
+The "Today" button can be hidden by setting the `showTodayButton` prop to `false`.
+
+<ComponentPreview name="calendar-hide-today-button" />
+
+## Slots
+
+- **base**: Calendar wrapper, it handles alignment, placement, and general appearance.
+- **prevButton**: The previous button of the calendar.
+- **nextButton**: The next button of the calendar.
+- **buttonGroup**: The wrapping element of the next and previous buttons of the calendar.
+- **header**: The header element.
+- **title**: A description of the visible date range, for use in the calendar title.
+- **gridWrapper**: The wrapper for the calendar grid.
+- **grid**: The date grid element (e.g. `<table>`).
+- **gridHeader**: The date grid header element (e.g. `<th>`).
+- **gridHeaderCell**: The date grid header cell element (e.g. `<td>`).
+- **gridBody**: The date grid body element (e.g. `<tbody>`).
+- **cell**: The date grid cell element (e.g. `<td>`).
+- **cellButton**: The button element within the cell.
+- **yearSelector**: The wrapper for the year picker
+- **monthSelector**: The wrapper for the month picker
+- **selectors**: The wrapping element for the year and month pickers
+- **monthList**: The month list picker.
+- **yearList**: The year list picker.
+- **selectorText**: The text of the selected month or year.
+- **bottomContentWrapper**: The wrapping element for the bottom content.
+- **todayButton**: The "Today" button.
+
+## Data Attributes
+
+`Calendar` has the following attributes on the `CalendarCell` element (that you can use with Tailwind to style the cells):
+
+- **`data-focused`**: Whether the cell is focused.
+- **`data-hovered`**: Whether the cell is currently hovered with a mouse.
+- **`data-pressed`**: Whether the cell is currently being pressed.
+- **`data-unavailable`**: Whether the cell is unavailable, according to the calendar's `isDateUnavailable` prop. Unavailable dates remain focusable, but cannot be selected by the user. They should be displayed with a visual affordance to indicate they are unavailable, such as a different color or a strikethrough.
+- **`data-disabled`**: Whether the cell is disabled, according to the calendar's `minValue`, `maxValue`, and `isDisabled` props.
+- **`data-focus-visible`**: Whether the cell is keyboard focused.
+- **`data-outside-visible-range`**: Whether the cell is outside the visible range of the calendar.
+- **`data-outside-month`**: Whether the cell is outside the current month.
+- **`data-selected`**: Whether the cell is selected.
+- **`data-selected-start`**: Whether the cell is the first date in a range selection.
+- **`data-selected-end`**: Whether the cell is the last date in a range selection.
+- **`data-invalid`**: Whether the cell is part of an invalid selection.

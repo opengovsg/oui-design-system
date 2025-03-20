@@ -21,6 +21,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@icons-pack/react-simple-icons": "^11.2.0",
+    "@internationalized/date": "^3.7.0",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
