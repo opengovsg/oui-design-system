@@ -31,8 +31,6 @@ import {
   useLocalizedMonthYear,
 } from "./utils"
 
-export { CalendarDate }
-
 export interface CalendarBaseProps<T extends DateValue>
   extends CalendarProps<T> {
   calendarRef: ForwardedRef<HTMLDivElement>
