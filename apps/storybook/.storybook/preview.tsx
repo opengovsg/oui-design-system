@@ -32,7 +32,10 @@ export const withMockDate: Decorator = (storyFn, context) => {
 
   return (
     <>
-      <div className="z-docked fixed top-0 right-0 bg-white p-1 text-xs">
+      <div
+        className="z-docked fixed top-0 right-0 bg-white p-1 text-xs"
+        data-a11y-ignore="true"
+      >
         Mocking date: {mockedDate.toISOString()}
       </div>
       {storyFn(context)}
@@ -68,6 +71,10 @@ export const parameters: Preview["parameters"] = {
         {
           id: "region",
           enabled: false,
+        },
+        {
+          id: "explicit-ignore",
+          selector: '[data-a11y-ignore="true"]',
         },
       ],
     },
