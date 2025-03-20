@@ -35,6 +35,11 @@ export const calendarStyles = tv({
   },
   variants: {
     variant: {},
+    isDateHighlighted: {
+      true: {
+        cell: "border-utility-focus-default border",
+      },
+    },
     isMultipleMonths: {
       true: {
         cell: "outside-month:hidden",

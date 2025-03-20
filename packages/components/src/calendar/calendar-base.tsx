@@ -146,6 +146,10 @@ export function CalendarBase<T extends DateValue>({
 
   const numberOfVisibleMonths = props.visibleDuration?.months ?? 1
 
+  const dateToHighlight = useMemo(() => {
+    return props.defaultFocusedValue ?? today(getLocalTimeZone())
+  }, [props.defaultFocusedValue])
+
   return (
     <AriaCalendar
       pageBehavior="single"
@@ -188,6 +192,8 @@ export function CalendarBase<T extends DateValue>({
                         slots.cell({
                           className,
                           isMultipleMonths: numberOfVisibleMonths >= 2,
+                          isDateHighlighted:
+                            date.compare(dateToHighlight) === 0,
                           ...renderProps,
                         }),
                     )}
