@@ -27,6 +27,10 @@ type Story = StoryObj<typeof Calendar>
 
 export const Default: Story = {}
 
+export const Disabled: Story = {
+  args: { isDisabled: true },
+}
+
 export const MultipleMonths: Story = {
   args: {
     visibleDuration: { months: 2 },

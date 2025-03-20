@@ -1,3 +1,5 @@
+"use client"
+
 import type { DateValue } from "react-aria-components"
 import { useDeepCompareMemo } from "use-deep-compare"
 

@@ -1,3 +1,5 @@
+"use client"
+
 import type { ForwardedRef } from "react"
 import type { LocalizedStrings } from "react-aria"
 import type { DateValue } from "react-aria-components"
@@ -118,6 +120,7 @@ const CalendarBottomContent = <T extends DateValue>({
       })}
     >
       <Button
+        isDisabled={state.isDisabled}
         variant="clear"
         color="sub"
         size={size}
@@ -227,6 +230,7 @@ const CalendarMonthDaySelector = () => {
         if (part === "month") {
           return (
             <Select
+              isDisabled={state.isDisabled}
               key={part}
               size={size}
               items={months}
@@ -255,6 +259,7 @@ const CalendarMonthDaySelector = () => {
         }
         return (
           <Select
+            isDisabled={state.isDisabled}
             size={size}
             key={part}
             variant="clear"
