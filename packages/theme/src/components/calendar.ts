@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
   slots: {
-    base: "relative inline-block h-fit max-w-full overflow-x-auto overflow-y-hidden rounded-sm shadow-sm",
+    base: "relative inline-block h-fit max-w-full overflow-y-hidden rounded-sm shadow-sm",
     prevButton: "",
     nextButton: "",
     buttonGroup: "justify-self-end",
@@ -19,7 +19,7 @@ export const calendarStyles = tv({
     ],
     grid: "",
     calendar: "",
-    gridWrapper: "flex gap-x-4 max-sm:block",
+    gridWrapper: "flex gap-x-4 overflow-x-auto max-sm:block",
     gridHeader: "",
     gridHeaderCell: "text-base-content-default",
     gridBody: "",
