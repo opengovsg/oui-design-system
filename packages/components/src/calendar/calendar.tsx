@@ -1,3 +1,5 @@
+"use client"
+
 import type { ForwardedRef, ReactElement } from "react"
 import type { DateValue } from "react-aria-components"
 import { Provider } from "react-aria-components"
