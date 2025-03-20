@@ -6,7 +6,7 @@ import type {
   ListLayoutOptions,
 } from "react-aria-components"
 import { useMemo } from "react"
-import { ChevronsUpDownIcon } from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 import {
   Select as AriaSelect,
   ListBox,
@@ -114,7 +114,12 @@ export function Select<T extends object>({
               className: classNames?.selectedText,
             })}
           />
-          <ChevronsUpDownIcon className="h-4 w-4" />
+
+          <ChevronDownIcon
+            className={styles.icon({
+              className: classNames?.icon,
+            })}
+          />
         </Button>
         {description && (
           <Description
