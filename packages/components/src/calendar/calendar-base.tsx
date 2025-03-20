@@ -3,7 +3,7 @@ import type { LocalizedStrings } from "react-aria"
 import type { DateValue } from "react-aria-components"
 import type { CalendarState } from "react-stately"
 import { useContext, useMemo } from "react"
-import { CalendarDate } from "@internationalized/date"
+import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useDateFormatter, useMessageFormatter } from "react-aria"
 import {
@@ -32,6 +32,41 @@ import {
   useLocalizedMonthYear,
 } from "./utils"
 
+const useCalendarSelectors = (state: CalendarState) => {
+  const yearRange = useMemo(() => {
+    const start = state.minValue!.year ?? 1900
+    const end = state.maxValue!.year ?? 2100
+    return { start, end }
+  }, [state.maxValue, state.minValue])
+
+  const dateFormatter = useDateFormatter(state)
+
+  const datePartOrder = useMemo(() => {
+    const parts = dateFormatter.formatToParts(
+      state.visibleRange.start.toDate(state.timeZone),
+    )
+    const filteredParts = parts.filter((part) =>
+      ["year", "month"].includes(part.type),
+    )
+    const filteredPartNames = filteredParts.map((part) => part.type)
+    return filteredPartNames as Array<"year" | "month">
+  }, [dateFormatter, state.timeZone, state.visibleRange.start])
+
+  const months = useGenerateLocalizedMonths(state.timeZone)
+  const years = useGenerateLocalizedYears(
+    yearRange.start,
+    yearRange.end,
+    state.timeZone,
+  )
+
+  return useMemo(() => {
+    return {
+      months,
+      years,
+      datePartOrder,
+    }
+  }, [datePartOrder, months, years])
+}
 export interface CalendarBaseProps<T extends DateValue>
   extends CalendarProps<T> {
   calendarRef: ForwardedRef<HTMLDivElement>
@@ -41,28 +76,70 @@ const i18nStrings: LocalizedStrings = {
   "en-SG": {
     selectMonth: "Select month",
     selectYear: "Select year",
+    today: "Today",
   },
   "zh-SG": {
     selectMonth: "选择月份",
     selectYear: "选择年份",
+    today: "今天",
   },
   "ms-SG": {
     selectMonth: "Pilih bulan",
     selectYear: "Pilih tahun",
+    today: "Hari ini",
   },
   "ta-SG": {
     selectMonth: "மாதத்தை தேர்ந்தெடுக்கவும்",
     selectYear: "ஆண்டை தேர்ந்தெடுக்கவும்",
+    today: "இன்று",
   },
 }
 
-// TODO: Add preset buttons ala https://www.heroui.com/docs/components/calendar#presets
+const CalendarBottomContent = <T extends DateValue>({
+  bottomContent,
+  showTodayButton,
+}: Pick<CalendarProps<T>, "bottomContent" | "showTodayButton">) => {
+  const state = useContext(CalendarStateContext)!
+  const { slots, classNames, size } = useCalendarStyleContext()
+  const formatMessage = useMessageFormatter(i18nStrings)
+
+  if (bottomContent) {
+    return bottomContent
+  }
+
+  if (!showTodayButton) {
+    return null
+  }
+
+  return (
+    <div
+      className={slots.bottomContentWrapper({
+        className: classNames?.bottomContentWrapper,
+      })}
+    >
+      <Button
+        variant="clear"
+        color="sub"
+        size={size}
+        slot={null}
+        className={slots.todayButton({ className: classNames?.todayButton })}
+        onPress={() => {
+          state.setFocusedDate(today(getLocalTimeZone()))
+        }}
+      >
+        {formatMessage("today")}
+      </Button>
+    </div>
+  )
+}
 
 export function CalendarBase<T extends DateValue>({
   weekdayStyle = "narrow",
   calendarRef,
   minValue = new CalendarDate(1900, 0, 1),
   maxValue = new CalendarDate(2100, 12, 31),
+  bottomContent,
+  showTodayButton = true,
   ...props
 }: CalendarBaseProps<T>) {
   const { slots, className, classNames } = useCalendarStyleContext()
@@ -122,44 +199,12 @@ export function CalendarBase<T extends DateValue>({
           </div>
         ))}
       </div>
+      <CalendarBottomContent
+        bottomContent={bottomContent}
+        showTodayButton={showTodayButton}
+      />
     </AriaCalendar>
   )
-}
-
-const useCalendarSelectors = (state: CalendarState) => {
-  const yearRange = useMemo(() => {
-    const start = state.minValue!.year ?? 1900
-    const end = state.maxValue!.year ?? 2100
-    return { start, end }
-  }, [state.maxValue, state.minValue])
-
-  const dateFormatter = useDateFormatter(state)
-
-  const datePartOrder = useMemo(() => {
-    const parts = dateFormatter.formatToParts(
-      state.visibleRange.start.toDate(state.timeZone),
-    )
-    const filteredParts = parts.filter((part) =>
-      ["year", "month"].includes(part.type),
-    )
-    const filteredPartNames = filteredParts.map((part) => part.type)
-    return filteredPartNames as Array<"year" | "month">
-  }, [dateFormatter, state.timeZone, state.visibleRange.start])
-
-  const months = useGenerateLocalizedMonths(state.timeZone)
-  const years = useGenerateLocalizedYears(
-    yearRange.start,
-    yearRange.end,
-    state.timeZone,
-  )
-
-  return useMemo(() => {
-    return {
-      months,
-      years,
-      datePartOrder,
-    }
-  }, [datePartOrder, months, years])
 }
 
 const CalendarMonthDaySelector = () => {

@@ -62,3 +62,7 @@ export const CustomFirstDayOfWeek: Story = {
     firstDayOfWeek: "fri",
   },
 }
+
+export const HideTodayButton: Story = {
+  args: { showTodayButton: false },
+}

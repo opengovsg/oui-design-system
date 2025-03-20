@@ -29,6 +29,9 @@ export const calendarStyles = tv({
     monthList: "",
     selectorText: "text-interaction-sub-active",
     selectors: "flex flex-row gap-0.5",
+    bottomContentWrapper:
+      "border-base-divider-medium flex flex-1 items-center justify-center border-t",
+    todayButton: "",
   },
   variants: {
     variant: {},
@@ -56,6 +59,7 @@ export const calendarStyles = tv({
         yearSelector: "p-1",
         nextButton: "-mr-4",
         selectors: "-ml-2",
+        bottomContentWrapper: "-mx-2 px-2 pt-2",
       },
       md: {
         base: "px-2 py-3",
@@ -67,6 +71,7 @@ export const calendarStyles = tv({
         yearSelector: "p-1",
         nextButton: "-mr-4",
         selectors: "-ml-1.5",
+        bottomContentWrapper: "-mx-2 -mb-1 px-2 pt-2",
       },
     },
   },

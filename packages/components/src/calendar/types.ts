@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
@@ -63,4 +64,12 @@ export interface CalendarProps<T extends DateValue>
    * @defaultValue `new CalendarDate(2100, 12, 31)`
    */
   maxValue?: DateValue
+
+  /**
+   * If provided, there will be a button below the calendar for users to jump to today's date.
+   * @defaultValue `true`
+   * If `bottomContent is provided, this will be ignored.
+   */
+  showTodayButton?: boolean
+  bottomContent?: ReactNode
 }
