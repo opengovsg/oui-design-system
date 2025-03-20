@@ -75,13 +75,13 @@ export function Select<T extends object>({
   const { items, children, listLayoutOptions, ...props } = _props
   const styles = selectStyles(variantProps)
 
-  const layout = useMemo(() => {
-    return new ListLayout({
+  const layoutOptions: ListLayoutOptions = useMemo(() => {
+    return {
       estimatedRowHeight: calculateEstimatedRowHeight(
         variantProps.size ?? "md",
       ),
       ...listLayoutOptions,
-    })
+    }
   }, [listLayoutOptions, variantProps.size])
 
   return (
@@ -126,8 +126,9 @@ export function Select<T extends object>({
         )}
         <Popover className={styles.popover({ className: classNames?.popover })}>
           {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
-          <Virtualizer layout={layout}>
+          <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
             <ListBox
+              autoFocus
               items={items}
               shouldFocusWrap
               className={composeRenderProps(
