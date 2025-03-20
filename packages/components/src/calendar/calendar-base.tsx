@@ -1,10 +1,11 @@
 import type { ForwardedRef } from "react"
+import type { LocalizedStrings } from "react-aria"
 import type { DateValue } from "react-aria-components"
 import type { CalendarState } from "react-stately"
 import { useContext, useMemo } from "react"
 import { CalendarDate } from "@internationalized/date"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useDateFormatter } from "react-aria"
+import { useDateFormatter, useMessageFormatter } from "react-aria"
 import {
   Calendar as AriaCalendar,
   CalendarGridHeader as AriaCalendarGridHeader,
@@ -36,7 +37,25 @@ export interface CalendarBaseProps<T extends DateValue>
   calendarRef: ForwardedRef<HTMLDivElement>
 }
 
-// TODO: Add aria label i18n
+const i18nStrings: LocalizedStrings = {
+  "en-SG": {
+    selectMonth: "Select month",
+    selectYear: "Select year",
+  },
+  "zh-SG": {
+    selectMonth: "选择月份",
+    selectYear: "选择年份",
+  },
+  "ms-SG": {
+    selectMonth: "Pilih bulan",
+    selectYear: "Pilih tahun",
+  },
+  "ta-SG": {
+    selectMonth: "மாதத்தை தேர்ந்தெடுக்கவும்",
+    selectYear: "ஆண்டை தேர்ந்தெடுக்கவும்",
+  },
+}
+
 // TODO: Add preset buttons ala https://www.heroui.com/docs/components/calendar#presets
 
 export function CalendarBase<T extends DateValue>({
@@ -143,6 +162,8 @@ const CalendarMonthDaySelector = () => {
 
   const { months, years, datePartOrder } = useCalendarSelectors(state)
 
+  const formatMessage = useMessageFormatter(i18nStrings)
+
   return (
     <Group className={slots.selectors({ className: classNames?.selectors })}>
       {datePartOrder.map((part) => {
@@ -163,7 +184,7 @@ const CalendarMonthDaySelector = () => {
                 popover: "min-w-[12ch]",
               }}
               selectedKey={state.visibleRange.start.month}
-              aria-label="Select month TODO: Add aria label i18n"
+              aria-label={formatMessage("selectMonth")}
               onSelectionChange={(month) => {
                 state.setFocusedDate(
                   new CalendarDate(state.focusedDate.year, Number(month), 1),
@@ -189,7 +210,7 @@ const CalendarMonthDaySelector = () => {
               }),
             }}
             selectedKey={state.visibleRange.start.year}
-            aria-label="Select year TODO: Add aria label i18n"
+            aria-label={formatMessage("selectYear")}
             onSelectionChange={(year) => {
               state.setFocusedDate(
                 new CalendarDate(
