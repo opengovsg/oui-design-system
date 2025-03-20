@@ -42,6 +42,7 @@ const docsLinks: NavItem = {
             { title: "Banner", url: "banner", status: "new" },
             { title: "Breadcrumb", url: "breadcrumb", status: "wip" },
             { title: "Button", url: "button" },
+            { title: "Calendar", url: "calendar", status: "new" },
             { title: "Card", url: "card", status: "wip" },
             { title: "ComboBox", url: "combo-box", status: "new" },
             { title: "CheckboxGroup", url: "checkbox-group", status: "wip" },

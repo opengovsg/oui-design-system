@@ -1,11 +1,50 @@
-import type { Preview } from "@storybook/react"
+import type { Decorator, Preview } from "@storybook/react"
+import { CalendarDate } from "@internationalized/date"
 import { viewport } from "@oui/chromatic"
+import FakeTimers from "@sinonjs/fake-timers"
 import { themes } from "@storybook/theming"
 import { I18nProvider } from "react-aria-components"
 
 import "../tailwind.css"
 
+const now = new Date()
+let clock: FakeTimers.Clock | undefined
+
+export const withMockDate: Decorator = (storyFn, context) => {
+  const mockDate = context.parameters.mockDate
+
+  if (!mockDate || !(mockDate instanceof CalendarDate)) {
+    if (clock) {
+      clock.setSystemTime(now)
+    }
+    return storyFn(context)
+  }
+
+  const mockedDate = mockDate.toDate("UTC")
+  if (!clock) {
+    clock = FakeTimers.install({
+      toFake: ["Date"],
+      ...(mockDate && { now: mockedDate }),
+    })
+  } else {
+    clock.setSystemTime(mockedDate)
+  }
+
+  return (
+    <>
+      <div
+        className="z-docked fixed top-0 right-0 bg-white p-1 text-xs"
+        data-a11y-ignore="true"
+      >
+        Mocking date: {mockedDate.toISOString()}
+      </div>
+      {storyFn(context)}
+    </>
+  )
+}
+
 export const decorators: Preview["decorators"] = [
+  withMockDate,
   (Story, { globals }) => {
     const { locale } = globals
     return (
@@ -32,6 +71,10 @@ export const parameters: Preview["parameters"] = {
         {
           id: "region",
           enabled: false,
+        },
+        {
+          id: "explicit-ignore",
+          selector: '[data-a11y-ignore="true"]',
         },
       ],
     },

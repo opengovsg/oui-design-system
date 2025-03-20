@@ -6,7 +6,7 @@ import type {
   ListLayoutOptions,
 } from "react-aria-components"
 import { useMemo } from "react"
-import { ChevronsUpDownIcon } from "lucide-react"
+import { ChevronDownIcon } from "lucide-react"
 import {
   Select as AriaSelect,
   ListBox,
@@ -75,13 +75,13 @@ export function Select<T extends object>({
   const { items, children, listLayoutOptions, ...props } = _props
   const styles = selectStyles(variantProps)
 
-  const layout = useMemo(() => {
-    return new ListLayout({
+  const layoutOptions: ListLayoutOptions = useMemo(() => {
+    return {
       estimatedRowHeight: calculateEstimatedRowHeight(
         variantProps.size ?? "md",
       ),
       ...listLayoutOptions,
-    })
+    }
   }, [listLayoutOptions, variantProps.size])
 
   return (
@@ -114,7 +114,12 @@ export function Select<T extends object>({
               className: classNames?.selectedText,
             })}
           />
-          <ChevronsUpDownIcon className="h-4 w-4" />
+
+          <ChevronDownIcon
+            className={styles.icon({
+              className: classNames?.icon,
+            })}
+          />
         </Button>
         {description && (
           <Description
@@ -126,8 +131,9 @@ export function Select<T extends object>({
         )}
         <Popover className={styles.popover({ className: classNames?.popover })}>
           {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
-          <Virtualizer layout={layout}>
+          <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
             <ListBox
+              autoFocus
               items={items}
               shouldFocusWrap
               className={composeRenderProps(

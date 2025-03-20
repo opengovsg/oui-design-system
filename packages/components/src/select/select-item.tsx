@@ -2,7 +2,6 @@
 
 import type { ForwardedRef, ReactElement } from "react"
 import type { ListBoxItemProps } from "react-aria-components"
-import { CheckIcon } from "lucide-react"
 import { ListBoxItem, useContextProps } from "react-aria-components"
 
 import type {
@@ -40,6 +39,9 @@ export const SelectItem = forwardRef(function SelectItem<T extends object>(
 
   return (
     <ListBoxItem
+      textValue={
+        typeof props.children === "string" ? props.children : undefined
+      }
       {...props}
       ref={ref}
       className={composeRenderProps(
@@ -52,27 +54,14 @@ export const SelectItem = forwardRef(function SelectItem<T extends object>(
           return props.children(renderProps)
         }
         return (
-          <>
-            <span
-              className={styles.text({
-                className: classNames?.text,
-                ...renderProps,
-              })}
-            >
-              {props.children}
-            </span>
-            {renderProps.isSelected && (
-              <span
-                aria-hidden
-                className={styles.icon({
-                  className: classNames?.icon,
-                  ...renderProps,
-                })}
-              >
-                <CheckIcon />
-              </span>
-            )}
-          </>
+          <span
+            className={styles.text({
+              className: classNames?.text,
+              ...renderProps,
+            })}
+          >
+            {props.children}
+          </span>
         )
       }}
     </ListBoxItem>

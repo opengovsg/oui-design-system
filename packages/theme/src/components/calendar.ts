@@ -1,41 +1,90 @@
 import type { VariantProps } from "tailwind-variants"
 
+import { focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
-
-// TODO: Use typography from design system
-// TODO: Use design tokens from design system
-// TODO: Actually add theme
 
 export const calendarStyles = tv({
   slots: {
-    base: "",
+    base: "relative inline-block h-fit max-w-full overflow-y-hidden rounded-sm shadow-sm",
     prevButton: "",
     nextButton: "",
-    header: "",
+    buttonGroup: "justify-self-end",
+    header:
+      "text-interaction-sub-active flex flex-wrap items-center justify-between",
     title: "",
     content: "",
-    cell: "bg-red-500",
-    cellButton: "",
-    errorMessage: "",
+    cell: [
+      "text-base-content-default outside-month:text-interaction-support-disabled-content disabled:text-interaction-support-disabled-content unavailable:text-interaction-support-disabled-content unavailable:line-through unavailable:cursor-default my-0.5 flex cursor-pointer items-center justify-center rounded-full transition-colors duration-150 disabled:cursor-default",
+      ...focusVisibleClasses,
+    ],
+    grid: "",
+    calendar: "",
+    gridWrapper: "flex gap-x-4 overflow-x-auto max-sm:block",
+    gridHeader: "",
+    gridHeaderCell: "text-base-content-default",
+    gridBody: "",
+    yearSelector: "min-w-fit",
+    monthSelector: "min-w-fit",
+    yearList: "",
+    monthList: "",
+    selectorText: "text-interaction-sub-active",
+    selectors: "flex flex-row gap-0.5",
+    bottomContentWrapper:
+      "border-base-divider-medium flex flex-1 items-center justify-center border-t",
+    todayButton: "",
   },
   variants: {
     variant: {},
+    isDateHighlighted: {
+      true: {
+        cell: "border-utility-focus-default border",
+      },
+    },
+    isMultipleMonths: {
+      true: {
+        cell: "outside-month:hidden",
+      },
+    },
     isSelected: {
       false: {
-        cell: "pressed:bg-gray-200 dark:pressed:bg-zinc-600 text-zinc-900 hover:bg-gray-100 dark:text-zinc-200 dark:hover:bg-zinc-700",
+        cell: "not-unavailable:hover:bg-interaction-muted-main-hover not-unavailable:pressed:bg-interaction-muted-main-active",
       },
       true: {
-        cell: "bg-blue-600 text-white invalid:bg-red-600 forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
+        cell: "bg-interaction-main-default text-base-content-inverse invalid:bg-interaction-critical-default forced-colors:bg-[Highlight] forced-colors:text-[HighlightText] forced-colors:invalid:bg-[Mark]",
+      },
+    },
+    size: {
+      sm: {
+        base: "px-2 py-2",
+        gridHeaderCell: "prose-caption-1 w-10 p-2.5",
+        header: "prose-subhead-2 min-h-10 px-4",
+        cell: "prose-body-2 mx-auto h-9 w-9",
+        monthSelector: "p-1",
+        selectorText: "prose-subhead-2",
+        yearSelector: "p-1",
+        nextButton: "-mr-4",
+        selectors: "-ml-2",
+        bottomContentWrapper: "-mx-2 px-2 pt-2",
+        calendar: "pb-2",
+      },
+      md: {
+        base: "px-2 py-3",
+        gridHeaderCell: "prose-subhead-2 w-11 p-3",
+        header: "prose-subhead-1 min-h-11 px-4",
+        cell: "prose-body-1 mx-auto h-10 w-10",
+        monthSelector: "p-1",
+        selectorText: "prose-subhead-1",
+        yearSelector: "p-1",
+        nextButton: "-mr-4",
+        selectors: "-ml-1.5",
+        bottomContentWrapper: "-mx-2 -mb-1 px-2 pt-2",
+        calendar: "pb-3",
       },
     },
   },
-  compoundVariants: [],
-  compoundSlots: [
-    {
-      slots: ["prevButton", "nextButton"],
-      class: "",
-    },
-  ],
+  defaultVariants: {
+    size: "sm",
+  },
 })
 
 export type CalendarVariantProps = VariantProps<typeof calendarStyles>
