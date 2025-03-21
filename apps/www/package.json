@@ -33,7 +33,7 @@
     "inter-ui": "^4.1.0",
     "jotai": "^2.12.1",
     "lucide-react": "^0.475.0",
-    "next": "15.1.7",
+    "next": "15.2.3",
     "react": "catalog:",
     "react-aria-components": "^1.7.1",
     "react-dom": "catalog:",
