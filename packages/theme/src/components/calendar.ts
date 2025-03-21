@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
   slots: {
-    base: "relative inline-block h-fit max-w-full overflow-y-hidden rounded-sm shadow-sm",
+    base: "relative isolate inline-block h-fit max-w-full overflow-y-hidden rounded-sm shadow-sm",
     prevButton: "",
     nextButton: "",
     buttonGroup: "justify-self-end",
@@ -38,7 +38,7 @@ export const calendarStyles = tv({
     variant: {},
     isRange: {
       true: {
-        cell: "outside-month:before:hidden transition-none before:absolute before:inset-0 before:z-[-1] before:rounded-none before:content-['']",
+        cell: "outside-month:before:hidden transition-none before:absolute before:inset-0 before:z-[-1] before:content-['']",
       },
     },
     isMultipleMonths: {
@@ -97,7 +97,7 @@ export const calendarStyles = tv({
       isRange: true,
       isSelected: true,
       className: {
-        cell: "selection-start:before:rounded-s-full selection-end:before:rounded-e-full selection-end:rounded-full selection-start:rounded-full selection-start:bg-interaction-main-default selection-start:text-base-content-inverse selection-end:bg-interaction-main-default selection-end:text-base-content-inverse before:bg-interaction-muted-main-active selection-start:before:ms-0 selection-end:before:me-0 before:-mx-1 data-[range-end=true]:before:me-0 data-[range-end=true]:before:rounded-e-sm data-[range-start=true]:before:ms-0 data-[range-start=true]:before:rounded-s-sm",
+        cell: "selection-start:not-data-[range-end=true]:before:rounded-s-full selection-start:data-[range-end=true]:before:rounded-e-sm selection-end:before:w-[50%] selection-end:rounded-full selection-start:rounded-full selection-start:bg-interaction-main-default selection-start:text-base-content-inverse selection-end:bg-interaction-main-default selection-end:text-base-content-inverse before:bg-interaction-muted-main-active selection-start:before:ms-0 selection-end:before:me-0 selection-end:not-selection-start:data-[range-start=true]:before:rounded-s-sm selection-start:data-[range-end=true]:before:w-[50%] selection-start:data-[range-end=true]:before:left-[50%] before:-mx-1 data-[range-end=true]:before:me-0 data-[range-end=true]:before:rounded-e-sm data-[range-start=true]:before:ms-0 data-[range-start=true]:before:rounded-s-sm",
       },
     },
   ],
