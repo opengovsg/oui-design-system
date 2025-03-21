@@ -2,14 +2,10 @@
 
 import { useContext } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import {
-  CalendarStateContext,
-  Group,
-  Heading,
-  useLocale,
-} from "react-aria-components"
+import { Group, Heading, useLocale } from "react-aria-components"
 
 import { Button } from "../button/button"
+import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { CalendarMonthDaySelector } from "./calendar-month-day-selector"
 import { useCalendarStyleContext } from "./calendar-style-context"
 import { useLocalizedMonthYear } from "./utils"
@@ -22,7 +18,7 @@ export function CalendarHeader({ offsetMonths = 0 }: CalendarHeaderProps) {
   const { direction } = useLocale()
   const { slots, classNames, size } = useCalendarStyleContext()
 
-  const state = useContext(CalendarStateContext)!
+  const state = useContext(AgnosticCalendarStateContext)!
 
   const monthYearTitle = useLocalizedMonthYear(
     state.visibleRange.start.add({ months: offsetMonths }),

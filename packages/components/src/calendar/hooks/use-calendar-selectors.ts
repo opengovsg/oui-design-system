@@ -1,12 +1,14 @@
 "use client"
 
-import type { CalendarState } from "react-stately"
+import type { CalendarState, RangeCalendarState } from "react-stately"
 import { useMemo } from "react"
 import { useDateFormatter } from "react-aria"
 
 import { useGenerateLocalizedMonths, useGenerateLocalizedYears } from "../utils"
 
-export const useCalendarSelectors = (state: CalendarState) => {
+export const useCalendarSelectors = (
+  state: CalendarState | RangeCalendarState,
+) => {
   const yearRange = useMemo(() => {
     const start = state.minValue!.year ?? 1900
     const end = state.maxValue!.year ?? 2100

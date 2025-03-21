@@ -2,15 +2,16 @@
 
 import { useContext } from "react"
 import { CalendarDate } from "@internationalized/date"
-import { CalendarStateContext, Group } from "react-aria-components"
+import { Group } from "react-aria-components"
 
 import { Select, SelectItem } from "../select"
+import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
 import { useCalendarI18n, useCalendarSelectors } from "./hooks"
 
 export const CalendarMonthDaySelector = () => {
   const { slots, size, classNames } = useCalendarStyleContext()
-  const state = useContext(CalendarStateContext)!
+  const state = useContext(AgnosticCalendarStateContext)!
 
   const { months, years, datePartOrder } = useCalendarSelectors(state)
 
