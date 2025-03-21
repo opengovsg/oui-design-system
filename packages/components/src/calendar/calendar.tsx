@@ -12,37 +12,57 @@ import {
   CalendarStateContext,
   composeRenderProps,
   Provider,
+  Text,
 } from "react-aria-components"
+import { useDeepCompareMemo } from "use-deep-compare"
 
-import { cn } from "@opengovsg/oui-theme"
+import { calendarStyles, cn, dataAttr } from "@opengovsg/oui-theme"
 
 import type { CalendarProps } from "./types"
-import { forwardRef } from "../system/utils"
+import { forwardRef, mapPropsVariants } from "../system/utils"
 import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { CalendarBottomContent } from "./calendar-bottom-content"
 import { CalendarGridHeader } from "./calendar-grid-header"
 import { CalendarHeader } from "./calendar-header"
-import {
-  CalendarStyleContext,
-  useProvideCalendarStyles,
-} from "./calendar-style-context"
+import { CalendarStyleContext } from "./calendar-style-context"
 
 export const Calendar = forwardRef(function Calendar<T extends DateValue>(
   originalProps: CalendarProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
-  const { calendarProps, context } = useProvideCalendarStyles<T>(originalProps)
+  const [props, variantProps] = mapPropsVariants(
+    originalProps,
+    calendarStyles.variantKeys,
+  )
+
   const {
+    className,
+    classNames,
     weekdayStyle = "narrow",
     minValue = new CalendarDate(1900, 0, 1),
     maxValue = new CalendarDate(2100, 12, 31),
     bottomContent,
     showTodayButton = true,
-    ...props
-  } = calendarProps
+    errorMessage,
+    ...restProps
+  } = props
 
-  const { classNames, className, slots } = context
-  const numberOfVisibleMonths = calendarProps.visibleDuration?.months ?? 1
+  const slots = useDeepCompareMemo(
+    () => calendarStyles(variantProps),
+    [variantProps],
+  )
+
+  const context = useMemo(
+    () => ({
+      slots,
+      classNames,
+      className,
+      size: variantProps.size ?? calendarStyles.defaultVariants.size,
+    }),
+    [className, classNames, slots, variantProps.size],
+  )
+
+  const numberOfVisibleMonths = props.visibleDuration?.months ?? 1
 
   const dateToHighlight = useMemo(() => {
     if (props.defaultFocusedValue !== undefined) {
@@ -54,7 +74,7 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
   return (
     <AriaCalendar
       pageBehavior="single"
-      {...props}
+      {...restProps}
       ref={ref}
       minValue={minValue}
       maxValue={maxValue}
@@ -97,11 +117,13 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
                             slots.cell({
                               className,
                               isMultipleMonths: numberOfVisibleMonths >= 2,
-                              isDateHighlighted: dateToHighlight
-                                ? date.compare(dateToHighlight) === 0
-                                : false,
                               ...renderProps,
                             }),
+                        )}
+                        data-highlighted={dataAttr(
+                          dateToHighlight
+                            ? date.compare(dateToHighlight) === 0
+                            : false,
                         )}
                         date={date}
                       />
@@ -117,6 +139,17 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
           />
         </Provider>
       </CalendarStateWrapper>
+
+      {errorMessage && (
+        <Text
+          className={slots.errorMessage({
+            className: classNames?.errorMessage,
+          })}
+          slot="errorMessage"
+        >
+          {errorMessage}
+        </Text>
+      )}
     </AriaCalendar>
   )
 }) as <T extends DateValue>(props: CalendarProps<T>) => ReactElement
