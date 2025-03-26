@@ -1,5 +1,4 @@
 import type { UseMultipleSelectionReturnValue } from "downshift"
-import type { Context } from "react"
 import { useCallback, useContext } from "react"
 import { XIcon } from "lucide-react"
 

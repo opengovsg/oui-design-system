@@ -16,4 +16,5 @@ export * from "./tag-field"
 export * from "./select"
 export * from "./badge"
 export * from "./calendar"
+export * from "./range-calendar"
 // Add new component exports here

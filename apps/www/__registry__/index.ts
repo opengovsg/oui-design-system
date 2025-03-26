@@ -364,6 +364,149 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/calendar-visible-duration.tsx")),
   },
+  "range-calendar-controlled": {
+    name: "range-calendar-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-controlled.tsx")),
+  },
+  "range-calendar-demo": {
+    name: "range-calendar-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-demo.tsx")),
+  },
+  "range-calendar-disabled": {
+    name: "range-calendar-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-disabled.tsx")),
+  },
+  "range-calendar-first-day-of-week": {
+    name: "range-calendar-first-day-of-week",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-first-day-of-week.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-first-day-of-week.tsx")),
+  },
+  "range-calendar-hide-today-button": {
+    name: "range-calendar-hide-today-button",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-hide-today-button.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-hide-today-button.tsx")),
+  },
+  "range-calendar-international": {
+    name: "range-calendar-international",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-international.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-international.tsx")),
+  },
+  "range-calendar-invalid-date": {
+    name: "range-calendar-invalid-date",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-invalid-date.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-invalid-date.tsx")),
+  },
+  "range-calendar-max-value": {
+    name: "range-calendar-max-value",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-max-value.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-max-value.tsx")),
+  },
+  "range-calendar-min-value": {
+    name: "range-calendar-min-value",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-min-value.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-min-value.tsx")),
+  },
+  "range-calendar-non-contiguous-ranges": {
+    name: "range-calendar-non-contiguous-ranges",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-non-contiguous-ranges.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-non-contiguous-ranges.tsx")),
+  },
+  "range-calendar-page-behaviour": {
+    name: "range-calendar-page-behaviour",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-page-behaviour.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-page-behaviour.tsx")),
+  },
+  "range-calendar-unavailable-dates": {
+    name: "range-calendar-unavailable-dates",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-unavailable-dates.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-unavailable-dates.tsx")),
+  },
+  "range-calendar-visible-duration": {
+    name: "range-calendar-visible-duration",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-visible-duration.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/range-calendar-visible-duration.tsx")),
+  },
   "tag-field-content-example": {
     name: "tag-field-content-example",
     description: "",
