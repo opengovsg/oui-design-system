@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "packages/components/src/**"
+      - "packages/theme/src/**"
 jobs:
   release:
     name: Release
