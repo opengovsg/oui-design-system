@@ -48,7 +48,7 @@ export const decorators: Preview["decorators"] = [
   (Story, { globals }) => {
     const { locale } = globals
     return (
-      <I18nProvider locale={locale}>
+      <I18nProvider locale={locale ?? "en-SG"}>
         <div className="antialiased">
           <Story />
         </div>
