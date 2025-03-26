@@ -3,8 +3,8 @@
 import type { ForwardedRef } from "react"
 import { useContext } from "react"
 
-import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
-import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
+import type { ListBoxItemSlots, SlotsToClasses } from "@opengovsg/oui-theme"
+import { dataAttr, listBoxItemStyles } from "@opengovsg/oui-theme"
 
 import type { TagFieldBaseItemProps, TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
@@ -13,7 +13,7 @@ import { TagFieldStateContext } from "./tag-field-state-context"
 export interface TagFieldItemProps<T extends object>
   extends Omit<TagFieldListRenderProps<T>, "key" | "itemProps">,
     TagFieldBaseItemProps<T> {
-  classNames?: SlotsToClasses<TagFieldItemSlots>
+  classNames?: SlotsToClasses<ListBoxItemSlots>
 }
 
 const TagFieldItemInner = <T extends object>(
@@ -21,15 +21,20 @@ const TagFieldItemInner = <T extends object>(
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
   const { itemToText, size } = useContext(TagFieldStateContext)!
-  const styles = tagFieldItemStyles({ size })
+  const styles = listBoxItemStyles({ size })
 
   return (
     <li
       ref={ref}
       {...itemProps}
-      className={styles.container({ className: classNames?.container })}
+      className={styles.container({
+        className: classNames?.container,
+        isFocused: isHighlighted,
+        isDisabled: itemProps["aria-disabled"],
+      })}
       data-rac
-      data-hovered={dataAttr(isHighlighted)}
+      data-focused={dataAttr(isHighlighted)}
+      data-disabled={dataAttr(itemProps["aria-disabled"])}
     >
       <span className={styles.label({ className: classNames?.label })}>
         {itemToText(item)}

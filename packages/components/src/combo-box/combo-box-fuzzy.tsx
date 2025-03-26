@@ -8,13 +8,13 @@ import { Text } from "react-aria-components"
 
 import type {
   ComboBoxFuzzyVariantProps,
-  ComboBoxItemSlots,
+  ListBoxItemSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import {
   comboBoxFuzzyHighlightedTextStyles,
-  comboBoxItemStyles,
   comboBoxStyles,
+  listBoxItemStyles,
 } from "@opengovsg/oui-theme"
 
 import type { ComboBoxProps } from "./combo-box"
@@ -65,7 +65,7 @@ export interface ComboBoxFuzzyProps<T extends ComboBoxItem = ComboBoxItem>
     | "selectedKey"
     | "items"
   > {
-  itemClassNames?: SlotsToClasses<ComboBoxItemSlots> &
+  itemClassNames?: SlotsToClasses<ListBoxItemSlots> &
     SlotsToClasses<"highlight">
 }
 
@@ -133,7 +133,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
     [onInputChangeProp, preparedItems],
   )
 
-  const comboboxItemStyles = comboBoxItemStyles(variantProps)
+  const itemStyles = listBoxItemStyles(variantProps)
 
   return (
     <ComboBox
@@ -149,7 +149,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
           {({ isSelected, isFocused }) => (
             <>
               <Text
-                className={comboboxItemStyles.label({
+                className={itemStyles.label({
                   className: itemClassNames?.label,
                 })}
                 slot="label"
@@ -164,7 +164,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
               </Text>
               {item.description && (
                 <Text
-                  className={comboboxItemStyles.description({
+                  className={itemStyles.description({
                     className: itemClassNames?.description,
                   })}
                   slot="description"

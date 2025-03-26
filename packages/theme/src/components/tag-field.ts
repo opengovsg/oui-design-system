@@ -3,43 +3,6 @@ import type { VariantProps } from "tailwind-variants"
 import { focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
 
-export const tagFieldItemStyles = tv({
-  slots: {
-    container:
-      "text-base-content-strong aria-disabled:text-interaction-support-disabled-content hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active flex cursor-pointer flex-col aria-disabled:cursor-not-allowed",
-    label: "line-clamp-1",
-    description: "text-base-content-medium",
-  },
-  variants: {
-    size: {
-      xs: {
-        container: "prose-body-2 px-3 py-3",
-        description: "prose-body-2",
-      },
-      sm: {
-        container: "prose-body-2 px-3 py-3",
-        description: "prose-body-2",
-      },
-      md: { container: "prose-body-1 px-4 py-3", description: "prose-body-2" },
-    },
-  },
-  compoundVariants: [
-    {
-      size: "md",
-      isSelected: true,
-      className: { container: "prose-subhead-1" },
-    },
-    {
-      size: ["sm", "xs"],
-      isSelected: true,
-      className: { container: "prose-subhead-2" },
-    },
-  ],
-  defaultVariants: {
-    size: "md",
-  },
-})
-
 export const tagFieldStyles = tv({
   slots: {
     root: "flex flex-col gap-2",
@@ -95,4 +58,3 @@ export const tagFieldStyles = tv({
 
 export type TagFieldVariantProps = VariantProps<typeof tagFieldStyles>
 export type TagFieldSlots = keyof ReturnType<typeof tagFieldStyles>
-export type TagFieldItemSlots = keyof ReturnType<typeof tagFieldItemStyles>

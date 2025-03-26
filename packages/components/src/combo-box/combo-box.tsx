@@ -30,10 +30,10 @@ import type {
 import {
   cn,
   comboBoxClearButtonStyles,
-  comboBoxItemStyles,
   comboBoxStyles,
   composeRenderProps,
   composeTailwindRenderProps,
+  listBoxItemStyles,
 } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
@@ -111,7 +111,7 @@ export function ComboBoxEmptyState({
   size,
   className,
 }: Pick<ComboBoxVariantProps, "size"> & { className?: string }) {
-  const styles = comboBoxItemStyles({ size })
+  const styles = listBoxItemStyles({ size })
   const formatMessage = useMessageFormatter(i18nStrings)
   return (
     <span
