@@ -7,6 +7,8 @@ import "./shiki.css"
 import { cookies } from "next/headers"
 import { docsConfig } from "@/config/docs.config"
 
+import { I18nProvider } from "./providers/i18n"
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -50,7 +52,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-white text-black antialiased dark:bg-black dark:text-white`}
       >
-        {children}
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   )
