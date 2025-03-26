@@ -1,6 +1,6 @@
 "use client"
 
-import type { DateValue } from "react-aria-components"
+import type { CalendarDate } from "@internationalized/date"
 import { useContext } from "react"
 import { getLocalTimeZone, today } from "@internationalized/date"
 
@@ -10,7 +10,7 @@ import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
 import { useCalendarI18n } from "./hooks"
 
-export const CalendarBottomContent = <T extends DateValue>({
+export const CalendarBottomContent = <T extends CalendarDate>({
   bottomContent,
   showTodayButton,
 }: Pick<CalendarProps<T>, "bottomContent" | "showTodayButton">) => {

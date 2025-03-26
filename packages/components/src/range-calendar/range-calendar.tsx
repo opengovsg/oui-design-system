@@ -2,10 +2,10 @@
 "use client"
 
 import type { ForwardedRef } from "react"
-import type { DateValue } from "react-aria"
 import type {
   RangeCalendarProps as AriaRangeCalendarProps,
   CalendarGridProps,
+  DateValue,
 } from "react-aria-components"
 import { forwardRef, useContext, useMemo } from "react"
 import {
@@ -45,7 +45,7 @@ import { CalendarGridHeader } from "../calendar/calendar-grid-header"
 import { CalendarHeader } from "../calendar/calendar-header"
 import { mapPropsVariants } from "../system/utils"
 
-interface RangeCalendarProps<T extends DateValue>
+interface RangeCalendarProps<T extends CalendarDate>
   extends CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle">,
     AriaRangeCalendarProps<T> {
@@ -87,12 +87,12 @@ interface RangeCalendarProps<T extends DateValue>
    * The minimum allowed date that a user may select.
    * @defaultValue `new CalendarDate(1900, 0, 1)`
    */
-  minValue?: DateValue
+  minValue?: T
   /**
    * The maximum allowed date that a user may select.
    * @defaultValue `new CalendarDate(2100, 12, 31)`
    */
-  maxValue?: DateValue
+  maxValue?: T
 
   /**
    * If provided, there will be a button below the calendar for users to jump to today's date.
@@ -106,7 +106,7 @@ interface RangeCalendarProps<T extends DateValue>
 }
 
 export const RangeCalendar = forwardRef(function RangeCalendar<
-  T extends DateValue,
+  T extends CalendarDate,
 >(originalProps: RangeCalendarProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
@@ -234,7 +234,7 @@ export const RangeCalendarStateWrapper = ({
   )
 }
 
-export const RangeCalendarCell = <T extends DateValue>({
+export const RangeCalendarCell = <T extends CalendarDate>({
   date,
   isMultipleMonths,
   dateToHighlight,
@@ -242,7 +242,7 @@ export const RangeCalendarCell = <T extends DateValue>({
 }: {
   date: CalendarDate
   isMultipleMonths: boolean
-  dateToHighlight: T | null
+  dateToHighlight: DateValue | null
   firstDayOfWeek?: RangeCalendarProps<T>["firstDayOfWeek"]
 }) => {
   const { classNames, slots } = useCalendarStyleContext()

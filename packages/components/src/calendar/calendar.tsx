@@ -1,7 +1,6 @@
 "use client"
 
 import type { ForwardedRef, ReactElement } from "react"
-import type { DateValue } from "react-aria-components"
 import { useContext, useMemo } from "react"
 import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date"
 import {
@@ -26,7 +25,7 @@ import { CalendarGridHeader } from "./calendar-grid-header"
 import { CalendarHeader } from "./calendar-header"
 import { CalendarStyleContext } from "./calendar-style-context"
 
-export const Calendar = forwardRef(function Calendar<T extends DateValue>(
+export const Calendar = forwardRef(function Calendar<T extends CalendarDate>(
   originalProps: CalendarProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
@@ -152,7 +151,7 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
       )}
     </AriaCalendar>
   )
-}) as <T extends DateValue>(props: CalendarProps<T>) => ReactElement
+}) as <T extends CalendarDate>(props: CalendarProps<T>) => ReactElement
 
 export const CalendarStateWrapper = ({
   children,
