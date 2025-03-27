@@ -364,6 +364,39 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/calendar-visible-duration.tsx")),
   },
+  "combo-box-content-example": {
+    name: "combo-box-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-content-example.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/combo-box-content-example.tsx")),
+  },
+  "combo-box-demo": {
+    name: "combo-box-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/combo-box-demo.tsx")),
+  },
+  "combo-box-text-slots": {
+    name: "combo-box-text-slots",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-text-slots.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/combo-box-text-slots.tsx")),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",
