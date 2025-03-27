@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { AdobeIcon } from "@/components/icons/brand-icons"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
 import { SiGithub, SiStorybook } from "@icons-pack/react-simple-icons"
 import { ArrowUpRight } from "lucide-react"
@@ -13,14 +14,23 @@ interface PageHeaderProps {
   }
 }
 
+const TYPE_TO_LABEL = {
+  source: "Source",
+  storybook: "Storybook",
+  theme: "Theme",
+  reactaria: "React Aria",
+}
+
 const LinkIcon = ({ type }: { type: string }) => {
   switch (type) {
     case "source":
-      return <SiGithub className="fill=[#181717] size-4" />
+      return <SiGithub className="size-4 fill-[#181717]" />
     case "storybook":
       return <SiStorybook className="size-4 fill-[#FF4785]" />
     case "theme":
-      return <SiGithub className="fill=[#181717] size-4" />
+      return <SiGithub className="size-4 fill-[#181717]" />
+    case "reactaria":
+      return <AdobeIcon className="size-4 fill-[#E1251B]" />
   }
 }
 
@@ -31,15 +41,15 @@ export const PageHeader = ({ title, description, links }: PageHeaderProps) => {
       <p>{description}</p>
       {links && (
         <div className="flex flex-wrap gap-4">
-          {Object.entries(links).map(([title, url], i) => (
+          {Object.entries(links).map(([type, url], i) => (
             <Link
               key={i}
               className="flex items-center gap-1 p-1 text-xs capitalize underline-offset-2 hover:underline"
               href={url}
               target="_blank"
             >
-              <LinkIcon type={title} />
-              <span>{title}</span>
+              <LinkIcon type={type} />
+              <span>{TYPE_TO_LABEL[type as keyof typeof links]}</span>
               <ArrowUpRight className="-ml-1 size-4" />
             </Link>
           ))}

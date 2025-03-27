@@ -31,6 +31,7 @@ export const docs = defineCollection({
           source: s.string().optional(),
           storybook: s.string().optional(),
           theme: s.string().optional(),
+          reactaria: s.string().optional(),
         })
         .optional(),
     })
@@ -49,6 +50,9 @@ export const docs = defineCollection({
             : undefined,
           theme: links.theme
             ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/theme/src/components/${links.theme}.ts`
+            : undefined,
+          reactaria: links.reactaria
+            ? `https://react-spectrum.adobe.com/react-aria/${links.reactaria}.html`
             : undefined,
         },
       }
