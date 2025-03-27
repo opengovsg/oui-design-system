@@ -11,23 +11,23 @@ import {
 } from "react-aria-components"
 
 import type {
-  ComboBoxItemSlots,
-  ComboBoxItemVariantProps,
+  ListBoxItemSlots,
+  ListBoxItemVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { comboBoxItemStyles } from "@opengovsg/oui-theme"
+import { listBoxItemStyles } from "@opengovsg/oui-theme"
 
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { ComboBoxVariantContext } from "./combo-box-variant-context"
 
 export interface ComboBoxItemProps
   extends ListBoxItemProps,
-    ComboBoxItemVariantProps {
+    ListBoxItemVariantProps {
   /**
    * Description for the item, if any
    */
   description?: React.ReactNode
-  classNames?: SlotsToClasses<ComboBoxItemSlots>
+  classNames?: SlotsToClasses<ListBoxItemSlots>
 }
 
 export const ComboBoxItem = forwardRef(function ComboBoxItem(
@@ -43,9 +43,9 @@ export const ComboBoxItem = forwardRef(function ComboBoxItem(
   const [
     { className, description, children, classNames, ...props },
     variantProps,
-  ] = mapPropsVariants(originalProps, comboBoxItemStyles.variantKeys)
+  ] = mapPropsVariants(originalProps, listBoxItemStyles.variantKeys)
 
-  const styles = comboBoxItemStyles(variantProps)
+  const styles = listBoxItemStyles(variantProps)
 
   const defaultTextValue = useMemo(() => {
     if (props.textValue) {

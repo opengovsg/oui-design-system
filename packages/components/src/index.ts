@@ -17,4 +17,6 @@ export * from "./select"
 export * from "./badge"
 export * from "./calendar"
 export * from "./range-calendar"
+export * from "./menu"
+export * from "./popover"
 // Add new component exports here

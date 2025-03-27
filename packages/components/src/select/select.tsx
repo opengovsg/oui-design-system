@@ -11,7 +11,6 @@ import {
   Select as AriaSelect,
   ListBox,
   ListLayout,
-  Popover,
   Provider,
   SelectValue,
   Virtualizer,
@@ -27,6 +26,7 @@ import { composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, Label } from "../field"
+import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
 

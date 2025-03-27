@@ -3,7 +3,7 @@ import {
   useContext as useReactContext,
 } from "react"
 
-export interface CreateContextOptions {
+export interface CreateContextOptions<T = any> {
   /**
    * If `true`, React will throw if context is `null` or `undefined`
    * In some cases, you might want to support nested context, so you can set it to `false`
@@ -17,6 +17,8 @@ export interface CreateContextOptions {
    * The display name of the context
    */
   name?: string
+
+  defaultValue?: T
 }
 
 export type CreateContextReturn<T> = [React.Context<T>, () => T]
@@ -27,15 +29,16 @@ export type CreateContextReturn<T> = [React.Context<T>, () => T]
  * @param options - create context options
  */
 export function createContext<ContextType>(
-  options: CreateContextOptions = {},
+  options: CreateContextOptions<ContextType> = {},
 ): CreateContextReturn<ContextType> {
   const {
     strict = true,
     errorMessage = "useContext: `context` is undefined. Seems you forgot to wrap component within the Provider",
     name,
+    defaultValue,
   } = options
 
-  const Context = createReactContext<ContextType | undefined>(undefined)
+  const Context = createReactContext<ContextType | undefined>(defaultValue)
 
   Context.displayName = name
 

@@ -13,7 +13,7 @@ export const selectSearchStyles = tv({
 
 export const selectItemStyles = tv({
   slots: {
-    base: "text-base-content-strong outline-hidden group flex cursor-default select-none items-center gap-2 rounded-sm px-4 py-2",
+    base: "text-base-content-strong group flex cursor-default items-center gap-2 rounded-sm px-4 py-2 outline-hidden select-none",
     text: "line-clamp-1 flex-1 text-inherit",
   },
   variants: {
@@ -60,8 +60,7 @@ export const selectStyles = tv({
     trigger: "w-fit",
     icon: "size-4",
     selectedText: "text-base-content-strong flex-1 truncate text-start",
-    popover:
-      "motion-safe:entering:animate-in motion-safe:entering:fade-in motion-safe:exiting:animate-out motion-safe:exiting:fade-out w-(--trigger-width) flex flex-col rounded-sm bg-white shadow-md",
+    popover: "flex w-(--trigger-width) flex-col",
     list: "overflow-y-auto",
     description: "",
   },

@@ -6,6 +6,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@utility scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-default {
+  scrollbar-width: auto;
+  -ms-overflow-style: auto;
+  &::-webkit-scrollbar {
+    display: auto;
+  }
+}
+
 @theme {
   /* TODO: Split up theme specific variables */
   --shadow-sm: 0px 0px 10px 0px rgba(191, 191, 191, 0.5);

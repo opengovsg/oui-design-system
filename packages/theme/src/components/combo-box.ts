@@ -11,7 +11,7 @@ export const comboBoxStyles = tv({
     expandButton: "h-full cursor-pointer",
     icon: "",
     field: "h-full w-full overflow-ellipsis outline-hidden",
-    popover: "mt-0.5 w-(--trigger-width) overflow-hidden bg-white shadow-sm",
+    popover: "mt-0.5 w-(--trigger-width) overflow-hidden rounded-t-none",
     list: "w-unset block max-h-[300px] min-h-0 overflow-y-auto",
   },
   base: [],
@@ -56,54 +56,6 @@ export const comboBoxStyles = tv({
 
 export type ComboBoxVariantProps = VariantProps<typeof comboBoxStyles>
 export type ComboBoxSlots = keyof ReturnType<typeof comboBoxStyles>
-
-export const comboBoxItemStyles = tv({
-  slots: {
-    container: "text-base-content-strong flex cursor-pointer flex-col",
-    label: "",
-    description: "text-base-content-medium",
-  },
-  variants: {
-    size: {
-      xs: {
-        container: "prose-body-2 px-3 py-3",
-        description: "prose-body-2",
-      },
-      sm: {
-        container: "prose-body-2 px-3 py-3",
-        description: "prose-body-2",
-      },
-      md: { container: "prose-body-1 px-4 py-3", description: "prose-body-2" },
-    },
-    isFocused: {
-      true: { container: "bg-interaction-muted-main-hover" },
-    },
-    isSelected: {
-      true: { container: "bg-interaction-muted-main-active" },
-    },
-    isDisabled: {
-      true: { container: "cursor-not-allowed" },
-    },
-  },
-  compoundVariants: [
-    {
-      size: "md",
-      isSelected: true,
-      className: { container: "prose-subhead-1" },
-    },
-    {
-      size: ["sm", "xs"],
-      isSelected: true,
-      className: { container: "prose-subhead-2" },
-    },
-  ],
-  defaultVariants: {
-    size: "md",
-  },
-})
-
-export type ComboBoxItemVariantProps = VariantProps<typeof comboBoxItemStyles>
-export type ComboBoxItemSlots = keyof ReturnType<typeof comboBoxItemStyles>
 
 export const comboBoxClearButtonStyles = tv({
   base: "border-base-divider-strong text-base-content-strong z-0 -ml-px cursor-pointer rounded-sm rounded-l-none border outline-hidden transition",

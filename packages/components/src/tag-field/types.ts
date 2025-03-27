@@ -13,8 +13,8 @@ import type { UseComboboxReturnValue } from "downshift"
 import type { ReactNode } from "react"
 
 import type {
+  ListBoxItemSlots,
   SlotsToClasses,
-  TagFieldItemSlots,
   TagFieldSlots,
   TagFieldVariantProps,
 } from "@opengovsg/oui-theme"
@@ -35,7 +35,7 @@ export interface TagFieldListRenderProps<T> {
   item: T
   key: VirtualItem["key"]
   isHighlighted: boolean
-  classNames?: SlotsToClasses<TagFieldItemSlots>
+  classNames?: SlotsToClasses<ListBoxItemSlots>
   itemProps: TagFieldBaseItemProps<T>
 }
 
@@ -59,7 +59,7 @@ export interface TagFieldProps<T>
     HelpTextProps,
     TagFieldVariantProps {
   classNames?: SlotsToClasses<TagFieldSlots>
-  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
+  itemClassNames?: SlotsToClasses<ListBoxItemSlots>
   children?: (values: TagFieldRenderProps<T>) => ReactNode
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: (textValue: string, inputValue: string) => boolean
