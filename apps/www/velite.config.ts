@@ -29,8 +29,8 @@ export const docs = defineCollection({
       links: s
         .object({
           source: s.string().optional(),
-          storybook: s.string().optional(),
           theme: s.string().optional(),
+          storybook: s.string().optional(),
           reactaria: s.string().optional(),
         })
         .optional(),
