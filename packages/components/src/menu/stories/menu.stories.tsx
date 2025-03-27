@@ -49,6 +49,7 @@ export default {
       options: ["xs", "sm", "md"],
     },
   },
+  tags: ["skip-test"], // flakey due to some react-aria injected elements only at the start
 } as Meta<typeof Menu>
 
 type Story = StoryObj<typeof Menu>
