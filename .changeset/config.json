@@ -5,7 +5,7 @@
     { "repo": "opengovsg/oui-design-system" }
   ],
   "commit": false,
-  "fixed": [],
+  "fixed": [["@opengovsg/oui", "@opengovsg/oui-theme"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
