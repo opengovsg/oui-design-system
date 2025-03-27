@@ -39,7 +39,6 @@ export const menuStyles = tv({
     base: "scrollbar-hide max-h-[inherit] overflow-x-hidden overflow-y-auto",
     popover: "min-w-(--trigger-width)",
     separator: "border-t border-gray-200",
-    item: "flex flex-row items-center gap-2",
   },
   variants: {
     variant: {},
@@ -81,3 +80,7 @@ export const menuSectionStyles = tv({
 
 export type MenuSectionVariantProps = VariantProps<typeof menuSectionStyles>
 export type MenuSectionVariantSlots = keyof ReturnType<typeof menuSectionStyles>
+
+export const menuDividerStyles = tv({
+  base: "border-base-divider-medium my-1 border-b",
+})

@@ -32,6 +32,7 @@ import type {
 } from "@opengovsg/oui-theme"
 import {
   listBoxItemStyles,
+  menuDividerStyles,
   menuItemStyles,
   menuSectionStyles,
   menuStyles,
@@ -104,6 +105,15 @@ export interface MenuItemProps
   classNames?: SlotsToClasses<MenuItemVariantSlots>
   multipleSelectionIcon?: React.ReactNode | null
   singleSelectionIcon?: React.ReactNode | null
+
+  /**
+   * Element to be rendered in the left side of the menu item.
+   */
+  startContent?: React.ReactNode
+  /**
+   * Element to be rendered in the right side of the menu item.
+   */
+  endContent?: React.ReactNode
 }
 
 export const MenuItem = forwardRef(function MenuItem(
@@ -121,6 +131,8 @@ export const MenuItem = forwardRef(function MenuItem(
       className,
       multipleSelectionIcon: multipleSelectionIconProp,
       singleSelectionIcon: singleSelectionIconProp,
+      startContent,
+      endContent,
       ...props
     },
     variantProps,
@@ -144,8 +156,13 @@ export const MenuItem = forwardRef(function MenuItem(
     if (singleSelectionIconProp !== undefined) {
       return singleSelectionIconProp
     }
-    return null
-  }, [singleSelectionIconProp])
+    return (
+      <Check
+        aria-hidden
+        className={styles.icon({ className: classNames?.icon })}
+      />
+    )
+  }, [classNames?.icon, singleSelectionIconProp, styles])
 
   const showIconContainer = useCallback(
     (selectionMode: SelectionMode): boolean => {
@@ -190,6 +207,7 @@ export const MenuItem = forwardRef(function MenuItem(
         props.children,
         (children, { selectionMode, isSelected, hasSubmenu }) => (
           <>
+            {startContent}
             <span
               className={styles.label({
                 className: classNames?.label,
@@ -211,6 +229,7 @@ export const MenuItem = forwardRef(function MenuItem(
                   singleSelectionIcon}
               </span>
             )}
+            {endContent}
             {hasSubmenu && (
               <ChevronRight
                 aria-hidden
@@ -230,7 +249,9 @@ export function MenuSeparator(props: SeparatorProps) {
   return (
     <Separator
       {...props}
-      className="border-base-divider-medium my-1 border-b"
+      className={menuDividerStyles({
+        className: props.className,
+      })}
     />
   )
 }
