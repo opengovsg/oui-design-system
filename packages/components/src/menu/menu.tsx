@@ -1,13 +1,288 @@
-"use client"
+import type { ForwardedRef } from "react"
+import type {
+  MenuItemProps as AriaMenuItemProps,
+  MenuProps as AriaMenuProps,
+  MenuSectionProps as AriaMenuSectionProps,
+  ContextValue,
+  SelectionMode,
+  SeparatorProps,
+} from "react-aria-components"
+import { forwardRef, useCallback, useMemo } from "react"
+import { Check, ChevronRight } from "lucide-react"
+import {
+  Menu as AriaMenu,
+  MenuItem as AriaMenuItem,
+  MenuSection as AriaMenuSection,
+  Collection,
+  composeRenderProps,
+  Header,
+  Provider,
+  Separator,
+  useContextProps,
+} from "react-aria-components"
 
-import { menuStyles, VariantProps } from "@opengovsg/oui-theme"
+import type {
+  ListBoxItemVariantProps,
+  MenuItemVariantSlots,
+  MenuSectionVariantProps,
+  MenuSectionVariantSlots,
+  MenuVariantProps,
+  MenuVariantSlots,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import {
+  listBoxItemStyles,
+  menuItemStyles,
+  menuSectionStyles,
+  menuStyles,
+} from "@opengovsg/oui-theme"
 
-interface MenuProps extends VariantProps<typeof menuStyles> {}
+import type { PopoverProps } from "../popover"
+import { Popover } from "../popover"
+import { createContext } from "../system/react-utils"
+import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
 
-export const Menu = ({  }: MenuProps) => {
+export const [MenuVariantContext, useMenuVariantContext] = createContext<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ContextValue<MenuVariantProps, any>
+>({
+  name: "MenuVariantContext",
+  strict: false,
+})
+export interface MenuProps<T> extends AriaMenuProps<T>, MenuVariantProps {
+  placement?: PopoverProps["placement"]
+  classNames?: SlotsToClasses<MenuVariantSlots>
+}
+
+function MenuInner<T extends object>(
+  originalProps: MenuProps<T>,
+  ref: ForwardedRef<HTMLDivElement>,
+) {
+  // Might be nested in a submenu
+  ;[originalProps, ref] = useContextProps(
+    originalProps,
+    ref,
+    MenuVariantContext,
+  )
+
+  const [props, variantProps] = mapPropsVariants(
+    originalProps,
+    menuStyles.variantKeys,
+  )
+
+  const { className, classNames, placement, ...rest } = props
+  const styles = menuStyles(variantProps)
+
   return (
-    <div>
-      <h1>menu</h1>
-    </div>
+    <Provider values={[[MenuVariantContext, variantProps]]}>
+      <Popover
+        placement={placement}
+        className={styles.popover({ className: classNames?.popover })}
+      >
+        <AriaMenu
+          {...rest}
+          ref={ref}
+          className={composeRenderProps(
+            className ?? classNames?.base,
+            (className, renderProps) =>
+              styles.base({
+                className,
+                ...renderProps,
+              }),
+          )}
+        />
+      </Popover>
+    </Provider>
   )
 }
+
+export const Menu = forwardRefGeneric(MenuInner)
+
+export interface MenuItemProps
+  extends AriaMenuItemProps,
+    ListBoxItemVariantProps {
+  classNames?: SlotsToClasses<MenuItemVariantSlots>
+  multipleSelectionIcon?: React.ReactNode | null
+  singleSelectionIcon?: React.ReactNode | null
+}
+
+export const MenuItem = forwardRef(function MenuItem(
+  originalProps: MenuItemProps,
+  ref: ForwardedRef<object>,
+) {
+  ;[originalProps, ref] = useContextProps(
+    originalProps,
+    ref,
+    MenuVariantContext,
+  )
+  const [
+    {
+      classNames,
+      className,
+      multipleSelectionIcon: multipleSelectionIconProp,
+      singleSelectionIcon: singleSelectionIconProp,
+      ...props
+    },
+    variantProps,
+  ] = mapPropsVariants(originalProps, listBoxItemStyles.variantKeys)
+
+  const styles = menuItemStyles(variantProps)
+
+  const multipleSelectionIcon = useMemo(() => {
+    if (multipleSelectionIconProp !== undefined) {
+      return multipleSelectionIconProp
+    }
+    return (
+      <Check
+        aria-hidden
+        className={styles.icon({ className: classNames?.icon })}
+      />
+    )
+  }, [classNames?.icon, multipleSelectionIconProp, styles])
+
+  const singleSelectionIcon = useMemo(() => {
+    if (singleSelectionIconProp !== undefined) {
+      return singleSelectionIconProp
+    }
+    return null
+  }, [singleSelectionIconProp])
+
+  const showIconContainer = useCallback(
+    (selectionMode: SelectionMode): boolean => {
+      switch (selectionMode) {
+        case "none":
+          return false
+        case "multiple":
+          return !!multipleSelectionIcon
+        case "single":
+          return !!singleSelectionIcon
+      }
+    },
+    [multipleSelectionIcon, singleSelectionIcon],
+  )
+
+  const defaultTextValue = useMemo(() => {
+    if (props.textValue) {
+      return props.textValue
+    }
+    if (typeof props.children === "string") {
+      return props.children
+    }
+    return undefined
+  }, [props.children, props.textValue])
+
+  return (
+    <AriaMenuItem
+      ref={ref}
+      textValue={defaultTextValue}
+      {...props}
+      isDisabled={variantProps.isDisabled}
+      className={composeRenderProps(
+        className ?? classNames?.container,
+        (className, renderProps) =>
+          styles.container({
+            className,
+            ...renderProps,
+          }),
+      )}
+    >
+      {composeRenderProps(
+        props.children,
+        (children, { selectionMode, isSelected, hasSubmenu }) => (
+          <>
+            <span
+              className={styles.label({
+                className: classNames?.label,
+              })}
+            >
+              {children}
+            </span>
+            {showIconContainer(selectionMode) && (
+              <span
+                className={styles.iconContainer({
+                  className: classNames?.iconContainer,
+                })}
+              >
+                {isSelected &&
+                  selectionMode === "multiple" &&
+                  multipleSelectionIcon}
+                {isSelected &&
+                  selectionMode === "single" &&
+                  singleSelectionIcon}
+              </span>
+            )}
+            {hasSubmenu && (
+              <ChevronRight
+                aria-hidden
+                className={styles.icon({
+                  className: classNames?.icon,
+                })}
+              />
+            )}
+          </>
+        ),
+      )}
+    </AriaMenuItem>
+  )
+})
+
+export function MenuSeparator(props: SeparatorProps) {
+  return (
+    <Separator
+      {...props}
+      className="border-base-divider-medium my-1 border-b"
+    />
+  )
+}
+
+export interface MenuSectionProps<T>
+  extends AriaMenuSectionProps<T>,
+    MenuSectionVariantProps {
+  /**
+   * The title of the section.\
+   * If not provided, the `aria-label` prop must be provided for accessibility.
+   */
+  title?: string
+  items?: T[]
+  classNames?: SlotsToClasses<MenuSectionVariantSlots>
+}
+
+function MenuSectionInner<T extends object>(
+  originalProps: MenuSectionProps<T>,
+  ref: ForwardedRef<HTMLElement>,
+) {
+  ;[originalProps, ref] = useContextProps(
+    originalProps,
+    ref,
+    MenuVariantContext,
+  )
+  const [{ title, classNames, ...props }, variantProps] = mapPropsVariants(
+    originalProps,
+    menuSectionStyles.variantKeys,
+  )
+
+  const styles = menuSectionStyles(variantProps)
+
+  return (
+    <AriaMenuSection
+      ref={ref}
+      className={styles.base({
+        className: props.className ?? classNames?.base,
+      })}
+      {...props}
+    >
+      {title && (
+        <Header
+          className={styles.header({
+            className: classNames?.header,
+          })}
+        >
+          {title}
+        </Header>
+      )}
+      <Collection items={props.items}>{props.children}</Collection>
+    </AriaMenuSection>
+  )
+}
+
+export const MenuSection = forwardRefGeneric(MenuSectionInner)

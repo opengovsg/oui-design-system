@@ -23,6 +23,9 @@ export const listBoxItemStyles = tv({
     isFocused: {
       true: { container: "bg-interaction-muted-main-hover" },
     },
+    isOpen: {
+      true: "",
+    },
     isSelected: {
       true: { container: "bg-interaction-muted-main-active" },
     },
@@ -34,6 +37,13 @@ export const listBoxItemStyles = tv({
     },
   },
   compoundVariants: [
+    {
+      isFocused: false,
+      isOpen: true,
+      className: {
+        container: "bg-interaction-muted-neutral-hover",
+      },
+    },
     {
       size: "md",
       isSelected: true,
