@@ -54,7 +54,7 @@ export default {
 type Story = StoryObj<typeof Menu>
 
 const Template = (args: MenuProps<object>) => (
-  <MenuTrigger defaultOpen>
+  <MenuTrigger>
     <Button
       isIconOnly
       aria-label="File options"
@@ -77,12 +77,18 @@ const Template = (args: MenuProps<object>) => (
 
 export const Example: Story = {
   render: Template,
+  play: ({ canvas }) => {
+    userEvent.click(canvas.getByRole("button", { name: /file options/i }))
+  },
 }
 
 export const DisabledItems: Story = {
   render: Template,
   args: {
     disabledKeys: ["save"],
+  },
+  play: ({ canvas }) => {
+    userEvent.click(canvas.getByRole("button", { name: /file options/i }))
   },
 }
 
@@ -92,8 +98,13 @@ export const WithSubmenuAndSelection: Story = {
     const [style, setStyle] = useState<Selection>(new Set(["bold", "italic"]))
     const [align, setAlign] = useState<Selection>(new Set(["left"]))
     return (
-      <MenuTrigger defaultOpen>
-        <Button isIconOnly variant="outline" className="px-2">
+      <MenuTrigger>
+        <Button
+          isIconOnly
+          aria-label="Menu options"
+          variant="outline"
+          className="px-2"
+        >
           <MoreHorizontal className="h-5 w-5" />
         </Button>
         <Menu {...args}>
@@ -140,11 +151,12 @@ export const WithSubmenuAndSelection: Story = {
       </MenuTrigger>
     )
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const screen = canvasElement.parentElement!
     const canvas = within(screen)
 
-    userEvent.click(canvas.getByRole("menuitem", { name: /open/i }))
+    userEvent.click(canvas.getByRole("button", { name: /menu options/i }))
+    userEvent.click(await canvas.findByRole("menuitem", { name: /open/i }))
 
     expect(
       canvas.findByRole("menuitem", { name: /open in new window/i }),
