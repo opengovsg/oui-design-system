@@ -10,4 +10,30 @@ links:
   reactaria: ComboBox
 ---
 
-# Docs to be updated
+There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/ComboBox.html) for more details.
+
+## Usage
+
+OUI exports 3 combo-box related components:
+
+- **ComboBox**: The main component.
+- **ComboBoxItem**: The component that represents the combo-box menu item.
+- **ComboBoxEmptyState**: The component that gets rendered when there are no options available.
+
+<ComponentPreview name="combo-box-demo" />
+
+If the combo-box does not have a visible label, an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Content
+
+ComboBox follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections. The examples above show static collections, which can be used when the full list of options is known ahead of time. Dynamic collections, as shown below, can be used when the options come from an external data source such as an API call, or update over time.
+
+As seen below, an iterable list of options is passed to the ComboBox using the `defaultItems` prop. Each item accepts an `id` prop, which is passed to the `onSelectionChange` handler to identify the selected item. Alternatively, if the item objects contain an `id` property, as shown in the example below, then this is used automatically and an `id` prop is not required.
+
+<ComponentPreview name="combo-box-content-example" />
+
+### Text slots
+
+By default, items in a ComboBox are labeled by their text contents for accessibility. ComboBoxItem exposes the `description` prop to allow for additional help text to be associated with each item. This can be used to provide additional context or information about each item.
+
+<ComponentPreview name="combo-box-text-slots" />
