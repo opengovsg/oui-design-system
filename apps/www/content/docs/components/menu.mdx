@@ -1,0 +1,79 @@
+---
+title: Menu
+description: Displays a list of actions.
+toc:
+  visible: true
+links:
+  source: menu
+  storybook: components-menu--example
+  theme: menu
+---
+
+This component should not be confused with [ComboBox](./combo-box) which provides a selectable list of options within a form.
+
+## Usage
+
+OUI exports 5 menu-related components:
+
+- **Menu**: The main component that contains the menu items.
+- **MenuTrigger**: The component that triggers the menu to open. Re-exported from `react-aria-components`.
+- **SubmenuTrigger**: The component that triggers a nested menu to open. Re-exported from `react-aria-components`.
+- **MenuSection**: The component that contains a group of menu items.
+- **MenuItem**: The component that represents a menu item.
+- **MenuSeparator**: The component that represents a separator between menu items.
+
+<ComponentPreview name="menu-demo" />
+
+### Disabled Keys
+
+Menu items can be disabled using the `disabledKeys` prop to the `Menu` component.
+
+> Note: It's important to have a unique key for each item, otherwise the disabled keys will not work.
+
+### Action event
+
+You can use the onAction prop to get the key of the selected item.
+
+### With Icons
+
+You can also add icons to the menu items using the `startContent` / `endContent` props.
+
+### With Sections
+
+You can use the `MenuSection` component to group menu items.
+
+### Custom Trigger
+
+You can use any component as a trigger for the menu, just wrap it in the `MenuTrigger` component.
+
+### Nested menus
+
+You can also nest submenus inside a a menu using the `SubmenuTrigger` and `Menu` components.
+
+### Routing
+
+The `<MenuItem>` component works with frameworks and client side routers like Next.js and React Router. See the [Routing](https://react-spectrum.adobe.com/react-aria/routing.html) guide to learn how to set this up.
+
+## Slots
+
+Menu has multiple components with slots; the `Menu`, `MenuItem`, and `MenuSection` components.
+
+### Menu
+
+- **base**: The slot for the menu component.
+- **popover**: The slot for the popover component.
+- **separator**: The slot for the separator component.
+
+### MenuItem
+
+The slots extend from `ListboxItem` slots, but not all slots are used. Below are the slots used by `MenuItem`.
+
+- **container**: The slot for the container of the menu item.
+- **label**: The slot for the label of the menu item.
+- **iconContainer**: The slot for the wrapper for the selection icons.
+- **icon**: The slot for the selection and chevron icons displayed.
+
+### MenuSection
+
+- **base**: The main slot for the menu section. It wraps all the other slots.
+- **header**: The title that is render on top of the section group.

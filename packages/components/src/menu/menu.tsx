@@ -15,6 +15,8 @@ import {
   Menu as AriaMenu,
   MenuItem as AriaMenuItem,
   MenuSection as AriaMenuSection,
+  MenuTrigger as AriaMenuTrigger,
+  SubmenuTrigger as AriaSubmenuTrigger,
   Collection,
   composeRenderProps,
   Header,
@@ -309,3 +311,6 @@ function MenuSectionInner<T extends object>(
 }
 
 export const MenuSection = forwardRefGeneric(MenuSectionInner)
+
+export const MenuTrigger = AriaMenuTrigger
+export const SubmenuTrigger = AriaSubmenuTrigger

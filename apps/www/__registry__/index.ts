@@ -364,6 +364,17 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/calendar-visible-duration.tsx")),
   },
+  "menu-demo": {
+    name: "menu-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
+  },
   "range-calendar-controlled": {
     name: "range-calendar-controlled",
     description: "",
