@@ -6,10 +6,10 @@ export const popoverStyles = tv({
   base: "bg-utility-ui text-base-content-strong rounded-sm bg-clip-padding shadow-sm forced-colors:bg-[Canvas]",
   variants: {
     isEntering: {
-      true: "animate-in fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 duration-200 ease-out",
+      true: "motion-safe:animate-in motion-safe:fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 motion-safe:duration-200 motion-safe:ease-out",
     },
     isExiting: {
-      true: "animate-out fade-out placement-bottom:slide-out-to-top-1 placement-top:slide-out-to-bottom-1 placement-left:slide-out-to-right-1 placement-right:slide-out-to-left-1 duration-150 ease-in",
+      true: "motion-safe:animate-out motion-safe:fade-out placement-bottom:slide-out-to-top-1 placement-top:slide-out-to-bottom-1 placement-left:slide-out-to-right-1 placement-right:slide-out-to-left-1 ease-in motion-safe:duration-150",
     },
   },
 })

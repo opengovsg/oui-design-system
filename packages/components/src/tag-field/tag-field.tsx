@@ -1,13 +1,14 @@
 "use client"
 
 import { ChevronDown } from "lucide-react"
-import { composeRenderProps, Popover } from "react-aria-components"
+import { composeRenderProps } from "react-aria-components"
 
 import { tagFieldStyles } from "@opengovsg/oui-theme"
 
 import type { TagFieldProps } from "./types"
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
+import { Popover } from "../popover"
 import { TagFieldItem } from "./tag-field-item"
 import { TagFieldList } from "./tag-field-list"
 import { TagFieldRoot } from "./tag-field-root"
@@ -80,7 +81,7 @@ export function TagField<T extends object>({
           {props.errorMessage}
         </FieldError>
       </div>
-      <Popover>
+      <Popover className={styles.popover({ className: classNames?.popover })}>
         <TagFieldList<T>
           className={styles.list({ className: classNames?.list })}
           itemClassNames={props.itemClassNames}

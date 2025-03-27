@@ -18,7 +18,8 @@ export const tagFieldStyles = tv({
     trigger: "flex items-center aria-expanded:rotate-180",
     description: "",
     error: "",
-    list: "relative z-10 max-h-80 w-(--trigger-width) overflow-y-auto rounded-b-sm bg-white p-0 shadow-sm",
+    popover: "rounded-t-none",
+    list: "relative z-10 max-h-80 w-(--trigger-width) overflow-y-auto p-0",
   },
   variants: {
     isDisabled: {

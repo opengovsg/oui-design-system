@@ -11,7 +11,7 @@ export const comboBoxStyles = tv({
     expandButton: "h-full cursor-pointer",
     icon: "",
     field: "h-full w-full overflow-ellipsis outline-hidden",
-    popover: "mt-0.5 w-(--trigger-width) overflow-hidden bg-white shadow-sm",
+    popover: "mt-0.5 w-(--trigger-width) overflow-hidden rounded-t-none",
     list: "w-unset block max-h-[300px] min-h-0 overflow-y-auto",
   },
   base: [],

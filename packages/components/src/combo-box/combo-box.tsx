@@ -17,7 +17,6 @@ import {
   Input,
   ListBox,
   ListLayout,
-  Popover,
   Provider,
   Virtualizer,
 } from "react-aria-components"
@@ -37,6 +36,7 @@ import {
 } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { ComboBoxVariantContext } from "./combo-box-variant-context"
 
