@@ -89,7 +89,6 @@ export const CustomCloseIcon = {
   },
 }
 
-// eslint-disable-next-line react/prop-types
 const SizesTemplate: Story["render"] = ({ children, ...args }) => {
   return (
     <div className="space-x-4">

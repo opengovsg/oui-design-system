@@ -28,6 +28,9 @@ export const config = tseslint.config(
         ...globals.browser,
       },
     },
+    rules: {
+      "react/prop-types": "off",
+    },
   },
   {
     files: ["**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx}"],
