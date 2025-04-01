@@ -52,6 +52,7 @@ export const Disabled: Story = {
 export const Invalid: Story = {
   args: {
     isInvalid: true,
+    errorMessage: "Please select a language",
   },
 }
 
