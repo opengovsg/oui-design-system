@@ -64,6 +64,7 @@ const docsLinks: NavItem = {
             { title: "RadioGroup", url: "radio-group", status: "wip" },
             { title: "RangeCalendar", url: "range-calendar", status: "new" },
             { title: "SearchInput", url: "search-input", status: "wip" },
+            { title: "Select", url: "select", status: "new" },
             { title: "Sidebar", url: "sidebar", status: "wip" },
             { title: "Skeleton", url: "skeleton", status: "wip" },
             { title: "Table", url: "table", status: "wip" },

@@ -551,6 +551,50 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/range-calendar-visible-duration.tsx")),
   },
+  "select-content-example": {
+    name: "select-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-content-example.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-content-example.tsx")),
+  },
+  "select-demo": {
+    name: "select-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-demo.tsx")),
+  },
+  "select-description-slot": {
+    name: "select-description-slot",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-description-slot.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-description-slot.tsx")),
+  },
+  "select-error-slot": {
+    name: "select-error-slot",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-error-slot.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-error-slot.tsx")),
+  },
   "tag-field-content-example": {
     name: "tag-field-content-example",
     description: "",
