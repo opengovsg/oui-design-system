@@ -1,6 +1,6 @@
 {
   "name": "@opengovsg/oui-theme",
-  "version": "0.0.7",
+  "version": "0.0.10",
   "sideEffects": false,
   "files": [
     "dist",
