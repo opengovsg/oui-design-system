@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
+import { docsConfig } from "@/config/docs.config"
 import { flattenToc } from "@/lib/flatten-toc"
 import { docs } from "#site/content"
 
+import { EditPageButton } from "../components/edit-page-button"
 import { PageHeader } from "./components/page-header"
 import { Toc } from "./components/toc"
 
@@ -60,11 +62,10 @@ export default async function DocPage({ params }: DynamicPageProps) {
         </div>
       </div>
       <div className="max-xl:hidden">
-        {doc.toc.visible && (
-          <div className="sticky top-14 max-h-[calc(100svh-3.5rem)] overflow-x-hidden px-6 pt-10 pb-24">
-            <Toc items={flattenToc(doc.toc.content)} />
-          </div>
-        )}
+        <div className="sticky top-14 max-h-[calc(100svh-3.5rem)] overflow-x-hidden px-6 pt-10 pb-24">
+          {doc.toc.visible && <Toc items={flattenToc(doc.toc.content)} />}
+          <EditPageButton href={`${docsConfig.editUrl}/${doc.slug}.mdx`} />
+        </div>
       </div>
     </div>
   )

@@ -47,7 +47,7 @@ export interface SelectProps<T>
   errorMessage?: string | ((validation: ValidationResult) => string)
 
   /** The list of Select options to render */
-  items: NonNullable<ListBoxProps<T>["items"]>
+  items?: NonNullable<ListBoxProps<T>["items"]>
 
   children?: ListBoxProps<T>["children"]
 }

@@ -1,0 +1,47 @@
+---
+title: Select
+description: A select displays a collapsible list of options and allows a user to select one or more of them.
+toc:
+  visible: true
+links:
+  source: select
+  storybook: components-select--default
+  theme: select
+  reactaria: Select
+---
+
+This component should not be confused with [ComboBox](./combo-box) which provides a searchable, selectable list of options within a form input. \
+This component should also not be confused with [Menu](./menu), which is more suitable for displaying a list of actions or options in a dropdown format.
+
+## Usage
+
+OUI exports 3 select-related components:
+
+- **Select**: The main component.
+- **SelectItem**: The component that represents the select item.
+
+<ComponentPreview name="select-demo" />
+
+If the select component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Content
+
+Select follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections. The examples above show static collections, which can be used when the full list of options is known ahead of time. Dynamic collections, as shown below, can be used when the options come from an external data source such as an API call, or update over time.
+
+As seen below, an iterable list of options is passed to the Select using the `items` prop. Each item accepts an `id` prop, which is passed to the `onSelectionChange` handler to identify the selected item. Alternatively, if the item objects contain an `id` property, as shown in the example below, then this is used automatically and an `id` prop is not required.
+
+<ComponentPreview name="select-content-example" />
+
+### Text slots
+
+#### Description
+
+By default, items in a Select are labeled by their text contents for accessibility. SelectItem exposes the `description` prop to allow for additional help text to be associated with each item. This can be used to provide additional context or information about each item.
+
+<ComponentPreview name="select-description-slot" />
+
+#### Error Message
+
+The `errorMessage` prop can be used to associate additional help text below the input when an error occurs. This is useful for displaying validation errors or other important information to the user. The error message will only be displayed if the `isInvalid` prop is set to `true`.
+
+<ComponentPreview name="select-error-slot" />
