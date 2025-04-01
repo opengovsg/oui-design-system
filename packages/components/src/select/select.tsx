@@ -4,6 +4,7 @@ import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
   ListLayoutOptions,
+  ValidationResult,
 } from "react-aria-components"
 import { useMemo } from "react"
 import { ChevronDownIcon } from "lucide-react"
@@ -25,7 +26,7 @@ import type {
 import { composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
-import { Description, Label } from "../field"
+import { Description, FieldError, Label } from "../field"
 import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
@@ -33,7 +34,7 @@ import { SelectVariantContext } from "./select-variant-context"
 export interface SelectProps<T>
   extends Omit<AriaSelectProps, "children">,
     VariantProps<typeof selectStyles> {
-  classNames?: SlotsToClasses<SelectVariantSlots>
+  classNames?: SlotsToClasses<SelectVariantSlots | "error">
 
   /**
    * Any additional props to be spread to the list layout.
@@ -42,6 +43,8 @@ export interface SelectProps<T>
 
   label?: string
   description?: string | null
+
+  errorMessage?: string | ((validation: ValidationResult) => string)
 
   /** The list of Select options to render */
   items: NonNullable<ListBoxProps<T>["items"]>
@@ -66,6 +69,7 @@ export function Select<T extends object>({
   label,
   description,
   classNames,
+  errorMessage,
   ...originalProps
 }: SelectProps<T>) {
   const [_props, variantProps] = mapPropsVariants(
@@ -129,6 +133,9 @@ export function Select<T extends object>({
             {description}
           </Description>
         )}
+        <FieldError size={variantProps.size} className={classNames?.error}>
+          {errorMessage}
+        </FieldError>
         <Popover className={styles.popover({ className: classNames?.popover })}>
           {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
           <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
