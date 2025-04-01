@@ -4,6 +4,8 @@ on:
     branches:
       - main
     paths:
+      - "packages/components/package.json"
+      - "packages/theme/package.json"
       - "packages/components/src/**"
       - "packages/theme/src/**"
 jobs:
