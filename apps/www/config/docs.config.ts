@@ -68,7 +68,7 @@ const docsLinks: NavItem = {
             { title: "Sidebar", url: "sidebar", status: "wip" },
             { title: "Skeleton", url: "skeleton", status: "wip" },
             { title: "Table", url: "table", status: "wip" },
-            { title: "Tabs", url: "tabs", status: "wip" },
+            { title: "Tabs", url: "tabs", status: "new" },
             { title: "TagField", url: "tag-field", status: "new" },
             { title: "TagGroup", url: "tag-group", status: "wip" },
             { title: "TextAreaField", url: "text-area-field" },

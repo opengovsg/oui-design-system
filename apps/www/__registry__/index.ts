@@ -595,6 +595,127 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/select-error-slot.tsx")),
   },
+  "tabs-all-disabled": {
+    name: "tabs-all-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-all-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-all-disabled.tsx")),
+  },
+  "tabs-demo": {
+    name: "tabs-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-demo.tsx")),
+  },
+  "tabs-variants": {
+    name: "tabs-variants",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-variants.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-variants.tsx")),
+  },
+  "tabs-with-controlled-selection": {
+    name: "tabs-with-controlled-selection",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-controlled-selection.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-controlled-selection.tsx")),
+  },
+  "tabs-with-default-selection": {
+    name: "tabs-with-default-selection",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-default-selection.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-default-selection.tsx")),
+  },
+  "tabs-with-disabled-items": {
+    name: "tabs-with-disabled-items",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-disabled-items.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-disabled-items.tsx")),
+  },
+  "tabs-with-disabled-keys": {
+    name: "tabs-with-disabled-keys",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-disabled-keys.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-disabled-keys.tsx")),
+  },
+  "tabs-with-dynamic-items": {
+    name: "tabs-with-dynamic-items",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-dynamic-items.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-dynamic-items.tsx")),
+  },
+  "tabs-with-keyboard-activation": {
+    name: "tabs-with-keyboard-activation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-keyboard-activation.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-keyboard-activation.tsx")),
+  },
+  "tabs-with-keyboard-focusable-content": {
+    name: "tabs-with-keyboard-focusable-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-keyboard-focusable-content.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-keyboard-focusable-content.tsx")),
+  },
+  "tabs-with-vertical-orientation": {
+    name: "tabs-with-vertical-orientation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-vertical-orientation.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-vertical-orientation.tsx")),
+  },
   "tag-field-content-example": {
     name: "tag-field-content-example",
     description: "",
