@@ -17,4 +17,5 @@ export * from "./badge"
 export * from "./menu"
 export * from "./list-box"
 export * from "./popover"
+export * from "./tabs"
 // Add new theme exports here
