@@ -13,6 +13,7 @@ const config: StorybookConfig = {
     getAbsolutePath("@storybook/addon-a11y"),
     getAbsolutePath("storybook-dark-mode"),
     getAbsolutePath("@storybook/experimental-addon-test"),
+    getAbsolutePath("@storybook/addon-themes")
   ],
   framework: {
     name: getAbsolutePath("@storybook/react-vite"),
@@ -35,6 +36,10 @@ const config: StorybookConfig = {
   },
 
   docs: {},
+
+  features: {
+    backgroundsStoryGlobals: true,
+  },
 }
 
 export default config

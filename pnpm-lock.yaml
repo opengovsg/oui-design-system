@@ -108,6 +108,9 @@ importers:
       '@storybook/addon-links':
         specifier: 8.6.4
         version: 8.6.4(react@19.0.0)(storybook@8.6.4(prettier@3.5.0))
+      '@storybook/addon-themes':
+        specifier: ^8.6.4
+        version: 8.6.12(storybook@8.6.4(prettier@3.5.0))
       '@storybook/experimental-addon-test':
         specifier: 8.6.4
         version: 8.6.4(@vitest/browser@3.0.5)(@vitest/runner@3.0.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.6.4(prettier@3.5.0))(vitest@3.0.5)
@@ -2814,6 +2817,11 @@ packages:
     resolution: {integrity: sha512-28nAslKTy0zWMdxAZcipMDYrEp1TkXVooAsqMGY5AMXMiORi1ObjhmjTLhVt1dXp+aDg0X+M3B6PqoingmHhqQ==}
     peerDependencies:
       storybook: ^8.6.4
+
+  '@storybook/addon-themes@8.6.12':
+    resolution: {integrity: sha512-eqE40MUKTz9lLEOusXjRuDC7DwCSIwlgEnlbvhhEEme8IeKf2di6yvlhenY4nn5QfkUwY1POnZxfJ2OpXj0gqQ==}
+    peerDependencies:
+      storybook: ^8.6.12
 
   '@storybook/addon-toolbars@8.6.4':
     resolution: {integrity: sha512-PU2lvgwCKDn93zpp5MEog103UUmSSugcxDf18xaoa9D15Qtr+YuQHd2hXbxA7+dnYL9lA7MLYsstfxE91ieM4Q==}
@@ -10803,6 +10811,11 @@ snapshots:
   '@storybook/addon-outline@8.6.4(storybook@8.6.4(prettier@3.5.0))':
     dependencies:
       '@storybook/global': 5.0.0
+      storybook: 8.6.4(prettier@3.5.0)
+      ts-dedent: 2.2.0
+
+  '@storybook/addon-themes@8.6.12(storybook@8.6.4(prettier@3.5.0))':
+    dependencies:
       storybook: 8.6.4(prettier@3.5.0)
       ts-dedent: 2.2.0
 
