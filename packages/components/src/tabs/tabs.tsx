@@ -112,6 +112,7 @@ export const Tab = forwardRef(function Tab(
     <AriaTab
       ref={ref}
       {...props}
+      isDisabled={originalProps.isDisabled}
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabStyles({ ...renderProps, ...variantProps, className }),
       )}

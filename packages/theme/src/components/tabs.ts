@@ -4,8 +4,12 @@ import { racFocusRing } from "../utils/classes"
 import { tv } from "../utils/tv"
 
 export const tabsStyles = tv({
-  base: "flex gap-4",
+  base: "isolate flex gap-4",
   variants: {
+    variant: {
+      underlined: "",
+      bordered: "",
+    },
     prominence: {
       normal: "",
       strong: "",
@@ -15,7 +19,10 @@ export const tabsStyles = tv({
       vertical: "w-[800px] flex-row",
     },
     size: {
+      xs: "",
+      sm: "",
       md: "",
+      lg: "",
     },
   },
 })
@@ -28,7 +35,8 @@ export const tabStyles = tv({
     variant: {
       underlined:
         "selected:border-interaction-main-default dark:selected:border-base-divider-inverse",
-      bordered: "",
+      bordered:
+        "border-base-divider-strong not-selected:hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active border",
     },
     prominence: {
       normal: "",
@@ -39,10 +47,13 @@ export const tabStyles = tv({
       true: "text-interaction-main-default dark:text-base-content-inverse",
     },
     isDisabled: {
-      true: "forced-colors:selected:text-[HighlightText] text-interaction-support-disabled-content forced-colors:text-[GrayText]",
+      true: "forced-colors:selected:text-[HighlightText] text-interaction-support-disabled-content cursor-not-allowed forced-colors:text-[GrayText]",
     },
     size: {
+      xs: "",
+      sm: "",
       md: "",
+      lg: "",
     },
     orientation: {
       horizontal: "",
@@ -54,8 +65,15 @@ export const tabStyles = tv({
     {
       variant: "underlined",
       isSelected: false,
+      isDisabled: false,
       className:
         "text-interaction-support-unselected-strong dark:text-interaction-support-unselected",
+    },
+    {
+      variant: "underlined",
+      isDisabled: true,
+      className:
+        "selected:text-interaction-support-disabled-content dark:selected:text-base-content-inverse selected:border-base-divider-strong text-interaction-support-disabled-content dark:text-interaction-support-unselected",
     },
     {
       prominence: "strong",
@@ -78,6 +96,49 @@ export const tabStyles = tv({
       size: "md",
       variant: "underlined",
       className: "gap-4",
+    },
+    // Bordered variant
+    {
+      variant: "bordered",
+      size: "xs",
+      className: "px-4 py-2",
+    },
+    {
+      variant: "bordered",
+      size: "sm",
+      className: "px-4 py-2",
+    },
+    {
+      variant: "bordered",
+      size: "md",
+      className: "px-4 py-2.5",
+    },
+    {
+      variant: "bordered",
+      size: "lg",
+      className: "px-4 py-3",
+    },
+    {
+      variant: "bordered",
+      isSelected: true,
+      className:
+        "bg-interaction-muted-main-active border-interaction-main-default z-1",
+    },
+    {
+      variant: "bordered",
+      isDisabled: true,
+      className:
+        "bg-interaction-support-disabled selected:text-interaction-support-disabled-content border-base-divider-strong selected:bg-interaction-muted-main-active active:bg-interaction-support-disabled",
+    },
+    {
+      variant: "bordered",
+      orientation: "horizontal",
+      className: "not-last:-me-px first:rounded-s-sm last:rounded-e-sm",
+    },
+    {
+      variant: "bordered",
+      orientation: "vertical",
+      className: "not-last:-mb-px first:rounded-t-sm last:rounded-b-sm",
     },
     // Vertical orientation
     {
@@ -119,23 +180,32 @@ export type TabPanelVariantProps = VariantProps<typeof tabPanelStyles>
 export const tabListStyles = tv({
   base: "flex",
   variants: {
+    variant: {
+      underlined: "",
+      bordered: "",
+    },
     orientation: {
       horizontal: "flex-row overflow-x-auto",
       vertical: "flex-col items-start overflow-y-auto",
     },
     size: {
+      xs: "",
+      sm: "",
       md: "",
+      lg: "",
     },
   },
   compoundVariants: [
     {
       size: "md",
       orientation: "horizontal",
+      variant: "underlined",
       className: "gap-8",
     },
   ],
   defaultVariants: {
     orientation: "horizontal",
+    variant: "underlined",
     size: "md",
   },
 })

@@ -52,6 +52,7 @@ const Template = (args: TabsProps) => (
 export const Default: Story = {
   args: {},
   render: Template,
+  name: "Underlined/Default",
 }
 
 export const DarkModeHorizontal: Story = {
@@ -71,6 +72,7 @@ export const DarkModeHorizontal: Story = {
   args: {
     orientation: "horizontal",
   },
+  name: "Underlined/Dark Mode Horizontal",
 }
 
 export const NormalProminence: Story = {
@@ -78,6 +80,15 @@ export const NormalProminence: Story = {
     prominence: "normal",
   },
   render: Template,
+  name: "Underlined/Normal Prominence",
+}
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+  render: Template,
+  name: "Underlined/Disabled",
 }
 
 export const VerticalOrientation: Story = {
@@ -85,6 +96,7 @@ export const VerticalOrientation: Story = {
     orientation: "vertical",
   },
   render: Template,
+  name: "Underlined/Vertical",
 }
 
 export const VerticalWithStartAndEndContent: Story = {
@@ -122,6 +134,7 @@ export const VerticalWithStartAndEndContent: Story = {
       </Tabs>
     )
   },
+  name: "Underlined/Vertical with start and end content",
 }
 
 export const DarkModeVertical: Story = {
@@ -133,6 +146,7 @@ export const DarkModeVertical: Story = {
   args: {
     orientation: "vertical",
   },
+  name: "Underlined/Dark Mode Vertical",
 }
 
 export const DynamicTabs: Story = {
@@ -182,4 +196,22 @@ export const DynamicTabs: Story = {
       </Tabs>
     )
   },
+  name: "Underlined/Dynamic Tabs",
+}
+
+export const Bordered: Story = {
+  args: {
+    variant: "bordered",
+  },
+  render: Template,
+  name: "Bordered/Default",
+}
+
+export const BorderedDisabled: Story = {
+  args: {
+    variant: "bordered",
+    isDisabled: true,
+  },
+  render: Template,
+  name: "Bordered/Disabled",
 }
