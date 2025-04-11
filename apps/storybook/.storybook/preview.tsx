@@ -65,12 +65,6 @@ export const decorators: Preview["decorators"] = [
 ]
 
 export const parameters: Preview["parameters"] = {
-  backgrounds: {
-    options: {
-      dark: { name: "dark", value: "#3a3e46" },
-      light: { name: "light", value: "#ffffff" },
-    },
-  },
   viewport,
   a11y: {
     config: {

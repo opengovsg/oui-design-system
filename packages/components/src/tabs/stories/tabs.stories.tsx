@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import type { TabsProps } from "react-aria-components"
 import { useState } from "react"
+import { AmphoraIcon, HouseIcon, WarehouseIcon } from "lucide-react"
 import { Collection } from "react-aria-components"
 
 import { Button } from "../../button"
@@ -16,6 +17,20 @@ export default {
     TabList,
     Tab,
     TabPanel,
+  },
+  argTypes: {
+    prominence: {
+      control: {
+        type: "select",
+      },
+      options: ["normal", "strong"],
+    },
+    orientation: {
+      control: {
+        type: "select",
+      },
+      options: ["horizontal", "vertical"],
+    },
   },
 } as Meta<typeof Tabs>
 
@@ -39,6 +54,25 @@ export const Default: Story = {
   render: Template,
 }
 
+export const DarkModeHorizontal: Story = {
+  parameters: {
+    backgrounds: { default: "dark" },
+  },
+  globals: {
+    theme: "dark",
+  },
+  render(args) {
+    return (
+      <div className="dark">
+        <Template {...args} />
+      </div>
+    )
+  },
+  args: {
+    orientation: "horizontal",
+  },
+}
+
 export const NormalProminence: Story = {
   args: {
     prominence: "normal",
@@ -51,6 +85,54 @@ export const VerticalOrientation: Story = {
     orientation: "vertical",
   },
   render: Template,
+}
+
+export const VerticalWithStartAndEndContent: Story = {
+  args: {
+    orientation: "vertical",
+    prominence: "normal",
+  },
+  render(args) {
+    return (
+      <Tabs {...args}>
+        <TabList aria-label="History of Ancient Rome">
+          <Tab
+            id="FoR"
+            startContent={<HouseIcon />}
+            endContent={<span className="flex-1 text-end">100,000</span>}
+          >
+            Founding of Rome
+          </Tab>
+          <Tab
+            id="MaR"
+            startContent={<WarehouseIcon />}
+            endContent={<span className="flex-1 text-end">300</span>}
+          >
+            Monarchy and Republic
+          </Tab>
+          <Tab id="Emp" startContent={<AmphoraIcon />}>
+            Empire
+          </Tab>
+        </TabList>
+        <TabPanel id="FoR">
+          Arma virumque cano, Troiae qui primus ab oris.
+        </TabPanel>
+        <TabPanel id="MaR">Senatus Populusque Romanus.</TabPanel>
+        <TabPanel id="Emp">Alea jacta est.</TabPanel>
+      </Tabs>
+    )
+  },
+}
+
+export const DarkModeVertical: Story = {
+  parameters: DarkModeHorizontal.parameters,
+  globals: {
+    theme: "dark",
+  },
+  render: DarkModeHorizontal.render,
+  args: {
+    orientation: "vertical",
+  },
 }
 
 export const DynamicTabs: Story = {

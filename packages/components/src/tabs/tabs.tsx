@@ -91,7 +91,10 @@ export const TabList = forwardRefGeneric(function TabList<T extends object>(
   )
 })
 
-export interface TabProps extends AriaTabProps, TabVariantProps {}
+export interface TabProps extends AriaTabProps, TabVariantProps {
+  startContent?: React.ReactNode
+  endContent?: React.ReactNode
+}
 
 export const Tab = forwardRef(function Tab(
   originalProps: TabProps,
@@ -102,10 +105,8 @@ export const Tab = forwardRef(function Tab(
     ref,
     TabsVariantContext,
   )
-  const [props, variantProps] = mapPropsVariants(
-    originalProps,
-    tabStyles.variantKeys,
-  )
+  const [{ children, startContent, endContent, ...props }, variantProps] =
+    mapPropsVariants(originalProps, tabStyles.variantKeys)
 
   return (
     <AriaTab
@@ -114,7 +115,15 @@ export const Tab = forwardRef(function Tab(
       className={composeRenderProps(props.className, (className, renderProps) =>
         tabStyles({ ...renderProps, ...variantProps, className }),
       )}
-    />
+    >
+      {(renderProps) => (
+        <>
+          {startContent}
+          {typeof children === "function" ? children(renderProps) : children}
+          {endContent}
+        </>
+      )}
+    </AriaTab>
   )
 })
 
