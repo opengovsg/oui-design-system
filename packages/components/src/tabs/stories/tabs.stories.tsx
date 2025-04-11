@@ -39,6 +39,13 @@ export const Default: Story = {
   render: Template,
 }
 
+export const NormalProminence: Story = {
+  args: {
+    prominence: "normal",
+  },
+  render: Template,
+}
+
 export const VerticalOrientation: Story = {
   args: {
     orientation: "vertical",

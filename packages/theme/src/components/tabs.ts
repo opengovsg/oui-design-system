@@ -10,9 +10,16 @@ export const tabStylesAll = tv({
 export const tabsStyles = tv({
   base: "flex gap-4",
   variants: {
+    prominence: {
+      normal: "",
+      strong: "",
+    },
     orientation: {
       horizontal: "flex-col",
       vertical: "w-[800px] flex-row",
+    },
+    size: {
+      md: "",
     },
   },
 })
@@ -20,16 +27,44 @@ export type TabsVariantProps = VariantProps<typeof tabsStyles>
 
 export const tabStyles = tv({
   extend: racFocusRing,
-  base: "flex cursor-default items-center rounded-full px-4 py-1.5 text-sm font-medium transition forced-color-adjust-none",
+  base: "flex cursor-pointer items-center justify-start transition forced-color-adjust-none",
   variants: {
+    prominence: {
+      normal: "",
+      strong: "",
+    },
     isSelected: {
-      false:
-        "pressed:text-gray-700 dark:pressed:text-zinc-200 pressed:bg-gray-200 dark:pressed:bg-zinc-800 text-gray-600 hover:bg-gray-200 hover:text-gray-700 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-200",
-      true: "bg-gray-800 text-white dark:bg-zinc-200 dark:text-black forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+      false: "",
+      true: "text-interaction-main-default",
     },
     isDisabled: {
-      true: "selected:text-gray-300 dark:selected:text-zinc-500 forced-colors:selected:text-[HighlightText] selected:bg-gray-200 dark:selected:bg-zinc-600 forced-colors:selected:bg-[GrayText] text-gray-200 dark:text-zinc-600 forced-colors:text-[GrayText]",
+      true: "forced-colors:selected:text-[HighlightText] text-interaction-support-disabled-content forced-colors:text-[GrayText]",
     },
+    size: {
+      md: "",
+    },
+    orientation: {
+      horizontal:
+        "selected:border-interaction-main-default mb-0.5 border-b-2 border-transparent",
+      vertical: "",
+    },
+  },
+  compoundVariants: [
+    {
+      prominence: "strong",
+      size: "md",
+      className: "prose-subhead-3",
+    },
+    {
+      prominence: "normal",
+      size: "md",
+      className: "prose-subhead-2",
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    prominence: "strong",
+    orientation: "horizontal",
   },
 })
 
@@ -49,6 +84,13 @@ export const tabListStyles = tv({
       horizontal: "flex-row",
       vertical: "flex-col items-start",
     },
+    size: {
+      md: "gap-8",
+    },
+  },
+  defaultVariants: {
+    orientation: "horizontal",
+    size: "md",
   },
 })
 
