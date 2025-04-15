@@ -49,6 +49,7 @@
     "autoprefixer": "^10.4.20",
     "chromatic": "^11.25.2",
     "eslint": "catalog:",
+    "playwright": "^1.51.1",
     "prettier": "catalog:",
     "serve": "^14.2.4",
     "storybook": "8.6.4",

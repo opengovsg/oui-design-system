@@ -12,5 +12,7 @@ jobs:
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
+      - name: Install Playwright Chromium browser
+        run: pnpx playwright install chromium --only-shell
       - name: Run Storybook tests
         run: pnpm test
