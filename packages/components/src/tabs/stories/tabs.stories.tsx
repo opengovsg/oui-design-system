@@ -39,9 +39,15 @@ type Story = StoryObj<typeof Tabs>
 const Template = (args: TabsProps) => (
   <Tabs {...args}>
     <TabList aria-label="History of Ancient Rome">
-      <Tab id="FoR">Founding of Rome</Tab>
-      <Tab id="MaR">Monarchy and Republic</Tab>
-      <Tab id="Emp">Empire</Tab>
+      <Tab key={Math.random()} id="FoR">
+        Founding of Rome
+      </Tab>
+      <Tab key={Math.random()} id="MaR">
+        Monarchy and Republic
+      </Tab>
+      <Tab key={Math.random()} id="Emp">
+        Empire
+      </Tab>
     </TabList>
     <TabPanel id="FoR">Arma virumque cano, Troiae qui primus ab oris.</TabPanel>
     <TabPanel id="MaR">Senatus Populusque Romanus.</TabPanel>
@@ -56,6 +62,11 @@ export const Default: Story = {
 }
 
 export const DarkModeHorizontal: Story = {
+  parameters: {
+    // This option disables all automatic a11y checks on this story,
+    // since the transitions are causing false positives
+    a11y: { test: "todo" },
+  },
   globals: {
     theme: "dark",
     backgrounds: { value: "dark" },

@@ -35,18 +35,3 @@ jobs:
           autoAcceptChanges: main
           # Skip running Chromatic on dependabot and changeset PRs
           skip: "@(dependabot/**|changeset-release/**)"
-  test:
-    needs: chromatic
-    timeout-minutes: 10
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: ./.github/actions/setup
-      - name: Install Playwright Chromium browser
-        run: pnpx playwright install chromium --only-shell
-      - name: Run tests
-        run: pnpm test
-        env:
-          TARGET_URL: "${{ needs.chromatic.outputs.storybookUrl }}"

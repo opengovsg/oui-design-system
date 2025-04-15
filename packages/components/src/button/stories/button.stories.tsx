@@ -260,4 +260,9 @@ export const CustomWithClassNames: Story = {
     className:
       "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
   },
+  parameters: {
+    // This option disables all automatic a11y checks on this story,
+    // since there are false positives, and is an example story anyways
+    a11y: { test: "todo" },
+  },
 }

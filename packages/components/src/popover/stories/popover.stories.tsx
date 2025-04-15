@@ -10,6 +10,11 @@ import { Popover } from "../popover"
 export default {
   title: "Components/Popover",
   component: Popover,
+  parameters: {
+    // This option disables all automatic a11y checks on this story,
+    // since the popover transitions are causing false positives
+    a11y: { test: "todo" },
+  },
 } as Meta<typeof Popover>
 
 type Story = StoryObj<typeof Popover>

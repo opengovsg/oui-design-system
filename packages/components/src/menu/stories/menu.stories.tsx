@@ -49,7 +49,11 @@ export default {
       options: ["xs", "sm", "md"],
     },
   },
-  tags: ["skip-test"], // flakey due to some react-aria injected elements only at the start
+  parameters: {
+    // This option disables all automatic a11y checks on this story,
+    // since the transitions are causing false positives
+    a11y: { test: "todo" },
+  },
 } as Meta<typeof Menu>
 
 type Story = StoryObj<typeof Menu>
