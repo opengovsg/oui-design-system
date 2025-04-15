@@ -3,7 +3,7 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "../utils/tv"
 
 export const labelStyles = tv({
-  base: "text-base-content-strong w-fit cursor-default",
+  base: "text-base-content-strong flex w-fit cursor-default flex-col",
   variants: {
     size: {
       xs: "prose-subhead-2",

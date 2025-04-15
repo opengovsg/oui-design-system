@@ -43,13 +43,13 @@ import { ComboBoxVariantContext } from "./combo-box-variant-context"
 export interface ComboBoxProps<T extends object>
   extends ComboBoxVariantProps,
     Omit<AriaComboBoxProps<T>, "children"> {
-  label?: string
+  label?: React.ReactNode
   /** The list of ComboBox items (uncontrolled). */
   defaultItems?: T[]
   /** The list of ComboBox items (controlled). */
   items?: T[]
-  description?: string | null
-  errorMessage?: string | ((validation: ValidationResult) => string)
+  description?: React.ReactNode | null
+  errorMessage?: React.ReactNode | ((validation: ValidationResult) => string)
   classNames?: SlotsToClasses<ComboBoxSlots> &
     SlotsToClasses<"clearButton" | "emptyState">
   /**

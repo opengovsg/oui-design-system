@@ -41,10 +41,12 @@ export interface SelectProps<T>
    */
   listLayoutOptions?: ListLayoutOptions
 
-  label?: string
-  description?: string | null
+  label?: React.ReactNode
+  description?: React.ReactNode | null
 
-  errorMessage?: string | ((validation: ValidationResult) => string)
+  errorMessage?:
+    | React.ReactNode
+    | ((validation: ValidationResult) => React.ReactNode)
 
   /** The list of Select options to render */
   items?: NonNullable<ListBoxProps<T>["items"]>

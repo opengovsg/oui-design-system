@@ -14,9 +14,9 @@ import { Description, FieldError, Label } from "../field"
 import { Input } from "../input"
 
 export interface TextFieldProps extends AriaTextFieldProps, InputVariantProps {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: React.ReactNode
+  description?: React.ReactNode
+  errorMessage?: React.ReactNode | ((validation: ValidationResult) => string)
   classNames?: SlotsToClasses<
     "base" | "label" | "input" | "description" | "error"
   >
