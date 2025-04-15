@@ -45,7 +45,10 @@ interface ModalProps
   extends ModalOverlayProps,
     VariantProps<typeof modalStyles> {}
 
-export function Modal(originalProps: ModalProps) {
+export const Modal = forwardRef(function Modal(
+  originalProps: ModalProps,
+  ref: React.Ref<HTMLDivElement>,
+) {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     modalStyles.variantKeys,
@@ -63,6 +66,7 @@ export function Modal(originalProps: ModalProps) {
       >
         <AriaModal
           {...props}
+          ref={ref}
           isDismissable={isDismissable}
           className={composeRenderProps(
             props.className,
@@ -73,7 +77,7 @@ export function Modal(originalProps: ModalProps) {
       </ModalOverlay>
     </Provider>
   )
-}
+})
 
 interface ModalContentProps extends Omit<DialogProps, "children"> {
   children: React.ReactNode | ((onClose: () => void) => React.ReactNode)
