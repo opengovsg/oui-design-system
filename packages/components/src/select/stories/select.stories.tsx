@@ -57,7 +57,6 @@ export const Invalid: Story = {
 }
 
 export const WithCustomItem: Story = {
-  tags: ["skip-test"],
   args: {
     label: "Language",
     children: (item) => (

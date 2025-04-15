@@ -49,7 +49,6 @@ export const NoMatch: Story = {
       canvas.findByText("No matching results"),
     ).resolves.toBeInTheDocument()
   },
-  tags: ["skip-test"], // flakey
 }
 
 export const Disabled: Story = {
@@ -92,7 +91,11 @@ export const WithExpandedSuggestions: Story = {
       canvas.findByRole("option", { name: /item 0/i }),
     ).resolves.toBeInTheDocument()
   },
-  tags: ["skip-test"], // flakey
+  parameters: {
+    // This option disables all automatic a11y checks on this story,
+    // since there are false positives
+    a11y: { test: "todo" },
+  },
 }
 
 export const Virtualised: Story = {
@@ -125,7 +128,6 @@ export const TriggerOnFocus: Story = {
       canvas.findByRole("option", { name: /item 0/i }),
     ).resolves.toBeInTheDocument()
   },
-  tags: ["skip-test"], // flakey
 }
 
 const ControlledComboBoxTemplate = ({

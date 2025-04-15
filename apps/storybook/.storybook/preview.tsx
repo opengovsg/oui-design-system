@@ -2,7 +2,7 @@ import type { Decorator, Preview } from "@storybook/react"
 import { CalendarDate } from "@internationalized/date"
 import { viewport } from "@oui/chromatic"
 import FakeTimers from "@sinonjs/fake-timers"
-import { themes } from "@storybook/theming"
+import { withThemeByClassName } from "@storybook/addon-themes"
 import { I18nProvider } from "react-aria-components"
 
 import "../tailwind.css"
@@ -45,6 +45,13 @@ export const withMockDate: Decorator = (storyFn, context) => {
 
 export const decorators: Preview["decorators"] = [
   withMockDate,
+  withThemeByClassName({
+    themes: {
+      light: "light",
+      dark: "dark",
+    },
+    defaultTheme: "light",
+  }),
   (Story, { globals }) => {
     const { locale } = globals
     return (
@@ -57,15 +64,10 @@ export const decorators: Preview["decorators"] = [
   },
 ]
 
-const commonTheme = {
-  brandTitle: "@oui",
-  brandUrl: "https://oui.open.gov.sg",
-  brandTarget: "_self",
-}
-
 export const parameters: Preview["parameters"] = {
   viewport,
   a11y: {
+    test: "error",
     config: {
       rules: [
         {
@@ -90,21 +92,6 @@ export const parameters: Preview["parameters"] = {
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
-    },
-  },
-  darkMode: {
-    current: "light",
-    stylePreview: true,
-    darkClass: "dark",
-    lightClass: "light",
-    classTarget: "html",
-    dark: {
-      ...themes.dark,
-      ...commonTheme,
-    },
-    light: {
-      ...themes.light,
-      ...commonTheme,
     },
   },
   /**
@@ -142,24 +129,6 @@ export const globalTypes: Preview["globalTypes"] = {
             : undefined,
       })),
     },
-  },
-  disableAnimation: {
-    name: "Disable Animation",
-    description: "Disable all animations in the stories",
-    toolbar: {
-      icon: "photodrag",
-      items: [
-        { value: true, title: "True" },
-        { value: false, title: "False" },
-      ],
-    },
-  },
-}
-
-// Fixes concurrent axe instances. See https://github.com/storybookjs/storybook/issues/30385.
-export const initialGlobals: Preview["initialGlobals"] = {
-  a11y: {
-    manual: true,
   },
 }
 

@@ -7,6 +7,94 @@ links:
   source: tabs
   storybook: components-tabs--default
   theme: tabs
+  reactaria: Tabs
 ---
 
-# Not yet implemented
+<ComponentPreview name="tabs-demo" />
+
+## Usage
+
+OUI exports 4 tabs-related components:
+
+- **Tabs**: The main component to display a tab list.
+- **Tab**: The component to display a tab item.
+- **TabPanel**: The component that contains the content for each tab.
+- **TabList**: The component that wraps the Tab components.
+
+### Variants
+
+Two variants of tabs are available: `underlined` and `bordered`.
+
+- **Underlined** – Tabs are displayed with an underline to indicate the active tab.
+- **Bordered** – Tabs are displayed with a border around each tab, modeled like a button group.
+
+<ComponentPreview name="tabs-variants" />
+
+## Features
+
+Tabs provide a list of tabs that a user can select from to switch between multiple tab panels. Tabs can be used to implement these in an accessible way.
+
+- **Flexible** – Support for both horizontal and vertical orientations, disabled tabs, customizable layout, and multiple keyboard activation modes.
+- **Accessible** – Follows the ARIA tabs pattern, automatically linking tabs and their associated tab panels semantically. The arrow keys can be used to navigate between tabs, and tab panels automatically become focusable when they don't contain any focusable children.
+- **International** – Keyboard navigation is automatically mirrored in right-to-left languages.
+- **Styleable** – Hover, press, keyboard focus, and selection states are provided for easy styling. These states only apply when interacting with an appropriate input device, unlike CSS pseudo classes.
+
+## Selection
+
+### Default selection
+
+A default selected tab can be provided using the `defaultSelectedKey` prop, which should correspond to the `id` prop provided to each item. When `Tabs` is used with dynamic items as described below, the key of each item is derived from the data. See the [Selection](https://react-spectrum.adobe.com/react-aria/selection.html) guide for more details.
+
+<ComponentPreview name="tabs-with-default-selection" />
+
+### Controlled selection
+
+Selection can be controlled using the `selectedKey` prop, paired with the `onSelectionChange` event. The `id` prop from the selected tab will be passed into the callback when the tab is selected, allowing you to update state accordingly.
+
+<ComponentPreview name="tabs-with-controlled-selection" />
+
+### Keyboard Activation
+
+By default, pressing the arrow keys while focus is on a Tab will switch selection to the adjacent Tab in that direction, updating the content displayed accordingly. If you would like to prevent selection change from happening automatically you can set the `keyboardActivation` prop to `"manual"`. This will prevent tab selection from changing on arrow key press, requiring a subsequent Enter or Space key press to confirm tab selection.
+
+<ComponentPreview name="tabs-with-keyboard-activation" />
+
+## Content
+
+### Focusable content
+
+When the tab panel doesn't contain any focusable content, the entire panel is given a `tabIndex=0` so that the content can be navigated to with the keyboard. When the tab panel contains focusable content, such as a textfield, then the `tabIndex` is omitted because the content itself can receive focus.
+
+This example uses the same `Tabs` component from above. Try navigating from the tabs to the content for each panel using the keyboard.
+
+<ComponentPreview name="tabs-with-keyboard-focusable-content" />
+
+### Dynamic items
+
+The above examples have shown tabs with static items. The items prop can be used when creating tabs from a dynamic collection, for example when the user can add and remove tabs, or the tabs come from an external data source. The function passed as the children of the TabList component is called for each item in the list, and returns an `<Tab>`. A function passed as the children of the Collection component returns a corresponding` <TabPanel>` for each tab.
+
+Each item accepts an `id` prop, which is passed to the `onSelectionChange` handler to identify the selected item. Alternatively, if the item objects contain an `id` property, as shown in the example below, then this is used automatically and an `id` prop is not required. See [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html) for more details.
+
+<ComponentPreview name="tabs-with-dynamic-items" />
+
+## Orientation
+
+By default, tabs are horizontally oriented. The `orientation` prop can be set to `vertical` to change this. This does not affect keyboard navigation.
+
+<ComponentPreview name="tabs-with-vertical-orientation" />
+
+## Disabled
+
+All tabs can be disabled using the `isDisabled` prop.
+
+<ComponentPreview name="tabs-all-disabled" />
+
+### Disabled items
+
+An individual `Tab` can be disabled with the `isDisabled` prop. Disabled tabs are not focusable, selectable, or keyboard navigable.
+
+<ComponentPreview name="tabs-with-disabled-items" />
+
+In dynamic collections, it may be more convenient to use the `disabledKeys` prop at the `Tabs` level instead of `isDisabled` on individual tabs. Each key in this list corresponds with the `id` prop passed to the `Tab` component, or automatically derived from the values passed to the `items` prop (see [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html) for more details). A tab is considered disabled if its `id` exists in `disabledKeys` or if its `isDisabled` prop is true.
+
+<ComponentPreview name="tabs-with-disabled-keys" />
