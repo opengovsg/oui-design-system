@@ -56,11 +56,9 @@ export const Default: Story = {
 }
 
 export const DarkModeHorizontal: Story = {
-  parameters: {
-    backgrounds: { default: "dark" },
-  },
   globals: {
     theme: "dark",
+    backgrounds: { value: "dark" },
   },
   render(args) {
     return (
@@ -139,9 +137,7 @@ export const VerticalWithStartAndEndContent: Story = {
 
 export const DarkModeVertical: Story = {
   parameters: DarkModeHorizontal.parameters,
-  globals: {
-    theme: "dark",
-  },
+  globals: DarkModeHorizontal.globals,
   render: DarkModeHorizontal.render,
   args: {
     orientation: "vertical",

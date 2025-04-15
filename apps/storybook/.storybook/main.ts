@@ -34,7 +34,9 @@ const config: StorybookConfig = {
       },
     }
   },
-
+  features: {
+    backgroundsStoryGlobals: true,
+  },
   docs: {},
 }
 

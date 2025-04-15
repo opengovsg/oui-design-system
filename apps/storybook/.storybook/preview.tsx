@@ -67,6 +67,7 @@ export const decorators: Preview["decorators"] = [
 export const parameters: Preview["parameters"] = {
   viewport,
   a11y: {
+    test: "error",
     config: {
       rules: [
         {
@@ -128,24 +129,6 @@ export const globalTypes: Preview["globalTypes"] = {
             : undefined,
       })),
     },
-  },
-  disableAnimation: {
-    name: "Disable Animation",
-    description: "Disable all animations in the stories",
-    toolbar: {
-      icon: "photodrag",
-      items: [
-        { value: true, title: "True" },
-        { value: false, title: "False" },
-      ],
-    },
-  },
-}
-
-// Fixes concurrent axe instances. See https://github.com/storybookjs/storybook/issues/30385.
-export const initialGlobals: Preview["initialGlobals"] = {
-  a11y: {
-    manual: true,
   },
 }
 
