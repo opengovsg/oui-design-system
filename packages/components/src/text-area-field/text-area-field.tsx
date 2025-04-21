@@ -16,9 +16,11 @@ import { TextArea } from "../text-area"
 export interface TextAreaFieldProps
   extends AriaTextFieldProps,
     TextAreaVariantProps {
-  label?: string
-  description?: string
-  errorMessage?: string | ((validation: ValidationResult) => string)
+  label?: React.ReactNode
+  description?: React.ReactNode
+  errorMessage?:
+    | React.ReactNode
+    | ((validation: ValidationResult) => React.ReactNode)
   classNames?: SlotsToClasses<
     "base" | "label" | "input" | "description" | "error"
   >
