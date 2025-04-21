@@ -35,6 +35,7 @@
     "jotai": "^2.12.1",
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.475.0",
+    "motion": "^12.4.2",
     "next": "15.2.4",
     "react": "catalog:",
     "react-aria-components": "^1.13.0",
