@@ -7,6 +7,76 @@ links:
   source: modal
   storybook: components-modal--default
   theme: modal
+  reactaria: Modal
 ---
 
-# Not yet implemented
+## Usage
+
+OUI exports 5 modal-related components:
+
+- **Modal**: The main component to display a modal.
+- **ModalContent**: The wrapper of the other modal components.
+- **ModalBody**: The body of the modal.
+- **ModalHeader**: The header of the modal.
+- **ModalFooter**: The footer of the modal.
+
+When the modal opens:
+
+- Focus is bounded within the modal and set to the first tabbable element.
+- Content behind the modal dialog is inert, meaning that users cannot interact with it.
+
+### Non-dismissible
+
+By default, the modal can be closed by clicking on the overlay or pressing the
+
+<Kbd>Esc</Kbd> key. You can disable this behavior by setting the following
+properties:
+
+- Set the `isDismissable` property to `false` to prevent the modal from closing when clicking on the overlay.
+- Set the `isKeyboardDismissDisabled` property to `true` to prevent the modal from closing when pressing the <Kbd>Esc</Kbd> key.
+
+### Modal placement
+
+By default, the modal is centered on screens larger than `sm` and is at the `bottom` of the screen on mobile. This placement is called `auto`, but you can change it by using the `placement` prop.
+
+<ComponentPreview
+  asIframe
+  name="modal-placement"
+  iframeSrc="/examples/modal/placement"
+  iframeInitialWidth={320}
+  previewHeight="680px"
+/>
+
+### Overflow scroll
+
+You can use the `scrollBehavior` prop to set the scroll behavior of the modal.
+
+- **normal**: The modal content will not be scrollable.
+- **inside**: The modal content will be scrollable.
+- **outside**: The modal content will be scrollable and the modal will be fixed.
+
+The default value is `inside`.
+
+<ComponentPreview name="modal-scroll-behavior" />
+
+### Backdrop
+
+The `Modal` component has a `backdrop` prop to show a backdrop behind the modal. The backdrop can be either `transparent`, `opaque` or `blur`. The default value is `opaque`.
+
+<ComponentPreview name="modal-backdrop" />
+
+### Custom Backdrop
+
+You can customize the backdrop by using the `backdrop` slot.
+
+<ComponentPreview name="modal-custom-backdrop" />
+
+## Examples
+
+### Feature announcement
+
+<ComponentPreview name="modal-example-feature-announcement" />
+
+### Draggable modal
+
+<ComponentPreview name="modal-example-draggable" />

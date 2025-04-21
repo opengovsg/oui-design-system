@@ -1388,6 +1388,31 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
   },
+  "modal-example-feature-announcement": {
+    name: "modal-example-feature-announcement",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-example-feature-announcement.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/modal-example-feature-announcement.tsx"),
+    ),
+  },
+  "modal-placement": {
+    name: "modal-placement",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-placement.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-placement.tsx")),
+  },
   "number-field-controlled": {
     name: "number-field-controlled",
     description: "",
