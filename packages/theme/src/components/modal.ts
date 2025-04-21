@@ -17,6 +17,19 @@ export const modalStyles = tv({
     ],
   },
   variants: {
+    scrollBehavior: {
+      normal: {
+        base: "overflow-y-hidden",
+      },
+      inside: {
+        base: "max-h-[calc(100%_-_8rem)]",
+        body: "overflow-y-auto",
+      },
+      outside: {
+        wrapper: "items-start overflow-y-auto sm:items-start",
+        base: "my-16",
+      },
+    },
     radius: {
       none: { base: "rounded-none" },
       sm: { base: "rounded-sm" },
@@ -54,6 +67,7 @@ export const modalStyles = tv({
   defaultVariants: {
     overlay: "blur",
     radius: "sm",
+    scrollBehavior: "inside",
   },
 })
 
