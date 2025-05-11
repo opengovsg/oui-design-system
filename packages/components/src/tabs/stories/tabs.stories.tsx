@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { TabsProps } from "react-aria-components"
 import { useState } from "react"
 import { AmphoraIcon, HouseIcon, WarehouseIcon } from "lucide-react"

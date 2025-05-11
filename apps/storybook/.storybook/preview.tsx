@@ -1,4 +1,4 @@
-import type { Decorator, Preview } from "@storybook/react"
+import type { Decorator, Preview } from "@storybook/react-vite"
 import { CalendarDate } from "@internationalized/date"
 import { viewport } from "@oui/chromatic"
 import FakeTimers from "@sinonjs/fake-timers"

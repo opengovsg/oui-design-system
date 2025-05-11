@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
-import { userEvent } from "@storybook/test"
+import { userEvent } from "storybook/test"
 import { ListBoxItem } from "react-aria-components"
 
 import type { SelectProps } from "../select"
