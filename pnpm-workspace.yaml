@@ -12,3 +12,6 @@ catalog:
   prettier: ^3.5.0
   tailwindcss: 4.0.6
   "@tailwindcss/vite": 4.0.6
+
+overrides:
+  prettier: ^3.5.0
