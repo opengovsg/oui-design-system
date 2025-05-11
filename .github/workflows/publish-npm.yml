@@ -34,7 +34,7 @@ jobs:
 
       - name: Create Release PR or Publish to npm
         id: changesets
-        uses: opengovsg/changesets-action@9de320bbdbc24172a9266fba789366aeb6ffa2cd
+        uses: opengovsg/changesets-action@f68bb4b781c954856eabd2643d4087c8faa97f2a
         with:
           publish: pnpm changeset publish
         env:
