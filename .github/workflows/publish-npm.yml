@@ -32,14 +32,9 @@ jobs:
         run: |
           echo -e "@opengovsg:registry=https://registry.npmjs.org\n//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > $HOME/.npmrc
 
-      - name: Remove prettier config import in package.json
-        # This is a workaround to prevent changeset from failing due to prettier config ESM import
-        run: |
-          sed -i '/"prettier"\: \"@oui/d' packages/components/package.json
-
       - name: Create Release PR or Publish to npm
         id: changesets
-        uses: changesets/action@e0538e686673de0265c8a3e2904b8c76beaa43fd
+        uses: opengovsg/changesets-action@9de320bbdbc24172a9266fba789366aeb6ffa2cd
         with:
           publish: pnpm changeset publish
         env:
