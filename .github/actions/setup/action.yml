@@ -17,5 +17,5 @@ runs:
         cache: "pnpm"
         registry-url: ${{ inputs.registry_url }}
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: pnpm install
       shell: bash
