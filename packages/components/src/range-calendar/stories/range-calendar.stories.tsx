@@ -1,9 +1,9 @@
 import type { DateValue } from "@react-aria/calendar"
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useCallback } from "react"
 import { CalendarDate, isWeekend } from "@internationalized/date"
 import { withChromaticModes } from "@oui/chromatic"
-import { userEvent } from "@storybook/test"
+import { userEvent } from "storybook/test"
 import { useLocale } from "react-aria"
 
 import { RangeCalendar } from "../range-calendar"
