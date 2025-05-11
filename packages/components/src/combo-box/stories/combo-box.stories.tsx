@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
-import { expect, userEvent, within } from "storybook/test"
 import { ListBoxItem, useFilter } from "react-aria-components"
+import { expect, userEvent, within } from "storybook/test"
 
 import type { ComboBoxProps } from "../combo-box"
 import { ComboBox } from "../combo-box"

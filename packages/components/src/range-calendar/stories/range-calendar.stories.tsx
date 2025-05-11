@@ -3,8 +3,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useCallback } from "react"
 import { CalendarDate, isWeekend } from "@internationalized/date"
 import { withChromaticModes } from "@oui/chromatic"
-import { userEvent } from "storybook/test"
 import { useLocale } from "react-aria"
+import { userEvent } from "storybook/test"
 
 import { RangeCalendar } from "../range-calendar"
 
