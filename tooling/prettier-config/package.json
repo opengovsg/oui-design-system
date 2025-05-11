@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "sideEffects": false,
-  "type": "module",
+  "type": "commonjs",
   "exports": "./index.js",
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
