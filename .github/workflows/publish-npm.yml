@@ -23,10 +23,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Remove prettier config from components package.json
-        run: |
-          sed -i '/prettier/d' packages/components/package.json
-
       - uses: ./.github/actions/setup
 
       - name: Build packages
