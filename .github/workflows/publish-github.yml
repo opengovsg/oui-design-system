@@ -30,7 +30,7 @@ jobs:
       - name: Remove prettier config import in package.json
         # This is a workaround to prevent changeset from failing due to prettier config ESM import
         run: |
-          sed -i '' '/"prettier"\: \"@oui/d' packages/components/package.json
+          sed -i '/"prettier"\: \"@oui/d' packages/components/package.json
 
       - name: Publish to GitHub registry
         run: |
