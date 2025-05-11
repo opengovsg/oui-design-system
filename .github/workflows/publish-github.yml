@@ -27,11 +27,6 @@ jobs:
         run: |
           echo -e "@opengovsg:registry=https://npm.pkg.github.com\n//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > $HOME/.npmrc
 
-      - name: Remove prettier config import in package.json
-        # This is a workaround to prevent changeset from failing due to prettier config ESM import
-        run: |
-          sed -i '/"prettier"\: \"@oui/d' packages/components/package.json
-
       - name: Publish to GitHub registry
         run: |
           pnpm changeset publish
