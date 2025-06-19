@@ -3,7 +3,7 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "../utils/tv"
 
 export const popoverStyles = tv({
-  base: "bg-utility-ui text-base-content-strong rounded-sm bg-clip-padding shadow-sm forced-colors:bg-[Canvas]",
+  base: "bg-utility-ui text-base-content-strong overflow-auto rounded-sm bg-clip-padding shadow-sm forced-colors:bg-[Canvas]",
   variants: {
     isEntering: {
       true: "motion-safe:animate-in motion-safe:fade-in placement-bottom:slide-in-from-top-1 placement-top:slide-in-from-bottom-1 placement-left:slide-in-from-right-1 placement-right:slide-in-from-left-1 motion-safe:duration-200 motion-safe:ease-out",
