@@ -1,12 +1,13 @@
 import type { VariantProps } from "tailwind-variants"
 
 import { tv } from "../utils/tv"
+import { inputStyles } from "./input"
 
 export const dateInputStyles = tv({
   slots: {
     base: "block min-w-[150px]",
     segment:
-      "type-literal:px-0 inline rounded-xs p-0.5 text-gray-800 caret-transparent outline-0 forced-color-adjust-none dark:text-zinc-200 forced-colors:text-[ButtonText]",
+      "type-literal:px-0 rounded-xs inline p-0.5 text-gray-800 caret-transparent outline-0 forced-color-adjust-none dark:text-zinc-200 forced-colors:text-[ButtonText]",
   },
   variants: {
     variant: {},
@@ -46,3 +47,9 @@ export const dateInputStyles = tv({
 
 export type DateInputSlots = keyof ReturnType<typeof dateInputStyles>
 export type DateInputVariantProps = VariantProps<typeof dateInputStyles>
+
+export const dateFieldStyles = tv({
+  extend: inputStyles,
+})
+
+export type DateFieldVariantProps = VariantProps<typeof dateFieldStyles>
