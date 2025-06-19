@@ -22,4 +22,5 @@ export * from "./popover"
 export * from "./tabs"
 export * from "./date-field"
 export * from "./date-picker"
+export * from "./date-range-picker"
 // Add new component exports here
