@@ -19,4 +19,5 @@ export * from "./list-box"
 export * from "./popover"
 export * from "./tabs"
 export * from "./date-field"
+export * from "./date-picker"
 // Add new theme exports here
