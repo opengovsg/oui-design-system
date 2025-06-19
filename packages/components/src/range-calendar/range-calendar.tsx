@@ -6,7 +6,7 @@ import type {
   CalendarGridProps,
   DateValue,
 } from "react-aria-components"
-import { forwardRef, useContext, useMemo } from "react"
+import { useContext, useMemo } from "react"
 import {
   CalendarDate,
   getDayOfWeek,
@@ -42,9 +42,9 @@ import { AgnosticCalendarStateContext } from "../calendar/agnostic-calendar-stat
 import { CalendarBottomContent } from "../calendar/calendar-bottom-content"
 import { CalendarGridHeader } from "../calendar/calendar-grid-header"
 import { CalendarHeader } from "../calendar/calendar-header"
-import { mapPropsVariants } from "../system/utils"
+import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
 
-interface RangeCalendarProps<T extends CalendarDate>
+export interface RangeCalendarProps<T extends DateValue>
   extends CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle">,
     AriaRangeCalendarProps<T> {
@@ -82,16 +82,6 @@ interface RangeCalendarProps<T extends CalendarDate>
    * ```
    */
   classNames?: SlotsToClasses<CalendarSlots>
-  /**
-   * The minimum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(1900, 0, 1)`
-   */
-  minValue?: T
-  /**
-   * The maximum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(2100, 12, 31)`
-   */
-  maxValue?: T
 
   /**
    * If provided, there will be a button below the calendar for users to jump to today's date.
@@ -104,8 +94,8 @@ interface RangeCalendarProps<T extends CalendarDate>
   errorMessage?: string
 }
 
-export const RangeCalendar = forwardRef(function RangeCalendar<
-  T extends CalendarDate,
+export const RangeCalendar = forwardRefGeneric(function RangeCalendar<
+  T extends DateValue,
 >(originalProps: RangeCalendarProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   const [props, variantProps] = mapPropsVariants(
     originalProps,

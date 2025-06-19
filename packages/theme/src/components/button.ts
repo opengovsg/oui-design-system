@@ -15,6 +15,7 @@ export const buttonStyles = tv({
       default: "",
     },
     variant: {
+      field: "",
       solid: "",
       reverse: "",
       outline: "",
@@ -47,6 +48,9 @@ export const buttonStyles = tv({
     isIconOnly: {
       true: "!gap-0 px-0",
       false: "[&>svg]:max-w-[theme(spacing.8)]",
+    },
+    isAttached: {
+      true: "rounded-s-none",
     },
     size: {
       xs: "prose-subhead-2 h-9 min-w-16 gap-2 px-4 py-2",

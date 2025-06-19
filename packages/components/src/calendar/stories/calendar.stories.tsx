@@ -4,6 +4,7 @@ import { useCallback } from "react"
 import { CalendarDate, isWeekend } from "@internationalized/date"
 import { withChromaticModes } from "@oui/chromatic"
 import { useLocale } from "react-aria"
+import { expect, within } from "storybook/internal/test"
 
 import { Calendar } from "../calendar"
 
@@ -80,5 +81,19 @@ export const HideOutsideMonths: Story = {
     classNames: {
       cell: "outside-month:hidden",
     },
+  },
+}
+
+export const WithMinValue: Story = {
+  args: {
+    minValue: new CalendarDate(2020, 0, 1),
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.parentElement!)
+    canvas.getByRole("button", { name: /2025 select year/i }).click()
+    await expect(
+      canvas.findByRole("option", { name: /2020/i }),
+    ).resolves.toBeInTheDocument()
+    expect(canvas.queryByRole("option", { name: /2019/i })).toBeNull()
   },
 }

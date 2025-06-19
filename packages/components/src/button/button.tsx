@@ -77,6 +77,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isPending,
       spinner: spinnerProp,
       isIconOnly,
+      isAttached,
       ...props
     },
     ref,
@@ -114,6 +115,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             color,
             radius,
             isIconOnly,
+            isAttached,
           }),
         )}
         isPending={isPending}

@@ -1,8 +1,8 @@
-import type { CalendarDate } from "@internationalized/date"
 import type { ReactNode } from "react"
 import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
+  DateValue,
 } from "react-aria-components"
 
 import type {
@@ -11,7 +11,7 @@ import type {
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 
-export interface CalendarProps<T extends CalendarDate>
+export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
     CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle"> {
@@ -50,17 +50,6 @@ export interface CalendarProps<T extends CalendarDate>
    * ```
    */
   classNames?: SlotsToClasses<CalendarSlots>
-
-  /**
-   * The minimum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(1900, 0, 1)`
-   */
-  minValue?: T
-  /**
-   * The maximum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(2100, 12, 31)`
-   */
-  maxValue?: T
 
   /**
    * If provided, there will be a button below the calendar for users to jump to today's date.

@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
   slots: {
-    base: "relative isolate inline-block h-fit max-w-full overflow-y-hidden rounded-sm shadow-sm",
+    base: "relative isolate inline-block h-fit max-w-full overflow-y-hidden",
     prevButton: "",
     nextButton: "",
     buttonGroup: "justify-self-end",
