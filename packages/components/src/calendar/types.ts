@@ -1,8 +1,8 @@
-import type { CalendarDate } from "@internationalized/date"
 import type { ReactNode } from "react"
 import type {
   CalendarProps as AriaCalendarProps,
   CalendarGridProps,
+  DateValue,
 } from "react-aria-components"
 
 import type {
@@ -11,7 +11,7 @@ import type {
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 
-export interface CalendarProps<T extends CalendarDate>
+export interface CalendarProps<T extends DateValue>
   extends AriaCalendarProps<T>,
     CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle"> {

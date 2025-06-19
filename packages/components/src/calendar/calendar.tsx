@@ -10,6 +10,7 @@ import {
   CalendarGridBody,
   CalendarStateContext,
   composeRenderProps,
+  DateValue,
   Provider,
   Text,
 } from "react-aria-components"
@@ -25,7 +26,7 @@ import { CalendarGridHeader } from "./calendar-grid-header"
 import { CalendarHeader } from "./calendar-header"
 import { CalendarStyleContext } from "./calendar-style-context"
 
-export const Calendar = forwardRef(function Calendar<T extends CalendarDate>(
+export const Calendar = forwardRef(function Calendar<T extends DateValue>(
   originalProps: CalendarProps<T>,
   ref: ForwardedRef<HTMLDivElement>,
 ) {
