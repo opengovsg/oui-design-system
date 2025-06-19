@@ -139,7 +139,7 @@ For example, here's the included Story for our `Button` component:
 
 ```js:packages/components/src/button/stories/button.stories.tsx
 import { buttonStyles } from "@opengovsg/oui-theme";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import type { ButtonProps } from "../button";
 import { Button } from "../button";
