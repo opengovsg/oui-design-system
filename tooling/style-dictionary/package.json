@@ -16,7 +16,7 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "token-transformer": "^0.0.33",
-    "tsx": "^4.19.2",
+    "tsx": "^4.20.3",
     "typescript": "catalog:"
   },
   "dependencies": {
