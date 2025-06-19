@@ -96,7 +96,6 @@ export function DatePicker<T extends DateValue>(
       </FieldGroup>
       <Popover placement="bottom end" {...popoverProps}>
         <Dialog className={styles.dialog({ className: classNames?.dialog })}>
-          {/** @ts-expect-error Types do overlap but not resolving for some reason. */}
           <Calendar
             size={variantProps.size === "xs" ? "sm" : variantProps.size}
             classNames={classNames?.calendar}

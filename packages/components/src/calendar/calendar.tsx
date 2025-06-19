@@ -1,6 +1,7 @@
 "use client"
 
-import type { ForwardedRef, ReactElement } from "react"
+import type { ForwardedRef } from "react"
+import type { DateValue } from "react-aria-components"
 import { useContext, useMemo } from "react"
 import { CalendarDate, getLocalTimeZone, today } from "@internationalized/date"
 import {
@@ -10,7 +11,6 @@ import {
   CalendarGridBody,
   CalendarStateContext,
   composeRenderProps,
-  DateValue,
   Provider,
   Text,
 } from "react-aria-components"
@@ -19,17 +19,16 @@ import { useDeepCompareMemo } from "use-deep-compare"
 import { calendarStyles, cn, dataAttr } from "@opengovsg/oui-theme"
 
 import type { CalendarProps } from "./types"
-import { forwardRef, mapPropsVariants } from "../system/utils"
+import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
 import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { CalendarBottomContent } from "./calendar-bottom-content"
 import { CalendarGridHeader } from "./calendar-grid-header"
 import { CalendarHeader } from "./calendar-header"
 import { CalendarStyleContext } from "./calendar-style-context"
 
-export const Calendar = forwardRef(function Calendar<T extends DateValue>(
-  originalProps: CalendarProps<T>,
-  ref: ForwardedRef<HTMLDivElement>,
-) {
+export const Calendar = forwardRefGeneric(function Calendar<
+  T extends DateValue,
+>(originalProps: CalendarProps<T>, ref: ForwardedRef<HTMLDivElement>) {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     calendarStyles.variantKeys,
@@ -152,7 +151,7 @@ export const Calendar = forwardRef(function Calendar<T extends DateValue>(
       )}
     </AriaCalendar>
   )
-}) as <T extends CalendarDate>(props: CalendarProps<T>) => ReactElement
+})
 
 export const CalendarStateWrapper = ({
   children,

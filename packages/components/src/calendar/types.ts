@@ -52,17 +52,6 @@ export interface CalendarProps<T extends DateValue>
   classNames?: SlotsToClasses<CalendarSlots>
 
   /**
-   * The minimum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(1900, 0, 1)`
-   */
-  minValue?: T
-  /**
-   * The maximum allowed date that a user may select.
-   * @defaultValue `new CalendarDate(2100, 12, 31)`
-   */
-  maxValue?: T
-
-  /**
    * If provided, there will be a button below the calendar for users to jump to today's date.
    * @defaultValue `true`
    * If `bottomContent is provided, this will be ignored.
