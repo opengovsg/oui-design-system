@@ -205,7 +205,7 @@ export function GovtBanner({
               </div>
               <article>
                 {formatMessage("officialLinkContent", {
-                  boldThis: (content: string) => <b>{content}</b>,
+                  boldThis: (content: string) => <b key={content}>{content}</b>,
                 })}{" "}
                 <a
                   className={slots.link({ className: classNames?.link })}
