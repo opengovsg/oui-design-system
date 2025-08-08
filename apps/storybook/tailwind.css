@@ -1,9 +1,9 @@
 @import "@opengovsg/oui-theme/tailwind.css";
-@source "../../../packages/components/src/**/*.{js,jsx,ts,tsx}";
-@source "../../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}";
-@source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
-@source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
-@source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
+@source "../../packages/components/src/**/*.{js,jsx,ts,tsx}";
+@source "../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}";
+@source "../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
+@source "../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
+@source "../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
 
 @import "inter-ui/inter.css";
 @import "inter-ui/inter-variable.css";
