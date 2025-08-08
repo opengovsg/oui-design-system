@@ -7,6 +7,6 @@ export default defineConfig((options) => ({
   dts: true,
   splitting: true,
   sourcemap: true,
-  external: ["react"],
+  external: ["react", "tailwind-variants"],
   ...options,
 }))
