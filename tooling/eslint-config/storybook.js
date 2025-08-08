@@ -8,8 +8,6 @@ import pluginStorybook from "eslint-plugin-storybook";
  * */
 export const config = [
   ...baseConfig,
-  {
-    ignores: ["!.storybook/*", "storybook-static"],
-  },
+  { ignores: ["!.storybook/*", "storybook-static"] },
   ...pluginStorybook.configs["flat/recommended"],
 ];
