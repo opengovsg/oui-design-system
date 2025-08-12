@@ -26,6 +26,12 @@ export const Expanded: Story = {
   },
 }
 
+export const WithEnvironment: Story = {
+  args: {
+    environment: "staging",
+  },
+}
+
 export const CustomPadding: Story = {
   args: {
     classNames: {
