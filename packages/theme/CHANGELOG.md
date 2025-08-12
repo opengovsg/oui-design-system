@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.13
+
+### Patch Changes
+
+- [#112](https://github.com/opengovsg/oui-design-system/pull/112) [`8b11b2e`](https://github.com/opengovsg/oui-design-system/commit/8b11b2e2c80e89a2660ae5820efeb5afa85b5197) Thanks [@karrui](https://github.com/karrui)! - feat: set specific tailwind-variants peer-deps
+
+- [#111](https://github.com/opengovsg/oui-design-system/pull/111) [`3c64a91`](https://github.com/opengovsg/oui-design-system/commit/3c64a9110a22b99a31ce9a4ca4d69f5dcb1b8af9) Thanks [@karrui](https://github.com/karrui)! - feat: make tailwind-variants a peer-dependency
+
 ## 0.0.12
 
 ### Patch Changes

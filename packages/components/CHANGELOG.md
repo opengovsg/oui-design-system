@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.13
+
+### Patch Changes
+
+- [#110](https://github.com/opengovsg/oui-design-system/pull/110) [`a7fa199`](https://github.com/opengovsg/oui-design-system/commit/a7fa199f092b4108396b3f870e12c8ca4d4e7049) Thanks [@karrui](https://github.com/karrui)! - fix(govt-banner): add content as key so react doesn't show key warning
+
+- [#114](https://github.com/opengovsg/oui-design-system/pull/114) [`8a66d37`](https://github.com/opengovsg/oui-design-system/commit/8a66d37a8c4b166e599e69034e1b5c004424333e) Thanks [@karrui](https://github.com/karrui)! - feat(govt-banner): remove unnecessary i18n causing react key warnings
+
+- Updated dependencies [[`8b11b2e`](https://github.com/opengovsg/oui-design-system/commit/8b11b2e2c80e89a2660ae5820efeb5afa85b5197), [`3c64a91`](https://github.com/opengovsg/oui-design-system/commit/3c64a9110a22b99a31ce9a4ca4d69f5dcb1b8af9)]:
+  - @opengovsg/oui-theme@0.0.13
+
 ## 0.0.12
 
 ### Patch Changes
