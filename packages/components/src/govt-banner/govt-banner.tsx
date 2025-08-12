@@ -1,17 +1,10 @@
 "use client"
 
-import type { LocalizedStrings } from "react-aria"
 import type { DisclosureProps } from "react-stately"
 import type { LiteralUnion } from "type-fest"
 import { useRef } from "react"
 import { ChevronDown, ExternalLink, Landmark, Lock } from "lucide-react"
-import {
-  mergeProps,
-  useButton,
-  useDisclosure,
-  useFocusRing,
-  useMessageFormatter,
-} from "react-aria"
+import { mergeProps, useButton, useDisclosure, useFocusRing } from "react-aria"
 import { useDisclosureState } from "react-stately"
 
 import type { GovtBannerSlots, SlotsToClasses } from "@opengovsg/oui-theme"
@@ -56,64 +49,12 @@ interface GovtBannerProps extends DisclosureProps {
 }
 
 // TODO: Add strings for other localisations
-const i18nStrings: LocalizedStrings = {
-  "en-SG": {
-    mainLabel: "A Singapore Government Agency Website",
-    identifyLabel: "How to identify",
-    environmentLabel: "[NOTE: THIS IS A {environment} WEBSITE]",
-    officialLinkHeader: "Official website links end with .gov.sg",
-    officialLinkContent:
-      "Government agencies communicate via <boldThis>.gov.sg</boldThis> websites (e.g. go.gov.sg/open).",
-    officialLinkTrusted: "Trusted websites",
-    secureHeader: "Secure websites use HTTPS",
-    secureContent:
-      "Look for a <boldThis>lock</boldThis> {icon} or https:// as an added precaution. Share sensitive information only on official, secure websites.",
-  },
-  "zh-SG": {
-    mainLabel: "A Singapore Government Agency Website",
-    identifyLabel: "How to identify",
-    environmentLabel: "[NOTE: THIS IS A {environment} WEBSITE]",
-    officialLinkHeader: "Official website links end with .gov.sg",
-    officialLinkContent:
-      "Government agencies communicate via <boldThis>.gov.sg</boldThis> websites (e.g. go.gov.sg/open).",
-    officialLinkTrusted: "Trusted websites",
-    secureHeader: "Secure websites use HTTPS",
-    secureContent:
-      "Look for a <boldThis>lock</boldThis> {icon} or https:// as an added precaution. Share sensitive information only on official, secure websites.",
-  },
-  "ms-SG": {
-    mainLabel: "A Singapore Government Agency Website",
-    identifyLabel: "How to identify",
-    environmentLabel: "[NOTE: THIS IS A {environment} WEBSITE]",
-    officialLinkHeader: "Official website links end with .gov.sg",
-    officialLinkContent:
-      "Government agencies communicate via <boldThis>.gov.sg</boldThis> websites (e.g. go.gov.sg/open).",
-    officialLinkTrusted: "Trusted websites",
-    secureHeader: "Secure websites use HTTPS",
-    secureContent:
-      "Look for a <boldThis>lock</boldThis> {icon} or https:// as an added precaution. Share sensitive information only on official, secure websites.",
-  },
-  "ta-SG": {
-    mainLabel: "A Singapore Government Agency Website",
-    identifyLabel: "How to identify",
-    environmentLabel: "[NOTE: THIS IS A {environment} WEBSITE]",
-    officialLinkHeader: "Official website links end with .gov.sg",
-    officialLinkContent:
-      "Government agencies communicate via <boldThis>.gov.sg</boldThis> websites (e.g. go.gov.sg/open).",
-    officialLinkTrusted: "Trusted websites",
-    secureHeader: "Secure websites use HTTPS",
-    secureContent:
-      "Look for a <boldThis>lock</boldThis> {icon} or https:// as an added precaution. Share sensitive information only on official, secure websites.",
-  },
-}
 
 export function GovtBanner({
   environment,
   classNames,
   ...props
 }: GovtBannerProps) {
-  const formatMessage = useMessageFormatter(i18nStrings)
-
   const state = useDisclosureState(props)
   const panelRef = useRef<HTMLDivElement | null>(null)
   const triggerRef = useRef<HTMLButtonElement | null>(null)
@@ -154,14 +95,8 @@ export function GovtBanner({
         <div
           className={slots.mainContent({ className: classNames?.mainContent })}
         >
-          <span>{formatMessage("mainLabel")}</span>
-          {environment ? (
-            <b>
-              {formatMessage("environmentLabel", {
-                environment: environment.toUpperCase(),
-              })}
-            </b>
-          ) : null}
+          <span>A Singapore Government Agency Website</span>
+          {environment ? <b>[NOTE: THIS IS A {environment} WEBSITE]</b> : null}
           <button
             className={slots.identifyButton({
               className: classNames?.identifyButton,
@@ -172,7 +107,7 @@ export function GovtBanner({
             {...mergeProps(buttonProps, focusProps)}
           >
             <span className={slots.link({ className: classNames?.link })}>
-              {formatMessage("identifyLabel")}
+              How to identify
             </span>
             <ChevronDown
               className={slots.chevron({ className: classNames?.chevron })}
@@ -201,19 +136,18 @@ export function GovtBanner({
                   className: classNames?.panelHeader,
                 })}
               >
-                {formatMessage("officialLinkHeader")}
+                Official website links end with .gov.sg
               </div>
               <article>
-                {formatMessage("officialLinkContent", {
-                  boldThis: (content: string) => <b key={content}>{content}</b>,
-                })}{" "}
+                Government agencies communicate via <b>.gov.sg</b> websites
+                (e.g. go.gov.sg/open).{" "}
                 <a
                   className={slots.link({ className: classNames?.link })}
                   href="https://www.gov.sg/trusted-sites#govsites"
                   rel="noreferrer"
                   target="_blank"
                 >
-                  {formatMessage("officialLinkTrusted", {})}
+                  Trusted websites
                   <ExternalLink
                     aria-hidden
                     className={slots.inlineIcon({
@@ -242,23 +176,21 @@ export function GovtBanner({
                   className: classNames?.panelHeader,
                 })}
               >
-                {formatMessage("secureHeader")}
+                Secure websites use HTTPS
               </p>
               <article>
-                {formatMessage("secureContent", {
-                  boldThis: (content: string) => <b>{content}</b>,
-                  icon: (
-                    <span aria-hidden>
-                      (
-                      <Lock
-                        className={slots.inlineIcon({
-                          className: classNames?.inlineIcon,
-                        })}
-                      />
-                      )
-                    </span>
-                  ),
-                })}
+                Look for a <b>lock</b>{" "}
+                <span aria-hidden>
+                  (
+                  <Lock
+                    className={slots.inlineIcon({
+                      className: classNames?.inlineIcon,
+                    })}
+                  />
+                  )
+                </span>{" "}
+                or <b>https://</b> as an added precaution. Share sensitive
+                information only on official, secure websites.
               </article>
             </div>
           </div>
