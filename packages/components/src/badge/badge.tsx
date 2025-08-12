@@ -6,7 +6,10 @@ import { XIcon } from "lucide-react"
 import type { UseBadgeProps } from "./use-badge"
 import { useBadge } from "./use-badge"
 
-export const Badge = forwardRef<HTMLDivElement, UseBadgeProps>((props, ref) => {
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+export interface BadgeProps extends UseBadgeProps {}
+
+export const Badge = forwardRef<HTMLDivElement, BadgeProps>((props, ref) => {
   const {
     Component,
     children,
