@@ -48,8 +48,6 @@ interface GovtBannerProps extends DisclosureProps {
   classNames?: SlotsToClasses<GovtBannerSlots>
 }
 
-// TODO: Add strings for other localisations
-
 export function GovtBanner({
   environment,
   classNames,
@@ -96,7 +94,9 @@ export function GovtBanner({
           className={slots.mainContent({ className: classNames?.mainContent })}
         >
           <span>A Singapore Government Agency Website</span>
-          {environment ? <b>[NOTE: THIS IS A {environment} WEBSITE]</b> : null}
+          {environment ? (
+            <b>[NOTE: THIS IS A {environment.toUpperCase()} WEBSITE]</b>
+          ) : null}
           <button
             className={slots.identifyButton({
               className: classNames?.identifyButton,
