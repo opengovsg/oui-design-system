@@ -7,7 +7,7 @@ export const dateInputStyles = tv({
   slots: {
     base: "block min-w-[150px]",
     segment:
-      "type-literal:px-0 rounded-xs inline p-0.5 text-gray-800 caret-transparent outline-0 forced-color-adjust-none dark:text-zinc-200 forced-colors:text-[ButtonText]",
+      "type-literal:px-0 inline rounded-xs p-0.5 caret-transparent outline-0",
   },
   variants: {
     variant: {},
@@ -21,14 +21,12 @@ export const dateInputStyles = tv({
     },
     isDisabled: {
       true: {
-        segment:
-          "text-interaction-support-disabled-content forced-colors:text-[GrayText]",
+        segment: "text-interaction-support-disabled-content",
       },
     },
     isFocused: {
       true: {
-        segment:
-          "bg-interaction-main-default text-white dark:text-white forced-colors:bg-[Highlight] forced-colors:text-[HighlightText]",
+        segment: "bg-interaction-main-default text-white dark:text-white",
       },
     },
     size: {

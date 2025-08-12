@@ -81,7 +81,7 @@ export const parameters: Preview["parameters"] = {
       ],
     },
   },
-  actions: { argTypesRegex: "^on[A-Z].*" },
+  actions: { argTypesRegex: "^on.*" },
   options: {
     storySort: {
       method: "alphabetical",

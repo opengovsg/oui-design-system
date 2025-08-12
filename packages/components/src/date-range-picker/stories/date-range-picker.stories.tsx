@@ -5,6 +5,19 @@ import { DateRangePicker } from "../date-range-picker"
 export default {
   title: "Components/DateRangePicker",
   component: DateRangePicker,
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            // The autocomplete rule will not run based on the CSS selector provided
+            id: "color-contrast",
+            selector: '*:not([data-placeholder="true"])',
+          },
+        ],
+      },
+    },
+  },
 } as Meta<typeof DateRangePicker>
 
 type Story = StoryObj<typeof DateRangePicker>

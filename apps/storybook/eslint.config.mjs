@@ -5,9 +5,7 @@ import { config as baseConfig } from "@oui/eslint-config/storybook"
  */
 const config = [
   ...baseConfig,
-  {
-    ignores: ["!.storybook/*", "storybook-static"],
-  },
+  { ignores: ["!.storybook/*", "storybook-static"] },
 ]
 
 export default config

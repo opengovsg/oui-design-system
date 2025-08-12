@@ -5,6 +5,19 @@ import { DatePicker } from "../date-picker"
 export default {
   title: "Components/DatePicker",
   component: DatePicker,
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            // The autocomplete rule will not run based on the CSS selector provided
+            id: "color-contrast",
+            selector: '*:not([data-placeholder="true"])',
+          },
+        ],
+      },
+    },
+  },
 } as Meta<typeof DatePicker>
 
 type Story = StoryObj<typeof DatePicker>

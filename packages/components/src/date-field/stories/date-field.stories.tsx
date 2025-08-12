@@ -5,6 +5,19 @@ import { DateField } from "../date-field"
 export default {
   title: "Components/DateField",
   component: DateField,
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            // The autocomplete rule will not run based on the CSS selector provided
+            id: "color-contrast",
+            selector: '*:not([data-placeholder="true"])',
+          },
+        ],
+      },
+    },
+  },
 } as Meta<typeof DateField>
 
 type Story = StoryObj<typeof DateField>

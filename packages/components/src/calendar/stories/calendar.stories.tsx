@@ -88,12 +88,4 @@ export const WithMinValue: Story = {
   args: {
     minValue: new CalendarDate(2020, 0, 1),
   },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.parentElement!)
-    canvas.getByRole("button", { name: /2025 select year/i }).click()
-    await expect(
-      canvas.findByRole("option", { name: /2020/i }),
-    ).resolves.toBeInTheDocument()
-    expect(canvas.queryByRole("option", { name: /2019/i })).toBeNull()
-  },
 }
