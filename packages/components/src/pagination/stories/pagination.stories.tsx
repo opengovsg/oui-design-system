@@ -41,13 +41,13 @@ export default {
       control: {
         type: "select",
       },
-      options: ["flat", "bordered", "light", "faded"],
+      options: ["light"],
     },
     color: {
       control: {
         type: "select",
       },
-      options: ["default", "main", "neutral", "success", "warning", "critical"],
+      options: ["main", "neutral", "success", "warning", "critical"],
     },
     radius: {
       control: {
@@ -60,11 +60,6 @@ export default {
         type: "select",
       },
       options: ["sm", "md", "lg"],
-    },
-    showShadow: {
-      control: {
-        type: "boolean",
-      },
     },
     isDisabled: {
       control: {
@@ -87,6 +82,14 @@ export const Default: Story = {}
 
 export const WithControls: Story = {
   args: {
+    showControls: true,
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    initialPage: 12,
+    isDisabled: true,
     showControls: true,
   },
 }
@@ -114,7 +117,6 @@ export const TwoSiblings: Story = {
 
 export const IsCompact: Story = {
   args: {
-    showControls: true,
     isCompact: true,
   },
 }

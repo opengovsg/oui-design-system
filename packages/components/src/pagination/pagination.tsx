@@ -74,7 +74,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
         })}
         data-slot="prev"
         getAriaLabel={getItemAriaLabel}
-        isDisabled={!loop && activePage === 1}
+        isDisabled={props.isDisabled || (!loop && activePage === 1)}
         value={PaginationItemType.PREV}
         onPress={onPrevious}
       >
@@ -85,6 +85,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
     slots,
     classNames?.prev,
     getItemAriaLabel,
+    props.isDisabled,
     loop,
     activePage,
     onPrevious,
@@ -100,7 +101,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
         })}
         data-slot="next"
         getAriaLabel={getItemAriaLabel}
-        isDisabled={!loop && activePage === total}
+        isDisabled={props.isDisabled || (!loop && activePage === total)}
         value={PaginationItemType.NEXT}
         onPress={onNext}
       >
@@ -111,6 +112,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
     slots,
     classNames?.next,
     getItemAriaLabel,
+    props.isDisabled,
     loop,
     activePage,
     total,
@@ -203,6 +205,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
             className={slots.item({
               class: cn(classNames?.item, "group"),
             })}
+            isDisabled={props.isDisabled}
             data-slot="item"
             getAriaLabel={getItemAriaLabel}
             value={value}
@@ -258,6 +261,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
       getItemRef,
       renderPrevItem,
       renderNextItem,
+      props.isDisabled,
       isRTL,
     ],
   )
@@ -267,7 +271,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
       <Component {...getBaseProps()}>
         <ul {...getWrapperProps()}>
           {renderPrevItem()}
-          <li className={slots.item()}>
+          <li className={slots.item({ class: classNames?.item })}>
             Page {activePage} of {total}
           </li>
           {renderNextItem()}

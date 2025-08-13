@@ -354,7 +354,6 @@ export function usePagination(originalProps: UsePaginationProps) {
 
   const getBaseProps: PropGetter = (props = {}) => {
     return {
-      ...props,
       ref: domRef,
       role: "navigation",
       "aria-label": props["aria-label"] || "pagination navigation",
@@ -366,17 +365,19 @@ export function usePagination(originalProps: UsePaginationProps) {
       "data-active-page": activePage,
       className: slots.base({ class: cn(baseStyles, props?.className) }),
       ...otherProps,
+      ...props,
     }
   }
 
   const getWrapperProps: PropGetter = (props = {}) => {
     return {
-      ...props,
       "data-slot": "wrapper",
+      "data-disabled": dataAttr(variantProps.isDisabled),
       role: "none",
       className: slots.wrapper({
         class: cn(classNames?.wrapper, props?.className),
       }),
+      ...props,
     }
   }
 
@@ -405,8 +406,8 @@ export function usePagination(originalProps: UsePaginationProps) {
 
   const getItemProps: PropGetter = (props = {}) => {
     return {
-      ...props,
       ref: (node) => getItemRef(node, props.value),
+      "data-disabled": dataAttr(variantProps.isDisabled),
       "data-slot": "item",
       isActive: props.value === activePage,
       className: slots.item({
@@ -417,18 +418,19 @@ export function usePagination(originalProps: UsePaginationProps) {
           setPage(props.value)
         }
       },
+      ...props,
     }
   }
 
   const getCursorProps: PropGetter = (props = {}) => {
     return {
-      ...props,
       ref: cursorRef,
       activePage,
       "data-slot": "cursor",
       className: slots.cursor({
         class: cn(classNames?.cursor, props?.className),
       }),
+      ...props,
     }
   }
 
