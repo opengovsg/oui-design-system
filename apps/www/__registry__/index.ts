@@ -398,6 +398,76 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/calendar-visible-duration.tsx"),
     ),
   },
+  "checkbox-colours": {
+    name: "checkbox-colours",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-colours.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/checkbox-colours.tsx")),
+  },
+  "checkbox-custom-styles": {
+    name: "checkbox-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-custom-styles.tsx"),
+    ),
+  },
+  "checkbox-demo": {
+    name: "checkbox-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/checkbox-demo.tsx")),
+  },
+  "checkbox-disabled": {
+    name: "checkbox-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/checkbox-disabled.tsx")),
+  },
+  "checkbox-indeterminate": {
+    name: "checkbox-indeterminate",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-indeterminate.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-indeterminate.tsx"),
+    ),
+  },
+  "checkbox-sizes": {
+    name: "checkbox-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/checkbox-sizes.tsx")),
+  },
   "combo-box-content-example": {
     name: "combo-box-content-example",
     description: "",

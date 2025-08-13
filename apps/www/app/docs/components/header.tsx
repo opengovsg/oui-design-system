@@ -49,10 +49,10 @@ export const Header = () => {
                   clipRule="evenodd"
                 ></path>
               </svg>
-              <kbd className="hidden font-sans text-xs/4 text-gray-500 dark:text-gray-400 [.os-macos_&amp;]:block">
+              <kbd className="[.os-macos_&amp;]:block hidden font-sans text-xs/4 text-gray-500 dark:text-gray-400">
                 ⌘K
               </kbd>
-              <kbd className="hidden font-sans text-xs/4 text-gray-500 not-[.os-macos_&amp;]:block dark:text-gray-400">
+              <kbd className="not-[.os-macos_&amp;]:block hidden font-sans text-xs/4 text-gray-500 dark:text-gray-400">
                 Ctrl&nbsp;K
               </kbd>
             </button>
