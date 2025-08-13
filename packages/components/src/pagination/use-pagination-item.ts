@@ -1,3 +1,5 @@
+"use client"
+
 import type { LinkDOMProps, PressEvent } from "@react-types/shared"
 import type { Ref } from "react"
 import { useMemo } from "react"

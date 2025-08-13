@@ -1,3 +1,5 @@
+"use client"
+
 import type { HtmlUiProps } from "../system/types"
 import { useDomRef } from "../system/react-utils"
 import { forwardRef } from "../system/utils"
