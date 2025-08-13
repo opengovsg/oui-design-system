@@ -9,7 +9,9 @@ import { composeRenderProps, inputStyles } from "@opengovsg/oui-theme"
 
 export interface InputProps
   extends VariantProps<typeof inputStyles>,
-    Omit<AriaInputProps, "size"> {}
+    Omit<AriaInputProps, "size"> {
+  ref: React.Ref<HTMLInputElement>
+}
 
 /**
  * This component should not be used by itself. Use the `TextField` component from `@opengovsg/oui/text-field` instead.
