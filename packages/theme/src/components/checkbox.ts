@@ -10,7 +10,7 @@ export const checkboxStyles = tv({
       "flex w-full shrink-0 items-center justify-center self-start rounded-sm border-2 transition",
       racFocusRing.base,
     ),
-    base: "group relative flex items-center self-center transition",
+    base: "group relative flex items-stretch transition",
     icon: "h-4 w-4 text-white group-disabled:text-white dark:text-slate-900 dark:group-disabled:text-slate-600 forced-colors:text-[HighlightText]",
   },
   variants: {
@@ -97,7 +97,7 @@ export type CheckboxVariantProps = VariantProps<typeof checkboxStyles>
 export type CheckboxSlots = keyof ReturnType<typeof checkboxStyles>
 
 export const checkboxGroupStyles = tv({
-  base: "flex flex-col",
+  base: "flex w-full flex-col",
   variants: {
     size: {
       xs: "",

@@ -92,7 +92,7 @@ export interface CheckboxGroupProps
   classNames?: SlotsToClasses<"label" | "base" | "description"> & {
     error?: SlotsToClasses<FieldErrorSlots>
   }
-  size: CheckboxProps["size"]
+  size?: CheckboxProps["size"]
 }
 
 export function CheckboxGroup({
