@@ -66,26 +66,11 @@ export const paginationStyles = tv({
   },
   variants: {
     variant: {
-      bordered: {
-        item: [
-          "border-2",
-          "border-base-divider-strong",
-          "bg-transparent",
-          "data-[hover=true]:bg-interaction-muted-neutral-hover",
-        ],
-      },
       light: {
         item: "bg-transparent",
       },
-      flat: {},
-      faded: {
-        item: ["border-2", "border-base-divider-medium"],
-      },
     },
     color: {
-      default: {
-        cursor: colorVariants.solid.main,
-      },
       main: {
         cursor: colorVariants.solid.main,
       },
@@ -125,7 +110,7 @@ export const paginationStyles = tv({
     },
     isCompact: {
       true: {
-        wrapper: "gap-0",
+        wrapper: "gap-1",
       },
     },
     isDisabled: {
@@ -168,14 +153,6 @@ export const paginationStyles = tv({
     disableCursorAnimation: false,
   },
   compoundVariants: [
-    // isCompact / bordered
-    {
-      isCompact: true,
-      variant: "bordered",
-      class: {
-        item: "[&:not(:first-of-type)]:ms-[calc(theme(borderWidth.2)*-1)]",
-      },
-    },
     /**
      * --------------------------------------------------------
      * disableCursorAnimation
@@ -183,17 +160,6 @@ export const paginationStyles = tv({
      * --------------------------------------------------------
      */
     // disableCursorAnimation / color
-    {
-      disableCursorAnimation: true,
-      color: "default",
-      class: {
-        item: [
-          "data-[active=true]:bg-default-400",
-          "data-[active=true]:border-default-400",
-          "data-[active=true]:text-white",
-        ],
-      },
-    },
     {
       disableCursorAnimation: true,
       color: "main",
@@ -272,27 +238,18 @@ export const paginationStyles = tv({
       ],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: "flat",
+      slots: ["prev", "next"],
+      variant: "light",
       class: [
-        "bg-interaction-muted-neutral-hover",
         "[&[data-hover=true]:not([data-active=true])]:bg-interaction-neutral-subtle-default",
         "[&[data-pressed=true]:not([data-active=true])]:bg-interaction-neutral-subtle-hover",
         "active:bg-interaction-muted-neutral-active",
       ],
     },
     {
-      slots: ["item", "prev", "next"],
-      variant: "faded",
-      class: [
-        "bg-default-50",
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-100",
-        "active:bg-default-200",
-      ],
-    },
-    {
-      slots: ["item", "prev", "next"],
+      slots: ["item"],
       variant: "light",
+      isCompact: false,
       class: [
         "[&[data-hover=true]:not([data-active=true])]:bg-interaction-neutral-subtle-default",
         "[&[data-pressed=true]:not([data-active=true])]:bg-interaction-neutral-subtle-hover",
@@ -301,21 +258,54 @@ export const paginationStyles = tv({
     },
     // size
     {
-      slots: ["item", "cursor", "prev", "next"],
+      slots: ["item", "cursor"],
       size: "sm",
       isCompact: false,
+      class: "h-7 w-7 min-w-7",
+    },
+    {
+      slots: ["item"],
+      size: "sm",
+      isCompact: true,
+      class: "px-2",
+    },
+    {
+      slots: ["prev", "next"],
+      size: "sm",
       class: "h-7 w-7 min-w-7 [&_svg]:size-5",
     },
     {
-      slots: ["item", "cursor", "prev", "next"],
+      slots: ["item", "cursor"],
       size: "md",
       isCompact: false,
+      class: "h-8 w-8 min-w-8",
+    },
+    {
+      slots: ["item"],
+      size: "md",
+      isCompact: true,
+      class: "px-2.5",
+    },
+    {
+      slots: ["prev", "next"],
+      size: "md",
       class: "h-8 w-8 min-w-8 [&_svg]:size-6",
     },
     {
-      slots: ["item", "cursor", "prev", "next"],
+      slots: ["item", "cursor"],
       size: "lg",
       isCompact: false,
+      class: "h-9 w-9 min-w-9",
+    },
+    {
+      slots: ["item"],
+      size: "lg",
+      isCompact: true,
+      class: "px-3",
+    },
+    {
+      slots: ["prev", "next"],
+      size: "lg",
       class: "h-9 w-9 min-w-9 [&_svg]:size-7",
     },
     // radius
