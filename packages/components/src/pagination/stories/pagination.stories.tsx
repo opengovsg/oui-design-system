@@ -71,26 +71,34 @@ type Story = StoryObj<typeof Pagination>
 
 export const Default: Story = {}
 
-export const WithControls = {
+export const WithControls: Story = {
   args: {
     showControls: true,
   },
 }
 
-export const PaginationLoop = {
+export const PaginationLoop: Story = {
   args: {
     showControls: true,
     loop: true,
   },
 }
 
-export const InitialPage = {
+export const InitialPage: Story = {
   args: {
-    initialPage: 3,
+    initialPage: 6,
   },
 }
 
-export const IsCompact = {
+export const TwoSiblings: Story = {
+  args: {
+    total: 20,
+    initialPage: 6,
+    siblings: 2,
+  },
+}
+
+export const IsCompact: Story = {
   args: {
     showControls: true,
     isCompact: true,
