@@ -409,6 +409,7 @@ export function usePagination(originalProps: UsePaginationProps) {
   const getItemProps: PropGetter = (props = {}) => {
     return {
       ref: (node) => getItemRef(node, props.value),
+      "aria-disabled": dataAttr(variantProps.isDisabled),
       "data-disabled": dataAttr(variantProps.isDisabled),
       "data-slot": "item",
       isActive: props.value === activePage,
