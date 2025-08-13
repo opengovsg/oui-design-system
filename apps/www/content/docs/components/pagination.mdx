@@ -9,4 +9,116 @@ links:
   theme: pagination
 ---
 
-# Not yet implemented
+## Usage
+
+OUI exports 3 pagination-related components:
+
+- **Pagination**: The main component to display a pagination.
+- **PaginationItem**: The internal component to display a pagination item.
+- **PaginationCursor**: The internal item component to display the current page.
+
+<ComponentPreview name="pagination-demo" />
+
+### Disabled
+
+<ComponentPreview name="pagination-disabled" />
+
+### Sizes
+
+<ComponentPreview name="pagination-sizes" />
+
+### Colors
+
+<ComponentPreview name="pagination-colors" />
+
+### Variants
+
+There is currently only a single `light` variant available.
+
+<ComponentPreview name="pagination-variants" />
+
+### Show controls
+
+You can set the `showControls` prop to `true` to display the next and previous buttons.
+
+<ComponentPreview name="pagination-with-controls" />
+
+### Pagination Loop
+
+In case you want to loop the pagination, you can set the `loop` property to `true`. The cursor will go back to the first page when it reaches the last page and vice versa.
+
+<ComponentPreview name="pagination-loop" />
+
+### Initial page
+
+You can change the initial page by setting the `initialPage` property.
+
+<ComponentPreview name="pagination-initial-page" />
+
+### Compact variant
+
+You can set the `isCompact` property to `true` to display a reduced version of the pagination.
+
+<ComponentPreview name="pagination-compact" />
+
+### Controlled
+
+<ComponentPreview name="pagination-controlled" />
+
+### Siblings
+
+You can control the number of pages to show before and after the current page by setting the `siblings` property.
+
+<ComponentPreview name="pagination-siblings" />
+
+### Boundaries
+
+You can control the number of pages to show at the beginning and end of the pagination by setting the `boundaries` property.
+
+<ComponentPreview name="pagination-boundaries" />
+
+### Custom items
+
+You can use the `renderItem` property to customize the pagination items.
+
+<ComponentPreview name="pagination-custom-items" />
+
+## Slots
+
+- **base**: The main pagination slot.
+- **wrapper**: The pagination wrapper slot. This wraps the pagination items.
+- **prev**: The previous button slot.
+- **next**: The next button slot.
+- **item**: The pagination item slot, applied to the middle items.
+- **cursor**: The current page slot. Available only when disableCursorAnimation is false and disableAnimation is false.
+- **forwardIcon**: The forward icon slot. The one that appears when hovering the ellipsis button.
+- **ellipsis**: The ellipsis slot.
+- **chevronNext**: The chevron next icon slot.
+
+### Custom Styles
+
+You can customize the `Pagination` component by passing custom Tailwind CSS classes to the component slots.
+
+<ComponentPreview name="pagination-custom-styles" />
+
+### Custom Implementation
+
+In case you need to customize the pagination even further, you can use the `usePagination` hook to create your own implementation.
+
+<ComponentPreview name="pagination-hook-implementation" />
+
+## Data Attributes
+
+`Pagination` has the following attributes on the base element:
+
+- **data-controls**: Indicates whether the pagination has controls. Based on `showControls` prop.
+- **data-loop**: When the pagination is looped. Based on `loop` prop.
+- **data-dots-jump**: Indicates whether the pagination has dots jump. Based on `dotsJump` prop.
+- **data-total**: The total number of pages. Based on `total` prop.
+- **data-active-page**: The active page. Based on `activePage` prop.
+
+## Accessibility
+
+- The root node has a role of `navigation` by default.
+- The pagination items have an aria-label that identifies the item purpose ("next page button", "previous page button", etc.), you can override this label by using the `getItemAriaLabel` function.
+- The pagination items are in tab order, with a tabindex of "0".

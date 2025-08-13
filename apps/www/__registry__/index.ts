@@ -568,6 +568,191 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
   },
+  "pagination-boundaries": {
+    name: "pagination-boundaries",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-boundaries.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-boundaries.tsx"),
+    ),
+  },
+  "pagination-colors": {
+    name: "pagination-colors",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-colors.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/pagination-colors.tsx")),
+  },
+  "pagination-compact": {
+    name: "pagination-compact",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-compact.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/pagination-compact.tsx")),
+  },
+  "pagination-controlled": {
+    name: "pagination-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-controlled.tsx"),
+    ),
+  },
+  "pagination-custom-items": {
+    name: "pagination-custom-items",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-custom-items.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-custom-items.tsx"),
+    ),
+  },
+  "pagination-custom-styles": {
+    name: "pagination-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-custom-styles.tsx"),
+    ),
+  },
+  "pagination-demo": {
+    name: "pagination-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/pagination-demo.tsx")),
+  },
+  "pagination-disabled": {
+    name: "pagination-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-disabled.tsx"),
+    ),
+  },
+  "pagination-hook-implementation": {
+    name: "pagination-hook-implementation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-hook-implementation.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-hook-implementation.tsx"),
+    ),
+  },
+  "pagination-initial-page": {
+    name: "pagination-initial-page",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-initial-page.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-initial-page.tsx"),
+    ),
+  },
+  "pagination-loop": {
+    name: "pagination-loop",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-loop.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/pagination-loop.tsx")),
+  },
+  "pagination-siblings": {
+    name: "pagination-siblings",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-siblings.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-siblings.tsx"),
+    ),
+  },
+  "pagination-sizes": {
+    name: "pagination-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/pagination-sizes.tsx")),
+  },
+  "pagination-variants": {
+    name: "pagination-variants",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-variants.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-variants.tsx"),
+    ),
+  },
+  "pagination-with-controls": {
+    name: "pagination-with-controls",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/pagination-with-controls.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/pagination-with-controls.tsx"),
+    ),
+  },
   "range-calendar-controlled": {
     name: "range-calendar-controlled",
     description: "",
