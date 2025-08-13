@@ -1,3 +1,5 @@
+"use client"
+
 import type { PressEvent } from "@react-types/shared"
 import type { Key, ReactNode, Ref } from "react"
 import { useCallback, useEffect, useRef } from "react"

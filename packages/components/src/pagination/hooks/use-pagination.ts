@@ -1,3 +1,5 @@
+"use client"
+
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useLocale } from "@react-aria/i18n"
 
