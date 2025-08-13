@@ -3,6 +3,7 @@ import {
   useContext as useReactContext,
 } from "react"
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface CreateContextOptions<T = any> {
   /**
    * If `true`, React will throw if context is `null` or `undefined`
