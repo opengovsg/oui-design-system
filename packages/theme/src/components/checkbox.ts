@@ -7,30 +7,29 @@ import { tv } from "../utils/tv"
 export const checkboxStyles = tv({
   slots: {
     box: cn(
-      "flex shrink-0 items-center justify-center self-start rounded-sm border-2 transition",
+      "flex w-full shrink-0 items-center justify-center self-start rounded-sm border-2 transition",
       racFocusRing.base,
     ),
-    input: "group relative flex items-center transition",
+    base: "group relative flex items-center transition",
     icon: "h-4 w-4 text-white group-disabled:text-white dark:text-slate-900 dark:group-disabled:text-slate-600 forced-colors:text-[HighlightText]",
   },
   variants: {
     color: {
       default: {
-        input:
-          "hover:bg-interaction-muted-main-hover pressed:bg-interaction-muted-main-active",
+        base: "hover:bg-interaction-muted-main-hover pressed:bg-interaction-muted-main-active",
       },
     },
     size: {
       xs: {
         box: "mt-0.5 h-4 w-4",
-        input: "prose-body-2 gap-3 px-1 py-2",
+        base: "prose-body-2 gap-3 px-1 py-2",
       },
       sm: {
         box: "h-5 w-5",
-        input: "prose-body-2 gap-3 px-1 py-2",
+        base: "prose-body-2 gap-3 px-1 py-2",
       },
       md: {
-        input: "prose-body-1 gap-4 px-1 py-2.5",
+        base: "prose-body-1 gap-4 px-1 py-2.5",
         box: "h-6 w-6",
       },
     },
@@ -44,11 +43,10 @@ export const checkboxStyles = tv({
     },
     isDisabled: {
       false: {
-        input: "text-gray-800 dark:text-zinc-200",
+        base: "text-gray-800 dark:text-zinc-200",
       },
       true: {
-        input:
-          "text-interaction-support-disabled-content dark:text-zinc-600 forced-colors:text-[GrayText]",
+        base: "text-interaction-support-disabled-content dark:text-zinc-600 forced-colors:text-[GrayText]",
         box: "[--color:var(--color-gray-200)] dark:[--color:var(--color-zinc-700)] forced-colors:[--color:GrayText]!",
       },
     },

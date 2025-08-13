@@ -52,8 +52,8 @@ export const Checkbox = ({
       isInvalid={variants.isInvalid}
       isSelected={variants.isSelected}
       className={composeRenderProps(
-        className ?? classNames?.input,
-        (className, renderProps) => styles.input({ ...renderProps, className }),
+        className ?? classNames?.base,
+        (className, renderProps) => styles.base({ ...renderProps, className }),
       )}
     >
       {({ isSelected, isIndeterminate, ...renderProps }) => (
