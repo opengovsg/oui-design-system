@@ -10,6 +10,7 @@ import {
   Checkbox as AriaCheckbox,
   CheckboxGroup as AriaCheckboxGroup,
   composeRenderProps,
+  Provider,
 } from "react-aria-components"
 
 import type {
@@ -22,8 +23,12 @@ import { checkboxGroupStyles, checkboxStyles } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
 import { mapPropsVariants } from "../system/utils"
+import {
+  CheckboxGroupStyleContext,
+  useCheckboxGroupStyleContext,
+} from "./checkbox-group-style-context"
 
-interface CheckboxProps
+export interface CheckboxProps
   extends AriaCheckboxProps,
     VariantProps<typeof checkboxStyles> {
   classNames?: SlotsToClasses<CheckboxSlots>
@@ -38,7 +43,8 @@ export const Checkbox = ({
     originalProps,
     checkboxStyles.variantKeys,
   )
-  const styles = checkboxStyles(variants)
+  const { size } = useCheckboxGroupStyleContext()
+  const styles = checkboxStyles({ size, ...variants })
   return (
     <AriaCheckbox
       {...props}
@@ -86,31 +92,43 @@ export interface CheckboxGroupProps
   classNames?: SlotsToClasses<"label" | "base" | "description"> & {
     error?: SlotsToClasses<FieldErrorSlots>
   }
+  size: CheckboxProps["size"]
 }
 
 export function CheckboxGroup({
   description,
   errorMessage,
   classNames,
+  size,
   ...props
 }: CheckboxGroupProps) {
+  const context = {
+    size,
+  }
+
   return (
-    <AriaCheckboxGroup
-      {...props}
-      className={composeRenderProps(
-        props.className ?? classNames?.base,
-        (className, renderProps) =>
-          checkboxGroupStyles({ ...renderProps, className }),
-      )}
-    >
-      <Label className={classNames?.label}>{props.label}</Label>
-      {props.children}
-      {description && (
-        <Description className={classNames?.description}>
-          {description}
-        </Description>
-      )}
-      <FieldError classNames={classNames?.error}>{errorMessage}</FieldError>
-    </AriaCheckboxGroup>
+    <Provider values={[[CheckboxGroupStyleContext, context]]}>
+      <AriaCheckboxGroup
+        {...props}
+        className={composeRenderProps(
+          props.className ?? classNames?.base,
+          (className, renderProps) =>
+            checkboxGroupStyles({ ...renderProps, size, className }),
+        )}
+      >
+        <Label size={size} className={classNames?.label}>
+          {props.label}
+        </Label>
+        {props.children}
+        {description && (
+          <Description size={size} className={classNames?.description}>
+            {description}
+          </Description>
+        )}
+        <FieldError size={size} classNames={classNames?.error}>
+          {errorMessage}
+        </FieldError>
+      </AriaCheckboxGroup>
+    </Provider>
   )
 }

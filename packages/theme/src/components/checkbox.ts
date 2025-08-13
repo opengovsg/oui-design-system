@@ -100,4 +100,11 @@ export type CheckboxSlots = keyof ReturnType<typeof checkboxStyles>
 
 export const checkboxGroupStyles = tv({
   base: "flex flex-col",
+  variants: {
+    size: {
+      xs: "",
+      sm: "",
+      md: "",
+    },
+  },
 })

@@ -46,6 +46,39 @@ export const IsInvalid: Story = {
   },
 }
 
+export const Sizes: Story = {
+  args: {
+    defaultValue: ["sf", "ny", "tokyo"],
+  },
+  render: (args) => {
+    return (
+      <div className="flex flex-row gap-4">
+        <CheckboxGroup {...args} label="Cities (xs)" size="xs">
+          <Checkbox value="sf">San Francisco</Checkbox>
+          <Checkbox value="ny">New York</Checkbox>
+          <Checkbox value="sydney">Sydney</Checkbox>
+          <Checkbox value="london">London</Checkbox>
+          <Checkbox value="tokyo">Tokyo</Checkbox>
+        </CheckboxGroup>
+        <CheckboxGroup {...args} label="Cities (sm)" size="sm">
+          <Checkbox value="sf">San Francisco</Checkbox>
+          <Checkbox value="ny">New York</Checkbox>
+          <Checkbox value="sydney">Sydney</Checkbox>
+          <Checkbox value="london">London</Checkbox>
+          <Checkbox value="tokyo">Tokyo</Checkbox>
+        </CheckboxGroup>
+        <CheckboxGroup {...args} label="Cities (md)" size="md">
+          <Checkbox value="sf">San Francisco</Checkbox>
+          <Checkbox value="ny">New York</Checkbox>
+          <Checkbox value="sydney">Sydney</Checkbox>
+          <Checkbox value="london">London</Checkbox>
+          <Checkbox value="tokyo">Tokyo</Checkbox>
+        </CheckboxGroup>
+      </div>
+    )
+  },
+}
+
 // TODO: Move into oui docs
 export const WithInputChildrenExample: Story = {
   render: (args) => {
