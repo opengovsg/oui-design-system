@@ -1,7 +1,7 @@
+import type { NavItem } from "@/config/docs.config"
 import type { LinkProps } from "next/link"
 import type { JSX } from "react"
 import Link from "next/link"
-import { NavItem } from "@/config/docs.config"
 
 import { Badge } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"

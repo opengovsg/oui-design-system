@@ -1,6 +1,5 @@
 import Link from "next/link"
 import { AdobeIcon } from "@/components/icons/brand-icons"
-import { MdxContentRenderer } from "@/components/mdx/content-renderer"
 import { SiGithub, SiStorybook } from "@icons-pack/react-simple-icons"
 import { ArrowUpRight } from "lucide-react"
 

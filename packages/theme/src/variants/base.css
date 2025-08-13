@@ -191,6 +191,12 @@
   --color-utility-ui-clear: rgba(255, 255, 255, 0);
 }
 
+@utility transition-transform-background {
+  transition-property: transform, scale, background;
+  transition-duration: 0.25s;
+  transition-timing-function: ease;
+}
+
 @utility prose-h1 {
   font-family: var(--font-sans);
   text-transform: none;
