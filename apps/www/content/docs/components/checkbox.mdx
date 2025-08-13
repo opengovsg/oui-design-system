@@ -7,6 +7,41 @@ links:
   source: checkbox
   storybook: components-checkbox--default
   theme: checkbox
+  reactaria: Checkbox
 ---
 
-# Not yet implemented
+There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/Checkbox.html) for more details.
+
+## Usage
+
+<ComponentPreview name="checkbox-demo" />
+
+### Disabled
+
+<ComponentPreview name="checkbox-disabled" />
+
+### Sizes
+
+<ComponentPreview name="checkbox-sizes" />
+
+### Colours
+
+<ComponentPreview name="checkbox-colours" />
+
+### Indeterminate
+
+The `isIndeterminate` prop sets a `Checkbox` to an indeterminate state, overriding its appearance and maintaining it until set to `false`, regardless of user interaction.
+
+<ComponentPreview name="checkbox-indeterminate" />
+
+## Slots
+
+- **base**: Checkbox wrapper, it handles alignment, placement, and general appearance.
+- **box**: The pseudo component that represents the checkbox state. Includes styles for relative positioning, flex properties, overflow handling and managing hover and selected states.
+- **icon**: Icon within the checkbox, controlling size, visibility, and changes when checked.
+
+### Custom Styles
+
+You can customize the `Checkbox` component by passing custom Tailwind CSS classes to the component slots.
+
+<ComponentPreview name="checkbox-custom-styles" />
