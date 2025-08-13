@@ -7,6 +7,20 @@ import { Pagination } from "../pagination"
 export default {
   title: "Components/Pagination",
   component: Pagination,
+  parameters: {
+    a11y: {
+      config: {
+        rules: [
+          {
+            // Current failures are actually valid in WCAG, provided `ul` parent has a role of "none",
+            // which wrapper props in pagination component has.
+            id: "aria-allowed-role",
+            selector: '*:not([role="button"])',
+          },
+        ],
+      },
+    },
+  },
   argTypes: {
     page: {
       control: {
@@ -33,7 +47,7 @@ export default {
       control: {
         type: "select",
       },
-      options: ["default", "main", "sub", "success", "warning", "critical"],
+      options: ["default", "main", "neutral", "success", "warning", "critical"],
     },
     radius: {
       control: {
@@ -60,7 +74,7 @@ export default {
   },
   args: {
     ...paginationStyles.defaultVariants,
-    total: 10,
+    total: 100,
     siblings: 1,
     boundaries: 1,
     initialPage: 1,

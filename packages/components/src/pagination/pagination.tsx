@@ -2,7 +2,7 @@
 
 import { useCallback } from "react"
 import { useLocale } from "@react-aria/i18n"
-import { ChevronLeftIcon, EllipsisIcon, ForwardIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronsRightIcon, EllipsisIcon } from "lucide-react"
 
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 
@@ -65,64 +65,58 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
     [isRTL, slots, classNames?.chevronNext],
   )
 
-  const renderPrevItem = useCallback(
-    (value: PaginationItemValue) => {
-      return (
-        <PaginationItem
-          key={PaginationItemType.PREV}
-          className={slots.prev({
-            class: classNames?.prev,
-          })}
-          data-slot="prev"
-          getAriaLabel={getItemAriaLabel}
-          isDisabled={!loop && activePage === 1}
-          value={value}
-          onPress={onPrevious}
-        >
-          {renderChevronIcon(PaginationItemType.PREV)}
-        </PaginationItem>
-      )
-    },
-    [
-      slots,
-      classNames?.prev,
-      getItemAriaLabel,
-      loop,
-      activePage,
-      onPrevious,
-      renderChevronIcon,
-    ],
-  )
+  const renderPrevItem = useCallback(() => {
+    return (
+      <PaginationItem
+        key={PaginationItemType.PREV}
+        className={slots.prev({
+          class: classNames?.prev,
+        })}
+        data-slot="prev"
+        getAriaLabel={getItemAriaLabel}
+        isDisabled={!loop && activePage === 1}
+        value={PaginationItemType.PREV}
+        onPress={onPrevious}
+      >
+        {renderChevronIcon(PaginationItemType.PREV)}
+      </PaginationItem>
+    )
+  }, [
+    slots,
+    classNames?.prev,
+    getItemAriaLabel,
+    loop,
+    activePage,
+    onPrevious,
+    renderChevronIcon,
+  ])
 
-  const renderNextItem = useCallback(
-    (value: PaginationItemValue) => {
-      return (
-        <PaginationItem
-          key={PaginationItemType.NEXT}
-          className={slots.next({
-            class: cn(classNames?.next),
-          })}
-          data-slot="next"
-          getAriaLabel={getItemAriaLabel}
-          isDisabled={!loop && activePage === total}
-          value={value}
-          onPress={onNext}
-        >
-          {renderChevronIcon(PaginationItemType.NEXT)}
-        </PaginationItem>
-      )
-    },
-    [
-      slots,
-      classNames?.next,
-      getItemAriaLabel,
-      loop,
-      activePage,
-      total,
-      onNext,
-      renderChevronIcon,
-    ],
-  )
+  const renderNextItem = useCallback(() => {
+    return (
+      <PaginationItem
+        key={PaginationItemType.NEXT}
+        className={slots.next({
+          class: cn(classNames?.next),
+        })}
+        data-slot="next"
+        getAriaLabel={getItemAriaLabel}
+        isDisabled={!loop && activePage === total}
+        value={PaginationItemType.NEXT}
+        onPress={onNext}
+      >
+        {renderChevronIcon(PaginationItemType.NEXT)}
+      </PaginationItem>
+    )
+  }, [
+    slots,
+    classNames?.next,
+    getItemAriaLabel,
+    loop,
+    activePage,
+    total,
+    onNext,
+    renderChevronIcon,
+  ])
 
   const renderItem = useCallback(
     (value: PaginationItemValue, index: number) => {
@@ -157,7 +151,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
               <EllipsisIcon
                 className={slots?.ellipsis({ class: classNames?.ellipsis })}
               />
-              <ForwardIcon
+              <ChevronsRightIcon
                 className={slots?.forwardIcon({
                   class: classNames?.forwardIcon,
                 })}
@@ -196,10 +190,10 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
       }
 
       if (value === PaginationItemType.PREV) {
-        return renderPrevItem(value)
+        return renderPrevItem()
       }
       if (value === PaginationItemType.NEXT) {
-        return renderNextItem(value)
+        return renderNextItem()
       }
 
       if (value === PaginationItemType.DOTS) {
@@ -227,7 +221,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
             <EllipsisIcon
               className={slots?.ellipsis({ class: classNames?.ellipsis })}
             />
-            <ForwardIcon
+            <ChevronsRightIcon
               className={slots?.forwardIcon({ class: classNames?.forwardIcon })}
               data-before={dataAttr(isRTL ? !isBefore : isBefore)}
             />
@@ -267,6 +261,20 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
       isRTL,
     ],
   )
+
+  if (props.isCompact) {
+    return (
+      <Component {...getBaseProps()}>
+        <ul {...getWrapperProps()}>
+          {renderPrevItem()}
+          <li className={slots.item()}>
+            Page {activePage} of {total}
+          </li>
+          {renderNextItem()}
+        </ul>
+      </Component>
+    )
+  }
 
   return (
     <Component {...getBaseProps()}>

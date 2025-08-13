@@ -7,7 +7,7 @@ import { colorVariants } from "../utils/variants"
 /**
  * Pagination wrapper **Tailwind Variants** component
  *
- * const {base,cursor, prev, next, item } = paginationStyles({...})
+ * const {base, cursor, prev, next, item } = paginationStyles({...})
  *
  * @example
  * <ul className={base()} aria-label="pagination navigation">
@@ -33,7 +33,12 @@ export const paginationStyles = tv({
       "items-center",
       "overflow-visible",
     ],
-    item: ["tap-highlight-transparent", "select-none", "touch-none"],
+    item: [
+      "tap-highlight-transparent",
+      "select-none",
+      "touch-none",
+      "transition",
+    ],
     prev: "",
     next: "",
     cursor: [
@@ -48,6 +53,7 @@ export const paginationStyles = tv({
       "touch-none",
       "pointer-events-none",
       "z-20",
+      "text-standard-white",
     ],
     forwardIcon: [
       "hidden",
@@ -62,10 +68,10 @@ export const paginationStyles = tv({
     variant: {
       bordered: {
         item: [
-          "border-medium",
-          "border-default",
+          "border-2",
+          "border-base-divider-strong",
           "bg-transparent",
-          "data-[hover=true]:bg-default-100",
+          "data-[hover=true]:bg-interaction-muted-neutral-hover",
         ],
       },
       light: {
@@ -73,7 +79,7 @@ export const paginationStyles = tv({
       },
       flat: {},
       faded: {
-        item: ["border-medium", "border-default"],
+        item: ["border-2", "border-base-divider-medium"],
       },
     },
     color: {
@@ -83,8 +89,8 @@ export const paginationStyles = tv({
       main: {
         cursor: colorVariants.solid.main,
       },
-      sub: {
-        cursor: colorVariants.solid.sub,
+      neutral: {
+        cursor: colorVariants.solid.neutral,
       },
       success: {
         cursor: colorVariants.solid.success,
@@ -97,9 +103,18 @@ export const paginationStyles = tv({
       },
     },
     size: {
-      sm: {},
-      md: {},
-      lg: {},
+      sm: {
+        item: "prose-body-2",
+        cursor: "prose-body-2",
+      },
+      md: {
+        item: "prose-body-2",
+        cursor: "prose-body-2",
+      },
+      lg: {
+        item: "prose-body-1",
+        cursor: "prose-body-1",
+      },
     },
     radius: {
       none: {},
@@ -110,20 +125,12 @@ export const paginationStyles = tv({
     },
     isCompact: {
       true: {
-        wrapper: "gap-0 shadow-xs",
-        item: [
-          "shadow-none",
-          "first-of-type:rounded-e-none",
-          "last-of-type:rounded-s-none",
-          "[&:not(:first-of-type):not(:last-of-type)]:rounded-none",
-        ],
-        prev: "!rounded-e-none",
-        next: "!rounded-s-none",
+        wrapper: "gap-0",
       },
     },
     isDisabled: {
       true: {
-        base: "opacity-disabled pointer-events-none",
+        base: "pointer-events-none",
       },
     },
     disableCursorAnimation: {
@@ -138,7 +145,7 @@ export const paginationStyles = tv({
       },
       false: {
         item: [
-          "data-[pressed=true]:scale-[0.97]",
+          "data-[pressed=true]:scale-[0.95]",
           "transition-transform-background",
         ],
         cursor: [
@@ -152,10 +159,10 @@ export const paginationStyles = tv({
     },
   },
   defaultVariants: {
-    variant: "flat",
-    color: "default",
+    variant: "light",
+    color: "neutral",
     size: "md",
-    radius: "md",
+    radius: "sm",
     isCompact: false,
     isDisabled: false,
     disableCursorAnimation: false,
@@ -183,7 +190,7 @@ export const paginationStyles = tv({
         item: [
           "data-[active=true]:bg-default-400",
           "data-[active=true]:border-default-400",
-          "data-[active=true]:text-default-foreground",
+          "data-[active=true]:text-white",
         ],
       },
     },
@@ -192,20 +199,20 @@ export const paginationStyles = tv({
       color: "main",
       class: {
         item: [
-          "data-[active=true]:bg-primary",
-          "data-[active=true]:border-primary",
-          "data-[active=true]:text-primary-foreground",
+          "data-[active=true]:bg-interaction-main-active",
+          "data-[active=true]:border-interaction-main-active",
+          "data-[active=true]:text-white",
         ],
       },
     },
     {
       disableCursorAnimation: true,
-      color: "sub",
+      color: "neutral",
       class: {
         item: [
-          "data-[active=true]:bg-secondary",
-          "data-[active=true]:border-secondary",
-          "data-[active=true]:text-secondary-foreground",
+          "data-[active=true]:bg-interaction-support-selected",
+          "data-[active=true]:border-interaction-support-selected",
+          "data-[active=true]:text-white",
         ],
       },
     },
@@ -214,9 +221,9 @@ export const paginationStyles = tv({
       color: "success",
       class: {
         item: [
-          "data-[active=true]:bg-success",
-          "data-[active=true]:border-success",
-          "data-[active=true]:text-success-foreground",
+          "data-[active=true]:bg-interaction-success-active",
+          "data-[active=true]:border-interaction-success-active",
+          "data-[active=true]:text-white",
         ],
       },
     },
@@ -225,9 +232,9 @@ export const paginationStyles = tv({
       color: "warning",
       class: {
         item: [
-          "data-[active=true]:bg-warning",
-          "data-[active=true]:border-warning",
-          "data-[active=true]:text-warning-foreground",
+          "data-[active=true]:bg-interaction-warning-active",
+          "data-[active=true]:border-interaction-warning-active",
+          "data-[active=true]:text-base-content-strong",
         ],
       },
     },
@@ -236,9 +243,9 @@ export const paginationStyles = tv({
       color: "critical",
       class: {
         item: [
-          "data-[active=true]:bg-danger",
-          "data-[active=true]:border-danger",
-          "data-[active=true]:text-danger-foreground",
+          "data-[active=true]:bg-interaction-critical-active",
+          "data-[active=true]:border-interaction-critical-active",
+          "data-[active=true]:text-white",
         ],
       },
     },
@@ -255,26 +262,23 @@ export const paginationStyles = tv({
         "outline-transparent outline-solid",
         "items-center",
         "justify-center",
-        "text-default-foreground",
+        "text-base-content-default",
         // focus ring
         ...dataFocusVisibleClasses,
+        "outline-offset-0",
         // disabled
-        "data-[disabled=true]:text-default-300",
+        "data-[disabled=true]:text-interaction-support-disabled-content",
         "data-[disabled=true]:pointer-events-none",
       ],
     },
     {
       slots: ["item", "prev", "next"],
-      variant: ["flat", "bordered", "faded"],
-      class: ["shadow-xs"],
-    },
-    {
-      slots: ["item", "prev", "next"],
       variant: "flat",
       class: [
-        "bg-default-100",
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-200",
-        "active:bg-default-300",
+        "bg-interaction-muted-neutral-hover",
+        "[&[data-hover=true]:not([data-active=true])]:bg-interaction-neutral-subtle-default",
+        "[&[data-pressed=true]:not([data-active=true])]:bg-interaction-neutral-subtle-hover",
+        "active:bg-interaction-muted-neutral-active",
       ],
     },
     {
@@ -290,25 +294,29 @@ export const paginationStyles = tv({
       slots: ["item", "prev", "next"],
       variant: "light",
       class: [
-        "[&[data-hover=true]:not([data-active=true])]:bg-default-100",
-        "active:bg-default-200",
+        "[&[data-hover=true]:not([data-active=true])]:bg-interaction-neutral-subtle-default",
+        "[&[data-pressed=true]:not([data-active=true])]:bg-interaction-neutral-subtle-hover",
+        "active:bg-interaction-muted-neutral-active",
       ],
     },
     // size
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "sm",
-      class: "text-tiny h-8 w-8 min-w-8",
+      isCompact: false,
+      class: "h-7 w-7 min-w-7 [&_svg]:size-5",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "md",
-      class: "text-small h-9 w-9 min-w-9",
+      isCompact: false,
+      class: "h-8 w-8 min-w-8 [&_svg]:size-6",
     },
     {
       slots: ["item", "cursor", "prev", "next"],
       size: "lg",
-      class: "text-medium h-10 w-10 min-w-10",
+      isCompact: false,
+      class: "h-9 w-9 min-w-9 [&_svg]:size-7",
     },
     // radius
     {
@@ -319,17 +327,17 @@ export const paginationStyles = tv({
     {
       slots: ["wrapper", "item", "cursor", "prev", "next"],
       radius: "sm",
-      class: "rounded-small",
+      class: "rounded-sm",
     },
     {
       slots: ["wrapper", "item", "cursor", "prev", "next"],
       radius: "md",
-      class: "rounded-medium",
+      class: "rounded-md",
     },
     {
       slots: ["wrapper", "item", "cursor", "prev", "next"],
       radius: "lg",
-      class: "rounded-large",
+      class: "rounded-lg",
     },
     {
       slots: ["wrapper", "item", "cursor", "prev", "next"],

@@ -373,6 +373,7 @@ export function usePagination(originalProps: UsePaginationProps) {
     return {
       ...props,
       "data-slot": "wrapper",
+      role: "none",
       className: slots.wrapper({
         class: cn(classNames?.wrapper, props?.className),
       }),
