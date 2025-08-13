@@ -444,6 +444,58 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/checkbox-disabled.tsx")),
   },
+  "checkbox-group-demo": {
+    name: "checkbox-group-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-group-demo.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-demo.tsx"),
+    ),
+  },
+  "checkbox-group-disabled": {
+    name: "checkbox-group-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-group-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-disabled.tsx"),
+    ),
+  },
+  "checkbox-group-invalid": {
+    name: "checkbox-group-invalid",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-group-invalid.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-invalid.tsx"),
+    ),
+  },
+  "checkbox-group-with-input-example": {
+    name: "checkbox-group-with-input-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/checkbox-group-with-input-example.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-with-input-example.tsx"),
+    ),
+  },
   "checkbox-indeterminate": {
     name: "checkbox-indeterminate",
     description: "",

@@ -7,6 +7,34 @@ links:
   source: checkbox-group
   storybook: components-checkboxgroup--default
   theme: checkbox-group
+  reactaria: CheckboxGroup
 ---
 
-# Not yet implemented
+There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/CheckboxGroup.html) for more details.
+
+## Usage
+
+<ComponentPreview name="checkbox-group-demo" />
+
+### Disabled
+
+<ComponentPreview name="checkbox-group-disabled" />
+
+### Invalid
+
+<ComponentPreview name="checkbox-group-invalid" />
+
+## Slots
+
+- **base**: Checkbox group root wrapper, it wraps the label and the wrapper.
+- **label**: Checkbox group label, it is placed before the wrapper.
+- **description**: The description of the checkbox group.
+- **error**: [FieldError](./field) slots
+  - **icon**: The error icon.
+  - **text**: The error text.
+
+## Other examples
+
+### With checkbox input
+
+<ComponentPreview name="checkbox-group-with-input-example" />
