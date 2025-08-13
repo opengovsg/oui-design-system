@@ -1,5 +1,18 @@
 # @opengovsg/oui
 
+## 0.0.14
+
+### Patch Changes
+
+- [#115](https://github.com/opengovsg/oui-design-system/pull/115) [`e9f4e22`](https://github.com/opengovsg/oui-design-system/commit/e9f4e22731d0903e6cedf57747df7091bc7875fb) Thanks [@karrui](https://github.com/karrui)! - feat(badge): export BadgeProps type
+
+- [#116](https://github.com/opengovsg/oui-design-system/pull/116) [`3b00a2d`](https://github.com/opengovsg/oui-design-system/commit/3b00a2d03c656d5f726905cb6ebb61c79f750311) Thanks [@karrui](https://github.com/karrui)! - feat: add checkbox and checkbox-group components
+
+- [#118](https://github.com/opengovsg/oui-design-system/pull/118) [`f4f0409`](https://github.com/opengovsg/oui-design-system/commit/f4f040947bba6539c319c9610caadfd4a3d52f8c) Thanks [@karrui](https://github.com/karrui)! - feat: add Pagination component
+
+- Updated dependencies [[`3b00a2d`](https://github.com/opengovsg/oui-design-system/commit/3b00a2d03c656d5f726905cb6ebb61c79f750311), [`f4f0409`](https://github.com/opengovsg/oui-design-system/commit/f4f040947bba6539c319c9610caadfd4a3d52f8c)]:
+  - @opengovsg/oui-theme@0.0.14
+
 ## 0.0.13
 
 ### Patch Changes
