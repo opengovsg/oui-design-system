@@ -93,12 +93,12 @@ export function Select<T extends object>({
   return (
     <Provider values={[[SelectVariantContext, variantProps]]}>
       <AriaSelect
+        {...props}
         className={composeRenderProps(
-          props.className,
+          props.className ?? classNames?.base,
           (className, renderProps) =>
             styles.base({ className, ...renderProps }),
         )}
-        {...props}
       >
         {label && (
           <Label size={variantProps.size} className={classNames?.label}>
