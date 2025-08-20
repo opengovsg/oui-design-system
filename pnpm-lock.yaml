@@ -334,9 +334,6 @@ importers:
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
-      react:
-        specifier: 'catalog:'
-        version: 19.0.0
       react-aria:
         specifier: ^3.41.1
         version: 3.41.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -404,6 +401,9 @@ importers:
       prettier:
         specifier: ^3.5.0
         version: 3.5.3
+      react:
+        specifier: 'catalog:'
+        version: 19.0.0
       storybook:
         specifier: 9.1.1
         version: 9.1.1(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.0.3)(typescript@5.7.3))(prettier@3.5.3)(vite@7.1.2(@types/node@24.0.3)(jiti@2.4.2)(lightningcss@1.30.1)(terser@5.43.0)(tsx@4.20.3)(yaml@2.7.0))
@@ -425,9 +425,6 @@ importers:
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
-      react:
-        specifier: 'catalog:'
-        version: 19.0.0
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -462,6 +459,9 @@ importers:
       prettier:
         specifier: ^3.5.0
         version: 3.5.3
+      react:
+        specifier: 'catalog:'
+        version: 19.0.0
       tailwind-variants:
         specifier: 2.0.1
         version: 2.0.1(tailwind-merge@3.3.1)(tailwindcss@4.1.11)
@@ -10621,7 +10621,7 @@ snapshots:
       eslint: 9.20.1(jiti@2.4.2)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.8.6(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-react: 7.37.5(eslint@9.20.1(jiti@2.4.2))
       eslint-plugin-react-hooks: 5.2.0(eslint@9.20.1(jiti@2.4.2))
@@ -10655,7 +10655,7 @@ snapshots:
       stable-hash: 0.0.4
       tinyglobby: 0.2.14
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.4.2))
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2))
     transitivePeerDependencies:
       - supports-color
 
@@ -10670,7 +10670,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.4.2)):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.4.2))(typescript@5.7.3))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2)))(eslint@9.20.1(jiti@2.4.2)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
