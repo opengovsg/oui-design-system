@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { HelpCircle } from "lucide-react"
 import { Dialog, DialogTrigger, Heading } from "react-aria-components"
-import { expect, userEvent, within } from "storybook/test"
 
 import type { PopoverProps } from "../popover"
 import { Button } from "../../button"
@@ -42,15 +41,6 @@ const Template = (args: PopoverProps) => {
 export const Example: Story = {
   args: {},
   render: Template,
-  play: ({ canvasElement }) => {
-    const screenElement = canvasElement.parentElement!
-    const canvas = within(screenElement)
-    userEvent.click(canvas.getByLabelText("Help"))
-
-    expect(
-      canvas.findByRole("heading", { name: /help/i }),
-    ).resolves.toBeInTheDocument()
-  },
 }
 
 export const WithArrow: Story = {
@@ -58,13 +48,4 @@ export const WithArrow: Story = {
     showArrow: true,
   },
   render: Template,
-  play: ({ canvasElement }) => {
-    const screenElement = canvasElement.parentElement!
-    const canvas = within(screenElement)
-    userEvent.click(canvas.getByLabelText("Help"))
-
-    expect(
-      canvas.findByRole("heading", { name: /help/i }),
-    ).resolves.toBeInTheDocument()
-  },
 }

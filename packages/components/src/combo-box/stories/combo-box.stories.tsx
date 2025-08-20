@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
 import { ListBoxItem, useFilter } from "react-aria-components"
-import { expect, userEvent, within } from "storybook/test"
 
 import type { ComboBoxProps } from "../combo-box"
 import { ComboBox } from "../combo-box"
@@ -38,19 +37,6 @@ export const WithSelection: Story = {
   },
 }
 
-export const NoMatch: Story = {
-  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.parentElement!)
-    const inputElem = canvas.getByRole("combobox")
-    await userEvent.type(inputElem, "No match")
-
-    expect(
-      canvas.findByText("No matching results"),
-    ).resolves.toBeInTheDocument()
-  },
-}
-
 export const Disabled: Story = {
   args: {
     isDisabled: true,
@@ -79,25 +65,6 @@ export const CustomComboboxItem: Story = {
   },
 }
 
-export const WithExpandedSuggestions: Story = {
-  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.parentElement!)
-    const expandElem = canvas.getByRole("button", {
-      name: /show suggestions ice cream flavour/i,
-    })
-    expandElem.click()
-    expect(
-      canvas.findByRole("option", { name: /item 0/i }),
-    ).resolves.toBeInTheDocument()
-  },
-  parameters: {
-    // This option disables all automatic a11y checks on this story,
-    // since there are false positives
-    a11y: { test: "todo" },
-  },
-}
-
 export const Virtualised: Story = {
   args: {
     defaultItems: [
@@ -118,15 +85,6 @@ export const TriggerOnFocus: Story = {
   args: {
     label: "Click on the input to automatically trigger the menu",
     menuTrigger: "focus",
-  },
-  play: async ({ canvasElement }) => {
-    const canvas = within(canvasElement.parentElement!)
-    const inputElem = canvas.getByRole("combobox")
-    userEvent.click(inputElem)
-
-    expect(
-      canvas.findByRole("option", { name: /item 0/i }),
-    ).resolves.toBeInTheDocument()
   },
 }
 

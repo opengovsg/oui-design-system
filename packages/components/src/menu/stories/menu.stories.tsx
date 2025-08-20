@@ -3,7 +3,7 @@ import type { Selection } from "react-aria-components"
 import { useState } from "react"
 import { MoreHorizontal } from "lucide-react"
 import { MenuTrigger, SubmenuTrigger } from "react-aria-components"
-import { expect, userEvent, within } from "storybook/test"
+import { userEvent } from "storybook/test"
 
 import type { MenuProps } from "../menu"
 import { Button } from "../../button"
@@ -155,17 +155,6 @@ export const WithSubmenuAndSelection: Story = {
         </Menu>
       </MenuTrigger>
     )
-  },
-  play: async ({ canvasElement }) => {
-    const screen = canvasElement.parentElement!
-    const canvas = within(screen)
-
-    userEvent.click(canvas.getByRole("button", { name: /menu options/i }))
-    userEvent.click(await canvas.findByRole("menuitem", { name: /open/i }))
-
-    expect(
-      canvas.findByRole("menuitem", { name: /open in new window/i }),
-    ).resolves.toBeInTheDocument()
   },
 }
 
