@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.15
+
+### Patch Changes
+
+- [#120](https://github.com/opengovsg/oui-design-system/pull/120) [`c901e0c`](https://github.com/opengovsg/oui-design-system/commit/c901e0c2bda669d3311242494ee5fb201bb8d694) Thanks [@karrui](https://github.com/karrui)! - feat: make react a peer dependency instead of a dependency
+
 ## 0.0.14
 
 ### Patch Changes
