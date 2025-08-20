@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.15
+
+### Patch Changes
+
+- [#120](https://github.com/opengovsg/oui-design-system/pull/120) [`c901e0c`](https://github.com/opengovsg/oui-design-system/commit/c901e0c2bda669d3311242494ee5fb201bb8d694) Thanks [@karrui](https://github.com/karrui)! - feat: make react a peer dependency instead of a dependency
+
+- [#119](https://github.com/opengovsg/oui-design-system/pull/119) [`30e967f`](https://github.com/opengovsg/oui-design-system/commit/30e967f00f56e3f8b878e9285b619c6f93c9d656) Thanks [@karrui](https://github.com/karrui)! - fix(select): prevent className prop from overriding everything
+
+- Updated dependencies [[`c901e0c`](https://github.com/opengovsg/oui-design-system/commit/c901e0c2bda669d3311242494ee5fb201bb8d694)]:
+  - @opengovsg/oui-theme@0.0.15
+
 ## 0.0.14
 
 ### Patch Changes
