@@ -59,6 +59,7 @@
     "lucide-react": "^0.475.0",
     "motion": "^12.18.1",
     "prettier": "catalog:",
+    "react": "catalog:",
     "storybook": "9.1.1",
     "tsx": "^4.20.3",
     "typescript": "catalog:"
@@ -79,7 +80,6 @@
     "fuzzysort": "^3.1.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.1.5",
-    "react": "catalog:",
     "react-aria": "^3.41.1",
     "react-aria-components": "^1.10.1",
     "react-stately": "^3.39.0",
@@ -92,6 +92,7 @@
   "peerDependencies": {
     "@opengovsg/oui-theme": "workspace:*",
     "motion": ">=11.12.0 || >=12.0.0-alpha.1",
+    "react": ">= 18",
     "react-aria-components": "^1.10.1"
   }
 }
