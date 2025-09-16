@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.16
+
+### Patch Changes
+
+- [#123](https://github.com/opengovsg/oui-design-system/pull/123) [`a5b3827`](https://github.com/opengovsg/oui-design-system/commit/a5b38274213bd1e51beb920eff678748236b1f10) Thanks [@karrui](https://github.com/karrui)! - feat: update dependencies
+
 ## 0.0.15
 
 ### Patch Changes
