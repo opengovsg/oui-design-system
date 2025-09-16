@@ -16,14 +16,14 @@
     "test": "vitest --project=storybook"
   },
   "dependencies": {
-    "@internationalized/date": "^3.8.2",
+    "@internationalized/date": "^3.9.0",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/prettier-config": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "inter-ui": "^4.1.0",
     "react": "catalog:",
-    "react-aria-components": "^1.10.1",
+    "react-aria-components": "^1.12.2",
     "react-dom": "catalog:"
   },
   "devDependencies": {

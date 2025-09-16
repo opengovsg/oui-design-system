@@ -21,7 +21,7 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@icons-pack/react-simple-icons": "^11.2.0",
-    "@internationalized/date": "^3.8.2",
+    "@internationalized/date": "^3.9.0",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
@@ -36,7 +36,7 @@
     "lucide-react": "^0.475.0",
     "next": "15.2.4",
     "react": "catalog:",
-    "react-aria-components": "^1.10.1",
+    "react-aria-components": "^1.12.2",
     "react-dom": "catalog:",
     "shiki": "^2.3.2",
     "type-fest": "^4.41.0"
