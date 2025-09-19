@@ -1,6 +1,6 @@
 import type { VariantProps } from "tailwind-variants"
 
-import { focusVisibleClasses } from "../utils"
+import { focusClasses } from "../utils"
 import { tv } from "../utils/tv"
 
 export const calendarStyles = tv({
@@ -15,7 +15,7 @@ export const calendarStyles = tv({
     content: "",
     cell: [
       "text-base-content-default outside-month:text-interaction-support-disabled-content disabled:text-interaction-support-disabled-content unavailable:text-interaction-support-disabled-content unavailable:line-through unavailable:cursor-default data-[highlighted=true]:border-utility-focus-default relative my-0.25 flex cursor-pointer items-center justify-center rounded-full border border-transparent transition-colors duration-150 disabled:cursor-default",
-      ...focusVisibleClasses,
+      ...focusClasses,
     ],
     grid: "",
     calendar: "",
