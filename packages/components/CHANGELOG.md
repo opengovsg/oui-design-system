@@ -1,5 +1,12 @@
 # @opengovsg/oui
 
+## 0.0.17
+
+### Patch Changes
+
+- Updated dependencies [[`82f07e4`](https://github.com/opengovsg/oui-design-system/commit/82f07e41756417ef2d0a0c9ee2ebb9d15c3a7088)]:
+  - @opengovsg/oui-theme@0.0.17
+
 ## 0.0.16
 
 ### Patch Changes
