@@ -57,5 +57,10 @@ export interface CalendarProps<T extends DateValue>
    * If `bottomContent is provided, this will be ignored.
    */
   showTodayButton?: boolean
+  /**
+   * If `true`, clicking on the "Today" button will set the selected date to today.
+   * If `false`, it will only move the focus to today's date without changing the selected date.
+   */
+  shouldSetDateOnTodayButtonClick?: boolean
   bottomContent?: ReactNode
 }

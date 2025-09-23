@@ -1,7 +1,7 @@
 "use client"
 
 import type { CalendarDate } from "@internationalized/date"
-import { useContext } from "react"
+import { useCallback, useContext } from "react"
 import { getLocalTimeZone, today } from "@internationalized/date"
 
 import type { CalendarProps } from "./types"
@@ -10,13 +10,27 @@ import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
 import { useCalendarI18n } from "./hooks"
 
+type CalendarBottomContentProps<T extends CalendarDate> = Pick<
+  CalendarProps<T>,
+  "bottomContent" | "showTodayButton" | "shouldSetDateOnTodayButtonClick"
+>
+
 export const CalendarBottomContent = <T extends CalendarDate>({
   bottomContent,
   showTodayButton,
-}: Pick<CalendarProps<T>, "bottomContent" | "showTodayButton">) => {
+  shouldSetDateOnTodayButtonClick,
+}: CalendarBottomContentProps<T>) => {
   const state = useContext(AgnosticCalendarStateContext)!
   const { slots, classNames, size } = useCalendarStyleContext()
   const formatMessage = useCalendarI18n()
+
+  const handleTodayClick = useCallback(() => {
+    const todayDate = today(getLocalTimeZone())
+    state.setFocusedDate(todayDate)
+    if (shouldSetDateOnTodayButtonClick) {
+      state.selectDate(todayDate)
+    }
+  }, [shouldSetDateOnTodayButtonClick, state])
 
   if (bottomContent) {
     return bottomContent
@@ -39,9 +53,7 @@ export const CalendarBottomContent = <T extends CalendarDate>({
         size={size}
         slot={null}
         className={slots.todayButton({ className: classNames?.todayButton })}
-        onPress={() => {
-          state.setFocusedDate(today(getLocalTimeZone()))
-        }}
+        onPress={handleTodayClick}
       >
         {formatMessage("today")}
       </Button>

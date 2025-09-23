@@ -372,6 +372,22 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/calendar-page-behaviour.tsx"),
     ),
   },
+  "calendar-select-date-on-today-button-click": {
+    name: "calendar-select-date-on-today-button-click",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/calendar-select-date-on-today-button-click.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/calendar-select-date-on-today-button-click.tsx"
+        ),
+    ),
+  },
   "calendar-unavailable-dates": {
     name: "calendar-unavailable-dates",
     description: "",
