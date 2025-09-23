@@ -87,6 +87,10 @@ export const SelectDateOnTodayButtonClick: Story = {
   args: {
     shouldSetDateOnTodayButtonClick: true,
   },
+  play: async ({ canvas, userEvent }) => {
+    const button = await canvas.findByText("Today")
+    await userEvent.click(button)
+  },
 }
 
 export const HideTodayButton: Story = {
