@@ -89,6 +89,11 @@ export interface RangeCalendarProps<T extends DateValue>
    * If `bottomContent is provided, this will be ignored.
    */
   showTodayButton?: boolean
+  /**
+   * If `true`, clicking on the "Today" button will set the selected date to today.
+   * If `false`, it will only move the focus to today's date without changing the selected date.
+   */
+  shouldSetDateOnTodayButtonClick?: boolean
   bottomContent?: React.ReactNode
 
   errorMessage?: string
@@ -110,6 +115,7 @@ export const RangeCalendar = forwardRefGeneric(function RangeCalendar<
     maxValue = new CalendarDate(2100, 12, 31),
     bottomContent,
     showTodayButton = true,
+    shouldSetDateOnTodayButtonClick,
     errorMessage,
     ...restProps
   } = props
@@ -192,6 +198,7 @@ export const RangeCalendar = forwardRefGeneric(function RangeCalendar<
           <CalendarBottomContent
             bottomContent={bottomContent}
             showTodayButton={showTodayButton}
+            shouldSetDateOnTodayButtonClick={shouldSetDateOnTodayButtonClick}
           />
         </RangeCalendarStateWrapper>
       </Provider>

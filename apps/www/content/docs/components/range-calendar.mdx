@@ -105,6 +105,13 @@ By default, when pressing the next or previous buttons, pagination will advance 
 
 <ComponentPreview name="range-calendar-page-behaviour" />
 
+### Selecting Date on "Today" Button Click
+
+By default, clicking the "Today" button will only move focus to today's date without selecting it. To change this behavior so that clicking the "Today" button also selects today's date, set the `shouldSetDateOnTodayButtonClick` prop to `true`.
+If there is an open range selection, clicking "Today" will set either the start or end of the range to today's date, depending on which end of the range is already selected.
+
+<ComponentPreview name="range-calendar-select-date-on-today-button-click" />
+
 ### Hiding "Today" Button
 
 The "Today" button can be hidden by setting the `showTodayButton` prop to `false`.

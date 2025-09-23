@@ -12,10 +12,15 @@ export default function RangeCalendarControlled() {
   })
 
   return (
-    <RangeCalendar
-      aria-label="Date (Controlled)"
-      value={value}
-      onChange={setValue}
-    />
+    <div className="flex flex-col gap-4">
+      <RangeCalendar
+        aria-label="Date (Controlled)"
+        value={value}
+        onChange={setValue}
+      />
+      <div>
+        Selected dates: {value.start.toString()} - {value.end.toString()}
+      </div>
+    </div>
   )
 }

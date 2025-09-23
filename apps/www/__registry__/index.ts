@@ -913,6 +913,22 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/range-calendar-page-behaviour.tsx"),
     ),
   },
+  "range-calendar-select-date-on-today-button-click": {
+    name: "range-calendar-select-date-on-today-button-click",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/range-calendar-select-date-on-today-button-click.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/range-calendar-select-date-on-today-button-click.tsx"
+        ),
+    ),
+  },
   "range-calendar-unavailable-dates": {
     name: "range-calendar-unavailable-dates",
     description: "",

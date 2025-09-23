@@ -83,6 +83,12 @@ export const CustomFirstDayOfWeek: Story = {
   },
 }
 
+export const SelectDateOnTodayButtonClick: Story = {
+  args: {
+    shouldSetDateOnTodayButtonClick: true,
+  },
+}
+
 export const HideTodayButton: Story = {
   args: { showTodayButton: false },
 }
