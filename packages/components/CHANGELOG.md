@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.18
+
+### Patch Changes
+
+- [#128](https://github.com/opengovsg/oui-design-system/pull/128) [`d7e4f5d`](https://github.com/opengovsg/oui-design-system/commit/d7e4f5d40073ba0a1f9b6aa3233a4b414b1ed94d) Thanks [@karrui](https://github.com/karrui)! - feat(range-calendar): add `shouldSetDateOnTodayButtonClick` prop handling
+
+- [#128](https://github.com/opengovsg/oui-design-system/pull/128) [`d7e4f5d`](https://github.com/opengovsg/oui-design-system/commit/d7e4f5d40073ba0a1f9b6aa3233a4b414b1ed94d) Thanks [@karrui](https://github.com/karrui)! - feat(calendar): add `shouldSetDateOnTodayButtonClick` prop handling
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.18
+
 ## 0.0.17
 
 ### Patch Changes
