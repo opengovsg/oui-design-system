@@ -42,6 +42,7 @@ export const Calendar = forwardRefGeneric(function Calendar<
     maxValue = new CalendarDate(2100, 12, 31),
     bottomContent,
     showTodayButton = true,
+    shouldSetDateOnTodayButtonClick,
     errorMessage,
     ...restProps
   } = props
@@ -135,6 +136,7 @@ export const Calendar = forwardRefGeneric(function Calendar<
           <CalendarBottomContent
             bottomContent={bottomContent}
             showTodayButton={showTodayButton}
+            shouldSetDateOnTodayButtonClick={shouldSetDateOnTodayButtonClick}
           />
         </Provider>
       </CalendarStateWrapper>

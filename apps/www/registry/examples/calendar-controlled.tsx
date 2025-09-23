@@ -9,10 +9,13 @@ export default function CalendarControlled() {
   let [value, setValue] = React.useState(parseDate("2025-03-20"))
 
   return (
-    <Calendar
-      aria-label="Date (Controlled)"
-      value={value}
-      onChange={setValue}
-    />
+    <div className="flex flex-col gap-4">
+      <Calendar
+        aria-label="Date (Controlled)"
+        value={value}
+        onChange={setValue}
+      />
+      <div>Selected date: {value.toString()}</div>
+    </div>
   )
 }
