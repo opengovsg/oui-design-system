@@ -31,6 +31,11 @@ interface _ToggleProps
   thumbIcon?:
     | React.ReactElement
     | ((props: ToggleThumbIconProps) => React.ReactNode)
+  /**
+   * The where to place the children label.
+   * @defaultValue "end"
+   */
+  labelPlacement?: "start" | "end"
 }
 
 export type ToggleProps = _ToggleProps &
@@ -49,6 +54,7 @@ export const Toggle = ({
   children,
   classNames,
   thumbIcon,
+  labelPlacement = "end",
   ...originalProps
 }: ToggleProps) => {
   const [props, variantProps] = mapPropsVariants(
@@ -80,12 +86,13 @@ export const Toggle = ({
     >
       {(renderProps) => (
         <>
+          {labelPlacement === "start" ? children : null}
           <div className={slots.track({ className: classNames?.track })}>
             <span className={slots.thumb({ className: classNames?.thumb })}>
               {thumbIcon && clonedThumbIcon(renderProps)}
             </span>
           </div>
-          {children}
+          {labelPlacement === "end" ? children : null}
         </>
       )}
     </AriaSwitch>
