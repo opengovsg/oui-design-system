@@ -3,6 +3,7 @@
 import type { LocalizedStrings } from "react-aria"
 import type {
   ComboBoxProps as AriaComboBoxProps,
+  InputProps,
   ListBoxProps,
   ListBoxRenderProps,
   ListLayoutOptions,
@@ -56,10 +57,8 @@ export interface ComboBoxProps<T extends object>
    * Any additional props to be spread to the list layout.
    */
   listLayoutOptions?: ListLayoutOptions
-
   /** Values that should invalidate the item cache when using dynamic collections. */
   dependencies?: ListBoxProps<T>["dependencies"]
-
   /**
    * If provided, a clear button will be rendered next to the expand button.
    *
@@ -69,10 +68,9 @@ export interface ComboBoxProps<T extends object>
    * handled `inputValue`, `onInputChange`, `selectedKey` and `onSelectionChange` state.
    */
   onClear?: () => void
-
   renderEmptyState?: ListBoxProps<T>["renderEmptyState"]
-
   children?: ListBoxProps<T>["children"]
+  inputProps?: Partial<InputProps>
 }
 
 const calculateEstimatedRowHeight = (
@@ -140,6 +138,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
     dependencies,
     onClear,
     renderEmptyState: renderEmptyStateProp,
+    inputProps,
     ...props
   } = _props
 
@@ -203,6 +202,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
                     (className, renderProps) =>
                       styles.field({ ...renderProps, className }),
                   )}
+                  {...inputProps}
                 />
                 <AriaButton
                   className={composeRenderProps(
