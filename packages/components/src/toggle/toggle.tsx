@@ -32,7 +32,7 @@ interface _ToggleProps
     | React.ReactElement
     | ((props: ToggleThumbIconProps) => React.ReactNode)
   /**
-   * The where to place the children label.
+   * Where to place the children label.
    * @defaultValue "end"
    */
   labelPlacement?: "start" | "end"
