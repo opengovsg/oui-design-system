@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.19
+
+### Patch Changes
+
+- [#130](https://github.com/opengovsg/oui-design-system/pull/130) [`df95e34`](https://github.com/opengovsg/oui-design-system/commit/df95e34399c6a63d28acd4cc47f9fa62711b04a5) Thanks [@karrui](https://github.com/karrui)! - feat(toggle): add `labelPlacement` prop to allow label to be before toggle
+
+- [#131](https://github.com/opengovsg/oui-design-system/pull/131) [`41d06f3`](https://github.com/opengovsg/oui-design-system/commit/41d06f3d80e8b98cdfd417dbae03d30fcd5683e4) Thanks [@karrui](https://github.com/karrui)! - feat(combo-box): add inputProps prop for props passthrough to input
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.19
+
 ## 0.0.18
 
 ### Patch Changes
