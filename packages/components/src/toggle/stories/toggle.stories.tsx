@@ -35,6 +35,13 @@ export const WithLabel: Story = {
   },
 }
 
+export const LabelAtStart: Story = {
+  args: {
+    children: "Toggle",
+    labelPlacement: "start",
+  },
+}
+
 export const WithThumbIcon: Story = {
   parameters: {
     docs: {
