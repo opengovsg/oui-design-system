@@ -29,10 +29,6 @@ jobs:
       - name: Build packages
         run: pnpm build --filter=@opengovsg/oui
 
-      - name: Setup .npmrc
-        run: |
-          echo -e "@opengovsg:registry=https://registry.npmjs.org\n//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > $HOME/.npmrc
-
       - name: Create Release PR or Publish to npm
         id: changesets
         uses: opengovsg/changesets-action@f68bb4b781c954856eabd2643d4087c8faa97f2a
