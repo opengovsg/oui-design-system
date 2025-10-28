@@ -5,3 +5,5 @@ import { customTwMergeConfig } from "./tw-merge"
 export const tv = createTV({
   twMergeConfig: customTwMergeConfig,
 })
+
+export const emptyStyles = tv({})

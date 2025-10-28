@@ -6,7 +6,7 @@ import { chain } from "@react-aria/utils"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 
 import type { ButtonVariantProps } from "@opengovsg/oui-theme"
-import { buttonStyles } from "@opengovsg/oui-theme"
+import { buttonStyles, emptyStyles } from "@opengovsg/oui-theme"
 
 import type { SpinnerProps } from "../spinner"
 import { Ripple, useRipple } from "../ripple"
@@ -102,11 +102,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       return <Spinner size={spinnerSize} />
     }, [size, spinnerProp])
 
+    const styles = variant === "unstyled" ? emptyStyles : buttonStyles
+
     return (
       <AriaButton
         {...props}
         className={composeRenderProps(classNameProp, (className, renderProps) =>
-          buttonStyles({
+          styles({
             ...renderProps,
             variant,
             size,
