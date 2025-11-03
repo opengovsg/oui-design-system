@@ -59,7 +59,6 @@ export const Header = () => {
             <a aria-label="GitHub repository" href={route.repoUrl}>
               <SiGithub className="size-5 fill-black/40 hover:fill-black dark:fill-gray-400 dark:hover:fill-gray-200" />
             </a>
-            <ColorModeButton />
           </div>
         </div>
       </div>
