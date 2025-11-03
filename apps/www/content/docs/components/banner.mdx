@@ -9,6 +9,54 @@ links:
   theme: banner
 ---
 
+## Usage
+
 <ComponentPreview name="banner-demo" />
 
-# Docs to be updated
+### Sizes
+
+Use the `size` prop to change the size of the banner.
+
+<ComponentPreview name="banner-with-sizes" />
+
+### Variants
+
+Use the `variant` prop to change the visual style of the Banner.
+
+<ComponentPreview name="banner-variants" />
+
+### Custom icon
+
+By default, Banner displays an appropriate icon based on the `variant` prop. You can override this by providing a custom icon using the `startContent` prop.
+
+<ComponentPreview name="banner-with-start-content" />
+
+### Hidden icon
+
+You can hide the icon by setting startContent to `null`.
+
+<ComponentPreview name="banner-with-hidden-start-content" />
+
+### Visibility
+
+#### Controlled
+
+You can control the banner visibility using the `isExpanded` and `onExpandedChange` props.
+
+<ComponentPreview name="banner-with-controlled-visibility" />
+
+#### Uncontrolled
+
+You can also set the initial visibility using the `defaultExpanded` prop.
+This defaults to `true` if unset.
+
+## Slots
+
+Alert has the following slots:
+
+- `base`: The main banner container element
+- `content`: The content wrapper that contains the `startContent` and children
+- `startContentWrapper`: The wrapper around the `startContent` element
+- `childrenWrapper`: The wrapper around the children elements
+- `dismissButton`: The dismiss button element
+- `icon`: The icon element within startContent (if default icons are used)
