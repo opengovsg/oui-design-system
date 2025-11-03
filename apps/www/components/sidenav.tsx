@@ -46,6 +46,20 @@ const WipBadge = () => {
   )
 }
 
+const RedirectBadge = () => {
+  return (
+    <Badge
+      variant="outline"
+      radius="full"
+      color="neutral"
+      className="bg-transparent decoration-inherit"
+      size="xs"
+    >
+      ↗
+    </Badge>
+  )
+}
+
 const SidenavItem = ({
   children,
 }: {
@@ -90,6 +104,7 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
                   </span>
                   {item.status === "new" && <NewBadge />}
                   {item.status === "wip" && <WipBadge />}
+                  {item.status === "redirect" && <RedirectBadge />}
                 </Link>
               )
             }}
