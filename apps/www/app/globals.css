@@ -52,3 +52,33 @@
 .steps > h3 {
   @apply mt-8 mb-4 text-base font-semibold;
 }
+
+@theme {
+  @keyframes modal-blur {
+    from {
+      background: color-mix(in oklab, var(--color-grey-900) 0%, transparent);
+      backdrop-filter: blur(0);
+    }
+
+    to {
+      background: color-mix(in oklab, var(--color-grey-900) 30%, transparent);
+      backdrop-filter: blur(8px);
+    }
+  }
+
+  @keyframes modal-slide {
+    from {
+      transform: translateY(100%);
+    }
+
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  --animate-modal-slide-enter: modal-slide 200ms;
+  --animate-modal-slide-exit: modal-slide 200ms reverse;
+
+  --animate-modal-blur-enter: modal-blur 200ms;
+  --animate-modal-blur-exit: modal-blur 200ms reverse;
+}
