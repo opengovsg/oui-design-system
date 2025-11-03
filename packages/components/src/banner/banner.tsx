@@ -22,7 +22,7 @@ interface BannerProps
   /**
    * The banner start content. Will default to the relevant icons based on the `variant` prop.
    */
-  startContent?: React.ReactNode
+  startContent?: React.ReactNode | null
   children: ReactNode
   /**
    * If provided, the dismiss button will be rendered.
@@ -66,6 +66,11 @@ export const Banner = ({
     if (startContentProp) {
       return startContentProp
     }
+
+    if (startContentProp === null) {
+      return null
+    }
+
     switch (variant) {
       case "info":
         return (
@@ -102,13 +107,15 @@ export const Banner = ({
       {...(isDismissable ? bannerProps : {})}
     >
       <div className={styles.content({ className: classNames?.content })}>
-        <div
-          className={styles.startContentWrapper({
-            className: classNames?.startContentWrapper,
-          })}
-        >
-          {startContent}
-        </div>
+        {startContent && (
+          <div
+            className={styles.startContentWrapper({
+              className: classNames?.startContentWrapper,
+            })}
+          >
+            {startContent}
+          </div>
+        )}
         <div
           className={styles.childrenWrapper({
             className: classNames?.childrenWrapper,
