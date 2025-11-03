@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.20
+
+### Patch Changes
+
+- [#137](https://github.com/opengovsg/oui-design-system/pull/137) [`6596d7f`](https://github.com/opengovsg/oui-design-system/commit/6596d7ffdc8ca54916a52b799132b9d562c569af) Thanks [@karrui](https://github.com/karrui)! - feat(banner): allow nullable startContent and fix controllable state
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.20
+
 ## 0.0.19
 
 ### Patch Changes
