@@ -89,6 +89,8 @@ export const Banner = ({
   const bannerRef = useRef<HTMLDivElement>(null)
   const state = useDisclosureState({
     defaultExpanded,
+    isExpanded: disclosureProps.isExpanded,
+    onExpandedChange: disclosureProps.onExpandedChange,
   })
   const { buttonProps, panelProps: bannerProps } = useDisclosure(
     disclosureProps,
