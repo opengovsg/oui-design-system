@@ -182,7 +182,10 @@ export const mdxComponents = {
   },
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className={cn("rounded-md font-mono text-sm", className)}
+      className={cn(
+        "rounded-md font-mono text-sm font-bold before:content-['`'] after:content-['`']",
+        className,
+      )}
       {...props}
     />
   ),

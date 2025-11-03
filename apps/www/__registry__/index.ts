@@ -143,6 +143,67 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/banner-demo.tsx")),
   },
+  "banner-variants": {
+    name: "banner-variants",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-variants.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/banner-variants.tsx")),
+  },
+  "banner-with-controlled-visibility": {
+    name: "banner-with-controlled-visibility",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-with-controlled-visibility.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/banner-with-controlled-visibility.tsx"),
+    ),
+  },
+  "banner-with-hidden-start-content": {
+    name: "banner-with-hidden-start-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-with-hidden-start-content.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/banner-with-hidden-start-content.tsx"),
+    ),
+  },
+  "banner-with-sizes": {
+    name: "banner-with-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-with-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/banner-with-sizes.tsx")),
+  },
+  "banner-with-start-content": {
+    name: "banner-with-start-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/banner-with-start-content.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/banner-with-start-content.tsx"),
+    ),
+  },
   "button-demo": {
     name: "button-demo",
     description: "",
