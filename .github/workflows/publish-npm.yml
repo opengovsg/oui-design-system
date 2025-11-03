@@ -26,11 +26,6 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: Update npm for OIDC publishing
-        # pnpm publish uses npm publish under the hood,
-        # which requires npm >= 11.5.1 for OIDC support
-        run: pnpm install -g npm@11.6.2
-
       - name: Build packages
         run: pnpm build --filter=@opengovsg/oui
 
@@ -42,7 +37,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Use OIDC for npm authentication instead of NPM_TOKEN
-          NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
 
       - name: Publish dev snapshot
         if: steps.changesets.outputs.published != 'true'
@@ -53,4 +47,3 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Use OIDC for npm authentication instead of NPM_TOKEN
-          NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
