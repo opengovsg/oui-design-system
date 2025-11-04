@@ -21,6 +21,7 @@ import type {
 import {
   composeRenderProps,
   composeTailwindRenderProps,
+  dataAttr,
   dateFieldStyles,
   dateInputStyles,
 } from "@opengovsg/oui-theme"
@@ -125,6 +126,7 @@ export function DateInput(originalProps: DateInputProps) {
             classNames?.segment,
             (className, renderProps) =>
               styles.segment({
+                isEditable: segment.isEditable,
                 ...renderProps,
                 className,
               }),
