@@ -37,13 +37,22 @@ interface DateFieldProps<T extends DateValue>
   classNames?: SlotsToClasses<
     "base" | "label" | "input" | "description" | "error"
   >
+  inputProps?: DateInputProps
 }
 
 export function DateField<T extends DateValue>(
   originalProps: DateFieldProps<T>,
 ) {
   const [
-    { label, description, errorMessage, className, classNames, ...props },
+    {
+      inputProps,
+      label,
+      description,
+      errorMessage,
+      className,
+      classNames,
+      ...props
+    },
     variantProps,
   ] = useMemo(
     () => mapPropsVariants(originalProps, dateFieldStyles.variantKeys),
@@ -69,7 +78,7 @@ export function DateField<T extends DateValue>(
           {label}
         </Label>
       )}
-      <DateInput size={variantProps.size} className={styles} />
+      <DateInput size={variantProps.size} className={styles} {...inputProps} />
       {description && (
         <Description
           size={variantProps.size}
