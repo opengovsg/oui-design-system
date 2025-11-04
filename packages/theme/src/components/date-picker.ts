@@ -4,11 +4,11 @@ import { tv } from "../utils/tv"
 
 export const datePickerStyles = tv({
   slots: {
-    base: "group isolate flex flex-col gap-1",
+    base: "group isolate flex w-full flex-col gap-1",
     group: "",
     input: "flex-1",
     dialog: "flex",
-    selectorButton: "group-focus-within:",
+    selectorIcon: "",
     calendarButton: "z-1 -m-px text-inherit -outline-offset-1",
   },
   variants: {

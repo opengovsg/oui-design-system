@@ -65,6 +65,7 @@ export const CalendarMonthDaySelector = () => {
               selectedText: slots.selectorText({
                 className: classNames?.selectorText,
               }),
+              popover: "min-w-[8ch]",
             }}
             selectedKey={state.visibleRange.start.year}
             aria-label={formatMessage("selectYear")}

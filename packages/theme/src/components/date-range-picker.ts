@@ -11,7 +11,6 @@ export const dateRangePickerStyles = tv({
     group:
       "group-disabled:text-interaction-support-disabled-content text-base-content-default",
     dialog: "flex",
-    selectorButton: "group-focus-within:",
     calendarButton: "z-1 -m-px text-inherit -outline-offset-1",
     connector: "",
   },
