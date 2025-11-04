@@ -12,6 +12,7 @@ import { DatePicker as AriaDatePicker, Dialog } from "react-aria-components"
 import type {
   CalendarSlots,
   DatePickerSlots,
+  FieldErrorSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
@@ -36,11 +37,14 @@ interface DatePickerProps<T extends DateValue>
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
+  selectorIcon?: React.ReactNode
   calendarProps?: CalendarProps<T>
   popoverProps?: PopoverProps
   calendarButtonProps?: ButtonProps
-  classNames?: SlotsToClasses<DatePickerSlots> & {
+  classNames?: SlotsToClasses<DatePickerSlots | "description"> & {
     calendar?: SlotsToClasses<CalendarSlots>
+    error?: SlotsToClasses<FieldErrorSlots>
+    popover?: PopoverProps["classNames"]
   }
 }
 
@@ -57,6 +61,7 @@ export function DatePicker<T extends DateValue>(
       calendarProps,
       popoverProps,
       calendarButtonProps,
+      selectorIcon,
       ...props
     },
     variantProps,
@@ -91,10 +96,21 @@ export function DatePicker<T extends DateValue>(
           })}
           {...calendarButtonProps}
         >
-          <CalendarIcon aria-hidden />
+          {selectorIcon ?? (
+            <CalendarIcon
+              className={styles.selectorIcon({
+                className: classNames?.selectorIcon,
+              })}
+              aria-hidden
+            />
+          )}
         </Button>
       </FieldGroup>
-      <Popover placement="bottom end" {...popoverProps}>
+      <Popover
+        placement="bottom end"
+        classNames={classNames?.popover}
+        {...popoverProps}
+      >
         <Dialog className={styles.dialog({ className: classNames?.dialog })}>
           <Calendar
             size={variantProps.size === "xs" ? "sm" : variantProps.size}
@@ -104,9 +120,16 @@ export function DatePicker<T extends DateValue>(
         </Dialog>
       </Popover>
       {description && (
-        <Description size={variantProps.size}>{description}</Description>
+        <Description
+          className={classNames?.description}
+          size={variantProps.size}
+        >
+          {description}
+        </Description>
       )}
-      <FieldError size={variantProps.size}>{errorMessage}</FieldError>
+      <FieldError classNames={classNames?.error} size={variantProps.size}>
+        {errorMessage}
+      </FieldError>
     </AriaDatePicker>
   )
 }
