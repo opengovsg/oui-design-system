@@ -1,16 +1,15 @@
 "use client"
 
-import type { DateValue } from "react-aria-components"
 import { useState } from "react"
-import { now, parseAbsoluteToLocal } from "@internationalized/date"
+import { parseAbsoluteToLocal, ZonedDateTime } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
 import { DateRangePicker } from "@opengovsg/oui"
 
 export default function DateRangePickerGranularity() {
   const [value, setValue] = useState<{
-    start: DateValue
-    end: DateValue
+    start: ZonedDateTime
+    end: ZonedDateTime
   } | null>({
     start: parseAbsoluteToLocal("2021-04-07T18:45:22Z"),
     end: parseAbsoluteToLocal("2021-04-08T20:00:00Z"),
@@ -29,7 +28,7 @@ export default function DateRangePickerGranularity() {
       <p className="text-muted-foreground text-sm">
         Selected date range:{" "}
         {value && value.start && value.end
-          ? `${formatter.format(value.start.toDate("UTC"))} to ${formatter.format(value.end.toDate("UTC"))}`
+          ? `${formatter.format(value.start.toDate())} to ${formatter.format(value.end.toDate())}`
           : "--"}
       </p>
     </div>

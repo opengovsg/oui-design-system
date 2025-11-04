@@ -1,6 +1,5 @@
 "use client"
 
-import type { DateValue } from "react-aria-components"
 import { useState } from "react"
 import { CalendarDate } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
@@ -9,8 +8,8 @@ import { DateRangePicker } from "@opengovsg/oui"
 
 export default function DateRangePickerControlled() {
   const [value, setValue] = useState<{
-    start: DateValue
-    end: DateValue
+    start: CalendarDate
+    end: CalendarDate
   } | null>({
     start: new CalendarDate(2024, 7, 1),
     end: new CalendarDate(2024, 7, 8),
