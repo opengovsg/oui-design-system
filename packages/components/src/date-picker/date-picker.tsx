@@ -115,6 +115,7 @@ export function DatePicker<T extends DateValue>(
           <Calendar
             size={variantProps.size === "xs" ? "sm" : variantProps.size}
             classNames={classNames?.calendar}
+            pageBehavior={props.pageBehavior}
             {...calendarProps}
           />
         </Dialog>

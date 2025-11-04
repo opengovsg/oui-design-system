@@ -771,6 +771,226 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/date-field-with-error-message.tsx"),
     ),
   },
+  "date-picker-controlled": {
+    name: "date-picker-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-controlled.tsx"),
+    ),
+  },
+  "date-picker-demo": {
+    name: "date-picker-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/date-picker-demo.tsx")),
+  },
+  "date-picker-disabled": {
+    name: "date-picker-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-disabled.tsx"),
+    ),
+  },
+  "date-picker-first-day-of-week": {
+    name: "date-picker-first-day-of-week",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-first-day-of-week.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-first-day-of-week.tsx"),
+    ),
+  },
+  "date-picker-granularity": {
+    name: "date-picker-granularity",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-granularity.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-granularity.tsx"),
+    ),
+  },
+  "date-picker-international-calendar": {
+    name: "date-picker-international-calendar",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-international-calendar.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-picker-international-calendar.tsx"),
+    ),
+  },
+  "date-picker-min-max": {
+    name: "date-picker-min-max",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-min-max.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-min-max.tsx"),
+    ),
+  },
+  "date-picker-page-behavior": {
+    name: "date-picker-page-behavior",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-page-behavior.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-page-behavior.tsx"),
+    ),
+  },
+  "date-picker-readonly": {
+    name: "date-picker-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-readonly.tsx"),
+    ),
+  },
+  "date-picker-required": {
+    name: "date-picker-required",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-required.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-required.tsx"),
+    ),
+  },
+  "date-picker-timezones": {
+    name: "date-picker-timezones",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-timezones.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-timezones.tsx"),
+    ),
+  },
+  "date-picker-unavailable-dates": {
+    name: "date-picker-unavailable-dates",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-unavailable-dates.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-unavailable-dates.tsx"),
+    ),
+  },
+  "date-picker-visible-months": {
+    name: "date-picker-visible-months",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-visible-months.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-visible-months.tsx"),
+    ),
+  },
+  "date-picker-with-description": {
+    name: "date-picker-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-description.tsx"),
+    ),
+  },
+  "date-picker-with-error-message": {
+    name: "date-picker-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-error-message.tsx"),
+    ),
+  },
+  "date-picker-with-selector-icon": {
+    name: "date-picker-with-selector-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-with-selector-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-selector-icon.tsx"),
+    ),
+  },
+  "date-picker-with-time-fields": {
+    name: "date-picker-with-time-fields",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-picker-with-time-fields.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-time-fields.tsx"),
+    ),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",
