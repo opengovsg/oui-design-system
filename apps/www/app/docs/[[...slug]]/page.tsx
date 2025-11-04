@@ -54,8 +54,8 @@ export default async function DocPage({ params }: DynamicPageProps) {
   }
 
   return (
-    <div className="mx-auto grid w-full max-w-2xl grid-cols-1 gap-10 xl:max-w-6xl xl:grid-cols-[minmax(0,1fr)_var(--container-2xs)]">
-      <div className="px-4 pt-10 pb-24 sm:px-6 xl:pr-0">
+    <div className="mx-auto grid w-full grid-cols-1 gap-10 lg:max-w-2xl xl:max-w-6xl xl:grid-cols-[minmax(0,1fr)_var(--container-2xs)]">
+      <div className="px-4 pt-4 pb-4 sm:px-6 md:pt-10 md:pb-24 xl:pr-0">
         <PageHeader {...doc} />
         <div className="pt-8 pb-12">
           <MdxContentRenderer code={doc.body} />
