@@ -1,18 +1,14 @@
-import { PropsWithChildren } from "react"
-import Link, { LinkProps } from "next/link"
+import { PropsWithChildren, useEffect, useRef, useState } from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Sidenav } from "@/components/sidenav"
 import { useRoute } from "@/lib/use-route"
-import { Menu, X } from "lucide-react"
-import {
-  Dialog,
-  DialogTrigger,
-  Modal,
-  ModalOverlay,
-} from "react-aria-components"
+import { Menu } from "lucide-react"
+import { DialogTrigger } from "react-aria-components"
 
 import { Button } from "@opengovsg/oui"
-import { cn, dataAttr } from "@opengovsg/oui-theme"
+import { dataAttr } from "@opengovsg/oui-theme"
+
+import { Drawer } from "./drawer"
 
 const MobileNavLink = ({
   isCurrent,
@@ -40,8 +36,20 @@ export const MobileHeaderNav = () => {
   const route = useRoute()
   const secondaryNavItems = route.getSecondaryNavItems()
 
+  const [isOpen, setIsOpen] = useState(false)
+
+  const pathname = usePathname()
+  const pathnameRef = useRef(pathname)
+
+  useEffect(() => {
+    if (pathnameRef.current !== pathname) {
+      setIsOpen(false)
+    }
+    pathnameRef.current = pathname
+  }, [pathname, setIsOpen])
+
   return (
-    <DialogTrigger>
+    <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
       <Button
         isIconOnly
         variant="clear"
@@ -52,50 +60,17 @@ export const MobileHeaderNav = () => {
       >
         <Menu />
       </Button>
-      <ModalOverlay
-        isDismissable
-        className={({ isEntering, isExiting }) =>
-          cn(
-            "bg-grey-900/30 fixed top-0 left-0 z-100 h-(--visual-viewport-height) w-screen backdrop-blur-sm",
-            isEntering && "animate-modal-blur-enter",
-            isExiting && "animate-modal-blur-exit",
-          )
-        }
-      >
-        <Modal
-          className={({ isEntering, isExiting, state }) =>
-            cn(
-              "fixed right-0 bottom-0 max-h-(--visual-viewport-height) w-full overflow-y-auto bg-white",
-              isEntering && "animate-modal-slide-enter",
-              isExiting && "animate-modal-slide-exit",
-            )
-          }
-        >
-          <Dialog className="h-full py-8">
-            <Button
-              isIconOnly
-              size="xs"
-              color="neutral"
-              variant="clear"
-              className="absolute top-2 right-2"
-              slot="close"
-            >
-              <X />
-            </Button>
-            <div className="flex flex-col items-start justify-stretch">
-              {secondaryNavItems.map((item) => (
-                <MobileNavLink
-                  key={item.title}
-                  href={item.url}
-                  isCurrent={item.current}
-                >
-                  {item.title}
-                </MobileNavLink>
-              ))}
-            </div>
-          </Dialog>
-        </Modal>
-      </ModalOverlay>
+      <Drawer>
+        {secondaryNavItems.map((item) => (
+          <MobileNavLink
+            key={item.title}
+            href={item.url}
+            isCurrent={item.current}
+          >
+            {item.title}
+          </MobileNavLink>
+        ))}
+      </Drawer>
     </DialogTrigger>
   )
 }

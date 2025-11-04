@@ -4,18 +4,13 @@ import { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Sidenav } from "@/components/sidenav"
 import { useRoute } from "@/lib/use-route"
-import { Menu, X } from "lucide-react"
-import {
-  Breadcrumb,
-  Breadcrumbs,
-  Dialog,
-  DialogTrigger,
-  Modal,
-  ModalOverlay,
-} from "react-aria-components"
+import { Menu } from "lucide-react"
+import { Breadcrumb, Breadcrumbs, DialogTrigger } from "react-aria-components"
 
 import { Button } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
+
+import { Drawer } from "./drawer"
 
 export const MobileBreadcrumbs = () => {
   const route = useRoute()
@@ -75,49 +70,17 @@ export const MobileSidebarNav = () => {
           <Menu className="size-4 shrink-0" />
           <MobileBreadcrumbs />
         </Button>
-        <ModalOverlay
-          isDismissable
-          className={({ isEntering, isExiting }) =>
-            cn(
-              "bg-grey-900/30 fixed top-0 left-0 z-100 h-(--visual-viewport-height) w-screen backdrop-blur-sm",
-              isEntering && "animate-modal-blur-enter",
-              isExiting && "animate-modal-blur-exit",
-            )
-          }
-        >
-          <Modal
-            className={({ isEntering, isExiting }) =>
-              cn(
-                "fixed right-0 bottom-0 max-h-(--visual-viewport-height) w-full overflow-y-auto bg-white",
-                isEntering && "animate-modal-slide-enter",
-                isExiting && "animate-modal-slide-exit",
-              )
-            }
-          >
-            <Dialog className="h-full py-8">
-              <Button
-                isIconOnly
-                size="xs"
-                color="neutral"
-                variant="clear"
-                className="fixed top-2 right-2"
-                slot="close"
-              >
-                <X />
-              </Button>
-              <div className="flex flex-col items-start justify-stretch">
-                {navItems.map((group) => (
-                  <Sidenav
-                    key={group.title}
-                    currentUrl={route.currentUrl}
-                    title={group.title}
-                    items={group.items}
-                  />
-                ))}
-              </div>
-            </Dialog>
-          </Modal>
-        </ModalOverlay>
+
+        <Drawer>
+          {navItems.map((group) => (
+            <Sidenav
+              key={group.title}
+              currentUrl={route.currentUrl}
+              title={group.title}
+              items={group.items}
+            />
+          ))}
+        </Drawer>
       </DialogTrigger>
     </div>
   )
