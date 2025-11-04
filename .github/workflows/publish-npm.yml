@@ -1,6 +1,11 @@
 name: Publish to npm registry
 on:
   workflow_dispatch:
+    inputs:
+      snapshot:
+        description: "Create snapshot release"
+        type: boolean
+        default: false
   push:
     branches:
       - main
@@ -10,13 +15,39 @@ on:
       - "packages/components/src/**"
       - "packages/theme/src/**"
 jobs:
+  snapshot:
+    name: Snapshot Release
+    runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.snapshot == 'true' }}
+    permissions:
+      contents: read # For changeset to create a release
+      pull-requests: write # For changeset to generate changelog and create a PR
+      id-token: write # Required for OIDC publishing
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Build packages
+        run: pnpm build --filter=@opengovsg/oui
+      - name: Publish dev snapshot
+        run: |
+          pnpm changeset version --snapshot snapshot
+          pnpm changeset publish --tag snapshot
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: ${{ github.event.inputs.snapshot != 'true' }}
     permissions:
       contents: write # For changeset to create a release
       pull-requests: write # For changeset to generate changelog and create a PR
       id-token: write # Required for OIDC publishing
+      packages: write
       statuses: read
     steps:
       - name: Checkout
@@ -37,13 +68,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Use OIDC for npm authentication instead of NPM_TOKEN
-
-      - name: Publish dev snapshot
-        if: steps.changesets.outputs.published != 'true'
-        run: |
-          git checkout main
-          pnpm changeset version --snapshot snapshot
-          pnpm changeset publish --tag snapshot
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Use OIDC for npm authentication instead of NPM_TOKEN
+          NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
