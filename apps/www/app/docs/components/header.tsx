@@ -2,7 +2,6 @@
 
 import { useMemo } from "react"
 import Link from "next/link"
-import { ColorModeButton } from "@/components/color-mode-button"
 import { useRoute } from "@/lib/use-route"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 

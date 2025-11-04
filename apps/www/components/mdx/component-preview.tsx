@@ -85,7 +85,7 @@ export function ComponentPreview({
           <TabPanel id="preview" className="relative rounded-md border">
             <div
               className={cn(
-                "preview flex w-full items-center justify-start p-4 md:p-6 lg:p-10",
+                "flex w-full items-center justify-start overflow-auto p-4 md:p-6 lg:p-10",
               )}
             >
               <RenderedComponent name={name} />

@@ -1,6 +1,7 @@
 import { SkipNavLink } from "@opengovsg/oui"
 
 import { Header } from "./components/header"
+import { MobileSidebarNav } from "./components/mobile-sidebar-nav"
 import { DocsSidebar } from "./components/sidebar"
 
 const SKIP_NAV_ID = "oui-docs-start-content"
@@ -16,6 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="col-start-2 row-span-5 row-start-1 hidden border-x border-x-(--pattern-fg) bg-[image:repeating-linear-gradient(315deg,_var(--pattern-fg)_0,_var(--pattern-fg)_1px,_transparent_0,_transparent_50%)] bg-[size:10px_10px] bg-fixed [--pattern-fg:var(--color-gray-950)]/5 md:block dark:[--pattern-fg:var(--color-white)]/10" />
         <div className="relative row-start-1 grid-cols-subgrid lg:col-start-3 lg:grid">
+          <MobileSidebarNav />
           <div className="hidden" tabIndex={-1} id={SKIP_NAV_ID} />
           {children}
         </div>
