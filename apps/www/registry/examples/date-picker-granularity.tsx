@@ -7,9 +7,7 @@ import { useDateFormatter } from "@react-aria/i18n"
 import { DatePicker } from "@opengovsg/oui"
 
 export default function DatePickerGranularity() {
-  const [date, setDate] = useState<DateValue>(
-    parseAbsoluteToLocal("2025-11-04T03:45:00Z"),
-  )
+  const [date, setDate] = useState(parseAbsoluteToLocal("2025-11-04T03:45:00Z"))
 
   const formatter = useDateFormatter({
     dateStyle: "short",
@@ -25,8 +23,7 @@ export default function DatePickerGranularity() {
         onChange={(value) => value && setDate(value)}
       />
       <p className="text-default-500 text-sm">
-        Selected date and time:{" "}
-        {date ? formatter.format(date.toDate("UTC")) : "--"}
+        Selected date and time: {date ? formatter.format(date.toDate()) : "--"}
       </p>
     </div>
   )
