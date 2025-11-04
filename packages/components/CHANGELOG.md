@@ -1,5 +1,20 @@
 # @opengovsg/oui
 
+## 0.0.21
+
+### Patch Changes
+
+- [#146](https://github.com/opengovsg/oui-design-system/pull/146) [`6591c46`](https://github.com/opengovsg/oui-design-system/commit/6591c465576a3b6dd5469ff5eb1559a93e5f7ad4) Thanks [@karrui](https://github.com/karrui)! - feat(date-field): allow overriding date input props with `inputProps`
+
+- [#146](https://github.com/opengovsg/oui-design-system/pull/146) [`6591c46`](https://github.com/opengovsg/oui-design-system/commit/6591c465576a3b6dd5469ff5eb1559a93e5f7ad4) Thanks [@karrui](https://github.com/karrui)! - fix(fielderror): render error icon only if string children
+
+- [#146](https://github.com/opengovsg/oui-design-system/pull/146) [`6591c46`](https://github.com/opengovsg/oui-design-system/commit/6591c465576a3b6dd5469ff5eb1559a93e5f7ad4) Thanks [@karrui](https://github.com/karrui)! - feat(date-field): default to full width
+
+- [#146](https://github.com/opengovsg/oui-design-system/pull/146) [`6591c46`](https://github.com/opengovsg/oui-design-system/commit/6591c465576a3b6dd5469ff5eb1559a93e5f7ad4) Thanks [@karrui](https://github.com/karrui)! - feat(date-field): allow styling segment based on editable state
+
+- Updated dependencies [[`6591c46`](https://github.com/opengovsg/oui-design-system/commit/6591c465576a3b6dd5469ff5eb1559a93e5f7ad4)]:
+  - @opengovsg/oui-theme@0.0.21
+
 ## 0.0.20
 
 ### Patch Changes
