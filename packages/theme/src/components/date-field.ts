@@ -11,12 +11,15 @@ export const dateInputStyles = tv({
   },
   variants: {
     variant: {},
+    isEditable: {
+      true: {},
+      false: {
+        segment: "text-interaction-support-placeholder",
+      },
+    },
     isPlaceholder: {
       true: {
         segment: "text-interaction-support-placeholder",
-      },
-      false: {
-        segment: "text-base-content-default",
       },
     },
     isDisabled: {
@@ -41,6 +44,16 @@ export const dateInputStyles = tv({
       },
     },
   },
+  compoundVariants: [
+    {
+      isPlaceholder: false,
+      isEditable: true,
+      isFocused: false,
+      className: {
+        segment: "text-base-content-default",
+      },
+    },
+  ],
 })
 
 export type DateInputSlots = keyof ReturnType<typeof dateInputStyles>

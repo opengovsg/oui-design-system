@@ -6,6 +6,7 @@ import type {
   GroupProps,
   TextProps,
 } from "react-aria-components"
+import { useMemo } from "react"
 import { CircleAlert } from "lucide-react"
 import {
   FieldError as AriaFieldError,
@@ -53,6 +54,15 @@ export interface FieldErrorProps
   classNames?: SlotsToClasses<FieldErrorSlots>
 }
 
+export function FieldErrorIcon({
+  size,
+  className,
+}: Pick<FieldErrorProps, "size"> & { className?: string }) {
+  const styles = fieldErrorStyles({ size })
+
+  return <CircleAlert className={styles.icon({ className })} />
+}
+
 export function FieldError({
   children,
   className,
@@ -62,7 +72,17 @@ export function FieldError({
 }: FieldErrorProps) {
   const styles = fieldErrorStyles({ size })
 
-  if (!children) return null
+  const childrenFromProps = useMemo(() => {
+    if (typeof children === "string") {
+      return (
+        <>
+          <FieldErrorIcon className={classNames?.icon} size={size} />
+          {children}
+        </>
+      )
+    }
+    return children
+  }, [children, classNames?.icon, size])
 
   return (
     <AriaFieldError
@@ -72,10 +92,7 @@ export function FieldError({
         (className, renderProps) => styles.text({ ...renderProps, className }),
       )}
     >
-      <>
-        <CircleAlert className={styles.icon({ className: classNames?.icon })} />
-        {children}
-      </>
+      {childrenFromProps}
     </AriaFieldError>
   )
 }
