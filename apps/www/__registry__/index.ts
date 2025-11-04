@@ -634,6 +634,143 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/combo-box-text-slots.tsx"),
     ),
   },
+  "date-field-controlled": {
+    name: "date-field-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-controlled.tsx"),
+    ),
+  },
+  "date-field-demo": {
+    name: "date-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/date-field-demo.tsx")),
+  },
+  "date-field-disabled": {
+    name: "date-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-disabled.tsx"),
+    ),
+  },
+  "date-field-hide-timezone": {
+    name: "date-field-hide-timezone",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-hide-timezone.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-hide-timezone.tsx"),
+    ),
+  },
+  "date-field-hourly-cycle": {
+    name: "date-field-hourly-cycle",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-hourly-cycle.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-hourly-cycle.tsx"),
+    ),
+  },
+  "date-field-min-max": {
+    name: "date-field-min-max",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-min-max.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/date-field-min-max.tsx")),
+  },
+  "date-field-readonly": {
+    name: "date-field-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-readonly.tsx"),
+    ),
+  },
+  "date-field-sizes": {
+    name: "date-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/date-field-sizes.tsx")),
+  },
+  "date-field-timezones": {
+    name: "date-field-timezones",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-timezones.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-timezones.tsx"),
+    ),
+  },
+  "date-field-with-description": {
+    name: "date-field-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-with-description.tsx"),
+    ),
+  },
+  "date-field-with-error-message": {
+    name: "date-field-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-field-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-field-with-error-message.tsx"),
+    ),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",

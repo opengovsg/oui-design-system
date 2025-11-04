@@ -17,7 +17,7 @@ export const CodeBlock = ({
           className={cn("overflow-x-auto rounded-md p-4 font-mono", className)}
           {...props}
         >
-          <code>{children}</code>
+          {children}
         </pre>
       </div>
     </div>

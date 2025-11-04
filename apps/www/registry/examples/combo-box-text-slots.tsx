@@ -1,7 +1,5 @@
 "use client"
 
-import { Text } from "react-aria-components"
-
 import { ComboBox, ComboBoxItem } from "@opengovsg/oui"
 
 export default function ComboBoxTextSlots() {
