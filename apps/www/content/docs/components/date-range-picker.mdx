@@ -1,5 +1,5 @@
 ---
-title: DatePicker
+title: DateRangePicker
 description: A date range picker combines two DateFields and a RangeCalendar popover to allow users to enter or select a date and time range.
 toc:
   visible: true
@@ -10,4 +10,181 @@ links:
   reactaria: DateRangePicker
 ---
 
-# Implemented, but not yet documented
+There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/DateRangePicker.html) for more details.
+
+## Usage
+
+<ComponentPreview name="date-range-picker-demo" />
+
+### Disabled
+
+<ComponentPreview name="date-range-picker-disabled" />
+
+### Read Only
+
+<ComponentPreview name="date-range-picker-readonly" />
+
+### Required
+
+<ComponentPreview name="date-range-picker-required" />
+
+### With Description
+
+You can add a description to the DateRangePicker by passing the `description` property.
+
+<ComponentPreview name="date-range-picker-with-description" />
+
+### With Error Message
+
+You can combine the `isInvalid` and `errorMessage` properties to show an invalid input.
+
+<ComponentPreview name="date-range-picker-with-error-message" />
+
+### With Time Fields
+
+If the `value` (or `defaultValue`) given to DateRangePicker includes time information, time fields will be shown in the DateFields.
+
+<ComponentPreview name="date-range-picker-with-time-fields" />
+
+### Controlled
+
+You can use the `value` and `onChange` properties to control the input value.
+
+<ComponentPreview name="date-range-picker-controlled" />
+
+### Time Zones
+
+DateRangePicker is timezone aware when a `ZonedDateTime` object is provided as the value. In this case, the time zone abbreviation is displayed,
+and time zone concerns such as daylight saving time are taken into account when the value is manipulated.
+
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) includes functions for parsing strings in multiple formats into `ZonedDateTime` objects.
+
+```bash
+npm install @internationalized/date
+```
+
+```tsx
+import { parseZonedDateTime } from "@internationalized/date"
+```
+
+<ComponentPreview name="date-range-picker-timezones" />
+
+### Granularity
+
+The `granularity` prop allows you to control the smallest unit that is displayed by DateRangePicker. By default, the value is displayed with "day" granularity (year, month, and day),
+and `CalendarDateTime` and `ZonedDateTime` values are displayed with "minute" granularity.
+
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) includes functions for parsing strings in multiple formats into `ZonedDateTime` objects.
+
+```bash
+npm install @internationalized/date
+```
+
+```tsx
+import { DateValue, parseAbsoluteToLocal } from "@internationalized/date"
+import { useDateFormatter } from "@react-aria/i18n"
+```
+
+<ComponentPreview name="date-range-picker-granularity" />
+
+### Min Date And Max Date
+
+The `minValue` and `maxValue` props can also be used to ensure the value is within a specific range.
+
+You may also want to use `RangeCalendar`'s `isDateUnavailable` (via `calendarProps`) prop to visually indicate which dates are unavailable for selection in the calendar.
+
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) includes functions for parsing strings in multiple formats into `ZonedDateTime` objects.
+
+```bash
+npm install @internationalized/date
+```
+
+```tsx
+import { getLocalTimeZone, parseDate, today } from "@internationalized/date"
+```
+
+<ComponentPreview name="date-range-picker-min-max" />
+
+### International Calendar
+
+DateRangePicker supports selecting dates in many calendar systems used around the world,
+including Gregorian, Hebrew, Indian, Islamic, Buddhist, and more.
+Dates are automatically displayed in the appropriate calendar system for the user's locale.
+The calendar system can be overridden using the https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Locale/calendar#adding_a_calendar_in_the_locale_string,
+passed to the [`I18nProvider`](https://react-spectrum.adobe.com/react-aria/I18nProvider.html) component.
+
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) includes functions for parsing strings in multiple formats into `ZonedDateTime` objects.
+
+```bash
+npm install @internationalized/date
+```
+
+```tsx
+import { parseAbsoluteToLocal } from "@internationalized/date"
+import { I18nProvider } from "@react-aria/i18n"
+```
+
+<ComponentPreview name="date-range-picker-international-calendar" />
+
+### Unavailable Dates
+
+DateRangePicker supports marking certain dates as unavailable. These dates cannot be selected by the user and are displayed with a crossed out appearance in the calendar. In the date field, an invalid state is displayed if a user enters an unavailable date.
+
+[@internationalized/date](https://react-spectrum.adobe.com/internationalized/date/index.html) includes functions for parsing strings in multiple formats into `ZonedDateTime` objects.
+
+```bash
+npm install @internationalized/date
+```
+
+```tsx
+import { getLocalTimeZone, isWeekend, today } from "@internationalized/date"
+import { useLocale } from "@react-aria/i18n"
+```
+
+<ComponentPreview name="date-range-picker-unavailable-dates" />
+
+### Visible Months
+
+By default, the calendar popover displays two months.
+You can use the `calendarProps#visibleDuration` to pass a custom duration to display more months at once.
+
+<ComponentPreview name="date-range-picker-visible-months" />
+
+### Custom first day of the week
+
+By default, the first day of the week is determined by the user's locale. You can override this using the `calendarProps#firstDayOfWeek` prop.
+The available values are `'sun'`, `'mon'`, `'tue'`, `'wed'`, `'thu'`, `'fri'`, and `'sat'`.
+
+<ComponentPreview name="date-range-picker-first-day-of-week" />
+
+### Page Behavior
+
+By default, when pressing the next or previous buttons, pagination will advance by a single month.
+This behavior can be changed to page by the visible months instead, by setting `calendarProps#pageBehavior` to `"visible"`.
+
+<ComponentPreview name="date-range-picker-page-behavior" />
+
+## Slots
+
+- **base**: Input wrapper, it handles alignment, placement, and general appearance.
+- **group**: Wrapper for the input fields and calendar button.
+- **dateWrapper**: Wrapper for the two date input fields.
+- **startInput**: The start date input component element.
+- **connector**: The dash connector between the two date inputs.
+- **endInput**: The end date input component element.
+- **calendarButton**: The calendar button element.
+- **dialog**: The calendar dialog container inside the popover element.
+
+You can also override styles of the various components used within DateRangePicker:
+
+### RangeCalendar slots
+
+[Slots](./range-calendar#slots) can be overridden via the `classNames.calendar` prop or `calendarProps#classNames` prop.
+
+### Popover slots
+
+Slots can be overridden via the `classNames.popover` prop or `popoverProps#classNames` prop.
+
+### FieldError slots
+
+Slots can be overridden via the `classNames.error` prop.

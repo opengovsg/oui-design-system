@@ -991,6 +991,222 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/date-picker-with-time-fields.tsx"),
     ),
   },
+  "date-range-picker-controlled": {
+    name: "date-range-picker-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-controlled.tsx"),
+    ),
+  },
+  "date-range-picker-demo": {
+    name: "date-range-picker-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-demo.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-demo.tsx"),
+    ),
+  },
+  "date-range-picker-disabled": {
+    name: "date-range-picker-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-disabled.tsx"),
+    ),
+  },
+  "date-range-picker-first-day-of-week": {
+    name: "date-range-picker-first-day-of-week",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-first-day-of-week.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-first-day-of-week.tsx"),
+    ),
+  },
+  "date-range-picker-granularity": {
+    name: "date-range-picker-granularity",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-granularity.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-granularity.tsx"),
+    ),
+  },
+  "date-range-picker-international-calendar": {
+    name: "date-range-picker-international-calendar",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-international-calendar.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/date-range-picker-international-calendar.tsx"
+        ),
+    ),
+  },
+  "date-range-picker-min-max": {
+    name: "date-range-picker-min-max",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-min-max.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-min-max.tsx"),
+    ),
+  },
+  "date-range-picker-page-behavior": {
+    name: "date-range-picker-page-behavior",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-page-behavior.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-page-behavior.tsx"),
+    ),
+  },
+  "date-range-picker-readonly": {
+    name: "date-range-picker-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-readonly.tsx"),
+    ),
+  },
+  "date-range-picker-required": {
+    name: "date-range-picker-required",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-required.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-required.tsx"),
+    ),
+  },
+  "date-range-picker-timezones": {
+    name: "date-range-picker-timezones",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-timezones.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-timezones.tsx"),
+    ),
+  },
+  "date-range-picker-unavailable-dates": {
+    name: "date-range-picker-unavailable-dates",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-unavailable-dates.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-unavailable-dates.tsx"),
+    ),
+  },
+  "date-range-picker-visible-months": {
+    name: "date-range-picker-visible-months",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-visible-months.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-visible-months.tsx"),
+    ),
+  },
+  "date-range-picker-with-description": {
+    name: "date-range-picker-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-description.tsx"),
+    ),
+  },
+  "date-range-picker-with-error-message": {
+    name: "date-range-picker-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-error-message.tsx"),
+    ),
+  },
+  "date-range-picker-with-time-fields": {
+    name: "date-range-picker-with-time-fields",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/date-range-picker-with-time-fields.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-time-fields.tsx"),
+    ),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",

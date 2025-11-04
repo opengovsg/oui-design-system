@@ -52,7 +52,6 @@ const docsLinks: NavItem = {
             {
               title: "DateRangePicker",
               url: "date-range-picker",
-              status: "wip",
             },
             { title: "Field", url: "field" },
             { title: "Infobox", url: "infobox", status: "wip" },
