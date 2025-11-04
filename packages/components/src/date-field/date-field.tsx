@@ -61,7 +61,7 @@ export function DateField<T extends DateValue>(
       isDisabled={variantProps.isDisabled}
       className={composeTailwindRenderProps(
         className ?? classNames?.base,
-        "flex flex-col gap-2",
+        "flex w-full flex-col gap-2",
       )}
     >
       {label && (
