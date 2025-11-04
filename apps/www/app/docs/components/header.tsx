@@ -22,7 +22,7 @@ export const Header = () => {
               OUI
             </Link>
           </div>
-          <div className="flex flex-1 items-center gap-6 max-lg:hidden">
+          <div className="flex flex-1 items-center gap-6 max-md:hidden">
             {secondaryNavItems.map((item) => (
               <a
                 className="current:after:font-medium invisible relative text-sm/6 font-medium text-gray-950 after:visible after:absolute after:inset-0 after:font-normal after:content-[attr(content)] dark:text-white"

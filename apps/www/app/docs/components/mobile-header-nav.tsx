@@ -48,7 +48,7 @@ export const MobileHeaderNav = () => {
         size="xs"
         color="neutral"
         aria-label="Open or close navbar"
-        className="lg:hidden"
+        className="md:hidden"
       >
         <Menu />
       </Button>
