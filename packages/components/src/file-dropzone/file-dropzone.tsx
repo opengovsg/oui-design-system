@@ -93,7 +93,12 @@ export interface FileDropzoneProps
   children?: (values: FileItemsRenderProps) => React.ReactNode
 }
 
-export interface FileDropzoneState extends DropzoneState {
+export interface FileDropzoneState
+  extends Omit<DropzoneState, "getInputProps"> {
+  isDisabled?: boolean
+  isReadOnly?: boolean
+  inputProps: ReturnType<DropzoneState["getInputProps"]>
+  triggerFileSelector: () => void | null
   maxFiles: number
   maxFileSizeTextId?: string
   maxFileSize: number
@@ -120,6 +125,7 @@ export const [FileDropzoneStyleContext, useFileDropzoneStyleContext] =
 
 export const FileDropzone = (props: FileDropzoneProps) => {
   const {
+    name,
     allowedMimeTypes = [],
     maxFileSize = Number.POSITIVE_INFINITY,
     showMaxFileSize = true,
@@ -192,7 +198,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     [setValue],
   )
 
-  const dropzoneState = useDropzone({
+  const { getInputProps, ...dropzoneState } = useDropzone({
     validator,
     accept: allowedMimeTypes.reduce(
       (acc, type) => ({ ...acc, [type]: [] }),
@@ -201,15 +207,22 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     onError: (e) => onError?.(e.message),
     onDrop,
     disabled: isDisabled,
-    noClick: isReadOnly,
     noDrag: isReadOnly,
-    noKeyboard: isReadOnly,
+    // Prevent ref hijack when there is a label
+    noClick: true,
+    noKeyboard: true,
     maxSize: maxFileSize,
     maxFiles,
     multiple: maxFiles !== 1,
   })
 
   const showDropzone = useMemo(() => value.length < maxFiles, [value, maxFiles])
+
+  const triggerFileSelector = useCallback(() => {
+    if (isDisabled || isReadOnly) return
+    // Not using dropzoneState.open() due to ref hijack issues when there is a label
+    dropzoneState.inputRef.current?.click()
+  }, [dropzoneState, isDisabled, isReadOnly])
 
   useEffect(() => {
     // If the number of files doesn't exceed the maxFiles parameter, remove the error 'Too many files' from each file
@@ -228,15 +241,23 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     }
   }, [maxFiles, setValue, value])
 
-  const augmentedFieldProps = useMemo(() => {
-    if (!showMaxFileSize || maxFileSize === Number.POSITIVE_INFINITY) {
-      return fieldProps
+  const inputProps = useMemo(() => {
+    const inputProps = { ...fieldProps, name }
+    if (showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY) {
+      inputProps["aria-describedby"] = inputProps["aria-describedby"]
+        ? `${inputProps["aria-describedby"]} ${maxFileSizeTextId}`
+        : maxFileSizeTextId
     }
-    fieldProps["aria-describedby"] = fieldProps["aria-describedby"]
-      ? `${fieldProps["aria-describedby"]} ${maxFileSizeTextId}`
-      : maxFileSizeTextId
-    return fieldProps
-  }, [fieldProps, maxFileSize, maxFileSizeTextId, showMaxFileSize])
+
+    return getInputProps(inputProps)
+  }, [
+    fieldProps,
+    getInputProps,
+    maxFileSize,
+    maxFileSizeTextId,
+    name,
+    showMaxFileSize,
+  ])
 
   return (
     <Provider
@@ -245,11 +266,15 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         [
           FileDropzoneStateContext,
           {
+            isDisabled,
+            isReadOnly,
             maxFiles,
             maxFileSize,
             showDropzone,
             files: value,
             handleRemoveFile,
+            inputProps,
+            triggerFileSelector,
             maxFileSizeTextId:
               showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY
                 ? maxFileSizeTextId
@@ -271,7 +296,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         [FieldErrorContext, { isInvalid, validationErrors, validationDetails }],
       ]}
     >
-      <Group {...augmentedFieldProps}>
+      <Group>
         {label && <Label>{label}</Label>}
         <FileDropzoneDropzone />
         {value.map((file) => {
@@ -296,9 +321,10 @@ const FileDropzoneDropzone = () => {
     maxFileSize,
     maxFileSizeTextId,
     getRootProps,
-    getInputProps,
+    inputProps,
+    triggerFileSelector,
+    isDisabled,
   } = useFileDropzoneStateContext()
-
   const { slots, classNames } = useFileDropzoneStyleContext()
 
   return (
@@ -308,8 +334,17 @@ const FileDropzoneDropzone = () => {
           className: classNames?.base,
         }),
       })}
+      tabIndex={isDisabled ? undefined : 0}
+      onClick={triggerFileSelector}
+      onKeyDown={(e) => {
+        // Trigger file selector on Enter or Space key press
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          triggerFileSelector()
+        }
+      }}
     >
-      <input {...getInputProps()} />
+      <input {...inputProps} />
       <div className={slots.dropzone()}>
         <Upload size={20} className="" />
         <p className="text-sm">

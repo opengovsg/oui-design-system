@@ -7,6 +7,9 @@ import { FileDropzone } from "../file-dropzone"
 export default {
   title: "Components/FileDropzone",
   component: FileDropzone,
+  args: {
+    "aria-label": "File Dropzone",
+  },
 } as Meta<typeof FileDropzone>
 
 type Story = StoryObj<typeof FileDropzone>
@@ -61,6 +64,7 @@ export const WithErrorMessage: Story = {
 
 export const WithLabelAndDescription: Story = {
   args: {
+    "aria-label": undefined,
     label: "Upload your documents",
     description: "Supported formats: PDF, CSV",
     allowedMimeTypes: ["application/pdf", "text/csv"],
