@@ -8,7 +8,7 @@ import type {
   FileError,
   FileRejection,
 } from "react-dropzone"
-import { useEffect, useMemo } from "react"
+import { useCallback, useEffect, useMemo } from "react"
 import { useFormValidationState } from "@react-stately/form"
 import { Upload } from "lucide-react"
 import { useField, useId } from "react-aria"
@@ -91,8 +91,8 @@ export interface FileDropzoneState extends DropzoneState {
   maxFileSizeTextId?: string
   maxFileSize: number
   showDropzone: boolean
-  value: FileItem[]
-  setValue: React.Dispatch<React.SetStateAction<FileItem[]>>
+  files: FileItem[]
+  handleRemoveFile: (fileName: string) => void
 }
 
 export interface FileDropzoneStyleContext {
@@ -152,27 +152,37 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   const slots = fileDropzoneStyles()
   const maxFileSizeTextId = useId()
 
-  const onDrop = (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-    const files: FileItem[] = acceptedFiles
-    if (showRejectedFiles) {
-      const invalidFiles = fileRejections.map(({ file, errors }) => {
-        ;(file as FileItem).errors = errors
-        return file as FileItem
-      })
-      files.push(...invalidFiles)
-    }
-    setValue(files)
-
-    if (onError && fileRejections.length > 0) {
-      const firstError = fileRejections[0].errors[0]
-      if (firstError.code === "file-too-large") {
-        // The error message is in bytes, we need to format it to be more user-friendly
-        onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
-      } else {
-        onError(firstError.message)
+  const onDrop = useCallback(
+    (acceptedFiles: File[], fileRejections: FileRejection[]) => {
+      const files: FileItem[] = acceptedFiles
+      if (showRejectedFiles) {
+        const invalidFiles = fileRejections.map(({ file, errors }) => {
+          ;(file as FileItem).errors = errors
+          return file as FileItem
+        })
+        files.push(...invalidFiles)
       }
-    }
-  }
+      setValue(files)
+
+      if (onError && fileRejections.length > 0) {
+        const firstError = fileRejections[0].errors[0]
+        if (firstError.code === "file-too-large") {
+          // The error message is in bytes, we need to format it to be more user-friendly
+          onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
+        } else {
+          onError(firstError.message)
+        }
+      }
+    },
+    [maxFileSize, onError, setValue, showRejectedFiles],
+  )
+
+  const handleRemoveFile = useCallback(
+    (fileName: string) => {
+      setValue((files) => files.filter((file) => file.name !== fileName))
+    },
+    [setValue],
+  )
 
   const dropzoneState = useDropzone({
     validator,
@@ -230,8 +240,8 @@ export const FileDropzone = (props: FileDropzoneProps) => {
             maxFiles,
             maxFileSize,
             showDropzone,
-            value,
-            setValue,
+            files: value,
+            handleRemoveFile,
             maxFileSizeTextId:
               showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY
                 ? maxFileSizeTextId

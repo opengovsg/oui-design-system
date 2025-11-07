@@ -13,7 +13,7 @@ interface FileInfoProps {
 }
 
 export const FileInfo = ({ file }: FileInfoProps) => {
-  const { maxFileSize } = useFileDropzoneStateContext()
+  const { maxFileSize, handleRemoveFile } = useFileDropzoneStateContext()
 
   const [previewSrc, setPreviewSrc] = useState("")
   useEffect(() => {
@@ -64,7 +64,7 @@ export const FileInfo = ({ file }: FileInfoProps) => {
         variant="clear"
         aria-label="Remove file"
         className="hover:text-foreground shrink-0 justify-self-end"
-        // onPress={() => handleRemoveFile(file.name)}
+        onPress={() => handleRemoveFile(file.name)}
       >
         <X />
       </Button>
