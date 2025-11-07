@@ -1,6 +1,6 @@
 "use client"
 
-import type { InputBase } from "@react-types/shared"
+import type { InputBase, Validation } from "@react-types/shared"
 import type { AriaFieldProps } from "react-aria"
 import type {
   DropzoneOptions,
@@ -9,9 +9,11 @@ import type {
   FileRejection,
 } from "react-dropzone"
 import { useEffect, useMemo } from "react"
+import { useFormValidationState } from "@react-stately/form"
 import { Upload } from "lucide-react"
 import { useField, useId } from "react-aria"
 import {
+  FieldErrorContext,
   Group,
   LabelContext,
   Provider,
@@ -26,19 +28,26 @@ import type {
 } from "@opengovsg/oui-theme"
 import { fileDropzoneStyles } from "@opengovsg/oui-theme"
 
-import { Description } from "../field"
+import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
 import { createContext } from "../system/react-utils"
+import { FileInfo } from "./file-info"
 import { formatBytes } from "./utils"
 
 export interface FileItem extends File {
   errors?: readonly FileError[]
 }
 
-interface FileDropzoneProps
-  extends AriaFieldProps,
+export interface FileDropzoneProps
+  extends Omit<AriaFieldProps, "validate">,
     InputBase,
+    Validation<FileItem[]>,
     VariantProps<typeof fileDropzoneStyles> {
+  name?: string
+  label?: React.ReactNode
+  description?: React.ReactNode
+  errorMessage?: React.ReactNode
+
   validator?: DropzoneOptions["validator"]
   classNames?: SlotsToClasses<FileDropzoneSlots>
   /** The current files (controlled). */
@@ -70,7 +79,11 @@ interface FileDropzoneProps
    */
   maxFiles?: number
   showRejectedFiles?: boolean
-  onError?: (errors: FileError[]) => void
+  /**
+   * If provided, this function will be called with any error messages that occur during file validation.
+   * If there are multiple errors, only the first message will be passed to this function.
+   */
+  onError?: (errorMessage: string) => void
 }
 
 export interface FileDropzoneState extends DropzoneState {
@@ -99,8 +112,6 @@ export const [FileDropzoneStyleContext, useFileDropzoneStyleContext] =
   })
 
 export const FileDropzone = (props: FileDropzoneProps) => {
-  const { labelProps, fieldProps, descriptionProps, errorMessageProps } =
-    useField(props)
   const {
     allowedMimeTypes = [],
     maxFileSize = Number.POSITIVE_INFINITY,
@@ -111,6 +122,10 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     classNames,
     validator,
     showRejectedFiles,
+    onError,
+    errorMessage,
+    label,
+    description,
   } = props
 
   const [value, setValue] = useControllableState({
@@ -119,22 +134,43 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     onChange: props.onChange,
   })
 
+  const validationState = useFormValidationState({
+    ...props,
+    value,
+  })
+
+  const { isInvalid, validationErrors, validationDetails } =
+    validationState.displayValidation
+
+  const { labelProps, fieldProps, descriptionProps, errorMessageProps } =
+    useField({
+      ...props,
+      isInvalid,
+      errorMessage: props.errorMessage || validationErrors,
+    })
+
   const slots = fileDropzoneStyles()
   const maxFileSizeTextId = useId()
 
   const onDrop = (acceptedFiles: File[], fileRejections: FileRejection[]) => {
-    const files: FileItem[] = [...acceptedFiles]
+    const files: FileItem[] = acceptedFiles
     if (showRejectedFiles) {
-      const rejectedFiles = fileRejections.map(({ file, errors }) =>
-        Object.assign(file, { errors }),
-      )
-      files.push(...rejectedFiles)
+      const invalidFiles = fileRejections.map(({ file, errors }) => {
+        ;(file as FileItem).errors = errors
+        return file as FileItem
+      })
+      files.push(...invalidFiles)
     }
     setValue(files)
 
-    if (props.onError && fileRejections.length > 0) {
-      const allErrors = fileRejections.flatMap((rejection) => rejection.errors)
-      props.onError(allErrors)
+    if (onError && fileRejections.length > 0) {
+      const firstError = fileRejections[0].errors[0]
+      if (firstError.code === "file-too-large") {
+        // The error message is in bytes, we need to format it to be more user-friendly
+        onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
+      } else {
+        onError(firstError.message)
+      }
     }
   }
 
@@ -145,6 +181,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
       (acc, type) => ({ ...acc, [type]: [] }),
       {},
     ),
+    onError: (e) => onError?.(e.message),
     onDrop,
     disabled: isDisabled,
     noDrag: isReadOnly,
@@ -213,10 +250,17 @@ export const FileDropzone = (props: FileDropzoneProps) => {
             },
           },
         ],
+        [FieldErrorContext, { isInvalid, validationErrors, validationDetails }],
       ]}
     >
       <Group {...augmentedFieldProps}>
+        {label && <Label>{label}</Label>}
         <FileDropzoneDropzone />
+        {value.map((file) => (
+          <FileInfo key={file.name} file={file} />
+        ))}
+        {description && <Description>{description}</Description>}
+        {errorMessage && <FieldError>{errorMessage}</FieldError>}
       </Group>
     </Provider>
   )
@@ -261,7 +305,6 @@ const FileDropzoneDropzone = () => {
               Maximum file size: {formatBytes(maxFileSize, 2)}
             </Description>
           )}
-          <Description slot="description">Another description</Description>
         </div>
       </a>
     </div>
