@@ -38,6 +38,11 @@ export interface FileItem extends File {
   errors?: readonly FileError[]
 }
 
+export interface FileItemsRenderProps {
+  file: FileItem
+  removeFile: () => void
+}
+
 export interface FileDropzoneProps
   extends Omit<AriaFieldProps, "validate">,
     InputBase,
@@ -84,6 +89,8 @@ export interface FileDropzoneProps
    * If there are multiple errors, only the first message will be passed to this function.
    */
   onError?: (errorMessage: string) => void
+
+  children?: (values: FileItemsRenderProps) => React.ReactNode
 }
 
 export interface FileDropzoneState extends DropzoneState {
@@ -126,6 +133,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     errorMessage,
     label,
     description,
+    children,
   } = props
 
   const [value, setValue] = useControllableState({
@@ -266,9 +274,15 @@ export const FileDropzone = (props: FileDropzoneProps) => {
       <Group {...augmentedFieldProps}>
         {label && <Label>{label}</Label>}
         <FileDropzoneDropzone />
-        {value.map((file) => (
-          <FileInfo key={file.name} file={file} />
-        ))}
+        {value.map((file) => {
+          if (typeof children === "function") {
+            return children({
+              file,
+              removeFile: () => handleRemoveFile(file.name),
+            })
+          }
+          return <FileInfo key={file.name} file={file} />
+        })}
         {description && <Description>{description}</Description>}
         {errorMessage && <FieldError>{errorMessage}</FieldError>}
       </Group>

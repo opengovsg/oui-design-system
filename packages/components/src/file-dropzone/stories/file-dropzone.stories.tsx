@@ -114,3 +114,35 @@ export const ReadOnly: Story = {
     isReadOnly: true,
   },
 }
+
+export const CustomFileInfoRendering: Story = {
+  args: {
+    allowedMimeTypes: ["image/*"],
+    maxFiles: 3,
+    children: ({ file, removeFile }) => {
+      const objectUrl = URL.createObjectURL(file)
+      return (
+        <div className="mt-4 grid grid-cols-3 gap-4">
+          <div key={file.name} className="border p-2">
+            <img
+              src={objectUrl}
+              alt={file.name}
+              className="mb-2 h-24 w-full object-cover"
+              onLoad={() => URL.revokeObjectURL(objectUrl)}
+            />
+            <p className="truncate text-sm" title={file.name}>
+              {file.name}
+            </p>
+            <button
+              type="button"
+              onClick={removeFile}
+              className="mt-2 text-xs text-red-600 underline"
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      )
+    },
+  },
+}
