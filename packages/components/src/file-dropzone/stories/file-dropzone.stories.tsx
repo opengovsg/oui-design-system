@@ -67,3 +67,50 @@ export const WithLabelAndDescription: Story = {
   },
   render: Template,
 }
+
+export const Controlled: Story = {
+  args: {
+    label: "Controlled FileDropzone",
+  },
+  render: () => {
+    const [files, setFiles] = useState<File[]>([])
+
+    return (
+      <div>
+        <FileDropzone
+          value={files}
+          onChange={setFiles}
+          label="Controlled FileDropzone"
+          allowedMimeTypes={["image/*"]}
+          maxFiles={3}
+        />
+        <div className="mt-4">
+          <strong>Selected Files:</strong>
+          {files.length === 0 ? (
+            <p>No files selected.</p>
+          ) : (
+            <ul className="list-inside list-disc">
+              {files.map((file) => (
+                <li key={file.name}>
+                  {file.name} - {(file.size / 1024).toFixed(2)} KB
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+    )
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    isDisabled: true,
+  },
+}
+
+export const ReadOnly: Story = {
+  args: {
+    isReadOnly: true,
+  },
+}

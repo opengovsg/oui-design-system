@@ -186,7 +186,6 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 
   const dropzoneState = useDropzone({
     validator,
-    noClick: true,
     accept: allowedMimeTypes.reduce(
       (acc, type) => ({ ...acc, [type]: [] }),
       {},
@@ -194,6 +193,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     onError: (e) => onError?.(e.message),
     onDrop,
     disabled: isDisabled,
+    noClick: isReadOnly,
     noDrag: isReadOnly,
     noKeyboard: isReadOnly,
     maxSize: maxFileSize,
@@ -221,14 +221,14 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   }, [maxFiles, setValue, value])
 
   const augmentedFieldProps = useMemo(() => {
-    if (!showMaxFileSize) {
+    if (!showMaxFileSize || maxFileSize === Number.POSITIVE_INFINITY) {
       return fieldProps
     }
     fieldProps["aria-describedby"] = fieldProps["aria-describedby"]
       ? `${fieldProps["aria-describedby"]} ${maxFileSizeTextId}`
       : maxFileSizeTextId
     return fieldProps
-  }, [fieldProps, maxFileSizeTextId, showMaxFileSize])
+  }, [fieldProps, maxFileSize, maxFileSizeTextId, showMaxFileSize])
 
   return (
     <Provider
@@ -281,7 +281,6 @@ const FileDropzoneDropzone = () => {
     maxFiles,
     maxFileSize,
     maxFileSizeTextId,
-    inputRef,
     getRootProps,
     getInputProps,
   } = useFileDropzoneStateContext()
@@ -297,7 +296,7 @@ const FileDropzoneDropzone = () => {
       })}
     >
       <input {...getInputProps()} />
-      <a onClick={() => inputRef.current?.click()} className={slots.dropzone()}>
+      <div className={slots.dropzone()}>
         <Upload size={20} className="" />
         <p className="text-sm">
           Upload{!!maxFiles && maxFiles > 1 ? ` ${maxFiles}` : ""} file
@@ -316,7 +315,7 @@ const FileDropzoneDropzone = () => {
             </Description>
           )}
         </div>
-      </a>
+      </div>
     </div>
   )
 }
