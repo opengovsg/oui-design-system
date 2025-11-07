@@ -25,4 +25,5 @@ export * from "./date-picker"
 export * from "./date-range-picker"
 export * from "./checkbox"
 export * from "./pagination"
+export * from "./file-dropzone"
 // Add new component exports here
