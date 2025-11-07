@@ -82,6 +82,7 @@
     "lodash-es": "^4.17.21",
     "nanoid": "^5.1.5",
     "react-aria": "^3.41.1",
+    "react-dropzone": "^14.3.8",
     "react-stately": "^3.41.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "type-fest": "^4.41.0",
