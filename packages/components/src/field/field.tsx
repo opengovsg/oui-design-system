@@ -41,8 +41,8 @@ export interface DescriptionProps extends TextProps, DescriptionVariantProps {}
 export function Description({ size, className, ...props }: DescriptionProps) {
   return (
     <Text
-      {...props}
       slot="description"
+      {...props}
       className={descriptionStyles({ className, size })}
     />
   )
