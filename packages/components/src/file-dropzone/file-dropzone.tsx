@@ -9,7 +9,8 @@ import type {
   FileRejection,
 } from "react-dropzone"
 import { useEffect, useMemo } from "react"
-import { useField } from "react-aria"
+import { Upload } from "lucide-react"
+import { useField, useId } from "react-aria"
 import {
   Group,
   LabelContext,
@@ -25,8 +26,10 @@ import type {
 } from "@opengovsg/oui-theme"
 import { fileDropzoneStyles } from "@opengovsg/oui-theme"
 
+import { Description } from "../field"
 import { useControllableState } from "../hooks"
 import { createContext } from "../system/react-utils"
+import { formatBytes } from "./utils"
 
 export interface FileItem extends File {
   errors?: readonly FileError[]
@@ -55,6 +58,12 @@ interface FileDropzoneProps
    * @default Number.POSITIVE_INFINITY
    */
   maxFileSize?: number
+
+  /**
+   * Whether to show the maximum file size information below the dropzone.
+   * @default true
+   */
+  showMaxFileSize?: boolean
   /**
    * Maximum number of files allowed per upload.
    * @default 1
@@ -65,6 +74,9 @@ interface FileDropzoneProps
 }
 
 export interface FileDropzoneState extends DropzoneState {
+  maxFiles: number
+  maxFileSizeTextId?: string
+  maxFileSize: number
   showDropzone: boolean
   value: FileItem[]
   setValue: React.Dispatch<React.SetStateAction<FileItem[]>>
@@ -92,6 +104,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   const {
     allowedMimeTypes = [],
     maxFileSize = Number.POSITIVE_INFINITY,
+    showMaxFileSize = true,
     maxFiles = 1,
     isDisabled,
     isReadOnly,
@@ -107,6 +120,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   })
 
   const slots = fileDropzoneStyles()
+  const maxFileSizeTextId = useId()
 
   const onDrop = (acceptedFiles: File[], fileRejections: FileRejection[]) => {
     const files: FileItem[] = [...acceptedFiles]
@@ -136,7 +150,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     noDrag: isReadOnly,
     noKeyboard: isReadOnly,
     maxSize: maxFileSize,
-    maxFiles: maxFiles,
+    maxFiles,
     multiple: maxFiles !== 1,
   })
 
@@ -159,6 +173,16 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     }
   }, [maxFiles, setValue, value])
 
+  const augmentedFieldProps = useMemo(() => {
+    if (!showMaxFileSize) {
+      return fieldProps
+    }
+    fieldProps["aria-describedby"] = fieldProps["aria-describedby"]
+      ? `${fieldProps["aria-describedby"]} ${maxFileSizeTextId}`
+      : maxFileSizeTextId
+    return fieldProps
+  }, [fieldProps, maxFileSizeTextId, showMaxFileSize])
+
   return (
     <Provider
       values={[
@@ -166,9 +190,15 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         [
           FileDropzoneStateContext,
           {
+            maxFiles,
+            maxFileSize,
             showDropzone,
             value,
             setValue,
+            maxFileSizeTextId:
+              showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY
+                ? maxFileSizeTextId
+                : undefined,
             ...dropzoneState,
           },
         ],
@@ -177,6 +207,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
           TextContext,
           {
             slots: {
+              maxFileSize: {},
               description: descriptionProps,
               errorMessage: errorMessageProps,
             },
@@ -184,9 +215,55 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         ],
       ]}
     >
-      <Group {...fieldProps}>
-        <h1>file-dropzone</h1>
+      <Group {...augmentedFieldProps}>
+        <FileDropzoneDropzone />
       </Group>
     </Provider>
+  )
+}
+
+const FileDropzoneDropzone = () => {
+  const {
+    maxFiles,
+    maxFileSize,
+    maxFileSizeTextId,
+    inputRef,
+    getRootProps,
+    getInputProps,
+  } = useFileDropzoneStateContext()
+
+  const { slots, classNames } = useFileDropzoneStyleContext()
+
+  return (
+    <div
+      {...getRootProps({
+        className: slots.base({
+          className: classNames?.base,
+        }),
+      })}
+    >
+      <input {...getInputProps()} />
+      <a onClick={() => inputRef.current?.click()} className={slots.dropzone()}>
+        <Upload size={20} className="" />
+        <p className="text-sm">
+          Upload{!!maxFiles && maxFiles > 1 ? ` ${maxFiles}` : ""} file
+          {!maxFiles || maxFiles > 1 ? "s" : ""}
+        </p>
+        <div className="flex flex-col items-center gap-y-1">
+          <p className="text-xs">
+            <span className="cursor-pointer underline transition">
+              Choose {maxFiles === 1 ? `file` : "files"}
+            </span>{" "}
+            or drag and drop here
+          </p>
+          {maxFileSizeTextId && (
+            <Description id={maxFileSizeTextId} slot="maxFileSize">
+              Maximum file size: {formatBytes(maxFileSize, 2)}
+            </Description>
+          )}
+          <Description slot="description">Another description</Description>
+        </div>
+      </a>
+    </div>
   )
 }

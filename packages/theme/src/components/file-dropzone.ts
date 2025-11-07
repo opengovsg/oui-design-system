@@ -5,6 +5,7 @@ import { tv } from "../utils/tv"
 export const fileDropzoneStyles = tv({
   slots: {
     base: "",
+    dropzone: "",
   },
   variants: {
     variant: {},
