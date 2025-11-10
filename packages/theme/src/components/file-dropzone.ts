@@ -6,6 +6,7 @@ export const fileDropzoneStyles = tv({
   slots: {
     base: "group flex flex-col gap-2",
     icon: "",
+    text: "text-center",
     group:
       "focus-within:outline-focus-ring rounded-sm outline-transparent transition-colors focus-within:outline-1",
     dropzone: "transition-colors group-disabled:cursor-not-allowed",

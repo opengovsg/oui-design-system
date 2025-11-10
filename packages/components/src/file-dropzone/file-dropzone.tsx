@@ -187,15 +187,23 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 
       if (onError && fileRejections.length > 0) {
         const firstError = fileRejections[0].errors[0]
-        if (firstError.code === "file-too-large") {
-          // The error message is in bytes, we need to format it to be more user-friendly
-          onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
-        } else {
-          onError(firstError.message)
+        switch (firstError.code) {
+          case "file-too-large":
+            // The error message is in bytes, we need to format it to be more user-friendly
+            onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
+            break
+          case "too-many-files":
+            onError(
+              `Too many files. Maximum number of files allowed is ${maxFiles}.`,
+            )
+            break
+          default: {
+            onError(firstError.message)
+          }
         }
       }
     },
-    [maxFileSize, onError, setValue, showRejectedFiles],
+    [maxFileSize, maxFiles, onError, setValue, showRejectedFiles],
   )
 
   const handleRemoveFile = useCallback(
@@ -372,7 +380,7 @@ const FileDropzoneDropzone = () => {
         className={slots.dropzone({ className: classNames?.dropzone })}
       >
         <Upload className={slots.icon({ className: classNames?.icon })} />
-        <div className="">
+        <div className={slots.text({ className: classNames?.text })}>
           <span
             className={slots.dropzoneHighlight({
               className: classNames?.dropzoneHighlight,
