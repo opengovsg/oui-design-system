@@ -20,7 +20,7 @@ import {
   Provider,
   TextContext,
 } from "react-aria-components"
-import { useDropzone } from "react-dropzone"
+import { ErrorCode, useDropzone } from "react-dropzone"
 
 import type {
   FileDropzoneSlots,
@@ -73,12 +73,17 @@ export interface FileDropzoneProps
    * @default Number.POSITIVE_INFINITY
    */
   maxFileSize?: number
+  /**
+   * Minimum upload size of each file allowed in bytes. (e.g 1000 bytes = 1 KB)
+   * @default 0
+   */
+  minFileSize?: number
 
   /**
-   * Whether to show the maximum file size information below the dropzone.
+   * Whether to show file size information below the dropzone.
    * @default true
    */
-  showMaxFileSize?: boolean
+  showFileSizeText?: boolean
   /**
    * Maximum number of files allowed per upload.
    * @default 1
@@ -97,6 +102,12 @@ export interface FileDropzoneProps
    * @default true if maxFiles is 1, false otherwise
    */
   hideDropzoneOnValue?: boolean
+
+  /**
+   * If provided, the image preview will be shown in the given size variant.
+   * @default "small"
+   */
+  imagePreview?: "small" | "large"
 }
 
 export interface FileDropzoneState
@@ -106,7 +117,6 @@ export interface FileDropzoneState
   inputProps: ReturnType<DropzoneState["getInputProps"]>
   triggerFileSelector: () => void | null
   maxFiles: number
-  maxFileSizeTextId?: string
   maxFileSize: number
   showDropzone: boolean
   files: FileItem[]
@@ -134,7 +144,8 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     name,
     allowedMimeTypes = [],
     maxFileSize = Number.POSITIVE_INFINITY,
-    showMaxFileSize = true,
+    minFileSize = 0,
+    showFileSizeText = true,
     maxFiles = 1,
     isDisabled,
     isReadOnly,
@@ -147,6 +158,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     description,
     children,
     hideDropzoneOnValue = maxFiles === 1,
+    imagePreview,
   } = props
 
   const [value, setValue] = useControllableState({
@@ -171,7 +183,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     })
 
   const slots = fileDropzoneStyles()
-  const maxFileSizeTextId = useId()
+  const fileSizeTextId = useId()
 
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
@@ -188,11 +200,15 @@ export const FileDropzone = (props: FileDropzoneProps) => {
       if (onError && fileRejections.length > 0) {
         const firstError = fileRejections[0].errors[0]
         switch (firstError.code) {
-          case "file-too-large":
+          case ErrorCode.FileTooLarge:
             // The error message is in bytes, we need to format it to be more user-friendly
             onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
             break
-          case "too-many-files":
+          case ErrorCode.FileTooSmall:
+            // The error message is in bytes, we need to format it to be more user-friendly
+            onError(`File is smaller than ${formatBytes(minFileSize, 2)}`)
+            break
+          case ErrorCode.TooManyFiles:
             onError(
               `Too many files. Maximum number of files allowed is ${maxFiles}.`,
             )
@@ -203,7 +219,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         }
       }
     },
-    [maxFileSize, maxFiles, onError, setValue, showRejectedFiles],
+    [maxFileSize, maxFiles, minFileSize, onError, setValue, showRejectedFiles],
   )
 
   const handleRemoveFile = useCallback(
@@ -227,14 +243,31 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     noClick: true,
     noKeyboard: true,
     maxSize: maxFileSize,
+    minSize: minFileSize,
     maxFiles,
     multiple: maxFiles !== 1,
   })
 
-  const showMaxFileSizeText = useMemo(
-    () => showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY,
-    [maxFileSize, showMaxFileSize],
-  )
+  const fileSizeText = useMemo(() => {
+    const notDefaultMaxFileSize = maxFileSize !== Number.POSITIVE_INFINITY
+    const notDefaultMinFileSize = minFileSize !== 0
+    const shouldShow =
+      showFileSizeText && (notDefaultMaxFileSize || notDefaultMinFileSize)
+    if (!shouldShow) return null
+    if (notDefaultMaxFileSize && notDefaultMinFileSize) {
+      return `File size must be between ${formatBytes(minFileSize, 2)} and ${formatBytes(
+        maxFileSize,
+        2,
+      )}`
+    }
+    if (notDefaultMaxFileSize) {
+      return `Maximum file size: ${formatBytes(maxFileSize, 2)}`
+    }
+    if (notDefaultMinFileSize) {
+      return `Minimum file size: ${formatBytes(minFileSize, 2)}`
+    }
+    return null
+  }, [maxFileSize, minFileSize, showFileSizeText])
 
   const triggerFileSelector = useCallback(() => {
     if (isDisabled || isReadOnly) return
@@ -261,14 +294,14 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 
   const inputProps = useMemo(() => {
     const inputProps = { ...fieldProps, name }
-    if (showMaxFileSizeText) {
+    if (fileSizeText) {
       inputProps["aria-describedby"] = inputProps["aria-describedby"]
-        ? `${inputProps["aria-describedby"]} ${maxFileSizeTextId}`
-        : maxFileSizeTextId
+        ? `${inputProps["aria-describedby"]} ${fileSizeTextId}`
+        : fileSizeTextId
     }
 
     return getInputProps(inputProps)
-  }, [fieldProps, getInputProps, maxFileSizeTextId, name, showMaxFileSizeText])
+  }, [fieldProps, getInputProps, fileSizeTextId, name, fileSizeText])
 
   const showDropzone = useMemo(() => {
     if (hideDropzoneOnValue) {
@@ -293,9 +326,6 @@ export const FileDropzone = (props: FileDropzoneProps) => {
             handleRemoveFile,
             inputProps,
             triggerFileSelector,
-            maxFileSizeTextId: showMaxFileSizeText
-              ? maxFileSizeTextId
-              : undefined,
             ...dropzoneState,
           },
         ],
@@ -312,7 +342,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
           TextContext,
           {
             slots: {
-              maxFileSize: {},
+              fileSize: {},
               description: descriptionProps,
               errorMessage: errorMessageProps,
             },
@@ -331,11 +361,11 @@ export const FileDropzone = (props: FileDropzoneProps) => {
               removeFile: () => handleRemoveFile(file.name),
             })
           }
-          return <FileInfo key={file.name} file={file} />
+          return <FileInfo variant={imagePreview} key={file.name} file={file} />
         })}
-        {showMaxFileSizeText && (
-          <Description id={maxFileSizeTextId} slot="maxFileSize">
-            Maximum file size: {formatBytes(maxFileSize, 2)}
+        {fileSizeText && (
+          <Description id={fileSizeTextId} slot="fileSize">
+            {fileSizeText}
           </Description>
         )}
         {description && <Description>{description}</Description>}
