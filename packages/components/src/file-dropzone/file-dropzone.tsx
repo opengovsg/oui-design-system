@@ -20,10 +20,12 @@ import {
   Provider,
   TextContext,
 } from "react-aria-components"
-import { ErrorCode, useDropzone } from "react-dropzone"
+import { useDropzone } from "react-dropzone"
 
 import type {
   FileDropzoneSlots,
+  FileDropzoneVariantProps,
+  FileInfoDropzoneSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
@@ -32,8 +34,9 @@ import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
 import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
 import { createContext } from "../system/react-utils"
+import { mapPropsVariants } from "../system/utils"
 import { FileInfo } from "./file-info"
-import { formatBytes } from "./utils"
+import { formatBytes, formatErrorMessage } from "./utils"
 
 export interface FileItem extends File {
   errors?: readonly FileError[]
@@ -56,6 +59,7 @@ export interface FileDropzoneProps
 
   validator?: DropzoneOptions["validator"]
   classNames?: SlotsToClasses<FileDropzoneSlots>
+  itemClassNames?: SlotsToClasses<FileInfoDropzoneSlots>
   /** The current files (controlled). */
   value?: FileItem[]
   /** The default files (uncontrolled). */
@@ -121,11 +125,13 @@ export interface FileDropzoneState
   showDropzone: boolean
   files: FileItem[]
   handleRemoveFile: (fileName: string) => void
+  formatError: (error: FileError) => string
 }
 
-export interface FileDropzoneStyleContext {
+export interface FileDropzoneStyleContext extends FileDropzoneVariantProps {
   slots: ReturnType<typeof fileDropzoneStyles>
   classNames?: SlotsToClasses<FileDropzoneSlots>
+  itemClassNames?: SlotsToClasses<FileInfoDropzoneSlots>
 }
 
 export const [FileDropzoneStateContext, useFileDropzoneStateContext] =
@@ -139,7 +145,11 @@ export const [FileDropzoneStyleContext, useFileDropzoneStyleContext] =
     name: "FileDropzoneStyleContext",
   })
 
-export const FileDropzone = (props: FileDropzoneProps) => {
+export const FileDropzone = (originalProps: FileDropzoneProps) => {
+  const [props, variantProps] = mapPropsVariants(
+    originalProps,
+    fileDropzoneStyles.variantKeys,
+  )
   const {
     name,
     allowedMimeTypes = [],
@@ -150,6 +160,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     isDisabled,
     isReadOnly,
     classNames,
+    itemClassNames,
     validator,
     showRejectedFiles,
     onError,
@@ -185,6 +196,16 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   const slots = fileDropzoneStyles()
   const fileSizeTextId = useId()
 
+  const formatError = useCallback(
+    (error: FileError) =>
+      formatErrorMessage(error, {
+        maxFileSize,
+        minFileSize,
+        maxFiles,
+      }),
+    [maxFileSize, maxFiles, minFileSize],
+  )
+
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       const files: FileItem[] = acceptedFiles
@@ -199,27 +220,10 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 
       if (onError && fileRejections.length > 0) {
         const firstError = fileRejections[0].errors[0]
-        switch (firstError.code) {
-          case ErrorCode.FileTooLarge:
-            // The error message is in bytes, we need to format it to be more user-friendly
-            onError(`File is larger than ${formatBytes(maxFileSize, 2)}`)
-            break
-          case ErrorCode.FileTooSmall:
-            // The error message is in bytes, we need to format it to be more user-friendly
-            onError(`File is smaller than ${formatBytes(minFileSize, 2)}`)
-            break
-          case ErrorCode.TooManyFiles:
-            onError(
-              `Too many files. Maximum number of files allowed is ${maxFiles}.`,
-            )
-            break
-          default: {
-            onError(firstError.message)
-          }
-        }
+        onError(formatError(firstError))
       }
     },
-    [maxFileSize, maxFiles, minFileSize, onError, setValue, showRejectedFiles],
+    [formatError, onError, setValue, showRejectedFiles],
   )
 
   const handleRemoveFile = useCallback(
@@ -313,7 +317,10 @@ export const FileDropzone = (props: FileDropzoneProps) => {
   return (
     <Provider
       values={[
-        [FileDropzoneStyleContext, { slots, classNames }],
+        [
+          FileDropzoneStyleContext,
+          { slots, classNames, itemClassNames, ...variantProps },
+        ],
         [
           FileDropzoneStateContext,
           {
@@ -324,6 +331,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
             showDropzone,
             files: value,
             handleRemoveFile,
+            formatError,
             inputProps,
             triggerFileSelector,
             ...dropzoneState,
@@ -361,7 +369,9 @@ export const FileDropzone = (props: FileDropzoneProps) => {
               removeFile: () => handleRemoveFile(file.name),
             })
           }
-          return <FileInfo variant={imagePreview} key={file.name} file={file} />
+          return (
+            <FileInfo imagePreview={imagePreview} key={file.name} file={file} />
+          )
         })}
         {fileSizeText && (
           <Description id={fileSizeTextId} slot="fileSize">

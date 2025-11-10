@@ -1,3 +1,6 @@
+import type { FileRejection } from "react-dropzone"
+import { ErrorCode } from "react-dropzone"
+
 export const formatBytes = (
   bytes: number,
   decimals = 2,
@@ -14,4 +17,24 @@ export const formatBytes = (
       ? sizes.indexOf(size)
       : Math.floor(Math.log(bytes) / Math.log(k))
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+}
+
+export const formatErrorMessage = (
+  error: FileRejection["errors"][number],
+  config: { maxFileSize: number; minFileSize: number; maxFiles: number },
+) => {
+  const { maxFileSize, minFileSize, maxFiles } = config
+  switch (error.code) {
+    case ErrorCode.FileTooLarge:
+      // The error message is in bytes, we need to format it to be more user-friendly
+      return `File is larger than ${formatBytes(maxFileSize, 2)}`
+    case ErrorCode.FileTooSmall:
+      // The error message is in bytes, we need to format it to be more user-friendly
+      return `File is smaller than ${formatBytes(minFileSize, 2)}`
+    case ErrorCode.TooManyFiles:
+      return `Too many files. Maximum number of files allowed is ${maxFiles}.`
+    default: {
+      return error.message
+    }
+  }
 }

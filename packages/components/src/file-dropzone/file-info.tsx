@@ -1,19 +1,33 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { File, X } from "lucide-react"
+import { Trash2 } from "lucide-react"
+
+import type {
+  FileInfoDropzoneSlots,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import { cn, fileInfoDropzoneStyles } from "@opengovsg/oui-theme"
 
 import type { FileItem } from "./file-dropzone"
 import { Button } from "../button"
-import { useFileDropzoneStateContext } from "./file-dropzone"
+import {
+  useFileDropzoneStateContext,
+  useFileDropzoneStyleContext,
+} from "./file-dropzone"
 import { formatBytes } from "./utils"
 
 interface FileInfoProps {
   file: FileItem
+  imagePreview?: "small" | "large"
+  classNames?: SlotsToClasses<FileInfoDropzoneSlots>
 }
 
-export const FileInfo = ({ file }: FileInfoProps) => {
-  const { maxFileSize, handleRemoveFile } = useFileDropzoneStateContext()
+export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
+  const { handleRemoveFile, formatError } = useFileDropzoneStateContext()
+  const { size, variant, itemClassNames } = useFileDropzoneStyleContext()
+
+  const styles = fileInfoDropzoneStyles({ size, variant, imagePreview })
 
   const [previewSrc, setPreviewSrc] = useState("")
   useEffect(() => {
@@ -29,44 +43,77 @@ export const FileInfo = ({ file }: FileInfoProps) => {
   }, [file])
 
   return (
-    <div className="flex items-center gap-x-4 border-b py-2 first:mt-4 last:mb-4">
-      {previewSrc ? (
-        <div className="bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded border">
-          <img src={previewSrc} alt={file.name} className="object-cover" />
-        </div>
-      ) : (
-        <div className="bg-muted flex h-10 w-10 items-center justify-center rounded border">
-          <File size={18} />
+    <div
+      className={styles.base({
+        className: cn(itemClassNames?.base, classNames?.base),
+      })}
+    >
+      {previewSrc && (
+        <div
+          className={styles.imageContainer({
+            className: cn(
+              itemClassNames?.imageContainer,
+              classNames?.imageContainer,
+            ),
+          })}
+        >
+          <img
+            src={previewSrc}
+            alt={file.name}
+            className={styles.image({
+              className: cn(itemClassNames?.image, classNames?.image),
+            })}
+          />
         </div>
       )}
 
-      <div className="flex shrink grow flex-col items-start truncate">
-        <p title={file.name} className="max-w-full truncate text-sm">
+      <div
+        className={styles.textContainer({
+          className: cn(
+            itemClassNames?.textContainer,
+            classNames?.textContainer,
+          ),
+        })}
+      >
+        <p
+          title={file.name}
+          className={styles.name({
+            className: cn(itemClassNames?.name, classNames?.name),
+          })}
+        >
           {file.name}
         </p>
         {file.errors?.length ? (
-          <p className="text-destructive text-xs">
-            {file.errors
-              .map((e) =>
-                e.message.startsWith("File is larger than")
-                  ? `File is larger than ${formatBytes(maxFileSize, 2)} (Size: ${formatBytes(file.size, 2)})`
-                  : e.message,
-              )
-              .join(", ")}
+          <p
+            className={styles.error({
+              className: cn(itemClassNames?.error, classNames?.error),
+            })}
+          >
+            {file.errors.map(formatError).join(", ")}
           </p>
         ) : (
-          <p className="text-xs">{formatBytes(file.size, 2)}</p>
+          <p
+            className={styles.size({
+              className: cn(itemClassNames?.size, classNames?.size),
+            })}
+          >
+            {formatBytes(file.size, 2)}
+          </p>
         )}
       </div>
 
       <Button
         isIconOnly
+        size={size}
         variant="clear"
+        color="critical"
         aria-label="Remove file"
-        className="hover:text-foreground shrink-0 justify-self-end"
+        className={styles.actionButton({
+          className: cn(itemClassNames?.actionButton, classNames?.actionButton),
+        })}
         onPress={() => handleRemoveFile(file.name)}
       >
-        <X />
+        <Trash2 />
       </Button>
     </div>
   )

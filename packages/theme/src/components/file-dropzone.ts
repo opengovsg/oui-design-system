@@ -43,3 +43,49 @@ export const fileDropzoneStyles = tv({
 
 export type FileDropzoneVariantProps = VariantProps<typeof fileDropzoneStyles>
 export type FileDropzoneSlots = keyof ReturnType<typeof fileDropzoneStyles>
+
+export const fileInfoDropzoneStyles = tv({
+  slots: {
+    base: "flex items-center gap-x-4 border-b py-2 first:mt-4 last:mb-4",
+    textContainer: "flex shrink grow flex-col items-start truncate",
+    imageContainer: "",
+    image: "",
+    name: "",
+    size: "",
+    error: "",
+    actionButton: "ml-auto",
+  },
+  variants: {
+    variant: {
+      solid: {},
+    },
+    size: {
+      md: {
+        actionButton: "",
+        size: "text-xs",
+        error: "text-destructive text-xs",
+        name: "max-w-full truncate text-sm",
+      },
+    },
+    imagePreview: {
+      small: {
+        imageContainer:
+          "bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded border",
+        image: "object-cover",
+      },
+      large: {},
+    },
+  },
+  defaultVariants: {
+    variant: "solid",
+    imagePreview: "small",
+    size: "md",
+  },
+})
+
+export type FileInfoDropzoneVariantProps = VariantProps<
+  typeof fileInfoDropzoneStyles
+>
+export type FileInfoDropzoneSlots = keyof ReturnType<
+  typeof fileInfoDropzoneStyles
+>
