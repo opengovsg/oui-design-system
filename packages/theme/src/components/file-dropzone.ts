@@ -4,14 +4,40 @@ import { tv } from "../utils/tv"
 
 export const fileDropzoneStyles = tv({
   slots: {
-    base: "",
-    dropzone: "",
+    base: "group flex flex-col gap-2",
+    icon: "",
+    group:
+      "focus-within:outline-focus-ring rounded-sm outline-transparent transition-colors focus-within:outline-1",
+    dropzone: "transition-colors group-disabled:cursor-not-allowed",
+    dropzoneHighlight:
+      "text-interaction-links-default group-disabled:text-base-content-disabled underline group-disabled:text-inherit",
   },
   variants: {
-    variant: {},
-    size: {},
+    variant: {
+      solid: {
+        dropzone:
+          "text-base-content-default bg-interaction-main-subtle-default border-base-divider-strong dragging:border-base-divider-medium hover:border-base-divider-medium dragging:bg-interaction-main-subtle-active hover:bg-interaction-main-subtle-hover group-focus-within:border-focus-ring! group-disabled:bg-interaction-support-disabled! group-disabled:border-base-divider-medium! group-disabled:text-interaction-support-disabled-content flex cursor-pointer flex-col items-center justify-center rounded-sm border border-dashed group-read-only:cursor-default group-focus-within:border-solid",
+      },
+    },
+    size: {
+      md: {},
+    },
   },
-  defaultVariants: {},
+  compoundVariants: [
+    {
+      size: "md",
+      variant: "solid",
+      className: {
+        base: "prose-body-1",
+        dropzone: "gap-2 px-12 py-16",
+        icon: "size-14",
+      },
+    },
+  ],
+  defaultVariants: {
+    size: "md",
+    variant: "solid",
+  },
 })
 
 export type FileDropzoneVariantProps = VariantProps<typeof fileDropzoneStyles>

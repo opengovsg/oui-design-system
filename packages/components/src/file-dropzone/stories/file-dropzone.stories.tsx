@@ -72,6 +72,14 @@ export const WithLabelAndDescription: Story = {
   render: Template,
 }
 
+export const WithLabelAndDescriptionAndMaxFileSize: Story = {
+  args: {
+    ...WithLabelAndDescription.args,
+    maxFileSize: 2 * 1000 * 1000, // 2MB
+  },
+  render: Template,
+}
+
 export const Controlled: Story = {
   args: {
     label: "Controlled FileDropzone",

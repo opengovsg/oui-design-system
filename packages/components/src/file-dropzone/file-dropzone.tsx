@@ -15,6 +15,7 @@ import { useField, useId } from "react-aria"
 import {
   FieldErrorContext,
   Group,
+  GroupContext,
   LabelContext,
   Provider,
   TextContext,
@@ -26,7 +27,7 @@ import type {
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { fileDropzoneStyles } from "@opengovsg/oui-theme"
+import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
@@ -89,8 +90,13 @@ export interface FileDropzoneProps
    * If there are multiple errors, only the first message will be passed to this function.
    */
   onError?: (errorMessage: string) => void
-
   children?: (values: FileItemsRenderProps) => React.ReactNode
+
+  /**
+   * Whether to hide the dropzone when there is at least one file uploaded.
+   * @default true if maxFiles is 1, false otherwise
+   */
+  hideDropzoneOnValue?: boolean
 }
 
 export interface FileDropzoneState
@@ -140,6 +146,7 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     label,
     description,
     children,
+    hideDropzoneOnValue = maxFiles === 1,
   } = props
 
   const [value, setValue] = useControllableState({
@@ -216,7 +223,10 @@ export const FileDropzone = (props: FileDropzoneProps) => {
     multiple: maxFiles !== 1,
   })
 
-  const showDropzone = useMemo(() => value.length < maxFiles, [value, maxFiles])
+  const showMaxFileSizeText = useMemo(
+    () => showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY,
+    [maxFileSize, showMaxFileSize],
+  )
 
   const triggerFileSelector = useCallback(() => {
     if (isDisabled || isReadOnly) return
@@ -243,21 +253,21 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 
   const inputProps = useMemo(() => {
     const inputProps = { ...fieldProps, name }
-    if (showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY) {
+    if (showMaxFileSizeText) {
       inputProps["aria-describedby"] = inputProps["aria-describedby"]
         ? `${inputProps["aria-describedby"]} ${maxFileSizeTextId}`
         : maxFileSizeTextId
     }
 
     return getInputProps(inputProps)
-  }, [
-    fieldProps,
-    getInputProps,
-    maxFileSize,
-    maxFileSizeTextId,
-    name,
-    showMaxFileSize,
-  ])
+  }, [fieldProps, getInputProps, maxFileSizeTextId, name, showMaxFileSizeText])
+
+  const showDropzone = useMemo(() => {
+    if (hideDropzoneOnValue) {
+      return value.length < maxFiles
+    }
+    return true
+  }, [hideDropzoneOnValue, maxFiles, value.length])
 
   return (
     <Provider
@@ -275,14 +285,21 @@ export const FileDropzone = (props: FileDropzoneProps) => {
             handleRemoveFile,
             inputProps,
             triggerFileSelector,
-            maxFileSizeTextId:
-              showMaxFileSize && maxFileSize !== Number.POSITIVE_INFINITY
-                ? maxFileSizeTextId
-                : undefined,
+            maxFileSizeTextId: showMaxFileSizeText
+              ? maxFileSizeTextId
+              : undefined,
             ...dropzoneState,
           },
         ],
         [LabelContext, labelProps],
+        [
+          GroupContext,
+          {
+            role: "presentation",
+            isInvalid,
+            isDisabled: props.isDisabled || false,
+          },
+        ],
         [
           TextContext,
           {
@@ -296,9 +313,9 @@ export const FileDropzone = (props: FileDropzoneProps) => {
         [FieldErrorContext, { isInvalid, validationErrors, validationDetails }],
       ]}
     >
-      <Group>
+      <Group className={slots.base({ className: classNames?.base })}>
         {label && <Label>{label}</Label>}
-        <FileDropzoneDropzone />
+        {showDropzone && <FileDropzoneDropzone />}
         {value.map((file) => {
           if (typeof children === "function") {
             return children({
@@ -308,6 +325,11 @@ export const FileDropzone = (props: FileDropzoneProps) => {
           }
           return <FileInfo key={file.name} file={file} />
         })}
+        {showMaxFileSizeText && (
+          <Description id={maxFileSizeTextId} slot="maxFileSize">
+            Maximum file size: {formatBytes(maxFileSize, 2)}
+          </Description>
+        )}
         {description && <Description>{description}</Description>}
         {errorMessage && <FieldError>{errorMessage}</FieldError>}
       </Group>
@@ -318,20 +340,20 @@ export const FileDropzone = (props: FileDropzoneProps) => {
 const FileDropzoneDropzone = () => {
   const {
     maxFiles,
-    maxFileSize,
-    maxFileSizeTextId,
     getRootProps,
     inputProps,
     triggerFileSelector,
     isDisabled,
+    isDragActive,
   } = useFileDropzoneStateContext()
   const { slots, classNames } = useFileDropzoneStyleContext()
 
   return (
     <div
       {...getRootProps({
-        className: slots.base({
-          className: classNames?.base,
+        "aria-disabled": isDisabled,
+        className: slots.group({
+          className: classNames?.group,
         }),
       })}
       tabIndex={isDisabled ? undefined : 0}
@@ -345,24 +367,20 @@ const FileDropzoneDropzone = () => {
       }}
     >
       <input {...inputProps} />
-      <div className={slots.dropzone()}>
-        <Upload size={20} className="" />
-        <p className="text-sm">
-          Upload{!!maxFiles && maxFiles > 1 ? ` ${maxFiles}` : ""} file
-          {!maxFiles || maxFiles > 1 ? "s" : ""}
-        </p>
-        <div className="flex flex-col items-center gap-y-1">
-          <p className="text-xs">
-            <span className="cursor-pointer underline transition">
-              Choose {maxFiles === 1 ? `file` : "files"}
-            </span>{" "}
-            or drag and drop here
-          </p>
-          {maxFileSizeTextId && (
-            <Description id={maxFileSizeTextId} slot="maxFileSize">
-              Maximum file size: {formatBytes(maxFileSize, 2)}
-            </Description>
-          )}
+      <div
+        data-dragging={dataAttr(isDragActive)}
+        className={slots.dropzone({ className: classNames?.dropzone })}
+      >
+        <Upload className={slots.icon({ className: classNames?.icon })} />
+        <div className="">
+          <span
+            className={slots.dropzoneHighlight({
+              className: classNames?.dropzoneHighlight,
+            })}
+          >
+            Choose {maxFiles === 1 ? `file` : `files`}
+          </span>{" "}
+          or drag and drop here
         </div>
       </div>
     </div>
