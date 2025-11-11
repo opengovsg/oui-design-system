@@ -7,6 +7,194 @@ links:
   source: number-field
   storybook: components-numberfield--default
   theme: number-field
+  reactaria: NumberField
 ---
 
-# Not yet implemented
+<ComponentPreview name="number-field-demo" />
+
+## Usage
+
+```tsx
+import { NumberField } from "@opengovsg/oui"
+```
+
+```tsx
+<NumberField aria-label="Enter quantity" />
+```
+
+The NumberField component provides an accessible way for users to enter numeric values with optional stepper buttons for incrementing and decrementing the value.
+
+If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label and Description
+
+Provide clear instructions to users with labels and descriptions.
+
+<ComponentPreview name="number-field-with-label-and-description" />
+
+### With Placeholder
+
+Use the `inputProps.placeholder` to show placeholder text.
+
+<ComponentPreview name="number-field-with-placeholder" />
+
+### Hide Steppers
+
+Use the `hideSteppers` prop to hide the increment and decrement buttons.
+
+<ComponentPreview name="number-field-hide-steppers" />
+
+### Start and End Content
+
+Add custom content to the start or end of the input field using `startContent` and `endContent` props.
+
+<ComponentPreview name="number-field-with-start-and-end-content" />
+
+### Min and Max Values
+
+Use `minValue` and `maxValue` props to restrict the range of acceptable values.
+
+<ComponentPreview name="number-field-min-max-values" />
+
+### Step Value
+
+Use the `step` prop to define the increment/decrement step size.
+
+<ComponentPreview name="number-field-with-step" />
+
+### Format Options
+
+Use the `formatOptions` prop to format the number display with internationalization support.
+
+<ComponentPreview name="number-field-with-format-options" />
+
+### Controlled
+
+Use the `value` and `onChange` props to control the number field value programmatically.
+
+<ComponentPreview name="number-field-controlled" />
+
+### With Error Message
+
+Combine `isInvalid` and `errorMessage` props to show validation errors.
+
+<ComponentPreview name="number-field-with-error-message" />
+
+### Sizes
+
+Use the `size` prop to change the size of the number field.
+
+<ComponentPreview name="number-field-sizes" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the number field.
+
+<ComponentPreview name="number-field-disabled" />
+
+### Read Only
+
+Use the `isReadOnly` prop to make the number field read-only.
+
+<ComponentPreview name="number-field-readonly" />
+
+### Required
+
+Use the `isRequired` prop to mark the field as required.
+
+<ComponentPreview name="number-field-required" />
+
+### Disable Wheel
+
+By default, users can change the value using the mouse wheel. Use `isWheelDisabled` to prevent this.
+
+<ComponentPreview name="number-field-wheel-disabled" />
+
+## Validation
+
+The NumberField component supports built-in validation:
+
+- **Range validation**: Automatically validates against `minValue` and `maxValue`
+- **Required validation**: Use `isRequired` to make the field mandatory
+- **Custom validation**: Use the `validate` prop for custom validation logic
+
+## Accessibility
+
+- Built with a native `<input type="number">` element
+- Full keyboard support (arrow keys to increment/decrement, typing to enter values)
+- Proper ARIA labeling and descriptions
+- Required and invalid states exposed to assistive technology
+- Stepper buttons are properly labeled for screen readers
+
+## Slots
+
+- **base**: The root container wrapper
+- **label**: The label text element
+- **field**: The field group wrapper containing input and steppers
+- **input**: The input element
+- **stepperContainer**: Container for the stepper buttons
+- **increment**: The increment button
+- **decrement**: The decrement button
+- **description**: The description text below the field
+- **error**: The error message text
+
+## Data Attributes
+
+`NumberField` has the following attributes on the base element, which you can use to style the component based on its state (e.g. `group-[data-invalid=true]:bg-red-500`):
+
+- **data-invalid**: When the input is invalid. Based on `isInvalid` prop.
+- **data-required**: When the input is required. Based on `isRequired` prop.
+- **data-readonly**: When the input is readonly. Based on `isReadOnly` prop.
+- **data-focus**: When the input is being focused.
+- **data-focus-within**: When the input is being focused or any of its children.
+- **data-focus-visible**: When the input is being focused with the keyboard.
+- **data-disabled**: When the input is disabled. Based on `isDisabled` prop.
+- **data-hide-steppers**: When the steppers are hidden. Based on `hideSteppers` prop.
+- **data-has-start-content**: When the input has start content. Based on `startContent` prop.
+- **data-has-end-content**: When the input has end content. Based on `endContent` prop.
+
+### Custom Styles
+
+You can customize the NumberField component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+```tsx
+<NumberField
+  label="Price"
+  classNames={{
+    base: "max-w-xs",
+    input: "text-right",
+    label: "font-bold",
+  }}
+/>
+```
+
+## Props
+
+### NumberField
+
+| Prop              | Type                                                              | Default | Description                                           |
+| ----------------- | ----------------------------------------------------------------- | ------- | ----------------------------------------------------- |
+| `label`           | `string`                                                          | -       | The label for the number field                        |
+| `description`     | `string`                                                          | -       | The description text shown below the field            |
+| `errorMessage`    | `string \| ((validation: ValidationResult) => string)`            | -       | The error message to display when validation fails    |
+| `value`           | `number`                                                          | -       | The current value (controlled)                        |
+| `defaultValue`    | `number`                                                          | -       | The default value (uncontrolled)                      |
+| `onChange`        | `(value: number) => void`                                         | -       | Callback fired when the value changes                 |
+| `minValue`        | `number`                                                          | -       | The minimum allowed value                             |
+| `maxValue`        | `number`                                                          | -       | The maximum allowed value                             |
+| `step`            | `number`                                                          | `1`     | The amount to increment/decrement when using steppers |
+| `formatOptions`   | `Intl.NumberFormatOptions`                                        | -       | Formatting options for number display                 |
+| `hideSteppers`    | `boolean`                                                         | `false` | Whether to hide the stepper buttons                   |
+| `startContent`    | `React.ReactNode`                                                 | -       | Content to display at the start of the input          |
+| `endContent`      | `React.ReactNode`                                                 | -       | Content to display at the end of the input            |
+| `size`            | `"xs" \| "sm" \| "md"`                                            | `"md"`  | The size of the component                             |
+| `isDisabled`      | `boolean`                                                         | `false` | Whether the field is disabled                         |
+| `isReadOnly`      | `boolean`                                                         | `false` | Whether the field is read-only                        |
+| `isRequired`      | `boolean`                                                         | `false` | Whether the field is required                         |
+| `isInvalid`       | `boolean`                                                         | `false` | Whether the field should display as invalid           |
+| `isWheelDisabled` | `boolean`                                                         | `false` | Whether to disable value changes via mouse wheel      |
+| `validate`        | `(value: number) => ValidationError \| true \| null \| undefined` | -       | Custom validation function                            |
+| `inputProps`      | `Partial<InputProps>`                                             | -       | Additional props to pass to the input element         |
+| `classNames`      | `SlotsToClasses<NumberFieldSlots>`                                | -       | Custom CSS classes for component slots                |
