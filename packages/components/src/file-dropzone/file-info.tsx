@@ -17,7 +17,7 @@ import {
 } from "./file-dropzone"
 import { formatBytes } from "./utils"
 
-interface FileInfoProps {
+export interface FileInfoProps {
   file: FileItem
   imagePreview?: "small" | "large" | null
   classNames?: SlotsToClasses<FileInfoDropzoneSlots>
