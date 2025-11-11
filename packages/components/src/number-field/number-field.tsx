@@ -75,6 +75,8 @@ export function NumberField(originalProps: NumberFieldProps) {
     <AriaNumberField
       {...props}
       data-hide-steppers={dataAttr(!!hideSteppers)}
+      data-has-start-content={dataAttr(!!startContent)}
+      data-has-end-content={dataAttr(!!endContent)}
       className={composeTailwindRenderProps(
         props.className,
         styles.base({
@@ -95,8 +97,6 @@ export function NumberField(originalProps: NumberFieldProps) {
           <>
             {startContent}
             <Input
-              data-has-start-content={dataAttr(!!startContent)}
-              data-has-end-content={dataAttr(!!endContent)}
               size={variantProps.size}
               variant="unstyled"
               className={styles.input({

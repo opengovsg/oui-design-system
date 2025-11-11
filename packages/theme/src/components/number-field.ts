@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const numberFieldStyles = tv({
   slots: {
-    base: "group text-base-content-default flex flex-col gap-1",
+    base: "group text-base-content-default flex w-full flex-col gap-1",
     label: "",
     field: "",
     description: "",
@@ -19,17 +19,17 @@ export const numberFieldStyles = tv({
     size: {
       xs: {
         input:
-          "data-[has-end-content=true]:pr-1 data-[has-start-content=true]:pl-1",
+          "group-data-[has-end-content=true]:pr-1 group-data-[has-start-content=true]:pl-1",
         field: "pl-3 group-data-[hide-steppers=true]:pr-3",
       },
       sm: {
         input:
-          "data-[has-end-content=true]:pr-1 data-[has-start-content=true]:pl-1",
+          "group-data-[has-end-content=true]:pr-1 group-data-[has-start-content=true]:pl-1",
         field: "pl-3 group-data-[hide-steppers=true]:pr-3",
       },
       md: {
         input:
-          "data-[has-end-content=true]:pr-1.5 data-[has-start-content=true]:pl-1.5",
+          "group-data-[has-end-content=true]:pr-1.5 group-data-[has-start-content=true]:pl-1.5",
         field: "pl-4 group-data-[hide-steppers=true]:pr-4",
       },
     },
