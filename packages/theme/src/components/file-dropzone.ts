@@ -8,8 +8,9 @@ export const fileDropzoneStyles = tv({
     icon: "",
     text: "text-center",
     group:
-      "focus-within:outline-focus-ring rounded-sm outline-transparent transition-colors focus-within:outline-1",
-    dropzone: "transition-colors group-disabled:cursor-not-allowed",
+      "group/dropzone rounded-sm outline-transparent transition-colors focus-visible:outline-none",
+    dropzone:
+      "group-focus-within/dropzone:border-focus-ring! group-focus-within/dropzone:outline-focus-ring outline-transparent transition group-focus-within/dropzone:border-solid group-focus-within/dropzone:outline-1 group-disabled:cursor-not-allowed",
     dropzoneHighlight:
       "text-interaction-links-default group-disabled:text-base-content-disabled underline group-disabled:text-inherit",
   },
@@ -17,7 +18,7 @@ export const fileDropzoneStyles = tv({
     variant: {
       solid: {
         dropzone:
-          "text-base-content-default bg-interaction-main-subtle-default border-base-divider-strong dragging:border-base-divider-medium hover:border-base-divider-medium dragging:bg-interaction-main-subtle-active hover:bg-interaction-main-subtle-hover group-focus-within:border-focus-ring! group-disabled:bg-interaction-support-disabled! group-disabled:border-base-divider-medium! group-disabled:text-interaction-support-disabled-content flex cursor-pointer flex-col items-center justify-center rounded-sm border border-dashed group-read-only:cursor-default group-focus-within:border-solid",
+          "text-base-content-default bg-interaction-main-subtle-default border-base-divider-strong dragging:border-base-divider-medium hover:border-base-divider-medium dragging:bg-interaction-main-subtle-active hover:bg-interaction-main-subtle-hover group-disabled:bg-interaction-support-disabled! group-disabled:border-base-divider-medium! group-disabled:text-interaction-support-disabled-content flex cursor-pointer flex-col items-center justify-center rounded-sm border border-dashed group-read-only:cursor-default",
       },
     },
     size: {
