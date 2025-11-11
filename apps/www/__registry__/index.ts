@@ -1388,6 +1388,203 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
   },
+  "number-field-controlled": {
+    name: "number-field-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-controlled.tsx"),
+    ),
+  },
+  "number-field-demo": {
+    name: "number-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/number-field-demo.tsx")),
+  },
+  "number-field-disabled": {
+    name: "number-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-disabled.tsx"),
+    ),
+  },
+  "number-field-hide-steppers": {
+    name: "number-field-hide-steppers",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-hide-steppers.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-hide-steppers.tsx"),
+    ),
+  },
+  "number-field-min-max-values": {
+    name: "number-field-min-max-values",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-min-max-values.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-min-max-values.tsx"),
+    ),
+  },
+  "number-field-readonly": {
+    name: "number-field-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-readonly.tsx"),
+    ),
+  },
+  "number-field-required": {
+    name: "number-field-required",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-required.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-required.tsx"),
+    ),
+  },
+  "number-field-sizes": {
+    name: "number-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/number-field-sizes.tsx")),
+  },
+  "number-field-wheel-disabled": {
+    name: "number-field-wheel-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-wheel-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-wheel-disabled.tsx"),
+    ),
+  },
+  "number-field-with-error-message": {
+    name: "number-field-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-error-message.tsx"),
+    ),
+  },
+  "number-field-with-format-options": {
+    name: "number-field-with-format-options",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-format-options.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-format-options.tsx"),
+    ),
+  },
+  "number-field-with-label-and-description": {
+    name: "number-field-with-label-and-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-label-and-description.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/number-field-with-label-and-description.tsx"
+        ),
+    ),
+  },
+  "number-field-with-placeholder": {
+    name: "number-field-with-placeholder",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-placeholder.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-placeholder.tsx"),
+    ),
+  },
+  "number-field-with-start-and-end-content": {
+    name: "number-field-with-start-and-end-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-start-and-end-content.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/number-field-with-start-and-end-content.tsx"
+        ),
+    ),
+  },
+  "number-field-with-step": {
+    name: "number-field-with-step",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/number-field-with-step.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-step.tsx"),
+    ),
+  },
   "pagination-boundaries": {
     name: "pagination-boundaries",
     description: "",

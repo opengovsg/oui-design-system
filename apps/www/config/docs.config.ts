@@ -60,7 +60,7 @@ const docsLinks: NavItem = {
             { title: "Menu", url: "menu" },
             { title: "Modal", url: "modal", status: "wip" },
             { title: "MultiSelect", url: "multi-select", status: "redirect" },
-            { title: "NumberField", url: "number-field", status: "wip" },
+            { title: "NumberField", url: "number-field", status: "new" },
             { title: "Pagination", url: "pagination", status: "new" },
             {
               title: "PhoneNumberField",
