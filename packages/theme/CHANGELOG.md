@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.23
+
+### Patch Changes
+
+- [#153](https://github.com/opengovsg/oui-design-system/pull/153) [`1f7c9a8`](https://github.com/opengovsg/oui-design-system/commit/1f7c9a80b135ea1bc65b8003881534eb5f52b6b3) Thanks [@karrui](https://github.com/karrui)! - feat(components): add NumberField component
+
 ## 0.0.22
 
 ### Patch Changes
