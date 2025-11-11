@@ -2,7 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 import { ErrorCode } from "react-dropzone"
 
-import type { FileDropzoneProps, FileItem } from "../file-dropzone"
+import type { FileDropzoneProps } from "../file-dropzone"
+import type { FileItem } from "../types"
 import { FileDropzone } from "../file-dropzone"
 
 function dataURLtoFile(dataurl: string, filename: string) {

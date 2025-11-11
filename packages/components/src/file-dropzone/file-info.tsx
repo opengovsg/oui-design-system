@@ -9,12 +9,12 @@ import type {
 } from "@opengovsg/oui-theme"
 import { cn, fileInfoDropzoneStyles } from "@opengovsg/oui-theme"
 
-import type { FileItem } from "./file-dropzone"
+import type { FileItem } from "./types"
 import { Button } from "../button"
 import {
   useFileDropzoneStateContext,
   useFileDropzoneStyleContext,
-} from "./file-dropzone"
+} from "./contexts"
 import { formatBytes } from "./utils"
 
 export interface FileInfoProps {

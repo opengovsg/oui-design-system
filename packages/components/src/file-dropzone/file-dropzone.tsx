@@ -2,12 +2,7 @@
 
 import type { InputBase, Validation } from "@react-types/shared"
 import type { AriaFieldProps } from "react-aria"
-import type {
-  DropzoneOptions,
-  DropzoneState,
-  FileError,
-  FileRejection,
-} from "react-dropzone"
+import type { DropzoneOptions, FileError, FileRejection } from "react-dropzone"
 import { useCallback, useEffect, useMemo } from "react"
 import { useFormValidationState } from "@react-stately/form"
 import { Upload } from "lucide-react"
@@ -24,23 +19,24 @@ import { useDropzone } from "react-dropzone"
 
 import type {
   FileDropzoneSlots,
-  FileDropzoneVariantProps,
   FileInfoDropzoneSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
 
+import type { FileItem } from "./types"
 import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
-import { createContext } from "../system/react-utils"
 import { mapPropsVariants } from "../system/utils"
+import {
+  FileDropzoneStateContext,
+  FileDropzoneStyleContext,
+  useFileDropzoneStateContext,
+  useFileDropzoneStyleContext,
+} from "./contexts"
 import { FileInfo } from "./file-info"
 import { formatBytes, formatErrorMessage } from "./utils"
-
-export interface FileItem extends File {
-  errors?: readonly FileError[]
-}
 
 export interface FileItemsRenderProps {
   file: FileItem
@@ -128,38 +124,6 @@ export interface FileDropzoneProps
    */
   imagePreview?: "small" | "large" | null
 }
-
-export interface FileDropzoneState
-  extends Omit<DropzoneState, "getInputProps"> {
-  isDisabled?: boolean
-  isReadOnly?: boolean
-  inputProps: ReturnType<DropzoneState["getInputProps"]>
-  triggerFileSelector: () => void | null
-  maxFiles: number
-  maxFileSize: number
-  showDropzone: boolean
-  files: FileItem[]
-  handleRemoveFile: (fileName: string) => void
-  handleRemoveRejection: (fileName: string) => void
-  formatError: (error: FileError) => string
-}
-
-export interface FileDropzoneStyleContext extends FileDropzoneVariantProps {
-  slots: ReturnType<typeof fileDropzoneStyles>
-  classNames?: SlotsToClasses<FileDropzoneSlots>
-  itemClassNames?: SlotsToClasses<FileInfoDropzoneSlots>
-}
-
-export const [FileDropzoneStateContext, useFileDropzoneStateContext] =
-  createContext<FileDropzoneState>({
-    strict: true,
-    name: "FileDropzoneStateContext",
-  })
-export const [FileDropzoneStyleContext, useFileDropzoneStyleContext] =
-  createContext<FileDropzoneStyleContext>({
-    strict: true,
-    name: "FileDropzoneStyleContext",
-  })
 
 export const FileDropzone = (originalProps: FileDropzoneProps) => {
   const [props, variantProps] = mapPropsVariants(
