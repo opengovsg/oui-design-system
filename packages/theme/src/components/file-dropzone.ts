@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const fileDropzoneStyles = tv({
   slots: {
-    base: "group flex flex-col items-stretch gap-2",
+    base: "group flex w-full flex-col items-stretch gap-2",
     icon: "",
     text: "text-center",
     group:
