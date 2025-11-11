@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.22
+
+### Patch Changes
+
+- [#152](https://github.com/opengovsg/oui-design-system/pull/152) [`be57b0d`](https://github.com/opengovsg/oui-design-system/commit/be57b0d6826102304e62e18b5c478def6f114778) Thanks [@karrui](https://github.com/karrui)! - feat(components): add FileDropzone component
+
+- [#148](https://github.com/opengovsg/oui-design-system/pull/148) [`098a678`](https://github.com/opengovsg/oui-design-system/commit/098a6780a7501bd1526697a76893ae0f02e578b0) Thanks [@karrui](https://github.com/karrui)! - feat(date-picker): allow passing of classNames to inner components
+
 ## 0.0.21
 
 ### Patch Changes
