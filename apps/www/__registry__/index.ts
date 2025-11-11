@@ -1207,6 +1207,176 @@ export const Index: Record<string, RegistryComponent> = {
         import("@/registry/examples/date-range-picker-with-time-fields.tsx"),
     ),
   },
+  "file-dropzone-allowed-mime-types": {
+    name: "file-dropzone-allowed-mime-types",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-allowed-mime-types.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-allowed-mime-types.tsx"),
+    ),
+  },
+  "file-dropzone-controlled": {
+    name: "file-dropzone-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-controlled.tsx"),
+    ),
+  },
+  "file-dropzone-custom-rendering": {
+    name: "file-dropzone-custom-rendering",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-custom-rendering.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-custom-rendering.tsx"),
+    ),
+  },
+  "file-dropzone-demo": {
+    name: "file-dropzone-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/file-dropzone-demo.tsx")),
+  },
+  "file-dropzone-disabled": {
+    name: "file-dropzone-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-disabled.tsx"),
+    ),
+  },
+  "file-dropzone-file-size-limits": {
+    name: "file-dropzone-file-size-limits",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-file-size-limits.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-file-size-limits.tsx"),
+    ),
+  },
+  "file-dropzone-image-preview": {
+    name: "file-dropzone-image-preview",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-image-preview.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-image-preview.tsx"),
+    ),
+  },
+  "file-dropzone-multiple-files": {
+    name: "file-dropzone-multiple-files",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-multiple-files.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-multiple-files.tsx"),
+    ),
+  },
+  "file-dropzone-readonly": {
+    name: "file-dropzone-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-readonly.tsx"),
+    ),
+  },
+  "file-dropzone-show-rejected-files": {
+    name: "file-dropzone-show-rejected-files",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-show-rejected-files.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-show-rejected-files.tsx"),
+    ),
+  },
+  "file-dropzone-sizes": {
+    name: "file-dropzone-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-sizes.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-sizes.tsx"),
+    ),
+  },
+  "file-dropzone-with-error-message": {
+    name: "file-dropzone-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-with-error-message.tsx"),
+    ),
+  },
+  "file-dropzone-with-label-and-description": {
+    name: "file-dropzone-with-label-and-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-with-label-and-description.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/file-dropzone-with-label-and-description.tsx"
+        ),
+    ),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",

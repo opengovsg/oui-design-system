@@ -35,7 +35,7 @@ const docsLinks: NavItem = {
             {
               title: "AttachmentField",
               url: "attachment-field",
-              status: "wip",
+              status: "redirect",
             },
             { title: "Avatar", url: "avatar", status: "wip" },
             { title: "Badge", url: "badge" },
@@ -53,6 +53,7 @@ const docsLinks: NavItem = {
               title: "DateRangePicker",
               url: "date-range-picker",
             },
+            { title: "FileDropzone", url: "file-dropzone", status: "new" },
             { title: "Field", url: "field" },
             { title: "Infobox", url: "infobox", status: "wip" },
             { title: "Link", url: "link", status: "wip" },

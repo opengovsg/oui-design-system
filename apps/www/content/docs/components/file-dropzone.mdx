@@ -1,0 +1,206 @@
+---
+title: FileDropzone
+description: A component that allows users to upload files via drag-and-drop or file selection.
+toc:
+  visible: true
+links:
+  source: file-dropzone
+  storybook: components-filedropzone--default
+  theme: file-dropzone
+---
+
+> If you want a more `react-aria-component`ish component, check out rac's [`FileTrigger`](https://react-spectrum.adobe.com/react-aria/FileTrigger.html)
+> and [`Dropzone`](https://react-spectrum.adobe.com/react-aria/DropZone.html#dropzone) components
+
+<ComponentPreview name="file-dropzone-demo" />
+
+## Usage
+
+```tsx
+import { FileDropzone } from "@opengovsg/oui"
+```
+
+```tsx
+<FileDropzone aria-label="Upload files" />
+```
+
+The FileDropzone component provides an accessible way for users to upload files through drag-and-drop or file selection. It supports various file types, size restrictions, and multiple file uploads.
+
+If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label and Description
+
+Provide clear instructions to users with labels and descriptions.
+
+<ComponentPreview name="file-dropzone-with-label-and-description" />
+
+### Allowed MIME Types
+
+Use the `allowedMimeTypes` prop to restrict which file types can be uploaded. Wildcards are supported (e.g., `image/*`).
+
+<ComponentPreview name="file-dropzone-allowed-mime-types" />
+
+### Multiple Files
+
+Use the `maxFiles` prop to allow users to upload multiple files at once.
+
+<ComponentPreview name="file-dropzone-multiple-files" />
+
+### File Size Limits
+
+Set `maxFileSize` and `minFileSize` to enforce file size restrictions. Sizes are specified in bytes.
+
+<ComponentPreview name="file-dropzone-file-size-limits" />
+
+### Error Handling
+
+The FileDropzone automatically validates files against your constraints. Use the `onError` callback to handle validation errors and display error messages.
+
+<ComponentPreview name="file-dropzone-with-error-message" />
+
+### Image Preview
+
+By default, image files are shown with a small preview. Use the `imagePreview` prop to control the preview size or disable it entirely.
+
+<ComponentPreview name="file-dropzone-image-preview" />
+
+### Show Rejected Files
+
+Use `showRejectedFiles` to display files that failed validation along with their error messages.
+
+<ComponentPreview name="file-dropzone-show-rejected-files" />
+
+### Controlled
+
+Use the `value` and `onChange` props to control the selected files programmatically.
+
+<ComponentPreview name="file-dropzone-controlled" />
+
+### Custom File Rendering
+
+Use the `children` render prop to customize how uploaded files are displayed.
+
+<ComponentPreview name="file-dropzone-custom-rendering" />
+
+### Sizes
+
+Use the `size` prop to change the size of the file dropzone.
+
+<ComponentPreview name="file-dropzone-sizes" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the file dropzone.
+
+<ComponentPreview name="file-dropzone-disabled" />
+
+### Read Only
+
+Use the `isReadOnly` prop to make the file dropzone read-only. Users can view uploaded files but cannot add or remove them.
+
+<ComponentPreview name="file-dropzone-readonly" />
+
+## Validation
+
+The FileDropzone component automatically validates files based on:
+
+- **MIME type**: Specified via `allowedMimeTypes`
+- **File size**: Controlled by `maxFileSize` and `minFileSize` (in bytes)
+- **Number of files**: Limited by `maxFiles`
+
+When validation fails, the component will:
+
+1. Trigger the `onError` callback with an error message (if provided)
+2. Mark rejected files with error information
+3. Display rejected files if `showRejectedFiles` is enabled
+
+## Accessibility
+
+- The component uses proper ARIA attributes for screen reader support
+- Keyboard navigation is fully supported (Enter/Space to open file selector)
+- File validation errors are communicated to assistive technology
+- Error messages are properly associated with the component
+
+## Slots
+
+### Dropzone (`classNames`)
+
+- **base**: The root container for the dropzone
+- **group**: The wrapper for the dropzone area
+- **dropzone**: The interactive drop target area
+- **icon**: The upload icon displayed in the dropzone
+- **text**: The instructional text in the dropzone
+- **dropzoneHighlight**: The highlighted "Choose files" text
+- **description**: The description text below the dropzone
+- **errorMessage**: The error message text
+
+### FileItem (`itemClassNames`)
+
+- **base**: The root container for the file item component
+- **container**: The container for the file item content (text and actionButton)
+- **textContainer**: The container for the file name and size text
+- **imageContainer**: The container for the file preview image
+- **image**: The file preview image
+- **name**: The file name text
+- **size**: The file size text
+- **error**: The file rejection error
+- **actionButton**: The action button for the file item
+
+### Custom Styles
+
+You can customize the FileDropzone component by passing custom Tailwind CSS classes to the component slots via the `classNames` and `itemClassNames` prop.
+
+```tsx
+<FileDropzone
+  aria-label="Upload files"
+  classNames={{
+    dropzone: "border-dashed border-2 border-blue-500",
+    icon: "text-blue-500",
+    text: "text-sm",
+  }}
+  itemClassNames={{
+    base: "flex items-center space-x-2",
+    textContainer: "flex-1",
+    imageContainer: "w-12 h-12",
+    image: "object-cover",
+    name: "font-medium",
+    size: "text-sm text-gray-500",
+    error: "text-red-500",
+    actionButton: "text-blue-500",
+  }}
+/>
+```
+
+## Props
+
+### FileDropzone
+
+| Prop                  | Type                                         | Default                    | Description                                                     |
+| --------------------- | -------------------------------------------- | -------------------------- | --------------------------------------------------------------- |
+| `label`               | `React.ReactNode`                            | -                          | The label for the file dropzone                                 |
+| `description`         | `React.ReactNode`                            | -                          | The description text shown below the dropzone                   |
+| `errorMessage`        | `React.ReactNode`                            | -                          | The error message to display when validation fails              |
+| `value`               | `FileItem[]`                                 | -                          | The currently selected files (controlled)                       |
+| `defaultValue`        | `FileItem[]`                                 | `[]`                       | The default files (uncontrolled)                                |
+| `onChange`            | `(files: FileItem[]) => void`                | -                          | Callback fired when the selected files change                   |
+| `onError`             | `(errorMessage: string) => void`             | -                          | Callback fired when file validation fails                       |
+| `onRejection`         | `(rejections: FileItem[]) => void`           | -                          | Callback fired when files are rejected                          |
+| `allowedMimeTypes`    | `string[]`                                   | `[]` (all types allowed)   | Array of allowed MIME types (supports wildcards like `image/*`) |
+| `maxFileSize`         | `number`                                     | `Number.POSITIVE_INFINITY` | Maximum file size in bytes                                      |
+| `minFileSize`         | `number`                                     | `0`                        | Minimum file size in bytes                                      |
+| `maxFiles`            | `number`                                     | `1`                        | Maximum number of files allowed                                 |
+| `showFileSizeText`    | `boolean`                                    | `true`                     | Whether to show file size information below the dropzone        |
+| `showRejectedFiles`   | `boolean`                                    | `false`                    | Whether to display rejected files in the component              |
+| `hideDropzoneOnValue` | `boolean`                                    | `true` if `maxFiles === 1` | Whether to hide the dropzone when files are uploaded            |
+| `imagePreview`        | `"small" \| "large" \| null`                 | `"small"`                  | Size of image preview, or `null` to disable previews            |
+| `size`                | `"sm" \| "md"`                               | `"md"`                     | The size of the component                                       |
+| `isDisabled`          | `boolean`                                    | `false`                    | Whether the component is disabled                               |
+| `isReadOnly`          | `boolean`                                    | `false`                    | Whether the component is read-only                              |
+| `isInvalid`           | `boolean`                                    | `false`                    | Whether the component should display as invalid                 |
+| `isRequired`          | `boolean`                                    | `false`                    | Whether the component is required                               |
+| `classNames`          | `SlotsToClasses<FileDropzoneSlots>`          | -                          | Custom CSS classes for component slots                          |
+| `itemClassNames`      | `SlotsToClasses<FileInfoDropzoneSlots>`      | -                          | Custom CSS classes for file info item slots                     |
+| `validator`           | `DropzoneOptions["validator"]`               | -                          | Custom file validator function                                  |
+| `children`            | `(props: FileItemsRenderProps) => ReactNode` | -                          | Render prop for custom file item rendering                      |
