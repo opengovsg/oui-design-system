@@ -58,6 +58,7 @@ export type FileDropzoneSlots = keyof ReturnType<typeof fileDropzoneStyles>
 export const fileInfoDropzoneStyles = tv({
   slots: {
     base: "border-base-divider-medium bg-interaction-main-subtle-default flex items-stretch overflow-hidden rounded-sm border",
+    container: "flex flex-1",
     textContainer:
       "text-base-content-default flex shrink grow flex-col items-start justify-center truncate",
     imageContainer:
@@ -74,26 +75,29 @@ export const fileInfoDropzoneStyles = tv({
     },
     size: {
       sm: {
-        textContainer: "prose-caption-1 min-h-14 gap-1 px-4",
+        base: "min-h-14",
+        container: "gap-4 px-4",
+        textContainer: "prose-caption-1 min-h-14 gap-1",
         size: "prose-caption-2",
         error: "prose-caption-2",
-        actionButton: "mr-4",
       },
       md: {
         base: "min-h-18",
-        textContainer: "prose-subhead-1 h-full gap-1 px-4 py-3.5",
-        actionButton: "mr-4",
+        container: "gap-4 px-4 py-3.5",
+        textContainer: "prose-subhead-1 h-full gap-1",
         size: "prose-caption-1",
         error: "prose-caption-1",
       },
     },
     imagePreview: {
       small: {
-        imageContainer: "",
         image: "p-1",
-        textContainer: "border-base-divider-medium border-l",
+        imageContainer: "border-base-divider-medium border-r",
       },
-      large: {},
+      large: {
+        image: "w-full p-1",
+        base: "flex-col",
+      },
     },
   },
   compoundVariants: [

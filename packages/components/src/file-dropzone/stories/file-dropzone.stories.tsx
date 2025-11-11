@@ -210,7 +210,7 @@ export const WithUploadedFileReadonly: Story = {
 
 export const WithLargeImagePreview: Story = {
   args: {
-    ...WithUploadedFile.args,
+    value: [MOCK_OGP_LOGO_FILE, MOCK_TEXT_FILE],
     imagePreview: "large",
   },
 }

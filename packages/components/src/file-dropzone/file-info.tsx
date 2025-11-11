@@ -74,7 +74,7 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
         >
           <img
             src={previewSrc}
-            alt={file.name}
+            alt={`Image preview of uploaded file: ${file.name}`}
             className={styles.image({
               className: cn(itemClassNames?.image, classNames?.image),
             })}
@@ -83,57 +83,66 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
       )}
 
       <div
-        className={styles.textContainer({
-          className: cn(
-            itemClassNames?.textContainer,
-            classNames?.textContainer,
-          ),
+        className={styles.container({
+          className: cn(itemClassNames?.container, classNames?.container),
         })}
       >
-        <p
-          title={file.name}
-          className={styles.name({
-            className: cn(itemClassNames?.name, classNames?.name),
+        <div
+          className={styles.textContainer({
+            className: cn(
+              itemClassNames?.textContainer,
+              classNames?.textContainer,
+            ),
           })}
         >
-          {file.name}
-        </p>
-        <p
-          className={styles.size({
-            className: cn(itemClassNames?.size, classNames?.size),
-          })}
-        >
-          {readableFileSize}
-        </p>
-        {file.errors?.length && (
           <p
-            className={styles.error({
-              className: cn(itemClassNames?.error, classNames?.error),
+            title={file.name}
+            className={styles.name({
+              className: cn(itemClassNames?.name, classNames?.name),
             })}
           >
-            {file.errors.map(formatError).join(", ")}
+            {file.name}
           </p>
-        )}
-      </div>
+          <p
+            className={styles.size({
+              className: cn(itemClassNames?.size, classNames?.size),
+            })}
+          >
+            {readableFileSize}
+          </p>
+          {file.errors?.length && (
+            <p
+              className={styles.error({
+                className: cn(itemClassNames?.error, classNames?.error),
+              })}
+            >
+              {file.errors.map(formatError).join(", ")}
+            </p>
+          )}
+        </div>
 
-      <Button
-        isDisabled={isDisabled || isReadOnly}
-        isIconOnly={!file.errors?.length}
-        size={size === "md" ? "md" : "xs"}
-        variant="clear"
-        color={file.errors?.length ? "main" : "critical"}
-        aria-label="Remove file"
-        className={styles.actionButton({
-          className: cn(itemClassNames?.actionButton, classNames?.actionButton),
-        })}
-        onPress={() =>
-          file.errors?.length
-            ? handleRemoveRejection(file.name)
-            : handleRemoveFile(file.name)
-        }
-      >
-        {file.errors?.length ? "Dismiss" : <Trash2 />}
-      </Button>
+        <Button
+          isDisabled={isDisabled || isReadOnly}
+          isIconOnly={!file.errors?.length}
+          size={size === "md" ? "md" : "xs"}
+          variant="clear"
+          color={file.errors?.length ? "main" : "critical"}
+          aria-label="Remove file"
+          className={styles.actionButton({
+            className: cn(
+              itemClassNames?.actionButton,
+              classNames?.actionButton,
+            ),
+          })}
+          onPress={() =>
+            file.errors?.length
+              ? handleRemoveRejection(file.name)
+              : handleRemoveFile(file.name)
+          }
+        >
+          {file.errors?.length ? "Dismiss" : <Trash2 />}
+        </Button>
+      </div>
     </div>
   )
 }
