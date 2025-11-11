@@ -109,9 +109,10 @@ export interface FileDropzoneProps
 
   /**
    * If provided, the image preview will be shown in the given size variant.
+   * If `null`, no image preview will be shown.
    * @default "small"
    */
-  imagePreview?: "small" | "large"
+  imagePreview?: "small" | "large" | null
 }
 
 export interface FileDropzoneState
@@ -169,7 +170,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     description,
     children,
     hideDropzoneOnValue = maxFiles === 1,
-    imagePreview,
+    imagePreview = "small",
   } = props
 
   const [value, setValue] = useControllableState({
@@ -193,7 +194,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       errorMessage: props.errorMessage || validationErrors,
     })
 
-  const slots = fileDropzoneStyles()
+  const slots = fileDropzoneStyles(variantProps)
   const fileSizeTextId = useId()
 
   const formatError = useCallback(
@@ -360,7 +361,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       ]}
     >
       <Group className={slots.base({ className: classNames?.base })}>
-        {label && <Label>{label}</Label>}
+        {label && <Label size={variantProps.size}>{label}</Label>}
         {showDropzone && <FileDropzoneDropzone />}
         {value.map((file) => {
           if (typeof children === "function") {
@@ -374,12 +375,20 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
           )
         })}
         {fileSizeText && (
-          <Description id={fileSizeTextId} slot="fileSize">
+          <Description
+            size={variantProps.size}
+            id={fileSizeTextId}
+            slot="fileSize"
+          >
             {fileSizeText}
           </Description>
         )}
-        {description && <Description>{description}</Description>}
-        {errorMessage && <FieldError>{errorMessage}</FieldError>}
+        {description && (
+          <Description size={variantProps.size}>{description}</Description>
+        )}
+        {errorMessage && (
+          <FieldError size={variantProps.size}>{errorMessage}</FieldError>
+        )}
       </Group>
     </Provider>
   )

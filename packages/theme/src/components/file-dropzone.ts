@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const fileDropzoneStyles = tv({
   slots: {
-    base: "group flex flex-col gap-2",
+    base: "group flex flex-col items-stretch gap-2",
     icon: "",
     text: "text-center",
     group:
@@ -21,10 +21,20 @@ export const fileDropzoneStyles = tv({
       },
     },
     size: {
+      sm: {},
       md: {},
     },
   },
   compoundVariants: [
+    {
+      size: "sm",
+      variant: "solid",
+      className: {
+        base: "prose-body-2",
+        dropzone: "gap-1 px-12 py-14",
+        icon: "size-7",
+      },
+    },
     {
       size: "md",
       variant: "solid",
@@ -46,36 +56,63 @@ export type FileDropzoneSlots = keyof ReturnType<typeof fileDropzoneStyles>
 
 export const fileInfoDropzoneStyles = tv({
   slots: {
-    base: "flex items-center gap-x-4 border-b py-2 first:mt-4 last:mb-4",
-    textContainer: "flex shrink grow flex-col items-start truncate",
-    imageContainer: "",
-    image: "",
-    name: "",
-    size: "",
-    error: "",
-    actionButton: "ml-auto",
+    base: "border-base-divider-medium bg-interaction-main-subtle-default flex items-stretch overflow-hidden rounded-sm border",
+    textContainer:
+      "text-base-content-default flex shrink grow flex-col items-start justify-center truncate",
+    imageContainer:
+      "inline-flex items-center justify-center overflow-hidden bg-white",
+    image: "object-contain",
+    name: "max-w-full truncate",
+    size: "text-base-content-medium",
+    error: "text-utility-feedback-critical",
+    actionButton: "ml-auto self-center",
   },
   variants: {
     variant: {
       solid: {},
     },
     size: {
+      sm: {
+        textContainer: "prose-caption-1 min-h-14 gap-1 px-4",
+        size: "prose-caption-2",
+        error: "prose-caption-2",
+        actionButton: "mr-4",
+      },
       md: {
-        actionButton: "",
-        size: "text-xs",
-        error: "text-destructive text-xs",
-        name: "max-w-full truncate text-sm",
+        base: "min-h-18",
+        textContainer: "prose-subhead-1 h-full gap-1 px-4 py-3.5",
+        actionButton: "mr-4",
+        size: "prose-caption-1",
+        error: "prose-caption-1",
       },
     },
     imagePreview: {
       small: {
-        imageContainer:
-          "bg-muted flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded border",
-        image: "object-cover",
+        imageContainer: "",
+        image: "p-1",
+        textContainer: "border-base-divider-medium border-l",
       },
       large: {},
     },
   },
+  compoundVariants: [
+    {
+      size: "sm",
+      imagePreview: "small",
+      className: {
+        imageContainer: "h-auto w-full max-w-21",
+        image: "max-h-14 max-w-21",
+      },
+    },
+    {
+      size: "md",
+      imagePreview: "small",
+      className: {
+        imageContainer: "h-auto w-full max-w-24",
+        image: "max-h-18 max-w-24",
+      },
+    },
+  ],
   defaultVariants: {
     variant: "solid",
     imagePreview: "small",

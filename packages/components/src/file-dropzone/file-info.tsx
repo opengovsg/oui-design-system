@@ -19,15 +19,22 @@ import { formatBytes } from "./utils"
 
 interface FileInfoProps {
   file: FileItem
-  imagePreview?: "small" | "large"
+  imagePreview?: "small" | "large" | null
   classNames?: SlotsToClasses<FileInfoDropzoneSlots>
 }
 
 export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
-  const { handleRemoveFile, formatError } = useFileDropzoneStateContext()
+  const { handleRemoveFile, formatError, isDisabled, isReadOnly } =
+    useFileDropzoneStateContext()
   const { size, variant, itemClassNames } = useFileDropzoneStyleContext()
 
-  const styles = fileInfoDropzoneStyles({ size, variant, imagePreview })
+  const readableFileSize = formatBytes(file.size, 2)
+
+  const styles = fileInfoDropzoneStyles({
+    size,
+    variant,
+    imagePreview: imagePreview ?? undefined,
+  })
 
   const [previewSrc, setPreviewSrc] = useState("")
   useEffect(() => {
@@ -48,7 +55,10 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
         className: cn(itemClassNames?.base, classNames?.base),
       })}
     >
-      {previewSrc && (
+      <div className="sr-only">
+        File attached: {file.name} with file size of {readableFileSize}
+      </div>
+      {imagePreview && previewSrc && (
         <div
           className={styles.imageContainer({
             className: cn(
@@ -97,14 +107,15 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
               className: cn(itemClassNames?.size, classNames?.size),
             })}
           >
-            {formatBytes(file.size, 2)}
+            {readableFileSize}
           </p>
         )}
       </div>
 
       <Button
+        isDisabled={isDisabled || isReadOnly}
         isIconOnly
-        size={size}
+        size={size === "md" ? "md" : "xs"}
         variant="clear"
         color="critical"
         aria-label="Remove file"
