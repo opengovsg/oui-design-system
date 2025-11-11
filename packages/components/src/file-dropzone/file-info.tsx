@@ -24,8 +24,13 @@ interface FileInfoProps {
 }
 
 export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
-  const { handleRemoveFile, formatError, isDisabled, isReadOnly } =
-    useFileDropzoneStateContext()
+  const {
+    handleRemoveFile,
+    handleRemoveRejection,
+    formatError,
+    isDisabled,
+    isReadOnly,
+  } = useFileDropzoneStateContext()
   const { size, variant, itemClassNames } = useFileDropzoneStyleContext()
 
   const readableFileSize = formatBytes(file.size, 2)
@@ -93,7 +98,14 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
         >
           {file.name}
         </p>
-        {file.errors?.length ? (
+        <p
+          className={styles.size({
+            className: cn(itemClassNames?.size, classNames?.size),
+          })}
+        >
+          {readableFileSize}
+        </p>
+        {file.errors?.length && (
           <p
             className={styles.error({
               className: cn(itemClassNames?.error, classNames?.error),
@@ -101,30 +113,26 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
           >
             {file.errors.map(formatError).join(", ")}
           </p>
-        ) : (
-          <p
-            className={styles.size({
-              className: cn(itemClassNames?.size, classNames?.size),
-            })}
-          >
-            {readableFileSize}
-          </p>
         )}
       </div>
 
       <Button
         isDisabled={isDisabled || isReadOnly}
-        isIconOnly
+        isIconOnly={!file.errors?.length}
         size={size === "md" ? "md" : "xs"}
         variant="clear"
-        color="critical"
+        color={file.errors?.length ? "main" : "critical"}
         aria-label="Remove file"
         className={styles.actionButton({
           className: cn(itemClassNames?.actionButton, classNames?.actionButton),
         })}
-        onPress={() => handleRemoveFile(file.name)}
+        onPress={() =>
+          file.errors?.length
+            ? handleRemoveRejection(file.name)
+            : handleRemoveFile(file.name)
+        }
       >
-        <Trash2 />
+        {file.errors?.length ? "Dismiss" : <Trash2 />}
       </Button>
     </div>
   )

@@ -93,7 +93,21 @@ export interface FileDropzoneProps
    * @default 1
    */
   maxFiles?: number
+
+  /**
+   * Whether to show rejected files in the component.
+   */
   showRejectedFiles?: boolean
+
+  /**
+   * List of file rejections (controlled).
+   */
+  rejections?: FileItem[]
+
+  /**
+   * If provided, callback function will be called when files are rejected.
+   */
+  onRejection?: (rejections: FileItem[]) => void
   /**
    * If provided, this function will be called with any error messages that occur during file validation.
    * If there are multiple errors, only the first message will be passed to this function.
@@ -126,6 +140,7 @@ export interface FileDropzoneState
   showDropzone: boolean
   files: FileItem[]
   handleRemoveFile: (fileName: string) => void
+  handleRemoveRejection: (fileName: string) => void
   formatError: (error: FileError) => string
 }
 
@@ -178,6 +193,11 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     defaultValue: props.defaultValue || [],
     onChange: props.onChange,
   })
+  const [rejections, setRejections] = useControllableState({
+    value: props.rejections,
+    defaultValue: [],
+    onChange: props.onRejection,
+  })
 
   const validationState = useFormValidationState({
     ...props,
@@ -215,7 +235,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
           ;(file as FileItem).errors = errors
           return file as FileItem
         })
-        files.push(...invalidFiles)
+        setRejections(invalidFiles)
       }
       setValue(files)
 
@@ -224,7 +244,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
         onError(formatError(firstError))
       }
     },
-    [formatError, onError, setValue, showRejectedFiles],
+    [formatError, onError, setRejections, setValue, showRejectedFiles],
   )
 
   const handleRemoveFile = useCallback(
@@ -232,6 +252,14 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       setValue((files) => files.filter((file) => file.name !== fileName))
     },
     [setValue],
+  )
+  const handleRemoveRejection = useCallback(
+    (fileName: string) => {
+      setRejections((rejections) =>
+        rejections.filter((file) => file.name !== fileName),
+      )
+    },
+    [setRejections],
   )
 
   const { getInputProps, ...dropzoneState } = useDropzone({
@@ -332,6 +360,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
             showDropzone,
             files: value,
             handleRemoveFile,
+            handleRemoveRejection,
             formatError,
             inputProps,
             triggerFileSelector,
@@ -374,6 +403,10 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
             <FileInfo imagePreview={imagePreview} key={file.name} file={file} />
           )
         })}
+        {rejections.length >= 1 &&
+          rejections.map((rj) => (
+            <FileInfo imagePreview={imagePreview} key={rj.name} file={rj} />
+          ))}
         {fileSizeText && (
           <Description
             size={variantProps.size}

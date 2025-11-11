@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { FileRejection } from "react-dropzone"
 import { useState } from "react"
 import { ErrorCode } from "react-dropzone"
 
-import type { FileDropzoneProps } from "../file-dropzone"
+import type { FileDropzoneProps, FileItem } from "../file-dropzone"
 import { FileDropzone } from "../file-dropzone"
 
 function dataURLtoFile(dataurl: string, filename: string) {
@@ -34,15 +33,13 @@ const MOCK_OGP_LOGO_FILE = dataURLtoFile(LOGO_BASE_64, "mock file.png")
 
 const MOCK_OGP_ICON_FILE = dataURLtoFile(ICON_BASE_64, "mock_file_2.png")
 
-const MOCK_REJECTED_FILE: FileRejection = {
-  file: MOCK_OGP_LOGO_FILE,
-  errors: [
-    {
-      code: ErrorCode.FileTooLarge,
-      message: "Failed to upload. This file exceeds the size limit.",
-    },
-  ],
-}
+const MOCK_REJECTED_FILE = dataURLtoFile(LOGO_BASE_64, "mock file.png")
+;(MOCK_REJECTED_FILE as FileItem).errors = [
+  {
+    code: ErrorCode.FileInvalidType,
+    message: "File type must be text/plain",
+  },
+]
 
 export default {
   title: "Components/FileDropzone",
@@ -222,6 +219,17 @@ export const NoImagePreview: Story = {
   args: {
     ...WithUploadedFile.args,
     imagePreview: null,
+  },
+}
+
+export const WithRejections: Story = {
+  args: {
+    // Only allow text
+    allowedMimeTypes: ["text/plain"],
+    hideDropzoneOnValue: false,
+    showRejectedFiles: true,
+    maxFiles: 3,
+    rejections: [MOCK_REJECTED_FILE],
   },
 }
 

@@ -27,7 +27,7 @@ export const formatErrorMessage = (
   switch (error.code) {
     case ErrorCode.FileTooLarge:
       // The error message is in bytes, we need to format it to be more user-friendly
-      return `You have exceeded the limit, please upload a file below ${formatBytes(maxFileSize, 2)}`
+      return `You have exceeded the size limit, please upload a file below ${formatBytes(maxFileSize, 2)}`
     case ErrorCode.FileTooSmall:
       // The error message is in bytes, we need to format it to be more user-friendly
       return `Please upload a file above ${formatBytes(minFileSize, 2)}`
