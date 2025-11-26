@@ -27,4 +27,5 @@ export * from "./checkbox"
 export * from "./pagination"
 export * from "./file-dropzone"
 export * from "./number-field"
+export * from "./multi-select"
 // Add new component exports here
