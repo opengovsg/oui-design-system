@@ -85,9 +85,9 @@ By default, the modal is centered on screens larger than `sm` and is at the `bot
 > **Note:** The `top-center` and `bottom-center` positions mean that the modal is positioned at the top/bottom of the screen on mobile, and at the center of the screen on desktop.
 
 <ComponentPreview
+  iframeSrc="/examples/modal/placement"
   asIframe
   name="modal-placement"
-  iframeSrc="/examples/modal/placement"
   iframeInitialWidth={320}
   previewHeight="680px"
 />
@@ -203,3 +203,15 @@ Use props returned by the `useDraggable` hook to make the modal draggable.
 Setting `useDraggable#overflow` prop to `true` allows users to drag the modal to a position where it overflows the viewport.
 
 <ComponentPreview name="modal-example-draggable-overflow" />
+
+### Responsive Modal
+
+You can use the [`useMediaQuery`](https://usehooks-ts.com/react-hook/use-media-query) hook from `usehooks-ts` (or other similar libraries) to create a responsive modal that changes its size and placement based on the screen size.
+
+<ComponentPreview
+  iframeSrc="/examples/modal/responsive"
+  asIframe
+  name="modal-example-responsive"
+  iframeInitialWidth={320}
+  previewHeight="680px"
+/>

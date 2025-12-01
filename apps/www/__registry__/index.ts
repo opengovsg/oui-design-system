@@ -1474,6 +1474,19 @@ export const Index: Record<string, RegistryComponent> = {
         import("@/registry/examples/modal-example-feature-announcement.tsx"),
     ),
   },
+  "modal-example-responsive": {
+    name: "modal-example-responsive",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-example-responsive.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-example-responsive.tsx"),
+    ),
+  },
   "modal-non-dismissible": {
     name: "modal-non-dismissible",
     description: "",
