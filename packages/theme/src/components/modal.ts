@@ -6,7 +6,8 @@ import { tv } from "../utils/tv"
 export const modalStyles = tv({
   slots: {
     base: "bg-base-canvas-default relative z-50 mx-1 my-1 box-border flex w-full max-w-md flex-col rounded-2xl border border-black/10 bg-clip-padding text-left align-middle text-slate-700 shadow-md outline-none sm:mx-6 sm:my-16 dark:border-white/10 dark:bg-zinc-800/70 dark:text-zinc-300 dark:backdrop-blur-2xl dark:backdrop-saturate-200 forced-colors:bg-[Canvas]",
-    overlay: "z-50",
+    overlay:
+      "fixed top-0 left-0 isolate z-50 flex h-(--visual-viewport-height) w-full items-center justify-center text-center",
     dialog: "flex h-full flex-col outline-none",
     header: "flex flex-initial px-6 py-4 text-start",
     body: "flex flex-1 flex-col gap-3 px-6 py-2 text-start",
@@ -17,6 +18,26 @@ export const modalStyles = tv({
     ],
   },
   variants: {
+    placement: {
+      auto: {
+        overlay: "items-end sm:items-center",
+      },
+      center: {
+        overlay: "items-center sm:items-center",
+      },
+      top: {
+        overlay: "items-start sm:items-start",
+      },
+      "top-center": {
+        overlay: "items-start sm:items-center",
+      },
+      bottom: {
+        overlay: "items-end sm:items-end",
+      },
+      "bottom-center": {
+        overlay: "items-end sm:items-center",
+      },
+    },
     radius: {
       none: { base: "rounded-none" },
       sm: { base: "rounded-sm" },
@@ -25,11 +46,13 @@ export const modalStyles = tv({
     },
     overlay: {
       transparent: {
-        overlay: "hidden",
+        overlay: "bg-transparent",
       },
       blur: {
-        overlay:
-          "bg-base-canvas-overlay fixed top-0 left-0 isolate z-20 flex h-(--visual-viewport-height) w-full items-center justify-center text-center backdrop-blur-md",
+        overlay: "bg-base-canvas-overlay backdrop-blur-md",
+      },
+      opaque: {
+        overlay: "bg-base-canvas-overlay",
       },
     },
     isEntering: {
@@ -105,7 +128,7 @@ export const modalStyles = tv({
       size: "full",
       scrollBehavior: "normal",
       class: {
-        overlay: "items-start overflow-y-auto sm:items-start",
+        overlay: "overflow-y-auto",
       },
     },
     {

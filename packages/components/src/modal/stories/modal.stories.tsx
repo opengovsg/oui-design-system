@@ -72,6 +72,14 @@ export default {
     scrollBehavior: "normal",
   },
   argTypes: {
+    overlay: {
+      control: { type: "radio" },
+      options: ["opaque", "blur", "transparent"],
+      description: "Determines the style of the modal overlay.",
+      table: {
+        type: { summary: '"opaque" | "blur" | "transparent"' },
+      },
+    },
     placement: {
       control: { type: "radio" },
       options: [
