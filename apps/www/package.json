@@ -26,6 +26,7 @@
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
     "@oui/prettier-config": "workspace:*",
+    "@react-aria/i18n": "^3.12.13",
     "@shikijs/rehype": "^2.4.2",
     "@shikijs/transformers": "^2.4.2",
     "@tailwindcss/postcss": "^4.0.6",

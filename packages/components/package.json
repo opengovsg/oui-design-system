@@ -61,7 +61,7 @@
     "motion": "^12.18.1",
     "prettier": "catalog:",
     "react": "catalog:",
-    "react-aria-components": "^1.12.2",
+    "react-aria-components": "^1.13.0",
     "storybook": "catalog:storybook10",
     "tsx": "^4.20.3",
     "typescript": "catalog:"
@@ -70,7 +70,7 @@
     "@internationalized/date": "^3.9.0",
     "@react-aria/calendar": "^3.8.3",
     "@react-aria/focus": "^3.21.2",
-    "@react-aria/i18n": "^3.12.10",
+    "@react-aria/i18n": "^3.12.13",
     "@react-aria/interactions": "^3.25.6",
     "@react-aria/utils": "^3.29.1",
     "@react-stately/calendar": "^3.8.4",

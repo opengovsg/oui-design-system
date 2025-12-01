@@ -23,7 +23,7 @@
     "@tailwindcss/vite": "catalog:",
     "inter-ui": "^4.1.0",
     "react": "catalog:",
-    "react-aria-components": "^1.12.2",
+    "react-aria-components": "^1.13.0",
     "react-dom": "catalog:"
   },
   "devDependencies": {

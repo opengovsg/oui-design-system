@@ -113,7 +113,7 @@ importers:
         specifier: 'catalog:'
         version: 19.0.0
       react-aria-components:
-        specifier: ^1.12.2
+        specifier: ^1.13.0
         version: 1.13.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-dom:
         specifier: 'catalog:'
@@ -224,6 +224,9 @@ importers:
       '@oui/prettier-config':
         specifier: workspace:*
         version: link:../../tooling/prettier-config
+      '@react-aria/i18n':
+        specifier: ^3.12.13
+        version: 3.12.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@shikijs/rehype':
         specifier: ^2.4.2
         version: 2.5.0
@@ -340,7 +343,7 @@ importers:
         specifier: ^3.21.2
         version: 3.21.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/i18n':
-        specifier: ^3.12.10
+        specifier: ^3.12.13
         version: 3.12.13(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-aria/interactions':
         specifier: ^3.25.6
@@ -452,7 +455,7 @@ importers:
         specifier: 'catalog:'
         version: 19.0.0
       react-aria-components:
-        specifier: ^1.12.2
+        specifier: ^1.13.0
         version: 1.13.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       storybook:
         specifier: catalog:storybook10
