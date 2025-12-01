@@ -19,7 +19,10 @@ const loremIpsums = [
   "Praesent hendrerit, velit bibendum feugiat venenatis, tortor enim dapibus urna, et tincidunt sapien dolor eu mauris. Fusce a sodales nisl. Donec sit amet orci consequat massa condimentum maximus id in ante. Quisque vel consectetur nulla, vel iaculis eros. Phasellus posuere purus tortor, ultricies aliquet nulla viverra id. Sed sed magna libero. Aliquam sit amet lobortis nisl. Suspendisse posuere facilisis diam, sit amet egestas odio sollicitudin sed. ]",
 ]
 
-const Template = (args: Story["args"]) => {
+const Template = ({
+  content,
+  ...args
+}: Story["args"] & { content: string[] }) => {
   return (
     <DialogTrigger>
       <Button>Open Modal</Button>
@@ -29,7 +32,7 @@ const Template = (args: Story["args"]) => {
             <>
               <ModalHeader>Modal Title</ModalHeader>
               <ModalBody>
-                {loremIpsums.slice(0, 3).map((text, index) => (
+                {content.map((text, index) => (
                   <p key={index}>{text}</p>
                 ))}
               </ModalBody>
@@ -52,7 +55,7 @@ const Template = (args: Story["args"]) => {
 export default {
   title: "Components/Modal",
   component: Modal,
-  render: Template,
+  render: (args) => <Template {...args} content={loremIpsums.slice(0, 3)} />,
   subcomponents: {
     ModalBody,
     ModalContent,
@@ -69,6 +72,32 @@ export default {
     scrollBehavior: "normal",
   },
   argTypes: {
+    placement: {
+      control: { type: "radio" },
+      options: [
+        "auto",
+        "center",
+        "top",
+        "top-center",
+        "bottom",
+        "bottom-center",
+      ],
+      description: "Determines the placement of the modal dialog.",
+      table: {
+        type: {
+          summary:
+            '"auto" | "center" | "top" | "top-center" | "bottom" | "bottom-center"',
+        },
+      },
+    },
+    size: {
+      control: { type: "radio" },
+      options: ["default", "mobile", "full"],
+      description: "Determines the size of the modal dialog.",
+      table: {
+        type: { summary: '"default" | "mobile" | "full"' },
+      },
+    },
     scrollBehavior: {
       control: { type: "radio" },
       options: ["inside", "outside", "normal"],
@@ -95,6 +124,19 @@ export const SizeFull: Story = {
   args: {
     size: "full",
   },
+}
+
+export const TransparentOverlay: Story = {
+  args: {
+    overlay: "transparent",
+  },
+}
+
+export const PlacementBottomCenter: Story = {
+  args: {
+    placement: "bottom-center",
+  },
+  render: (args) => <Template {...args} content={loremIpsums.slice(0, 1)} />,
 }
 
 export const Controlled: Story = {

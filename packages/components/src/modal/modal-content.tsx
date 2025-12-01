@@ -35,7 +35,12 @@ export function ModalContent({
   )
 
   return (
-    <Dialog {...props} className={slots.dialog({ className: props.className })}>
+    <Dialog
+      {...props}
+      className={slots.dialog({
+        className: props.className ?? classNames?.dialog,
+      })}
+    >
       {({ close }) => (
         <>
           {!hideCloseButton && (
