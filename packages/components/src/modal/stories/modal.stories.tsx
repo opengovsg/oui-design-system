@@ -72,6 +72,14 @@ export default {
     scrollBehavior: "normal",
   },
   argTypes: {
+    animation: {
+      control: { type: "radio" },
+      options: ["fade", "zoom", "none"],
+      description: "Determines the animation style of the modal dialog.",
+      table: {
+        type: { summary: '"fade" | "zoom" | "none"' },
+      },
+    },
     overlay: {
       control: { type: "radio" },
       options: ["opaque", "blur", "transparent"],

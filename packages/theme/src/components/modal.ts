@@ -18,6 +18,11 @@ export const modalStyles = tv({
     ],
   },
   variants: {
+    animation: {
+      none: {},
+      fade: {},
+      zoom: {},
+    },
     placement: {
       auto: {
         overlay: "items-end sm:items-center",
@@ -56,10 +61,14 @@ export const modalStyles = tv({
       },
     },
     isEntering: {
-      true: { base: "animate-in zoom-in-105 duration-200 ease-out" },
+      true: {
+        base: "",
+      },
     },
     isExiting: {
-      true: { base: "animate-out zoom-out-95 duration-200 ease-in" },
+      true: {
+        base: "",
+      },
     },
     size: {
       xs: {
@@ -131,15 +140,36 @@ export const modalStyles = tv({
         overlay: "overflow-y-auto",
       },
     },
+    // Animations
     {
-      overlay: "blur",
       isEntering: true,
-      class: { overlay: "animate-in fade-in duration-200 ease-out" },
+      animation: "zoom",
+      class: {
+        base: "animate-in zoom-in-105 duration-200 ease-in",
+      },
     },
     {
-      overlay: "blur",
       isExiting: true,
-      class: { overlay: "animate-out fade-out duration-200 ease-in" },
+      animation: "zoom",
+      class: {
+        base: "motion-safe:animate-out motion-safe:zoom-out-105 duration-200 ease-out",
+      },
+    },
+    {
+      isEntering: true,
+      animation: ["fade", "zoom"],
+      class: {
+        overlay:
+          "motion-safe:animate-in motion-safe:fade-in duration-200 ease-out",
+      },
+    },
+    {
+      isExiting: true,
+      animation: ["fade", "zoom"],
+      class: {
+        overlay:
+          "motion-safe:animate-out motion-safe:fade-out duration-200 ease-in",
+      },
     },
   ],
   defaultVariants: {
@@ -147,6 +177,7 @@ export const modalStyles = tv({
     size: "desktop",
     radius: "sm",
     scrollBehavior: "normal",
+    animation: "zoom",
   },
 })
 

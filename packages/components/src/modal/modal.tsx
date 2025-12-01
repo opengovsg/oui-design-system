@@ -59,14 +59,17 @@ export const Modal = forwardRef(function Modal(
       <ModalOverlay
         {...props}
         isDismissable={isDismissable}
-        className={slots.overlay({
-          className: classNames?.overlay,
-        })}
+        className={composeRenderProps(
+          classNames?.overlay,
+          (className, renderProps) =>
+            slots.overlay({ className, ...renderProps }),
+        )}
       >
         <AriaModal
           {...props}
           ref={ref}
           isDismissable={isDismissable}
+          data-placement={variantProps.placement}
           className={composeRenderProps(
             props.className ?? classNames?.base,
             (className, renderProps) =>
