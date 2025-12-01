@@ -7,6 +7,222 @@ links:
   source: modal
   storybook: components-modal--default
   theme: modal
+  reactaria: Modal
 ---
 
-# Not yet implemented
+<ComponentPreview name="modal-demo" />
+
+## Usage
+
+```tsx
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+} from "@opengovsg/oui"
+```
+
+```tsx
+<DialogTrigger>
+  <Button>Open Modal</Button>
+  <Modal>
+    <ModalContent>
+      {(onClose) => (
+        <>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalBody>
+            <p>Your modal content here</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button onPress={onClose}>Close</Button>
+          </ModalFooter>
+        </>
+      )}
+    </ModalContent>
+  </Modal>
+</DialogTrigger>
+```
+
+OUI exports 5 modal-related components:
+
+- **Modal**: The main component to display a modal.
+- **ModalContent**: The wrapper of the other modal components.
+- **ModalHeader**: The header of the modal.
+- **ModalBody**: The body of the modal.
+- **ModalFooter**: The footer of the modal.
+
+When the modal opens:
+
+- Focus is bounded within the modal and set to the first tabbable element.
+- Content behind the modal dialog is inert, meaning that users cannot interact with it.
+
+## Examples
+
+### Sizes
+
+Use the `size` prop to change the size of the modal. You will mainly use the `desktop`, `mobile`, and `full` sizes if following Figma.
+
+However, you can also choose from other preset sizes such as `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `3xl`, `4xl`, or `5xl` depending on your use case.
+
+<ComponentPreview name="modal-sizes" />
+
+### Non-dismissible
+
+By default, the modal can be closed by clicking on the overlay or pressing the <Kbd>Esc</Kbd> key. You can disable this behavior by setting the following properties:
+
+- Set the `isDismissable` property to `false` to prevent the modal from closing when clicking on the overlay.
+- Set the `isKeyboardDismissDisabled` property to `true` to prevent the modal from closing when pressing the <Kbd>Esc</Kbd> key.
+
+<ComponentPreview name="modal-non-dismissible" />
+
+### Modal Placement
+
+By default, the modal is centered on screens larger than `sm` and is at the `bottom` of the screen on mobile. This placement is called `auto`, but you can change it by using the `placement` prop.
+
+> **Note:** The `top-center` and `bottom-center` positions mean that the modal is positioned at the top/bottom of the screen on mobile, and at the center of the screen on desktop.
+
+<ComponentPreview
+  iframeSrc="/examples/modal/placement"
+  asIframe
+  name="modal-placement"
+  iframeInitialWidth={320}
+  previewHeight="680px"
+/>
+
+### Overflow Scroll
+
+You can use the `scrollBehavior` prop to set the scroll behavior of the modal.
+
+- **normal**: The modal content will not be scrollable.
+- **inside**: The modal content will be scrollable.
+- **outside**: The modal content will be scrollable and the modal will be fixed.
+
+The default value is `normal`.
+
+<ComponentPreview name="modal-scroll-behavior" />
+
+### Backdrop
+
+The `Modal` component has an `overlay` prop to show a backdrop behind the modal. The backdrop can be either `transparent`, `opaque` or `blur`. The default value is `blur`.
+
+<ComponentPreview name="modal-backdrop" />
+
+### Custom Backdrop
+
+You can customize the backdrop by using the `overlay` slot in `classNames`.
+
+<ComponentPreview name="modal-custom-backdrop" />
+
+### Controlled
+
+You can control the modal's open state using the `isOpen` and `onOpenChange` props.
+
+<ComponentPreview name="modal-controlled" />
+
+### Animation
+
+Use the `animation` prop to control the opening and closing animation of the modal.
+
+- **zoom**: The modal scales in and out (default).
+- **fade**: The modal fades in and out.
+- **none**: No animation.
+
+<ComponentPreview name="modal-animation" />
+
+## Slots
+
+- **overlay**: The backdrop/overlay slot, it is displayed behind the modal.
+- **base**: The main slot of the modal content.
+- **dialog**: The dialog wrapper inside the modal.
+- **header**: The header of the modal, it is displayed at the top of the modal.
+- **body**: The body of the modal, it is displayed in the middle of the modal.
+- **footer**: The footer of the modal, it is displayed at the bottom of the modal.
+- **closeButton**: The close button of the modal.
+
+### Custom Styles
+
+You can customize the `Modal` component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+```tsx
+<Modal
+  classNames={{
+    base: "bg-white",
+    overlay: "bg-black/50",
+    header: "border-b",
+    body: "py-6",
+    footer: "border-t",
+  }}
+>
+  {/* ... */}
+</Modal>
+```
+
+## Accessibility
+
+- Content outside the modal is hidden from assistive technologies while it is open.
+- The modal optionally closes when interacting outside, or pressing the <Kbd>Esc</Kbd> key.
+- Focus is moved into the modal on mount, and restored to the trigger element on unmount.
+- While open, focus is contained within the modal, preventing the user from tabbing outside.
+- Scrolling the page behind the modal is prevented while it is open, including in mobile browsers.
+
+## Props
+
+### Modal
+
+| Prop                        | Type                                                                                                          | Default     | Description                                         |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------- | --------------------------------------------------- |
+| `children`                  | `React.ReactNode`                                                                                             | -           | The content of the modal                            |
+| `size`                      | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "desktop" \| "mobile" \| "full"` | `"desktop"` | The size of the modal                               |
+| `radius`                    | `"none" \| "sm" \| "md" \| "lg"`                                                                              | `"sm"`      | The border radius of the modal                      |
+| `overlay`                   | `"transparent" \| "opaque" \| "blur"`                                                                         | `"blur"`    | The backdrop style                                  |
+| `animation`                 | `"none" \| "fade" \| "zoom"`                                                                                  | `"zoom"`    | The animation style for opening and closing         |
+| `scrollBehavior`            | `"normal" \| "inside" \| "outside"`                                                                           | `"normal"`  | The scroll behavior of the modal                    |
+| `placement`                 | `"auto" \| "center" \| "top" \| "top-center" \| "bottom" \| "bottom-center"`                                  | `"auto"`    | The placement of the modal                          |
+| `isOpen`                    | `boolean`                                                                                                     | -           | Whether the modal is open (controlled)              |
+| `defaultOpen`               | `boolean`                                                                                                     | -           | Whether the modal is open by default (uncontrolled) |
+| `isDismissable`             | `boolean`                                                                                                     | `true`      | Whether clicking the overlay closes the modal       |
+| `isKeyboardDismissDisabled` | `boolean`                                                                                                     | `false`     | Whether pressing Esc closes the modal               |
+| `classNames`                | `SlotsToClasses<ModalSlots>`                                                                                  | -           | Custom CSS classes for component slots              |
+
+### Modal Events
+
+| Prop           | Type                        | Description                          |
+| -------------- | --------------------------- | ------------------------------------ |
+| `onOpenChange` | `(isOpen: boolean) => void` | Callback when the open state changes |
+
+## Examples
+
+### Feature Announcement
+
+<ComponentPreview name="modal-example-feature-announcement" />
+
+### Draggable Modal
+
+Use props returned by the `useDraggable` hook to make the modal draggable.
+
+> The `zoom` animation may interfere with the dragging experience (the modal will snap back to the original position on close).
+>
+> It is recommended to set the `animation` prop to `fade` or `none` when using a draggable modal.
+
+<ComponentPreview name="modal-example-draggable" />
+
+### Draggable Overflow Modal
+
+Setting `useDraggable#overflow` prop to `true` allows users to drag the modal to a position where it overflows the viewport.
+
+<ComponentPreview name="modal-example-draggable-overflow" />
+
+### Responsive Modal
+
+You can use the [`useMediaQuery`](https://usehooks-ts.com/react-hook/use-media-query) hook from `usehooks-ts` (or other similar libraries) to create a responsive modal that changes its size and placement based on the screen size.
+
+<ComponentPreview
+  iframeSrc="/examples/modal/responsive"
+  asIframe
+  name="modal-example-responsive"
+  iframeInitialWidth={320}
+  previewHeight="680px"
+/>

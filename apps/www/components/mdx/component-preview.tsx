@@ -6,11 +6,16 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import { cn } from "@opengovsg/oui-theme"
 
 import { CopyButton } from "./copy-button"
+import { IframePreview } from "./iframe-preview"
 import { PreviewErrorBoundary } from "./preview-error-boundary"
 
 interface ComponentPreviewProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
   name: string
+  asIframe?: boolean
+  iframeInitialWidth?: number
+  iframeSrc?: string
+  previewHeight?: string
 }
 
 const RenderedComponent = ({ name }: { name: string }) => {
@@ -57,8 +62,24 @@ const Code = async ({
 export function ComponentPreview({
   name,
   className,
+  asIframe,
+  iframeInitialWidth,
+  iframeSrc,
+  previewHeight = "auto",
   ...props
 }: ComponentPreviewProps) {
+  const content = asIframe ? (
+    <IframePreview
+      iframeHeight={previewHeight}
+      iframeTitle={name}
+      iframeInitialWidth={iframeInitialWidth}
+      resizeEnabled
+      iframeSrc={iframeSrc}
+    />
+  ) : (
+    <RenderedComponent name={name} />
+  )
+
   return (
     <div
       className={cn("group relative my-4 flex flex-col space-y-2", className)}
@@ -82,13 +103,17 @@ export function ComponentPreview({
           </TabList>
         </div>
         <TabPanels>
-          <TabPanel id="preview" className="relative rounded-md border">
+          <TabPanel
+            id="preview"
+            className={cn("relative rounded-md", !asIframe && "border")}
+          >
             <div
               className={cn(
-                "flex w-full items-center justify-start overflow-auto p-4 md:p-6 lg:p-10",
+                "flex w-full items-center justify-start overflow-auto",
+                !asIframe && "p-4 md:p-6 lg:p-10",
               )}
             >
-              <RenderedComponent name={name} />
+              {content}
             </div>
           </TabPanel>
           <TabPanel id="code">

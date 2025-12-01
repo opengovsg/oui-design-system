@@ -226,4 +226,13 @@ export const mdxComponents = {
   Card,
   CardGroup,
   ComponentPreview,
+  Kbd: ({ ...props }) => {
+    // TODO: Change to kbd component when implemented
+    return (
+      <kbd
+        className="bg-interaction-muted-neutral-active border-base-divider-strong inline-flex items-center space-x-0.5 rounded-md border px-1.5 py-0.5 text-center font-sans font-normal"
+        {...props}
+      />
+    )
+  },
 }
