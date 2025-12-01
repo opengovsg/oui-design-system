@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.24
+
+### Patch Changes
+
+- [#156](https://github.com/opengovsg/oui-design-system/pull/156) [`de10a85`](https://github.com/opengovsg/oui-design-system/commit/de10a85f4b0319304e36937335d860b4fed672fb) Thanks [@karrui](https://github.com/karrui)! - feat: export package.json
+
+- [#156](https://github.com/opengovsg/oui-design-system/pull/156) [`de10a85`](https://github.com/opengovsg/oui-design-system/commit/de10a85f4b0319304e36937335d860b4fed672fb) Thanks [@karrui](https://github.com/karrui)! - feat: update react-aria dependency versions
+
 ## 0.0.23
 
 ### Patch Changes
