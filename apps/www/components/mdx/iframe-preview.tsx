@@ -12,12 +12,12 @@ const resizer = tv({
     base: "xs:hidden absolute right-[5px] z-10 flex w-auto items-center justify-end",
     main: "relative w-full",
     barWrapper:
-      "d-flex absolute flex h-auto w-[10px] cursor-ew-resize items-center justify-center select-none active:opacity-80",
+      "d-flex bg-grey-500 absolute flex h-auto w-[10px] cursor-ew-resize items-center justify-center rounded-sm select-none active:opacity-80",
     barInner: "relative z-10",
     bar: "bg-default-400 h-[40px] w-[6px] rounded-full",
     iframeWrapper:
       "border-default-200 dark:border-default-100 relative z-10 h-full w-full overflow-hidden rounded-lg border",
-    iframe: "z-10 h-[calc(100%_-_2rem)] w-full overflow-scroll border-none",
+    iframe: "z-10 h-full w-full overflow-scroll border-none",
   },
   variants: {
     hasInitialWidth: {

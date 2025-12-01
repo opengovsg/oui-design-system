@@ -103,10 +103,14 @@ export function ComponentPreview({
           </TabList>
         </div>
         <TabPanels>
-          <TabPanel id="preview" className="relative rounded-md border">
+          <TabPanel
+            id="preview"
+            className={cn("relative rounded-md", !asIframe && "border")}
+          >
             <div
               className={cn(
-                "flex w-full items-center justify-start overflow-auto p-4 md:p-6 lg:p-10",
+                "flex w-full items-center justify-start overflow-auto",
+                !asIframe && "p-4 md:p-6 lg:p-10",
               )}
             >
               {content}

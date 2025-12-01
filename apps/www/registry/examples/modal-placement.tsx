@@ -27,7 +27,7 @@ export default function ModalPlacement() {
   ]
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 p-4 md:p-6 lg:p-10">
       <div className="flex flex-wrap gap-2">
         {placements.map((placement) => (
           <Button
