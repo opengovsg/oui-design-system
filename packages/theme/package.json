@@ -31,7 +31,8 @@
       "require": "./src/index.ts"
     },
     "./base.css": "./src/variants/base.css",
-    "./tailwind.css": "./src/tailwind.css"
+    "./tailwind.css": "./src/tailwind.css",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "build": "tsup",
