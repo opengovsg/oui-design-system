@@ -1,37 +1,45 @@
 "use client"
 
 import { useState } from "react"
-import { DialogTrigger, Radio, RadioGroup } from "react-aria-components"
+import { DialogTrigger } from "react-aria-components"
 
 import {
   Button,
-  FieldGroup,
-  Label,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
+  ModalProps,
 } from "@opengovsg/oui"
 
 export default function ModalPlacement() {
-  const [modalPlacement, setModalPlacement] = useState("auto")
+  const [modalPlacement, setModalPlacement] =
+    useState<ModalProps["placement"]>("auto")
+
+  const placements: ModalProps["placement"][] = [
+    "auto",
+    "top",
+    "bottom",
+    "center",
+    "top-center",
+    "bottom-center",
+  ]
 
   return (
-    <div>
-      <RadioGroup
-        orientation="horizontal"
-        value={modalPlacement}
-        onChange={setModalPlacement}
-      >
-        <Label>Modal Placement</Label>
-        <Radio value="auto">auto</Radio>
-        <Radio value="top">top</Radio>
-        <Radio value="bottom">bottom</Radio>
-        <Radio value="center">center</Radio>
-        <Radio value="top-center">top-center</Radio>
-        <Radio value="bottom-center">bottom-center</Radio>
-      </RadioGroup>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-wrap gap-2">
+        {placements.map((placement) => (
+          <Button
+            key={placement}
+            size="sm"
+            variant={modalPlacement === placement ? "solid" : "outline"}
+            onPress={() => setModalPlacement(placement)}
+          >
+            {placement}
+          </Button>
+        ))}
+      </div>
       <DialogTrigger>
         <Button>Open Modal</Button>
         <Modal placement={modalPlacement}>
@@ -49,19 +57,6 @@ export default function ModalPlacement() {
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Nullam pulvinar risus non risus hendrerit venenatis.
                     Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                  </p>
-                  <p>
-                    Magna exercitation reprehenderit magna aute tempor cupidatat
-                    consequat elit dolor adipisicing. Mollit dolor eiusmod sunt
-                    ex incididunt cillum quis. Velit duis sit officia eiusmod
-                    Lorem aliqua enim laboris do dolor eiusmod. Et mollit
-                    incididunt nisi consectetur esse laborum eiusmod pariatur
-                    proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
                   </p>
                 </ModalBody>
                 <ModalFooter>

@@ -58,7 +58,7 @@ const docsLinks: NavItem = {
             { title: "Infobox", url: "infobox", status: "wip" },
             { title: "Link", url: "link", status: "wip" },
             { title: "Menu", url: "menu" },
-            { title: "Modal", url: "modal", status: "wip" },
+            { title: "Modal", url: "modal", status: "new" },
             { title: "MultiSelect", url: "multi-select", status: "redirect" },
             { title: "NumberField", url: "number-field", status: "new" },
             { title: "Pagination", url: "pagination", status: "new" },

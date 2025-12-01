@@ -1388,6 +1388,78 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
   },
+  "modal-backdrop": {
+    name: "modal-backdrop",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-backdrop.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-backdrop.tsx")),
+  },
+  "modal-controlled": {
+    name: "modal-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-controlled.tsx")),
+  },
+  "modal-custom-backdrop": {
+    name: "modal-custom-backdrop",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-custom-backdrop.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-custom-backdrop.tsx"),
+    ),
+  },
+  "modal-demo": {
+    name: "modal-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-demo.tsx")),
+  },
+  "modal-example-draggable-overflow": {
+    name: "modal-example-draggable-overflow",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-example-draggable-overflow.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-example-draggable-overflow.tsx"),
+    ),
+  },
+  "modal-example-draggable": {
+    name: "modal-example-draggable",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-example-draggable.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-example-draggable.tsx"),
+    ),
+  },
   "modal-example-feature-announcement": {
     name: "modal-example-feature-announcement",
     description: "",
@@ -1402,6 +1474,19 @@ export const Index: Record<string, RegistryComponent> = {
         import("@/registry/examples/modal-example-feature-announcement.tsx"),
     ),
   },
+  "modal-non-dismissible": {
+    name: "modal-non-dismissible",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-non-dismissible.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-non-dismissible.tsx"),
+    ),
+  },
   "modal-placement": {
     name: "modal-placement",
     description: "",
@@ -1412,6 +1497,30 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/modal-placement.tsx")),
+  },
+  "modal-scroll-behavior": {
+    name: "modal-scroll-behavior",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-scroll-behavior.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/modal-scroll-behavior.tsx"),
+    ),
+  },
+  "modal-sizes": {
+    name: "modal-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-sizes.tsx")),
   },
   "number-field-controlled": {
     name: "number-field-controlled",
