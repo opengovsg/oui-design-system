@@ -122,6 +122,16 @@ You can control the modal's open state using the `isOpen` and `onOpenChange` pro
 
 <ComponentPreview name="modal-controlled" />
 
+### Animation
+
+Use the `animation` prop to control the opening and closing animation of the modal.
+
+- **zoom**: The modal scales in and out (default).
+- **fade**: The modal fades in and out.
+- **none**: No animation.
+
+<ComponentPreview name="modal-animation" />
+
 ## Slots
 
 - **overlay**: The backdrop/overlay slot, it is displayed behind the modal.
@@ -168,6 +178,7 @@ You can customize the `Modal` component by passing custom Tailwind CSS classes t
 | `size`                      | `"xs" \| "sm" \| "md" \| "lg" \| "xl" \| "2xl" \| "3xl" \| "4xl" \| "5xl" \| "desktop" \| "mobile" \| "full"` | `"desktop"` | The size of the modal                               |
 | `radius`                    | `"none" \| "sm" \| "md" \| "lg"`                                                                              | `"sm"`      | The border radius of the modal                      |
 | `overlay`                   | `"transparent" \| "opaque" \| "blur"`                                                                         | `"blur"`    | The backdrop style                                  |
+| `animation`                 | `"none" \| "fade" \| "zoom"`                                                                                  | `"zoom"`    | The animation style for opening and closing         |
 | `scrollBehavior`            | `"normal" \| "inside" \| "outside"`                                                                           | `"normal"`  | The scroll behavior of the modal                    |
 | `placement`                 | `"auto" \| "center" \| "top" \| "top-center" \| "bottom" \| "bottom-center"`                                  | `"auto"`    | The placement of the modal                          |
 | `isOpen`                    | `boolean`                                                                                                     | -           | Whether the modal is open (controlled)              |

@@ -1388,6 +1388,17 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
   },
+  "modal-animation": {
+    name: "modal-animation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/modal-animation.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/modal-animation.tsx")),
+  },
   "modal-backdrop": {
     name: "modal-backdrop",
     description: "",
