@@ -19,7 +19,7 @@ import type { ButtonProps } from "../button"
 import { mapPropsVariants } from "../system/utils"
 import { ModalVariantContext } from "./modal-variant-context"
 
-interface ModalProps
+export interface ModalProps
   extends ModalOverlayProps,
     VariantProps<typeof modalStyles> {
   classNames?: SlotsToClasses<ModalSlots>

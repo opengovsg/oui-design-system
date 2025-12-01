@@ -1,3 +1,5 @@
+"use client"
+
 import type { DialogProps } from "react-aria-components"
 import { isValidElement, useContext } from "react"
 import { XIcon } from "lucide-react"

@@ -1,3 +1,5 @@
+"use client"
+
 import type { HeadingProps } from "react-aria-components"
 import { useContext } from "react"
 import { Heading } from "react-aria-components"
