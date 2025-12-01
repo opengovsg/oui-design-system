@@ -1,7 +1,5 @@
 "use client"
 
-import type { ContextValue } from "react-aria-components"
-
 import type {
   ModalSlots,
   modalStyles,
@@ -11,9 +9,10 @@ import type {
 
 import { createContext } from "../system/react-utils"
 
-interface ModalVariantContextValue extends ModalVariantProps {
+export interface ModalVariantContextValue extends ModalVariantProps {
   classNames?: SlotsToClasses<ModalSlots>
   slots: ReturnType<typeof modalStyles>
+  buttonSize: "md" | "lg"
 }
 
 export const [ModalVariantContext, useModalVariantContext] =
