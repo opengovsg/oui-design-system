@@ -1,7 +1,7 @@
 "use client"
 
 import type { MoveMoveEvent, MoveResult } from "@react-aria/interactions"
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef } from "react"
 import { useMove } from "@react-aria/interactions"
 
 export interface UseDraggableProps {
@@ -30,7 +30,7 @@ export function useDraggable(props: UseDraggableProps): MoveResult {
   const { targetRef, isDisabled = false, canOverflow = false } = props
   const boundary = useRef({ minLeft: 0, minTop: 0, maxLeft: 0, maxTop: 0 })
   const isDragging = useRef(false)
-  const [transform, setTransform] = useState({ offsetX: 0, offsetY: 0 })
+  let transform = { offsetX: 0, offsetY: 0 }
 
   const onMoveStart = useCallback(() => {
     isDragging.current = true
@@ -56,7 +56,8 @@ export function useDraggable(props: UseDraggableProps): MoveResult {
       maxLeft,
       maxTop,
     }
-  }, [transform, targetRef])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [transform, targetRef?.current])
 
   const onMove = useCallback(
     (e: MoveMoveEvent) => {
@@ -73,16 +74,17 @@ export function useDraggable(props: UseDraggableProps): MoveResult {
         moveY = Math.min(Math.max(moveY, minTop), maxTop)
       }
 
-      setTransform({
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      transform = {
         offsetX: moveX,
         offsetY: moveY,
-      })
+      }
 
       if (targetRef?.current) {
         targetRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
       }
     },
-    [isDisabled, transform, canOverflow, targetRef],
+    [isDisabled, transform, boundary.current, canOverflow, targetRef?.current],
   )
 
   const onMoveEnd = useCallback(() => {
