@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.25
+
+### Patch Changes
+
+- [#93](https://github.com/opengovsg/oui-design-system/pull/93) [`a5aba3e`](https://github.com/opengovsg/oui-design-system/commit/a5aba3e6945d324e8ec1e48db69a1d5c801f6cef) Thanks [@karrui](https://github.com/karrui)! - feat: add Modal component
+
+- [#93](https://github.com/opengovsg/oui-design-system/pull/93) [`a5aba3e`](https://github.com/opengovsg/oui-design-system/commit/a5aba3e6945d324e8ec1e48db69a1d5c801f6cef) Thanks [@karrui](https://github.com/karrui)! - feat: add Modal component
+
 ## 0.0.24
 
 ### Patch Changes
