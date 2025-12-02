@@ -1,5 +1,5 @@
 {
-  "name": "@oui/style-dictionary",
+  "name": "@opengovsg/oui-token-gen",
   "description": "Tool to generate tailwind variables from design tokens",
   "version": "0.0.0",
   "type": "module",

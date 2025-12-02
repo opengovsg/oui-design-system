@@ -664,7 +664,7 @@ importers:
         specifier: ^0.6.11
         version: 0.6.12(@ianvs/prettier-plugin-sort-imports@4.4.2(prettier@3.5.3))(prettier@3.5.3)
 
-  tooling/style-dictionary:
+  tooling/token-gen:
     dependencies:
       flat:
         specifier: ^6.0.1
