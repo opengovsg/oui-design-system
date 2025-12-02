@@ -90,7 +90,7 @@ export const mdxComponents = {
   }: React.HTMLAttributes<HTMLQuoteElement>) => (
     <blockquote
       className={cn(
-        "[&>*]:text-foreground/70 [&>*]:dark:text-muted-foreground flex gap-2 rounded-lg border p-2 text-sm",
+        "[&>*]:text-foreground/70 [&>*]:dark:text-muted-foreground flex gap-2 rounded-lg border p-2",
         className,
       )}
       {...props}
@@ -183,25 +183,23 @@ export const mdxComponents = {
   code: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
     <code
       className={cn(
-        "rounded-md font-mono text-sm",
+        "rounded-md font-mono",
         // @ts-ignore
         !props["data-theme"] &&
-          "font-bold before:content-['`'] after:content-['`']",
+          "text-[0.9em] font-semibold before:content-['`'] after:content-['`']",
         className,
       )}
       {...props}
     />
   ),
   Image: (props: ImageProps) => <Image {...props} alt="blog image" />,
-  Step: ({ className, ...props }: React.ComponentProps<"h3">) => (
-    <h3
-      className={cn(
-        "step font-heading mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  Step: function Step<As extends React.ElementType>({
+    as: As = "div",
+    className,
+    ...props
+  }: React.ComponentProps<As> & { as?: As }) {
+    return <As className={cn("step mt-8 scroll-m-20", className)} {...props} />
+  },
   Steps: ({ ...props }) => (
     <div
       className="steps mb-12 ml-4 border-l pl-8 [counter-reset:step]"

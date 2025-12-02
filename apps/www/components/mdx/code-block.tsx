@@ -8,7 +8,7 @@ export const CodeBlock = ({
   ...props
 }: React.HTMLAttributes<HTMLPreElement>) => {
   return (
-    <div className="relative mt-6 rounded-xl font-mono text-sm font-normal">
+    <div className="relative mt-6 mb-6 rounded-xl font-mono text-sm font-normal">
       <div className="absolute top-3 right-3 z-10">
         <CopyButton>{children}</CopyButton>
       </div>

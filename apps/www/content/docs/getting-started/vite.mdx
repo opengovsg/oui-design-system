@@ -1,0 +1,203 @@
+---
+title: Vite
+description: How to install and set up OUI in a Vite project
+---
+
+This guide will help you set up OUI in a new or existing Vite project with React and Tailwind CSS v4. \
+\
+OUI has been tested with the following dependency versions:
+
+- [Vite 4](https://vite.dev) or later
+- [React 18](https://reactjs.org) or later
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation)
+- [Motion 12](https://motion.dev/docs/react) or later
+
+## Create a new Vite project
+
+If you're starting from scratch, create a new Vite project with React and TypeScript:
+
+```bash
+npm create vite@latest my-app -- --template react-ts
+cd my-app
+```
+
+## Installation
+
+<Steps>
+
+<Step>
+### Install dependencies
+
+Install OUI packages and peer dependencies:
+
+```bash
+npm install @opengovsg/oui @opengovsg/oui-theme react-aria-components motion
+```
+
+</Step>
+
+<Step>
+### Install Tailwind CSS v4
+
+Install Tailwind CSS v4 and the Vite plugin:
+
+```bash
+npm install tailwindcss @tailwindcss/vite
+```
+
+</Step>
+
+<Step>
+### Configure Vite
+
+Add the Tailwind CSS plugin to your `vite.config.ts`:
+
+```ts {2,9}
+// vite.config.ts
+import tailwindcss from "@tailwindcss/vite"
+import react from "@vitejs/plugin-react"
+import { defineConfig } from "vite"
+
+export default defineConfig({
+  plugins: [
+    // Add Tailwind CSS plugin
+    tailwindcss(),
+    react(),
+  ],
+})
+```
+
+</Step>
+
+<Step>
+### Set up your CSS file
+
+Create or update your main CSS file (e.g., `src/globals.css`) to import the OUI theme:
+
+```css
+@import "@opengovsg/oui-theme/tailwind.css";
+/* 
+ * Note: You may need to change the path relative to this css file to fit your
+ * project structure, especially in a monorepo.
+ */
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+```
+
+This import includes:
+
+- Tailwind CSS v4 base styles
+- OUI design tokens and theme variables
+- React Aria Components integration via `tailwindcss-react-aria-components`
+- Animation utilities via `tw-animate-css`
+
+</Step>
+
+<Step>
+### Import CSS in your app
+
+Make sure your CSS file is imported in your app entry point:
+
+```tsx {4}
+// src/main.tsx
+import React from "react"
+
+import "./globals.css"
+
+import ReactDOM from "react-dom/client"
+
+import App from "./App"
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+```
+
+</Step>
+
+<Step>
+### (Optional) Add `react-aria-component` Link provider
+If your app uses routing (e.g., with Tanstack Router), wrap your app with the `LinkProvider` from `react-aria-components` 
+to have proper routing behavior when using `react-aria-component`s `Link` component:
+
+```tsx
+// app/providers.tsx (or wherever your providers are defined)
+import { RouterProvider } from "react-aria-components"
+import { useHref, useNavigate } from "your-router"
+
+export function Providers() {
+  let navigate = useNavigate()
+
+  return (
+    <RouterProvider navigate={navigate} useHref={useHref}>
+      <OtherProviders>{/* ... */}</OtherProviders>
+    </RouterProvider>
+  )
+}
+```
+
+```tsx
+// app/layout.tsx (or wherever your root layout is defined)
+import { Providers } from "./providers"
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className="antialiased">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+Read more about [Client Side Routing](https://react-spectrum.adobe.com/react-aria/routing.html) with `react-aria-components` [here](https://react-spectrum.adobe.com/react-aria/routing.html).
+
+</Step>
+
+<Step>
+### Start using OUI components
+
+You're all set! Start using OUI components in your app:
+
+```tsx {2,7-9}
+// src/some-component.tsx
+import { Button } from "@opengovsg/oui"
+
+function SomeComponent() {
+  return (
+    <div className="flex min-h-screen items-center justify-center gap-4">
+      <Button>Default</Button>
+      <Button color="main">Main</Button>
+      <Button variant="outline">Outline</Button>
+    </div>
+  )
+}
+```
+
+</Step>
+
+</Steps>
+
+## TypeScript configuration
+
+For the best TypeScript experience, ensure your `tsconfig.json` includes:
+
+```json title="tsconfig.json"
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx"
+  }
+}
+```
+
+## Next steps
+
+- Browse the [Components](/docs/components/button) documentation to explore available components
+- Check out the [Theming](/docs/theming) guide to customize the design system
