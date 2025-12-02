@@ -25,7 +25,7 @@ const MobileNavLink = ({
     <Link
       href={href}
       data-current={dataAttr(isCurrent)}
-      className="current:font-semibold block w-full px-4 py-2"
+      className="current:font-semibold current:bg-interaction-muted-main-active current:shadow-xs block w-full px-3 py-1.5"
     >
       {children}
     </Link>
@@ -61,15 +61,17 @@ export const MobileHeaderNav = () => {
         <Menu />
       </Button>
       <Drawer>
-        {secondaryNavItems.map((item) => (
-          <MobileNavLink
-            key={item.title}
-            href={item.url}
-            isCurrent={item.current}
-          >
-            {item.title}
-          </MobileNavLink>
-        ))}
+        <div className="w-full px-2">
+          {secondaryNavItems.map((item) => (
+            <MobileNavLink
+              key={item.title}
+              href={item.url}
+              isCurrent={item.current}
+            >
+              {item.title}
+            </MobileNavLink>
+          ))}
+        </div>
       </Drawer>
     </DialogTrigger>
   )

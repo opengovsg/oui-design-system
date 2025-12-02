@@ -24,7 +24,7 @@ export const Header = () => {
           <div className="flex flex-1 items-center gap-6 max-md:hidden">
             {secondaryNavItems.map((item) => (
               <a
-                className="current:after:font-medium invisible relative text-sm/6 font-medium text-gray-950 after:visible after:absolute after:inset-0 after:font-normal after:content-[attr(content)] dark:text-white"
+                className="current:after:font-medium current:text-gray-800 invisible relative text-sm/6 font-medium text-gray-500 after:visible after:absolute after:inset-0 after:font-normal after:content-[attr(content)] dark:text-white"
                 key={item.title}
                 data-current={item.current ? true : undefined}
                 href={item.url}
