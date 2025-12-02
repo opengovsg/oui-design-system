@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import { execSync } from "child_process";
-import { createInterface } from "readline";
 import { readFileSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+
+import { search } from "@inquirer/prompts";
+import { Command } from "commander";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -24,18 +26,8 @@ function getAvailableThemes(): string[] {
   );
 }
 
-function displayThemes(themes: string[]): void {
-  console.log("\nAvailable themes:");
-  console.log("─".repeat(40));
-  themes.forEach((theme, index) => {
-    console.log(`  ${index + 1}. ${theme}`);
-  });
-  console.log("─".repeat(40));
-  console.log(`\nNote: "${GLOBAL_THEME}" theme is always included.\n`);
-}
-
-function generateTokens(selectedThemes: string[]): void {
-  const themesArg = [GLOBAL_THEME, ...selectedThemes].join(",");
+function generateTokens(selectedTheme: string): void {
+  const themesArg = [GLOBAL_THEME, selectedTheme].join(",");
 
   console.log(`\nGenerating tokens with themes: ${themesArg}`);
   console.log("─".repeat(40));
@@ -63,152 +55,110 @@ function generateTokens(selectedThemes: string[]): void {
   }
 }
 
-async function promptForThemes(themes: string[]): Promise<string[]> {
-  const rl = createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+/**
+ * Simple fuzzy match - checks if all characters in the query appear in order in the target
+ */
+function fuzzyMatch(query: string, target: string): boolean {
+  const queryLower = query.toLowerCase();
+  const targetLower = target.toLowerCase();
 
-  return new Promise((resolve) => {
-    rl.question(
-      "Enter theme numbers (comma-separated) or theme names: ",
-      (answer) => {
-        rl.close();
+  let queryIndex = 0;
+  for (
+    let i = 0;
+    i < targetLower.length && queryIndex < queryLower.length;
+    i++
+  ) {
+    if (targetLower[i] === queryLower[queryIndex]) {
+      queryIndex++;
+    }
+  }
 
-        const input = answer.trim();
-        if (!input) {
-          console.log("No themes selected. Using all available themes.");
-          resolve(themes);
-          return;
-        }
-
-        const selectedThemes: string[] = [];
-        const parts = input.split(",").map((p) => p.trim());
-
-        for (const part of parts) {
-          // Check if it's a number
-          const num = parseInt(part, 10);
-          if (!isNaN(num) && num >= 1 && num <= themes.length) {
-            selectedThemes.push(themes[num - 1]!);
-          } else if (themes.includes(part)) {
-            // Check if it's a theme name
-            selectedThemes.push(part);
-          } else {
-            console.warn(`⚠️  Unknown theme: "${part}" (skipping)`);
-          }
-        }
-
-        if (selectedThemes.length === 0) {
-          console.log("No valid themes selected. Using all available themes.");
-          resolve(themes);
-        } else {
-          resolve([...new Set(selectedThemes)]); // Remove duplicates
-        }
-      }
-    );
-  });
+  return queryIndex === queryLower.length;
 }
 
-function parseCliArgs(args: string[], themes: string[]): string[] | null {
-  // Look for --theme or -t flag
-  const themeIndex = args.findIndex((arg) => arg === "--theme" || arg === "-t");
-  if (themeIndex !== -1 && args[themeIndex + 1]) {
-    const themeArg = args[themeIndex + 1]!;
-    const requestedThemes = themeArg.split(",").map((t) => t.trim());
-
-    const validThemes: string[] = [];
-    for (const theme of requestedThemes) {
-      if (themes.includes(theme)) {
-        validThemes.push(theme);
-      } else {
-        console.warn(`⚠️  Unknown theme: "${theme}" (skipping)`);
+async function interactiveMode(themes: string[]): Promise<string> {
+  const selectedTheme = await search({
+    message: `Select a theme to generate (${GLOBAL_THEME} is always included):`,
+    source: async (input) => {
+      if (!input) {
+        return themes.map((theme) => ({
+          name: theme,
+          value: theme,
+        }));
       }
+
+      // Filter themes based on fuzzy search
+      return themes
+        .filter((theme) => fuzzyMatch(input, theme))
+        .map((theme) => ({
+          name: theme,
+          value: theme,
+        }));
+    },
+  });
+
+  return selectedTheme;
+}
+
+const program = new Command();
+
+program
+  .name("oui-token-gen")
+  .description("🎨 OUI Style Dictionary Theme Generator")
+  .version("0.0.0");
+
+program
+  .option("-t, --theme <theme>", "Theme to generate")
+  .option("-l, --list", "List available themes")
+  .action(async (options: { theme?: string; list?: boolean }) => {
+    console.log("🎨 OUI Style Dictionary Theme Generator");
+    console.log("═".repeat(40));
+
+    let themes: string[];
+    try {
+      themes = getAvailableThemes();
+    } catch (error) {
+      console.error("❌ Error reading tokens.json:", error);
+      process.exit(1);
     }
 
-    return validThemes.length > 0 ? validThemes : null;
-  }
+    if (themes.length === 0) {
+      console.log("No themes found in tokens.json (other than global).");
+      process.exit(0);
+    }
 
-  // Look for --all or -a flag
-  if (args.includes("--all") || args.includes("-a")) {
-    return themes;
-  }
+    // List themes
+    if (options.list) {
+      console.log("\nAvailable themes:");
+      console.log("─".repeat(40));
+      themes.forEach((theme, index) => {
+        console.log(`  ${index + 1}. ${theme}`);
+      });
+      console.log("─".repeat(40));
+      console.log(`\nNote: "${GLOBAL_THEME}" theme is always included.\n`);
+      process.exit(0);
+    }
 
-  // Look for --list or -l flag
-  if (args.includes("--list") || args.includes("-l")) {
-    return null; // Will trigger list display
-  }
+    let selectedTheme: string;
 
-  return undefined as unknown as string[] | null; // No flags provided, will trigger interactive mode
-}
+    // Generate specific theme from CLI argument
+    if (options.theme) {
+      if (themes.includes(options.theme)) {
+        selectedTheme = options.theme;
+      } else {
+        console.error(`❌ Unknown theme: "${options.theme}"`);
+        console.log("\nAvailable themes:");
+        themes.forEach((theme) => console.log(`  - ${theme}`));
+        process.exit(1);
+      }
+    }
+    // Interactive mode with fuzzy search
+    else {
+      selectedTheme = await interactiveMode(themes);
+    }
 
-function showHelp(): void {
-  console.log(`
-Usage: tsx cli.ts [options]
+    console.log(`\nSelected theme: ${selectedTheme}`);
+    generateTokens(selectedTheme);
+  });
 
-Options:
-  -t, --theme <themes>  Comma-separated list of themes to generate
-  -a, --all             Generate all available themes
-  -l, --list            List available themes
-  -h, --help            Show this help message
-
-Examples:
-  tsx cli.ts                      # Interactive mode
-  tsx cli.ts --theme Postman      # Generate Postman theme
-  tsx cli.ts -t Postman,OtherTheme  # Generate multiple themes
-  tsx cli.ts --all                # Generate all themes
-  tsx cli.ts --list               # List available themes
-`);
-}
-
-async function main(): Promise<void> {
-  const args = process.argv.slice(2);
-
-  // Show help
-  if (args.includes("--help") || args.includes("-h")) {
-    showHelp();
-    process.exit(0);
-  }
-
-  console.log("🎨 OUI Style Dictionary Theme Generator");
-  console.log("═".repeat(40));
-
-  let themes: string[];
-  try {
-    themes = getAvailableThemes();
-  } catch (error) {
-    console.error("❌ Error reading tokens.json:", error);
-    process.exit(1);
-  }
-
-  if (themes.length === 0) {
-    console.log("No themes found in tokens.json (other than global).");
-    process.exit(0);
-  }
-
-  // Check for --list flag
-  if (args.includes("--list") || args.includes("-l")) {
-    displayThemes(themes);
-    process.exit(0);
-  }
-
-  // Parse CLI arguments
-  const cliThemes = parseCliArgs(args, themes);
-
-  let selectedThemes: string[];
-
-  if (cliThemes === undefined) {
-    // Interactive mode
-    displayThemes(themes);
-    selectedThemes = await promptForThemes(themes);
-  } else if (cliThemes === null) {
-    console.error("❌ No valid themes specified.");
-    process.exit(1);
-  } else {
-    selectedThemes = cliThemes;
-  }
-
-  console.log(`\nSelected themes: ${selectedThemes.join(", ")}`);
-  generateTokens(selectedThemes);
-}
-
-main().catch(console.error);
+program.parse();
