@@ -67,25 +67,26 @@ const SidenavItem = ({
 }) => {
   return children({
     className:
-      "flex py-1.5 ps-4 pe-3 rounded-sm current:font-medium gap-2 items-center",
+      "flex py-1.5 px-3 rounded-sm hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active current:bg-interaction-muted-main-active gap-2 items-center current:shadow-xs",
   })
 }
 
 export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
   return (
-    <div className="flex flex-col gap-2">
-      {title && <div className="flex flex-col ps-4 font-semibold">{title}</div>}
-      <div className="flex flex-col gap-px">
+    <div className="flex w-full flex-col gap-1">
+      {title && <div className="flex flex-col px-5 font-semibold">{title}</div>}
+      <div className="flex flex-col gap-px px-2">
         {items.map((item, index) => (
           <SidenavItem key={index}>
             {({ className }) => {
+              console.log({ currentUrl, itemUrl: item.url })
               return item.external ? (
                 <a
                   className={className}
                   href={item.url as string}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-current={item.url === currentUrl ? "page" : undefined}
+                  data-current={item.url === currentUrl ? "page" : undefined}
                 >
                   {item.title}
                 </a>
@@ -93,7 +94,7 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
                 <Link
                   className={className}
                   href={item.url!}
-                  aria-current={item.url === currentUrl ? "page" : undefined}
+                  data-current={item.url === currentUrl ? "page" : undefined}
                 >
                   <span
                     className={cn(

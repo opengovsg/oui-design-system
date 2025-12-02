@@ -5,25 +5,27 @@ description: How to install and set up OUI in your project
 
 ## Framework Guide
 
-OUI works in your favorite framework. Click in to see the docs for the specific framework.
+OUI works in your favorite framework. Click in to see the docs for the specific framework. \
+\
+OUI has been tested with the following dependency versions:
 
-<CardGroup className="grid-cols-3">
+- [React 18](https://reactjs.org) or later
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation)
+- [Motion 12](https://motion.dev/docs/react) or later
+- [Next.js 14](https://nextjs.org) or later
+- [Vite 4](https://vite.dev) or later
+
+<CardGroup className="grid-cols-1 lg:grid-cols-3">
 <Card
   title="Next.js"
-  href="/docs/getting-started/frameworks/next"
+  href="/docs/getting-started/next"
   icon="nextjs"
 >
   Use OUI with Next.js apps
 </Card>
 
-<Card title="Vite" href="/docs/getting-started/frameworks/vite" icon="vite">
+<Card title="Vite" href="/docs/getting-started/vite" icon="vite">
   Use OUI with Vite
-</Card>
-
-{/* TODO */}
-
-<Card title="Stackblitz" href="https://stackblitz.com/" icon="stackblitz">
-  Try OUI in a sandbox
 </Card>
 
 </CardGroup>
@@ -69,6 +71,35 @@ If you are using oui in a monorepo, you might need to add the following `@source
 </Step>
 
 <Step>
+**Install and configure the Inter font.**
+
+OUI is configured to work with the Inter font by default. The importing of the fonts differs based on your project setup.
+You can either self-host the font files or use a CDN like Google Fonts.
+
+Look at the specific framework guides for instructions on how to set up the Inter font in your project:
+
+- [Next.js Guide](/docs/getting-started/next#install-and-configure-the-inter-font)
+- [Vite Guide](/docs/getting-started/vite#install-and-configure-the-inter-font)
+
+After the font is set up, ensure that your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable.
+
+```css {10}
+/* styles/tailwind.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@theme {
+  /* 
+   * This assignment will differ depending on how the font is set up.
+   * The important part is to ensure that --font-sans is defined with the Inter font.
+   */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+</Step>
+
+<Step>
 Done! Start importing and using OUI components alongside TailwindCSS in your project.
 
 ```tsx
@@ -87,3 +118,8 @@ const Demo = () => {
 </Step>
 
 </Steps>
+
+## Next steps
+
+- Browse the [Components](/docs/components/button) documentation to explore available components
+- Check out the [Theming](/docs/theming) guide to customize the design system

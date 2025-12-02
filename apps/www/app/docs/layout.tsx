@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <SkipNavLink id={SKIP_NAV_ID}>Skip to Content</SkipNavLink>
       <Header />
-      <div className="min-h-dvh grid-cols-1 grid-rows-[1fr_1px_auto_1px_auto] pt-14 md:grid md:grid-cols-[var(--container-2xs)_1.5rem_minmax(0,1fr)_2.5rem] lg:pt-14.25 xl:grid-cols-[var(--container-2xs)_2.5rem_minmax(0,1fr)_2.5rem]">
+      <div className="min-h-dvh grid-cols-1 grid-rows-[1fr_1px_auto_1px_auto] pt-14 md:grid md:grid-cols-[var(--container-3xs)_1.5rem_minmax(0,1fr)_2.5rem] lg:pt-14.25 xl:grid-cols-[var(--container-2xs)_2.5rem_minmax(0,1fr)_2.5rem]">
         <div className="relative col-start-1 row-span-full row-start-1 hidden md:block">
           <DocsSidebar />
         </div>

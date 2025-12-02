@@ -23,7 +23,7 @@ export async function CodeBlockCommand({
   )
 
   return (
-    <div className="relative mt-6 max-h-[650px] overflow-x-auto rounded-xl bg-zinc-950 dark:bg-zinc-900">
+    <div className="relative my-6 max-h-[650px] overflow-x-auto rounded-xl bg-zinc-950 dark:bg-zinc-900">
       <CommandTabs tabContentHtmls={tabContentHtmls} tabs={tabs} />
     </div>
   )

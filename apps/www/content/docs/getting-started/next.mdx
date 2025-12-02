@@ -1,0 +1,321 @@
+---
+title: Next.js
+description: How to install and set up OUI in a Next.js project
+---
+
+This guide will help you set up OUI in a new or existing Next.js project with Tailwind CSS v4.
+
+OUI has been tested with the following dependency versions:
+
+- [Next.js 14](https://nextjs.org) or later
+- [React 18](https://reactjs.org) or later
+- [Tailwind CSS v4](https://tailwindcss.com/docs/installation)
+- [Motion 12](https://motion.dev/docs/react) or later
+
+## Create a new Next.js project
+
+If you're starting from scratch, create a new Next.js project (or use [Starter Kit](https://github.com/opengovsg/starter-kit)):
+
+```bash
+npx create-next-app@latest my-app --typescript --eslint
+cd my-app
+```
+
+## Installation (with App Router)
+
+<Steps>
+
+<Step>
+### Install dependencies
+
+Install OUI packages and peer dependencies:
+
+```bash
+npm install @opengovsg/oui @opengovsg/oui-theme react-aria-components motion
+```
+
+</Step>
+
+<Step>
+### Install Tailwind CSS v4
+
+Install Tailwind CSS v4 and the PostCSS plugin:
+
+```bash
+npm install tailwindcss @tailwindcss/postcss
+```
+
+</Step>
+
+<Step>
+### Configure PostCSS
+
+Create or update your `postcss.config.mjs` file to use the Tailwind CSS plugin:
+
+```js
+// postcss.config.mjs
+const config = {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+}
+
+export default config
+```
+
+</Step>
+
+<Step>
+### Set up your CSS file
+
+Create or update your global CSS file (e.g., `app/globals.css`) to import the OUI theme:
+
+```css
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+/*
+ * Note: You may need to change the path relative to this css file to fit your
+ * project structure, especially in a monorepo.
+ */
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+```
+
+This import includes:
+
+- Tailwind CSS v4 base styles
+- OUI design tokens and theme variables
+- React Aria Components integration via `tailwindcss-react-aria-components`
+- Animation utilities via `tw-animate-css`
+
+</Step>
+
+<Step>
+### Set up Inter font
+There are a few ways to set up the Inter font in your Next.js project:
+
+#### Using `next/font`
+
+One way is to use the `next/font` package:
+
+```tsx {2,4-7}
+// app/layout.tsx
+import { Inter } from "next/font/google"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+```
+
+Then, add the font variable to your HTML or body element:
+
+```tsx {13-15}
+// app/layout.tsx
+<html lang="en" className={inter.variable}>
+  <body>{children}</body>
+</html>
+```
+
+You will also need to ensure that your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable:
+
+```css {5-7}
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+#### Using the Inter NPM package
+
+Alternatively, you can use the [`inter-ui`](https://www.npmjs.com/package/inter-ui) NPM package.
+
+Install the package:
+
+```bash
+npm install inter-ui
+```
+
+Then, import the font CSS in your global CSS file:
+
+```css {5-6,8-15}
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@import "inter-ui/inter.css";
+@import "inter-ui/inter-variable.css";
+
+@layer base {
+  :root {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    @supports (font-variation-settings: normal) {
+      --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif;
+    }
+  }
+}
+```
+
+</Step>
+
+<Step>
+### Import CSS in your layout
+
+Make sure your CSS file is imported in your root layout:
+
+```tsx {4}
+// app/layout.tsx
+import type { Metadata } from "next"
+
+import "./globals.css"
+
+export const metadata: Metadata = {
+  title: "My App",
+  description: "My app description",
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  )
+}
+```
+
+</Step>
+
+<Step>
+### (Optional) Add `react-aria-component` Link provider
+
+If you want proper client-side navigation when using `react-aria-component`'s `Link` component with Next.js's router,
+wrap your app with the `RouterProvider`:
+
+```tsx
+// app/providers.tsx
+"use client"
+
+import { useRouter } from "next/navigation"
+import { RouterProvider } from "react-aria-components"
+
+export function Providers({ children }: { children: React.ReactNode }) {
+  const router = useRouter()
+
+  return <RouterProvider navigate={router.push}>{children}</RouterProvider>
+}
+```
+
+Then use it in your layout:
+
+```tsx {4,21}
+// app/layout.tsx
+import type { Metadata } from "next"
+
+import { Providers } from "./providers"
+
+import "./globals.css"
+
+export const metadata: Metadata = {
+  title: "My App",
+  description: "My app description",
+}
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  )
+}
+```
+
+Read more about [Client Side Routing](https://react-spectrum.adobe.com/react-aria/routing.html) with `react-aria-components` [here](https://react-spectrum.adobe.com/react-aria/routing.html).
+
+</Step>
+
+<Step>
+### Start using OUI components
+
+You're all set! Start using OUI components in your app.
+
+> **Note:** Next.js's `app/` directory uses Server Components by default. OUI components can be imported directly in Server Components since components have the `use client` directive added.
+>
+> However, if errors occur, add the `"use client"` directive at the top of files that use OUI components, or wrap them in a Client Component.
+
+```tsx {2,4,9-11}
+// app/page.tsx
+"use client"
+
+import { Button } from "@opengovsg/oui"
+
+export default function Home() {
+  return (
+    <div className="flex min-h-screen items-center justify-center gap-4">
+      <Button>Default</Button>
+      <Button color="main">Main</Button>
+      <Button variant="outline">Outline</Button>
+    </div>
+  )
+}
+```
+
+</Step>
+
+</Steps>
+
+## App Router vs Pages Router
+
+The examples above use the **App Router** (Next.js 13+). If you're using the **Pages Router**, the setup is similar:
+
+1. Import your CSS in `pages/_app.tsx` instead of `app/layout.tsx`
+2. Wrap your app with providers in `pages/_app.tsx`
+
+```tsx
+// pages/_app.tsx
+import type { AppProps } from "next/app"
+import { useRouter } from "next/router"
+import { RouterProvider } from "react-aria-components"
+
+import "../styles/globals.css"
+
+export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  return (
+    <RouterProvider navigate={router.push}>
+      <Component {...pageProps} />
+    </RouterProvider>
+  )
+}
+```
+
+## TypeScript configuration
+
+For the best TypeScript experience, ensure your `tsconfig.json` includes:
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "jsx": "preserve"
+  }
+}
+```
+
+## Next steps
+
+- Browse the [Components](/docs/components/button) documentation to explore available components
+- Check out the [Theming](/docs/theming) guide to customize the design system

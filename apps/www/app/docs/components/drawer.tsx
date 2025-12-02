@@ -39,7 +39,7 @@ export const Drawer = ({ children }: PropsWithChildren) => {
               <X />
             </Button>
           </div>
-          <div className="flex flex-col items-start justify-stretch pt-4 pb-8">
+          <div className="flex flex-col items-start justify-stretch gap-2 pt-8 pb-8">
             {children}
           </div>
         </Dialog>
