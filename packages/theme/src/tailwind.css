@@ -40,7 +40,4 @@
       transform: rotate(360deg);
     }
   }
-
-  /* TODO: Add outline generation when generating border colors too */
-  --outline-color-focus-ring: var(--theme-border-color-focus-ring);
 }
