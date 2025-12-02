@@ -17,7 +17,6 @@ const docsLinks: NavItem = {
           items: [
             { title: "Next.js", url: "next" },
             { title: "Vite", url: "vite" },
-            { title: "Storybook", url: "storybook" },
           ],
         },
       ],
