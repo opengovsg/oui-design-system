@@ -1,12 +1,21 @@
 {
   "name": "@opengovsg/oui-token-gen",
-  "description": "Tool to generate tailwind variables from design tokens",
-  "version": "0.0.0",
+  "description": "CLI tool to generate tailwind variables from design tokens",
+  "version": "0.0.1",
   "type": "module",
-  "private": true,
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bin": {
+    "oui-token-gen": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "raw",
+    "tokens"
+  ],
   "scripts": {
-    "generate": "pnpx token-transformer raw/tokens.json tokens/base.json global && tsx build.ts",
-    "generate:theme": "tsx cli.ts",
+    "build": "tsup cli.ts --format esm --dts --clean",
+    "cli": "tsx cli.ts",
+    "prepublishOnly": "pnpm build",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
@@ -14,9 +23,12 @@
   "devDependencies": {
     "@oui/eslint-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
+    "@types/node": "^22.15.32",
+    "@types/tinycolor2": "^1.4.6",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "token-transformer": "^0.0.33",
+    "tsup": "^8.3.5",
     "tsx": "^4.20.3",
     "typescript": "catalog:"
   },
@@ -28,5 +40,20 @@
     "sd-tailwindcss-transformer": "^2.1.0",
     "style-dictionary": "^4.3.3",
     "tinycolor2": "^1.6.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/opengovsg/oui-design-system.git",
+    "directory": "tooling/token-gen"
+  },
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "tailwind",
+    "cli",
+    "oui"
+  ]
 }
