@@ -10,7 +10,7 @@ export const fileDropzoneStyles = tv({
     group:
       "group/dropzone rounded-sm outline-transparent transition-colors focus-visible:outline-none",
     dropzone:
-      "group-focus-within/dropzone:border-focus-ring! group-focus-within/dropzone:outline-focus-ring outline-transparent transition group-focus-within/dropzone:border-solid group-focus-within/dropzone:outline-1 group-disabled:cursor-not-allowed",
+      "group-focus-within/dropzone:border-utility-focus-default! group-focus-within/dropzone:outline-utility-focus-default outline-transparent transition group-focus-within/dropzone:border-solid group-focus-within/dropzone:outline-1 group-disabled:cursor-not-allowed",
     dropzoneHighlight:
       "text-interaction-links-default group-disabled:text-base-content-disabled underline group-disabled:text-inherit",
   },
