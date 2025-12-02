@@ -90,6 +90,78 @@ This import includes:
 </Step>
 
 <Step>
+### Set up Inter font
+There are a few ways to set up the Inter font in your Next.js project:
+
+#### Using `next/font`
+
+One way is to use the `next/font` package:
+
+```tsx {2,4-7}
+// app/layout.tsx
+import { Inter } from "next/font/google"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+```
+
+Then, add the font variable to your HTML or body element:
+
+```tsx {13-15}
+// app/layout.tsx
+<html lang="en" className={inter.variable}>
+  <body>{children}</body>
+</html>
+```
+
+You will also need to ensure that your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable:
+
+```css {5-7}
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+#### Using the Inter NPM package
+
+Alternatively, you can use the [`inter-ui`](https://www.npmjs.com/package/inter-ui) NPM package.
+
+Install the package:
+
+```bash
+npm install inter-ui
+```
+
+Then, import the font CSS in your global CSS file:
+
+```css {5-6,8-15}
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@import "inter-ui/inter.css";
+@import "inter-ui/inter-variable.css";
+
+@layer base {
+  :root {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    @supports (font-variation-settings: normal) {
+      --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif;
+    }
+  }
+}
+```
+
+</Step>
+
+<Step>
 ### Import CSS in your layout
 
 Make sure your CSS file is imported in your root layout:

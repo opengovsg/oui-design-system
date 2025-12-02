@@ -93,6 +93,71 @@ This import includes:
 </Step>
 
 <Step>
+### Set up the Inter font
+#### Using the Inter NPM package
+
+You can use the [`inter-ui`](https://www.npmjs.com/package/inter-ui) NPM package to add the Inter font to your project.
+
+Install the package:
+
+```bash
+npm install inter-ui
+```
+
+Then, import the font CSS in your global CSS file:
+
+```css {5-6,8-15}
+/* app/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@import "inter-ui/inter.css";
+@import "inter-ui/inter-variable.css";
+
+@layer base {
+  :root {
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+    @supports (font-variation-settings: normal) {
+      --font-sans: "InterVariable", ui-sans-serif, system-ui, sans-serif;
+    }
+  }
+}
+```
+
+#### Using Google Fonts
+
+Alternatively, you can use [Google Fonts](https://fonts.google.com/selection?selection.family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900) to include the Inter font. Add the following `<link>` tag to the `<head>` of your `index.html`:
+
+```html {4-9}
+<!-- index.html -->
+<head>
+  <!-- ... -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <!-- ... -->
+</head>
+```
+
+Then, ensure your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable:
+
+```css {5-7}
+/* src/globals.css */
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+```
+
+</Step>
+
+<Step>
 ### Import CSS in your app
 
 Make sure your CSS file is imported in your app entry point:

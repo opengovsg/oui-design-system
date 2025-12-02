@@ -15,7 +15,7 @@ export const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h1
       className={cn(
-        "mt-10 mb-4 scroll-m-20 text-4xl font-bold tracking-tight",
+        "my-8 scroll-m-20 text-4xl font-bold tracking-tight",
         className,
       )}
       {...props}
@@ -24,7 +24,7 @@ export const mdxComponents = {
   h2: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className={cn(
-        "mdx-heading mt-10 mb-3 scroll-m-20 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
+        "mdx-heading my-6 scroll-m-20 pb-1 text-3xl font-semibold tracking-tight first:mt-0",
         className,
       )}
       {...props}
@@ -33,7 +33,7 @@ export const mdxComponents = {
   h3: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className={cn(
-        "mdx-heading mt-8 mb-2 scroll-m-20 text-2xl font-semibold tracking-tight",
+        "mdx-heading my-4 scroll-m-20 text-2xl font-semibold tracking-tight",
         className,
       )}
       {...props}
@@ -42,7 +42,7 @@ export const mdxComponents = {
   h4: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h4
       className={cn(
-        "mt-8 scroll-m-20 text-xl font-semibold tracking-tight",
+        "my-4 scroll-m-20 text-xl font-semibold tracking-tight",
         className,
       )}
       {...props}
@@ -51,7 +51,7 @@ export const mdxComponents = {
   h5: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h5
       className={cn(
-        "mt-8 scroll-m-20 text-lg font-semibold tracking-tight",
+        "my-4 scroll-m-20 text-lg font-semibold tracking-tight",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ export const mdxComponents = {
   h6: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h6
       className={cn(
-        "mt-8 scroll-m-20 text-base font-semibold tracking-tight",
+        "my-3 scroll-m-20 text-base font-semibold tracking-tight",
         className,
       )}
       {...props}
@@ -82,7 +82,7 @@ export const mdxComponents = {
     <ol className={cn("my-2 ml-6 list-decimal", className)} {...props} />
   ),
   li: ({ className, ...props }: React.HTMLAttributes<HTMLLIElement>) => (
-    <li className={cn("mt-1", className)} {...props} />
+    <li className={cn("my-1", className)} {...props} />
   ),
   blockquote: ({
     className,
@@ -198,7 +198,7 @@ export const mdxComponents = {
     className,
     ...props
   }: React.ComponentProps<As> & { as?: As }) {
-    return <As className={cn("step mt-8 scroll-m-20", className)} {...props} />
+    return <As className={cn("step my-6 scroll-m-20", className)} {...props} />
   },
   Steps: ({ ...props }) => (
     <div
