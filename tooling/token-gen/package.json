@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "generate": "pnpx token-transformer raw/tokens.json tokens/base.json global && tsx build.ts",
+    "generate:theme": "tsx cli.ts",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
