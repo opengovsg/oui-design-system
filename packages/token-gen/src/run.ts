@@ -8,6 +8,7 @@ import { readFile } from "fs/promises";
 import { transforms } from "style-dictionary/enums";
 import type { DesignToken, TransformedTokens } from "style-dictionary/types";
 import { fontWeightToNumber, percentToEm, pxToRem } from "./utils";
+import { dirname, resolve } from "path";
 
 register(StyleDictionary);
 
@@ -104,7 +105,11 @@ StyleDictionary.registerFormat({
 });
 
 export async function run(theme: string, outputDirPath = "generated") {
-  const tokens = JSON.parse(await readFile("raw/tokens.json", "utf-8"));
+  const tokensPath = resolve(
+    dirname(new URL(import.meta.url).pathname),
+    "../raw/tokens.json"
+  );
+  const tokens = JSON.parse(await readFile(tokensPath, "utf-8"));
   const { $themes, ...sets } = tokens;
 
   const themes = permutateThemes($themes, { separator: "_" });

@@ -12,9 +12,11 @@ interface TokensFile {
 }
 
 function getAvailableThemes(): string[] {
-  const tokens: TokensFile = JSON.parse(
-    readFileSync("./raw/tokens.json", "utf-8")
+  const tokensPath = resolve(
+    dirname(new URL(import.meta.url).pathname),
+    "../raw/tokens.json"
   );
+  const tokens: TokensFile = JSON.parse(readFileSync(tokensPath, "utf-8"));
   return Object.values(tokens.$themes).map(
     (key) => (key as { name: string }).name
   );
