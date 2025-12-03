@@ -4,9 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
-  "bin": {
-    "oui-token-gen": "./dist/cli.js"
-  },
+  "bin": "./dist/cli.js",
   "files": [
     "dist",
     "raw",
