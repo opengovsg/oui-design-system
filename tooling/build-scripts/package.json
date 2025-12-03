@@ -20,8 +20,8 @@
     "rollup-plugin-esbuild": "^6.2.0",
     "rollup-plugin-preserve-directives": "^0.4.0",
     "tinyglobby": "^0.2.10",
-    "tsup": "^8.3.6",
-    "tsx": "^4.20.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "catalog:"
   },
   "prettier": "@oui/prettier-config"

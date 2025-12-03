@@ -24,7 +24,7 @@
     "@oui/eslint-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^22.19.1",
+    "@types/node": "^22.13.1",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "tsup": "^8.5.1",
