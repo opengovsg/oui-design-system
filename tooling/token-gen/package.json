@@ -14,8 +14,8 @@
   ],
   "scripts": {
     "build": "tsup",
-    "generate": "tsx generate.ts",
-    "prepublishOnly": "pnpm build",
+    "generate": "tsx src/generate.ts",
+    "prebuild": "pnpm generate",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@oui/eslint-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
+    "@types/lodash-es": "^4.17.12",
     "@types/node": "^22.19.1",
     "eslint": "catalog:",
     "prettier": "catalog:",
