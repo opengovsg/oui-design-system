@@ -13,8 +13,8 @@
     "tokens"
   ],
   "scripts": {
-    "build": "tsup cli.ts --format esm --dts --clean",
-    "cli": "tsx cli.ts",
+    "build": "tsup",
+    "generate": "tsx generate.ts",
     "prepublishOnly": "pnpm build",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
@@ -23,23 +23,21 @@
   "devDependencies": {
     "@oui/eslint-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
-    "@types/node": "^22.15.32",
-    "@types/tinycolor2": "^1.4.6",
+    "@types/node": "^22.19.1",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "token-transformer": "^0.0.33",
-    "tsup": "^8.3.5",
-    "tsx": "^4.20.3",
+    "tsup": "^8.5.1",
+    "tsx": "^4.21.0",
     "typescript": "catalog:"
   },
   "dependencies": {
-    "@inquirer/prompts": "^7.2.0",
-    "commander": "^13.0.0",
+    "@inquirer/prompts": "^7.10.1",
+    "@tokens-studio/sd-transforms": "^2.0.2",
+    "commander": "^13.1.0",
     "flat": "^6.0.1",
     "lodash-es": "^4.17.21",
-    "sd-tailwindcss-transformer": "^2.1.0",
-    "style-dictionary": "^4.3.3",
-    "tinycolor2": "^1.6.0"
+    "sd-tailwindcss-transformer": "^2.2.1",
+    "style-dictionary": "^5.1.1"
   },
   "publishConfig": {
     "access": "public"

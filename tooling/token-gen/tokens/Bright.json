@@ -1,0 +1,331 @@
+{
+  "color": {
+    "blue": {
+      "50": {
+        "value": "#f3f7fb",
+        "type": "color",
+        "description": "19.95:1"
+      },
+      "75": {
+        "value": "#EBF0F8",
+        "type": "color",
+        "description": "19.95:1"
+      },
+      "100": {
+        "value": "#e4ebf5",
+        "type": "color",
+        "description": "17.34:1"
+      },
+      "200": {
+        "value": "#cfdeee",
+        "type": "color",
+        "description": "11.37:1"
+      },
+      "300": {
+        "value": "#afc8e1",
+        "type": "color",
+        "description": "8.04:1"
+      },
+      "400": {
+        "value": "#88abd2",
+        "type": "color",
+        "description": "5.61:1"
+      },
+      "500": {
+        "value": "#6c91c5",
+        "type": "color",
+        "description": "5.57:1"
+      },
+      "600": {
+        "value": "#5979b7",
+        "type": "color",
+        "description": "7.7:1"
+      },
+      "700": {
+        "value": "#4e68a7",
+        "type": "color",
+        "description": "9.17:1"
+      },
+      "800": {
+        "value": "#4a5e96",
+        "type": "color",
+        "description": "10.87:1"
+      },
+      "900": {
+        "value": "#3a496e",
+        "type": "color",
+        "description": "13:59:1"
+      },
+      "950": {
+        "value": "#272f44",
+        "type": "color",
+        "description": "13:59:1"
+      }
+    },
+    "red": {
+      "50": {
+        "value": "#fef3f2",
+        "type": "color",
+        "description": "19.95:1"
+      },
+      "75": {
+        "value": "#FFECEB",
+        "type": "color",
+        "description": "19.95:1"
+      },
+      "100": {
+        "value": "#fee4e2",
+        "type": "color",
+        "description": "17.34:1"
+      },
+      "200": {
+        "value": "#fececa",
+        "type": "color",
+        "description": "11.37:1"
+      },
+      "300": {
+        "value": "#fcaca5",
+        "type": "color",
+        "description": "8.04:1"
+      },
+      "400": {
+        "value": "#f87c71",
+        "type": "color",
+        "description": "5.61:1"
+      },
+      "500": {
+        "value": "#ef5244",
+        "type": "color",
+        "description": "5.57:1"
+      },
+      "600": {
+        "value": "#dc3526",
+        "type": "color",
+        "description": "7.7:1"
+      },
+      "700": {
+        "value": "#b9291c",
+        "type": "color",
+        "description": "9.17:1"
+      },
+      "800": {
+        "value": "#99251b",
+        "type": "color",
+        "description": "10.87:1"
+      },
+      "900": {
+        "value": "#7f251d",
+        "type": "color",
+        "description": "13:59:1"
+      },
+      "950": {
+        "value": "#450f0a",
+        "type": "color",
+        "description": "13:59:1"
+      }
+    },
+    "brand": {
+      "primary": {
+        "50": {
+          "value": "{color.blue.50}",
+          "type": "color",
+          "description": "19.93:1"
+        },
+        "75": {
+          "value": "{color.blue.75}",
+          "type": "color",
+          "description": "19.93:1"
+        },
+        "100": {
+          "value": "{color.blue.100}",
+          "type": "color",
+          "description": "17.5:1"
+        },
+        "200": {
+          "value": "{color.blue.200}",
+          "type": "color",
+          "description": "12.3:1"
+        },
+        "300": {
+          "value": "{color.blue.300}",
+          "type": "color",
+          "description": "9.11:1"
+        },
+        "400": {
+          "value": "{color.blue.400}",
+          "type": "color",
+          "description": "6.51:1"
+        },
+        "500": {
+          "value": "{color.blue.500}",
+          "type": "color",
+          "description": "4.57:1"
+        },
+        "600": {
+          "value": "{color.blue.600}",
+          "type": "color",
+          "description": "7.02:1"
+        },
+        "700": {
+          "value": "{color.blue.700}",
+          "type": "color",
+          "description": "8.61:1"
+        },
+        "800": {
+          "value": "{color.blue.800}",
+          "type": "color",
+          "description": "10.6:1"
+        },
+        "900": {
+          "value": "{color.blue.900}",
+          "type": "color",
+          "description": "13.59:1"
+        },
+        "950": {
+          "value": "{color.blue.950}",
+          "type": "color"
+        }
+      },
+      "accent": {
+        "50": {
+          "value": "{color.red.50}",
+          "type": "color"
+        },
+        "75": {
+          "value": "{color.red.75}",
+          "type": "color"
+        },
+        "100": {
+          "value": "{color.red.100}",
+          "type": "color"
+        },
+        "200": {
+          "value": "{color.red.200}",
+          "type": "color"
+        },
+        "300": {
+          "value": "{color.red.300}",
+          "type": "color"
+        },
+        "400": {
+          "value": "{color.red.400}",
+          "type": "color"
+        },
+        "500": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
+        "600": {
+          "value": "{color.red.600}",
+          "type": "color"
+        },
+        "700": {
+          "value": "{color.red.700}",
+          "type": "color"
+        },
+        "800": {
+          "value": "{color.red.800}",
+          "type": "color"
+        },
+        "900": {
+          "value": "{color.red.900}",
+          "type": "color"
+        },
+        "950": {
+          "value": "{color.red.950}",
+          "type": "color"
+        }
+      }
+    },
+    "base": {
+      "content": {
+        "strong": {
+          "value": "{color.brand.primary.900}",
+          "type": "color",
+          "description": "Used for text and icons requiring slightly more emphasis on pages and UI elements, includin Headlines, input labels, accordions, radios, checkboxes, dropdowns, etc"
+        },
+        "brand": {
+          "value": "{color.brand.primary.700}",
+          "type": "color",
+          "description": "Used sparingly to highlight areas of the interface"
+        }
+      }
+    },
+    "interaction": {
+      "main": {
+        "default": {
+          "value": "{color.brand.primary.700}",
+          "type": "color",
+          "description": "Primary interactive colour for texts, borders and background on canvas.default"
+        },
+        "hover": {
+          "value": "{color.brand.primary.800}",
+          "type": "color",
+          "description": "Background of a primary interaction when hovered over"
+        },
+        "active": {
+          "value": "{color.brand.primary.900}",
+          "type": "color",
+          "description": "Background of a primary interaction when pressed"
+        }
+      },
+      "main-subtle": {
+        "default": {
+          "value": "{color.brand.primary.75}",
+          "type": "color",
+          "description": "Solid light background based on the main interactive colour"
+        },
+        "hover": {
+          "value": "{color.brand.primary.100}",
+          "type": "color",
+          "description": "interaction.main-light.default in a hover state"
+        },
+        "active": {
+          "value": "{color.brand.primary.200}",
+          "type": "color",
+          "description": "interaction.main-light.default when pressed"
+        }
+      },
+      "muted": {
+        "main": {
+          "hover": {
+            "value": "{color.brand.primary.50}",
+            "type": "color",
+            "description": "muted.main.default when hovering"
+          },
+          "active": {
+            "value": "{color.brand.primary.75}",
+            "type": "color",
+            "description": "muted.main.default when pressed"
+          }
+        }
+      },
+      "tinted": {
+        "main": {
+          "hover": {
+            "value": "rgba({color.brand.primary.700}, 0.04)",
+            "type": "color",
+            "description": "Translucent background tinted with the main interactive colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.brand.primary.700}, 0.12)",
+            "type": "color",
+            "description": "Translucent background tinted with the main interactive colour, upon pressing"
+          }
+        }
+      },
+      "links": {
+        "default": {
+          "value": "{color.brand.primary.700}",
+          "type": "color",
+          "description": "Default colour for links"
+        },
+        "hover": {
+          "value": "{color.brand.primary.800}",
+          "type": "color",
+          "description": "Colour of links when hovered upon"
+        }
+      }
+    }
+  }
+}

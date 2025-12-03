@@ -1,0 +1,106 @@
+{
+  "color": {
+    "singpass-red": {
+      "50": {
+        "value": "#FAE7E8",
+        "type": "color"
+      },
+      "100": {
+        "value": "#F8DADC",
+        "type": "color"
+      },
+      "200": {
+        "value": "#F0B3B6",
+        "type": "color"
+      },
+      "300": {
+        "value": "#CF0B15",
+        "type": "color"
+      },
+      "400": {
+        "value": "#BA0A13",
+        "type": "color"
+      },
+      "500": {
+        "value": "#A60911",
+        "type": "color"
+      },
+      "600": {
+        "value": "#9B0810",
+        "type": "color"
+      },
+      "700": {
+        "value": "#7C070D",
+        "type": "color"
+      },
+      "800": {
+        "value": "#5D0509",
+        "type": "color"
+      },
+      "900": {
+        "value": "#480407",
+        "type": "color"
+      }
+    },
+    "brand": {
+      "primary": {
+        "50": {
+          "value": "{color.singpass-red.50}",
+          "type": "color"
+        },
+        "100": {
+          "value": "{color.singpass-red.100}",
+          "type": "color"
+        },
+        "200": {
+          "value": "{color.singpass-red.200}",
+          "type": "color"
+        },
+        "300": {
+          "value": "{color.singpass-red.300}",
+          "type": "color"
+        },
+        "400": {
+          "value": "{color.singpass-red.400}",
+          "type": "color"
+        },
+        "500": {
+          "value": "{color.singpass-red.500}",
+          "type": "color"
+        },
+        "600": {
+          "value": "{color.singpass-red.600}",
+          "type": "color"
+        },
+        "700": {
+          "value": "{color.singpass-red.700}",
+          "type": "color"
+        },
+        "800": {
+          "value": "{color.singpass-red.800}",
+          "type": "color"
+        },
+        "900": {
+          "value": "{color.singpass-red.900}",
+          "type": "color"
+        }
+      }
+    },
+    "base": {
+      "interaction": {
+        "default": {
+          "value": "{color.brand.primary.300}",
+          "type": "color"
+        },
+        "hover": {
+          "value": "{color.brand.primary.400}",
+          "type": "color"
+        },
+        "active": {
+          "value": "{color.brand.primary.500}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}
