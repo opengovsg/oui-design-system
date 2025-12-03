@@ -104,13 +104,18 @@ StyleDictionary.registerFormat({
   },
 });
 
-export async function run(theme: string, outputDirPath = "generated") {
-  const tokensPath = resolve(
+export async function run(theme: string, outputDirPath: string) {
+  const rawTokensPath = resolve(
     dirname(new URL(import.meta.url).pathname),
     "../raw/tokens.json"
   );
-  const tokens = JSON.parse(await readFile(tokensPath, "utf-8"));
-  const { $themes, ...sets } = tokens;
+  const rawTokens = JSON.parse(await readFile(rawTokensPath, "utf-8"));
+  const { $themes, ...sets } = rawTokens;
+
+  const tokenPath = resolve(
+    dirname(new URL(import.meta.url).pathname),
+    "../tokens"
+  );
 
   const themes = permutateThemes($themes, { separator: "_" });
   const configs = Object.entries(themes)
@@ -118,7 +123,7 @@ export async function run(theme: string, outputDirPath = "generated") {
     .map(([name, tokensets]) => ({
       source: Object.keys(sets)
         .filter((setName) => (tokensets as string).includes(setName))
-        .map((setName) => `tokens/${setName}.json`),
+        .map((setName) => `${tokenPath}/${setName}.json`),
       preprocessors: ["tokens-studio"],
       platforms: {
         css: {
