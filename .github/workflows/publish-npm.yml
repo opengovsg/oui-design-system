@@ -14,6 +14,8 @@ on:
       - "packages/theme/package.json"
       - "packages/components/src/**"
       - "packages/theme/src/**"
+      - "packages/token-gen/package.json"
+      - "packages/token-gen/**"
 jobs:
   snapshot:
     name: Snapshot Release
@@ -31,7 +33,7 @@ jobs:
           fetch-depth: 0
       - uses: ./.github/actions/setup
       - name: Build packages
-        run: pnpm build --filter=@opengovsg/oui
+        run: pnpm build --filter="./packages/*"
       - name: Publish dev snapshot
         run: |
           pnpm changeset version --snapshot snapshot
@@ -58,7 +60,7 @@ jobs:
       - uses: ./.github/actions/setup
 
       - name: Build packages
-        run: pnpm build --filter=@opengovsg/oui
+        run: pnpm build --filter="./packages/*"
 
       - name: Create Release PR or Publish to npm
         id: changesets
