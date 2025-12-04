@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.26
+
+### Patch Changes
+
+- [#165](https://github.com/opengovsg/oui-design-system/pull/165) [`b08964e`](https://github.com/opengovsg/oui-design-system/commit/b08964ec81df2f807702a1937b67ff839f788195) Thanks [@karrui](https://github.com/karrui)! - feat: update rac peer dependency's version
+
+- Updated dependencies [[`d07d695`](https://github.com/opengovsg/oui-design-system/commit/d07d6954200c7d6ea4330ceebc15ad36f454367e), [`d07d695`](https://github.com/opengovsg/oui-design-system/commit/d07d6954200c7d6ea4330ceebc15ad36f454367e)]:
+  - @opengovsg/oui-theme@0.0.26
+
 ## 0.0.25
 
 ### Patch Changes

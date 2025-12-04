@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.26
+
+### Patch Changes
+
+- [#161](https://github.com/opengovsg/oui-design-system/pull/161) [`d07d695`](https://github.com/opengovsg/oui-design-system/commit/d07d6954200c7d6ea4330ceebc15ad36f454367e) Thanks [@karrui](https://github.com/karrui)! - feat: remove unused semantic tokens
+
+- [#161](https://github.com/opengovsg/oui-design-system/pull/161) [`d07d695`](https://github.com/opengovsg/oui-design-system/commit/d07d6954200c7d6ea4330ceebc15ad36f454367e) Thanks [@karrui](https://github.com/karrui)! - fix!: replace `focus-ring` variable with `utility-focus-default`
+
 ## 0.0.25
 
 ### Patch Changes

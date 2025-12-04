@@ -1,7 +1,7 @@
 {
   "name": "@opengovsg/oui-token-gen",
   "description": "CLI tool to generate tailwind variables from design tokens",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
   "bin": "./dist/cli.js",
