@@ -63,7 +63,7 @@
     "react": "catalog:",
     "react-aria-components": "^1.13.0",
     "storybook": "catalog:storybook10",
-    "tsx": "^4.20.3",
+    "tsx": "^4.21.0",
     "typescript": "catalog:"
   },
   "dependencies": {

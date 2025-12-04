@@ -1,0 +1,1111 @@
+{
+  "color": {
+    "purple": {
+      "50": {
+        "value": "#F5F5FC",
+        "type": "color"
+      },
+      "100": {
+        "value": "#E6E6FA",
+        "type": "color"
+      },
+      "200": {
+        "value": "#CBCBF2",
+        "type": "color"
+      },
+      "300": {
+        "value": "#9B9BDE",
+        "type": "color"
+      },
+      "400": {
+        "value": "#6F6FC7",
+        "type": "color"
+      },
+      "500": {
+        "value": "#4F4FAB",
+        "type": "color"
+      },
+      "600": {
+        "value": "#3A3A94",
+        "type": "color"
+      },
+      "700": {
+        "value": "#2A2A7D",
+        "type": "color"
+      },
+      "800": {
+        "value": "#1C1C69",
+        "type": "color"
+      },
+      "900": {
+        "value": "#101052",
+        "type": "color"
+      }
+    },
+    "pink": {
+      "50": {
+        "value": "#FFF2F8",
+        "type": "color"
+      },
+      "100": {
+        "value": "#FFE0EE",
+        "type": "color"
+      },
+      "200": {
+        "value": "#FFB8D8",
+        "type": "color"
+      },
+      "300": {
+        "value": "#FF82BA",
+        "type": "color"
+      },
+      "400": {
+        "value": "#FF479A",
+        "type": "color"
+      },
+      "500": {
+        "value": "#F5167A",
+        "type": "color"
+      },
+      "600": {
+        "value": "#C91667",
+        "type": "color"
+      },
+      "700": {
+        "value": "#A31555",
+        "type": "color"
+      },
+      "800": {
+        "value": "#7D1544",
+        "type": "color"
+      },
+      "900": {
+        "value": "#571030",
+        "type": "color"
+      }
+    },
+    "blue": {
+      "50": {
+        "value": "#F7F9FE",
+        "type": "color",
+        "description": "19.98:1"
+      },
+      "100": {
+        "value": "#E7EFFC",
+        "type": "color",
+        "description": "17.4:1"
+      },
+      "200": {
+        "value": "#ACC7FA",
+        "type": "color",
+        "description": "11.36:1"
+      },
+      "300": {
+        "value": "#82ABF7",
+        "type": "color",
+        "description": "8.07:1"
+      },
+      "400": {
+        "value": "#568DF4",
+        "type": "color",
+        "description": "5.58:1"
+      },
+      "500": {
+        "value": "#1361F0",
+        "type": "color",
+        "description": "5.58:1"
+      },
+      "600": {
+        "value": "#0D4FCA",
+        "type": "color",
+        "description": "7.79:1"
+      },
+      "700": {
+        "value": "#0B44AC",
+        "type": "color",
+        "description": "9.25:1"
+      },
+      "800": {
+        "value": "#093890",
+        "type": "color",
+        "description": "10.97:1"
+      },
+      "900": {
+        "value": "#072A69",
+        "type": "color",
+        "description": "13.66:1"
+      }
+    },
+    "cobalt": {
+      "50": {
+        "value": "#EDF5FC",
+        "type": "color"
+      },
+      "100": {
+        "value": "#DEECFA",
+        "type": "color"
+      },
+      "200": {
+        "value": "#AACDF2",
+        "type": "color"
+      },
+      "300": {
+        "value": "#73ADEB",
+        "type": "color"
+      },
+      "400": {
+        "value": "#438EDE",
+        "type": "color"
+      },
+      "500": {
+        "value": "#166BC7",
+        "type": "color"
+      },
+      "600": {
+        "value": "#1159A6",
+        "type": "color"
+      },
+      "700": {
+        "value": "#0D4682",
+        "type": "color"
+      },
+      "800": {
+        "value": "#09315C",
+        "type": "color"
+      },
+      "900": {
+        "value": "#061E38",
+        "type": "color"
+      }
+    },
+    "red": {
+      "50": {
+        "value": "#FCF5F5",
+        "type": "color"
+      },
+      "100": {
+        "value": "#FAE3E3",
+        "type": "color"
+      },
+      "200": {
+        "value": "#F2B6B6",
+        "type": "color"
+      },
+      "300": {
+        "value": "#E88B8B",
+        "type": "color"
+      },
+      "400": {
+        "value": "#D66060",
+        "type": "color"
+      },
+      "500": {
+        "value": "#BF4141",
+        "type": "color"
+      },
+      "600": {
+        "value": "#AB2929",
+        "type": "color"
+      },
+      "700": {
+        "value": "#8F1F1F",
+        "type": "color"
+      },
+      "800": {
+        "value": "#701818",
+        "type": "color"
+      },
+      "900": {
+        "value": "#541212",
+        "type": "color"
+      }
+    },
+    "green": {
+      "50": {
+        "value": "#F0FAF3",
+        "type": "color"
+      },
+      "100": {
+        "value": "#E1F7E9",
+        "type": "color"
+      },
+      "200": {
+        "value": "#B7EBCC",
+        "type": "color"
+      },
+      "300": {
+        "value": "#7CCFA1",
+        "type": "color"
+      },
+      "400": {
+        "value": "#4AB080",
+        "type": "color"
+      },
+      "500": {
+        "value": "#269166",
+        "type": "color"
+      },
+      "600": {
+        "value": "#167852",
+        "type": "color"
+      },
+      "700": {
+        "value": "#0F6143",
+        "type": "color"
+      },
+      "800": {
+        "value": "#0A4A33",
+        "type": "color"
+      },
+      "900": {
+        "value": "#063022",
+        "type": "color"
+      }
+    },
+    "yellow": {
+      "50": {
+        "value": "#FFFAEB",
+        "type": "color"
+      },
+      "100": {
+        "value": "#FFF3D1",
+        "type": "color"
+      },
+      "200": {
+        "value": "#FFDB80",
+        "type": "color"
+      },
+      "300": {
+        "value": "#FFC654",
+        "type": "color"
+      },
+      "400": {
+        "value": "#FFA526",
+        "type": "color"
+      },
+      "500": {
+        "value": "#ED7700",
+        "type": "color"
+      },
+      "600": {
+        "value": "#C75A00",
+        "type": "color"
+      },
+      "700": {
+        "value": "#9E4200",
+        "type": "color"
+      },
+      "800": {
+        "value": "#6B2700",
+        "type": "color"
+      },
+      "900": {
+        "value": "#471500",
+        "type": "color"
+      }
+    },
+    "slate": {
+      "50": {
+        "value": "#f8f9fa",
+        "type": "color",
+        "description": "19.92:1"
+      },
+      "100": {
+        "value": "#e9eaee",
+        "type": "color",
+        "description": "17.46:1"
+      },
+      "200": {
+        "value": "#babecb",
+        "type": "color",
+        "description": "11.31 : 1"
+      },
+      "300": {
+        "value": "#9aa0b3",
+        "type": "color",
+        "description": "8.05 : 1"
+      },
+      "400": {
+        "value": "#7b849c",
+        "type": "color",
+        "description": "5.62:1"
+      },
+      "500": {
+        "value": "#5d6785",
+        "type": "color",
+        "description": "5.6:1"
+      },
+      "600": {
+        "value": "#465173",
+        "type": "color",
+        "description": "7.82:1"
+      },
+      "700": {
+        "value": "#3c4764",
+        "type": "color",
+        "description": "9.22:1"
+      },
+      "800": {
+        "value": "#333c56",
+        "type": "color",
+        "description": "10.92:1"
+      },
+      "900": {
+        "value": "#272d41",
+        "type": "color",
+        "description": "13.65:1"
+      }
+    },
+    "teal": {
+      "50": {
+        "value": "#EDFCFB",
+        "type": "color"
+      },
+      "100": {
+        "value": "#D2F7F4",
+        "type": "color"
+      },
+      "200": {
+        "value": "#A6EDE6",
+        "type": "color"
+      },
+      "300": {
+        "value": "#76DED3",
+        "type": "color"
+      },
+      "400": {
+        "value": "#42C9BC",
+        "type": "color"
+      },
+      "500": {
+        "value": "#1AAB9C",
+        "type": "color"
+      },
+      "600": {
+        "value": "#128A7E",
+        "type": "color"
+      },
+      "700": {
+        "value": "#0E695E",
+        "type": "color"
+      },
+      "800": {
+        "value": "#0A4F48",
+        "type": "color"
+      },
+      "900": {
+        "value": "#06302C",
+        "type": "color"
+      }
+    },
+    "grey": {
+      "50": {
+        "value": "#F8F9F9",
+        "type": "color",
+        "description": "19.94:1"
+      },
+      "100": {
+        "value": "#EDEDED",
+        "type": "color",
+        "description": "17.29:1"
+      },
+      "200": {
+        "value": "#BFC2C8",
+        "type": "color",
+        "description": "11.41:1"
+      },
+      "300": {
+        "value": "#A0A4AD",
+        "type": "color",
+        "description": "8.03:1"
+      },
+      "400": {
+        "value": "#838894",
+        "type": "color",
+        "description": "5.62:1"
+      },
+      "500": {
+        "value": "#666C7A",
+        "type": "color",
+        "description": "5.57:1"
+      },
+      "600": {
+        "value": "#505660",
+        "type": "color",
+        "description": "7.69:1"
+      },
+      "700": {
+        "value": "#454953",
+        "type": "color",
+        "description": "9.29:1"
+      },
+      "800": {
+        "value": "#3A3E46",
+        "type": "color",
+        "description": "10.86:1"
+      },
+      "900": {
+        "value": "#2C2E34",
+        "type": "color",
+        "description": "13.57:1"
+      }
+    },
+    "standard": {
+      "white": {
+        "value": "#ffffff",
+        "type": "color",
+        "description": "21 : 1, AAA"
+      },
+      "black": {
+        "value": "#000000",
+        "type": "color",
+        "description": "21 : 1, AAA"
+      }
+    },
+    "brand": {
+      "primary": {
+        "50": {
+          "value": "{color.purple.50}",
+          "type": "color",
+          "description": ""
+        },
+        "100": {
+          "value": "{color.purple.100}",
+          "type": "color",
+          "description": ""
+        },
+        "200": {
+          "value": "{color.purple.200}",
+          "type": "color",
+          "description": ""
+        },
+        "300": {
+          "value": "{color.purple.300}",
+          "type": "color",
+          "description": ""
+        },
+        "400": {
+          "value": "{color.purple.400}",
+          "type": "color",
+          "description": ""
+        },
+        "500": {
+          "value": "{color.purple.500}",
+          "type": "color",
+          "description": ""
+        },
+        "600": {
+          "value": "{color.purple.600}",
+          "type": "color",
+          "description": ""
+        },
+        "700": {
+          "value": "{color.purple.700}",
+          "type": "color",
+          "description": ""
+        },
+        "800": {
+          "value": "{color.purple.800}",
+          "type": "color",
+          "description": ""
+        },
+        "900": {
+          "value": "{color.purple.900}",
+          "type": "color",
+          "description": ""
+        }
+      },
+      "secondary": {
+        "50": {
+          "value": "{color.slate.50}",
+          "type": "color",
+          "description": "19.92:1"
+        },
+        "100": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "17.46:1"
+        },
+        "200": {
+          "value": "{color.slate.200}",
+          "type": "color",
+          "description": "11.31 : 1"
+        },
+        "300": {
+          "value": "{color.slate.300}",
+          "type": "color",
+          "description": "8.05 : 1"
+        },
+        "400": {
+          "value": "{color.slate.400}",
+          "type": "color",
+          "description": "5.62:1"
+        },
+        "500": {
+          "value": "{color.slate.500}",
+          "type": "color",
+          "description": "5.6:1"
+        },
+        "600": {
+          "value": "{color.slate.600}",
+          "type": "color",
+          "description": "7.82:1"
+        },
+        "700": {
+          "value": "{color.slate.700}",
+          "type": "color",
+          "description": "9.22:1"
+        },
+        "800": {
+          "value": "{color.slate.800}",
+          "type": "color",
+          "description": "10.92:1"
+        },
+        "900": {
+          "value": "{color.slate.900}",
+          "type": "color",
+          "description": "13.65:1"
+        }
+      }
+    },
+    "base": {
+      "canvas": {
+        "default": {
+          "value": "{color.standard.white}",
+          "type": "color",
+          "description": "Default page background. Not for interactive elements like buttons or cards (use utility-ui for those)"
+        },
+        "alt": {
+          "value": "{color.slate.50}",
+          "type": "color",
+          "description": "Alternative page background, can be used when the canvas requires slightly more differentiation than elements on the page"
+        },
+        "backdrop": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "A backdrop used under other canvasses to provide more depth"
+        },
+        "brand-subtle": {
+          "value": "{color.brand.primary.50}",
+          "type": "color",
+          "description": "Lighter variant of the background tinted to the brand’s primary colour "
+        },
+        "inverse": {
+          "value": "{color.slate.800}",
+          "type": "color",
+          "description": "Dark reversed background"
+        },
+        "overlay": {
+          "value": "rgba({color.slate.800}, 0.8)",
+          "type": "color",
+          "description": "Tinted dark background, generally used as an overlay under a modal"
+        }
+      },
+      "content": {
+        "default": {
+          "value": "{color.slate.700}",
+          "type": "color",
+          "description": "Used for normal text and icons without emphasis in body copy on pages and UI elements, including input fields, input descriptions, toasts, toggles, etc."
+        },
+        "strong": {
+          "value": "{color.slate.900}",
+          "type": "color",
+          "description": "Used for text and icons requiring slightly more emphasis on pages and UI elements, includin Headlines, input labels, accordions, radios, checkboxes, dropdowns, etc"
+        },
+        "medium": {
+          "value": "{color.slate.500}",
+          "type": "color",
+          "description": "Used for descriptors in inputs and attachments"
+        },
+        "brand": {
+          "value": "{color.brand.primary.500}",
+          "type": "color",
+          "description": "Used sparingly to highlight areas of the interface"
+        },
+        "inverse": {
+          "value": "{color.standard.white}",
+          "type": "color",
+          "description": "Inverse colour for text and icons in pages and UI elements to provide contrast on strong dark backgrounds"
+        }
+      },
+      "divider": {
+        "subtle": {
+          "value": "{color.slate.50}",
+          "type": "color",
+          "description": "Lightest divider colour\nDefault on white backgrounds"
+        },
+        "medium": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "Medium divider colour\nDefault on light grey backgrounds\n"
+        },
+        "strong": {
+          "value": "{color.slate.200}",
+          "type": "color",
+          "description": "Darkest divider colour\nUsed when more differentiation is required\nUsed as the default border for input fields"
+        },
+        "inverse": {
+          "value": "{color.standard.white}",
+          "type": "color",
+          "description": "Colour of the inverse border colour"
+        },
+        "brand": {
+          "value": "{color.brand.primary.500}",
+          "type": "color",
+          "description": "Used when brand differentiation is required. Tabs, vertical tabs, side navs."
+        }
+      }
+    },
+    "interaction": {
+      "main": {
+        "default": {
+          "value": "{color.brand.primary.500}",
+          "type": "color",
+          "description": "Primary interactive colour for texts, borders and background on canvas.default"
+        },
+        "hover": {
+          "value": "{color.brand.primary.600}",
+          "type": "color",
+          "description": "Background of a primary interaction when hovered over"
+        },
+        "active": {
+          "value": "{color.brand.primary.700}",
+          "type": "color",
+          "description": "Background of a primary interaction when pressed"
+        }
+      },
+      "main-subtle": {
+        "default": {
+          "value": "{color.brand.primary.100}",
+          "type": "color",
+          "description": "Solid light background based on the main interactive colour"
+        },
+        "hover": {
+          "value": "{color.brand.primary.200}",
+          "type": "color",
+          "description": "interaction.main-light.default in a hover state"
+        },
+        "active": {
+          "value": "{color.brand.primary.300}",
+          "type": "color",
+          "description": "interaction.main-light.default when pressed"
+        }
+      },
+      "sub": {
+        "default": {
+          "value": "{color.brand.secondary.500}",
+          "type": "color",
+          "description": "Secondary interactive colour for texts, borders and background on canvas-default"
+        },
+        "hover": {
+          "value": "{color.brand.secondary.600}",
+          "type": "color",
+          "description": "Background of a secondary interaction when selected"
+        },
+        "active": {
+          "value": "{color.brand.secondary.700}",
+          "type": "color",
+          "description": "Background of a secondary interaction when selected"
+        }
+      },
+      "sub-subtle": {
+        "default": {
+          "value": "{color.brand.secondary.100}",
+          "type": "color",
+          "description": "Light background of a secondary interaction"
+        },
+        "hover": {
+          "value": "{color.brand.secondary.200}",
+          "type": "color",
+          "description": "Light background of a secondary interaction when hovering"
+        },
+        "active": {
+          "value": "{color.brand.secondary.300}",
+          "type": "color",
+          "description": "Light background of a secondary interaction when pressed"
+        }
+      },
+      "critical": {
+        "default": {
+          "value": "{color.red.500}",
+          "type": "color",
+          "description": "Danger colour for texts, borders and background"
+        },
+        "hover": {
+          "value": "{color.red.600}",
+          "type": "color",
+          "description": "Background and borders using critical-default when hovered over"
+        },
+        "active": {
+          "value": "{color.red.700}",
+          "type": "color",
+          "description": "Background and borders using critical-default when pressed"
+        }
+      },
+      "critical-subtle": {
+        "default": {
+          "value": "{color.red.100}",
+          "type": "color",
+          "description": "Light critical background"
+        },
+        "hover": {
+          "value": "{color.red.200}",
+          "type": "color",
+          "description": "Light critical background when hovered over"
+        },
+        "active": {
+          "value": "{color.red.300}",
+          "type": "color",
+          "description": "Light critical background when pressed"
+        }
+      },
+      "warning": {
+        "default": {
+          "value": "{color.yellow.500}",
+          "type": "color",
+          "description": "Warning background. Yellow is too light to be used for text colour, so this can only be used for background and border."
+        },
+        "hover": {
+          "value": "{color.yellow.600}",
+          "type": "color",
+          "description": "Warning background when hovered"
+        },
+        "active": {
+          "value": "{color.yellow.700}",
+          "type": "color",
+          "description": "Warning background when pressed"
+        }
+      },
+      "warning-subtle": {
+        "default": {
+          "value": "{color.yellow.100}",
+          "type": "color",
+          "description": "Light warning background"
+        },
+        "hover": {
+          "value": "{color.yellow.200}",
+          "type": "color",
+          "description": "Light warning background when hovered"
+        },
+        "active": {
+          "value": "{color.yellow.300}",
+          "type": "color",
+          "description": "Light warning background when pressed"
+        }
+      },
+      "success": {
+        "default": {
+          "value": "{color.green.500}",
+          "type": "color",
+          "description": "Success colour for texts, borders and background"
+        },
+        "hover": {
+          "value": "{color.green.600}",
+          "type": "color",
+          "description": "Background and borders using success.default when hovered over"
+        },
+        "active": {
+          "value": "{color.green.700}",
+          "type": "color",
+          "description": "Background of success.active when pressed"
+        }
+      },
+      "success-subtle": {
+        "default": {
+          "value": "{color.green.100}",
+          "type": "color",
+          "description": "Light background for success colours"
+        },
+        "hover": {
+          "value": "{color.green.200}",
+          "type": "color",
+          "description": "Light background for success colours when hovered"
+        },
+        "active": {
+          "value": "{color.green.300}",
+          "type": "color",
+          "description": "Light background for success colours when pressed"
+        }
+      },
+      "neutral": {
+        "default": {
+          "value": "{color.slate.500}",
+          "type": "color",
+          "description": "Bckground for neutral colours"
+        },
+        "hover": {
+          "value": "{color.slate.600}",
+          "type": "color",
+          "description": "Bckground for neutral colours"
+        },
+        "active": {
+          "value": "{color.slate.700}",
+          "type": "color",
+          "description": "Bckground for neutral colours when pressed"
+        }
+      },
+      "neutral-subtle": {
+        "default": {
+          "value": "{color.slate.50}",
+          "type": "color",
+          "description": "Light background for neutral colours"
+        },
+        "hover": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "Light background for neutral colours on hover"
+        },
+        "active": {
+          "value": "{color.slate.200}",
+          "type": "color",
+          "description": "Light background for neutral colours when pressed"
+        }
+      },
+      "muted": {
+        "main": {
+          "hover": {
+            "value": "{color.brand.primary.50}",
+            "type": "color",
+            "description": "muted.main.default when hovering"
+          },
+          "active": {
+            "value": "{color.brand.primary.100}",
+            "type": "color",
+            "description": "muted.main.default when pressed"
+          }
+        },
+        "sub": {
+          "hover": {
+            "value": "{color.brand.secondary.50}",
+            "type": "color",
+            "description": "muted.sub.default when hovering"
+          },
+          "active": {
+            "value": "{color.brand.secondary.100}",
+            "type": "color",
+            "description": "muted.sub.default when pressed"
+          }
+        },
+        "critical": {
+          "hover": {
+            "value": "{color.red.50}",
+            "type": "color",
+            "description": "muted.critical.default when hovering"
+          },
+          "active": {
+            "value": "{color.red.100}",
+            "type": "color",
+            "description": "muted.critical.default when pressed"
+          }
+        },
+        "neutral": {
+          "hover": {
+            "value": "{color.slate.50}",
+            "type": "color",
+            "description": "muted-neutral.default when hovered over"
+          },
+          "active": {
+            "value": "{color.slate.100}",
+            "type": "color",
+            "description": "muted-neutral.default when pressed"
+          }
+        }
+      },
+      "tinted": {
+        "main": {
+          "hover": {
+            "value": "rgba({color.brand.primary.500}, 0.04)",
+            "type": "color",
+            "description": "Translucent background tinted with the main interactive colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.brand.primary.500}, 0.12)",
+            "type": "color",
+            "description": "Translucent background tinted with the main interactive colour, upon pressing"
+          }
+        },
+        "sub": {
+          "hover": {
+            "value": "rgba({color.brand.secondary.500}, 0.04)",
+            "type": "color",
+            "description": "Translucent background tinted with the sub interactive colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.brand.secondary.500}, 0.12)",
+            "type": "color",
+            "description": "Translucent background tinted with the sub interactive colour, upon pressing"
+          }
+        },
+        "critical": {
+          "hover": {
+            "value": "rgba({color.red.500}, 0.04)",
+            "type": "color",
+            "description": "Translucent background tinted with the critical interactive colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.red.500}, 0.12)",
+            "type": "color",
+            "description": "Translucent background tinted with the critical interactive colour, upon pressing"
+          }
+        },
+        "neutral": {
+          "hover": {
+            "value": "rgba({color.standard.black}, 0.1)",
+            "type": "color",
+            "description": "Translucent background tinted with the neutral colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.standard.black}, 0.2)",
+            "type": "color",
+            "description": "Translucent background tinted with the neutral colour, upon pressing"
+          }
+        },
+        "inverse": {
+          "hover": {
+            "value": "rgba({color.standard.white}, 0.1)",
+            "type": "color",
+            "description": "Translucent background tinted with the neutral colour, upon hovering"
+          },
+          "active": {
+            "value": "rgba({color.standard.white}, 0.2)",
+            "type": "color",
+            "description": "Translucent background tinted with the neutral colour, upon pressing"
+          }
+        }
+      },
+      "support": {
+        "unselected": {
+          "value": "{color.slate.300}",
+          "type": "color",
+          "description": "To denote unselected regions of the interface. Used for toggles and progress indicators"
+        },
+        "selected": {
+          "value": "{color.slate.500}",
+          "type": "color",
+          "description": "To be used when a neutral tone is preferred to showcase a selected state"
+        },
+        "unselected-strong": {
+          "value": "{color.slate.500}",
+          "type": "color",
+          "description": "Darker variant to denote unselected foreground elements on canvas-default. Used for tabs"
+        },
+        "disabled": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "Fill colour of disabled regions, including inputs"
+        },
+        "disabled-content": {
+          "value": "{color.slate.300}",
+          "type": "color",
+          "description": "Colour of disabled foreground elements on the canvas-default or disabled"
+        },
+        "placeholder": {
+          "value": "{color.slate.400}",
+          "type": "color",
+          "description": "Colour of placeholder foreground elements"
+        }
+      },
+      "links": {
+        "default": {
+          "value": "{color.brand.primary.500}",
+          "type": "color",
+          "description": "Default colour for links"
+        },
+        "hover": {
+          "value": "{color.brand.primary.600}",
+          "type": "color",
+          "description": "Colour of links when hovered upon"
+        },
+        "neutral-default": {
+          "value": "{color.slate.700}",
+          "type": "color",
+          "description": "Default colour for dark links"
+        },
+        "neutral-hover": {
+          "value": "{color.slate.900}",
+          "type": "color",
+          "description": "Colour of dark links when hovered upon"
+        },
+        "inverse-default": {
+          "value": "{color.standard.white}",
+          "type": "color",
+          "description": "Default colour of inverse links"
+        },
+        "inverse-hover": {
+          "value": "{color.slate.100}",
+          "type": "color",
+          "description": "Colour of inverse links when hovered upon"
+        }
+      }
+    },
+    "utility": {
+      "feedback": {
+        "info": {
+          "value": "{color.blue.500}",
+          "type": "color",
+          "description": "Informational feedback colour for texts, borders and background. Can be used for toasts, banners, infoboxes."
+        },
+        "info-subtle": {
+          "value": "{color.blue.50}",
+          "type": "color",
+          "description": "Light background alternative to feedback.info. Can be used for toasts and infoboxes."
+        },
+        "warning": {
+          "value": "{color.yellow.500}",
+          "type": "color",
+          "description": "Warning feedback colour for texts, borders and background. Can be used for toasts, banners, infoboxes."
+        },
+        "warning-subtle": {
+          "value": "{color.yellow.50}",
+          "type": "color",
+          "description": "Light background alternative to feedback.warning. Can be used for toasts and infoboxes."
+        },
+        "success": {
+          "value": "{color.green.500}",
+          "type": "color",
+          "description": "Success feedback colour for texts, borders and background. Can be used for toasts, banners, infoboxes."
+        },
+        "success-subtle": {
+          "value": "{color.green.50}",
+          "type": "color",
+          "description": "Light background alternative to feedback.success. Can be used for toasts and infoboxes."
+        },
+        "critical": {
+          "value": "{color.red.500}",
+          "type": "color",
+          "description": "Critical feedback colour for texts, borders and background. Can be used for toasts, banners, infoboxes."
+        },
+        "critical-subtle": {
+          "value": "{color.red.50}",
+          "type": "color",
+          "description": "Light background alternative to feedback.critical. Can be used for toasts and infoboxes."
+        }
+      },
+      "focus-default": {
+        "value": "{color.brand.primary.500}",
+        "type": "color",
+        "description": "Default focus ring over interactive elements of the interface"
+      },
+      "focus-inverse": {
+        "value": "{color.standard.white}",
+        "type": "color",
+        "description": "Inverse focus ring over interactive elements of the inverse interface"
+      },
+      "input-prefilled": {
+        "value": "{color.yellow.50}",
+        "type": "color",
+        "description": "Background of an input field when prefilled"
+      },
+      "ui": {
+        "value": "{color.standard.white}",
+        "type": "color",
+        "description": "Background of UI elements"
+      },
+      "ui-clear": {
+        "value": "rgba({color.standard.white},0)",
+        "type": "color",
+        "description": "Clear transparent background"
+      }
+    }
+  }
+}

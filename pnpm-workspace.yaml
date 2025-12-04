@@ -2,21 +2,22 @@ packages:
   - apps/*
   - packages/*
   - tooling/*
-minimumReleaseAge: 1440
+
 catalog:
-  typescript: 5.7.3
-  react-dom: ^19.0.0
-  react: ^19.0.0
+  "@tailwindcss/vite": 4.1.11
   "@types/react": ^19.0.12
   "@types/react-dom": ^19.0.4
-  eslint: ^9.20.1
+  eslint: ^9.39.1
   prettier: ^3.5.3
+  react: ^19.0.0
+  react-dom: ^19.0.0
   tailwindcss: 4.1.11
-  "@tailwindcss/vite": 4.1.11
+  typescript: 5.7.3
+
 catalogs:
   storybook10:
-    "@storybook/addon-docs": 10.1.2
     "@storybook/addon-a11y": 10.1.2
+    "@storybook/addon-docs": 10.1.2
     "@storybook/addon-links": 10.1.2
     "@storybook/addon-themes": 10.1.2
     "@storybook/addon-vitest": 10.1.2
@@ -25,11 +26,15 @@ catalogs:
     eslint-plugin-storybook: 10.1.2
     storybook: 10.1.2
   vitest:
-    vitest: 4.0.14
     "@vitest/browser": 4.0.14
-    "@vitest/coverage-v8": 4.0.14
     "@vitest/browser-playwright": 4.0.14
+    "@vitest/coverage-v8": 4.0.14
+    vitest: 4.0.14
+
 ignoredBuiltDependencies:
   - "@tailwindcss/oxide"
+
+minimumReleaseAge: 1440
+
 overrides:
   prettier: ^3.5.0
