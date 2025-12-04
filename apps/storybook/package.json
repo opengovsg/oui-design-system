@@ -22,9 +22,9 @@
     "@oui/prettier-config": "workspace:*",
     "@tailwindcss/vite": "catalog:",
     "inter-ui": "^4.1.0",
-    "react": "catalog:",
+    "react": "catalog:react",
     "react-aria-components": "^1.13.0",
-    "react-dom": "catalog:"
+    "react-dom": "catalog:react"
   },
   "devDependencies": {
     "@oui/chromatic": "workspace:*",
