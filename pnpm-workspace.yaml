@@ -37,8 +37,12 @@ ignoredBuiltDependencies:
 
 minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
-  - "react"
-  - "react-dom"
+  - react
+  - react-dom
+  - next
+  - "@next/env"
+  - eslint-config-next
+  - "@next/eslint-plugin-next"
 
 overrides:
   prettier: ^3.5.0
