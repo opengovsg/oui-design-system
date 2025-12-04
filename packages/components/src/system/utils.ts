@@ -102,62 +102,6 @@ export const mapPropsVariants = <
   return [props, picked] as [T, Pick<T, K>]
 }
 
-export function useRenderProps<T>(props: RenderPropsHookOptions<T>) {
-  const {
-    className,
-    style,
-    children,
-    defaultClassName = undefined,
-    defaultChildren = undefined,
-    defaultStyle,
-    values,
-  } = props
-
-  return useMemo(() => {
-    let computedClassName: string | undefined
-    let computedStyle: React.CSSProperties | undefined
-    let computedChildren: React.ReactNode | undefined
-
-    if (typeof className === "function") {
-      computedClassName = className({ ...values, defaultClassName })
-    } else {
-      computedClassName = className
-    }
-
-    if (typeof style === "function") {
-      computedStyle = style({ ...values, defaultStyle: defaultStyle || {} })
-    } else {
-      computedStyle = style
-    }
-
-    if (typeof children === "function") {
-      computedChildren = children({ ...values, defaultChildren })
-    } else if (children == null) {
-      computedChildren = defaultChildren
-    } else {
-      computedChildren = children
-    }
-
-    return {
-      className: computedClassName ?? defaultClassName,
-      style:
-        computedStyle || defaultStyle
-          ? { ...defaultStyle, ...computedStyle }
-          : undefined,
-      children: computedChildren ?? defaultChildren,
-      "data-rac": "",
-    }
-  }, [
-    className,
-    style,
-    children,
-    defaultClassName,
-    defaultChildren,
-    defaultStyle,
-    values,
-  ])
-}
-
 /**
  * Filters out `data-*` attributes to keep them from being passed down and duplicated.
  * @param props
