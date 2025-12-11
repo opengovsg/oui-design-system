@@ -52,8 +52,7 @@ npm install tailwindcss @tailwindcss/vite
 
 Add the Tailwind CSS plugin to your `vite.config.ts`:
 
-```ts {2,9}
-// vite.config.ts
+```ts {1,8} title="vite.config.ts"
 import tailwindcss from "@tailwindcss/vite"
 import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
@@ -74,7 +73,7 @@ export default defineConfig({
 
 Create or update your main CSS file (e.g., `src/globals.css`) to import the OUI theme:
 
-```css
+```css title="src/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 /* 
  * Note: You may need to change the path relative to this css file to fit your
@@ -106,8 +105,7 @@ npm install inter-ui
 
 Then, import the font CSS in your global CSS file:
 
-```css {5-6,8-15}
-/* app/globals.css */
+```css {4-5,7-14} title="src/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 
@@ -129,8 +127,7 @@ Then, import the font CSS in your global CSS file:
 
 Alternatively, you can use [Google Fonts](https://fonts.google.com/selection?selection.family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900) to include the Inter font. Add the following `<link>` tag to the `<head>` of your `index.html`:
 
-```html {4-9}
-<!-- index.html -->
+```html {4-9} title="public/index.html"
 <head>
   <!-- ... -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -145,8 +142,7 @@ Alternatively, you can use [Google Fonts](https://fonts.google.com/selection?sel
 
 Then, ensure your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable:
 
-```css {5-7}
-/* src/globals.css */
+```css {4-6} title="src/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 
@@ -162,8 +158,7 @@ Then, ensure your Tailwind configuration uses the Inter font for the `--font-san
 
 Make sure your CSS file is imported in your app entry point:
 
-```tsx {4}
-// src/main.tsx
+```tsx {3} title="src/main.tsx"
 import React from "react"
 
 import "./globals.css"
@@ -186,8 +181,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 If your app uses routing (e.g., with Tanstack Router), wrap your app with the `LinkProvider` from `react-aria-components` 
 to have proper routing behavior when using `react-aria-component`s `Link` component:
 
-```tsx
-// app/providers.tsx (or wherever your providers are defined)
+```tsx title="app/providers.tsx (or wherever your providers are defined)"
 import { RouterProvider } from "react-aria-components"
 import { useHref, useNavigate } from "your-router"
 
@@ -202,8 +196,7 @@ export function Providers() {
 }
 ```
 
-```tsx
-// app/layout.tsx (or wherever your root layout is defined)
+```tsx title="app/layout.tsx (or wherever your root layout is defined)"
 import { Providers } from "./providers"
 
 export default function RootLayout({
@@ -230,8 +223,7 @@ Read more about [Client Side Routing](https://react-spectrum.adobe.com/react-ari
 
 You're all set! Start using OUI components in your app:
 
-```tsx {2,7-9}
-// src/some-component.tsx
+```tsx {1,6-8} title="src/some-component.tsx"
 import { Button } from "@opengovsg/oui"
 
 function SomeComponent() {
