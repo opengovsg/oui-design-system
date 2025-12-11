@@ -37,7 +37,7 @@ export const CommandTabs = ({ tabContentHtmls, tabs }: CommandTabsProps) => {
               <Tab
                 id={key}
                 key={key}
-                className="selected:border-b-zinc-50 selected:bg-transparent selected:text-zinc-50 rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 font-mono text-zinc-400"
+                className="selected:border-b-zinc-50 selected:bg-transparent selected:text-zinc-50 cursor-pointer rounded-none border-b border-transparent bg-transparent p-0 pb-1.5 font-mono text-zinc-400 transition-colors hover:text-zinc-50"
               >
                 {key}
               </Tab>
