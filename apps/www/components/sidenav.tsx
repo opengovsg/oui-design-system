@@ -79,7 +79,6 @@ export const Sidenav = ({ title, items, currentUrl }: SidenavProps) => {
         {items.map((item, index) => (
           <SidenavItem key={index}>
             {({ className }) => {
-              console.log({ currentUrl, itemUrl: item.url })
               return item.external ? (
                 <a
                   className={className}
