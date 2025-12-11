@@ -33,6 +33,7 @@ export const docs = defineCollection({
           storybook: s.string().optional(),
           reactaria: s.string().optional(),
         })
+        .passthrough()
         .optional(),
     })
     .transform((data) => {
