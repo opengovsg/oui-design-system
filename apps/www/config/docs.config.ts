@@ -51,8 +51,8 @@ const docsLinks: NavItem = {
             { title: "Calendar", url: "calendar" },
             { title: "Card", url: "card", status: "wip" },
             { title: "ComboBox", url: "combo-box" },
-            { title: "CheckboxGroup", url: "checkbox-group", status: "new" },
-            { title: "Checkbox", url: "checkbox", status: "new" },
+            { title: "CheckboxGroup", url: "checkbox-group" },
+            { title: "Checkbox", url: "checkbox" },
             { title: "DateField", url: "date-field" },
             { title: "DatePicker", url: "date-picker" },
             {
@@ -67,7 +67,7 @@ const docsLinks: NavItem = {
             { title: "Modal", url: "modal", status: "new" },
             { title: "MultiSelect", url: "multi-select", status: "redirect" },
             { title: "NumberField", url: "number-field", status: "new" },
-            { title: "Pagination", url: "pagination", status: "new" },
+            { title: "Pagination", url: "pagination" },
             {
               title: "PhoneNumberField",
               url: "phone-number-field",
@@ -89,7 +89,7 @@ const docsLinks: NavItem = {
             { title: "TextField", url: "text-field" },
             { title: "Tile", url: "tile", status: "wip" },
             { title: "TimeField", url: "time-field", status: "wip" },
-            { title: "Toast", url: "toast", status: "wip" },
+            { title: "Toast", url: "toast", status: "new" },
             { title: "Toggle", url: "toggle" },
             { title: "Tooltip", url: "tooltip", status: "wip" },
           ].sort((a, b) => a.title.localeCompare(b.title)),
