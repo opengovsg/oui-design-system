@@ -52,8 +52,7 @@ npm install tailwindcss @tailwindcss/postcss
 
 Create or update your `postcss.config.mjs` file to use the Tailwind CSS plugin:
 
-```js
-// postcss.config.mjs
+```js title="postcss.config.mjs"
 const config = {
   plugins: {
     "@tailwindcss/postcss": {},
@@ -70,8 +69,7 @@ export default config
 
 Create or update your global CSS file (e.g., `app/globals.css`) to import the OUI theme:
 
-```css
-/* app/globals.css */
+```css title="app/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 /*
  * Note: You may need to change the path relative to this css file to fit your
@@ -97,8 +95,7 @@ There are a few ways to set up the Inter font in your Next.js project:
 
 One way is to use the `next/font` package:
 
-```tsx {2,4-7}
-// app/layout.tsx
+```tsx {1,3-6} title="app/layout.tsx"
 import { Inter } from "next/font/google"
 
 const inter = Inter({
@@ -109,8 +106,7 @@ const inter = Inter({
 
 Then, add the font variable to your HTML or body element:
 
-```tsx {13-15}
-// app/layout.tsx
+```tsx {12-14} title="app/layout.tsx"
 <html lang="en" className={inter.variable}>
   <body>{children}</body>
 </html>
@@ -118,8 +114,7 @@ Then, add the font variable to your HTML or body element:
 
 You will also need to ensure that your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable:
 
-```css {5-7}
-/* app/globals.css */
+```css {4-6} title="app/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 
@@ -140,8 +135,7 @@ npm install inter-ui
 
 Then, import the font CSS in your global CSS file:
 
-```css {5-6,8-15}
-/* app/globals.css */
+```css {4-5,7-14} title="app/globals.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 
@@ -166,8 +160,7 @@ Then, import the font CSS in your global CSS file:
 
 Make sure your CSS file is imported in your root layout:
 
-```tsx {4}
-// app/layout.tsx
+```tsx {3} title="app/layout.tsx"
 import type { Metadata } from "next"
 
 import "./globals.css"
@@ -198,8 +191,7 @@ export default function RootLayout({
 If you want proper client-side navigation when using `react-aria-component`'s `Link` component with Next.js's router,
 wrap your app with the `RouterProvider`:
 
-```tsx
-// app/providers.tsx
+```tsx title="app/providers.tsx"
 "use client"
 
 import { useRouter } from "next/navigation"
@@ -214,8 +206,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 Then use it in your layout:
 
-```tsx {4,21}
-// app/layout.tsx
+```tsx {3,20} title="app/layout.tsx"
 import type { Metadata } from "next"
 
 import { Providers } from "./providers"
@@ -255,8 +246,7 @@ You're all set! Start using OUI components in your app.
 >
 > However, if errors occur, add the `"use client"` directive at the top of files that use OUI components, or wrap them in a Client Component.
 
-```tsx {2,4,9-11}
-// app/page.tsx
+```tsx {1,3,8-10} title="app/page.tsx"
 "use client"
 
 import { Button } from "@opengovsg/oui"
@@ -283,8 +273,7 @@ The examples above use the **App Router** (Next.js 13+). If you're using the **P
 1. Import your CSS in `pages/_app.tsx` instead of `app/layout.tsx`
 2. Wrap your app with providers in `pages/_app.tsx`
 
-```tsx
-// pages/_app.tsx
+```tsx title="pages/_app.tsx"
 import type { AppProps } from "next/app"
 import { useRouter } from "next/router"
 import { RouterProvider } from "react-aria-components"
@@ -306,7 +295,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 For the best TypeScript experience, ensure your `tsconfig.json` includes:
 
-```json
+```json title="tsconfig.json"
 {
   "compilerOptions": {
     "moduleResolution": "bundler",

@@ -50,8 +50,7 @@ npm install @opengovsg/oui @opengovsg/oui-theme tailwindcss react-aria-component
 <Step>
 Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
 
-```css
-/* styles/tailwind.css */
+```css title="path/to/tailwind.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 ```
 
@@ -62,8 +61,7 @@ Add `@opengovsg/oui-theme/tailwind.css` to your tailwind CSS file.
 <Step>
 If you are using oui in a monorepo, you might need to add the following `@source` directive to point to the installation directory `@opengovsg/oui-theme`, or Tailwind might not detect the class names of oui components.
 
-```css {3}
-/* styles/tailwind.css */
+```css {2} title="path/to/tailwind.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 ```
@@ -83,8 +81,7 @@ Look at the specific framework guides for instructions on how to set up the Inte
 
 After the font is set up, ensure that your Tailwind configuration uses the Inter font for the `--font-sans` CSS variable.
 
-```css {10}
-/* styles/tailwind.css */
+```css {9} title="path/to/tailwind.css"
 @import "@opengovsg/oui-theme/tailwind.css";
 @source "../path/to/node_modules/@opengovsg/oui-theme";
 

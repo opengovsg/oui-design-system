@@ -1,0 +1,81 @@
+---
+title: Theming
+description: How to customize the OUI theme to match your product's branding
+---
+
+OUI provides a [command line tool](https://github.com/opengovsg/oui-design-system/tree/main/packages/token-gen) to generate a theme based on your product's branding colors.
+
+This tool will create a custom theme file that you can use in your application to ensure a consistent look and feel.
+
+## Generating a Theme
+
+To generate a custom theme, use the following command:
+
+```bash
+npx @opengovsg/oui-token-gen generate
+```
+
+This command will prompt you to select your product. You may type your product's name or use the arrow keys to navigate the list.
+
+```ansi
+🎨 OUI Tailwind Variables Theme Generator
+════════════════════════════════════════
+? Select a theme to generate:
+❯ Redeem
+  Vault
+  ScamShield
+  Isomer
+  Postman
+  Care360
+  AskGov
+```
+
+Based on the product, it will generate a theme file with the necessary color variables.
+
+For example, if you select "Postman", the output will look like this:
+
+```ansi
+🎨 OUI Tailwind Variables Theme Generator
+════════════════════════════════════════
+✔ Select a theme to generate: Postman
+
+Selected theme: Postman
+
+Generating theme: Postman
+Output: /path/to/current/directory/generated-Postman.css
+────────────────────────────────────────
+
+Token collisions detected (46):
+Use log.verbosity "verbose" or use CLI option --verbose for more details.
+Refer to: https://styledictionary.com/reference/logging/
+
+css
+! /path/to/current/directory/generated-Postman.css, does not exist
+
+css
+✔︎ /path/to/current/directory/generated-Postman.css
+```
+
+The generated file `generated-Postman.css` will contain all the necessary CSS variables for the Postman theme.
+
+## Using the Generated Theme
+
+To use the generated theme in your application, import the CSS file into your Tailwind CSS file, which would have been generated during the OUI setup process following the [installation instructions](./installation).
+
+```css title="path/to/globals.css" {12}
+@import "@opengovsg/oui-theme/tailwind.css";
+@source "../path/to/node_modules/@opengovsg/oui-theme";
+
+@theme {
+  /*
+   * This assignment will differ depending on how the font is set up.
+   * The important part is to ensure that --font-sans is defined with the Inter font.
+   */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@import "path/to/generated-Postman.css";
+/* Alternatively, you can directly inline the contents of the generated CSS file 
+ * into your Tailwind CSS file. 
+ */
+```

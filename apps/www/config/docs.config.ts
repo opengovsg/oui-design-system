@@ -19,9 +19,17 @@ const docsLinks: NavItem = {
             { title: "Vite", url: "vite" },
           ],
         },
+        {
+          title: "Customization",
+          items: [
+            {
+              title: "Theming",
+              url: "theming",
+            },
+          ],
+        },
       ],
     },
-
     {
       title: "Components",
       url: "components",

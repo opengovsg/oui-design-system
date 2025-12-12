@@ -66,6 +66,20 @@ export const mdxComponents = {
       {...props}
     />
   ),
+  figcaption: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
+    // @ts-ignore
+    const hasTitle = props["data-rehype-pretty-code-title"] !== undefined
+    return (
+      <figcaption
+        {...props}
+        className={cn(
+          hasTitle &&
+            "mt-6 rounded-t-xl border-b border-b-zinc-600 bg-zinc-800 px-4 py-2 text-white dark:bg-zinc-800",
+          className,
+        )}
+      />
+    )
+  },
   a: ({ className, ...props }: React.HTMLAttributes<HTMLAnchorElement>) => (
     <a
       className={cn(
