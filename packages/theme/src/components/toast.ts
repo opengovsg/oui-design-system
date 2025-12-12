@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const toastStyles = tv({
   slots: {
-    base: "prose-body-1",
+    base: "prose-body-1 lg:[--width:680px]!",
     toast:
       "group/toast text-base-content-default relative flex w-(--width) flex-wrap items-start gap-2 rounded-sm px-4 py-3 has-data-close-button:pr-12 has-data-icon:pl-10 data-[expanded=false]:data-[front=false]:overflow-hidden",
     title: "[&:has(+[data-description])]:prose-subhead-1",
