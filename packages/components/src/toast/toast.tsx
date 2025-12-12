@@ -79,6 +79,7 @@ export function Toaster(originalProps: ToasterProps) {
             className: props.classNames?.cancelButton,
           }),
         },
+        unstyled: true,
         ...toastOptions,
       }}
       {...props}

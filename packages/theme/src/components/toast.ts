@@ -5,18 +5,17 @@ import { tv } from "../utils/tv"
 export const toastStyles = tv({
   slots: {
     base: "toaster group",
-    toast: "",
+    toast: "flex w-(--width) items-center gap-2 rounded-sm px-2 lg:px-4",
     title: "group-[.toast]:font-medium",
     description: "group-[.toast]:text-muted-foreground",
     loader: "",
     closeButton: "",
-    cancelButton:
-      "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
-    actionButton:
-      "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+    cancelButton: "",
+    actionButton: "",
     success:
-      "border-utility-feedback-success bg-utility-feedback-success-subtle rounded-sm border",
-    error: "",
+      "border-utility-feedback-success bg-utility-feedback-success-subtle border",
+    error:
+      "border-utility-feedback-critical bg-utility-feedback-critical-subtle border",
     info: "",
     warning: "",
     loading: "",
