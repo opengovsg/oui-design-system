@@ -1,7 +1,7 @@
 import Link from "next/link"
 import { AdobeIcon } from "@/components/icons/brand-icons"
 import { SiGithub, SiStorybook } from "@icons-pack/react-simple-icons"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Package } from "lucide-react"
 
 interface PageHeaderProps {
   title: string
@@ -30,6 +30,8 @@ const LinkIcon = ({ type }: { type: string }) => {
       return <SiGithub className="size-4 fill-[#181717]" />
     case "reactaria":
       return <AdobeIcon className="size-4 fill-[#E1251B]" />
+    default:
+      return <Package className="size-4" />
   }
 }
 
@@ -48,7 +50,7 @@ export const PageHeader = ({ title, description, links }: PageHeaderProps) => {
               target="_blank"
             >
               <LinkIcon type={type} />
-              <span>{TYPE_TO_LABEL[type as keyof typeof links]}</span>
+              <span>{TYPE_TO_LABEL[type as keyof typeof links] ?? type}</span>
               <ArrowUpRight className="-ml-1 size-4" />
             </Link>
           ))}

@@ -1,12 +1,177 @@
 ---
 title: Toast
-description: A toast is a timed notification which appears at the top of the interface to provide contextual feedback or confirmation in response to user action.
+description: A toast is a non-modal, unobtrusive, and time-limited notification that provides succinct feedback about an action.
 toc:
   visible: true
 links:
   source: toast
   storybook: components-toast--default
   theme: toast
+  Sonner: https://sonner.emilkowal.ski/toast
 ---
 
-# Not yet implemented
+<ComponentPreview name="toast-demo" />
+
+## Usage
+
+OUI's toast component is built on top of [Sonner](https://sonner.emilkowal.ski/), a minimal toast notification library.
+
+To use toasts in your application, you need to:
+
+1. Add the `Toaster` component to your app's layout (typically in your root layout)
+2. Use the `toast` function to trigger notifications
+
+```tsx
+import { toast, Toaster } from "@opengovsg/oui"
+```
+
+```tsx title="layout.tsx"
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        {children}
+        <Toaster />
+      </body>
+    </html>
+  )
+}
+```
+
+```tsx title="page.tsx"
+import { toast } from "@opengovsg/oui"
+
+function MyComponent() {
+  return (
+    <Button onPress={() => toast("This is a toast message")}>Show toast</Button>
+  )
+}
+```
+
+## Examples
+
+### With Description
+
+You can add a description to provide additional context to your toast message.
+
+<ComponentPreview name="toast-with-description" />
+
+### Types
+
+Use different toast types to convey the nature of the notification. Available types are `success`, `error`, `warning`, `info`, and `loading`.
+
+<ComponentPreview name="toast-types" />
+
+#### Success
+
+Use `toast.success()` for successful operations.
+
+<ComponentPreview name="toast-success" />
+
+#### Error
+
+Use `toast.error()` for error messages.
+
+<ComponentPreview name="toast-error" />
+
+#### Warning
+
+Use `toast.warning()` for warning messages.
+
+<ComponentPreview name="toast-warning" />
+
+#### Info
+
+Use `toast.info()` for informational messages.
+
+<ComponentPreview name="toast-info" />
+
+#### Loading
+
+Use `toast.loading()` for loading states. Note that loading toasts do not auto-dismiss.
+
+<ComponentPreview name="toast-loading" />
+
+### Positions
+
+Control where the toast appears on the screen using the `position` option. Available positions are `top-left`, `top-center`, `top-right`, `bottom-left`, `bottom-center`, and `bottom-right`.
+
+<ComponentPreview name="toast-positions" />
+
+### Actions
+
+Add interactive action buttons to your toasts. You can include an `action` button, a `cancel` button, or both.
+
+<ComponentPreview name="toast-actions" />
+
+### Promise
+
+Use `toast.promise()` to show loading, success, and error states for async operations automatically.
+
+<ComponentPreview name="toast-promise" />
+
+## API Reference
+
+### Toaster
+
+The `Toaster` component renders the toast container. It should be placed once in your application, typically in your root layout.
+
+| Prop        | Type                                                                                              | Default          | Description                                                    |
+| ----------- | ------------------------------------------------------------------------------------------------- | ---------------- | -------------------------------------------------------------- |
+| position    | `"top-left" \| "top-center" \| "top-right" \| "bottom-left" \| "bottom-center" \| "bottom-right"` | `"bottom-right"` | Default position for all toasts                                |
+| expand      | `boolean`                                                                                         | `false`          | Whether toasts should be expanded by default                   |
+| duration    | `number`                                                                                          | `4000`           | Default duration in milliseconds before a toast auto-dismisses |
+| closeButton | `boolean`                                                                                         | `true`           | Whether to show the close button on toasts                     |
+| richColors  | `boolean`                                                                                         | `false`          | Whether to use rich colors for toast types                     |
+
+### toast()
+
+The `toast` function is used to trigger notifications. It returns a unique toast ID that can be used to dismiss or update the toast.
+
+```tsx
+// Basic usage
+toast("Message")
+
+// With options
+toast("Message", {
+  description: "Additional details",
+  duration: 5000,
+  position: "top-center",
+})
+
+// Type-specific toasts
+toast.success("Success message")
+toast.error("Error message")
+toast.warning("Warning message")
+toast.info("Info message")
+toast.loading("Loading message")
+
+// Promise toast
+toast.promise(asyncFunction, {
+  loading: "Loading...",
+  success: "Success!",
+  error: "Error!",
+})
+
+// Dismiss a toast
+const toastId = toast("Message")
+toast.dismiss(toastId)
+
+// Dismiss all toasts
+toast.dismiss()
+```
+
+### Toast Options
+
+| Option      | Type                                     | Description                                                 |
+| ----------- | ---------------------------------------- | ----------------------------------------------------------- |
+| description | `string`                                 | Additional text displayed below the title                   |
+| duration    | `number`                                 | Duration in milliseconds before the toast auto-dismisses    |
+| position    | `Position`                               | Override the default position for this toast                |
+| action      | `{ label: string; onClick: () => void }` | Add an action button to the toast                           |
+| cancel      | `{ label: string; onClick: () => void }` | Add a cancel button to the toast                            |
+| id          | `string \| number`                       | Custom ID for the toast (useful for updating or dismissing) |
+| onDismiss   | `(toast: Toast) => void`                 | Callback when the toast is dismissed                        |
+| onAutoClose | `(toast: Toast) => void`                 | Callback when the toast auto-closes                         |
+
+For a complete list of options and advanced usage, refer to the [Sonner documentation](https://sonner.emilkowal.ski/).

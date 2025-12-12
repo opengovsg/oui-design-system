@@ -38,6 +38,11 @@ export const spinnerStyles = tv({
   },
   variants: {
     size: {
+      xs: {
+        wrapper: "h-4 w-4",
+        circle1: "border-2",
+        circle2: "border-2",
+      },
       sm: {
         wrapper: "h-5 w-5",
         circle1: "border-2",
