@@ -74,7 +74,7 @@ export const Positions: Story = {
           <ToastStory
             buttonText="Top-left"
             title="Top left toast"
-            data={{ position: "top-left" }}
+            data={{ position: "top-left", closeButton: false }}
           />
           <ToastStory
             buttonText="Top-center"
@@ -119,7 +119,11 @@ export const Statuses: Story = {
       <div className="flex flex-wrap gap-3">
         <Button
           variant="outline"
-          onPress={() => toast.error("The registration failed")}
+          onPress={() =>
+            toast.error(
+              "The registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failedThe registration failed",
+            )
+          }
         >
           Error
         </Button>
@@ -168,9 +172,9 @@ export const Action: Story = {
           variant="outline"
           size="sm"
           onPress={() =>
-            toast("New comment on your post!", {
+            toast.info("New comment on your post!", {
               action: {
-                label: "View",
+                label: "View long long long",
                 onClick: () => alert("Viewed"),
               },
             })
@@ -182,7 +186,7 @@ export const Action: Story = {
           variant="outline"
           size="sm"
           onPress={() =>
-            toast("New comment on your post!", {
+            toast.warning("New comment on your post!", {
               action: {
                 label: "View",
                 onClick: () => alert("Viewed"),
@@ -200,7 +204,7 @@ export const Action: Story = {
           variant="outline"
           size="sm"
           onPress={() =>
-            toast("New comment on your post!", {
+            toast.error("New comment on your post!", {
               cancel: {
                 label: "Cancel",
                 onClick: () => alert("Cancelled"),

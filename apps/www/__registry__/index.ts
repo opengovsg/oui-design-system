@@ -2435,6 +2435,129 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/text-field-demo.tsx")),
   },
+  "toast-actions": {
+    name: "toast-actions",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-actions.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-actions.tsx")),
+  },
+  "toast-demo": {
+    name: "toast-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-demo.tsx")),
+  },
+  "toast-error": {
+    name: "toast-error",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-error.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-error.tsx")),
+  },
+  "toast-info": {
+    name: "toast-info",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-info.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-info.tsx")),
+  },
+  "toast-loading": {
+    name: "toast-loading",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-loading.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-loading.tsx")),
+  },
+  "toast-positions": {
+    name: "toast-positions",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-positions.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-positions.tsx")),
+  },
+  "toast-promise": {
+    name: "toast-promise",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-promise.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-promise.tsx")),
+  },
+  "toast-success": {
+    name: "toast-success",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-success.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-success.tsx")),
+  },
+  "toast-types": {
+    name: "toast-types",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-types.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-types.tsx")),
+  },
+  "toast-warning": {
+    name: "toast-warning",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-warning.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/toast-warning.tsx")),
+  },
+  "toast-with-description": {
+    name: "toast-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/toast-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/toast-with-description.tsx"),
+    ),
+  },
   "toggle-demo": {
     name: "toggle-demo",
     description: "",
