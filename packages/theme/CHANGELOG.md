@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.28
+
+### Patch Changes
+
+- [#171](https://github.com/opengovsg/oui-design-system/pull/171) [`2b834c8`](https://github.com/opengovsg/oui-design-system/commit/2b834c845ddaaf35f392280105dda29920c7f0ce) Thanks [@karrui](https://github.com/karrui)! - feat(toast): update styling and defaults
+
 ## 0.0.27
 
 ### Patch Changes
