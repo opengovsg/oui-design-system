@@ -1,6 +1,7 @@
 "use client"
 
 import type { ToasterProps as BaseToasterProps } from "sonner"
+import { X } from "lucide-react"
 import { Toaster as Sonner } from "sonner"
 
 import type {
@@ -10,6 +11,7 @@ import type {
 } from "@opengovsg/oui-theme"
 import { toastStyles } from "@opengovsg/oui-theme"
 
+import { Spinner } from "../spinner"
 import { mapPropsVariants } from "../system/utils"
 
 export interface ToasterProps
@@ -19,10 +21,8 @@ export interface ToasterProps
 }
 
 export function Toaster(originalProps: ToasterProps) {
-  const [{ toastOptions, ...props }, variantProps] = mapPropsVariants(
-    originalProps,
-    toastStyles.variantKeys,
-  )
+  const [{ toastOptions, closeButton = true, ...props }, variantProps] =
+    mapPropsVariants(originalProps, toastStyles.variantKeys)
 
   const styles = toastStyles(variantProps)
 
@@ -31,6 +31,15 @@ export function Toaster(originalProps: ToasterProps) {
       className={styles.base({
         className: props.className ?? props.classNames?.base,
       })}
+      icons={{
+        loading: <Spinner size="xs" />,
+        close: <X />,
+      }}
+      mobileOffset={8}
+      offset={{
+        top: 8,
+      }}
+      closeButton={closeButton}
       toastOptions={{
         classNames: {
           toast: styles.toast({
