@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.27
+
+### Patch Changes
+
+- [#169](https://github.com/opengovsg/oui-design-system/pull/169) [`be831fb`](https://github.com/opengovsg/oui-design-system/commit/be831fbcaee53c0382c845b4b049a2031bc0f5e8) Thanks [@karrui](https://github.com/karrui)! - feat(components): add toast component with Sonner
+
+- Updated dependencies [[`be831fb`](https://github.com/opengovsg/oui-design-system/commit/be831fbcaee53c0382c845b4b049a2031bc0f5e8), [`be831fb`](https://github.com/opengovsg/oui-design-system/commit/be831fbcaee53c0382c845b4b049a2031bc0f5e8)]:
+  - @opengovsg/oui-theme@0.0.27
+
 ## 0.0.26
 
 ### Patch Changes
