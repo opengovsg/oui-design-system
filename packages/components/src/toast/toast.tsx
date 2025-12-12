@@ -31,6 +31,7 @@ export function Toaster(originalProps: ToasterProps) {
       className={styles.base({
         className: props.className ?? props.classNames?.base,
       })}
+      position="top-center"
       icons={{
         loading: <Spinner size="xs" />,
         close: <X />,

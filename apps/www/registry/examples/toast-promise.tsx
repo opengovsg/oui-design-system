@@ -1,6 +1,6 @@
 "use client"
 
-import { Button, toast, Toaster } from "@opengovsg/oui"
+import { Button, toast } from "@opengovsg/oui"
 
 function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))
@@ -15,10 +15,5 @@ export default function ToastPromise() {
     })
   }
 
-  return (
-    <>
-      <Toaster />
-      <Button onPress={handleSave}>Save changes</Button>
-    </>
-  )
+  return <Button onPress={handleSave}>Save changes</Button>
 }

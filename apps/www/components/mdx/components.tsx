@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { CircleAlertIcon } from "lucide-react"
 
+import { Toaster } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 
 import { Card, CardGroup } from "./card"
@@ -238,6 +239,7 @@ export const mdxComponents = {
   Card,
   CardGroup,
   ComponentPreview,
+  Toaster,
   Kbd: ({ ...props }) => {
     // TODO: Change to kbd component when implemented
     return (

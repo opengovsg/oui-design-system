@@ -1,14 +1,9 @@
 "use client"
 
-import { Button, toast, Toaster } from "@opengovsg/oui"
+import { Button, toast } from "@opengovsg/oui"
 
 export default function ToastDemo() {
   return (
-    <>
-      <Toaster />
-      <Button onPress={() => toast("This is a toast message")}>
-        Show toast
-      </Button>
-    </>
+    <Button onPress={() => toast("This is a toast message")}>Show toast</Button>
   )
 }

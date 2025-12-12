@@ -4,9 +4,9 @@ import { tv } from "../utils/tv"
 
 export const toastStyles = tv({
   slots: {
-    base: "prose-body-1",
+    base: "prose-body-1 lg:[--width:680px]!",
     toast:
-      "group/toast text-base-content-default relative flex w-(--width) flex-wrap items-start gap-2 overflow-hidden rounded-sm px-4 py-3 has-data-close-button:pr-12 has-data-icon:pl-10",
+      "group/toast text-base-content-default relative flex w-(--width) flex-wrap items-start gap-2 rounded-sm px-4 py-3 has-data-close-button:pr-12 has-data-icon:pl-10 data-[expanded=false]:data-[front=false]:overflow-hidden data-[expanded=false]:data-[front=false]:*:opacity-0",
     title: "[&:has(+[data-description])]:prose-subhead-1",
     description: "",
     loader: "absolute inset-0 size-5 [--size:20px]!",
@@ -22,7 +22,8 @@ export const toastStyles = tv({
     warning: "",
     loading: "",
     default: "",
-    content: "flex w-full shrink-0 flex-col gap-0.5",
+    content:
+      "flex w-full shrink-0 flex-col gap-0.5 ease-out group-data-[expanded=false]/toast:group-data-[front=false]/toast:opacity-0",
     icon: "group-data-[type=warning]/toast:text-utility-feedback-warning group-data-[type=info]/toast:text-utility-feedback-info group-data-[type=success]/toast:text-utility-feedback-success group-data-[type=error]/toast:text-utility-feedback-critical absolute left-4 my-0.5 flex size-5 shrink-0 items-center justify-start",
   },
   variants: {

@@ -1,1 +1,2 @@
-export * from "./toast"
+export { Toaster, toast } from "./toast"
+export type { ToasterProps } from "./toast"
