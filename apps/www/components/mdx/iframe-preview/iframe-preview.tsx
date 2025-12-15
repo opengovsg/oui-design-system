@@ -59,7 +59,7 @@ export interface IframePreviewProps {
 
 const MIN_WIDTH = 320
 
-export const IframePreview: React.FC<IframePreviewProps> = (props) => {
+const IframePreview: React.FC<IframePreviewProps> = (props) => {
   let constraintsResizerRef = useRef<HTMLDivElement>(null)
   let resizerRef = useRef<HTMLDivElement>(null)
   let iframeRef = useRef<HTMLIFrameElement>(null)
@@ -173,3 +173,5 @@ export const IframePreview: React.FC<IframePreviewProps> = (props) => {
     </div>
   )
 }
+
+export default IframePreview
