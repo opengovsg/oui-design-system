@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.29
+
+### Patch Changes
+
+- [#173](https://github.com/opengovsg/oui-design-system/pull/173) [`a625ca7`](https://github.com/opengovsg/oui-design-system/commit/a625ca726bcdefcf87300fc305081d40037dce09) Thanks [@karrui](https://github.com/karrui)! - feat(components): add Navbar template component
+
+- Updated dependencies [[`a625ca7`](https://github.com/opengovsg/oui-design-system/commit/a625ca726bcdefcf87300fc305081d40037dce09)]:
+  - @opengovsg/oui-theme@0.0.29
+
 ## 0.0.28
 
 ### Patch Changes
