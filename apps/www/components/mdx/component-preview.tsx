@@ -6,7 +6,7 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 import { cn } from "@opengovsg/oui-theme"
 
 import { CopyButton } from "./copy-button"
-import { IframePreview } from "./iframe-preview"
+import { IframePreviewNoSsr } from "./iframe-preview"
 import { PreviewErrorBoundary } from "./preview-error-boundary"
 
 interface ComponentPreviewProps
@@ -69,7 +69,7 @@ export function ComponentPreview({
   ...props
 }: ComponentPreviewProps) {
   const content = asIframe ? (
-    <IframePreview
+    <IframePreviewNoSsr
       iframeHeight={previewHeight}
       iframeTitle={name}
       iframeInitialWidth={iframeInitialWidth}
