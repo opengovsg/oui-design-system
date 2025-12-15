@@ -29,4 +29,5 @@ export * from "./file-dropzone"
 export * from "./number-field"
 export * from "./modal"
 export * from "./toast"
+export * from "./navbar"
 // Add new component exports here

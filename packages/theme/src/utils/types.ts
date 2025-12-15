@@ -4,3 +4,5 @@
 export type SlotsToClasses<S extends string> = {
   [key in S]?: string
 }
+
+export type ClassNameOrFunction<T> = string | ((values: T) => string)
