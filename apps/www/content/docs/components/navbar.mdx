@@ -1,0 +1,219 @@
+---
+title: Navbar
+description: A responsive navigation header positioned on top side of the page that has affordances for branding, links, actions, etc.
+toc:
+  visible: true
+links:
+  source: navbar
+  storybook: components-navbar--default
+  theme: navbar
+---
+
+<ComponentPreview
+  name="navbar-demo"
+  iframeSrc="/examples/navbar/demo"
+  asIframe
+  previewHeight="320px"
+/>
+
+## Usage
+
+```tsx
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from "@opengovsg/oui"
+```
+
+```tsx
+<Navbar>
+  <NavbarBrand>
+    <p className="font-bold">OUI</p>
+  </NavbarBrand>
+  <NavbarContent justify="center">
+    <NavbarItem>
+      <Link href="#">Features</Link>
+    </NavbarItem>
+    <NavbarItem isActive>
+      <Link href="#">Customers</Link>
+    </NavbarItem>
+  </NavbarContent>
+  <NavbarContent justify="end">
+    <NavbarItem>
+      <Link href="#">Login</Link>
+    </NavbarItem>
+  </NavbarContent>
+</Navbar>
+```
+
+OUI exports 7 navbar-related components:
+
+- **Navbar**: The main component of navbar.
+- **NavbarBrand**: The component for branding.
+- **NavbarContent**: The component for wrapping navbar items.
+- **NavbarItem**: The component for navbar item.
+- **NavbarMenuToggle**: The component for toggling navbar menu.
+- **NavbarMenu**: The component for wrapping navbar menu items.
+- **NavbarMenuItem**: The component for navbar menu item.
+
+## Examples
+
+### Static
+
+You can use the `position` prop to make the navbar static positioned (the default behavior is `sticky`).
+
+<ComponentPreview
+  iframeSrc="/examples/navbar/static"
+  asIframe
+  previewHeight="320px"
+  name="navbar-static"
+/>
+
+### With Menu
+
+You can use the `NavbarMenuToggle` and `NavbarMenu` components to display a togglable menu. This is commonly used for mobile navigation.
+
+<ComponentPreview
+  name="navbar-with-menu"
+  iframeInitialWidth={375}
+  iframeSrc="/examples/navbar/with-menu"
+  asIframe
+  previewHeight="320px"
+/>
+
+### Controlled Menu
+
+You can use the `isMenuOpen` and `onMenuOpenChange` props to control the navbar menu state programmatically.
+
+<ComponentPreview name="navbar-controlled"
+
+iframeSrc="/examples/navbar/controlled"
+asIframe
+
+previewHeight="320px"
+/>
+
+### Without Border
+
+By default, the navbar has a bottom border. You can use the `hasBorder` prop to control its visibility.
+Set `hasBorder={false}` to remove the bottom border from the navbar.
+
+<ComponentPreview
+  name="navbar-without-border"
+  iframeSrc="/examples/navbar/without-border"
+  asIframe
+  previewHeight="320px"
+/>
+
+### Customizing the Active Item
+
+When the `NavbarItem` has `isActive` set to `true`, it will have a `data-active` attribute. You can use this attribute to customize the active state styling.
+
+<ComponentPreview name="navbar-active-item"
+
+iframeSrc="/examples/navbar/active-item"
+asIframe
+
+previewHeight="320px"
+/>
+
+## Slots
+
+- **base**: The main slot for the navbar. It takes the full width of the parent and wraps the navbar elements including the menu.
+- **wrapper**: The slot that contains the navbar elements such as `brand`, `content` and `toggle`.
+- **brand**: The slot for the `NavbarBrand` component.
+- **content**: The slot for the `NavbarContent` component.
+- **item**: The slot for the `NavbarItem` component.
+- **toggle**: The slot for the `NavbarMenuToggle` component.
+- **toggleIcon**: The slot for the `NavbarMenuToggle` icon.
+- **menu**: The slot for the `NavbarMenu` component.
+- **menuItem**: The slot for the `NavbarMenuItem` component.
+
+## Data Attributes
+
+`Navbar` has the following attributes on the `base` element:
+
+- **data-menu-open**: Indicates if the navbar menu is open.
+
+`NavbarContent`:
+
+- **data-justify**: The justify content of the navbar content (`start`, `center`, or `end`).
+
+`NavbarItem` has the following attributes on the `base` element:
+
+- **data-active**: Indicates if the navbar item is active. Set when the `isActive` prop is `true`.
+
+`NavbarMenuToggle` has the following attributes on the `base` element:
+
+- **data-open**: Indicates if the navbar menu is open.
+- **data-pressed**: When the navbar menu toggle is pressed.
+- **data-hover**: When the navbar menu toggle is being hovered.
+- **data-focus-visible**: When the navbar menu toggle is being focused with the keyboard.
+
+`NavbarMenuItem` has the following attributes on the `base` element:
+
+- **data-active**: Indicates if the menu item is active. Set when the `isActive` prop is `true`.
+- **data-open**: Indicates if the navbar menu is open.
+
+## API Reference
+
+### Navbar Props
+
+| Prop              | Type                   | Default    | Description                                |
+| ----------------- | ---------------------- | ---------- | ------------------------------------------ |
+| children          | `ReactNode`            | -          | The content of the navbar                  |
+| height            | `string \| number`     | `"4rem"`   | The height of the navbar                   |
+| position          | `"static" \| "sticky"` | `"sticky"` | The CSS position of the navbar             |
+| hasBorder         | `boolean`              | `true`     | Whether to show a bottom border            |
+| isMenuOpen        | `boolean`              | `false`    | Whether the menu is open (controlled)      |
+| isMenuDefaultOpen | `boolean`              | `false`    | Whether the menu should be open by default |
+| shouldBlockScroll | `boolean`              | `true`     | Whether to block scroll when menu is open  |
+| classNames        | `Record<Slot, string>` | -          | Classes to apply to each slot              |
+
+### Navbar Events
+
+| Prop             | Type                        | Description                                     |
+| ---------------- | --------------------------- | ----------------------------------------------- |
+| onMenuOpenChange | `(isOpen: boolean) => void` | Handler called when the menu open state changes |
+
+### NavbarContent Props
+
+| Prop     | Type                           | Default   | Description                   |
+| -------- | ------------------------------ | --------- | ----------------------------- |
+| children | `ReactNode`                    | -         | The content items             |
+| justify  | `"start" \| "center" \| "end"` | `"start"` | The justify content alignment |
+
+### NavbarItem Props
+
+| Prop     | Type        | Default | Description                |
+| -------- | ----------- | ------- | -------------------------- |
+| children | `ReactNode` | -       | The content of the item    |
+| isActive | `boolean`   | `false` | Whether the item is active |
+
+### NavbarMenuToggle Props
+
+| Prop       | Type                                            | Default | Description                   |
+| ---------- | ----------------------------------------------- | ------- | ----------------------------- |
+| icon       | `ReactNode \| ((isOpen: boolean) => ReactNode)` | -       | Custom icon to display        |
+| size       | `"xs" \| "sm" \| "md" \| "lg"`                  | `"sm"`  | The size of the toggle button |
+| classNames | `Record<"toggle" \| "toggleIcon", string>`      | -       | Classes for toggle slots      |
+
+### NavbarMenu Props
+
+| Prop            | Type        | Default      | Description                       |
+| --------------- | ----------- | ------------ | --------------------------------- |
+| children        | `ReactNode` | -            | The menu items                    |
+| portalContainer | `Element`   | Below navbar | The container for the menu portal |
+
+### NavbarMenuItem Props
+
+| Prop      | Type                                                   | Default | Description                     |
+| --------- | ------------------------------------------------------ | ------- | ------------------------------- |
+| children  | `ReactNode`                                            | -       | The content of the menu item    |
+| isActive  | `boolean`                                              | `false` | Whether the menu item is active |
+| className | `string \| ((props: { isActive: boolean }) => string)` | -       | Class name or render function   |

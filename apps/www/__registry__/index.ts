@@ -1546,6 +1546,74 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/modal-sizes.tsx")),
   },
+  "navbar-active-item": {
+    name: "navbar-active-item",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-active-item.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/navbar-active-item.tsx")),
+  },
+  "navbar-controlled": {
+    name: "navbar-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/navbar-controlled.tsx")),
+  },
+  "navbar-demo": {
+    name: "navbar-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/navbar-demo.tsx")),
+  },
+  "navbar-static": {
+    name: "navbar-static",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-static.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/navbar-static.tsx")),
+  },
+  "navbar-with-menu": {
+    name: "navbar-with-menu",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-with-menu.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/navbar-with-menu.tsx")),
+  },
+  "navbar-without-border": {
+    name: "navbar-without-border",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-without-border.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/navbar-without-border.tsx"),
+    ),
+  },
   "number-field-controlled": {
     name: "number-field-controlled",
     description: "",
