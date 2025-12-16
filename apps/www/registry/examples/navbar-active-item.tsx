@@ -14,7 +14,10 @@ export default function NavbarActiveItem() {
         <NavbarItem>
           <Link href="#">Features</Link>
         </NavbarItem>
-        <NavbarItem isActive className="data-[active=true]:font-semibold">
+        <NavbarItem
+          isActive
+          className="data-[active=true]:text-interaction-links-default data-[active=true]:font-semibold"
+        >
           <Link aria-current="page" href="#">
             Customers
           </Link>
