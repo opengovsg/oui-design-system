@@ -29,7 +29,7 @@ export const NavbarMenu = forwardRef<"ul", NavbarMenuProps>(
     const {
       slots,
       isMenuOpen,
-      height,
+      menuTopOffsetPx,
       classNames,
       setIsMenuOpen,
       domRef: parentRef,
@@ -61,8 +61,7 @@ export const NavbarMenu = forwardRef<"ul", NavbarMenuProps>(
           style={{
             ...style,
             // @ts-expect-error due to not having any type declaration for CSS variables in React style prop
-            "--navbar-height":
-              typeof height === "number" ? `${height}px` : height,
+            "--menu-offset": menuTopOffsetPx,
           }}
           onKeyDown={chain(handleKeyDown, onKeyDown)}
           {...props}

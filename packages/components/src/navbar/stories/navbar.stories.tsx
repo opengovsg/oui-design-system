@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Link } from "react-aria-components"
 
 import type { NavbarProps } from "../navbar"
+import { Banner } from "../../banner"
 import { Button } from "../../button"
 import { Navbar } from "../navbar"
 import { NavbarBrand } from "../navbar-brand"
@@ -25,7 +26,8 @@ const storyMenuItems = [
 ]
 
 const Template = (args: NavbarProps) => (
-  <div className="min-w-screen flex min-h-screen items-center justify-center">
+  <div className="min-w-screen flex min-h-screen flex-col items-center justify-center">
+    <Banner>test</Banner>
     <div className="relative md:max-w-5xl">
       <Navbar {...args}>
         <NavbarContent className="sm:hidden" justify="start">

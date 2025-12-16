@@ -27,7 +27,7 @@ export const navbarStyles = tv({
     ],
     wrapper:
       "relative z-40 flex h-(--navbar-height) w-full flex-row flex-nowrap items-center justify-between gap-4",
-    toggle: "group text-base-content-strong -ml-3.5",
+    toggle: "text-base-content-strong group -ml-3.5",
     toggleIcon: [
       "pointer-events-none text-inherit",
       // before - first line
@@ -41,7 +41,7 @@ export const navbarStyles = tv({
     content:
       "flex h-full flex-row flex-nowrap items-center gap-4 data-[justify=center]:justify-center data-[justify=end]:flex-grow data-[justify=end]:basis-0 data-[justify=end]:justify-end data-[justify=start]:flex-grow data-[justify=start]:basis-0 data-[justify=start]:justify-start",
     item: "",
-    menu: "bg-base-canvas-default fixed inset-x-0 top-(--navbar-height) bottom-0 z-30 flex w-screen max-w-full flex-col gap-2 overflow-y-auto px-6 pt-2 pb-4",
+    menu: "bg-base-canvas-default fixed inset-x-0 top-(--menu-offset) bottom-0 z-30 flex w-screen max-w-full flex-col gap-2 overflow-y-auto px-6 pt-2 pb-4",
     menuItem: "",
   },
   variants: {

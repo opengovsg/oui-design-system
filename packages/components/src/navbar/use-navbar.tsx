@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
+import { useCallback, useRef, useState } from "react"
 import { usePreventScroll } from "@react-aria/overlays"
 import { mergeProps, useResizeObserver } from "@react-aria/utils"
 import { useControlledState } from "@react-stately/utils"
@@ -78,11 +78,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
   const Component = as || "nav"
 
   const domRef = useDomRef(ref)
-
   const menuRef = useRef<HTMLButtonElement | null>(null)
-
-  const prevWidth = useRef(0)
-  const navHeight = useRef(0)
 
   const handleMenuOpenChange = useCallback(
     (isOpen: boolean | undefined) => {
@@ -91,21 +87,12 @@ export function useNavbar(originalProps: UseNavbarProps) {
     [onMenuOpenChange],
   )
 
+  const [menuTopOffset, setMenuOffset] = useState(0)
   const [isMenuOpen, setIsMenuOpen] = useControlledState<boolean>(
     isMenuOpenProp,
     isMenuDefaultOpen ?? false,
     handleMenuOpenChange,
   )
-
-  const updateWidth = useCallback(() => {
-    if (domRef.current) {
-      const width = domRef.current.offsetWidth
-
-      if (width !== prevWidth.current) {
-        prevWidth.current = width
-      }
-    }
-  }, [domRef])
 
   usePreventScroll({
     isDisabled: !(shouldBlockScroll && isMenuOpen),
@@ -114,26 +101,9 @@ export function useNavbar(originalProps: UseNavbarProps) {
   useResizeObserver({
     ref: domRef,
     onResize: () => {
-      const currentWidth = domRef.current?.offsetWidth
-      const scrollWidth =
-        window.innerWidth - document.documentElement.clientWidth
-
-      if (currentWidth && currentWidth + scrollWidth == prevWidth.current) {
-        return
-      }
-
-      if (currentWidth !== prevWidth.current) {
-        updateWidth()
-        setIsMenuOpen(false)
-      }
+      setMenuOffset(domRef.current?.getBoundingClientRect().top || 0)
     },
   })
-
-  useEffect(() => {
-    updateWidth()
-
-    navHeight.current = domRef.current?.offsetHeight || 0
-  }, [domRef, updateWidth])
 
   const slots = useDeepCompareMemo(
     () =>
@@ -145,13 +115,16 @@ export function useNavbar(originalProps: UseNavbarProps) {
 
   const baseStyles = cn(classNames?.base, className)
 
+  const heightPx = typeof height === "number" ? `${height}px` : height
+  const menuTopOffsetPx = `calc(${heightPx} + ${menuTopOffset}px)`
+
   const getBaseProps: PropGetter = (props = {}) => ({
     ...mergeProps(otherProps, props),
     "data-menu-open": dataAttr(isMenuOpen),
     ref: domRef,
     className: slots.base({ class: cn(baseStyles, props?.className) }),
     style: {
-      "--navbar-height": typeof height === "number" ? `${height}px` : height,
+      "--navbar-height": heightPx,
       ...otherProps?.style,
       ...props?.style,
     },
@@ -169,7 +142,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
     Component,
     slots,
     domRef,
-    height,
+    menuTopOffsetPx,
     isMenuOpen,
     classNames,
     setIsMenuOpen,
