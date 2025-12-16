@@ -1,5 +1,18 @@
 # @opengovsg/oui
 
+## 0.0.31
+
+### Patch Changes
+
+- [#180](https://github.com/opengovsg/oui-design-system/pull/180) [`54ee0bd`](https://github.com/opengovsg/oui-design-system/commit/54ee0bd9dc7443a143c8c8129dc4939e1ba0c1f8) Thanks [@karrui](https://github.com/karrui)! - feat(components): add AvatarGroup component
+
+- [#180](https://github.com/opengovsg/oui-design-system/pull/180) [`54ee0bd`](https://github.com/opengovsg/oui-design-system/commit/54ee0bd9dc7443a143c8c8129dc4939e1ba0c1f8) Thanks [@karrui](https://github.com/karrui)! - feat(component): add generic arg to return proper types for lenient context usage
+
+- [#180](https://github.com/opengovsg/oui-design-system/pull/180) [`54ee0bd`](https://github.com/opengovsg/oui-design-system/commit/54ee0bd9dc7443a143c8c8129dc4939e1ba0c1f8) Thanks [@karrui](https://github.com/karrui)! - feat(components): add avatar component
+
+- Updated dependencies [[`54ee0bd`](https://github.com/opengovsg/oui-design-system/commit/54ee0bd9dc7443a143c8c8129dc4939e1ba0c1f8), [`54ee0bd`](https://github.com/opengovsg/oui-design-system/commit/54ee0bd9dc7443a143c8c8129dc4939e1ba0c1f8), [`82bd3ac`](https://github.com/opengovsg/oui-design-system/commit/82bd3acef841bd4fbe50a1ad7cd8fbb87dddcb92)]:
+  - @opengovsg/oui-theme@0.0.31
+
 ## 0.0.30
 
 ### Patch Changes
