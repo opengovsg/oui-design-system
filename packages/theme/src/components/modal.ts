@@ -173,7 +173,7 @@ export const modalStyles = tv({
     },
   ],
   defaultVariants: {
-    overlay: "blur",
+    overlay: "opaque",
     size: "desktop",
     radius: "sm",
     scrollBehavior: "normal",
