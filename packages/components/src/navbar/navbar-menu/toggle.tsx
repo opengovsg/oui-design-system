@@ -39,6 +39,7 @@ export const NavbarMenuToggle = ({
     setIsMenuOpen,
     menuRef,
     position,
+    menuTopOffset,
   } = useNavbarContext()
 
   // Scroll to top when menu is opened if navbar position is not sticky so that
@@ -47,7 +48,7 @@ export const NavbarMenuToggle = ({
     if (!isMenuOpen || position === "sticky" || typeof window === "undefined") {
       return
     }
-    window.scrollTo({ top: 0, behavior: "instant" })
+    window.scrollTo({ top: menuTopOffset, behavior: "instant" })
   }
 
   const formatMessage = useMessageFormatter(i18nStrings)

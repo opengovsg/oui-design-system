@@ -27,8 +27,8 @@ const storyMenuItems = [
 
 const Template = (args: NavbarProps) => (
   <div className="min-w-screen flex min-h-screen flex-col items-center justify-center">
-    <Banner>test</Banner>
-    <div className="relative md:max-w-5xl">
+    <div className="relative border md:max-w-5xl">
+      <Banner>test</Banner>
       <Navbar {...args}>
         <NavbarContent className="sm:hidden" justify="start">
           <NavbarMenuToggle />
@@ -154,6 +154,13 @@ export const Default: Story = {
 export const StaticNavbar: Story = {
   args: {
     position: "static",
+  },
+}
+
+export const StaticNavbarShowOnScrollUp: Story = {
+  args: {
+    position: "static",
+    shouldShowOnScrollUp: true,
   },
 }
 

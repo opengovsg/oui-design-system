@@ -1,10 +1,10 @@
 "use client"
 
-import { useCallback, useRef, useState } from "react"
+import type { HTMLMotionProps } from "motion/react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { usePreventScroll } from "@react-aria/overlays"
 import { mergeProps, useResizeObserver } from "@react-aria/utils"
 import { useControlledState } from "@react-stately/utils"
-import { useDeepCompareMemo } from "use-deep-compare"
 
 import type {
   NavbarSlots,
@@ -15,14 +15,24 @@ import { cn, dataAttr, navbarStyles } from "@opengovsg/oui-theme"
 
 import type { ReactRef } from "../system/react-utils"
 import type { HtmlUiProps, PropGetter } from "../system/types"
+import { useScrollPosition } from "../hooks/use-scroll-position"
 import { useDomRef } from "../system/react-utils"
 import { mapPropsVariants } from "../system/utils"
+
+// Add a buffer to prevent navbar display state change when scroll position is small
+const NAVBAR_PRESENCE_BUFFER = 10
 
 interface Props extends HtmlUiProps<"nav"> {
   /**
    * Ref to the DOM node.
    */
   ref?: ReactRef<HTMLElement | null>
+  /**
+   * The parent element where the navbar is placed within.
+   * This is used to determine the scroll position for `shouldShowOnScrollUp`.
+   * @default `window`
+   */
+  parentRef?: React.RefObject<HTMLElement>
   /**
    * The height of the navbar.
    * @default "4rem" (64px)
@@ -39,10 +49,31 @@ interface Props extends HtmlUiProps<"nav"> {
    */
   isMenuDefaultOpen?: boolean
   /**
+   * Whether the navbar should show up when user is scrolling up or not.
+   * Will only take effect if the `position` of the navbar is set to `static`.
+   * @default false
+   */
+  shouldShowOnScrollUp?: boolean
+  /**
+   * Whether the navbar parent scroll event should be listened to or not.
+   * @default false
+   */
+  disableScrollHandler?: boolean
+  /**
+   * The scroll event handler for the navbar. The event fires when the navbar parent element is scrolled.
+   * it only works if `disableScrollHandler` is set to `false` or `shouldShowOnScrollUp` is set to `true`.
+   */
+  onScrollPositionChange?: (scrollPosition: number) => void
+  /**
    * Whether the navbar should block scroll when the menu is open or not.
    * @default true
    */
   shouldBlockScroll?: boolean
+  /**
+   * The props to modify motion animation. Use the `variants` API to create your own animation.
+   * This motion is only available if the `shouldShowOnScrollUp` prop is set to `true`.
+   */
+  motionProps?: Omit<HTMLMotionProps<"nav">, "ref">
   /**
    * The event handler for the menu open state.
    * @param isOpen boolean
@@ -63,13 +94,18 @@ export function useNavbar(originalProps: UseNavbarProps) {
     {
       ref,
       as,
+      parentRef,
       height = "4rem",
       shouldBlockScroll = true,
+      shouldShowOnScrollUp = false,
+      disableScrollHandler = false,
+      onScrollPositionChange,
       isMenuOpen: isMenuOpenProp,
       isMenuDefaultOpen,
       onMenuOpenChange = () => {},
       className,
       classNames,
+      motionProps,
       ...otherProps
     },
     variantProps,
@@ -88,6 +124,7 @@ export function useNavbar(originalProps: UseNavbarProps) {
   )
 
   const [menuTopOffset, setMenuOffset] = useState(0)
+  const [isNavbarHidden, setIsNavbarHidden] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useControlledState<boolean>(
     isMenuOpenProp,
     isMenuDefaultOpen ?? false,
@@ -105,21 +142,44 @@ export function useNavbar(originalProps: UseNavbarProps) {
     },
   })
 
-  const slots = useDeepCompareMemo(
-    () =>
-      navbarStyles({
-        ...variantProps,
-      }),
-    [variantProps],
-  )
+  const truePosition = variantProps.position ?? "sticky"
+  const positionVariantProp = shouldShowOnScrollUp ? "sticky" : truePosition
+
+  const slots = navbarStyles({
+    ...variantProps,
+    position: positionVariantProp,
+  })
 
   const baseStyles = cn(classNames?.base, className)
+
+  const navHeight = useRef(0)
+  useEffect(() => {
+    navHeight.current = domRef.current?.offsetHeight || 0
+  }, [domRef])
+
+  useScrollPosition({
+    elementRef: parentRef,
+    isEnabled: shouldShowOnScrollUp || !disableScrollHandler,
+    callback: ({ prevPos, currPos }) => {
+      onScrollPositionChange?.(currPos.y)
+      if (shouldShowOnScrollUp) {
+        setIsNavbarHidden((prev) => {
+          const next =
+            currPos.y > prevPos.y + NAVBAR_PRESENCE_BUFFER &&
+            currPos.y > navHeight.current
+
+          return next !== prev ? next : prev
+        })
+      }
+    },
+  })
 
   const heightPx = typeof height === "number" ? `${height}px` : height
   const menuTopOffsetPx = `calc(${heightPx} + ${menuTopOffset}px)`
 
   const getBaseProps: PropGetter = (props = {}) => ({
     ...mergeProps(otherProps, props),
+    "data-hidden": dataAttr(isNavbarHidden),
     "data-menu-open": dataAttr(isMenuOpen),
     ref: domRef,
     className: slots.base({ class: cn(baseStyles, props?.className) }),
@@ -142,14 +202,18 @@ export function useNavbar(originalProps: UseNavbarProps) {
     Component,
     slots,
     domRef,
+    menuTopOffset,
     menuTopOffsetPx,
+    isNavbarHidden,
+    shouldShowOnScrollUp: shouldShowOnScrollUp && truePosition === "static",
     isMenuOpen,
     classNames,
     setIsMenuOpen,
     menuRef,
     getBaseProps,
     getWrapperProps,
-    position: variantProps.position ?? "sticky",
+    position: positionVariantProp,
+    motionProps,
   }
 }
 
