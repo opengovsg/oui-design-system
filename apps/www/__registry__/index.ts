@@ -104,6 +104,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/avatar-group-total.tsx")),
   },
+  "avatar-menu-template": {
+    name: "avatar-menu-template",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-menu-template.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/avatar-menu-template.tsx"),
+    ),
+  },
   "avatar-radius": {
     name: "avatar-radius",
     description: "",
