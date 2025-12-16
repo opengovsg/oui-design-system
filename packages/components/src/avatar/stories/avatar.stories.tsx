@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { CogIcon } from "lucide-react"
 
 import type { AvatarProps } from "../avatar"
+import type { AvatarGroupProps } from "../avatar-group"
+import { AvatarGroup } from "../avatar-group"
 import { Avatar } from "../index"
 
 export default {
@@ -10,6 +12,7 @@ export default {
 } as Meta<typeof Avatar>
 
 type Story = StoryObj<typeof Avatar>
+type AvatarGroupStory = StoryObj<typeof AvatarGroup>
 
 const Template = (args: AvatarProps) => (
   <Avatar {...args}>
@@ -146,4 +149,31 @@ export const VariantsAndSizes: Story = {
       </div>
     </div>
   ),
+}
+
+const AvatarGroupTemplate = (args: AvatarGroupProps) => (
+  <div className="flex items-center gap-[-0.5rem]">
+    <AvatarGroup {...args}>
+      <Avatar>
+        <Avatar.Fallback>AB</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Fallback>CD</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Fallback>EF</Avatar.Fallback>
+      </Avatar>
+      <Avatar>
+        <Avatar.Fallback>GH</Avatar.Fallback>
+      </Avatar>
+    </AvatarGroup>
+  </div>
+)
+
+export const WithAvatarGroup: AvatarGroupStory = {
+  render: AvatarGroupTemplate,
+  args: {
+    max: 3,
+    prominence: "subtle",
+  },
 }

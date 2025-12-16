@@ -10,7 +10,7 @@ export const avatarStyles = tv({
   base: [],
   slots: {
     base: [
-      "relative box-border flex items-center justify-center overflow-hidden align-middle",
+      "z-(--avatar-zindex) relative box-border flex items-center justify-center overflow-hidden bg-clip-padding align-middle",
       ...dataFocusVisibleClasses,
     ],
     icon: "",
@@ -19,6 +19,11 @@ export const avatarStyles = tv({
       "size-full object-cover object-center opacity-0 transition-opacity duration-500 data-[loaded=true]:opacity-100",
   },
   variants: {
+    isInGroup: {
+      true: {
+        base: "border-utility-ui -ms-2 border first-of-type:ms-0",
+      },
+    },
     prominence: {
       strong: {},
       subtle: {},
@@ -84,3 +89,13 @@ export const avatarStyles = tv({
 
 export type AvatarVariantProps = VariantProps<typeof avatarStyles>
 export type AvatarSlots = keyof ReturnType<typeof avatarStyles>
+
+export const avatarGroupStyles = tv({
+  slots: {
+    base: "isolate flex h-auto w-max items-center justify-center",
+    counter: "",
+  },
+})
+
+export type AvatarGroupVariantProps = VariantProps<typeof avatarGroupStyles>
+export type AvatarGroupSlots = keyof ReturnType<typeof avatarGroupStyles>

@@ -16,6 +16,7 @@ import type { ImageLoadingStatus } from "./hooks/use-img-loading-status"
 import { useDomRef } from "../system/react-utils"
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { AvatarContext, useAvatarContext } from "./avatar-context"
+import { useAvatarGroupContext } from "./avatar-group-context"
 import { useImageLoadingStatus } from "./hooks/use-img-loading-status"
 import { getInitialsFromText } from "./utils"
 
@@ -28,6 +29,9 @@ export interface AvatarProps extends AvatarVariantProps, PropsWithChildren {
 
 export const AvatarRoot = forwardRef<"span", AvatarProps>(
   (originalProps, ref) => {
+    const groupContext = useAvatarGroupContext()
+    const isInGroup = !!groupContext
+
     const [
       {
         name,
@@ -38,12 +42,25 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
         as,
         ...props
       },
-      variantProps,
+      {
+        color = groupContext?.color,
+        prominence = groupContext?.prominence,
+        size = groupContext?.size,
+        radius = groupContext?.radius,
+        ...variantProps
+      },
     ] = mapPropsVariants(originalProps, avatarStyles.variantKeys)
 
     const domRef = useDomRef(ref)
 
-    const slots = avatarStyles(variantProps)
+    const slots = avatarStyles({
+      color,
+      prominence,
+      size,
+      radius,
+      ...variantProps,
+      isInGroup,
+    })
 
     const [imageLoadingStatus, setImageLoadingStatus] =
       useState<ImageLoadingStatus>("idle")
