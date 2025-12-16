@@ -43,7 +43,7 @@ const docsLinks: NavItem = {
               url: "attachment-field",
               status: "redirect",
             },
-            { title: "Avatar", url: "avatar", status: "wip" },
+            { title: "Avatar", url: "avatar", status: "new" },
             { title: "Badge", url: "badge" },
             { title: "Banner", url: "banner" },
             { title: "Breadcrumb", url: "breadcrumb", status: "wip" },

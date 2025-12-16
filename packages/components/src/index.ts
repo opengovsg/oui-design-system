@@ -30,4 +30,5 @@ export * from "./number-field"
 export * from "./modal"
 export * from "./toast"
 export * from "./navbar"
+export * from "./avatar"
 // Add new component exports here

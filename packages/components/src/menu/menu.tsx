@@ -49,7 +49,8 @@ import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
 
 export const [MenuVariantContext, useMenuVariantContext] = createContext<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  ContextValue<MenuVariantProps, any>
+  ContextValue<MenuVariantProps, any>,
+  false
 >({
   name: "MenuVariantContext",
   strict: false,

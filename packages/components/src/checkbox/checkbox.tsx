@@ -43,8 +43,8 @@ export const Checkbox = ({
     originalProps,
     checkboxStyles.variantKeys,
   )
-  const { size } = useCheckboxGroupStyleContext()
-  const styles = checkboxStyles({ size, ...variants })
+  const context = useCheckboxGroupStyleContext()
+  const styles = checkboxStyles({ size: context?.size, ...variants })
   return (
     <AriaCheckbox
       {...props}

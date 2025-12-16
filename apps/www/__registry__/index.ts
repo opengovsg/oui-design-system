@@ -12,6 +12,133 @@ type RegistryComponent = {
 }
 
 export const Index: Record<string, RegistryComponent> = {
+  "avatar-colors": {
+    name: "avatar-colors",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-colors.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-colors.tsx")),
+  },
+  "avatar-custom-fallback": {
+    name: "avatar-custom-fallback",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-custom-fallback.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/avatar-custom-fallback.tsx"),
+    ),
+  },
+  "avatar-demo": {
+    name: "avatar-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-demo.tsx")),
+  },
+  "avatar-fallbacks": {
+    name: "avatar-fallbacks",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-fallbacks.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-fallbacks.tsx")),
+  },
+  "avatar-group-custom-count": {
+    name: "avatar-group-custom-count",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-group-custom-count.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/avatar-group-custom-count.tsx"),
+    ),
+  },
+  "avatar-group-demo": {
+    name: "avatar-group-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-group-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-group-demo.tsx")),
+  },
+  "avatar-group-max": {
+    name: "avatar-group-max",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-group-max.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-group-max.tsx")),
+  },
+  "avatar-group-total": {
+    name: "avatar-group-total",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-group-total.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-group-total.tsx")),
+  },
+  "avatar-menu-template": {
+    name: "avatar-menu-template",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-menu-template.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/avatar-menu-template.tsx"),
+    ),
+  },
+  "avatar-radius": {
+    name: "avatar-radius",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-radius.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-radius.tsx")),
+  },
+  "avatar-sizes": {
+    name: "avatar-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/avatar-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/avatar-sizes.tsx")),
+  },
   "badge-custom-styles": {
     name: "badge-custom-styles",
     description: "",

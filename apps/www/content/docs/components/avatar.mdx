@@ -9,4 +9,174 @@ links:
   theme: avatar
 ---
 
-# Not yet implemented
+<ComponentPreview name="avatar-demo" />
+
+## Usage
+
+```tsx
+import { Avatar, AvatarGroup } from "@opengovsg/oui"
+```
+
+```tsx
+<Avatar name="John Doe">
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+  <Avatar.Fallback />
+</Avatar>
+```
+
+OUI exports 2 avatar-related components:
+
+- **Avatar**: The main component to display an avatar. It has compound components `Avatar.Image` and `Avatar.Fallback`.
+- **AvatarGroup**: A wrapper component to display a group of avatars.
+
+## Examples
+
+### Sizes
+
+Use the `size` prop to change the size of the avatar. Available sizes are `2xs`, `xs`, `sm`, and `md`.
+
+<ComponentPreview name="avatar-sizes" />
+
+### Radius
+
+Use the `radius` prop to change the border radius of the avatar.
+
+<ComponentPreview name="avatar-radius" />
+
+### Colors
+
+Use the `prominence` and `color` props to customize the avatar's appearance.
+
+- **prominence**: `strong` (filled background) or `subtle` (light background)
+- **color**: `primary` or `white`
+
+<ComponentPreview name="avatar-colors" />
+
+### Avatar Fallbacks
+
+If the image fails to load, the avatar will display a fallback. There are 2 fallback options:
+
+1. If there's a `name` prop, the initials are generated from the name.
+2. If there's no `name` prop, a default user icon is displayed.
+
+<ComponentPreview name="avatar-fallbacks" />
+
+### Custom Fallback
+
+You can provide a custom fallback component to be displayed when the image fails to load.
+
+<ComponentPreview name="avatar-custom-fallback" />
+
+### Custom Initials Logic
+
+You can customize the logic used to generate initials by passing a function to the `getInitials` prop. By default, we use the first character of each word in the `name` prop.
+
+```tsx
+<Avatar
+  name="John Doe"
+  getInitials={(name) =>
+    name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase()
+  }
+>
+  <Avatar.Image src="https://example.com/avatar.jpg" />
+  <Avatar.Fallback />
+</Avatar>
+```
+
+## Avatar Group
+
+Use the `AvatarGroup` component to display a group of avatars together.
+
+<ComponentPreview name="avatar-group-demo" />
+
+### Max Count
+
+You can limit the number of avatars displayed by passing the `max` prop to the `AvatarGroup` component.
+
+<ComponentPreview name="avatar-group-max" />
+
+### Total Count
+
+You can display the total number of avatars by passing the `total` prop to the `AvatarGroup` component. This is useful when you have more avatars than what you're displaying.
+
+<ComponentPreview name="avatar-group-total" />
+
+### Custom Count
+
+`AvatarGroup` provides a `renderCount` prop to customize the count displayed.
+
+<ComponentPreview name="avatar-group-custom-count" />
+
+## Slots
+
+### Avatar Slots
+
+- **base**: Avatar wrapper, includes styles for position and general appearance.
+- **image**: Image element within the avatar, includes styles for opacity transition and size.
+- **fallback**: Fallback content when the image fails to load, includes styles for centering.
+- **icon**: Icon element within the avatar fallback.
+
+### AvatarGroup Slots
+
+- **base**: The wrapper for the avatar group.
+- **count**: The count avatar element.
+
+## Data Attributes
+
+`Avatar` has the following attributes on the `base` element:
+
+- **data-loaded**: When the avatar image has loaded successfully.
+
+## API Reference
+
+### Avatar Props
+
+| Prop        | Type                                       | Default     | Description                                    |
+| ----------- | ------------------------------------------ | ----------- | ---------------------------------------------- |
+| children    | `ReactNode`                                | -           | The avatar content (Image and Fallback)        |
+| name        | `string`                                   | -           | The name used for initials and alt text        |
+| size        | `"2xs" \| "xs" \| "sm" \| "md"`            | `"md"`      | The size of the avatar                         |
+| radius      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"`    | The border radius of the avatar                |
+| prominence  | `"strong" \| "subtle"`                     | `"strong"`  | The visual prominence of the avatar            |
+| color       | `"primary" \| "white"`                     | `"primary"` | The color scheme of the avatar                 |
+| getInitials | `(name: string) => string`                 | -           | Custom function to generate initials from name |
+| classNames  | `Record<Slot, string>`                     | -           | Classes to apply to each slot                  |
+
+### Avatar.Image Props
+
+| Prop | Type     | Description               |
+| ---- | -------- | ------------------------- |
+| src  | `string` | The image source URL      |
+| ...  | -        | All native img attributes |
+
+### Avatar.Fallback Props
+
+| Prop     | Type        | Description                                         |
+| -------- | ----------- | --------------------------------------------------- |
+| children | `ReactNode` | Custom fallback content (defaults to icon/initials) |
+
+### AvatarGroup Props
+
+| Prop        | Type                                       | Default | Description                               |
+| ----------- | ------------------------------------------ | ------- | ----------------------------------------- |
+| children    | `ReactNode`                                | -       | The avatars to display                    |
+| max         | `number`                                   | `5`     | Maximum number of visible avatars         |
+| total       | `number`                                   | -       | Total count (for calculating overflow)    |
+| size        | `"2xs" \| "xs" \| "sm" \| "md"`            | -       | Size applied to all avatars               |
+| color       | `"primary" \| "white"`                     | -       | Color applied to all avatars              |
+| prominence  | `"strong" \| "subtle"`                     | -       | Prominence applied to all avatars         |
+| radius      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | -       | Radius applied to all avatars             |
+| renderCount | `(count: number) => ReactNode`             | -       | Custom render function for overflow count |
+| classNames  | `Record<"base" \| "count", string>`        | -       | Classes to apply to each slot             |
+
+## Templates
+
+### Usage with Menu
+
+You can use the `Avatar` component as a trigger for a `Menu` to create a user profile menu.
+
+<ComponentPreview name="avatar-menu-template" />
