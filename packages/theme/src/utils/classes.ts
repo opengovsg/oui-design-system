@@ -43,3 +43,14 @@ export const racFocusRing = tv({
     },
   },
 })
+
+/**
+ * This classes centers the element by using absolute positioning.
+ */
+export const translateCenterClasses = [
+  "absolute",
+  "top-1/2",
+  "left-1/2",
+  "-translate-x-1/2",
+  "-translate-y-1/2",
+]
