@@ -10,7 +10,7 @@ export const avatarStyles = tv({
   base: [],
   slots: {
     base: [
-      "z-(--avatar-zindex) relative box-border flex items-center justify-center overflow-hidden bg-clip-padding align-middle",
+      "relative z-(--avatar-zindex) box-border flex items-center justify-center overflow-hidden bg-clip-padding align-middle",
       ...dataFocusVisibleClasses,
     ],
     icon: "",
@@ -37,13 +37,13 @@ export const avatarStyles = tv({
         base: "rounded-none",
       },
       sm: {
-        base: "rounded-small",
+        base: "rounded-sm",
       },
       md: {
-        base: "rounded-medium",
+        base: "rounded-md",
       },
       lg: {
-        base: "rounded-large",
+        base: "rounded-lg",
       },
       full: {
         base: "rounded-full",

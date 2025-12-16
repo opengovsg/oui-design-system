@@ -30,7 +30,6 @@ export interface AvatarProps extends AvatarVariantProps, PropsWithChildren {
 export const AvatarRoot = forwardRef<"span", AvatarProps>(
   (originalProps, ref) => {
     const groupContext = useAvatarGroupContext()
-    const isInGroup = !!groupContext
 
     const [
       {
@@ -51,6 +50,8 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
       },
     ] = mapPropsVariants(originalProps, avatarStyles.variantKeys)
 
+    const isInGroup = !!groupContext
+
     const domRef = useDomRef(ref)
 
     const slots = avatarStyles({
@@ -58,8 +59,8 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
       prominence,
       size,
       radius,
-      ...variantProps,
       isInGroup,
+      ...variantProps,
     })
 
     const [imageLoadingStatus, setImageLoadingStatus] =
