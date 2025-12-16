@@ -21,7 +21,6 @@ import type {
 import {
   composeRenderProps,
   composeTailwindRenderProps,
-  dataAttr,
   dateFieldStyles,
   dateInputStyles,
 } from "@opengovsg/oui-theme"

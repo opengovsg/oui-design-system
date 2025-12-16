@@ -4,9 +4,10 @@ import { ErrorCode } from "react-dropzone"
 export const formatBytes = (
   bytes: number,
   decimals = 2,
+  base: "binary" | "decimal",
   size?: "bytes" | "KB" | "MB" | "GB" | "TB" | "PB" | "EB" | "ZB" | "YB",
 ) => {
-  const k = 1000
+  const k = base === "binary" ? 1024 : 1000
   const dm = decimals < 0 ? 0 : decimals
   const sizes = ["bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
 
@@ -21,16 +22,21 @@ export const formatBytes = (
 
 export const formatErrorMessage = (
   error: FileRejection["errors"][number],
-  config: { maxFileSize: number; minFileSize: number; maxFiles: number },
+  config: {
+    maxFileSize: number
+    minFileSize: number
+    maxFiles: number
+    fileSizeBase: "binary" | "decimal"
+  },
 ) => {
   const { maxFileSize, minFileSize, maxFiles } = config
   switch (error.code) {
     case ErrorCode.FileTooLarge:
       // The error message is in bytes, we need to format it to be more user-friendly
-      return `You have exceeded the size limit, please upload a file below ${formatBytes(maxFileSize, 2)}`
+      return `You have exceeded the size limit, please upload a file below ${formatBytes(maxFileSize, 2, config.fileSizeBase)}`
     case ErrorCode.FileTooSmall:
       // The error message is in bytes, we need to format it to be more user-friendly
-      return `Please upload a file above ${formatBytes(minFileSize, 2)}`
+      return `Please upload a file above ${formatBytes(minFileSize, 2, config.fileSizeBase)}`
     case ErrorCode.TooManyFiles:
       return `Maximum number of files allowed is ${maxFiles}.`
     default: {
