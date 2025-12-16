@@ -1,14 +1,8 @@
 import type { WeakValidationMap } from "prop-types"
 import type React from "react"
-import { forwardRef as baseForwardRef, useMemo } from "react"
+import { forwardRef as baseForwardRef } from "react"
 
-import type {
-  As,
-  MergeWithAs,
-  PropsOf,
-  RenderPropsHookOptions,
-  RightJoinProps,
-} from "./types"
+import type { As, MergeWithAs, PropsOf, RightJoinProps } from "./types"
 
 export interface InternalForwardRefRenderFunction<
   Component extends As,

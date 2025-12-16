@@ -69,12 +69,19 @@ export interface FileDropzoneProps
    */
   allowedMimeTypes?: string[]
   /**
-   * Maximum upload size of each file allowed in bytes. (e.g 1000 bytes = 1 KB)
+   * File size base system: binary or decimal.
+   *
+   * Defaults to binary (1 KB = 1024 bytes), vs. decimal (1 KB = 1000 bytes)
+   */
+  fileSizeBase?: "binary" | "decimal"
+
+  /**
+   * Maximum upload size of each file allowed in bytes.
    * @default Number.POSITIVE_INFINITY
    */
   maxFileSize?: number
   /**
-   * Minimum upload size of each file allowed in bytes. (e.g 1000 bytes = 1 KB)
+   * Minimum upload size of each file allowed in bytes.
    * @default 0
    */
   minFileSize?: number
@@ -133,6 +140,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
   const {
     name,
     allowedMimeTypes = [],
+    fileSizeBase = "binary",
     maxFileSize = Number.POSITIVE_INFINITY,
     minFileSize = 0,
     showFileSizeText = true,
@@ -187,8 +195,9 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
         maxFileSize,
         minFileSize,
         maxFiles,
+        fileSizeBase,
       }),
-    [maxFileSize, maxFiles, minFileSize],
+    [fileSizeBase, maxFileSize, maxFiles, minFileSize],
   )
 
   const onDrop = useCallback(
@@ -252,19 +261,20 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       showFileSizeText && (notDefaultMaxFileSize || notDefaultMinFileSize)
     if (!shouldShow) return null
     if (notDefaultMaxFileSize && notDefaultMinFileSize) {
-      return `File size must be between ${formatBytes(minFileSize, 2)} and ${formatBytes(
+      return `File size must be between ${formatBytes(minFileSize, 2, fileSizeBase)} and ${formatBytes(
         maxFileSize,
         2,
+        fileSizeBase,
       )}`
     }
     if (notDefaultMaxFileSize) {
-      return `Maximum file size: ${formatBytes(maxFileSize, 2)}`
+      return `Maximum file size: ${formatBytes(maxFileSize, 2, fileSizeBase)}`
     }
     if (notDefaultMinFileSize) {
-      return `Minimum file size: ${formatBytes(minFileSize, 2)}`
+      return `Minimum file size: ${formatBytes(minFileSize, 2, fileSizeBase)}`
     }
     return null
-  }, [maxFileSize, minFileSize, showFileSizeText])
+  }, [maxFileSize, minFileSize, showFileSizeText, fileSizeBase])
 
   const triggerFileSelector = useCallback(() => {
     if (isDisabled || isReadOnly) return
@@ -319,6 +329,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
           {
             isDisabled,
             isReadOnly,
+            fileSizeBase,
             maxFiles,
             maxFileSize,
             showDropzone,

@@ -18,6 +18,7 @@ export interface FileDropzoneState
   isReadOnly?: boolean
   inputProps: ReturnType<DropzoneState["getInputProps"]>
   triggerFileSelector: () => void | null
+  fileSizeBase: "binary" | "decimal"
   maxFiles: number
   maxFileSize: number
   showDropzone: boolean
