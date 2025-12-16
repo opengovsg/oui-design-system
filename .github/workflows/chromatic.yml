@@ -30,5 +30,6 @@ jobs:
           onlyChanged: true
           exitOnceUploaded: true
           autoAcceptChanges: main
+          untraced: "apps/www/**"
           # Skip running Chromatic on dependabot and changeset PRs
           skip: "@(dependabot/**|changeset-release/**)"
