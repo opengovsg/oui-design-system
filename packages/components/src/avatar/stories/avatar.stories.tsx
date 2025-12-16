@@ -49,6 +49,7 @@ export const WithImage: Story = {
     </Avatar>
   ),
   args: {
+    name: "Cool guy extraordinaire",
     prominence: "subtle",
   },
 }
