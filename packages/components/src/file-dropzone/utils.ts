@@ -4,7 +4,7 @@ import { ErrorCode } from "react-dropzone"
 export const formatBytes = (
   bytes: number,
   decimals = 2,
-  base: "binary" | "decimal",
+  base: "binary" | "decimal" = "binary",
   size?: "bytes" | "KB" | "MB" | "GB" | "TB" | "PB" | "EB" | "ZB" | "YB",
 ) => {
   const k = base === "binary" ? 1024 : 1000
