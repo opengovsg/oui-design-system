@@ -8,7 +8,7 @@ export interface UseProvideCheckboxGroupStylesReturn {
 }
 
 export const [CheckboxGroupStyleContext, useCheckboxGroupStyleContext] =
-  createContext<UseProvideCheckboxGroupStylesReturn>({
+  createContext<UseProvideCheckboxGroupStylesReturn, false>({
     name: "CheckboxGroupStyleContext",
     strict: false,
     defaultValue: {
