@@ -63,6 +63,18 @@ OUI exports 7 navbar-related components:
 
 ## Examples
 
+### With Menu
+
+You can use the `NavbarMenuToggle` and `NavbarMenu` components to display a togglable menu. This is commonly used for mobile navigation.
+
+<ComponentPreview
+  name="navbar-with-menu"
+  iframeInitialWidth={375}
+  iframeSrc="/examples/navbar/with-menu"
+  asIframe
+  previewHeight="320px"
+/>
+
 ### Static
 
 You can use the `position` prop to make the navbar static positioned (the default behavior is `sticky`).
@@ -74,16 +86,17 @@ You can use the `position` prop to make the navbar static positioned (the defaul
   name="navbar-static"
 />
 
-### With Menu
+### Show on Scroll Up
 
-You can use the `NavbarMenuToggle` and `NavbarMenu` components to display a togglable menu. This is commonly used for mobile navigation.
+You can use the `shouldShowOnScrollUp` prop to make the navbar show when the user scrolls up. This is useful for providing quick access to navigation while maximizing content visibility.
+
+> **Note:** This prop only takes effect when `position` is set to `static`.
 
 <ComponentPreview
-  name="navbar-with-menu"
-  iframeInitialWidth={375}
-  iframeSrc="/examples/navbar/with-menu"
+  iframeSrc="/examples/navbar/show-on-scroll-up"
   asIframe
   previewHeight="320px"
+  name="navbar-show-on-scroll-up"
 />
 
 ### Controlled Menu
@@ -139,6 +152,7 @@ previewHeight="320px"
 `Navbar` has the following attributes on the `base` element:
 
 - **data-menu-open**: Indicates if the navbar menu is open.
+- **data-hidden**: Indicates if the navbar is hidden. Used when the `shouldShowOnScrollUp` prop is `true`.
 
 `NavbarContent`:
 
@@ -164,22 +178,25 @@ previewHeight="320px"
 
 ### Navbar Props
 
-| Prop              | Type                   | Default    | Description                                |
-| ----------------- | ---------------------- | ---------- | ------------------------------------------ |
-| children          | `ReactNode`            | -          | The content of the navbar                  |
-| height            | `string \| number`     | `"4rem"`   | The height of the navbar                   |
-| position          | `"static" \| "sticky"` | `"sticky"` | The CSS position of the navbar             |
-| hasBorder         | `boolean`              | `true`     | Whether to show a bottom border            |
-| isMenuOpen        | `boolean`              | `false`    | Whether the menu is open (controlled)      |
-| isMenuDefaultOpen | `boolean`              | `false`    | Whether the menu should be open by default |
-| shouldBlockScroll | `boolean`              | `true`     | Whether to block scroll when menu is open  |
-| classNames        | `Record<Slot, string>` | -          | Classes to apply to each slot              |
+| Prop                 | Type                   | Default    | Description                                                                    |
+| -------------------- | ---------------------- | ---------- | ------------------------------------------------------------------------------ |
+| children             | `ReactNode`            | -          | The content of the navbar                                                      |
+| height               | `string \| number`     | `"4rem"`   | The height of the navbar                                                       |
+| position             | `"static" \| "sticky"` | `"sticky"` | The CSS position of the navbar                                                 |
+| hasBorder            | `boolean`              | `true`     | Whether to show a bottom border                                                |
+| isMenuOpen           | `boolean`              | `false`    | Whether the menu is open (controlled)                                          |
+| isMenuDefaultOpen    | `boolean`              | `false`    | Whether the menu should be open by default                                     |
+| shouldBlockScroll    | `boolean`              | `true`     | Whether to block scroll when menu is open                                      |
+| shouldShowOnScrollUp | `boolean`              | `false`    | Whether to show navbar when scrolling up (only works with `position="static"`) |
+| disableScrollHandler | `boolean`              | `false`    | Whether to disable the scroll event handler                                    |
+| classNames           | `Record<Slot, string>` | -          | Classes to apply to each slot                                                  |
 
 ### Navbar Events
 
-| Prop             | Type                        | Description                                     |
-| ---------------- | --------------------------- | ----------------------------------------------- |
-| onMenuOpenChange | `(isOpen: boolean) => void` | Handler called when the menu open state changes |
+| Prop                   | Type                               | Description                                     |
+| ---------------------- | ---------------------------------- | ----------------------------------------------- |
+| onMenuOpenChange       | `(isOpen: boolean) => void`        | Handler called when the menu open state changes |
+| onScrollPositionChange | `(scrollPosition: number) => void` | Handler called when scroll position changes     |
 
 ### NavbarContent Props
 

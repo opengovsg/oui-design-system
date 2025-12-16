@@ -1579,6 +1579,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/navbar-demo.tsx")),
   },
+  "navbar-show-on-scroll-up": {
+    name: "navbar-show-on-scroll-up",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/navbar-show-on-scroll-up.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/navbar-show-on-scroll-up.tsx"),
+    ),
+  },
   "navbar-static": {
     name: "navbar-static",
     description: "",
