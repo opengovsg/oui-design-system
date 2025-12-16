@@ -4,6 +4,7 @@
 @source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/utils/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
+@source "./examples/**/*.{js,jsx,ts,tsx}";
 @source "../**/*.{js,jsx,ts,tsx}";
 
 @layer utilities {

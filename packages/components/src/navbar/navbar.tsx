@@ -1,6 +1,8 @@
 "use client"
 
-import { FocusScope } from "react-aria"
+import type { Variants } from "motion/react"
+import { domAnimation, LazyMotion, m } from "motion/react"
+import { FocusScope, mergeProps } from "react-aria"
 
 import type { UseNavbarProps } from "./use-navbar"
 import { pickChildren } from "../system/react-utils/children"
@@ -11,6 +13,21 @@ import { useNavbar } from "./use-navbar"
 
 export interface NavbarProps extends UseNavbarProps {
   children?: React.ReactNode | React.ReactNode[]
+}
+
+const showOnScrollUpVariants: Variants = {
+  visible: {
+    y: 0,
+    transition: {
+      ease: [0, 0, 0.2, 1],
+    },
+  },
+  hidden: {
+    y: "-100%",
+    transition: {
+      ease: [0, 0, 0.2, 1],
+    },
+  },
 }
 
 export const Navbar = forwardRef<"div", NavbarProps>((props, ref) => {
@@ -32,7 +49,20 @@ export const Navbar = forwardRef<"div", NavbarProps>((props, ref) => {
   return (
     <NavbarProvider value={context}>
       <FocusScope contain={context.isMenuOpen}>
-        <Component {...context.getBaseProps()}>{content}</Component>
+        {context.shouldShowOnScrollUp ? (
+          <LazyMotion features={domAnimation}>
+            <m.nav
+              animate={context.isNavbarHidden ? "hidden" : "visible"}
+              initial="visible"
+              variants={showOnScrollUpVariants}
+              {...mergeProps(context.getBaseProps(), context.motionProps)}
+            >
+              {content}
+            </m.nav>
+          </LazyMotion>
+        ) : (
+          <Component {...context.getBaseProps()}>{content}</Component>
+        )}
       </FocusScope>
     </NavbarProvider>
   )
