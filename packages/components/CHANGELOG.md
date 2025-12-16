@@ -1,5 +1,18 @@
 # @opengovsg/oui
 
+## 0.0.30
+
+### Patch Changes
+
+- [#175](https://github.com/opengovsg/oui-design-system/pull/175) [`4d55362`](https://github.com/opengovsg/oui-design-system/commit/4d553622ab89a0ad08880370624789bcd6793ac7) Thanks [@karrui](https://github.com/karrui)! - feat(navbar): add prop to show navbar on scroll up if static position
+
+- [#175](https://github.com/opengovsg/oui-design-system/pull/175) [`4d55362`](https://github.com/opengovsg/oui-design-system/commit/4d553622ab89a0ad08880370624789bcd6793ac7) Thanks [@karrui](https://github.com/karrui)! - feat(navbar): calculate menu offset using navbar bounding rect
+
+- [#176](https://github.com/opengovsg/oui-design-system/pull/176) [`8a78d97`](https://github.com/opengovsg/oui-design-system/commit/8a78d974f572c0b0ac7e0b03a434bbfc2bbefcb3) Thanks [@calebchiam](https://github.com/calebchiam)! - feat(dropzone): add prop to configure file size base system
+
+- Updated dependencies [[`4d55362`](https://github.com/opengovsg/oui-design-system/commit/4d553622ab89a0ad08880370624789bcd6793ac7)]:
+  - @opengovsg/oui-theme@0.0.30
+
 ## 0.0.29
 
 ### Patch Changes

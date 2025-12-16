@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.30
+
+### Patch Changes
+
+- [#175](https://github.com/opengovsg/oui-design-system/pull/175) [`4d55362`](https://github.com/opengovsg/oui-design-system/commit/4d553622ab89a0ad08880370624789bcd6793ac7) Thanks [@karrui](https://github.com/karrui)! - feat(navbar): calculate menu offset using navbar bounding rect
+
 ## 0.0.29
 
 ### Patch Changes
