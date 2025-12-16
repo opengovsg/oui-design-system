@@ -32,8 +32,9 @@ export const FileInfo = ({ file, imagePreview, classNames }: FileInfoProps) => {
     isReadOnly,
   } = useFileDropzoneStateContext()
   const { size, variant, itemClassNames } = useFileDropzoneStyleContext()
+  const { fileSizeBase } = useFileDropzoneStateContext()
 
-  const readableFileSize = formatBytes(file.size, 2)
+  const readableFileSize = formatBytes(file.size, 2, fileSizeBase)
 
   const styles = fileInfoDropzoneStyles({
     size,

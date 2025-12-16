@@ -88,7 +88,8 @@ export const AllowMultipleFiles: Story = {
 
 export const WithCustomFileSizeLimit: Story = {
   args: {
-    maxFileSize: 500 * 1000, // 500KB
+    maxFileSize: 500 * 1024, // 500KB
+    fileSizeBase: "decimal",
   },
   render: Template,
 }
@@ -113,8 +114,8 @@ export const WithLabelAndDescription: Story = {
 export const WithLabelAndDescriptionAndFileSizeLimits: Story = {
   args: {
     ...WithLabelAndDescription.args,
-    maxFileSize: 2 * 1000 * 1000, // 2MB
-    minFileSize: 10 * 1000, // 10KB
+    maxFileSize: 2 * 1024 * 1024, // 2MB
+    minFileSize: 10 * 1024, // 10KB
   },
   render: Template,
 }
