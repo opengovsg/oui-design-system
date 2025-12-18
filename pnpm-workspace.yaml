@@ -17,15 +17,15 @@ catalogs:
     "@types/react": ^19.2.7
     "@types/react-dom": "^19.2.1"
   storybook10:
-    "@storybook/addon-a11y": 10.1.2
-    "@storybook/addon-docs": 10.1.2
-    "@storybook/addon-links": 10.1.2
-    "@storybook/addon-themes": 10.1.2
-    "@storybook/addon-vitest": 10.1.2
-    "@storybook/nextjs": 10.1.2
-    "@storybook/react-vite": 10.1.2
-    eslint-plugin-storybook: 10.1.2
-    storybook: 10.1.2
+    "@storybook/addon-a11y": 10.1.10
+    "@storybook/addon-docs": 10.1.10
+    "@storybook/addon-links": 10.1.10
+    "@storybook/addon-themes": 10.1.10
+    "@storybook/addon-vitest": 10.1.10
+    "@storybook/nextjs": 10.1.10
+    "@storybook/react-vite": 10.1.10
+    eslint-plugin-storybook: 10.1.10
+    storybook: 10.1.10
   vitest:
     "@vitest/browser": 4.0.15
     "@vitest/browser-playwright": 4.0.15
@@ -43,6 +43,9 @@ minimumReleaseAgeExclude:
   - "@next/env"
   - eslint-config-next
   - "@next/eslint-plugin-next"
+  - storybook
+  - "@storybook/*"
+  - eslint-plugin-storybook
 
 overrides:
   prettier: ^3.5.0
