@@ -39,4 +39,5 @@ export * from "./breadcrumbs"
 export * from "./sidebar"
 export * from "./tooltip"
 export * from "./phone-number-field"
+export * from "./infobox"
 // Add new component exports here
