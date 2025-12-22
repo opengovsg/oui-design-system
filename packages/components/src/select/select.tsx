@@ -10,10 +10,14 @@ import { useMemo } from "react"
 import { ChevronDownIcon } from "lucide-react"
 import {
   Select as AriaSelect,
+  Autocomplete,
+  Input,
   ListBox,
   ListLayout,
   Provider,
+  SearchField,
   SelectValue,
+  useFilter,
   Virtualizer,
 } from "react-aria-components"
 
@@ -52,6 +56,23 @@ export interface SelectProps<T>
   items?: NonNullable<ListBoxProps<T>["items"]>
 
   children?: ListBoxProps<T>["children"]
+
+  /**
+   * Enable search/autocomplete functionality with a search field
+   * @default false
+   */
+  enableSearch?: boolean
+
+  /**
+   * Placeholder text for the search field
+   * @default "Search..."
+   */
+  searchPlaceholder?: string
+
+  /**
+   * Icon to display in the search field. If not provided, no icon will be displayed.
+   */
+  searchIcon?: React.ReactNode
 }
 
 const calculateEstimatedRowHeight = (
@@ -78,8 +99,18 @@ export function Select<T extends object>({
     originalProps,
     selectStyles.variantKeys,
   )
-  const { items, children, listLayoutOptions, ...props } = _props
+  const {
+    items,
+    children,
+    listLayoutOptions,
+    enableSearch = false,
+    searchPlaceholder = "Search...",
+    searchIcon,
+    ...props
+  } = _props
   const styles = selectStyles(variantProps)
+
+  const { contains } = useFilter({ sensitivity: "base" })
 
   const layoutOptions: ListLayoutOptions = useMemo(() => {
     return {
@@ -89,6 +120,23 @@ export function Select<T extends object>({
       ...listLayoutOptions,
     }
   }, [listLayoutOptions, variantProps.size])
+
+  const listContent = (
+    <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
+      <ListBox
+        autoFocus={!enableSearch}
+        items={items}
+        shouldFocusWrap
+        className={composeRenderProps(
+          classNames?.list,
+          (className, renderProps) =>
+            styles.list({ className, ...renderProps }),
+        )}
+      >
+        {children}
+      </ListBox>
+    </Virtualizer>
+  )
 
   return (
     <Provider values={[[SelectVariantContext, variantProps]]}>
@@ -139,21 +187,28 @@ export function Select<T extends object>({
           {errorMessage}
         </FieldError>
         <Popover className={styles.popover({ className: classNames?.popover })}>
-          {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
-          <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
-            <ListBox
-              autoFocus
-              items={items}
-              shouldFocusWrap
-              className={composeRenderProps(
-                classNames?.list,
-                (className, renderProps) =>
-                  styles.list({ className, ...renderProps }),
-              )}
-            >
-              {children}
-            </ListBox>
-          </Virtualizer>
+          {enableSearch ? (
+            <Autocomplete filter={contains}>
+              <SearchField
+                autoFocus
+                aria-label="Search options"
+                className={styles.searchField({
+                  className: classNames?.searchField,
+                })}
+              >
+                {searchIcon}
+                <Input
+                  placeholder={searchPlaceholder}
+                  className={styles.searchInput({
+                    className: classNames?.searchInput,
+                  })}
+                />
+              </SearchField>
+              {listContent}
+            </Autocomplete>
+          ) : (
+            listContent
+          )}
         </Popover>
       </AriaSelect>
     </Provider>

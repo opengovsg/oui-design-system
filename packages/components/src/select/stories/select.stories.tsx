@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { Key } from "react-aria-components"
 import { useState } from "react"
+import { SearchIcon } from "lucide-react"
 import { ListBoxItem } from "react-aria-components"
 import { userEvent } from "storybook/test"
 
@@ -71,7 +72,7 @@ export const WithCustomItem: Story = {
 }
 
 const ControlledTemplate = (args: SelectProps<(typeof defaultItems)[0]>) => {
-  const [selectedKey, setSelectedKey] = useState<Key>("it")
+  const [selectedKey, setSelectedKey] = useState<Key | null>("it")
 
   return (
     <>
@@ -128,5 +129,50 @@ export const Sizes: Story = {
         <Select {...args} size="md" label="Medium" />
       </div>
     )
+  },
+}
+
+export const WithSearch: Story = {
+  args: {
+    label: "Language",
+    description: "Search and select your preferred language",
+    enableSearch: true,
+  },
+}
+
+export const WithSearchCustomPlaceholder: Story = {
+  args: {
+    label: "Language",
+    enableSearch: true,
+    searchPlaceholder: "Type to filter languages...",
+  },
+}
+
+export const WithSearchIcon: Story = {
+  args: {
+    label: "Language",
+    description: "Search without an icon",
+    enableSearch: true,
+    searchPlaceholder: "Type to search...",
+    searchIcon: <SearchIcon className="text-base-content-subtle size-4" />,
+  },
+}
+
+export const WithSearchCustomStyles: Story = {
+  args: {
+    label: "Language",
+    description: "Customized search field styling",
+    enableSearch: true,
+    searchPlaceholder: "Type here...",
+    searchIcon: <SearchIcon className="text-interaction-main-default size-5" />,
+    classNames: {
+      searchField:
+        "bg-interaction-tinted-main-hover border-b-2 border-interaction-main-default px-4 py-3",
+      searchInput:
+        "text-base font-medium placeholder:text-interaction-main-default/50",
+    },
+  },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Language"))
   },
 }

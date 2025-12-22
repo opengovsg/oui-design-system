@@ -1,6 +1,6 @@
 import type { VariantProps } from "tailwind-variants"
 
-import { tv } from "../utils/tv"
+import { tv } from "../utils"
 
 export const selectSearchStyles = tv({
   slots: {
@@ -63,6 +63,11 @@ export const selectStyles = tv({
     popover: "flex w-(--trigger-width) flex-col",
     list: "overflow-y-auto",
     description: "",
+    searchField:
+      "group border-base-300 flex items-center gap-2 border-b px-3 py-2",
+    searchIcon: "text-base-content-subtle size-4 shrink-0",
+    searchInput:
+      "min-w-0 flex-1 truncate border-none bg-transparent px-0 py-0 text-sm outline-none placeholder:truncate focus:ring-0",
   },
   variants: {
     variant: {
