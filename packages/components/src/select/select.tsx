@@ -1,5 +1,6 @@
 "use client"
 
+import type { LocalizedStrings } from "react-aria"
 import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
@@ -8,6 +9,7 @@ import type {
 } from "react-aria-components"
 import { useMemo } from "react"
 import { ChevronDownIcon } from "lucide-react"
+import { useLocalizedStringFormatter } from "react-aria"
 import {
   Select as AriaSelect,
   Autocomplete,
@@ -34,6 +36,25 @@ import { Description, FieldError, Label } from "../field"
 import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
+
+const i18nStrings: LocalizedStrings = {
+  "en-SG": {
+    searchPlaceholder: "Search...",
+    searchAriaLabel: "Search options",
+  },
+  "zh-SG": {
+    searchPlaceholder: "搜索...",
+    searchAriaLabel: "搜索选项",
+  },
+  "ms-SG": {
+    searchPlaceholder: "Cari...",
+    searchAriaLabel: "Cari pilihan",
+  },
+  "ta-SG": {
+    searchPlaceholder: "தேடு...",
+    searchAriaLabel: "தேடல் விருப்பங்கள்",
+  },
+}
 
 export interface SelectProps<T>
   extends Omit<AriaSelectProps, "children">,
@@ -64,8 +85,8 @@ export interface SelectProps<T>
   enableSearch?: boolean
 
   /**
-   * Placeholder text for the search field
-   * @default "Search..."
+   * Placeholder text for the search field.
+   * If not provided, a localized default will be used.
    */
   searchPlaceholder?: string
 
@@ -95,6 +116,7 @@ export function Select<T extends object>({
   errorMessage,
   ...originalProps
 }: SelectProps<T>) {
+  const formatter = useLocalizedStringFormatter(i18nStrings)
   const [_props, variantProps] = mapPropsVariants(
     originalProps,
     selectStyles.variantKeys,
@@ -104,7 +126,7 @@ export function Select<T extends object>({
     children,
     listLayoutOptions,
     enableSearch = false,
-    searchPlaceholder = "Search...",
+    searchPlaceholder,
     searchIcon,
     ...props
   } = _props
@@ -191,14 +213,14 @@ export function Select<T extends object>({
             <Autocomplete filter={contains}>
               <SearchField
                 autoFocus
-                aria-label="Search options"
+                aria-label={formatter.format("searchAriaLabel")}
                 className={styles.searchField({
                   className: classNames?.searchField,
                 })}
               >
                 {searchIcon}
                 <Input
-                  placeholder={searchPlaceholder}
+                  placeholder={searchPlaceholder ?? formatter.format("searchPlaceholder")}
                   className={styles.searchInput({
                     className: classNames?.searchInput,
                   })}
