@@ -76,11 +76,7 @@ const ControlledTemplate = (args: SelectProps<(typeof defaultItems)[0]>) => {
 
   return (
     <>
-      <Select
-        {...args}
-        value={selectedKey}
-        onChange={setSelectedKey}
-      />
+      <Select {...args} value={selectedKey} onChange={setSelectedKey} />
 
       <span>Current selected key: {selectedKey ?? "null"}</span>
     </>

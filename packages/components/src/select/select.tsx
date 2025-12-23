@@ -220,7 +220,9 @@ export function Select<T extends object>({
               >
                 {searchIcon}
                 <Input
-                  placeholder={searchPlaceholder ?? formatter.format("searchPlaceholder")}
+                  placeholder={
+                    searchPlaceholder ?? formatter.format("searchPlaceholder")
+                  }
                   className={styles.searchInput({
                     className: classNames?.searchInput,
                   })}
