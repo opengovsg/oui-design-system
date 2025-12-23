@@ -138,6 +138,9 @@ export const WithSearch: Story = {
     description: "Search and select your preferred language",
     enableSearch: true,
   },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Language"))
+  },
 }
 
 export const WithSearchCustomPlaceholder: Story = {
@@ -146,15 +149,21 @@ export const WithSearchCustomPlaceholder: Story = {
     enableSearch: true,
     searchPlaceholder: "Type to filter languages...",
   },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Language"))
+  },
 }
 
 export const WithSearchIcon: Story = {
   args: {
     label: "Language",
-    description: "Search without an icon",
+    description: "Search with a custom icon",
     enableSearch: true,
     searchPlaceholder: "Type to search...",
     searchIcon: <SearchIcon className="text-base-content-subtle size-4" />,
+  },
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Language"))
   },
 }
 
