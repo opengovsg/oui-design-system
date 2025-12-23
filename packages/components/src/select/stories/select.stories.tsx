@@ -78,8 +78,8 @@ const ControlledTemplate = (args: SelectProps<(typeof defaultItems)[0]>) => {
     <>
       <Select
         {...args}
-        selectedKey={selectedKey}
-        onSelectionChange={setSelectedKey}
+        value={selectedKey}
+        onChange={setSelectedKey}
       />
 
       <span>Current selected key: {selectedKey ?? "null"}</span>
@@ -134,12 +134,17 @@ export const Sizes: Story = {
 
 export const WithSearch: Story = {
   args: {
-    label: "Language",
-    description: "Search and select your preferred language",
     enableSearch: true,
+    searchIcon: <SearchIcon className="text-base-content-subtle size-4" />,
   },
-  play: async ({ canvas }) => {
-    userEvent.click(canvas.getByLabelText("Language"))
+  render: (args) => {
+    return (
+      <div className="space-y-4">
+        <Select {...args} size="xs" label="Search (xs)" />
+        <Select {...args} size="sm" label="Search (sm)" />
+        <Select {...args} size="md" label="Search (md)" />
+      </div>
+    )
   },
 }
 

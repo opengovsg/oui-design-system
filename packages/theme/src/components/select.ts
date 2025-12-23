@@ -63,11 +63,10 @@ export const selectStyles = tv({
     popover: "flex w-(--trigger-width) flex-col",
     list: "overflow-y-auto",
     description: "",
-    searchField:
-      "group border-base-300 flex items-center gap-2 border-b px-3 py-2",
-    searchIcon: "text-base-content-subtle size-4 shrink-0",
+    searchField: "group border-base-300 flex items-center gap-2 border-b",
+    searchIcon: "text-base-content-subtle shrink-0",
     searchInput:
-      "min-w-0 flex-1 truncate border-none bg-transparent px-0 py-0 text-sm outline-none placeholder:truncate focus:ring-0",
+      "min-w-0 flex-1 truncate border-none bg-transparent px-0 py-0 outline-none placeholder:truncate focus:ring-0",
   },
   variants: {
     variant: {
@@ -92,14 +91,23 @@ export const selectStyles = tv({
       xs: {
         selectedText: "prose-body-2",
         list: "max-h-[264px]",
+        searchField: "px-3 py-2",
+        searchIcon: "size-4",
+        searchInput: "prose-body-2",
       },
       sm: {
         selectedText: "prose-body-2",
         list: "max-h-[264px]",
+        searchField: "px-3 py-2.5",
+        searchIcon: "size-4",
+        searchInput: "prose-body-2",
       },
       md: {
         selectedText: "prose-body-1",
         list: "max-h-[288px]",
+        searchField: "px-4 py-2.5",
+        searchIcon: "size-5",
+        searchInput: "prose-body-1",
       },
     },
   },
