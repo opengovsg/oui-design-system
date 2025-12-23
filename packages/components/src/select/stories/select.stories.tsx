@@ -131,7 +131,7 @@ export const Sizes: Story = {
 export const WithSearch: Story = {
   args: {
     enableSearch: true,
-    searchIcon: <SearchIcon className="text-base-content-subtle size-4" />,
+    searchIcon: <SearchIcon className="text-base-content-subtle" />,
   },
   render: (args) => {
     return (

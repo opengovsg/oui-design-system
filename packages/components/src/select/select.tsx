@@ -7,7 +7,7 @@ import type {
   ListLayoutOptions,
   ValidationResult,
 } from "react-aria-components"
-import { useMemo } from "react"
+import { cloneElement, isValidElement, useMemo } from "react"
 import { ChevronDownIcon } from "lucide-react"
 import { useLocalizedStringFormatter } from "react-aria"
 import {
@@ -29,7 +29,7 @@ import type {
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
+import { composeRenderProps, selectStyles, twMerge } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
@@ -107,6 +107,20 @@ const calculateEstimatedRowHeight = (
     case "md":
       return 48
   }
+}
+
+const renderSearchIcon = (
+  icon: React.ReactNode,
+  slotClassName: string,
+): React.ReactNode => {
+  if (!icon) return null
+  if (isValidElement(icon)) {
+    const iconElement = icon as React.ReactElement<{ className?: string }>
+    return cloneElement(iconElement, {
+      className: twMerge(slotClassName, iconElement.props.className),
+    })
+  }
+  return <span className={slotClassName}>{icon}</span>
 }
 
 export function Select<T extends object>({
@@ -218,7 +232,10 @@ export function Select<T extends object>({
                   className: classNames?.searchField,
                 })}
               >
-                {searchIcon}
+                {renderSearchIcon(
+                  searchIcon,
+                  styles.searchIcon({ className: classNames?.searchIcon }),
+                )}
                 <Input
                   placeholder={
                     searchPlaceholder ?? formatter.format("searchPlaceholder")
