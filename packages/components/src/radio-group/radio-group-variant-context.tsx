@@ -7,7 +7,10 @@ export interface RadioGroupVariantContextValue extends RadioGroupVariantProps {
 }
 
 export const [RadioGroupVariantContext, useRadioGroupVariantContext] =
-  createContext<RadioGroupVariantContextValue>({
+  createContext<RadioGroupVariantContextValue, false>({
     name: "RadioGroupVariantContext",
-    strict: true,
+    strict: false,
+    defaultValue: {
+      size: "md",
+    },
   })

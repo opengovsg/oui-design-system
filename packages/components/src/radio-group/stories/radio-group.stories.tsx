@@ -115,3 +115,76 @@ export const LongLabels: Story = {
   ),
   args: {},
 }
+
+export const WithDescription: Story = {
+  render: (args) => (
+    <RadioGroup {...args} label="Select a payment method">
+      <Radio value="card" description="Pay securely with credit or debit card">
+        Credit Card
+      </Radio>
+      <Radio
+        value="paypal"
+        description="Fast checkout with your PayPal account"
+      >
+        PayPal
+      </Radio>
+      <Radio
+        value="bank"
+        description="Direct bank transfer (processing may take 2-3 business days)"
+      >
+        Bank Transfer
+      </Radio>
+    </RadioGroup>
+  ),
+  args: {},
+}
+
+export const WithDescriptionSizes: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-8">
+      <RadioGroup {...args} label="Payment method (xs)" size="xs">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+      </RadioGroup>
+      <RadioGroup {...args} label="Payment method (sm)" size="sm">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+      </RadioGroup>
+      <RadioGroup {...args} label="Payment method (md)" size="md">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+      </RadioGroup>
+    </div>
+  ),
+  args: {},
+}

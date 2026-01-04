@@ -7,27 +7,29 @@ import { tv } from "../utils/tv"
 export const radioStyles = tv({
   slots: {
     circle: cn(
-      "flex w-full shrink-0 items-center justify-center self-start rounded-full border-2 bg-white transition",
+      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 bg-white transition",
       racFocusRing.base,
     ),
-    base: "group flex items-start",
+    base: "group grid grid-cols-[auto_1fr]",
     icon: "rounded-full transition",
+    label: "col-start-2 row-start-1",
+    description: "col-start-2 row-start-2 text-gray-600",
   },
   variants: {
     size: {
       xs: {
         circle: "h-4 w-4",
-        base: "prose-body-2 gap-3 px-1 py-2",
+        base: "prose-body-2 gap-x-3 gap-y-1 px-1 py-2",
         icon: "h-2 w-2",
       },
       sm: {
         circle: "h-5 w-5",
-        base: "prose-body-2 gap-3 px-1 py-2.5",
+        base: "prose-body-2 gap-x-3 gap-y-1 px-1 py-2.5",
         icon: "h-2.5 w-2.5",
       },
       md: {
         circle: "h-6 w-6",
-        base: "prose-body-1 gap-4 px-1 py-2.5",
+        base: "prose-body-1 gap-x-4 gap-y-1 px-1 py-2.5",
         icon: "h-3 w-3",
       },
     },

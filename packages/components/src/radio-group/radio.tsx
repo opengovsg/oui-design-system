@@ -22,7 +22,7 @@ import type {
 } from "@opengovsg/oui-theme"
 import { radioGroupStyles, radioStyles } from "@opengovsg/oui-theme"
 
-import { FieldError, Label } from "../field"
+import { Description, FieldError, Label } from "../field"
 import { mapPropsVariants } from "../system/utils"
 import {
   RadioGroupVariantContext,
@@ -33,12 +33,14 @@ export interface RadioProps
   extends AriaRadioProps,
     VariantProps<typeof radioStyles> {
   classNames?: SlotsToClasses<RadioSlots>
+  description?: string
 }
 
 export const Radio = ({
   classNames,
   className,
   children,
+  description,
   ...originalProps
 }: RadioProps) => {
   const [props, variants] = mapPropsVariants(
@@ -46,9 +48,9 @@ export const Radio = ({
     radioStyles.variantKeys,
   )
 
-  const { size } = useRadioGroupVariantContext()
+  const groupContext = useRadioGroupVariantContext()
 
-  const styles = radioStyles({ size, ...variants })
+  const styles = radioStyles({ size: groupContext?.size, ...variants })
 
   return (
     <AriaRadio
@@ -59,24 +61,40 @@ export const Radio = ({
         (className, renderProps) => styles.base({ ...renderProps, className }),
       )}
     >
-      {(renderProps) => (
-        <>
-          <span
-            className={styles.circle({
-              ...renderProps,
-              className: classNames?.circle,
-            })}
-          >
+      {(renderProps) => {
+        const content =
+          typeof children === "function" ? children(renderProps) : children
+        return (
+          <>
             <span
-              className={styles.icon({
+              className={styles.circle({
                 ...renderProps,
-                className: classNames?.icon,
+                className: classNames?.circle,
               })}
-            />
-          </span>
-          {children}
-        </>
-      )}
+            >
+              <span
+                className={styles.icon({
+                  ...renderProps,
+                  className: classNames?.icon,
+                })}
+              />
+            </span>
+            <span className={styles.label({ className: classNames?.label })}>
+              {content}
+            </span>
+            {description && (
+              <Description
+                size={groupContext?.size}
+                className={styles.description({
+                  className: classNames?.description,
+                })}
+              >
+                {description}
+              </Description>
+            )}
+          </>
+        )
+      }}
     </AriaRadio>
   )
 }
