@@ -63,7 +63,8 @@ export const selectStyles = tv({
     popover: "flex w-(--trigger-width) flex-col",
     list: "overflow-y-auto",
     description: "",
-    searchField: "group border-base-300 flex items-center gap-2 border-b",
+    searchField:
+      "group border-base-divider-strong flex items-center gap-2 border-b",
     searchIcon: "text-base-content-subtle shrink-0",
     searchInput:
       "min-w-0 flex-1 truncate border-none bg-transparent px-0 py-0 outline-none placeholder:truncate focus:ring-0",
