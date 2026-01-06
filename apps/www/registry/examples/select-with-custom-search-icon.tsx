@@ -6,7 +6,7 @@ import { SearchIcon } from "lucide-react"
 
 import { Select, SelectItem } from "@opengovsg/oui"
 
-export default function SelectWithSearch() {
+export default function SelectWithCustomSearchIcon() {
   const countries = [
     { id: 1, name: "Singapore" },
     { id: 2, name: "Malaysia" },
@@ -31,6 +31,7 @@ export default function SelectWithSearch() {
         selectedKey={selectedId}
         onSelectionChange={setSelectedId}
         enableSearch
+        searchIcon={<SearchIcon />}
       >
         {(item) => <SelectItem>{item.name}</SelectItem>}
       </Select>
