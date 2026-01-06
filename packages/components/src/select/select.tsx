@@ -29,7 +29,7 @@ import type {
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { composeRenderProps, selectStyles, twMerge } from "@opengovsg/oui-theme"
+import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
@@ -109,20 +109,6 @@ const calculateEstimatedRowHeight = (
   }
 }
 
-const renderSearchIcon = (
-  icon: React.ReactNode,
-  slotClassName: string,
-): React.ReactNode => {
-  if (!icon) return null
-  if (isValidElement(icon)) {
-    const iconElement = icon as React.ReactElement<{ className?: string }>
-    return cloneElement(iconElement, {
-      className: twMerge(slotClassName, iconElement.props.className),
-    })
-  }
-  return <span className={slotClassName}>{icon}</span>
-}
-
 export function Select<T extends object>({
   label,
   description,
@@ -156,6 +142,27 @@ export function Select<T extends object>({
       ...listLayoutOptions,
     }
   }, [listLayoutOptions, variantProps.size])
+
+  const renderedSearchIcon = useMemo(() => {
+    if (!enableSearch || !searchIcon) return null
+    if (isValidElement(searchIcon)) {
+      const iconElement = searchIcon as React.ReactElement<{
+        className?: string
+      }>
+      return cloneElement(iconElement, {
+        className: styles.searchIcon({
+          className: cn(classNames?.searchIcon, iconElement.props.className),
+        }),
+      })
+    }
+    return (
+      <span
+        className={styles.searchIcon({ className: classNames?.searchIcon })}
+      >
+        {searchIcon}
+      </span>
+    )
+  }, [classNames?.searchIcon, enableSearch, searchIcon, styles])
 
   const listContent = (
     <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
@@ -232,10 +239,7 @@ export function Select<T extends object>({
                   className: classNames?.searchField,
                 })}
               >
-                {renderSearchIcon(
-                  searchIcon,
-                  styles.searchIcon({ className: classNames?.searchIcon }),
-                )}
+                {renderedSearchIcon}
                 <Input
                   placeholder={
                     searchPlaceholder ?? formatter.format("searchPlaceholder")
