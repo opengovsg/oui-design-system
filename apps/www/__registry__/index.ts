@@ -2370,6 +2370,44 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/select-error-slot.tsx")),
   },
+  "select-with-custom-search-icon": {
+    name: "select-with-custom-search-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-with-custom-search-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/select-with-custom-search-icon.tsx"),
+    ),
+  },
+  "select-with-custom-search-placeholder": {
+    name: "select-with-custom-search-placeholder",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-with-custom-search-placeholder.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/select-with-custom-search-placeholder.tsx"),
+    ),
+  },
+  "select-with-search": {
+    name: "select-with-search",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-with-search.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-with-search.tsx")),
+  },
   "tabs-all-disabled": {
     name: "tabs-all-disabled",
     description: "",

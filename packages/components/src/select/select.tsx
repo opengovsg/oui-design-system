@@ -1,19 +1,25 @@
 "use client"
 
+import type { LocalizedStrings } from "react-aria"
 import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
   ListLayoutOptions,
   ValidationResult,
 } from "react-aria-components"
-import { useMemo } from "react"
+import { cloneElement, isValidElement, useMemo } from "react"
 import { ChevronDownIcon } from "lucide-react"
+import { useLocalizedStringFormatter } from "react-aria"
 import {
   Select as AriaSelect,
+  Autocomplete,
+  Input,
   ListBox,
   ListLayout,
   Provider,
+  SearchField,
   SelectValue,
+  useFilter,
   Virtualizer,
 } from "react-aria-components"
 
@@ -23,13 +29,32 @@ import type {
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
-import { composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
+import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
 import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
+
+const i18nStrings: LocalizedStrings = {
+  "en-SG": {
+    searchPlaceholder: "Search...",
+    searchAriaLabel: "Search options",
+  },
+  "zh-SG": {
+    searchPlaceholder: "搜索...",
+    searchAriaLabel: "搜索选项",
+  },
+  "ms-SG": {
+    searchPlaceholder: "Cari...",
+    searchAriaLabel: "Cari pilihan",
+  },
+  "ta-SG": {
+    searchPlaceholder: "தேடு...",
+    searchAriaLabel: "தேடல் விருப்பங்கள்",
+  },
+}
 
 export interface SelectProps<T>
   extends Omit<AriaSelectProps, "children">,
@@ -52,6 +77,23 @@ export interface SelectProps<T>
   items?: NonNullable<ListBoxProps<T>["items"]>
 
   children?: ListBoxProps<T>["children"]
+
+  /**
+   * Enable search/autocomplete functionality with a search field
+   * @default false
+   */
+  enableSearch?: boolean
+
+  /**
+   * Placeholder text for the search field.
+   * If not provided, a localized default will be used.
+   */
+  searchPlaceholder?: string
+
+  /**
+   * Icon to display in the search field. If not provided, no icon will be displayed.
+   */
+  searchIcon?: React.ReactNode
 }
 
 const calculateEstimatedRowHeight = (
@@ -74,12 +116,23 @@ export function Select<T extends object>({
   errorMessage,
   ...originalProps
 }: SelectProps<T>) {
+  const formatter = useLocalizedStringFormatter(i18nStrings)
   const [_props, variantProps] = mapPropsVariants(
     originalProps,
     selectStyles.variantKeys,
   )
-  const { items, children, listLayoutOptions, ...props } = _props
+  const {
+    items,
+    children,
+    listLayoutOptions,
+    enableSearch = false,
+    searchPlaceholder,
+    searchIcon,
+    ...props
+  } = _props
   const styles = selectStyles(variantProps)
+
+  const { contains } = useFilter({ sensitivity: "base" })
 
   const layoutOptions: ListLayoutOptions = useMemo(() => {
     return {
@@ -89,6 +142,44 @@ export function Select<T extends object>({
       ...listLayoutOptions,
     }
   }, [listLayoutOptions, variantProps.size])
+
+  const renderedSearchIcon = useMemo(() => {
+    if (!enableSearch || !searchIcon) return null
+    if (isValidElement(searchIcon)) {
+      const iconElement = searchIcon as React.ReactElement<{
+        className?: string
+      }>
+      return cloneElement(iconElement, {
+        className: styles.searchIcon({
+          className: cn(classNames?.searchIcon, iconElement.props.className),
+        }),
+      })
+    }
+    return (
+      <span
+        className={styles.searchIcon({ className: classNames?.searchIcon })}
+      >
+        {searchIcon}
+      </span>
+    )
+  }, [classNames?.searchIcon, enableSearch, searchIcon, styles])
+
+  const listContent = (
+    <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
+      <ListBox
+        autoFocus={!enableSearch}
+        items={items}
+        shouldFocusWrap
+        className={composeRenderProps(
+          classNames?.list,
+          (className, renderProps) =>
+            styles.list({ className, ...renderProps }),
+        )}
+      >
+        {children}
+      </ListBox>
+    </Virtualizer>
+  )
 
   return (
     <Provider values={[[SelectVariantContext, variantProps]]}>
@@ -139,21 +230,30 @@ export function Select<T extends object>({
           {errorMessage}
         </FieldError>
         <Popover className={styles.popover({ className: classNames?.popover })}>
-          {/* TODO: Allow search field in select. See PR commit for prior implementation. */}
-          <Virtualizer layout={ListLayout} layoutOptions={layoutOptions}>
-            <ListBox
-              autoFocus
-              items={items}
-              shouldFocusWrap
-              className={composeRenderProps(
-                classNames?.list,
-                (className, renderProps) =>
-                  styles.list({ className, ...renderProps }),
-              )}
-            >
-              {children}
-            </ListBox>
-          </Virtualizer>
+          {enableSearch ? (
+            <Autocomplete filter={contains}>
+              <SearchField
+                autoFocus
+                aria-label={formatter.format("searchAriaLabel")}
+                className={styles.searchField({
+                  className: classNames?.searchField,
+                })}
+              >
+                {renderedSearchIcon}
+                <Input
+                  placeholder={
+                    searchPlaceholder ?? formatter.format("searchPlaceholder")
+                  }
+                  className={styles.searchInput({
+                    className: classNames?.searchInput,
+                  })}
+                />
+              </SearchField>
+              {listContent}
+            </Autocomplete>
+          ) : (
+            listContent
+          )}
         </Popover>
       </AriaSelect>
     </Provider>

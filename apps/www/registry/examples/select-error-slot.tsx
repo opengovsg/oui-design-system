@@ -26,20 +26,22 @@ export default function App() {
   const isValid = value === "cat"
 
   return (
-    <Select
-      description="The second most popular pet in the world"
-      errorMessage={isValid ? "" : "You must select a cat"}
-      isInvalid={!isValid}
-      label="Favorite Animal"
-      placeholder="Select an animal"
-      selectedKey={value}
-      onSelectionChange={setValue}
-    >
-      {animals.map((animal) => (
-        <SelectItem key={animal.id} id={animal.id}>
-          {animal.textValue}
-        </SelectItem>
-      ))}
-    </Select>
+    <div className="w-full max-w-xs">
+      <Select
+        description="The second most popular pet in the world"
+        errorMessage={isValid ? "" : "You must select a cat"}
+        isInvalid={!isValid}
+        label="Favorite Animal"
+        placeholder="Select an animal"
+        value={value}
+        onChange={setValue}
+      >
+        {animals.map((animal) => (
+          <SelectItem key={animal.id} id={animal.id}>
+            {animal.textValue}
+          </SelectItem>
+        ))}
+      </Select>
+    </div>
   )
 }

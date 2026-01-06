@@ -45,3 +45,21 @@ By default, items in a Select are labeled by their text contents for accessibili
 The `errorMessage` prop can be used to associate additional help text below the input when an error occurs. This is useful for displaying validation errors or other important information to the user. The error message will only be displayed if the `isInvalid` prop is set to `true`.
 
 <ComponentPreview name="select-error-slot" />
+
+## Search
+
+The Select component supports search/autocomplete functionality through the `enableSearch` prop. When enabled, a search field appears in the dropdown that allows users to filter options by typing.
+
+<ComponentPreview name="select-with-search" />
+
+### Search Icon
+
+You can customize the search field by adding an icon using the `searchIcon` prop.
+
+<ComponentPreview name="select-with-custom-search-icon" />
+
+### Custom Search Placeholder
+
+By default, the search field uses a localized placeholder ("Search..." in English). You can customize this by passing a `searchPlaceholder` prop. The component automatically provides translations for English, Chinese, Malay, and Tamil locales when using the default placeholder.
+
+<ComponentPreview name="select-with-custom-search-placeholder" />
