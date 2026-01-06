@@ -24,7 +24,7 @@ export default function SelectWithCustomSearchIcon() {
   const [selectedId, setSelectedId] = useState<Key | null>(null)
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex w-full max-w-xs flex-col gap-4">
       <Select
         label="Select a country"
         items={countries}

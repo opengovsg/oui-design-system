@@ -22,15 +22,17 @@ export default function SelectWithCustomSearchPlaceholder() {
   const [selectedId, setSelectedId] = useState<Key | null>(null)
 
   return (
-    <Select
-      label="Select a fruit"
-      items={fruits}
-      selectedKey={selectedId}
-      onSelectionChange={setSelectedId}
-      enableSearch
-      searchPlaceholder="Type to filter fruits..."
-    >
-      {(item) => <SelectItem>{item.name}</SelectItem>}
-    </Select>
+    <div className="flex w-full max-w-xs">
+      <Select
+        label="Select a fruit"
+        items={fruits}
+        selectedKey={selectedId}
+        onSelectionChange={setSelectedId}
+        enableSearch
+        searchPlaceholder="Type to filter fruits..."
+      >
+        {(item) => <SelectItem>{item.name}</SelectItem>}
+      </Select>
+    </div>
   )
 }

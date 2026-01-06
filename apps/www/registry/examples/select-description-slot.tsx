@@ -16,12 +16,14 @@ export default function SelectDescription() {
   ]
 
   return (
-    <Select
-      label="Engineering"
-      items={options}
-      description="Choose one of the above options."
-    >
-      {(item) => <SelectItem>{item.textValue}</SelectItem>}
-    </Select>
+    <div className="w-full max-w-xs">
+      <Select
+        label="Engineering"
+        items={options}
+        description="Choose one of the above options."
+      >
+        {(item) => <SelectItem>{item.textValue}</SelectItem>}
+      </Select>
+    </div>
   )
 }

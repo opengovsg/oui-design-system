@@ -21,7 +21,7 @@ export default function SelectContentExample() {
   const [selectedId, setSelectedId] = useState<Key | null>(null)
 
   return (
-    <div className="flex flex-col">
+    <div className="flex w-full max-w-xs flex-col">
       <Select
         label="Engineering"
         items={options}
