@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.32
+
+### Patch Changes
+
+- [#183](https://github.com/opengovsg/oui-design-system/pull/183) [`2dcce59`](https://github.com/opengovsg/oui-design-system/commit/2dcce59f4112c083a3b64d0e95a12ddc9b214a44) Thanks [@aakashgupta0205](https://github.com/aakashgupta0205)! - feat: add search functionality to Select component
+
+- Updated dependencies [[`2dcce59`](https://github.com/opengovsg/oui-design-system/commit/2dcce59f4112c083a3b64d0e95a12ddc9b214a44), [`2dcce59`](https://github.com/opengovsg/oui-design-system/commit/2dcce59f4112c083a3b64d0e95a12ddc9b214a44)]:
+  - @opengovsg/oui-theme@0.0.32
+
 ## 0.0.31
 
 ### Patch Changes
