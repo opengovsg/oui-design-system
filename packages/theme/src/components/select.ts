@@ -55,9 +55,9 @@ export type SelectItemVariantSlots = keyof ReturnType<typeof selectItemStyles>
 
 export const selectStyles = tv({
   slots: {
-    base: "group flex flex-col gap-1",
+    base: "group flex w-full flex-col gap-1",
     label: "",
-    trigger: "w-fit",
+    trigger: "w-full",
     icon: "size-4",
     selectedText: "text-base-content-strong flex-1 truncate text-start",
     popover: "flex w-(--trigger-width) flex-col",
