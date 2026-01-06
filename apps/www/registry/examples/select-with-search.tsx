@@ -28,8 +28,8 @@ export default function SelectWithSearch() {
       <Select
         label="Select a country"
         items={countries}
-        selectedKey={selectedId}
-        onSelectionChange={setSelectedId}
+        value={selectedId}
+        onChange={setSelectedId}
         enableSearch
       >
         {(item) => <SelectItem>{item.name}</SelectItem>}

@@ -33,8 +33,8 @@ export default function App() {
         isInvalid={!isValid}
         label="Favorite Animal"
         placeholder="Select an animal"
-        selectedKey={value}
-        onSelectionChange={setValue}
+        value={value}
+        onChange={setValue}
       >
         {animals.map((animal) => (
           <SelectItem key={animal.id} id={animal.id}>

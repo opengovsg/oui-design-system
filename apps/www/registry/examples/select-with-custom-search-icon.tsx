@@ -28,8 +28,8 @@ export default function SelectWithCustomSearchIcon() {
       <Select
         label="Select a country"
         items={countries}
-        selectedKey={selectedId}
-        onSelectionChange={setSelectedId}
+        value={selectedId}
+        onChange={setSelectedId}
         enableSearch
         searchIcon={<SearchIcon />}
       >

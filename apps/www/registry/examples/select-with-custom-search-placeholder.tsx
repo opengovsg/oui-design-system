@@ -26,8 +26,8 @@ export default function SelectWithCustomSearchPlaceholder() {
       <Select
         label="Select a fruit"
         items={fruits}
-        selectedKey={selectedId}
-        onSelectionChange={setSelectedId}
+        value={selectedId}
+        onChange={setSelectedId}
         enableSearch
         searchPlaceholder="Type to filter fruits..."
       >
