@@ -181,7 +181,7 @@ export function AccordionHeader({
                   )}
                 </span>
               )}
-              {startContent && (
+              {endContent && (
                 <div
                   className={slots.endContentWrapper({
                     className: cn(
@@ -193,7 +193,6 @@ export function AccordionHeader({
                   {renderChildren(headerRenderProps, endContent)}
                 </div>
               )}
-              {renderChildren(headerRenderProps, endContent)}
             </>
           )
         }}
