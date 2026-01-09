@@ -37,7 +37,7 @@ export const Default: Story = {
 
 const MultipleTemplate = (args: Story["args"]) => (
   <Accordion {...args}>
-    <AccordionItem>
+    <AccordionItem id="item-1">
       <AccordionHeader startContent={<Info />}>
         What happens if I lose my Secret Key?
       </AccordionHeader>
@@ -48,7 +48,7 @@ const MultipleTemplate = (args: Story["args"]) => (
         as possible to avoid losing further responses.
       </AccordionContent>
     </AccordionItem>
-    <AccordionItem>
+    <AccordionItem id="item-2">
       <AccordionHeader startContent={<Info />}>
         Excel responses from table style questions are clumped into one line,
         how do I separate them?
@@ -65,6 +65,27 @@ export const WithStartContent: Story = {
 export const ExpandMultiple: Story = {
   args: {
     allowsMultipleExpanded: true,
+    defaultExpandedKeys: ["item-1", "item-2"],
   },
   render: MultipleTemplate,
+}
+
+export const DefaultExpanded: Story = {
+  render: (args) => (
+    <Accordion {...args} defaultExpandedKeys={["test"]}>
+      <AccordionItem id="test">
+        <AccordionHeader>This item is expanded by default</AccordionHeader>
+        <AccordionContent>
+          You can set an accordion item to be expanded by default using the
+          defaultExpanded prop.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem>
+        <AccordionHeader>This item is collapsed by default</AccordionHeader>
+        <AccordionContent>
+          This content is hidden until you click on the header.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
 }

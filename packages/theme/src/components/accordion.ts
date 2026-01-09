@@ -7,12 +7,12 @@ export const accordionStyles = tv({
   slots: {
     base: "w-full",
     item: "group border-base-divider-medium min-w-50 border-b first:border-t",
-    heading: "text-base-content-strong",
+    heading: "",
     title: "flex-1 text-left",
     startContentWrapper: "inline-flex items-center",
     endContentWrapper: "inline-flex items-center",
     trigger: [
-      "group flex w-full items-start justify-start gap-2 transition-colors",
+      "group text-base-content-strong disabled:text-interaction-support-disabled-content flex w-full items-start justify-start gap-2 transition-colors",
       ...focusVisibleClasses,
       "outline-offset-0",
     ],
@@ -26,7 +26,7 @@ export const accordionStyles = tv({
     color: {
       main: {
         trigger:
-          "hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active",
+          "hover:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active disabled:bg-inherit",
       },
     },
     size: {
