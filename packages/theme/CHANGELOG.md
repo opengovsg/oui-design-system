@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.34
+
+### Patch Changes
+
+- [#189](https://github.com/opengovsg/oui-design-system/pull/189) [`89a4015`](https://github.com/opengovsg/oui-design-system/commit/89a4015f6c15fa59e5e5598a921a699921a48b3b) Thanks [@karrui](https://github.com/karrui)! - fix(accordion): pass in isExpanded prop to indicator
+
 ## 0.0.33
 
 ### Patch Changes
