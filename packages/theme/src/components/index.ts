@@ -29,4 +29,5 @@ export * from "./modal"
 export * from "./toast"
 export * from "./navbar"
 export * from "./avatar"
+export * from "./accordion"
 // Add new theme exports here

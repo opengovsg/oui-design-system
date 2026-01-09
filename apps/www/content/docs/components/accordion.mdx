@@ -7,6 +7,166 @@ links:
   source: accordion
   storybook: components-accordion--default
   theme: accordion
+  reactaria: Disclosure
 ---
 
-# Not yet implemented
+<ComponentPreview name="accordion-demo" />
+
+## Usage
+
+OUI exports 4 accordion-related components:
+
+- **Accordion**: The main wrapper component (uses React Aria's `DisclosureGroup`).
+- **AccordionItem**: The component that wraps each disclosure item.
+- **AccordionHeader**: The header button that toggles the accordion item.
+- **AccordionContent**: The collapsible content panel.
+
+```tsx
+import {
+  Accordion,
+  AccordionContent,
+  AccordionHeader,
+  AccordionItem,
+} from "@opengovsg/oui"
+```
+
+```tsx
+<Accordion>
+  <AccordionItem>
+    <AccordionHeader>Accordion header</AccordionHeader>
+    <AccordionContent>Accordion content</AccordionContent>
+  </AccordionItem>
+</Accordion>
+```
+
+## Features
+
+The Accordion component provides an accessible way to organize and display collapsible content sections.
+
+- **Accessible** – Follows the ARIA disclosure pattern with proper keyboard navigation and screen reader support.
+- **Flexible** – Support for single or multiple expanded items, disabled states, and custom styling.
+- **Keyboard Navigation** – Full keyboard support with Enter/Space to toggle items and Tab to navigate between them.
+- **Animated** – Smooth expand/collapse animations with configurable transitions.
+- **Customizable** – Support for custom icons, start/end content, and size variants.
+
+## Examples
+
+### Sizes
+
+Use the `size` prop on `Accordion` to change the size of the accordion.
+
+<ComponentPreview name="accordion-sizes" />
+
+### Multiple Expanded Items
+
+By default, only one accordion item can be expanded at a time. Use the `allowsMultipleExpanded` prop on the `Accordion` component to allow multiple items to be expanded simultaneously.
+
+<ComponentPreview name="accordion-multiple-expanded" />
+
+### Default Expanded
+
+Use the `defaultExpanded` prop on `AccordionItem` to set an item as expanded by default.
+
+<ComponentPreview name="accordion-default-expanded" />
+
+### Controlled
+
+Control the expanded state of the accordion using the `expandedKeys` and `onExpandedChange` props on the `Accordion` component.
+
+<ComponentPreview name="accordion-controlled" />
+
+### Start Content
+
+Use the `startContent` prop on `AccordionHeader` to add content before the title, such as icons.
+
+<ComponentPreview name="accordion-with-start-content" />
+
+### Custom Indicator
+
+Use the `indicator` prop on `AccordionHeader` to customize the expansion indicator icon.
+
+<ComponentPreview name="accordion-custom-indicator" />
+
+### Hide Indicator
+
+Use the `hideIndicator` prop on `AccordionHeader` to hide the indicator icon.
+
+<ComponentPreview name="accordion-hide-indicator" />
+
+### Disabled
+
+Use the `isDisabled` prop on `AccordionItem` to disable interaction with specific items.
+
+<ComponentPreview name="accordion-disabled" />
+
+## API Reference
+
+### Accordion
+
+The `Accordion` component wraps React Aria's `DisclosureGroup` component and provides styling variants. It accepts all props from [DisclosureGroup](https://react-aria.adobe.com/Disclosure.html#disclosuregroup) plus the following:
+
+| Prop                     | Type                             | Default  | Description                                              |
+| ------------------------ | -------------------------------- | -------- | -------------------------------------------------------- |
+| `size`                   | `"sm"` \| `"md"`                 | `"md"`   | The size of all accordion items.                         |
+| `color`                  | `"main"`                         | `"main"` | The color scheme of all accordion items.                 |
+| `allowsMultipleExpanded` | `boolean`                        | `false`  | Whether multiple items can be expanded at the same time. |
+| `expandedKeys`           | `Set<string>`                    | -        | The expanded items (controlled).                         |
+| `defaultExpandedKeys`    | `Set<string>`                    | -        | The default expanded items (uncontrolled).               |
+| `onExpandedChange`       | `(keys: Set<string>) => void`    | -        | Handler called when the expanded items change.           |
+| `children`               | `ReactNode`                      | -        | The accordion items.                                     |
+| `classNames`             | `SlotsToClasses<AccordionSlots>` | -        | Custom classes for the accordion slots.                  |
+
+### AccordionItem
+
+The `AccordionItem` component wraps React Aria's `Disclosure` component. It accepts all props from [Disclosure](https://react-aria.adobe.com/Disclosure.html) including:
+
+| Prop               | Type                             | Default | Description                                                       |
+| ------------------ | -------------------------------- | ------- | ----------------------------------------------------------------- |
+| `isDisabled`       | `boolean`                        | `false` | Whether the accordion item is disabled.                           |
+| `defaultExpanded`  | `boolean`                        | `false` | Whether the accordion item is expanded by default (uncontrolled). |
+| `isExpanded`       | `boolean`                        | -       | Whether the accordion item is expanded (controlled).              |
+| `onExpandedChange` | `(isExpanded: boolean) => void`  | -       | Handler called when the expanded state changes.                   |
+| `children`         | `ReactNode`                      | -       | The accordion header and content.                                 |
+| `classNames`       | `SlotsToClasses<AccordionSlots>` | -       | Custom classes for the accordion item slots.                      |
+
+### AccordionHeader
+
+| Prop            | Type                                                            | Default           | Description                                                |
+| --------------- | --------------------------------------------------------------- | ----------------- | ---------------------------------------------------------- |
+| `children`      | `ReactNode \| (props: AccordionHeaderRenderProps) => ReactNode` | -                 | The header title content. Supports render props.           |
+| `startContent`  | `ReactNode \| (props: AccordionHeaderRenderProps) => ReactNode` | -                 | Content displayed before the title. Supports render props. |
+| `endContent`    | `ReactNode \| (props: AccordionHeaderRenderProps) => ReactNode` | -                 | Content displayed after the title. Supports render props.  |
+| `indicator`     | `ReactNode \| (props: AccordionHeaderRenderProps) => ReactNode` | `<ChevronDown />` | The expansion indicator icon. Supports render props.       |
+| `hideIndicator` | `boolean`                                                       | `false`           | Whether to hide the indicator icon.                        |
+| `classNames`    | `SlotsToClasses<...>`                                           | -                 | Custom classes for the header slots.                       |
+
+#### AccordionHeaderRenderProps
+
+When using render props for `children`, `startContent`, `endContent`, or `indicator`, the following props are available:
+
+| Prop             | Type      | Description                                           |
+| ---------------- | --------- | ----------------------------------------------------- |
+| `isExpanded`     | `boolean` | Whether the accordion item is currently expanded.     |
+| `isHovered`      | `boolean` | Whether the header button is hovered.                 |
+| `isPressed`      | `boolean` | Whether the header button is pressed.                 |
+| `isFocused`      | `boolean` | Whether the header button is focused.                 |
+| `isFocusVisible` | `boolean` | Whether the header button has keyboard focus visible. |
+| `isDisabled`     | `boolean` | Whether the accordion item is disabled.               |
+
+### AccordionContent
+
+| Prop         | Type                                   | Default | Description                                        |
+| ------------ | -------------------------------------- | ------- | -------------------------------------------------- |
+| `children`   | `ReactNode`                            | -       | The content to display inside the accordion panel. |
+| `classNames` | `SlotsToClasses<"panel" \| "content">` | -       | Custom classes for the content slots.              |
+
+## Accessibility
+
+The Accordion component follows the [ARIA disclosure pattern](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/):
+
+- The header button has `aria-expanded` set to indicate the expanded state.
+- The content panel is properly associated with its header using `aria-controls`.
+- Keyboard navigation is fully supported:
+  - **Enter** or **Space**: Toggle the accordion item.
+  - **Tab**: Move focus between accordion items and other focusable elements.
+- Screen readers announce the expanded state and relationship between headers and panels.

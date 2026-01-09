@@ -12,6 +12,117 @@ type RegistryComponent = {
 }
 
 export const Index: Record<string, RegistryComponent> = {
+  "accordion-controlled": {
+    name: "accordion-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-controlled.tsx"),
+    ),
+  },
+  "accordion-custom-indicator": {
+    name: "accordion-custom-indicator",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-custom-indicator.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-custom-indicator.tsx"),
+    ),
+  },
+  "accordion-default-expanded": {
+    name: "accordion-default-expanded",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-default-expanded.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-default-expanded.tsx"),
+    ),
+  },
+  "accordion-demo": {
+    name: "accordion-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/accordion-demo.tsx")),
+  },
+  "accordion-disabled": {
+    name: "accordion-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/accordion-disabled.tsx")),
+  },
+  "accordion-hide-indicator": {
+    name: "accordion-hide-indicator",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-hide-indicator.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-hide-indicator.tsx"),
+    ),
+  },
+  "accordion-multiple-expanded": {
+    name: "accordion-multiple-expanded",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-multiple-expanded.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-multiple-expanded.tsx"),
+    ),
+  },
+  "accordion-sizes": {
+    name: "accordion-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/accordion-sizes.tsx")),
+  },
+  "accordion-with-start-content": {
+    name: "accordion-with-start-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/accordion-with-start-content.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/accordion-with-start-content.tsx"),
+    ),
+  },
   "avatar-colors": {
     name: "avatar-colors",
     description: "",
