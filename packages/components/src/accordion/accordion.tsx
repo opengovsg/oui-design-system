@@ -168,6 +168,7 @@ export function AccordionHeader({
                 <span
                   aria-hidden
                   className={slots.indicator({
+                    isExpanded,
                     className: cn(
                       contextClassNames?.indicator,
                       classNames?.indicator,

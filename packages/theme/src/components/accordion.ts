@@ -16,13 +16,17 @@ export const accordionStyles = tv({
       ...focusVisibleClasses,
       "outline-offset-0",
     ],
-    indicator:
-      "group-expanded:rotate-180 group-expanded:transform transition-transform duration-200 ease-in-out",
+    indicator: "transition-transform duration-200 ease-in-out",
     panel:
       "h-(--disclosure-panel-height) overflow-clip motion-safe:transition-[height]",
     content: "",
   },
   variants: {
+    isExpanded: {
+      true: {
+        indicator: "rotate-180 transform",
+      },
+    },
     color: {
       main: {
         trigger:
