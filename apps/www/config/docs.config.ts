@@ -37,7 +37,7 @@ const docsLinks: NavItem = {
         {
           title: "Components",
           items: [
-            { title: "Accordion", url: "accordion", status: "wip" },
+            { title: "Accordion", url: "accordion", status: "new" },
             {
               title: "AttachmentField",
               url: "attachment-field",
