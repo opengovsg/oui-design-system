@@ -5,7 +5,8 @@ import { tv } from "../utils/tv"
 
 export const accordionStyles = tv({
   slots: {
-    base: "group border-base-divider-medium min-w-50 border-b first:border-t",
+    base: "w-full",
+    item: "group border-base-divider-medium min-w-50 border-b first:border-t",
     heading: "text-base-content-strong",
     title: "flex-1 text-left",
     startContentWrapper: "inline-flex items-center",

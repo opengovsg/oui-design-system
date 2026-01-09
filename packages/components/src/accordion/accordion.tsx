@@ -1,8 +1,11 @@
+"use client"
+
 import type React from "react"
 import type {
   DisclosurePanelProps as AriaDisclosurePanelProps,
   DisclosureProps as AriaDisclosureProps,
   ButtonRenderProps,
+  DisclosureGroupProps,
   RenderProps,
 } from "react-aria-components"
 import { useContext } from "react"
@@ -30,7 +33,7 @@ import {
 
 import { createContext } from "../system/react-utils"
 import { renderChildren } from "../system/react-utils/children"
-import { mapPropsVariants } from "../system/utils"
+import { forwardRef, mapPropsVariants } from "../system/utils"
 
 export interface UseProvideAccordionStylesReturn {
   slots: ReturnType<typeof accordionStyles>
@@ -43,42 +46,35 @@ export const [AccordionStyleContext, useAccordionStyleContext] =
     strict: true,
   })
 
-export interface DisclosureProps
-  extends AriaDisclosureProps,
-    AccordionVariantProps {
+export interface AccordionItemProps
+  extends Omit<
+    AriaDisclosureProps,
+    "isExpanded" | "defaultExpanded" | "onExpandedChange"
+  > {
   children: React.ReactNode
   classNames?: SlotsToClasses<AccordionSlots>
 }
 
-export function AccordionItem(originalProps: DisclosureProps) {
-  const [{ children, classNames, ...props }, { size = "md", ...variantProps }] =
-    mapPropsVariants(originalProps, accordionStyles.variantKeys)
-
-  const slots = accordionStyles({ size, ...variantProps })
-
-  return (
-    <AccordionStyleContext.Provider
-      value={{
-        slots,
-        classNames,
-      }}
-    >
+export const AccordionItem = forwardRef<"div", AccordionItemProps>(
+  ({ classNames, className, children, ...props }, ref) => {
+    const { slots } = useContext(AccordionStyleContext)
+    return (
       <AriaDisclosure
         {...props}
-        className={composeRenderProps(
-          props.className,
-          (className, renderProps) =>
-            slots.base({
-              ...renderProps,
-              className: cn(classNames?.base, className),
-            }),
+        ref={ref}
+        className={composeRenderProps(className, (className, renderProps) =>
+          slots.item({
+            ...renderProps,
+            className: cn(classNames?.item, className),
+          }),
         )}
       >
         {children}
       </AriaDisclosure>
-    </AccordionStyleContext.Provider>
-  )
-}
+    )
+  },
+)
+AccordionItem.displayName = "AccordionItem"
 
 export interface AccordionHeaderRenderProps extends ButtonRenderProps {
   isExpanded: boolean
@@ -239,5 +235,36 @@ export function AccordionContent({
   )
 }
 
-export const Accordion = DisclosureGroup
+interface AccordionProps extends DisclosureGroupProps, AccordionVariantProps {
+  children: React.ReactNode
+  classNames?: SlotsToClasses<AccordionSlots>
+}
+
+export const Accordion = forwardRef<"div", AccordionProps>(
+  (originalProps, ref) => {
+    const [
+      { classNames, className, ...props },
+      { size = "md", ...variantProps },
+    ] = mapPropsVariants(originalProps, accordionStyles.variantKeys)
+
+    const slots = accordionStyles({ size, ...variantProps })
+
+    return (
+      <AccordionStyleContext.Provider
+        value={{
+          slots,
+          classNames,
+        }}
+      >
+        <DisclosureGroup
+          className={slots.base({
+            className: cn(classNames?.base, className),
+          })}
+          {...props}
+          ref={ref}
+        />
+      </AccordionStyleContext.Provider>
+    )
+  },
+)
 Accordion.displayName = "Accordion"
