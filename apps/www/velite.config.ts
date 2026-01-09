@@ -53,7 +53,7 @@ export const docs = defineCollection({
             ? `${docsConfig.repoUrl}/tree/${docsConfig.repoBranch}/packages/theme/src/components/${links.theme}.ts`
             : undefined,
           reactaria: links.reactaria
-            ? `https://react-spectrum.adobe.com/react-aria/${links.reactaria}.html`
+            ? `https://react-aria.adobe.com/${links.reactaria}`
             : undefined,
         },
       }
