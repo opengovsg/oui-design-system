@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.33
+
+### Patch Changes
+
+- [#186](https://github.com/opengovsg/oui-design-system/pull/186) [`d8b3944`](https://github.com/opengovsg/oui-design-system/commit/d8b3944021da0e9df2b64674d2e6d986a588138e) Thanks [@karrui](https://github.com/karrui)! - feat(button): allow children(-like) prop(s) to be functions
+
+- [#187](https://github.com/opengovsg/oui-design-system/pull/187) [`10dc877`](https://github.com/opengovsg/oui-design-system/commit/10dc8772d987967182ed5aadd7ec90ab11d226f5) Thanks [@karrui](https://github.com/karrui)! - feat: add Accordion component
+
+- Updated dependencies [[`10dc877`](https://github.com/opengovsg/oui-design-system/commit/10dc8772d987967182ed5aadd7ec90ab11d226f5)]:
+  - @opengovsg/oui-theme@0.0.33
+
 ## 0.0.32
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.33
+
+### Patch Changes
+
+- [#187](https://github.com/opengovsg/oui-design-system/pull/187) [`10dc877`](https://github.com/opengovsg/oui-design-system/commit/10dc8772d987967182ed5aadd7ec90ab11d226f5) Thanks [@karrui](https://github.com/karrui)! - feat: add Accordion component
+
 ## 0.0.32
 
 ### Patch Changes
