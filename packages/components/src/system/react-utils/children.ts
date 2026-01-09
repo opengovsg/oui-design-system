@@ -1,6 +1,8 @@
 import type { ReactNode } from "react"
 import { Children, isValidElement } from "react"
 
+type ChildrenOrFunction<T> = ReactNode | ((values: T) => ReactNode)
+
 /**
  * Gets only the valid children of a component,
  * and ignores any nullish or falsy child.
@@ -33,4 +35,15 @@ export const pickChildren = <T = ReactNode>(
   const targetChildren = target.length >= 0 ? target : undefined
 
   return [withoutTargetChildren, targetChildren]
+}
+
+export const renderChildren = <T>(
+  renderProps: T,
+  children: ChildrenOrFunction<T>,
+) => {
+  if (typeof children === "function") {
+    return children(renderProps)
+  }
+
+  return children
 }

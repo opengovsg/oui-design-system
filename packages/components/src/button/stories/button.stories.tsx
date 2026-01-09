@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
-import { AlertTriangle, User2Icon } from "lucide-react"
+import { AlertTriangle, HelpCircleIcon, User2Icon } from "lucide-react"
+
+import { cn } from "@opengovsg/oui-theme"
 
 import type { ButtonProps } from "../button"
 import { Button } from "../button"
@@ -264,5 +266,21 @@ export const CustomWithClassNames: Story = {
     // This option disables all automatic a11y checks on this story,
     // since there are false positives, and is an example story anyways
     a11y: { test: "todo" },
+  },
+}
+
+export const WithChildrenFunction: Story = {
+  args: {
+    children: ({ isDisabled }) => (
+      <div className={cn(isDisabled && "bg-red-400")}>
+        Custom children function
+      </div>
+    ),
+    endContent: ({ isDisabled }) => (
+      <HelpCircleIcon
+        className={cn("inline-block", isDisabled && "text-red-400")}
+      />
+    ),
+    isDisabled: true,
   },
 }
