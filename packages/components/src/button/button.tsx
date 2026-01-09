@@ -1,6 +1,9 @@
 "use client"
 
-import type { ButtonProps as AriaButtonProps } from "react-aria-components"
+import type {
+  ButtonProps as AriaButtonProps,
+  RenderProps,
+} from "react-aria-components"
 import { forwardRef, useMemo } from "react"
 import { chain } from "@react-aria/utils"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
@@ -11,35 +14,41 @@ import { buttonStyles } from "@opengovsg/oui-theme"
 import type { SpinnerProps } from "../spinner"
 import { Ripple, useRipple } from "../ripple"
 import { Spinner } from "../spinner"
+import { renderChildren } from "../system/react-utils/children"
 
-export interface ButtonProps
-  extends Omit<AriaButtonProps, "children">,
-    ButtonVariantProps {
+export interface ButtonProps extends AriaButtonProps, ButtonVariantProps {
   /**
    * Whether the button should display a ripple effect on press.
    * @defaultValue false
    */
   disableRipple?: boolean
-  children: React.ReactNode
   /**
    * The button start content.
    */
-  startContent?: React.ReactNode
+  startContent?: RenderProps<ButtonProps>["children"]
   /**
    * The button end content.
    */
-  endContent?: React.ReactNode
+  endContent?: RenderProps<ButtonProps>["children"]
   /**
    * Spinner to display when loading.
    * @defaultValue \@opengovsg/oui/components/spinner
    */
-  spinner?: React.ReactNode
+  spinner?: RenderProps<ButtonProps>["children"]
+
+  /**
+   * Text to show when the button is loading.
+   * If not provided, the button will only show the loading spinner.
+   *
+   * @deprecated Use `pendingElement` instead.
+   */
+  loadingText?: string
 
   /**
    * Text to show when the button is loading.
    * If not provided, the button will only show the loading spinner.
    */
-  loadingText?: string
+  pendingElement?: RenderProps<ButtonProps>["children"]
 
   /**
    * The spinner placement.
@@ -71,6 +80,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       spinnerPlacement = "start",
       loadingText,
+      pendingElement,
       onPress,
       children,
       disableRipple,
@@ -122,13 +132,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onPress={chain(onPress, onPressRipple)}
         ref={ref}
       >
-        {startContent}
-        {isPending && spinnerPlacement === "start" ? spinner : null}
-        {isPending ? null : children}
-        {isPending && loadingText ? loadingText : null}
-        {isPending && spinnerPlacement === "end" ? spinner : null}
-        {endContent}
-        {!disableRipple && <Ripple onClear={onClearRipple} ripples={ripples} />}
+        {(renderProps) => (
+          <>
+            {renderChildren(renderProps, startContent)}
+            {isPending && spinnerPlacement === "start"
+              ? renderChildren(renderProps, spinner)
+              : null}
+            {isPending ? null : renderChildren(renderProps, children)}
+            {isPending && loadingText ? loadingText : null}
+            {isPending && pendingElement
+              ? renderChildren(renderProps, pendingElement)
+              : null}
+            {isPending && spinnerPlacement === "end"
+              ? renderChildren(renderProps, spinner)
+              : null}
+            {renderChildren(renderProps, endContent)}
+            {!disableRipple && (
+              <Ripple onClear={onClearRipple} ripples={ripples} />
+            )}
+          </>
+        )}
       </AriaButton>
     )
   },
