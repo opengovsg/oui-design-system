@@ -168,6 +168,7 @@ export function AccordionHeader({
                 <span
                   aria-hidden
                   className={slots.indicator({
+                    isExpanded,
                     className: cn(
                       contextClassNames?.indicator,
                       classNames?.indicator,
@@ -180,7 +181,7 @@ export function AccordionHeader({
                   )}
                 </span>
               )}
-              {startContent && (
+              {endContent && (
                 <div
                   className={slots.endContentWrapper({
                     className: cn(
@@ -192,7 +193,6 @@ export function AccordionHeader({
                   {renderChildren(headerRenderProps, endContent)}
                 </div>
               )}
-              {renderChildren(headerRenderProps, endContent)}
             </>
           )
         }}
