@@ -16,7 +16,7 @@ export const accordionStyles = tv({
       ...focusVisibleClasses,
       "outline-offset-0",
     ],
-    indicator: "transition-transform duration-200 ease-in-out",
+    indicator: "inline-flex transition-transform duration-200 ease-in-out",
     panel:
       "h-(--disclosure-panel-height) overflow-clip motion-safe:transition-[height]",
     content: "",
