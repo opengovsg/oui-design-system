@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.35
+
+### Patch Changes
+
+- [#191](https://github.com/opengovsg/oui-design-system/pull/191) [`da47eed`](https://github.com/opengovsg/oui-design-system/commit/da47eed882d14eb2ab4bf74ff0a64d322754f3a2) Thanks [@karrui](https://github.com/karrui)! - fix(theme/accordion): add inline-flex to indicator styles
+
 ## 0.0.34
 
 ### Patch Changes
