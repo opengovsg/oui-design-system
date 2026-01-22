@@ -14,7 +14,7 @@ import { composeRenderProps, selectItemStyles } from "@opengovsg/oui-theme"
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
 
-interface SelectItemProps<T extends object>
+export interface SelectItemProps<T extends object>
   extends ListBoxItemProps<T>,
     SelectItemVariantProps {
   classNames?: SlotsToClasses<SelectItemVariantSlots>
