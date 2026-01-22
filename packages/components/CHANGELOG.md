@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.36
+
+### Patch Changes
+
+- [#193](https://github.com/opengovsg/oui-design-system/pull/193) [`aef86e3`](https://github.com/opengovsg/oui-design-system/commit/aef86e3465a0a51c6af56ff4f2acdb3d7cd3095e) Thanks [@karrui](https://github.com/karrui)! - feat(select): export SelectItemProps type
+
+- Updated dependencies [[`aef86e3`](https://github.com/opengovsg/oui-design-system/commit/aef86e3465a0a51c6af56ff4f2acdb3d7cd3095e)]:
+  - @opengovsg/oui-theme@0.0.36
+
 ## 0.0.35
 
 ### Patch Changes
