@@ -35,7 +35,9 @@ export const selectItemStyles = tv({
       },
     },
     isDisabled: {
-      true: "",
+      true: {
+        base: "bg-interaction-support-disabled text-interaction-support-disabled-content",
+      },
     },
     isFocused: {
       true: "",
