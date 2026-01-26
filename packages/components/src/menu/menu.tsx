@@ -123,7 +123,7 @@ export interface MenuItemProps
 
 export const MenuItem = forwardRef(function MenuItem(
   originalProps: MenuItemProps,
-  ref: ForwardedRef<object>,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   ;[originalProps, ref] = useContextProps(
     originalProps,
