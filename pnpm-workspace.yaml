@@ -7,15 +7,15 @@ catalog:
   "@tailwindcss/vite": 4.1.18
   eslint: ^9.39.1
   prettier: ^3.5.3
-  tailwindcss: 4.1.11
+  tailwindcss: 4.1.18
   typescript: 5.7.3
 
 catalogs:
   react:
+    "@types/react": ^19.2.7
+    "@types/react-dom": ^19.2.1
     react: ^19.2.3
     react-dom: ^19.2.3
-    "@types/react": ^19.2.7
-    "@types/react-dom": "^19.2.1"
   storybook10:
     "@storybook/addon-a11y": 10.1.10
     "@storybook/addon-docs": 10.1.10
@@ -36,6 +36,7 @@ ignoredBuiltDependencies:
   - "@tailwindcss/oxide"
 
 minimumReleaseAge: 1440
+
 minimumReleaseAgeExclude:
   - react
   - react-dom
@@ -47,5 +48,19 @@ minimumReleaseAgeExclude:
   - "@storybook/*"
   - eslint-plugin-storybook
 
+# mostly pnpm audit --fixes
 overrides:
+  "@eslint/plugin-kit@<0.3.4": ">=0.3.4"
+  diff@<4.0.4: ">=4.0.4"
+  expr-eval-fork@<=3.0.0: ">=3.0.1"
+  lodash-es@>=4.0.0 <=4.17.22: ">=4.17.23"
+  lodash@>=4.0.0 <=4.17.22: ">=4.17.23"
+  mdast-util-to-hast@>=13.0.0 <13.2.1: ">=13.2.1"
+  on-headers@<1.1.0: ">=1.1.0"
   prettier: ^3.5.0
+  qs@<6.14.1: ">=6.14.1"
+  tar@<=7.5.2: ">=7.5.3"
+  tar@<=7.5.3: ">=7.5.4"
+  tmp@<=0.2.3: ">=0.2.4"
+  vite@>=7.1.0 <=7.1.10: ">=7.1.11"
+  vite@>=7.1.0 <=7.1.4: ">=7.1.5"
