@@ -61,24 +61,24 @@
     "motion": "^12.18.1",
     "prettier": "catalog:",
     "react": "catalog:react",
-    "react-aria-components": "^1.13.0",
+    "react-aria-components": "catalog:",
     "storybook": "catalog:storybook10",
     "tsx": "^4.21.0",
     "typescript": "catalog:"
   },
   "dependencies": {
-    "@internationalized/date": "^3.9.0",
-    "@react-aria/calendar": "^3.8.3",
+    "@internationalized/date": "^3.10.1",
+    "@react-aria/calendar": "^3.9.2",
     "@react-aria/focus": "^3.21.2",
     "@react-aria/i18n": "^3.12.13",
     "@react-aria/interactions": "^3.25.6",
-    "@react-aria/utils": "^3.29.1",
-    "@react-stately/calendar": "^3.8.4",
-    "@react-stately/collections": "^3.12.7",
-    "@react-stately/form": "^3.2.1",
-    "@react-stately/list": "^3.13.0",
-    "@react-stately/utils": "^3.10.8",
-    "@react-types/shared": "^3.30.0",
+    "@react-aria/utils": "^3.32.0",
+    "@react-stately/calendar": "^3.9.1",
+    "@react-stately/collections": "^3.12.8",
+    "@react-stately/form": "^3.2.2",
+    "@react-stately/list": "^3.13.2",
+    "@react-stately/utils": "^3.11.0",
+    "@react-types/shared": "^3.32.1",
     "@tanstack/react-virtual": "^3.13.10",
     "downshift": "^9.0.9",
     "fuzzysort": "^3.1.0",
@@ -98,6 +98,6 @@
     "@opengovsg/oui-theme": "workspace:*",
     "motion": ">=11.12.0 || >=12.0.0-alpha.1",
     "react": ">= 18",
-    "react-aria-components": "^1.13.0"
+    "react-aria-components": "^1.14.0"
   }
 }
