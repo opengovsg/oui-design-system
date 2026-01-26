@@ -1,5 +1,15 @@
 # @opengovsg/oui-theme
 
+## 0.0.37
+
+### Patch Changes
+
+- [#195](https://github.com/opengovsg/oui-design-system/pull/195) [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3) Thanks [@karrui](https://github.com/karrui)! - feat: run pnpm audit --fix for package overrides
+
+- [#195](https://github.com/opengovsg/oui-design-system/pull/195) [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3) Thanks [@karrui](https://github.com/karrui)! - feat: update @tailwindcss/vite package to v4.1.18
+
+- [#195](https://github.com/opengovsg/oui-design-system/pull/195) [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3) Thanks [@karrui](https://github.com/karrui)! - feat(theme): remove tailwindcss/vite dependency from package
+
 ## 0.0.36
 
 ### Patch Changes

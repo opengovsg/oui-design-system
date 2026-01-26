@@ -1,5 +1,20 @@
 # @opengovsg/oui
 
+## 0.0.37
+
+### Patch Changes
+
+- [#195](https://github.com/opengovsg/oui-design-system/pull/195) [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3) Thanks [@karrui](https://github.com/karrui)! - feat: run pnpm audit --fix for package overrides
+
+- [#197](https://github.com/opengovsg/oui-design-system/pull/197) [`73e1e2a`](https://github.com/opengovsg/oui-design-system/commit/73e1e2a1a8ec0082762c362941be82cfd91c6a28) Thanks [@karrui](https://github.com/karrui)! - feat(tabs): update ref to only accept HTMLDivElement type
+
+- [#197](https://github.com/opengovsg/oui-design-system/pull/197) [`73e1e2a`](https://github.com/opengovsg/oui-design-system/commit/73e1e2a1a8ec0082762c362941be82cfd91c6a28) Thanks [@karrui](https://github.com/karrui)! - feat: update react-aria packages and bump peerDep version
+
+- [#197](https://github.com/opengovsg/oui-design-system/pull/197) [`73e1e2a`](https://github.com/opengovsg/oui-design-system/commit/73e1e2a1a8ec0082762c362941be82cfd91c6a28) Thanks [@karrui](https://github.com/karrui)! - feat(menu): update ref to only accept HTMLDivElement type
+
+- Updated dependencies [[`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3), [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3), [`bd1f779`](https://github.com/opengovsg/oui-design-system/commit/bd1f779b9b8931c439d925c21d42cf25134981a3)]:
+  - @opengovsg/oui-theme@0.0.37
+
 ## 0.0.36
 
 ### Patch Changes
