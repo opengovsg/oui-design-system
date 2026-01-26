@@ -98,7 +98,7 @@ export interface TabProps extends AriaTabProps, TabVariantProps {
 
 export const Tab = forwardRef(function Tab(
   originalProps: TabProps,
-  ref: React.Ref<object>,
+  ref: React.Ref<HTMLDivElement>,
 ) {
   ;[originalProps, ref] = useContextProps(
     originalProps,
