@@ -235,7 +235,9 @@ export function AccordionContent({
   )
 }
 
-interface AccordionProps extends DisclosureGroupProps, AccordionVariantProps {
+export interface AccordionProps
+  extends DisclosureGroupProps,
+    AccordionVariantProps {
   children: React.ReactNode
   classNames?: SlotsToClasses<AccordionSlots>
 }
