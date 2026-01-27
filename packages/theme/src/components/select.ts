@@ -19,7 +19,7 @@ export const selectItemStyles = tv({
   variants: {
     color: {
       main: {
-        base: "focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active",
+        base: "focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active selected:bg-interaction-muted-main-active",
       },
     },
     size: {
@@ -30,7 +30,7 @@ export const selectItemStyles = tv({
         base: "prose-body-2 px-3 py-3",
       },
       md: {
-        base: "prose-body-1 selected:bg-interaction-muted-main-active px-4 py-3",
+        base: "prose-body-1 px-4 py-3",
         text: "group-selected:prose-subhead-1",
       },
     },
@@ -93,21 +93,21 @@ export const selectStyles = tv({
     size: {
       xs: {
         selectedText: "prose-body-2",
-        list: "max-h-[264px]",
+        list: "max-h-66",
         searchField: "px-3 py-2",
         searchIcon: "size-4",
         searchInput: "prose-body-2",
       },
       sm: {
         selectedText: "prose-body-2",
-        list: "max-h-[264px]",
+        list: "max-h-66",
         searchField: "px-3 py-2.5",
         searchIcon: "size-4",
         searchInput: "prose-body-2",
       },
       md: {
         selectedText: "prose-body-1",
-        list: "max-h-[288px]",
+        list: "max-h-72",
         searchField: "px-4 py-2.5",
         searchIcon: "size-5",
         searchInput: "prose-body-1",
