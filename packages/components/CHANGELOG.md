@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.38
+
+### Patch Changes
+
+- [#198](https://github.com/opengovsg/oui-design-system/pull/198) [`553bdfd`](https://github.com/opengovsg/oui-design-system/commit/553bdfdc24a432809e42cf5883782033def1fa17) Thanks [@karrui](https://github.com/karrui)! - feat(accordion): expose AccordionProps interface
+
+- Updated dependencies [[`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6), [`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6), [`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6)]:
+  - @opengovsg/oui-theme@0.0.38
+
 ## 0.0.37
 
 ### Patch Changes
