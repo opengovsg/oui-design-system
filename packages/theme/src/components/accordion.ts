@@ -6,13 +6,13 @@ import { tv } from "../utils/tv"
 export const accordionStyles = tv({
   slots: {
     base: "w-full",
-    item: "group border-base-divider-medium min-w-50 border-b first:border-t",
+    item: "border-base-divider-medium min-w-50 border-b first:border-t",
     heading: "",
     title: "flex-1 text-left",
     startContentWrapper: "inline-flex items-center",
     endContentWrapper: "inline-flex items-center",
     trigger: [
-      "group text-base-content-strong disabled:text-interaction-support-disabled-content flex w-full items-start justify-start gap-2 transition-colors",
+      "text-base-content-strong disabled:text-interaction-support-disabled-content flex w-full items-start justify-start gap-2 transition-colors",
       ...focusVisibleClasses,
       "outline-offset-0",
     ],
