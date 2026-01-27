@@ -31,7 +31,7 @@ export const selectItemStyles = tv({
       },
       md: {
         base: "prose-body-1 px-4 py-3",
-        text: "group-selected:prose-subhead-1",
+        text: "group-selected/select:prose-subhead-1",
       },
     },
     isDisabled: {
@@ -57,7 +57,7 @@ export type SelectItemVariantSlots = keyof ReturnType<typeof selectItemStyles>
 
 export const selectStyles = tv({
   slots: {
-    base: "group flex w-full flex-col gap-1",
+    base: "group/select flex w-full flex-col gap-1",
     label: "",
     trigger: "w-full",
     icon: "size-4",
@@ -66,7 +66,7 @@ export const selectStyles = tv({
     list: "overflow-y-auto",
     description: "",
     searchField:
-      "group border-base-divider-strong flex items-center gap-2 border-b",
+      "group/search border-base-divider-strong flex items-center gap-2 border-b",
     searchIcon: "text-base-content-subtle shrink-0",
     searchInput:
       "min-w-0 flex-1 truncate border-none bg-transparent px-0 py-0 outline-none placeholder:truncate focus:ring-0",
@@ -76,7 +76,7 @@ export const selectStyles = tv({
       solid: "",
       reverse: "",
       outline: {
-        trigger: "group-invalid:border-interaction-critical-default",
+        trigger: "group-invalid/select:border-interaction-critical-default",
       },
       clear: "",
       unstyled: "",
