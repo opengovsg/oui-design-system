@@ -1,5 +1,15 @@
 # @opengovsg/oui-theme
 
+## 0.0.38
+
+### Patch Changes
+
+- [#200](https://github.com/opengovsg/oui-design-system/pull/200) [`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6) Thanks [@karrui](https://github.com/karrui)! - feat(select): move bg color declaration from size to color variant
+
+- [#200](https://github.com/opengovsg/oui-design-system/pull/200) [`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6) Thanks [@karrui](https://github.com/karrui)! - feat(select): add specificity to group classname
+
+- [#200](https://github.com/opengovsg/oui-design-system/pull/200) [`2db1b7f`](https://github.com/opengovsg/oui-design-system/commit/2db1b7fa82bf09d1655c286c5bb7a6e541ac46c6) Thanks [@karrui](https://github.com/karrui)! - feat(accordion): remove unnecessary `group` classname
+
 ## 0.0.37
 
 ### Patch Changes
