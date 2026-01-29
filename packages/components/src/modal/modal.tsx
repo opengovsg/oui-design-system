@@ -29,12 +29,11 @@ export const Modal = forwardRef(function Modal(
   originalProps: ModalProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const [{ classNames, ...props }, variantProps] = mapPropsVariants(
-    originalProps,
-    modalStyles.variantKeys,
-  )
+  const [
+    { classNames, isOpen, onOpenChange, isDismissable, defaultOpen, ...props },
+    variantProps,
+  ] = mapPropsVariants(originalProps, modalStyles.variantKeys)
 
-  const { isDismissable = true } = props
   const slots = modalStyles(variantProps)
 
   const buttonSize: ButtonProps["size"] = useMemo(() => {
@@ -57,8 +56,10 @@ export const Modal = forwardRef(function Modal(
       ]}
     >
       <ModalOverlay
-        {...props}
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
         isDismissable={isDismissable}
+        defaultOpen={defaultOpen}
         className={composeRenderProps(
           classNames?.overlay,
           (className, renderProps) =>
@@ -68,7 +69,6 @@ export const Modal = forwardRef(function Modal(
         <AriaModal
           {...props}
           ref={ref}
-          isDismissable={isDismissable}
           data-placement={variantProps.placement}
           className={composeRenderProps(
             props.className ?? classNames?.base,
