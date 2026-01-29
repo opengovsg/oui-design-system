@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.39
+
+### Patch Changes
+
+- [#202](https://github.com/opengovsg/oui-design-system/pull/202) [`5db8927`](https://github.com/opengovsg/oui-design-system/commit/5db89279c5990bc4c0605a996e66b8b704cd830d) Thanks [@karrui](https://github.com/karrui)! - feat(modal): pass controlled props to overlay only
+
+- Updated dependencies [[`23764e6`](https://github.com/opengovsg/oui-design-system/commit/23764e669cf77e73408baeb1de8ea6db7916dbcf)]:
+  - @opengovsg/oui-theme@0.0.39
+
 ## 0.0.38
 
 ### Patch Changes

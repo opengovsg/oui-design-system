@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.39
+
+### Patch Changes
+
+- [#203](https://github.com/opengovsg/oui-design-system/pull/203) [`23764e6`](https://github.com/opengovsg/oui-design-system/commit/23764e669cf77e73408baeb1de8ea6db7916dbcf) Thanks [@karrui](https://github.com/karrui)! - feat(theme): export rest of focusVisible classes
+
 ## 0.0.38
 
 ### Patch Changes
