@@ -1,4 +1,10 @@
-export { focusVisibleClasses, focusClasses } from "./classes"
+export {
+  focusVisibleClasses,
+  groupFocusVisibleClasses,
+  dataFocusVisibleClasses,
+  racFocusRing,
+  focusClasses,
+} from "./classes"
 export { customTwMergeConfig, twMerge } from "./tw-merge"
 export { tv } from "./tv"
 export * from "./types"
