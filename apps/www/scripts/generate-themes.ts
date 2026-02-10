@@ -1,5 +1,5 @@
-import { readFileSync, mkdirSync, writeFileSync, existsSync } from "fs"
-import { resolve, dirname } from "path"
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs"
+import { dirname, resolve } from "path"
 import { fileURLToPath } from "url"
 
 // Import the run function directly from token-gen source (monorepo)
@@ -12,7 +12,10 @@ interface ThemeEntry {
 }
 
 function getAvailableThemes(): string[] {
-  const tokensPath = resolve(__dirname, "../../../packages/token-gen/raw/tokens.json")
+  const tokensPath = resolve(
+    __dirname,
+    "../../../packages/token-gen/raw/tokens.json",
+  )
   const tokens = JSON.parse(readFileSync(tokensPath, "utf-8"))
   return Object.values(tokens.$themes).map((t) => (t as ThemeEntry).name)
 }
