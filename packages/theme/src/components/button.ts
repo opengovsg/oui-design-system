@@ -46,8 +46,8 @@ export const buttonStyles = tv({
       true: "cursor-not-allowed",
     },
     isIconOnly: {
-      true: "!gap-0 px-0",
-      false: "[&>svg]:max-w-[theme(spacing.8)]",
+      true: "gap-0! px-0 [&>svg]:shrink-0",
+      false: "[&>svg]:max-w-8",
     },
     isAttached: {
       true: "rounded-s-none",
