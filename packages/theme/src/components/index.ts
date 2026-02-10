@@ -30,4 +30,5 @@ export * from "./toast"
 export * from "./navbar"
 export * from "./avatar"
 export * from "./accordion"
+export * from "./time-field"
 // Add new theme exports here
