@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { FilterIcon } from "lucide-react"
 import { useState } from "react"
 import { expect } from "storybook/test"
 
@@ -62,6 +63,20 @@ export const Sizes: Story = {
   },
   args: {
     label: "Date of issue",
+  },
+}
+
+export const CustomSearchIcon: Story = {
+  args: {
+    label: "Filter",
+    searchIcon: <FilterIcon aria-hidden className="ml-4 size-5 text-base-content-medium" />,
+  },
+}
+
+export const HiddenSearchIcon: Story = {
+  args: {
+    label: "Search",
+    searchIcon: null,
   },
 }
 

@@ -2446,6 +2446,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/search-field-controlled.tsx"),
     ),
   },
+  "search-field-custom-icon": {
+    name: "search-field-custom-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-custom-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-custom-icon.tsx"),
+    ),
+  },
   "search-field-demo": {
     name: "search-field-demo",
     description: "",
@@ -2468,6 +2481,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () => import("@/registry/examples/search-field-disabled.tsx"),
+    ),
+  },
+  "search-field-hidden-icon": {
+    name: "search-field-hidden-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-hidden-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-hidden-icon.tsx"),
     ),
   },
   "search-field-sizes": {
