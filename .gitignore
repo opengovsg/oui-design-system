@@ -13,3 +13,6 @@ public/dist
 storybook-static/
 
 .velite
+
+# Generated theme CSS for docs site
+apps/www/public/themes/

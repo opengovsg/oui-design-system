@@ -6,6 +6,7 @@ import { useRoute } from "@/lib/use-route"
 import { SiGithub } from "@icons-pack/react-simple-icons"
 
 import { MobileHeaderNav } from "./mobile-header-nav"
+import { ThemeSelector } from "./theme-selector"
 
 export const Header = () => {
   const route = useRoute()
@@ -35,6 +36,7 @@ export const Header = () => {
             ))}
           </div>
           <div className="flex items-center gap-6">
+            <ThemeSelector />
             <button
               type="button"
               className="inline-flex items-center gap-1 rounded-full bg-gray-950/2 px-2 py-1 outline -outline-offset-1 outline-gray-950/8 dark:bg-white/5 dark:outline-white/2"

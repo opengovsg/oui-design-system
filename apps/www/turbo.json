@@ -3,8 +3,12 @@
   "extends": ["//"],
   "tasks": {
     "generate:registry": {},
+    "generate:themes": {},
+    "dev": {
+      "dependsOn": ["generate:themes"]
+    },
     "build": {
-      "dependsOn": ["^build", "generate:registry"]
+      "dependsOn": ["^build", "generate:registry", "generate:themes"]
     }
   }
 }
