@@ -2,12 +2,14 @@
 
 import { useContext } from "react"
 import { CalendarDate } from "@internationalized/date"
+import { useLocalizedStringFormatter } from "react-aria"
 import { Group } from "react-aria-components"
 
 import { Select, SelectItem } from "../select"
 import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
-import { useCalendarI18n, useCalendarSelectors } from "./hooks"
+import { useCalendarSelectors } from "./hooks"
+import { i18nStrings } from "./i18n"
 
 export const CalendarMonthDaySelector = () => {
   const { slots, size, classNames } = useCalendarStyleContext()
@@ -15,7 +17,7 @@ export const CalendarMonthDaySelector = () => {
 
   const { months, years, datePartOrder } = useCalendarSelectors(state)
 
-  const formatMessage = useCalendarI18n()
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   return (
     <Group className={slots.selectors({ className: classNames?.selectors })}>
@@ -39,7 +41,7 @@ export const CalendarMonthDaySelector = () => {
                 popover: "min-w-[12ch]",
               }}
               selectedKey={state.visibleRange.start.month}
-              aria-label={formatMessage("selectMonth")}
+              aria-label={stringFormatter.format("Select month")}
               onSelectionChange={(month) => {
                 state.setFocusedDate(
                   new CalendarDate(state.focusedDate.year, Number(month), 1),
@@ -68,7 +70,7 @@ export const CalendarMonthDaySelector = () => {
               popover: "min-w-[8ch]",
             }}
             selectedKey={state.visibleRange.start.year}
-            aria-label={formatMessage("selectYear")}
+            aria-label={stringFormatter.format("Select year")}
             onSelectionChange={(year) => {
               state.setFocusedDate(
                 new CalendarDate(

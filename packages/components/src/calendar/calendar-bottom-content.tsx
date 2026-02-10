@@ -3,12 +3,13 @@
 import type { CalendarDate } from "@internationalized/date"
 import { useCallback, useContext } from "react"
 import { getLocalTimeZone, today } from "@internationalized/date"
+import { useLocalizedStringFormatter } from "react-aria"
 
 import type { CalendarProps } from "./types"
 import { Button } from "../button/button"
 import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
-import { useCalendarI18n } from "./hooks"
+import { i18nStrings } from "./i18n"
 
 type CalendarBottomContentProps<T extends CalendarDate> = Pick<
   CalendarProps<T>,
@@ -22,7 +23,8 @@ export const CalendarBottomContent = <T extends CalendarDate>({
 }: CalendarBottomContentProps<T>) => {
   const state = useContext(AgnosticCalendarStateContext)!
   const { slots, classNames, size } = useCalendarStyleContext()
-  const formatMessage = useCalendarI18n()
+
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const handleTodayClick = useCallback(() => {
     const todayDate = today(getLocalTimeZone())
@@ -55,7 +57,7 @@ export const CalendarBottomContent = <T extends CalendarDate>({
         className={slots.todayButton({ className: classNames?.todayButton })}
         onPress={handleTodayClick}
       >
-        {formatMessage("today")}
+        {stringFormatter.format("Today")}
       </Button>
     </div>
   )

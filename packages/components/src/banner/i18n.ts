@@ -2,15 +2,15 @@ import type { LocalizedStrings } from "react-aria"
 
 export const i18nStrings = {
   "en-SG": {
-    Dismiss: "Dismiss",
+    "Close banner": "Close banner",
   },
   "zh-SG": {
-    Dismiss: "取消",
+    "Close banner": "关闭横幅",
   },
   "ms-SG": {
-    Dismiss: "Tutup",
+    "Close banner": "Tutup sepanduk",
   },
   "ta-SG": {
-    Dismiss: "மூடு",
+    "Close banner": "உடைகளை மூடுங்கள்",
   },
 } satisfies LocalizedStrings

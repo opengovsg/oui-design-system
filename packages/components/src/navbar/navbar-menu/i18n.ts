@@ -1,20 +1,20 @@
 import type { LocalizedStrings } from "react-aria"
 
-export const i18nStrings: LocalizedStrings = {
+export const i18nStrings = {
   "en-SG": {
-    openMenu: "Open navigation menu",
-    closeMenu: "Close navigation menu",
+    "Open navigation menu": "Open navigation menu",
+    "Close navigation menu": "Close navigation menu",
   },
   "zh-SG": {
-    openMenu: "打开导航菜单",
-    closeMenu: "关闭导航菜单",
+    "Open navigation menu": "打开导航菜单",
+    "Close navigation menu": "关闭导航菜单",
   },
   "ms-SG": {
-    openMenu: "Buka menu navigasi",
-    closeMenu: "Tutup menu navigasi",
+    "Open navigation menu": "Buka menu navigasi",
+    "Close navigation menu": "Tutup menu navigasi",
   },
   "ta-SG": {
-    openMenu: "நேவிகேஷன் மெனுவைத் திற",
-    closeMenu: "நேவிகேஷன் மெனுவை மூடு",
+    "Open navigation menu": "நேவிகேஷன் மெனுவைத் திற",
+    "Close navigation menu": "நேவிகேஷன் மெனுவை மூடு",
   },
-}
+} satisfies LocalizedStrings

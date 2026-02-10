@@ -1,9 +1,8 @@
 import type { PressEvent } from "@react-types/shared"
 import type { ReactNode } from "react"
-import type { LocalizedStrings } from "react-aria"
 import { cloneElement, isValidElement, useCallback, useMemo } from "react"
 import { mergeProps } from "@react-aria/utils"
-import { useFocusRing, useMessageFormatter, usePress } from "react-aria"
+import { useFocusRing, useLocalizedStringFormatter, usePress } from "react-aria"
 import { useDeepCompareMemo } from "use-deep-compare"
 
 import type {
@@ -17,6 +16,7 @@ import type { ReactRef } from "../system/react-utils"
 import type { HtmlUiProps, PropGetter } from "../system/types"
 import { useDomRef } from "../system/react-utils"
 import { mapPropsVariants } from "../system/utils"
+import { i18nStrings } from "./i18n"
 
 export interface UseBadgeProps extends HtmlUiProps, BadgeVariantProps {
   ref?: ReactRef<HTMLDivElement | null>
@@ -55,21 +55,6 @@ export interface UseBadgeProps extends HtmlUiProps, BadgeVariantProps {
   onClose?: (e: PressEvent) => void
 }
 
-const i18nStrings: LocalizedStrings = {
-  "en-SG": {
-    close: "Close badge",
-  },
-  "zh-SG": {
-    close: "关闭徽章",
-  },
-  "ms-SG": {
-    close: "Tutup lencana",
-  },
-  "ta-SG": {
-    close: "பேட்ஜை மூடு",
-  },
-}
-
 export function useBadge(originalProps: UseBadgeProps) {
   const [_props, variantProps] = mapPropsVariants(
     originalProps,
@@ -92,7 +77,7 @@ export function useBadge(originalProps: UseBadgeProps) {
   const Component = useMemo(() => as || "div", [as])
   const baseClassName = cn(classNames?.base, className)
 
-  const formatMessage = useMessageFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const isCloseable = variantProps.isCloseable || !!onClose
 
@@ -143,16 +128,16 @@ export function useBadge(originalProps: UseBadgeProps) {
         className: classNames?.closeButton,
         isFocusVisible: isCloseButtonFocusVisible,
       }),
-      "aria-label": formatMessage("close"),
+      "aria-label": stringFormatter.format("Close badge"),
       ...mergeProps(closePressProps, closeFocusProps),
     }
   }, [
     classNames?.closeButton,
     closeFocusProps,
     closePressProps,
-    formatMessage,
     isCloseButtonFocusVisible,
     slots,
+    stringFormatter,
     variantProps?.size,
   ])
 

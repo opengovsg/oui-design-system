@@ -3,7 +3,7 @@
 import type { ReactNode } from "react"
 import type { ToggleButtonProps } from "react-aria-components"
 import { useMemo } from "react"
-import { chain, useMessageFormatter } from "react-aria"
+import { chain, useLocalizedStringFormatter } from "react-aria"
 import { ToggleButton } from "react-aria-components"
 
 import type { ButtonVariantProps, SlotsToClasses } from "@opengovsg/oui-theme"
@@ -51,7 +51,7 @@ export const NavbarMenuToggle = ({
     window.scrollTo({ top: menuTopOffset, behavior: "instant" })
   }
 
-  const formatMessage = useMessageFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const toggleStyles = useMemo(() => {
     return buttonStyles({
@@ -101,7 +101,9 @@ export const NavbarMenuToggle = ({
   return (
     <ToggleButton
       aria-label={
-        isMenuOpen ? formatMessage("closeMenu") : formatMessage("openMenu")
+        isMenuOpen
+          ? stringFormatter.format("Close navigation menu")
+          : stringFormatter.format("Open navigation menu")
       }
       ref={menuRef}
       data-open={dataAttr(isMenuOpen)}
