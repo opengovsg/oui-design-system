@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.41
+
+### Patch Changes
+
+- [#210](https://github.com/opengovsg/oui-design-system/pull/210) [`62ecaeb`](https://github.com/opengovsg/oui-design-system/commit/62ecaeb8451d5ffdda94959a6fb98500e98759a2) Thanks [@karrui](https://github.com/karrui)! - feat: add SearchField component
+
+- [#208](https://github.com/opengovsg/oui-design-system/pull/208) [`66b9ba3`](https://github.com/opengovsg/oui-design-system/commit/66b9ba35832a6540f884e1fbfbe5647abf079d03) Thanks [@karrui](https://github.com/karrui)! - refactor: update all usage of useMessageFormatter to useLocalizedStringFormatter
+
+- Updated dependencies [[`62ecaeb`](https://github.com/opengovsg/oui-design-system/commit/62ecaeb8451d5ffdda94959a6fb98500e98759a2), [`db086ea`](https://github.com/opengovsg/oui-design-system/commit/db086ea4a2a70dd59e61dd96a879e1f882adc188)]:
+  - @opengovsg/oui-theme@0.0.41
+
 ## 0.0.40
 
 ### Patch Changes

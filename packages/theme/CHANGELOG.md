@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.41
+
+### Patch Changes
+
+- [#210](https://github.com/opengovsg/oui-design-system/pull/210) [`62ecaeb`](https://github.com/opengovsg/oui-design-system/commit/62ecaeb8451d5ffdda94959a6fb98500e98759a2) Thanks [@karrui](https://github.com/karrui)! - feat: add SearchField component
+
+- [#207](https://github.com/opengovsg/oui-design-system/pull/207) [`db086ea`](https://github.com/opengovsg/oui-design-system/commit/db086ea4a2a70dd59e61dd96a879e1f882adc188) Thanks [@karrui](https://github.com/karrui)! - feat(button): add shrink-0 to icon button svg
+
 ## 0.0.40
 
 ### Patch Changes
