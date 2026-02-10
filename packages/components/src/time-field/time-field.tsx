@@ -6,7 +6,10 @@ import type {
 import { useMemo } from "react"
 import { TimeField as AriaTimeField } from "react-aria-components"
 
-import type { SlotsToClasses, VariantProps } from "@opengovsg/oui-theme"
+import type {
+  DateInputVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 import {
   composeTailwindRenderProps,
   dateInputStyles,
@@ -19,7 +22,7 @@ import { mapPropsVariants } from "../system/utils"
 
 export interface TimeFieldProps<T extends TimeValue>
   extends AriaTimeFieldProps<T>,
-    VariantProps<typeof dateInputStyles> {
+    DateInputVariantProps {
   label?: React.ReactNode
   description?: React.ReactNode | null
   errorMessage?:

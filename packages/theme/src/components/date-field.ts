@@ -31,8 +31,7 @@ export const dateSegmentStyles = tv({
   ],
 })
 
-export type DateInputSlots = keyof ReturnType<typeof dateSegmentStyles>
-export type DateInputVariantProps = VariantProps<typeof dateSegmentStyles>
+export type DateSegmentVariantProps = VariantProps<typeof dateSegmentStyles>
 
 export const dateInputStyles = tv({
   extend: inputStyles,
@@ -50,4 +49,4 @@ export const dateInputStyles = tv({
   base: "focus-within:border-utility-focus-default focus-within:shadow-[0_0_0_1px]",
 })
 
-export type DateFieldVariantProps = VariantProps<typeof dateInputStyles>
+export type DateInputVariantProps = VariantProps<typeof dateInputStyles>

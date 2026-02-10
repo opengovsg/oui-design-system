@@ -13,7 +13,10 @@ import {
   DateSegment,
 } from "react-aria-components"
 
-import type { SlotsToClasses, VariantProps } from "@opengovsg/oui-theme"
+import type {
+  DateInputVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 import {
   composeRenderProps,
   composeTailwindRenderProps,
@@ -26,7 +29,7 @@ import { mapPropsVariants } from "../system/utils"
 
 export interface DateFieldProps<T extends DateValue>
   extends AriaDateFieldProps<T>,
-    VariantProps<typeof dateInputStyles> {
+    DateInputVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -91,7 +94,7 @@ export function DateField<T extends DateValue>(
 
 export interface DateInputProps
   extends Omit<AriaDateInputProps, "children">,
-    VariantProps<typeof dateInputStyles> {
+    DateInputVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
