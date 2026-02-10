@@ -1,6 +1,5 @@
 "use client"
 
-import type { LocalizedStrings } from "react-aria"
 import type {
   ComboBoxProps as AriaComboBoxProps,
   InputProps,
@@ -11,7 +10,7 @@ import type {
 } from "react-aria-components"
 import { useCallback, useMemo } from "react"
 import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
-import { useMessageFormatter } from "react-aria"
+import { useLocalizedStringFormatter } from "react-aria"
 import {
   Button as AriaButton,
   ComboBox as AriaComboBox,
@@ -40,6 +39,7 @@ import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 import { ComboBoxVariantContext } from "./combo-box-variant-context"
+import { i18nStrings } from "./i18n"
 
 export interface ComboBoxProps<T extends object>
   extends ComboBoxVariantProps,
@@ -86,44 +86,26 @@ const calculateEstimatedRowHeight = (
   }
 }
 
-const i18nStrings: LocalizedStrings = {
-  "en-SG": {
-    clear: "Clear",
-    empty: "No matching results",
-  },
-  "zh-SG": {
-    clear: "清除",
-    empty: "没有匹配的结果",
-  },
-  "ms-SG": {
-    clear: "Jelas",
-    empty: "Tiada hasil yang sepadan",
-  },
-  "ta-SG": {
-    clear: "தெளிவு",
-    empty: "பொருந்தும் முடிவுகள் இல்லை",
-  },
-}
-
 export function ComboBoxEmptyState({
   size,
   className,
 }: Pick<ComboBoxVariantProps, "size"> & { className?: string }) {
   const styles = listBoxItemStyles({ size })
-  const formatMessage = useMessageFormatter(i18nStrings)
+
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
   return (
     <span
       className={styles.container({
         className: cn("cursor-default italic", className),
       })}
     >
-      {formatMessage("empty")}
+      {stringFormatter.format("No matching results")}
     </span>
   )
 }
 
 export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
-  const formatMessage = useMessageFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
   const [_props, variantProps] = mapPropsVariants(
     originalProps,
     comboBoxStyles.variantKeys,
@@ -231,7 +213,7 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
                   slot={null}
                   onPress={onClear}
                   isDisabled={isComboBoxDisabled}
-                  aria-label={formatMessage("clear")}
+                  aria-label={stringFormatter.format("Clear")}
                   className={composeRenderProps(
                     classNames?.clearButton,
                     (className, renderProps) =>

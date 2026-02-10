@@ -3,7 +3,7 @@
 import type { DialogProps } from "react-aria-components"
 import { isValidElement, useContext } from "react"
 import { XIcon } from "lucide-react"
-import { useMessageFormatter } from "react-aria"
+import { useLocalizedStringFormatter } from "react-aria"
 import { Dialog } from "react-aria-components"
 
 import { cn } from "@opengovsg/oui-theme"
@@ -28,7 +28,7 @@ export function ModalContent({
 }: ModalContentProps) {
   const { slots, classNames, buttonSize } = useContext(ModalVariantContext)!
 
-  const formatMessage = useMessageFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const closeButtonContent = isValidElement(closeButtonContentProp) ? (
     closeButtonContentProp
@@ -49,7 +49,7 @@ export function ModalContent({
             <Button
               slot="close"
               isIconOnly
-              aria-label={formatMessage("dismiss")}
+              aria-label={stringFormatter.format("Dismiss")}
               size={buttonSize}
               variant="clear"
               color="neutral"

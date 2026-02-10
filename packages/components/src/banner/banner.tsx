@@ -1,10 +1,10 @@
 "use client"
 
 import type { ReactNode } from "react"
-import type { AriaDisclosureProps, LocalizedStrings } from "react-aria"
+import type { AriaDisclosureProps } from "react-aria"
 import { useMemo, useRef } from "react"
 import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
-import { useDisclosure, useMessageFormatter } from "react-aria"
+import { useDisclosure, useLocalizedStringFormatter } from "react-aria"
 import { useDisclosureState } from "react-stately"
 
 import type {
@@ -15,6 +15,7 @@ import type {
 import { bannerStyles } from "@opengovsg/oui-theme"
 
 import { Button } from "../button"
+import { i18nStrings } from "./i18n"
 
 interface BannerProps
   extends VariantProps<typeof bannerStyles>,
@@ -32,21 +33,6 @@ interface BannerProps
   classNames?: SlotsToClasses<BannerSlots>
 }
 
-const i18nStrings: LocalizedStrings = {
-  "en-SG": {
-    dismiss: "Close banner",
-  },
-  "zh-SG": {
-    dismiss: "关闭横幅",
-  },
-  "ms-SG": {
-    dismiss: "Tutup sepanduk",
-  },
-  "ta-SG": {
-    dismiss: "உடைகளை மூடுங்கள்",
-  },
-}
-
 export const Banner = ({
   variant = "info",
   size,
@@ -58,7 +44,7 @@ export const Banner = ({
   defaultExpanded = true,
   ...disclosureProps
 }: BannerProps) => {
-  const formatMessage = useMessageFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const styles = bannerStyles({ variant, size })
 
@@ -132,7 +118,7 @@ export const Banner = ({
           variant="clear"
           color="neutral"
           isIconOnly
-          aria-label={formatMessage("dismiss")}
+          aria-label={stringFormatter.format("Close banner")}
           className={styles.dismissButton({
             className: classNames?.dismissButton,
           })}
