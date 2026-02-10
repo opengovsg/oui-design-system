@@ -28,7 +28,7 @@ import {
 import { Description, FieldError, Label } from "../field"
 import { mapPropsVariants } from "../system/utils"
 
-interface DateFieldProps<T extends DateValue>
+export interface DateFieldProps<T extends DateValue>
   extends AriaDateFieldProps<T>,
     VariantProps<typeof dateFieldStyles> {
   label?: string
@@ -94,7 +94,7 @@ export function DateField<T extends DateValue>(
   )
 }
 
-interface DateInputProps
+export interface DateInputProps
   extends Omit<AriaDateInputProps, "children">,
     VariantProps<typeof dateInputStyles> {
   label?: string
