@@ -1,0 +1,86 @@
+---
+title: SearchField
+description: Allows users to enter and clear a search query.
+toc:
+  visible: true
+links:
+  source: search-field
+  storybook: components-searchfield--default
+  theme: search-field
+  reactaria: SearchField
+---
+
+<ComponentPreview name="search-field-demo" />
+
+## Usage
+
+```tsx
+import { SearchField } from "@opengovsg/oui"
+```
+
+```tsx
+<SearchField aria-label="Search" />
+```
+
+The SearchField component provides an accessible search input with a built-in search icon and clear button. The clear button automatically appears when the field has a value and hides when empty.
+
+If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label and Description
+
+Provide clear instructions to users with labels and descriptions.
+
+<ComponentPreview name="search-field-with-label-and-description" />
+
+### With Error Message
+
+Combine `isInvalid` and `errorMessage` props to show validation errors.
+
+<ComponentPreview name="search-field-with-error-message" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the search field.
+
+<ComponentPreview name="search-field-disabled" />
+
+### Sizes
+
+Use the `size` prop to change the size of the field. Defaults to `"md"`.
+
+<ComponentPreview name="search-field-sizes" />
+
+### With Placeholder
+
+Use the `inputProps` prop to pass additional props to the underlying input element, such as a `placeholder`.
+
+<ComponentPreview name="search-field-with-placeholder" />
+
+### Custom Search Icon
+
+Use the `searchIcon` prop to replace the default search icon with a custom one.
+
+<ComponentPreview name="search-field-custom-icon" />
+
+### Hidden Search Icon
+
+Set the `searchIcon` prop to `null` to hide the icon entirely.
+
+<ComponentPreview name="search-field-hidden-icon" />
+
+### Controlled
+
+Use the `value` and `onChange` props to control the input value. The `onSubmit` callback is invoked when the user presses Enter.
+
+<ComponentPreview name="search-field-controlled" />
+
+## Slots
+
+- **base**: The root container wrapper.
+- **label**: The label text element.
+- **group**: The field group wrapper containing the search icon, input, and clear button.
+- **searchIcon**: The search icon displayed at the start of the input.
+- **input**: The input element.
+- **clearButton**: The clear button displayed at the end of the input.

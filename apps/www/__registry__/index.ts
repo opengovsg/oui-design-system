@@ -2433,6 +2433,122 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/range-calendar-visible-duration.tsx"),
     ),
   },
+  "search-field-controlled": {
+    name: "search-field-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-controlled.tsx"),
+    ),
+  },
+  "search-field-custom-icon": {
+    name: "search-field-custom-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-custom-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-custom-icon.tsx"),
+    ),
+  },
+  "search-field-demo": {
+    name: "search-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/search-field-demo.tsx")),
+  },
+  "search-field-disabled": {
+    name: "search-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-disabled.tsx"),
+    ),
+  },
+  "search-field-hidden-icon": {
+    name: "search-field-hidden-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-hidden-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-hidden-icon.tsx"),
+    ),
+  },
+  "search-field-sizes": {
+    name: "search-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/search-field-sizes.tsx")),
+  },
+  "search-field-with-error-message": {
+    name: "search-field-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-with-error-message.tsx"),
+    ),
+  },
+  "search-field-with-label-and-description": {
+    name: "search-field-with-label-and-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-with-label-and-description.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/search-field-with-label-and-description.tsx"
+        ),
+    ),
+  },
+  "search-field-with-placeholder": {
+    name: "search-field-with-placeholder",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-with-placeholder.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-with-placeholder.tsx"),
+    ),
+  },
   "select-content-example": {
     name: "select-content-example",
     description: "",
