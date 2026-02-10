@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 
-import { Input } from "../../input"
 import { DateRangePicker } from "../date-range-picker"
 
 export default {
@@ -56,7 +55,6 @@ export const Sizes: Story = {
         <DateRangePicker {...args} label={`${args.label} (xs)`} size="xs" />
         <DateRangePicker {...args} label={`${args.label} (sm)`} size="sm" />
         <DateRangePicker {...args} label={`${args.label} (md)`} size="md" />
-        <Input size="md" placeholder="dd / mm / yyyy" />
       </div>
     )
   },
