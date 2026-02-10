@@ -1,11 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useTheme } from "@/hooks/use-theme"
 import { ChevronDown } from "lucide-react"
 
 import { Button, Menu, MenuItem, MenuTrigger } from "@opengovsg/oui"
-
-import { useTheme } from "@/hooks/use-theme"
 
 type ThemeManifestEntry = {
   name: string
@@ -32,11 +31,11 @@ export const ThemeSelector = () => {
         size="xs"
         color="neutral"
         endContent={<ChevronDown className="size-3" />}
-        className="max-w-32 truncate text-xs"
       >
         {theme}
       </Button>
       <Menu
+        size="xs"
         items={allThemes}
         selectionMode="single"
         selectedKeys={new Set([theme])}
