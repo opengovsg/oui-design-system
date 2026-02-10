@@ -2792,6 +2792,130 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/text-field-demo.tsx")),
   },
+  "time-field-controlled": {
+    name: "time-field-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-controlled.tsx"),
+    ),
+  },
+  "time-field-demo": {
+    name: "time-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/time-field-demo.tsx")),
+  },
+  "time-field-disabled": {
+    name: "time-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-disabled.tsx"),
+    ),
+  },
+  "time-field-granularity": {
+    name: "time-field-granularity",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-granularity.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-granularity.tsx"),
+    ),
+  },
+  "time-field-hourly-cycle": {
+    name: "time-field-hourly-cycle",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-hourly-cycle.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-hourly-cycle.tsx"),
+    ),
+  },
+  "time-field-min-max": {
+    name: "time-field-min-max",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-min-max.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/time-field-min-max.tsx")),
+  },
+  "time-field-readonly": {
+    name: "time-field-readonly",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-readonly.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-readonly.tsx"),
+    ),
+  },
+  "time-field-sizes": {
+    name: "time-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/time-field-sizes.tsx")),
+  },
+  "time-field-with-description": {
+    name: "time-field-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-with-description.tsx"),
+    ),
+  },
+  "time-field-with-error-message": {
+    name: "time-field-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/time-field-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/time-field-with-error-message.tsx"),
+    ),
+  },
   "toast-actions": {
     name: "toast-actions",
     description: "",
