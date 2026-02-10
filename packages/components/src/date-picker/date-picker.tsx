@@ -82,6 +82,7 @@ export function DatePicker<T extends DateValue>(
       {label && <Label size={variantProps.size}>{label}</Label>}
       <FieldGroup className={styles.group({ className: classNames?.group })}>
         <DateInput
+          variant="unstyled"
           size={variantProps.size}
           className={styles.input({ className: classNames?.input })}
         />

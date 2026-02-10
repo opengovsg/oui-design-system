@@ -3,45 +3,22 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "../utils/tv"
 import { inputStyles } from "./input"
 
-export const dateInputStyles = tv({
-  slots: {
-    base: "block min-w-[150px]",
-    segment:
-      "type-literal:px-0 inline rounded-xs p-0.5 caret-transparent outline-0",
-  },
+export const dateSegmentStyles = tv({
+  base: "type-literal:px-0 inline rounded-xs p-0.5 caret-transparent outline-0",
   variants: {
     variant: {},
     isEditable: {
       true: {},
-      false: {
-        segment: "text-interaction-support-placeholder",
-      },
+      false: "text-interaction-support-placeholder",
     },
     isPlaceholder: {
-      true: {
-        segment: "text-interaction-support-placeholder",
-      },
+      true: "text-interaction-support-placeholder",
     },
     isDisabled: {
-      true: {
-        segment: "text-interaction-support-disabled-content",
-      },
+      true: "text-interaction-support-disabled-content",
     },
     isFocused: {
-      true: {
-        segment: "bg-interaction-main-default text-white dark:text-white",
-      },
-    },
-    size: {
-      xs: {
-        base: "prose-body-2 placeholder:prose-subhead-5 max-sm:prose-body-1",
-      },
-      sm: {
-        base: "prose-body-2 max-sm:prose-body",
-      },
-      md: {
-        base: "prose-body-1",
-      },
+      true: "bg-interaction-main-default text-white dark:text-white",
     },
   },
   compoundVariants: [
@@ -49,18 +26,30 @@ export const dateInputStyles = tv({
       isPlaceholder: false,
       isEditable: true,
       isFocused: false,
-      className: {
-        segment: "text-base-content-default",
-      },
+      className: "text-base-content-default",
     },
   ],
 })
 
-export type DateInputSlots = keyof ReturnType<typeof dateInputStyles>
-export type DateInputVariantProps = VariantProps<typeof dateInputStyles>
+export type DateSegmentVariantProps = VariantProps<typeof dateSegmentStyles>
 
-export const dateFieldStyles = tv({
+export const dateInputStyles = tv({
   extend: inputStyles,
+  variants: {
+    variant: {
+      outline:
+        "focus-within:border-utility-focus-default block min-w-37.5 focus-within:shadow-[0_0_0_1px]",
+    },
+    isDisabled: {
+      true: "",
+    },
+    // Override y padding since this input is actually a wrapper around the segments
+    size: {
+      xs: "py-1.75",
+      sm: "py-2.25",
+      md: "py-2.25",
+    },
+  },
 })
 
-export type DateFieldVariantProps = VariantProps<typeof dateFieldStyles>
+export type DateInputVariantProps = VariantProps<typeof dateInputStyles>

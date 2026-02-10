@@ -6,7 +6,7 @@ export const datePickerStyles = tv({
   slots: {
     base: "group isolate flex w-full flex-col gap-1",
     group: "",
-    input: "flex-1",
+    input: "h-auto flex-1",
     dialog: "flex",
     selectorIcon: "",
     calendarButton: "z-1 -m-px text-inherit -outline-offset-1",
@@ -14,18 +14,9 @@ export const datePickerStyles = tv({
   variants: {
     variant: {},
     size: {
-      xs: {
-        group: "h-9",
-        input: "px-3 py-2",
-      },
-      sm: {
-        group: "h-10",
-        input: "px-3 py-2.5",
-      },
-      md: {
-        group: "h-11",
-        input: "px-4 py-2.5",
-      },
+      xs: {},
+      sm: {},
+      md: {},
     },
   },
   defaultVariants: {
