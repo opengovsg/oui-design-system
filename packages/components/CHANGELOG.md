@@ -1,5 +1,20 @@
 # @opengovsg/oui
 
+## 0.0.40
+
+### Patch Changes
+
+- [#205](https://github.com/opengovsg/oui-design-system/pull/205) [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5) Thanks [@karrui](https://github.com/karrui)! - feat(date-field): update styles and variant props
+
+- [#205](https://github.com/opengovsg/oui-design-system/pull/205) [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5) Thanks [@karrui](https://github.com/karrui)! - feat(time-field): add TimeField component
+
+- [#205](https://github.com/opengovsg/oui-design-system/pull/205) [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5) Thanks [@karrui](https://github.com/karrui)! - feat(date-pickers): update styling due to changes in underlying date field styling
+
+- [#205](https://github.com/opengovsg/oui-design-system/pull/205) [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5) Thanks [@karrui](https://github.com/karrui)! - feat: export DateField and DateInput props
+
+- Updated dependencies [[`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5), [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5), [`c8da99d`](https://github.com/opengovsg/oui-design-system/commit/c8da99dd5c3821795c7942534a2040881aa4c9f5)]:
+  - @opengovsg/oui-theme@0.0.40
+
 ## 0.0.39
 
 ### Patch Changes
