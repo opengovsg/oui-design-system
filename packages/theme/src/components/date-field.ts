@@ -36,6 +36,10 @@ export type DateSegmentVariantProps = VariantProps<typeof dateSegmentStyles>
 export const dateInputStyles = tv({
   extend: inputStyles,
   variants: {
+    variant: {
+      outline:
+        "focus-within:border-utility-focus-default block min-w-37.5 focus-within:shadow-[0_0_0_1px]",
+    },
     isDisabled: {
       true: "",
     },
@@ -46,7 +50,6 @@ export const dateInputStyles = tv({
       md: "py-2.25",
     },
   },
-  base: "focus-within:border-utility-focus-default focus-within:shadow-[0_0_0_1px]",
 })
 
 export type DateInputVariantProps = VariantProps<typeof dateInputStyles>

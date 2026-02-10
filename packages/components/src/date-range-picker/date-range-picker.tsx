@@ -95,6 +95,7 @@ export function DateRangePicker<T extends DateValue>(
           className={styles.dateWrapper({ className: classNames?.dateWrapper })}
         >
           <DateInput
+            variant="unstyled"
             slot="start"
             size={variantProps.size}
             className={styles.startInput({ className: classNames?.startInput })}
@@ -108,6 +109,7 @@ export function DateRangePicker<T extends DateValue>(
             –
           </span>
           <DateInput
+            variant="unstyled"
             slot="end"
             size={variantProps.size}
             className={styles.endInput({ className: classNames?.endInput })}
