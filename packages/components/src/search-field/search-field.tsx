@@ -28,13 +28,24 @@ export interface SearchFieldProps
   errorMessage?:
     | React.ReactNode
     | ((validation: ValidationResult) => React.ReactNode)
+  /** The icon to display in the search field. Defaults to `SearchIcon`.
+   * Set to `null` to hide the icon. */
+  searchIcon?: React.ReactNode | null
   inputProps?: Partial<InputProps>
   classNames?: SlotsToClasses<SearchFieldSlots>
 }
 
 export function SearchField(originalProps: SearchFieldProps) {
   const [
-    { label, description, errorMessage, inputProps, classNames, ...props },
+    {
+      label,
+      description,
+      errorMessage,
+      searchIcon,
+      inputProps,
+      classNames,
+      ...props
+    },
     variantProps,
   ] = mapPropsVariants(originalProps, searchFieldStyles.variantKeys)
 
@@ -62,10 +73,17 @@ export function SearchField(originalProps: SearchFieldProps) {
         </Label>
       )}
       <FieldGroup className={styles.group({ className: classNames?.group })}>
-        <SearchIcon
-          aria-hidden
-          className={styles.searchIcon({ className: classNames?.searchIcon })}
-        />
+        {searchIcon !== null &&
+          (searchIcon === undefined ? (
+            <SearchIcon
+              aria-hidden
+              className={styles.searchIcon({
+                className: classNames?.searchIcon,
+              })}
+            />
+          ) : (
+            searchIcon
+          ))}
         <Input
           size={variantProps.size}
           variant="unstyled"

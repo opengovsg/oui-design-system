@@ -17,16 +17,16 @@ export const searchFieldStyles = tv({
     size: {
       xs: {
         searchIcon: "ml-3 size-4",
-        input: "pl-2",
+        input: "not-first:pl-2",
       },
       sm: {
         searchIcon: "ml-3 size-4",
-        input: "pl-2",
+        input: "not-first:pl-2",
         clearButton: "[&_svg]:h-4 [&_svg]:w-4",
       },
       md: {
         searchIcon: "ml-4 size-5",
-        input: "pl-2",
+        input: "not-first:pl-2",
       },
     },
   },
