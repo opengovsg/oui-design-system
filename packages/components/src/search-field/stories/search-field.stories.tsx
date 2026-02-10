@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { FilterIcon } from "lucide-react"
 import { useState } from "react"
+import { FilterIcon } from "lucide-react"
 import { expect } from "storybook/test"
 
 import { SearchField } from "../search-field"
@@ -20,6 +20,9 @@ export default {
         ],
       },
     },
+  },
+  args: {
+    onSubmit: (value) => alert(`Search submitted: ${value}`),
   },
 } as Meta<typeof SearchField>
 
@@ -69,7 +72,12 @@ export const Sizes: Story = {
 export const CustomSearchIcon: Story = {
   args: {
     label: "Filter",
-    searchIcon: <FilterIcon aria-hidden className="ml-4 size-5 text-base-content-medium" />,
+    searchIcon: (
+      <FilterIcon
+        aria-hidden
+        className="text-base-content-medium ml-4 size-5"
+      />
+    ),
   },
 }
 
@@ -77,6 +85,13 @@ export const HiddenSearchIcon: Story = {
   args: {
     label: "Search",
     searchIcon: null,
+  },
+}
+
+export const WithPlaceholder: Story = {
+  args: {
+    label: "Search",
+    inputProps: { placeholder: "Search by name or email" },
   },
 }
 

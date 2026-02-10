@@ -2536,6 +2536,19 @@ export const Index: Record<string, RegistryComponent> = {
         ),
     ),
   },
+  "search-field-with-placeholder": {
+    name: "search-field-with-placeholder",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-with-placeholder.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-with-placeholder.tsx"),
+    ),
+  },
   "select-content-example": {
     name: "select-content-example",
     description: "",
