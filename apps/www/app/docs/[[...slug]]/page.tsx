@@ -1,13 +1,45 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
-import { docsConfig } from "@/config/docs.config"
+import { docsConfig, type NavItem } from "@/config/docs.config"
 import { flattenToc } from "@/lib/flatten-toc"
 import { docs } from "#site/content"
 
 import { EditPageButton } from "../components/edit-page-button"
 import { PageHeader } from "./components/page-header"
 import { Toc } from "./components/toc"
+
+/**
+ * Walk the navigation config to find the first child URL for a given slug path.
+ * For example, [] → "getting-started", ["getting-started"] → "getting-started/installation".
+ */
+function getFirstChildSlug(slugSegments: string[]): string | null {
+  const rootNav = docsConfig.navigation[0]
+  if (!rootNav?.items) return null
+
+  let items: NavItem[] = rootNav.items
+  for (const segment of slugSegments) {
+    const match = items.find((item) => item.url === segment)
+    if (!match?.items) return null
+    items = match.items
+  }
+
+  function findFirstUrl(navItems: NavItem[]): string | null {
+    for (const item of navItems) {
+      if (item.url) return item.url
+      if (item.items) {
+        const url = findFirstUrl(item.items)
+        if (url) return url
+      }
+    }
+    return null
+  }
+
+  const firstChildUrl = findFirstUrl(items)
+  if (!firstChildUrl) return null
+
+  return [...slugSegments, firstChildUrl].join("/")
+}
 
 interface DynamicPageProps {
   params: Promise<{ slug: string[] }>
@@ -50,6 +82,14 @@ export default async function DocPage({ params }: DynamicPageProps) {
   const doc = await getDocFromParams({ params })
 
   if (!doc) {
+    const parameters = await params
+    const slugSegments = parameters.slug ?? []
+    const firstChildSlug = getFirstChildSlug(slugSegments)
+
+    if (firstChildSlug) {
+      redirect(`/docs/${firstChildSlug}`)
+    }
+
     notFound()
   }
 
