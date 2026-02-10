@@ -33,4 +33,5 @@ export * from "./navbar"
 export * from "./avatar"
 export * from "./accordion"
 export * from "./time-field"
+export * from "./search-field"
 // Add new component exports here
