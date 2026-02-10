@@ -13,16 +13,12 @@ import {
   DateSegment,
 } from "react-aria-components"
 
-import type {
-  DateInputSlots,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
+import type { SlotsToClasses, VariantProps } from "@opengovsg/oui-theme"
 import {
   composeRenderProps,
   composeTailwindRenderProps,
-  dateFieldStyles,
   dateInputStyles,
+  dateSegmentStyles,
 } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
@@ -30,7 +26,7 @@ import { mapPropsVariants } from "../system/utils"
 
 export interface DateFieldProps<T extends DateValue>
   extends AriaDateFieldProps<T>,
-    VariantProps<typeof dateFieldStyles> {
+    VariantProps<typeof dateInputStyles> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -55,14 +51,9 @@ export function DateField<T extends DateValue>(
     },
     variantProps,
   ] = useMemo(
-    () => mapPropsVariants(originalProps, dateFieldStyles.variantKeys),
+    () => mapPropsVariants(originalProps, dateInputStyles.variantKeys),
     [originalProps],
   )
-
-  const styles = dateFieldStyles({
-    className: classNames?.input,
-    ...variantProps,
-  })
 
   return (
     <AriaDateField
@@ -78,7 +69,11 @@ export function DateField<T extends DateValue>(
           {label}
         </Label>
       )}
-      <DateInput size={variantProps.size} className={styles} {...inputProps} />
+      <DateInput
+        {...variantProps}
+        {...inputProps}
+        className={classNames?.input ?? inputProps?.className}
+      />
       {description && (
         <Description
           size={variantProps.size}
@@ -100,7 +95,7 @@ export interface DateInputProps
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
-  classNames?: SlotsToClasses<DateInputSlots>
+  classNames?: SlotsToClasses<"base" | "segment">
 }
 
 export function DateInput(originalProps: DateInputProps) {
@@ -108,13 +103,18 @@ export function DateInput(originalProps: DateInputProps) {
     () => mapPropsVariants(originalProps, dateInputStyles.variantKeys),
     [originalProps],
   )
-  const styles = dateInputStyles(variantProps)
 
   return (
     <AriaDateInput
-      className={composeTailwindRenderProps(
+      className={composeRenderProps(
         className ?? classNames?.base,
-        styles.base(),
+        (className, renderProps) => {
+          return dateInputStyles({
+            ...variantProps,
+            ...renderProps,
+            className,
+          })
+        },
       )}
       {...props}
     >
@@ -124,7 +124,7 @@ export function DateInput(originalProps: DateInputProps) {
           className={composeRenderProps(
             classNames?.segment,
             (className, renderProps) =>
-              styles.segment({
+              dateSegmentStyles({
                 isEditable: segment.isEditable,
                 ...renderProps,
                 className,
