@@ -1,14 +1,13 @@
-import type { VariantProps } from "tailwind-variants"
-
 import { tv } from "../utils/tv"
 
 export const breadcrumbsStyles = tv({
-  base: [],
-  variants: {
-    variant: {},
-    size: {},
+  slots: {
+    base: "flex gap-1",
+    crumb: "flex items-center gap-1",
+    link: "disabled:text-base-content-default inline-flex items-center justify-center",
+    separator:
+      "text-interaction-support-disabled-content inline-flex size-[1em] items-center justify-center leading-none",
   },
-  defaultVariants: {},
 })
 
-export type BreadcrumbsVariantProps = VariantProps<typeof breadcrumbsStyles>
+export type BreadcrumbsSlots = keyof ReturnType<typeof breadcrumbsStyles>
