@@ -15,8 +15,7 @@ export default function BreadcrumbsTruncatedCustom() {
           {(item) => (
             <MenuItem
               key={item.id}
-              id={item.id}
-              href={item.href}
+              {...item}
               classNames={{
                 container: "text-brand-primary-700 font-bold",
               }}
@@ -30,7 +29,9 @@ export default function BreadcrumbsTruncatedCustom() {
       <Breadcrumb href="#">Home</Breadcrumb>
       <Breadcrumb href="#">Category</Breadcrumb>
       <Breadcrumb href="#">Subcategory A</Breadcrumb>
-      <Breadcrumb href="#">Subcategory B</Breadcrumb>
+      <Breadcrumb onPress={() => alert("Subcategory B pressed")}>
+        Subcategory B
+      </Breadcrumb>
       <Breadcrumb href="#">Subcategory C</Breadcrumb>
       <Breadcrumb>Current Page</Breadcrumb>
     </Breadcrumbs>

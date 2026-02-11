@@ -49,7 +49,11 @@ export const WithCollection: Story = {
       { id: "home", href: "#", children: "Home" },
       { id: "category", href: "#", children: "Category" },
       { id: "subcategory-a", href: "#", children: "Subcategory A" },
-      { id: "subcategory-b", href: "#", children: "Subcategory B" },
+      {
+        id: "subcategory-b",
+        onPress: () => alert("Subcategory B pressed"),
+        children: "Subcategory B",
+      },
       { id: "subcategory-c", href: "#", children: "Subcategory C" },
       { id: "current-page", children: "Current Page" },
     ]
@@ -57,7 +61,7 @@ export const WithCollection: Story = {
     return (
       // @ts-expect-error: Generic type inference issue
       <Breadcrumbs {...args} items={items}>
-        {(item) => <Breadcrumb>{item.children}</Breadcrumb>}
+        {(item) => <Breadcrumb {...item} />}
       </Breadcrumbs>
     )
   },
@@ -69,7 +73,9 @@ const TruncationTemplate = (args: Story["args"]) => {
       <Breadcrumb href="#">Home</Breadcrumb>
       <Breadcrumb href="#">Category</Breadcrumb>
       <Breadcrumb href="#">Subcategory A</Breadcrumb>
-      <Breadcrumb href="#">Subcategory B</Breadcrumb>
+      <Breadcrumb onPress={() => alert("Subcategory B pressed")}>
+        Subcategory B
+      </Breadcrumb>
       <Breadcrumb href="#">Subcategory C</Breadcrumb>
       <Breadcrumb>Current Page</Breadcrumb>
     </Breadcrumbs>
@@ -116,8 +122,7 @@ export const TruncateCustomDropdown: Story = {
         {(item) => (
           <MenuItem
             key={item.id}
-            id={item.id}
-            href={item.href}
+            {...item}
             classNames={{
               container: "text-brand-primary-700 font-bold",
             }}

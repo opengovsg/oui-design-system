@@ -158,8 +158,9 @@ Individual `Breadcrumb` items also accept a `classNames` prop to override styles
 
 The shape of items passed to the `renderTruncate` function.
 
-| Property   | Type              | Description                        |
-| ---------- | ----------------- | ---------------------------------- |
-| `id`       | `string`          | Unique identifier for the item     |
-| `href`     | `string`          | The URL the item links to          |
-| `children` | `React.ReactNode` | The content of the breadcrumb item |
+| Property   | Type                      | Description                                      |
+| ---------- | ------------------------- | ------------------------------------------------ |
+| `id`       | `string`                  | Unique identifier for the item                   |
+| `href`     | `string`                  | The URL the item links to                        |
+| `children` | `React.ReactNode`         | The content of the breadcrumb item               |
+| `onPress`  | `(e: PressEvent) => void` | Press event handler from the original breadcrumb |

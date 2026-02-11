@@ -8,7 +8,9 @@ export default function BreadcrumbsTruncatedNoDropdown() {
       <Breadcrumb href="#">Home</Breadcrumb>
       <Breadcrumb href="#">Category</Breadcrumb>
       <Breadcrumb href="#">Subcategory A</Breadcrumb>
-      <Breadcrumb href="#">Subcategory B</Breadcrumb>
+      <Breadcrumb onPress={() => alert("Subcategory B pressed")}>
+        Subcategory B
+      </Breadcrumb>
       <Breadcrumb href="#">Subcategory C</Breadcrumb>
       <Breadcrumb>Current Page</Breadcrumb>
     </Breadcrumbs>

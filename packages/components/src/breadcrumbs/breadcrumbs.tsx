@@ -111,10 +111,12 @@ export function Breadcrumbs<T extends object>({
       const childProps = child.props as {
         href?: string
         children?: React.ReactNode
+        onPress?: BreadcrumbEllipsisItem["onPress"]
       }
       return {
         href: childProps.href,
         children: childProps.children,
+        onPress: childProps.onPress,
         id:
           child.key != null ? String(child.key) : `breadcrumb-hidden-${index}`,
       }
@@ -232,6 +234,7 @@ export interface BreadcrumbEllipsisItem {
   href?: string
   children: React.ReactNode
   id: string
+  onPress?: LinkProps["onPress"]
 }
 
 interface BreadcrumbEllipsisProps {
@@ -267,7 +270,12 @@ function BreadcrumbEllipsis({
   ) : (
     <Menu placement="bottom start" {...menuProps}>
       {items.map((item) => (
-        <MenuItem key={item.id} id={item.id} href={item.href}>
+        <MenuItem
+          key={item.id}
+          id={item.id}
+          href={item.href}
+          onPress={item.onPress}
+        >
           {item.children}
         </MenuItem>
       ))}
