@@ -88,6 +88,9 @@ export const TruncateWithSlashSeparator: Story = {
     className: "prose-caption-1",
     itemsBeforeTruncate: 2,
     separator: "/",
+    truncateProps: {
+      size: "xs",
+    },
   },
 }
 

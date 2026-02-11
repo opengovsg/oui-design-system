@@ -17,6 +17,7 @@ import {
 import type { BreadcrumbsSlots, SlotsToClasses } from "@opengovsg/oui-theme"
 import { breadcrumbsStyles, composeRenderProps } from "@opengovsg/oui-theme"
 
+import type { MenuProps } from "../menu"
 import type {
   BreadcrumbSeparator,
   UseProvideBreadcrumbsStylesReturn,
@@ -42,6 +43,7 @@ export type BreadcrumbsProps<T extends object> = BreadcrumbsBaseProps<T> &
         itemsBeforeTruncate?: never
         itemsAfterTruncate?: never
         renderTruncate?: never
+        truncateProps?: never
       }
     | {
         items?: never
@@ -70,6 +72,8 @@ export type BreadcrumbsProps<T extends object> = BreadcrumbsBaseProps<T> &
         renderTruncate?:
           | ((items: BreadcrumbEllipsisItem[]) => React.ReactNode)
           | null
+
+        truncateProps?: Partial<MenuProps<object>>
       }
   )
 
@@ -78,6 +82,7 @@ export function Breadcrumbs<T extends object>({
   itemsBeforeTruncate = null,
   itemsAfterTruncate = 2,
   renderTruncate,
+  truncateProps,
   ...props
 }: BreadcrumbsProps<T>) {
   const slots = breadcrumbsStyles()
@@ -121,10 +126,17 @@ export function Breadcrumbs<T extends object>({
         key="__breadcrumb-ellipsis"
         items={hiddenItemData}
         renderTruncate={renderTruncate}
+        menuProps={truncateProps}
       />,
       ...visibleEnd,
     ]
-  }, [itemsBeforeTruncate, itemsAfterTruncate, renderTruncate, props.children])
+  }, [
+    itemsBeforeTruncate,
+    props.children,
+    itemsAfterTruncate,
+    renderTruncate,
+    truncateProps,
+  ])
 
   return (
     <Provider values={[[BreadcrumbsStyleContext, { separator, slots }]]}>
@@ -225,11 +237,13 @@ export interface BreadcrumbEllipsisItem {
 interface BreadcrumbEllipsisProps {
   items: BreadcrumbEllipsisItem[]
   renderTruncate?: ((items: BreadcrumbEllipsisItem[]) => React.ReactNode) | null
+  menuProps?: Partial<MenuProps<object>>
 }
 
 function BreadcrumbEllipsis({
   items,
   renderTruncate,
+  menuProps,
 }: BreadcrumbEllipsisProps) {
   const context =
     useBreadcrumbsStyleContext() ??
@@ -251,7 +265,7 @@ function BreadcrumbEllipsis({
   const menuContent = renderTruncate ? (
     renderTruncate(items)
   ) : (
-    <Menu placement="bottom start">
+    <Menu placement="bottom start" {...menuProps}>
       {items.map((item) => (
         <MenuItem key={item.id} id={item.id} href={item.href}>
           {item.children}
