@@ -46,7 +46,7 @@ const docsLinks: NavItem = {
             { title: "Avatar", url: "avatar" },
             { title: "Badge", url: "badge" },
             { title: "Banner", url: "banner" },
-            { title: "Breadcrumb", url: "breadcrumb", status: "wip" },
+            { title: "Breadcrumbs", url: "breadcrumbs", status: "new" },
             { title: "Button", url: "button" },
             { title: "Calendar", url: "calendar" },
             { title: "Card", url: "card", status: "wip" },
