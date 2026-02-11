@@ -3,7 +3,6 @@ import type { breadcrumbsStyles } from "@opengovsg/oui-theme"
 import { createContext } from "../system/react-utils"
 
 export type BreadcrumbSeparator =
-  | "slash"
   | "chevron"
   | Exclude<React.ReactNode, string>
   | (string & {})

@@ -6,7 +6,7 @@ export const breadcrumbsStyles = tv({
     crumb: "flex items-center gap-1",
     link: "disabled:text-base-content-default inline-flex items-center justify-center *:h-[1em]",
     separator:
-      "text-interaction-support-disabled-content inline-flex size-[1em] items-center justify-center leading-none",
+      "text-interaction-support-disabled-content inline-flex h-[1em] w-fit items-center justify-center leading-none",
   },
 })
 

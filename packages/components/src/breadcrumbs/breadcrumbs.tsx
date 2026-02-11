@@ -69,15 +69,6 @@ export function Breadcrumb({
   const separator = useMemo(() => {
     if (!separatorValue) return null
     switch (separatorValue) {
-      case "slash":
-        return (
-          <span
-            aria-hidden
-            className={slots.separator({ className: classNames?.separator })}
-          >
-            /
-          </span>
-        )
       case "chevron":
         return (
           <ChevronRight
@@ -86,7 +77,14 @@ export function Breadcrumb({
           />
         )
       default:
-        return separatorValue
+        return (
+          <span
+            aria-hidden
+            className={slots.separator({ className: classNames?.separator })}
+          >
+            {separatorValue}
+          </span>
+        )
     }
   }, [classNames?.separator, separatorValue, slots])
 

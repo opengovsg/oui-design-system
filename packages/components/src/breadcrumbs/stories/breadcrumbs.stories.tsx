@@ -37,6 +37,6 @@ export const CustomTypography: Story = {
 export const SlashSeparator: Story = {
   render: Template,
   args: {
-    separator: "slash",
+    separator: "/",
   },
 }
