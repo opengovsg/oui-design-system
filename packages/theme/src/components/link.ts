@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const linkStyles = tv({
   extend: racFocusRing,
-  base: "",
+  base: "inline cursor-pointer *:inline",
   variants: {
     color: {
       unstyled: "",
