@@ -1,0 +1,13 @@
+import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Breadcrumbs } from "../breadcrumbs"
+
+export default {
+  title: "Components/Breadcrumbs",
+  component: Breadcrumbs,
+} as Meta<typeof Breadcrumbs>
+
+type Story = StoryObj<typeof Breadcrumbs>
+
+export const Default: Story = {
+  args: {},
+}
