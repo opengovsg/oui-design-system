@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.43
+
+### Patch Changes
+
+- [#215](https://github.com/opengovsg/oui-design-system/pull/215) [`c03307b`](https://github.com/opengovsg/oui-design-system/commit/c03307b6b597031a8a7f31582f464bdee228bd3f) Thanks [@karrui](https://github.com/karrui)! - feat: add Breadcrumbs component
+
+- Updated dependencies [[`c03307b`](https://github.com/opengovsg/oui-design-system/commit/c03307b6b597031a8a7f31582f464bdee228bd3f)]:
+  - @opengovsg/oui-theme@0.0.43
+
 ## 0.0.42
 
 ### Patch Changes
