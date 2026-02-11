@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { Home } from "lucide-react"
 
 import { Breadcrumb, Breadcrumbs } from "../breadcrumbs"
 
@@ -12,7 +13,10 @@ type Story = StoryObj<typeof Breadcrumbs>
 const Template = (args: Story["args"]) => {
   return (
     <Breadcrumbs {...args}>
-      <Breadcrumb href="#">Home</Breadcrumb>
+      <Breadcrumb href="#">
+        <Home />
+        Home
+      </Breadcrumb>
       <Breadcrumb href="#">React Aria</Breadcrumb>
       <Breadcrumb>Breadcrumbs</Breadcrumb>
     </Breadcrumbs>
