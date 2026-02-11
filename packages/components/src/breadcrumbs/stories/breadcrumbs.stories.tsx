@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Home } from "lucide-react"
 
-import { Menu, MenuItem } from "../../menu"
+import { Link } from "../../link"
+import { Menu, MenuItem, MenuTrigger } from "../../menu"
 import { Breadcrumb, Breadcrumbs } from "../breadcrumbs"
 
 export default {
@@ -126,5 +127,27 @@ export const TruncateCustomDropdown: Story = {
         )}
       </Menu>
     ),
+  },
+}
+
+export const CustomBreadcrumbItem: Story = {
+  render: (args) => {
+    return (
+      <Breadcrumbs {...args}>
+        <Breadcrumb href="#">Home</Breadcrumb>
+        <Breadcrumb href="#">Category</Breadcrumb>
+        <Breadcrumb>
+          <MenuTrigger>
+            <Link>Subcategory HEHE</Link>
+            <Menu>
+              <MenuItem id="option-1">Option 1</MenuItem>
+              <MenuItem id="option-2">Option 2</MenuItem>
+              <MenuItem id="option-3">Option 3</MenuItem>
+            </Menu>
+          </MenuTrigger>
+        </Breadcrumb>
+        <Breadcrumb>Current Page</Breadcrumb>
+      </Breadcrumbs>
+    )
   },
 }
