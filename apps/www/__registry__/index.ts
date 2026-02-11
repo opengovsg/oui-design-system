@@ -1670,6 +1670,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/link-with-onpress.tsx")),
   },
+  "link-with-pseudo-elements": {
+    name: "link-with-pseudo-elements",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-with-pseudo-elements.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/link-with-pseudo-elements.tsx"),
+    ),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",
