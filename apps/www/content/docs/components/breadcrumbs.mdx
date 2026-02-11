@@ -1,0 +1,166 @@
+---
+title: Breadcrumbs
+description: Displays the current location within the hierarchy. It allows users to go back higher in the hierarchy.
+toc:
+  visible: true
+links:
+  source: breadcrumbs
+  storybook: components-breadcrumbs--default
+  theme: breadcrumbs
+  reactaria: Breadcrumbs
+---
+
+<ComponentPreview name="breadcrumbs-demo" />
+
+## Usage
+
+```tsx
+import { Breadcrumb, Breadcrumbs } from "@opengovsg/oui"
+```
+
+```tsx
+<Breadcrumbs>
+  <Breadcrumb href="#">Home</Breadcrumb>
+  <Breadcrumb href="#">Components</Breadcrumb>
+  <Breadcrumb>Breadcrumbs</Breadcrumb>
+</Breadcrumbs>
+```
+
+OUI exports 2 breadcrumb-related components:
+
+- **Breadcrumbs**: The container component that provides context and layout for breadcrumb items.
+- **Breadcrumb**: An individual breadcrumb item, rendered as a link by default. The last item is automatically styled as the current page.
+
+## Examples
+
+### Custom Separator
+
+Use the `separator` prop to change the separator between breadcrumb items. The default separator is a chevron icon. You can pass any string (e.g. `"/"`, `"|"`) or a custom React node.
+
+<ComponentPreview name="breadcrumbs-separator" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable all breadcrumb items, preventing navigation while maintaining layout consistency.
+
+<ComponentPreview name="breadcrumbs-disabled" />
+
+### Truncation
+
+When breadcrumbs have many items, you can use the `itemsBeforeTruncate` prop to collapse middle items behind an ellipsis. Clicking the ellipsis opens a dropdown menu showing the hidden items.
+
+Use `itemsAfterTruncate` to control how many items are shown after the ellipsis (default: `2`).
+
+> **Note:** Truncation props are ignored when using the Collection API (`items` prop). These two modes are mutually exclusive and this is enforced at the type level.
+
+<ComponentPreview name="breadcrumbs-truncated" />
+
+### Truncation Without Dropdown
+
+Set `renderTruncate={null}` to display the ellipsis without an interactive dropdown.
+
+<ComponentPreview name="breadcrumbs-truncated-no-dropdown" />
+
+### Custom Truncation Dropdown
+
+Pass a custom render function to `renderTruncate` to fully control the dropdown content and styling.
+
+<ComponentPreview name="breadcrumbs-truncated-custom" />
+
+### Collection API
+
+As an alternative to JSX children, you can use the Collection API by passing an `items` array. Items are rendered using a render function.
+
+> **Note:** The Collection API cannot be used simultaneously with truncation props (`itemsBeforeTruncate`, `itemsAfterTruncate`, `renderTruncate`). This is enforced at the type level.
+
+<ComponentPreview name="breadcrumbs-collection" />
+
+### Custom Breadcrumb Content
+
+Breadcrumb items accept arbitrary content. For example, you can embed a `MenuTrigger` inside a breadcrumb to create a dropdown navigation item.
+
+<ComponentPreview name="breadcrumbs-custom-breadcrumb" />
+
+## Slots
+
+- **base**: The outer container of the breadcrumbs list.
+- **crumb**: The wrapper for each individual breadcrumb item.
+- **link**: The link element inside each breadcrumb.
+- **separator**: The separator element between breadcrumb items.
+- **ellipsisTrigger**: The trigger element for the truncation ellipsis.
+
+### Custom Styles
+
+You can customize the `Breadcrumbs` component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+```tsx
+<Breadcrumbs
+  classNames={{
+    base: "gap-2",
+    crumb: "gap-2",
+    link: "text-brand-primary-500",
+    separator: "text-base-content-medium",
+  }}
+>
+  <Breadcrumb>Home</Breadcrumb>
+</Breadcrumbs>
+```
+
+Individual `Breadcrumb` items also accept a `classNames` prop to override styles on a per-item basis (all slots except `base`).
+
+```tsx
+<Breadcrumb
+  classNames={{
+    crumb: "font-bold",
+    link: "text-brand-primary-700",
+    separator: "text-base-content-strong",
+  }}
+>
+  Highlighted
+</Breadcrumb>
+```
+
+## Accessibility
+
+- Breadcrumbs are rendered as an ordered list (`<ol>`) inside a `<nav>` element, providing semantic navigation structure.
+- The last breadcrumb item is automatically marked as the current page with `aria-current="page"`.
+- Separators are hidden from assistive technologies with `aria-hidden`.
+- The truncation ellipsis has an `aria-label` of "Show more breadcrumbs" for screen readers.
+- Full keyboard navigation is supported.
+
+## Props
+
+### Breadcrumbs
+
+| Prop                  | Type                                                             | Default     | Description                                                                               |
+| --------------------- | ---------------------------------------------------------------- | ----------- | ----------------------------------------------------------------------------------------- |
+| `children`            | `React.ReactNode`                                                | -           | The breadcrumb items                                                                      |
+| `items`               | `Iterable<T>`                                                    | -           | Item data for the Collection API. Cannot be used with truncation props                    |
+| `separator`           | `"chevron" \| React.ReactNode \| string \| null`                 | `"chevron"` | The separator between breadcrumb items                                                    |
+| `itemsBeforeTruncate` | `number \| null`                                                 | `null`      | Number of items to show before the ellipsis. Setting a number enables truncation          |
+| `itemsAfterTruncate`  | `number`                                                         | `2`         | Number of items to show after the ellipsis                                                |
+| `renderTruncate`      | `((items: BreadcrumbEllipsisItem[]) => React.ReactNode) \| null` | -           | Custom render function for the truncation dropdown. Set to `null` to disable the dropdown |
+| `truncateProps`       | `Partial<MenuProps<object>>`                                     | -           | Props to pass to the truncation dropdown `Menu`                                           |
+| `isDisabled`          | `boolean`                                                        | -           | Whether all breadcrumbs are disabled                                                      |
+| `classNames`          | `SlotsToClasses<BreadcrumbsSlots>`                               | -           | Custom CSS classes for component slots                                                    |
+
+### Breadcrumb
+
+| Prop         | Type                                                | Default | Description                                                |
+| ------------ | --------------------------------------------------- | ------- | ---------------------------------------------------------- |
+| `children`   | `React.ReactNode`                                   | -       | The content of the breadcrumb                              |
+| `href`       | `string`                                            | -       | The URL the breadcrumb links to. Omit for the current page |
+| `separator`  | `"chevron" \| React.ReactNode \| string \| null`    | -       | Override the separator for this item                       |
+| `isDisabled` | `boolean`                                           | -       | Whether this breadcrumb is disabled                        |
+| `classNames` | `SlotsToClasses<Exclude<BreadcrumbsSlots, "base">>` | -       | Custom CSS classes for this item's slots                   |
+
+### BreadcrumbEllipsisItem
+
+The shape of items passed to the `renderTruncate` function.
+
+| Property   | Type                      | Description                                      |
+| ---------- | ------------------------- | ------------------------------------------------ |
+| `id`       | `string`                  | Unique identifier for the item                   |
+| `href`     | `string`                  | The URL the item links to                        |
+| `children` | `React.ReactNode`         | The content of the breadcrumb item               |
+| `onPress`  | `(e: PressEvent) => void` | Press event handler from the original breadcrumb |

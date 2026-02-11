@@ -442,6 +442,108 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/banner-with-start-content.tsx"),
     ),
   },
+  "breadcrumbs-collection": {
+    name: "breadcrumbs-collection",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-collection.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-collection.tsx"),
+    ),
+  },
+  "breadcrumbs-custom-breadcrumb": {
+    name: "breadcrumbs-custom-breadcrumb",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-custom-breadcrumb.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-custom-breadcrumb.tsx"),
+    ),
+  },
+  "breadcrumbs-demo": {
+    name: "breadcrumbs-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/breadcrumbs-demo.tsx")),
+  },
+  "breadcrumbs-disabled": {
+    name: "breadcrumbs-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-disabled.tsx"),
+    ),
+  },
+  "breadcrumbs-separator": {
+    name: "breadcrumbs-separator",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-separator.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-separator.tsx"),
+    ),
+  },
+  "breadcrumbs-truncated-custom": {
+    name: "breadcrumbs-truncated-custom",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-truncated-custom.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated-custom.tsx"),
+    ),
+  },
+  "breadcrumbs-truncated-no-dropdown": {
+    name: "breadcrumbs-truncated-no-dropdown",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-truncated-no-dropdown.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated-no-dropdown.tsx"),
+    ),
+  },
+  "breadcrumbs-truncated": {
+    name: "breadcrumbs-truncated",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/breadcrumbs-truncated.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated.tsx"),
+    ),
+  },
   "button-demo": {
     name: "button-demo",
     description: "",

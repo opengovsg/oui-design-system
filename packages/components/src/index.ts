@@ -35,4 +35,5 @@ export * from "./accordion"
 export * from "./time-field"
 export * from "./search-field"
 export * from "./link"
+export * from "./breadcrumbs"
 // Add new component exports here

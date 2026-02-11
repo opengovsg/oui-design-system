@@ -1,0 +1,24 @@
+"use client"
+
+import { Breadcrumb, Breadcrumbs } from "@opengovsg/oui"
+
+export default function BreadcrumbsCollection() {
+  const items = [
+    { id: "home", href: "#", children: "Home" },
+    { id: "category", href: "#", children: "Category" },
+    { id: "subcategory-a", href: "#", children: "Subcategory A" },
+    {
+      id: "subcategory-b",
+      onPress: () => alert("Subcategory B pressed"),
+      children: "Subcategory B",
+    },
+    { id: "subcategory-c", href: "#", children: "Subcategory C" },
+    { id: "current-page", children: "Current Page" },
+  ]
+
+  return (
+    <Breadcrumbs items={items}>
+      {(item) => <Breadcrumb {...item} />}
+    </Breadcrumbs>
+  )
+}
