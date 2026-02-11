@@ -1615,6 +1615,61 @@ export const Index: Record<string, RegistryComponent> = {
         ),
     ),
   },
+  "link-demo": {
+    name: "link-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/link-demo.tsx")),
+  },
+  "link-disabled": {
+    name: "link-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-disabled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/link-disabled.tsx")),
+  },
+  "link-with-colors": {
+    name: "link-with-colors",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-with-colors.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/link-with-colors.tsx")),
+  },
+  "link-with-icons": {
+    name: "link-with-icons",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-with-icons.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/link-with-icons.tsx")),
+  },
+  "link-with-onpress": {
+    name: "link-with-onpress",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/link-with-onpress.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/link-with-onpress.tsx")),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",

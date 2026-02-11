@@ -177,9 +177,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 </Step>
 
 <Step>
-### (Optional) Add `react-aria-component` Link provider
-If your app uses routing (e.g., with Tanstack Router), wrap your app with the `LinkProvider` from `react-aria-components` 
-to have proper routing behavior when using `react-aria-component`s `Link` component:
+### Set up `react-aria-components` Link provider
+If your app uses routing (e.g., with TanStack Router, React Router, etc.), wrap your app with the `RouterProvider` from `react-aria-components`
+to enable client-side navigation when using OUI's `Link` component:
 
 ```tsx title="app/providers.tsx (or wherever your providers are defined)"
 import { RouterProvider } from "react-aria-components"
@@ -214,7 +214,7 @@ export default function RootLayout({
 }
 ```
 
-Read more about [Client Side Routing](https://react-spectrum.adobe.com/react-aria/routing.html) with `react-aria-components` [here](https://react-spectrum.adobe.com/react-aria/routing.html).
+Read more about setting up client-side routing with `react-aria-components` in the [React Aria frameworks guide](https://react-aria.adobe.com/frameworks).
 
 </Step>
 

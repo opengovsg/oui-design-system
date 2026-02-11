@@ -7,6 +7,47 @@ links:
   source: link
   storybook: components-link--default
   theme: link
+  reactaria: Link
 ---
 
-# Not yet implemented
+<ComponentPreview name="link-demo" />
+
+## Usage
+
+```tsx
+import { Link } from "@opengovsg/oui"
+```
+
+```tsx
+<Link href="/page">Navigate to page</Link>
+```
+
+The `Link` component is built on top of [React Aria's Link](https://react-aria.adobe.com/Link). It supports navigation via the `href` prop, or custom press handling via the `onPress` prop.
+
+> To ensure the Link component uses your framework's client-side router (instead of full page navigations), you need to set up the `RouterProvider` from `react-aria-components`. See the [Next.js](/docs/getting-started/next#set-up-react-aria-components-link-provider) or [Vite](/docs/getting-started/vite#set-up-react-aria-components-link-provider) setup guides, or refer to the [React Aria frameworks guide](https://react-aria.adobe.com/frameworks) for other frameworks.
+
+## Examples
+
+### Color
+
+Use the `color` prop to change the color of the link.
+
+<ComponentPreview name="link-with-colors" />
+
+### Start and end content
+
+Use the `startContent` and `endContent` props to add icons or other elements alongside the link text. Note that you are reponsible for styling the start and end content to ensure proper spacing and alignment.
+
+<ComponentPreview name="link-with-icons" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the link.
+
+<ComponentPreview name="link-disabled" />
+
+## Events
+
+Links with an href will be handled by the browser, or via a client side router. Links without an href will be rendered as a `<span role="link">` instead of an `<a>`. Use the `onPress` event to handle user interaction.
+
+<ComponentPreview name="link-with-onpress" />
