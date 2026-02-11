@@ -26,34 +26,52 @@ import { Menu, MenuItem } from "../menu"
 import { getValidChildren } from "../system/react-utils/children"
 import { BreadcrumbsStyleContext, useBreadcrumbsStyleContext } from "./context"
 
-export interface BreadcrumbsProps<T extends object>
-  extends AriaBreadcrumbsProps<T> {
+type BreadcrumbsBaseProps<T extends object> = Omit<
+  AriaBreadcrumbsProps<T>,
+  "items"
+> & {
   separator?: BreadcrumbSeparator
   classNames?: SlotsToClasses<BreadcrumbsSlots>
-  /**
-   * Number of items to show before the truncation indicator.
-   * Setting this to a number enables truncation.
-   * Set to `null` to explicitly disable truncation.
-   *
-   * @example itemsBeforeTruncate={1} with [Home, A, B, C, D, Current]:
-   * Renders: Home > ... > Current
-   *
-   * @default null
-   */
-  itemsBeforeTruncate?: number | null
-  /**
-   * Number of items to show after the truncation indicator.
-   * @default 2
-   */
-  itemsAfterTruncate?: number
-  /**
-   * Custom render function for the dropdown content of the truncation ellipsis.
-   * The ellipsis breadcrumb item always renders; this controls the dropdown.
-   * Defaults to a dropdown menu showing hidden items.
-   * Set to `null` to show the ellipsis with no dropdown.
-   */
-  renderTruncate?: ((items: BreadcrumbEllipsisItem[]) => React.ReactNode) | null
 }
+
+export type BreadcrumbsProps<T extends object> = BreadcrumbsBaseProps<T> &
+  (
+    | {
+        /** Data items for the Collection API. Cannot be used with truncation props. */
+        items: Iterable<T>
+        itemsBeforeTruncate?: never
+        itemsAfterTruncate?: never
+        renderTruncate?: never
+      }
+    | {
+        items?: never
+        /**
+         * Number of items to show before the truncation indicator.
+         * Setting this to a number enables truncation.
+         * Set to `null` to explicitly disable truncation.
+         *
+         * @example itemsBeforeTruncate={1} with [Home, A, B, C, D, Current]:
+         * Renders: Home > ... > Current
+         *
+         * @default null
+         */
+        itemsBeforeTruncate?: number | null
+        /**
+         * Number of items to show after the truncation indicator.
+         * @default 2
+         */
+        itemsAfterTruncate?: number
+        /**
+         * Custom render function for the dropdown content of the truncation ellipsis.
+         * The ellipsis breadcrumb item always renders; this controls the dropdown.
+         * Defaults to a dropdown menu showing hidden items.
+         * Set to `null` to show the ellipsis with no dropdown.
+         */
+        renderTruncate?:
+          | ((items: BreadcrumbEllipsisItem[]) => React.ReactNode)
+          | null
+      }
+  )
 
 export function Breadcrumbs<T extends object>({
   separator = "chevron",
@@ -65,8 +83,7 @@ export function Breadcrumbs<T extends object>({
   const slots = breadcrumbsStyles()
 
   const children = useMemo(() => {
-    // Skip truncation if not configured or children is a render function (dynamic collection)
-    if (itemsBeforeTruncate == null || typeof props.children === "function") {
+    if (itemsBeforeTruncate == null) {
       return props.children
     }
 
@@ -78,11 +95,12 @@ export function Breadcrumbs<T extends object>({
     }
 
     const visibleStart = validChildren.slice(0, itemsBeforeTruncate)
-    const visibleEnd = validChildren.slice(-itemsAfterTruncate)
-    const hiddenItems = validChildren.slice(
-      itemsBeforeTruncate,
-      -itemsAfterTruncate,
-    )
+    const visibleEnd =
+      itemsAfterTruncate > 0 ? validChildren.slice(-itemsAfterTruncate) : []
+    const hiddenItems =
+      itemsAfterTruncate > 0
+        ? validChildren.slice(itemsBeforeTruncate, -itemsAfterTruncate)
+        : validChildren.slice(itemsBeforeTruncate)
 
     const hiddenItemData = hiddenItems.map((child, index) => {
       const childProps = child.props as {

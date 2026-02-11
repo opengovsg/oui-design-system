@@ -42,6 +42,26 @@ export const SlashSeparator: Story = {
   },
 }
 
+export const WithCollection: Story = {
+  render: (args) => {
+    const items = [
+      { id: "home", href: "#", children: "Home" },
+      { id: "category", href: "#", children: "Category" },
+      { id: "subcategory-a", href: "#", children: "Subcategory A" },
+      { id: "subcategory-b", href: "#", children: "Subcategory B" },
+      { id: "subcategory-c", href: "#", children: "Subcategory C" },
+      { id: "current-page", children: "Current Page" },
+    ]
+
+    return (
+      // @ts-expect-error: Generic type inference issue
+      <Breadcrumbs {...args} items={items}>
+        {(item) => <Breadcrumb>{item.children}</Breadcrumb>}
+      </Breadcrumbs>
+    )
+  },
+}
+
 const TruncationTemplate = (args: Story["args"]) => {
   return (
     <Breadcrumbs {...args}>
@@ -103,27 +123,5 @@ export const TruncateCustomDropdown: Story = {
         )}
       </Menu>
     ),
-  },
-}
-
-export const WithCollection: Story = {
-  render: (args) => {
-    const items = [
-      { id: "home", href: "#", children: "Home" },
-      { id: "category", href: "#", children: "Category" },
-      { id: "subcategory-a", href: "#", children: "Subcategory A" },
-      { id: "subcategory-b", href: "#", children: "Subcategory B" },
-      { id: "subcategory-c", href: "#", children: "Subcategory C" },
-      { id: "current-page", children: "Current Page" },
-    ]
-
-    return (
-      <Breadcrumbs {...args} items={items}>
-        {(item) => <Breadcrumb>{item.children}</Breadcrumb>}
-      </Breadcrumbs>
-    )
-  },
-  args: {
-    itemsBeforeTruncate: 1,
   },
 }
