@@ -2,7 +2,7 @@ import { tv } from "../utils/tv"
 
 export const breadcrumbsStyles = tv({
   slots: {
-    base: "flex gap-1",
+    base: "flex flex-wrap gap-1",
     crumb: "flex items-center gap-1 whitespace-pre",
     link: "disabled:text-base-content-default inline-flex items-center justify-center *:h-[1em]",
     separator:
