@@ -6,6 +6,7 @@ import type {
   LinkProps,
 } from "react-aria-components"
 import { useMemo } from "react"
+import { useLocalizedStringFormatter } from "react-aria"
 import { ChevronRight } from "lucide-react"
 import {
   Breadcrumb as AriaBreadcrumb,
@@ -26,6 +27,7 @@ import { Link } from "../link"
 import { Menu, MenuItem } from "../menu"
 import { getValidChildren } from "../system/react-utils/children"
 import { BreadcrumbsStyleContext, useBreadcrumbsStyleContext } from "./context"
+import { i18nStrings } from "./i18n"
 
 type BreadcrumbsBaseProps<T extends object> = Omit<
   AriaBreadcrumbsProps<T>,
@@ -253,6 +255,7 @@ function BreadcrumbEllipsis({
     ({} as Partial<UseProvideBreadcrumbsStylesReturn>)
   const slots = context?.slots ?? breadcrumbsStyles()
   const separator = useBreadcrumbSeparator(undefined)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const ellipsisContent = "..."
 
@@ -286,7 +289,7 @@ function BreadcrumbEllipsis({
     <AriaBreadcrumb className={slots.crumb()}>
       <AriaMenuTrigger>
         <Link
-          aria-label="Show more breadcrumbs"
+          aria-label={stringFormatter.format("Show more navigation items")}
           className={slots.ellipsisTrigger()}
         >
           {ellipsisContent}
