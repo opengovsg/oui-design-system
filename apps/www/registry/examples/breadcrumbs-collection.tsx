@@ -17,7 +17,6 @@ export default function BreadcrumbsCollection() {
   ]
 
   return (
-    // @ts-expect-error: Generic type inference issue
     <Breadcrumbs items={items}>
       {(item) => <Breadcrumb {...item} />}
     </Breadcrumbs>
