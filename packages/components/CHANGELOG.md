@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.42
+
+### Patch Changes
+
+- [#213](https://github.com/opengovsg/oui-design-system/pull/213) [`4d14739`](https://github.com/opengovsg/oui-design-system/commit/4d14739fd4aa42ca61d29769b06071eac0469e1a) Thanks [@karrui](https://github.com/karrui)! - feat: add Link component
+
+- Updated dependencies [[`4d14739`](https://github.com/opengovsg/oui-design-system/commit/4d14739fd4aa42ca61d29769b06071eac0469e1a)]:
+  - @opengovsg/oui-theme@0.0.42
+
 ## 0.0.41
 
 ### Patch Changes
