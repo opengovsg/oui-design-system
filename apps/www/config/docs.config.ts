@@ -62,7 +62,7 @@ const docsLinks: NavItem = {
             { title: "FileDropzone", url: "file-dropzone" },
             { title: "Field", url: "field" },
             { title: "Infobox", url: "infobox", status: "wip" },
-            { title: "Link", url: "link", status: "wip" },
+            { title: "Link", url: "link", status: "new" },
 
             { title: "Menu", url: "menu" },
             { title: "Modal", url: "modal" },

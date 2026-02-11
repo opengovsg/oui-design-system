@@ -1,7 +1,8 @@
+import type { NavItem } from "@/config/docs.config"
 import type { Metadata } from "next"
 import { notFound, redirect } from "next/navigation"
 import { MdxContentRenderer } from "@/components/mdx/content-renderer"
-import { docsConfig, type NavItem } from "@/config/docs.config"
+import { docsConfig } from "@/config/docs.config"
 import { flattenToc } from "@/lib/flatten-toc"
 import { docs } from "#site/content"
 
