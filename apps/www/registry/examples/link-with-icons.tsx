@@ -9,10 +9,8 @@ export default function LinkWithIcons() {
     <div className="flex w-full flex-col gap-4">
       <p className="inline">
         This is a paragraph with an inline icon link:{" "}
-        <Link
-          href="#"
-          startContent={<ExternalLinkIcon className="mr-0.5 mb-1 size-4" />}
-        >
+        <Link href="#">
+          <ExternalLinkIcon className="mr-0.5 mb-1 size-4" />
           External link
         </Link>
         , and this should flow naturally, since all children of Link are inline
@@ -20,11 +18,9 @@ export default function LinkWithIcons() {
         handled by you manually.
       </p>
       <p>
-        <Link
-          href="#"
-          endContent={<ArrowRightIcon className="mb-0.5 ml-0.5 size-4" />}
-        >
+        <Link href="#">
           Continue
+          <ArrowRightIcon className="mb-0.5 ml-0.5 size-4" />
         </Link>
         , which is a link with an icon at the end. Check out the code to see the
         custom styles on the icons.

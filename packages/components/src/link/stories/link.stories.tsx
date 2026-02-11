@@ -28,11 +28,3 @@ export const Disabled: Story = {
     isDisabled: true,
   },
 }
-
-export const StartEndContent: Story = {
-  args: {
-    isDisabled: false,
-    startContent: <span className="mr-1">🔗</span>,
-    endContent: <span className="ml-1">➡️</span>,
-  },
-}

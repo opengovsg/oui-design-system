@@ -34,9 +34,9 @@ Use the `color` prop to change the color of the link.
 
 <ComponentPreview name="link-with-colors" />
 
-### Start and end content
+### Adding icons
 
-Use the `startContent` and `endContent` props to add icons or other elements alongside the link text. Note that you are reponsible for styling the start and end content to ensure proper spacing and alignment.
+When adding multiple children (such as using an icon to the Link text) to the `Link` component, you might encounter some layout issues when using block level elements like `div` or `svg`. All children of the `Link` component automatically have the inline styles applied to them, but sizing and alignment of the start/endContent should still be handled by you manually.
 
 <ComponentPreview name="link-with-icons" />
 
