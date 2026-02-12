@@ -6,12 +6,13 @@ type BaseSidebarItemProps = {
 }
 
 export interface SidebarItemProps extends BaseSidebarItemProps, LinkProps {
+  /** Whether the element is currently selected */
   isSelected?: boolean | (() => boolean)
 }
 
 export type SidebarHeaderProps = BaseSidebarItemProps
 
-export interface SidebarListProps extends BaseSidebarItemProps {
+export interface SidebarListProps extends SidebarItemProps {
   label: React.ReactNode
   /** Controlled state for expansion of section */
   isExpanded?: boolean
@@ -25,8 +26,12 @@ export interface SidebarListProps extends BaseSidebarItemProps {
    * @default false
    */
   onlyCaretToggle?: boolean
-  /** Whether the element is currently selected */
-  isSelected?: boolean | (() => boolean)
+  children: React.ReactNode
+  /**
+   * Props to be passed to the link component when the sidebar list is used as a link.
+   * @note Will not be used if `onlyCaretToggle` is false, since the entire list item will be a trigger for the expansion.
+   */
+  linkProps?: LinkProps
 }
 
 interface GeneratedBase

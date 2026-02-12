@@ -1,10 +1,11 @@
-import type { PropsWithChildren } from "react"
+import type React from "react"
 import { useMemo } from "react"
 import { ChevronDown } from "lucide-react"
 import {
   Button,
   Disclosure,
   DisclosurePanel,
+  Link,
   Provider,
 } from "react-aria-components"
 import { useDisclosureState } from "react-stately"
@@ -15,10 +16,56 @@ import type { SidebarListProps } from "./types"
 import { forwardRef } from "../system/utils"
 import { SidebarNestContext, useSidebarStyleContext } from "./context"
 
-export const SidebarList = forwardRef<
-  "li",
-  PropsWithChildren<SidebarListProps>
->(
+interface SidebarListSectionProps
+  extends Pick<
+    SidebarListProps,
+    "label" | "startContent" | "endContent" | "isExpanded" | "linkProps"
+  > {
+  onlyCaretToggle?: boolean
+  children: React.ReactNode
+}
+const SidebarListSection = ({
+  onlyCaretToggle,
+  isExpanded,
+  children,
+  linkProps,
+}: SidebarListSectionProps) => {
+  const { slots } = useSidebarStyleContext()
+
+  if (onlyCaretToggle) {
+    return (
+      <div>
+        <Link {...linkProps}>{children}</Link>
+        <Button slot="trigger">
+          {({ isDisabled }) => (
+            <>
+              <ChevronDown
+                aria-hidden
+                className={slots.chevron({ isExpanded, isDisabled })}
+              />
+            </>
+          )}
+        </Button>
+      </div>
+    )
+  }
+
+  return (
+    <Button slot="trigger">
+      {({ isDisabled }) => (
+        <>
+          <ChevronDown
+            aria-hidden
+            className={slots.chevron({ isExpanded, isDisabled })}
+          />
+          {children}
+        </>
+      )}
+    </Button>
+  )
+}
+
+export const SidebarList = forwardRef<"li", SidebarListProps>(
   (
     {
       label,
@@ -54,24 +101,22 @@ export const SidebarList = forwardRef<
         data-selected={dataAttr(dataSelected)}
         className={slots.list()}
         ref={ref}
-        {...props}
       >
         <Disclosure isExpanded={isExpanded} onExpandedChange={setExpanded}>
-          <Button slot="trigger">
-            {({ isDisabled }) => (
-              <>
-                <ChevronDown
-                  aria-hidden
-                  className={slots.chevron({ isExpanded, isDisabled })}
-                />
-                <span className={slots.label()}>
-                  {startContent}
-                  {label}
-                  {endContent}
-                </span>
-              </>
-            )}
-          </Button>
+          <SidebarListSection
+            onlyCaretToggle={onlyCaretToggle}
+            label={label}
+            startContent={startContent}
+            endContent={endContent}
+            isExpanded={isExpanded}
+            linkProps={props}
+          >
+            <span className={slots.label()}>
+              {startContent}
+              {label}
+              {endContent}
+            </span>
+          </SidebarListSection>
           <DisclosurePanel>
             <Provider values={[[SidebarNestContext, { nested: true }]]}>
               <ul className={slots.section()}>{children}</ul>
