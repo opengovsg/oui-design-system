@@ -1,17 +1,13 @@
 "use client"
 
 import { useMemo } from "react"
-import { Provider } from "react-aria-components"
 
-import type { SidebarVariantProps } from "@opengovsg/oui-theme"
-import { sidebarStyles } from "@opengovsg/oui-theme"
-
+import type { SidebarRootProps } from "./sidebar-root"
 import type { GeneratedSidebarItem } from "./types"
-import { mapPropsVariants } from "../system/utils"
-import { SidebarStyleContext } from "./context"
 import { SidebarHeader } from "./sidebar-header"
 import { SidebarItem } from "./sidebar-item"
 import { SidebarList } from "./sidebar-list"
+import { SidebarRoot } from "./sidebar-root"
 import { isHeaderItem, isNestableItem } from "./utils"
 
 // Generate recursive sidebar items if nested
@@ -33,22 +29,11 @@ export const generateSidebarItems = (items: GeneratedSidebarItem[]) => {
   })
 }
 
-export interface SidebarProps extends SidebarVariantProps {
+export interface SidebarProps extends SidebarRootProps {
   items: GeneratedSidebarItem[]
 }
 
-export const Sidebar = ({ items, ...originalProps }: SidebarProps) => {
-  const [props, variantProps] = mapPropsVariants(
-    originalProps,
-    sidebarStyles.variantKeys,
-  )
-  const slots = sidebarStyles(variantProps)
+export const Sidebar = ({ items, ...props }: SidebarProps) => {
   const sidebarItems = useMemo(() => generateSidebarItems(items), [items])
-  return (
-    <Provider values={[[SidebarStyleContext, { slots }]]}>
-      <nav>
-        <ul {...props}>{sidebarItems}</ul>
-      </nav>
-    </Provider>
-  )
+  return <SidebarRoot {...props}>{sidebarItems}</SidebarRoot>
 }

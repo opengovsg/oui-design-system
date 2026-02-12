@@ -1,9 +1,14 @@
-import type { sidebarStyles } from "@opengovsg/oui-theme"
+import type {
+  SidebarSlots,
+  sidebarStyles,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 
 import { createContext } from "../system/react-utils"
 
 export interface UseProvideSidebarStylesReturn {
   slots: ReturnType<typeof sidebarStyles>
+  classNames?: SlotsToClasses<SidebarSlots>
 }
 
 export const [SidebarStyleContext, useSidebarStyleContext] =

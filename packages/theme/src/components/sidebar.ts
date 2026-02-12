@@ -4,6 +4,8 @@ import { tv } from "../utils/tv"
 
 export const sidebarStyles = tv({
   slots: {
+    base: "",
+    ul: "",
     item: "",
     section: "",
     header: "",
@@ -28,3 +30,4 @@ export const sidebarStyles = tv({
 })
 
 export type SidebarVariantProps = VariantProps<typeof sidebarStyles>
+export type SidebarSlots = keyof ReturnType<typeof sidebarStyles>
