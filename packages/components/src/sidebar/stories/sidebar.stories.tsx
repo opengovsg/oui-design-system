@@ -14,6 +14,7 @@ import type { SidebarProps } from "../sidebar"
 import { Sidebar } from "../sidebar"
 import { SidebarHeader } from "../sidebar-header"
 import { SidebarItem } from "../sidebar-item"
+import { SidebarList } from "../sidebar-list"
 import { SidebarRoot } from "../sidebar-root"
 
 export default {
@@ -75,6 +76,26 @@ export const BuildByComponents = {
       <SidebarItem startContent={<Star />}>Item 3</SidebarItem>
       <SidebarItem startContent={<Star />}>Item 4</SidebarItem>
       <SidebarItem startContent={<Star />}>Item 5</SidebarItem>
+    </SidebarRoot>
+  ),
+}
+
+export const OnlyCaretToggle = {
+  render: () => (
+    <SidebarRoot>
+      <SidebarItem>Child</SidebarItem>
+      <SidebarList
+        onlyCaretToggle
+        label="Clicking this will not toggle the list, will need to click the caret"
+      >
+        <SidebarItem>Child item</SidebarItem>
+      </SidebarList>
+      <SidebarList defaultIsExpanded label="Default expanded">
+        <SidebarItem onPress={() => alert("This could be a link too")}>
+          Child button example
+        </SidebarItem>
+        <SidebarItem href="https://open.gov.sg">Child link example</SidebarItem>
+      </SidebarList>
     </SidebarRoot>
   ),
 }
