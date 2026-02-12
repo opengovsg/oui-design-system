@@ -17,7 +17,8 @@ export const [SidebarStyleContext, useSidebarStyleContext] =
   })
 
 export interface SidebarNestContextProps {
-  nested: boolean
+  isNested: boolean
+  isExpanded: boolean
 }
 
 export type SidebarNestContextReturn = SidebarNestContextProps
@@ -28,5 +29,5 @@ export const [SidebarNestContext, useSidebarNestContext] = createContext<
 >({
   name: "SidebarNestContext",
   strict: false,
-  defaultValue: { nested: false },
+  defaultValue: { isNested: false, isExpanded: false },
 })

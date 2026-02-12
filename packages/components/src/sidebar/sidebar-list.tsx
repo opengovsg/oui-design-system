@@ -14,7 +14,11 @@ import { dataAttr } from "@opengovsg/oui-theme"
 
 import type { SidebarListProps } from "./types"
 import { forwardRef } from "../system/utils"
-import { SidebarNestContext, useSidebarStyleContext } from "./context"
+import {
+  SidebarNestContext,
+  useSidebarNestContext,
+  useSidebarStyleContext,
+} from "./context"
 
 interface SidebarListSectionProps
   extends Pick<
@@ -30,11 +34,19 @@ const SidebarListSection = ({
   children,
   linkProps,
 }: SidebarListSectionProps) => {
-  const { slots } = useSidebarStyleContext()
+  const { slots, classNames } = useSidebarStyleContext()
+  const { isNested } = useSidebarNestContext() ?? {}
 
   if (onlyCaretToggle) {
     return (
-      <div>
+      <div
+        data-expanded={dataAttr(isExpanded)}
+        className={slots.item({
+          className: classNames?.item,
+          isExpanded,
+          isNested,
+        })}
+      >
         <Link {...linkProps}>{children}</Link>
         <Button slot="trigger">
           {({ isDisabled }) => (
@@ -51,14 +63,22 @@ const SidebarListSection = ({
   }
 
   return (
-    <Button slot="trigger">
+    <Button
+      data-expanded={dataAttr(isExpanded)}
+      slot="trigger"
+      className={slots.item({
+        className: classNames?.item,
+        isExpanded,
+        isNested,
+      })}
+    >
       {({ isDisabled }) => (
         <>
+          {children}
           <ChevronDown
             aria-hidden
             className={slots.chevron({ isExpanded, isDisabled })}
           />
-          {children}
         </>
       )}
     </Button>
@@ -81,7 +101,8 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
     },
     ref,
   ) => {
-    const { slots } = useSidebarStyleContext()
+    const { slots, classNames } = useSidebarStyleContext()
+    const { isNested } = useSidebarNestContext() ?? {}
 
     const { isExpanded, setExpanded } = useDisclosureState({
       defaultExpanded: defaultIsExpanded,
@@ -99,10 +120,19 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
     return (
       <li
         data-selected={dataAttr(dataSelected)}
-        className={slots.list()}
+        className={slots.list({
+          className: classNames?.list,
+        })}
         ref={ref}
       >
-        <Disclosure isExpanded={isExpanded} onExpandedChange={setExpanded}>
+        <Disclosure
+          className={slots.section({
+            className: classNames?.section,
+            isExpanded,
+          })}
+          isExpanded={isExpanded}
+          onExpandedChange={setExpanded}
+        >
           <SidebarListSection
             onlyCaretToggle={onlyCaretToggle}
             label={label}
@@ -111,15 +141,35 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
             isExpanded={isExpanded}
             linkProps={props}
           >
-            <span className={slots.label()}>
+            <span
+              className={slots.label({
+                className: classNames?.label,
+                isNested,
+                isExpanded,
+              })}
+            >
               {startContent}
               {label}
               {endContent}
             </span>
           </SidebarListSection>
-          <DisclosurePanel>
-            <Provider values={[[SidebarNestContext, { nested: true }]]}>
-              <ul className={slots.section()}>{children}</ul>
+          <DisclosurePanel
+            className={slots.nestedPanel({
+              className: classNames?.nestedPanel,
+            })}
+          >
+            <Provider
+              values={[[SidebarNestContext, { isNested: true, isExpanded }]]}
+            >
+              <ul
+                className={slots.ul({
+                  className: classNames?.ul,
+                  isNested: true,
+                  isExpanded,
+                })}
+              >
+                {children}
+              </ul>
             </Provider>
           </DisclosurePanel>
         </Disclosure>

@@ -10,8 +10,8 @@ import { useSidebarNestContext, useSidebarStyleContext } from "./context"
 
 export const SidebarItem = forwardRef<"li", SidebarItemProps>(
   ({ children, startContent, endContent, isSelected, ...props }, ref) => {
-    const { slots } = useSidebarStyleContext()
-    const { nested } = useSidebarNestContext() ?? { nested: false }
+    const { slots, classNames } = useSidebarStyleContext()
+    const { isNested, isExpanded } = useSidebarNestContext() ?? {}
 
     const dataSelected = useMemo(() => {
       if (typeof isSelected === "function") {
@@ -23,10 +23,21 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
     return (
       <li
         data-selected={dataAttr(dataSelected)}
-        className={slots.item({ isNested: nested })}
+        data-nested={dataAttr(isNested)}
+        className={slots.item({
+          isNested,
+          className: classNames?.item,
+        })}
         ref={ref}
       >
-        <Link {...props}>
+        <Link
+          {...props}
+          className={slots.label({
+            isNested,
+            isExpanded,
+            className: classNames?.label,
+          })}
+        >
           {(renderProps) => (
             <>
               {startContent}
