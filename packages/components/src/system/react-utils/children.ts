@@ -1,7 +1,7 @@
 import type { ReactNode } from "react"
 import { Children, isValidElement } from "react"
 
-type ChildrenOrFunction<T> = ReactNode | ((values: T) => ReactNode)
+export type ChildrenOrFunction<T> = ReactNode | ((values: T) => ReactNode)
 
 /**
  * Gets only the valid children of a component,
