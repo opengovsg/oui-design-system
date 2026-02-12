@@ -1,8 +1,12 @@
-import type { LinkProps, PressEvent } from "react-aria-components"
+import type { LinkProps } from "react-aria-components"
 
 type BaseSidebarItemProps = {
   startContent?: React.ReactNode
   endContent?: React.ReactNode
+  /**
+   * Will be used as the accessible label when the sidebar is collapsed
+   */
+  tooltip?: string
 }
 
 export interface SidebarItemProps extends BaseSidebarItemProps, LinkProps {

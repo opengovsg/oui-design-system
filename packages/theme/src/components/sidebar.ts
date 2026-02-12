@@ -44,6 +44,13 @@ export const sidebarStyles = tv({
     isDisabled: {
       true: {},
     },
+    isCollapsed: {
+      true: {
+        base: "w-(--sidebar-collapsed-width) overflow-hidden [--sidebar-collapsed-width:44px]",
+        header: "hidden",
+        nestedPanel: "h-0! overflow-hidden",
+      },
+    },
     isNested: {
       true: {
         ul: "pl-7",
@@ -58,6 +65,14 @@ export const sidebarStyles = tv({
     },
   },
   compoundVariants: [
+    {
+      size: "md",
+      isCollapsed: true,
+      className: {
+        ul: "gap-2 p-0.5",
+        label: "flex items-center justify-center p-2",
+      },
+    },
     {
       isExpanded: true,
       isNested: false,

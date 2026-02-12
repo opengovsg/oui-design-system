@@ -16,6 +16,7 @@ import type { SidebarListProps } from "./types"
 import { forwardRef } from "../system/utils"
 import {
   SidebarNestContext,
+  useSidebarCollapseContext,
   useSidebarNestContext,
   useSidebarStyleContext,
 } from "./context"
@@ -23,7 +24,7 @@ import {
 interface SidebarListSectionProps
   extends Pick<
     SidebarListProps,
-    "label" | "startContent" | "endContent" | "isExpanded" | "linkProps"
+    "startContent" | "endContent" | "isExpanded" | "linkProps"
   > {
   onlyCaretToggle?: boolean
   children: React.ReactNode
@@ -103,6 +104,7 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
   ) => {
     const { slots, classNames } = useSidebarStyleContext()
     const { isNested } = useSidebarNestContext() ?? {}
+    const { isCollapsed } = useSidebarCollapseContext() ?? {}
 
     const { isExpanded, setExpanded } = useDisclosureState({
       defaultExpanded: defaultIsExpanded,
@@ -116,6 +118,11 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
       }
       return isSelected
     }, [isSelected])
+
+    if (isCollapsed) {
+      // Skip rendering Disclosure and render children directly when collapsed, as the list will not be expandable and the children will be hidden by CSS. This also allows the tooltip to work without needing to wrap each child with a tooltip trigger.
+      return children
+    }
 
     return (
       <li
@@ -135,7 +142,6 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
         >
           <SidebarListSection
             onlyCaretToggle={onlyCaretToggle}
-            label={label}
             startContent={startContent}
             endContent={endContent}
             isExpanded={isExpanded}

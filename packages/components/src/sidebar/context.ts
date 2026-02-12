@@ -16,6 +16,18 @@ export const [SidebarStyleContext, useSidebarStyleContext] =
     name: "SidebarStyleContext",
   })
 
+export interface SidebarCollapseContextProps {
+  isCollapsed: boolean
+  setCollapsed?: (collapsed: boolean) => void
+}
+
+export type SidebarCollapseContextReturn = SidebarCollapseContextProps
+
+export const [SidebarCollapseContext, useSidebarCollapseContext] =
+  createContext<SidebarCollapseContextReturn>({
+    name: "SidebarCollapseContext",
+  })
+
 export interface SidebarNestContextProps {
   isNested: boolean
   isExpanded: boolean

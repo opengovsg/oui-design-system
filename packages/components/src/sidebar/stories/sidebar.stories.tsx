@@ -30,27 +30,43 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
     startContent: <MailIcon />,
     href: "#",
     children: "Inbox",
+    tooltip: "Go to Inbox",
   },
-  { children: "Notes", startContent: <Star />, onPress: () => alert("Notes") },
-  { children: "Activity", startContent: <Calendar /> },
-  { children: "Explore", startContent: <Link /> },
+  {
+    children: "Notes",
+    startContent: <Star />,
+    onPress: () => alert("Notes"),
+    tooltip: "Go to Notes",
+  },
+  {
+    children: "Activity",
+    startContent: <Calendar />,
+    tooltip: "Go to Activity",
+  },
+  {
+    children: "Explore",
+    startContent: <Link />,
+    tooltip: "Go to Explore",
+  },
   {
     label: "Settings",
     startContent: <Wrench />,
     defaultIsExpanded: true,
-    isSelected: true,
     subItems: [
       {
+        tooltip: "Go to Profile",
         startContent: <User />,
         children: "Profile",
       },
       {
+        tooltip: "Go to Security & Privacy",
         children: "Security & Privacy",
         startContent: <Trash />,
 
         isSelected: true,
       },
       {
+        tooltip: "Go to Notifications",
         children:
           "Notifications With Long Label That Definitely Overflows In Mobile",
         startContent: <Clock5 />,
@@ -98,4 +114,11 @@ export const OnlyCaretToggle = {
       </SidebarList>
     </SidebarRoot>
   ),
+}
+
+export const Collapsed: Story = {
+  args: {
+    items: DEFAULT_ITEMS,
+    isCollapsed: true,
+  },
 }

@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react"
+import { useControlledState } from "@react-stately/utils"
 import { Provider } from "react-aria-components"
 
 import type {
@@ -6,30 +7,53 @@ import type {
   SidebarVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
-import { sidebarStyles } from "@opengovsg/oui-theme"
+import { dataAttr, sidebarStyles } from "@opengovsg/oui-theme"
 
 import { mapPropsVariants } from "../system/utils"
-import { SidebarStyleContext } from "./context"
+import { SidebarCollapseContext, SidebarStyleContext } from "./context"
 
 export interface SidebarRootProps
   extends PropsWithChildren<SidebarVariantProps> {
   className?: string
   classNames?: SlotsToClasses<SidebarSlots>
+
+  /** Whether the sidebar is collapsed (controlled). */
+  isCollapsed?: boolean
+  /** Whether the sidebar is collapsed by default (uncontrolled). */
+  defaultCollapsed?: boolean
+  /** Handler that is called when the sidebar's collapsed state changes. */
+  onCollapsedChange?: (isCollapsed: boolean) => void
 }
 
 export const SidebarRoot = ({
   className,
   classNames,
+  defaultCollapsed,
+  onCollapsedChange,
   ...originalProps
 }: SidebarRootProps) => {
   const [props, variantProps] = mapPropsVariants(
     originalProps,
     sidebarStyles.variantKeys,
   )
-  const slots = sidebarStyles(variantProps)
+
+  const [isCollapsed, setCollapsed] = useControlledState(
+    variantProps.isCollapsed,
+    defaultCollapsed ?? false,
+    onCollapsedChange,
+  )
+
+  const slots = sidebarStyles({ ...variantProps, isCollapsed })
+
   return (
-    <Provider values={[[SidebarStyleContext, { slots, classNames }]]}>
+    <Provider
+      values={[
+        [SidebarStyleContext, { slots, classNames }],
+        [SidebarCollapseContext, { isCollapsed, setCollapsed }],
+      ]}
+    >
       <nav
+        data-collapsed={dataAttr(isCollapsed)}
         className={slots.base({
           className: className ?? classNames?.base,
         })}
