@@ -73,6 +73,31 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
       },
     ],
   },
+  {
+    label: "Settings2",
+    startContent: <Wrench />,
+    isSelected: true,
+    defaultIsExpanded: true,
+    subItems: [
+      {
+        tooltip: "Go to Profile",
+        startContent: <User />,
+        children: "Profile",
+      },
+      {
+        tooltip: "Go to Security & Privacy",
+        children: "Security & Privacy",
+        startContent: <Trash />,
+        isSelected: true,
+      },
+      {
+        tooltip: "Go to Notifications",
+        children:
+          "Notifications With Long Label That Definitely Overflows In Mobile",
+        startContent: <Clock5 />,
+      },
+    ],
+  },
 ]
 
 export const Default: Story = {

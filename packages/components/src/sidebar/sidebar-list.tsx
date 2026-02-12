@@ -26,16 +26,14 @@ import {
 import { i18nStrings } from "./i18n"
 
 interface SidebarListSectionProps
-  extends Pick<
-    SidebarListProps,
-    "startContent" | "endContent" | "isExpanded" | "linkProps"
-  > {
+  extends Pick<SidebarListProps, "isExpanded" | "linkProps" | "isSelected"> {
   onlyCaretToggle?: boolean
   children: React.ReactNode
 }
 const SidebarListSection = ({
   onlyCaretToggle,
   isExpanded,
+  isSelected,
   children,
   linkProps,
 }: SidebarListSectionProps) => {
@@ -48,6 +46,7 @@ const SidebarListSection = ({
     return (
       <div
         data-expanded={dataAttr(isExpanded)}
+        data-selected={dataAttr(isSelected)}
         className={slots.item({
           className: classNames?.item,
           isExpanded,
@@ -92,6 +91,7 @@ const SidebarListSection = ({
   return (
     <AriaButton
       data-expanded={dataAttr(isExpanded)}
+      data-selected={dataAttr(isSelected)}
       slot="trigger"
       className={slots.item({
         className: classNames?.item,
@@ -181,8 +181,7 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
         >
           <SidebarListSection
             onlyCaretToggle={onlyCaretToggle}
-            startContent={startContent}
-            endContent={endContent}
+            isSelected={isSelected}
             isExpanded={isExpanded}
             linkProps={props}
           >
