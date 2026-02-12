@@ -1,4 +1,4 @@
-import type { LinkProps } from "react-aria-components"
+import type { LinkProps, PressEvent } from "react-aria-components"
 
 type BaseSidebarItemProps = {
   startContent?: React.ReactNode
@@ -6,7 +6,7 @@ type BaseSidebarItemProps = {
 }
 
 export interface SidebarItemProps extends BaseSidebarItemProps, LinkProps {
-  isActive?: boolean | (() => boolean)
+  isSelected?: boolean | (() => boolean)
 }
 
 export type SidebarHeaderProps = BaseSidebarItemProps
@@ -25,15 +25,13 @@ export interface SidebarListProps extends BaseSidebarItemProps {
    * @default false
    */
   onlyCaretToggle?: boolean
-  /** Whether the element is currently active */
-  isActive?: boolean | (() => boolean)
-  /** Callback invoked when section is clicked */
-  onClick?: () => void
+  /** Whether the element is currently selected */
+  isSelected?: boolean | (() => boolean)
 }
 
 interface GeneratedBase
   extends BaseSidebarItemProps,
-    Pick<SidebarItemProps, "isActive"> {}
+    Pick<SidebarItemProps, "isSelected"> {}
 export interface GeneratedItem extends GeneratedBase, SidebarItemProps {}
 export interface GeneratedHeader extends SidebarHeaderProps {
   type: "header"

@@ -9,20 +9,20 @@ import { forwardRef } from "../system/utils"
 import { useSidebarNestContext, useSidebarStyleContext } from "./context"
 
 export const SidebarItem = forwardRef<"li", SidebarItemProps>(
-  ({ children, startContent, endContent, isActive, ...props }, ref) => {
+  ({ children, startContent, endContent, isSelected, ...props }, ref) => {
     const { slots } = useSidebarStyleContext()
     const { nested } = useSidebarNestContext() ?? { nested: false }
 
-    const dataActive = useMemo(() => {
-      if (typeof isActive === "function") {
-        return isActive()
+    const dataSelected = useMemo(() => {
+      if (typeof isSelected === "function") {
+        return isSelected()
       }
-      return isActive
-    }, [isActive])
+      return isSelected
+    }, [isSelected])
 
     return (
       <li
-        data-active={dataAttr(dataActive)}
+        data-selected={dataAttr(dataSelected)}
         className={slots.item({ isNested: nested })}
         ref={ref}
       >

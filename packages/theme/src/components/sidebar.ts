@@ -14,6 +14,12 @@ export const sidebarStyles = tv({
   variants: {
     variant: {},
     size: {},
+    isExpanded: {
+      true: {},
+    },
+    isDisabled: {
+      true: {},
+    },
     isNested: {
       true: {},
     },

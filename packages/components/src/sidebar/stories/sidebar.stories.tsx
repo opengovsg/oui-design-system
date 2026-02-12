@@ -34,7 +34,7 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
     label: "Settings",
     startContent: <Wrench />,
     defaultIsExpanded: true,
-    isActive: true,
+    isSelected: true,
     subItems: [
       {
         startContent: <User />,
@@ -44,7 +44,7 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
         children: "Security & Privacy",
         startContent: <Trash />,
 
-        isActive: true,
+        isSelected: true,
       },
       {
         children:
