@@ -64,7 +64,6 @@ const SidebarListSection = ({
           {children}
         </Link>
         <Button
-          isIconOnly
           variant="clear"
           color="none"
           slot="trigger"

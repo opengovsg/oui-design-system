@@ -24,17 +24,25 @@ export const sidebarStyles = tv({
     nestedPanel:
       "h-(--disclosure-panel-height) overflow-clip motion-safe:transition-[height]",
     chevron: "shrink-0 transition-transform",
-    chevronContainer: "flex items-center justify-center",
+    chevronContainer: "flex min-w-auto items-center justify-center",
   },
   variants: {
     variant: {},
     size: {
-      md: {
+      sm: {
         base: "",
         header: "prose-subhead-3 px-4 py-2",
         item: "prose-subhead-2 gap-3",
-        label: "gap-3 p-4 [&>svg]:size-5",
+        label: "gap-3 px-4 py-3 [&>svg]:size-5",
         chevron: "size-5",
+        chevronContainer: "p-3",
+      },
+      md: {
+        base: "",
+        header: "prose-subhead-3 px-4 py-2",
+        item: "prose-subhead-1 gap-3",
+        label: "gap-3 p-4 [&>svg]:size-6",
+        chevron: "size-6",
         chevronContainer: "p-3",
       },
     },
@@ -48,7 +56,7 @@ export const sidebarStyles = tv({
     },
     isCollapsed: {
       true: {
-        base: "w-(--sidebar-collapsed-width) overflow-hidden [--sidebar-collapsed-width:44px]",
+        base: "w-(--sidebar-collapsed-width) overflow-hidden",
         header: "hidden",
         nestedPanel: "h-0! overflow-hidden",
       },
@@ -68,11 +76,21 @@ export const sidebarStyles = tv({
   },
   compoundVariants: [
     {
+      size: "sm",
+      isCollapsed: true,
+      className: {
+        base: "[--sidebar-collapsed-width:44px]",
+        ul: "gap-2 p-1",
+        label: "flex items-center justify-center p-2",
+      },
+    },
+    {
       size: "md",
       isCollapsed: true,
       className: {
-        ul: "gap-2 p-0.5",
-        label: "flex items-center justify-center p-2",
+        base: "[--sidebar-collapsed-width:56px]",
+        ul: "gap-2 p-1",
+        label: "flex items-center justify-center p-3",
       },
     },
     {

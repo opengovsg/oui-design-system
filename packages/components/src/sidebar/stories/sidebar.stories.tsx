@@ -76,8 +76,6 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
   {
     label: "Settings2",
     startContent: <Wrench />,
-    isSelected: true,
-    defaultIsExpanded: true,
     subItems: [
       {
         tooltip: "Go to Profile",
@@ -88,7 +86,6 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
         tooltip: "Go to Security & Privacy",
         children: "Security & Privacy",
         startContent: <Trash />,
-        isSelected: true,
       },
       {
         tooltip: "Go to Notifications",
@@ -106,9 +103,16 @@ export const Default: Story = {
   },
 }
 
-export const BuildByComponents = {
-  render: () => (
-    <SidebarRoot>
+export const SmallSize: Story = {
+  args: {
+    items: DEFAULT_ITEMS,
+    size: "sm",
+  },
+}
+
+export const BuildByComponents: Story = {
+  render: (args) => (
+    <SidebarRoot {...args}>
       <SidebarHeader>Header</SidebarHeader>
       <SidebarItem isSelected startContent={<Star />}>
         Item 1
@@ -121,9 +125,9 @@ export const BuildByComponents = {
   ),
 }
 
-export const OnlyCaretToggle = {
-  render: () => (
-    <SidebarRoot>
+export const OnlyCaretToggle: Story = {
+  render: (args) => (
+    <SidebarRoot {...args}>
       <SidebarItem>Child</SidebarItem>
       <SidebarList
         onlyCaretToggle
@@ -139,11 +143,22 @@ export const OnlyCaretToggle = {
       </SidebarList>
     </SidebarRoot>
   ),
+  args: {
+    size: "md",
+  },
 }
 
 export const Collapsed: Story = {
   args: {
     items: DEFAULT_ITEMS,
     isCollapsed: true,
+  },
+}
+
+export const CollapsedSmall: Story = {
+  args: {
+    items: DEFAULT_ITEMS,
+    isCollapsed: true,
+    size: "sm",
   },
 }
