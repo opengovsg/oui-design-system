@@ -1,3 +1,5 @@
+"use client"
+
 import { useMemo } from "react"
 import { Link, Tooltip, TooltipTrigger } from "react-aria-components"
 

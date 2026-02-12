@@ -1,4 +1,5 @@
-import type React from "react"
+"use client"
+
 import { useMemo } from "react"
 import { ChevronDown } from "lucide-react"
 import { useLocalizedStringFormatter } from "react-aria"

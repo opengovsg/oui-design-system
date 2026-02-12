@@ -1,3 +1,5 @@
+"use client"
+
 import type { PropsWithChildren } from "react"
 import { useControlledState } from "@react-stately/utils"
 import { Provider } from "react-aria-components"
