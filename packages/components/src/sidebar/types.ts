@@ -1,15 +1,11 @@
-import type { ChildrenOrFunction } from "../system/react-utils/children"
-
-// TODO: Decide what props to pass to render prop
-export type SidebarRenderProps = {}
+import type { LinkProps } from "react-aria-components"
 
 type BaseSidebarItemProps = {
   startContent?: React.ReactNode
   endContent?: React.ReactNode
-  children?: ChildrenOrFunction<SidebarRenderProps>
 }
 
-export interface SidebarItemProps extends BaseSidebarItemProps {
+export interface SidebarItemProps extends BaseSidebarItemProps, LinkProps {
   isActive?: boolean | (() => boolean)
 }
 

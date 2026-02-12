@@ -24,9 +24,10 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
   { type: "header", children: "Header" },
   {
     startContent: <MailIcon />,
-    children: () => <a href="#">Inbox</a>,
+    href: "#",
+    children: "Inbox",
   },
-  { children: "Notes", startContent: <Star /> },
+  { children: "Notes", startContent: <Star />, onPress: () => alert("Notes") },
   { children: "Activity", startContent: <Calendar /> },
   { children: "Explore", startContent: <Link /> },
   {

@@ -1,4 +1,5 @@
 import { useMemo } from "react"
+import { Link } from "react-aria-components"
 
 import { dataAttr } from "@opengovsg/oui-theme"
 
@@ -24,11 +25,16 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
         data-active={dataAttr(dataActive)}
         className={slots.item({ isNested: nested })}
         ref={ref}
-        {...props}
       >
-        {startContent}
-        {renderChildren({}, children)}
-        {endContent}
+        <Link {...props}>
+          {(renderProps) => (
+            <>
+              {startContent}
+              {renderChildren(renderProps, children)}
+              {endContent}
+            </>
+          )}
+        </Link>
       </li>
     )
   },
