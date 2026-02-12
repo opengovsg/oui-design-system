@@ -24,6 +24,7 @@ export const sidebarStyles = tv({
     nestedPanel:
       "h-(--disclosure-panel-height) overflow-clip motion-safe:transition-[height]",
     chevron: "shrink-0 transition-transform",
+    chevronContainer: "flex items-center justify-center",
   },
   variants: {
     variant: {},
@@ -33,7 +34,8 @@ export const sidebarStyles = tv({
         header: "prose-subhead-3 px-4 py-2",
         item: "prose-subhead-2 gap-3",
         label: "gap-3 p-4 [&>svg]:size-5",
-        chevron: "mr-4 size-5",
+        chevron: "size-5",
+        chevronContainer: "p-3",
       },
     },
     isExpanded: {

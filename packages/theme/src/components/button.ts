@@ -23,6 +23,7 @@ export const buttonStyles = tv({
       unstyled: "",
     },
     color: {
+      none: "",
       main: "",
       success: "",
       warning: "",

@@ -1,8 +1,9 @@
 import type React from "react"
 import { useMemo } from "react"
 import { ChevronDown } from "lucide-react"
+import { useLocalizedStringFormatter } from "react-aria"
 import {
-  Button,
+  Button as AriaButton,
   Disclosure,
   DisclosurePanel,
   Link,
@@ -13,6 +14,7 @@ import { useDisclosureState } from "react-stately"
 import { dataAttr } from "@opengovsg/oui-theme"
 
 import type { SidebarListProps } from "./types"
+import { Button } from "../button"
 import { forwardRef } from "../system/utils"
 import {
   SidebarNestContext,
@@ -20,6 +22,7 @@ import {
   useSidebarNestContext,
   useSidebarStyleContext,
 } from "./context"
+import { i18nStrings } from "./i18n"
 
 interface SidebarListSectionProps
   extends Pick<
@@ -38,6 +41,8 @@ const SidebarListSection = ({
   const { slots, classNames } = useSidebarStyleContext()
   const { isNested } = useSidebarNestContext() ?? {}
 
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
+
   if (onlyCaretToggle) {
     return (
       <div
@@ -48,8 +53,28 @@ const SidebarListSection = ({
           isNested,
         })}
       >
-        <Link {...linkProps}>{children}</Link>
-        <Button slot="trigger">
+        <Link
+          className={slots.label({
+            className: classNames?.label,
+            isNested,
+            isExpanded,
+          })}
+          {...linkProps}
+        >
+          {children}
+        </Link>
+        <Button
+          isIconOnly
+          variant="clear"
+          color="none"
+          slot="trigger"
+          aria-label={stringFormatter.format(
+            isExpanded ? "Collapse sidebar section" : "Expand sidebar section",
+          )}
+          className={slots.chevronContainer({
+            className: classNames?.chevronContainer,
+          })}
+        >
           {({ isDisabled }) => (
             <>
               <ChevronDown
@@ -64,7 +89,7 @@ const SidebarListSection = ({
   }
 
   return (
-    <Button
+    <AriaButton
       data-expanded={dataAttr(isExpanded)}
       slot="trigger"
       className={slots.item({
@@ -75,14 +100,28 @@ const SidebarListSection = ({
     >
       {({ isDisabled }) => (
         <>
-          {children}
-          <ChevronDown
-            aria-hidden
-            className={slots.chevron({ isExpanded, isDisabled })}
-          />
+          <span
+            className={slots.label({
+              className: classNames?.label,
+              isNested,
+              isExpanded,
+            })}
+          >
+            {children}
+          </span>
+          <span
+            className={slots.chevronContainer({
+              className: classNames?.chevronContainer,
+            })}
+          >
+            <ChevronDown
+              aria-hidden
+              className={slots.chevron({ isExpanded, isDisabled })}
+            />
+          </span>
         </>
       )}
-    </Button>
+    </AriaButton>
   )
 }
 
@@ -103,7 +142,6 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
     ref,
   ) => {
     const { slots, classNames } = useSidebarStyleContext()
-    const { isNested } = useSidebarNestContext() ?? {}
     const { isCollapsed } = useSidebarCollapseContext() ?? {}
 
     const { isExpanded, setExpanded } = useDisclosureState({
@@ -147,17 +185,9 @@ export const SidebarList = forwardRef<"li", SidebarListProps>(
             isExpanded={isExpanded}
             linkProps={props}
           >
-            <span
-              className={slots.label({
-                className: classNames?.label,
-                isNested,
-                isExpanded,
-              })}
-            >
-              {startContent}
-              {label}
-              {endContent}
-            </span>
+            {startContent}
+            {label}
+            {endContent}
           </SidebarListSection>
           <DisclosurePanel
             className={slots.nestedPanel({
