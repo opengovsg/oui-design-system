@@ -1,16 +1,72 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
-import { Sidenav } from "@/components/sidenav"
 import { useRoute } from "@/lib/use-route"
 import { Menu } from "lucide-react"
 import { Breadcrumb, Breadcrumbs, DialogTrigger } from "react-aria-components"
 
-import { Button } from "@opengovsg/oui"
+import {
+  Badge,
+  Button,
+  SidebarHeader,
+  SidebarItem,
+  SidebarRoot,
+} from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 
 import { Drawer } from "./drawer"
+
+const NewBadge = () => {
+  return (
+    <Badge
+      classNames={{
+        base: "bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+        content: "drop-shadow shadow-black text-white",
+      }}
+      variant="solid"
+      radius="full"
+      size="xs"
+    >
+      New
+    </Badge>
+  )
+}
+
+const WipBadge = () => {
+  return (
+    <Badge
+      variant="outline"
+      radius="full"
+      color="neutral"
+      className="decoration-inherit"
+      size="xs"
+    >
+      WIP
+    </Badge>
+  )
+}
+
+const RedirectBadge = () => {
+  return (
+    <Badge
+      variant="outline"
+      radius="full"
+      color="neutral"
+      className="bg-transparent decoration-inherit"
+      size="xs"
+    >
+      ↗
+    </Badge>
+  )
+}
+
+const StatusBadge = ({ status }: { status?: string }) => {
+  if (status === "new") return <NewBadge />
+  if (status === "wip") return <WipBadge />
+  if (status === "redirect") return <RedirectBadge />
+  return null
+}
 
 export const MobileBreadcrumbs = () => {
   const route = useRoute()
@@ -72,14 +128,33 @@ export const MobileSidebarNav = () => {
         </Button>
 
         <Drawer>
-          {navItems.map((group) => (
-            <Sidenav
-              key={group.title}
-              currentUrl={route.currentUrl}
-              title={group.title}
-              items={group.items}
-            />
-          ))}
+          <SidebarRoot size="sm" className="gap-8">
+            {navItems.map((group) => (
+              <Fragment key={group.title ?? "ungrouped"}>
+                {group.title && <SidebarHeader>{group.title}</SidebarHeader>}
+                {group.items.map((item) => (
+                  <SidebarItem
+                    key={item.url ?? item.title}
+                    href={item.url}
+                    isSelected={item.current}
+                    endContent={<StatusBadge status={item.status} />}
+                    {...(item.external && {
+                      target: "_blank",
+                      rel: "noopener noreferrer",
+                    })}
+                  >
+                    <span
+                      className={cn(
+                        item.status === "wip" && "line-through opacity-50",
+                      )}
+                    >
+                      {item.title}
+                    </span>
+                  </SidebarItem>
+                ))}
+              </Fragment>
+            ))}
+          </SidebarRoot>
         </Drawer>
       </DialogTrigger>
     </div>

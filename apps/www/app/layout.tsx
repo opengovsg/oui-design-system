@@ -7,6 +7,7 @@ import "./shiki.css"
 import { docsConfig } from "@/config/docs.config"
 
 import { I18nProvider } from "./providers/i18n"
+import { RouterProvider } from "./providers/router"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-white text-black antialiased dark:bg-black dark:text-white`}
       >
-        <I18nProvider>{children}</I18nProvider>
+        <RouterProvider>
+          <I18nProvider>{children}</I18nProvider>
+        </RouterProvider>
       </body>
     </html>
   )

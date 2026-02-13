@@ -102,9 +102,9 @@ export function useRoute() {
               item.url?.startsWith("http") || item.external
                 ? item.url
                 : join(primaryNav.url, secondaryNav.url, group.url, item.url),
-            current: currentUrl.startsWith(
+            current:
+              currentUrl ===
               join(primaryNav.url, secondaryNav.url, group.url, item.url),
-            ),
             external: item.external,
           })) || [],
       })) || []
