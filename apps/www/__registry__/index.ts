@@ -2805,6 +2805,111 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/select-with-search.tsx")),
   },
+  "sidebar-collapsed": {
+    name: "sidebar-collapsed",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-collapsed.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-collapsed.tsx")),
+  },
+  "sidebar-collapsible-sections": {
+    name: "sidebar-collapsible-sections",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-collapsible-sections.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/sidebar-collapsible-sections.tsx"),
+    ),
+  },
+  "sidebar-composition": {
+    name: "sidebar-composition",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-composition.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/sidebar-composition.tsx"),
+    ),
+  },
+  "sidebar-controlled": {
+    name: "sidebar-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-controlled.tsx")),
+  },
+  "sidebar-demo": {
+    name: "sidebar-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-demo.tsx")),
+  },
+  "sidebar-in-drawer": {
+    name: "sidebar-in-drawer",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-in-drawer.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-in-drawer.tsx")),
+  },
+  "sidebar-only-caret-toggle": {
+    name: "sidebar-only-caret-toggle",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-only-caret-toggle.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/sidebar-only-caret-toggle.tsx"),
+    ),
+  },
+  "sidebar-selected": {
+    name: "sidebar-selected",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-selected.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-selected.tsx")),
+  },
+  "sidebar-sizes": {
+    name: "sidebar-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/sidebar-sizes.tsx")),
+  },
   "tabs-all-disabled": {
     name: "tabs-all-disabled",
     description: "",

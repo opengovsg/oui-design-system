@@ -11,7 +11,7 @@ export const DocsSidebar = () => {
 
   return (
     <div className="absolute inset-0">
-      <aside className="sticky top-[var(--header-height)] bottom-0 left-0 h-full max-h-[var(--content-height)] w-full overflow-y-auto px-3 py-6">
+      <aside className="sticky top-(--header-height) bottom-0 left-0 h-full max-h-(--content-height) w-full overflow-y-auto px-3 py-6">
         <nav className="flex flex-col gap-8">
           <ul className="flex flex-col gap-2">
             {sidebarNavItems?.map((group) => (
