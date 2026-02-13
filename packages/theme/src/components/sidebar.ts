@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const sidebarStyles = tv({
   slots: {
-    base: "",
+    base: "w-full",
     ul: "flex flex-col",
     item: [
       "group/item text-base-content-default hover:text-interaction-main-default selected:text-interaction-main-default inline-flex w-full cursor-pointer flex-row items-center transition",
