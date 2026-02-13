@@ -34,4 +34,5 @@ export * from "./time-field"
 export * from "./search-field"
 export * from "./link"
 export * from "./breadcrumbs"
+export * from "./tooltip"
 // Add new theme exports here
