@@ -16,26 +16,36 @@ export default function SidebarComposition() {
       <SidebarItem
         isSelected
         startContent={<MailIcon />}
-        href="#"
+        onPress={() => alert("Inbox clicked")}
         tooltip="Go to Inbox"
       >
         Inbox
       </SidebarItem>
-      <SidebarItem startContent={<Star />} href="#" tooltip="Go to Starred">
+      <SidebarItem
+        startContent={<Star />}
+        onPress={() => alert("Starred clicked")}
+        tooltip="Go to Starred"
+      >
         Starred
       </SidebarItem>
       <SidebarItem
         startContent={<Calendar />}
-        href="#"
+        onPress={() => alert("Activity clicked")}
         tooltip="Go to Activity"
       >
         Activity
       </SidebarItem>
       <SidebarList defaultIsExpanded label="Settings" startContent={<Wrench />}>
-        <SidebarItem href="#" tooltip="Go to General">
+        <SidebarItem
+          onPress={() => alert("General clicked")}
+          tooltip="Go to General"
+        >
           General
         </SidebarItem>
-        <SidebarItem href="#" tooltip="Go to Security">
+        <SidebarItem
+          onPress={() => alert("Security clicked")}
+          tooltip="Go to Security"
+        >
           Security
         </SidebarItem>
       </SidebarList>

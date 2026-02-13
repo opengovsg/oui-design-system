@@ -2853,6 +2853,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/sidebar-controlled.tsx")),
   },
+  "sidebar-custom-tooltip": {
+    name: "sidebar-custom-tooltip",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/sidebar-custom-tooltip.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/sidebar-custom-tooltip.tsx"),
+    ),
+  },
   "sidebar-demo": {
     name: "sidebar-demo",
     description: "",

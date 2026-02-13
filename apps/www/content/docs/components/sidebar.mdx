@@ -31,14 +31,20 @@ import { Sidebar } from "@opengovsg/oui"
     { type: "header", children: "Section" },
     {
       startContent: <MailIcon />,
-      href: "#",
+      onPress: () => alert("Inbox clicked"),
       children: "Inbox",
       tooltip: "Inbox",
     },
     {
       label: "Settings",
       startContent: <Wrench />,
-      subItems: [{ children: "Profile", href: "#", tooltip: "Profile" }],
+      subItems: [
+        {
+          children: "Profile",
+          onPress: () => alert("Profile clicked"),
+          tooltip: "Profile",
+        },
+      ],
     },
   ]}
 />
@@ -122,6 +128,14 @@ Set `isCollapsed` to `true` to collapse the sidebar to show only icons. When col
 > Every item should have a `tooltip` prop set when the sidebar supports collapsing. This ensures users can still identify each item when labels are hidden.
 
 <ComponentPreview name="sidebar-collapsed" />
+
+#### Customizing Tooltips
+
+Use the `tooltipProps` and `tooltipTriggerProps` props on `SidebarRoot` (or `Sidebar`) to customise tooltip behavior globally for all items. These props are spread onto the underlying React Aria [Tooltip](https://react-aria.adobe.com/Tooltip.html) and [TooltipTrigger](https://react-aria.adobe.com/TooltipTrigger.html) components respectively.
+
+By default, collapsed sidebar tooltips use `placement="right"`, `offset={4}`, and `delay={0}`.
+
+<ComponentPreview name="sidebar-custom-tooltip" />
 
 ### Controlled Collapse
 
@@ -226,15 +240,17 @@ Each item in the array can be one of three types:
 
 ### SidebarRoot
 
-| Prop                | Type                             | Default | Description                                      |
-| ------------------- | -------------------------------- | ------- | ------------------------------------------------ |
-| `size`              | `"sm" \| "md"`                   | `"md"`  | The size variant.                                |
-| `isCollapsed`       | `boolean`                        | -       | Whether the sidebar is collapsed (controlled).   |
-| `defaultCollapsed`  | `boolean`                        | `false` | Whether the sidebar is collapsed by default.     |
-| `onCollapsedChange` | `(isCollapsed: boolean) => void` | -       | Handler called when the collapsed state changes. |
-| `className`         | `string`                         | -       | Custom class for the root `<nav>` element.       |
-| `classNames`        | `SlotsToClasses<SidebarSlots>`   | -       | Custom classes for individual slots.             |
-| `children`          | `ReactNode`                      | -       | Sidebar content (items, headers, lists).         |
+| Prop                  | Type                                    | Default | Description                                                                                                      |
+| --------------------- | --------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| `size`                | `"sm" \| "md"`                          | `"md"`  | The size variant.                                                                                                |
+| `isCollapsed`         | `boolean`                               | -       | Whether the sidebar is collapsed (controlled).                                                                   |
+| `defaultCollapsed`    | `boolean`                               | `false` | Whether the sidebar is collapsed by default.                                                                     |
+| `onCollapsedChange`   | `(isCollapsed: boolean) => void`        | -       | Handler called when the collapsed state changes.                                                                 |
+| `tooltipProps`        | `Partial<TooltipProps>`                 | -       | Props spread onto each item's [Tooltip](https://react-aria.adobe.com/Tooltip.html) when collapsed.               |
+| `tooltipTriggerProps` | `Partial<TooltipTriggerComponentProps>` | -       | Props spread onto each item's [TooltipTrigger](https://react-aria.adobe.com/TooltipTrigger.html) when collapsed. |
+| `className`           | `string`                                | -       | Custom class for the root `<nav>` element.                                                                       |
+| `classNames`          | `SlotsToClasses<SidebarSlots>`          | -       | Custom classes for individual slots.                                                                             |
+| `children`            | `ReactNode`                             | -       | Sidebar content (items, headers, lists).                                                                         |
 
 ### SidebarItem
 

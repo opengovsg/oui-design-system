@@ -25,7 +25,7 @@ const items: SidebarProps["items"] = [
   { type: "header", children: "Mail" },
   {
     startContent: <MailIcon />,
-    href: "#",
+    onPress: () => alert("Inbox clicked"),
     children: "Inbox",
     tooltip: "Go to Inbox",
     isSelected: true,
@@ -33,19 +33,19 @@ const items: SidebarProps["items"] = [
   {
     children: "Starred",
     startContent: <Star />,
-    href: "#",
+    onPress: () => alert("Starred clicked"),
     tooltip: "Go to Starred",
   },
   {
     children: "Activity",
     startContent: <Calendar />,
-    href: "#",
+    onPress: () => alert("Activity clicked"),
     tooltip: "Go to Activity",
   },
   {
     children: "Explore",
     startContent: <Link />,
-    href: "#",
+    onPress: () => alert("Explore clicked"),
     tooltip: "Go to Explore",
   },
   {
@@ -57,7 +57,7 @@ const items: SidebarProps["items"] = [
         tooltip: "Go to Profile",
         startContent: <User />,
         children: "Profile",
-        href: "#",
+        onPress: () => alert("Profile clicked"),
       },
     ],
   },

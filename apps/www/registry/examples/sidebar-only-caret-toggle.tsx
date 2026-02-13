@@ -7,27 +7,47 @@ import { SidebarItem, SidebarList, SidebarRoot } from "@opengovsg/oui"
 export default function SidebarOnlyCaretToggle() {
   return (
     <SidebarRoot>
-      <SidebarItem startContent={<MailIcon />} href="#" tooltip="Go to Inbox">
+      <SidebarItem
+        startContent={<MailIcon />}
+        onPress={() => alert("Inbox clicked")}
+        tooltip="Go to Inbox"
+      >
         Inbox
       </SidebarItem>
       <SidebarList
         onlyCaretToggle
-        label="Settings"
+        label="Clicking this will not expand/collapse the section"
         startContent={<Wrench />}
-        href="#"
+        onPress={() =>
+          alert(
+            "onPress/href will be triggered instead. Click the caret to expand/collapse.",
+          )
+        }
       >
-        <SidebarItem href="#" tooltip="Go to General">
+        <SidebarItem
+          onPress={() => alert("General clicked")}
+          tooltip="Go to General"
+        >
           General
         </SidebarItem>
-        <SidebarItem href="#" tooltip="Go to Security">
+        <SidebarItem
+          onPress={() => alert("Security clicked")}
+          tooltip="Go to Security"
+        >
           Security
         </SidebarItem>
       </SidebarList>
       <SidebarList defaultIsExpanded label="Favorites" startContent={<Star />}>
-        <SidebarItem href="#" tooltip="Go to Dashboard">
+        <SidebarItem
+          onPress={() => alert("Dashboard clicked")}
+          tooltip="Go to Dashboard"
+        >
           Dashboard
         </SidebarItem>
-        <SidebarItem href="#" tooltip="Go to Reports">
+        <SidebarItem
+          onPress={() => alert("Reports clicked")}
+          tooltip="Go to Reports"
+        >
           Reports
         </SidebarItem>
       </SidebarList>

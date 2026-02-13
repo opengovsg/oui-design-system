@@ -16,26 +16,26 @@ import { Button, Sidebar } from "@opengovsg/oui"
 const items: SidebarProps["items"] = [
   {
     startContent: <MailIcon />,
-    href: "#",
+    onPress: () => alert("Inbox clicked"),
     children: "Inbox",
     tooltip: "Inbox",
   },
   {
     children: "Starred",
     startContent: <Star />,
-    href: "#",
+    onPress: () => alert("Starred clicked"),
     tooltip: "Starred",
   },
   {
     children: "Activity",
     startContent: <Calendar />,
-    href: "#",
+    onPress: () => alert("Activity clicked"),
     tooltip: "Activity",
   },
   {
     children: "Explore",
     startContent: <Link />,
-    href: "#",
+    onPress: () => alert("Explore clicked"),
     tooltip: "Explore",
   },
 ]
