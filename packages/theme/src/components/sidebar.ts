@@ -13,11 +13,11 @@ export const sidebarStyles = tv({
       "-outline-offset-2",
     ],
     section: "group/section w-full",
-    header: "text-base-content-strong",
+    header: "text-base-content-strong inline-flex items-center",
     headerLi: "",
     list: "",
     label: [
-      "group-expanded/item:text-interaction-main-default inline-flex flex-1 text-start transition [&>svg]:shrink-0",
+      "group-expanded/item:text-interaction-main-default inline-flex flex-1 items-center text-start transition [&>svg]:shrink-0",
       ...focusVisibleClasses,
       "-outline-offset-2",
     ],
