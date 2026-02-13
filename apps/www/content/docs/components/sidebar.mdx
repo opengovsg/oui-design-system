@@ -65,6 +65,35 @@ There are two ways to use the sidebar:
 
 ## Examples
 
+### Navigation
+
+Each `SidebarItem` is built on React Aria's [Link](https://react-aria.adobe.com/Link.html) component, so it accepts all `Link` props for navigation. Use `href` for standard URL navigation, or `onPress` for custom click handling.
+
+```tsx
+// URL navigation
+<SidebarItem href="/inbox" startContent={<MailIcon />}>
+  Inbox
+</SidebarItem>
+
+// Custom press handler
+<SidebarItem onPress={() => alert("Inbox clicked")} startContent={<MailIcon />}>
+  Inbox
+</SidebarItem>
+```
+
+When using the data-driven `Sidebar` component, pass these props directly in the items array:
+
+```tsx
+const items = [
+  { children: "Inbox", href: "/inbox", startContent: <MailIcon /> },
+  {
+    children: "Starred",
+    onPress: () => navigate("/starred"),
+    startContent: <Star />,
+  },
+]
+```
+
 ### Sizes
 
 Use the `size` prop to change the density of the sidebar. The default size is `md`.
