@@ -30,7 +30,15 @@ export const Modal = forwardRef(function Modal(
   ref: React.Ref<HTMLDivElement>,
 ) {
   const [
-    { classNames, isOpen, onOpenChange, isDismissable, defaultOpen, ...props },
+    {
+      classNames,
+      isOpen,
+      onOpenChange,
+      isDismissable,
+      isKeyboardDismissDisabled,
+      defaultOpen,
+      ...props
+    },
     variantProps,
   ] = mapPropsVariants(originalProps, modalStyles.variantKeys)
 
@@ -59,6 +67,7 @@ export const Modal = forwardRef(function Modal(
         isOpen={isOpen}
         onOpenChange={onOpenChange}
         isDismissable={isDismissable}
+        isKeyboardDismissDisabled={isKeyboardDismissDisabled}
         defaultOpen={defaultOpen}
         className={composeRenderProps(
           classNames?.overlay,
@@ -70,6 +79,8 @@ export const Modal = forwardRef(function Modal(
           {...props}
           ref={ref}
           data-placement={variantProps.placement}
+          isDismissable={isDismissable}
+          isKeyboardDismissDisabled={isKeyboardDismissDisabled}
           className={composeRenderProps(
             props.className ?? classNames?.base,
             (className, renderProps) =>
