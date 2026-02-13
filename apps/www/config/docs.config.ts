@@ -81,7 +81,7 @@ const docsLinks: NavItem = {
             { title: "SingleSelect", url: "single-select", status: "redirect" },
             { title: "SearchField", url: "search-field", status: "new" },
             { title: "Select", url: "select" },
-            { title: "Sidebar", url: "sidebar", status: "wip" },
+            { title: "Sidebar", url: "sidebar", status: "new" },
             { title: "Skeleton", url: "skeleton", status: "wip" },
             { title: "Table", url: "table", status: "wip" },
             { title: "Tabs", url: "tabs" },
