@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.44
+
+### Patch Changes
+
+- [#220](https://github.com/opengovsg/oui-design-system/pull/220) [`1c8299e`](https://github.com/opengovsg/oui-design-system/commit/1c8299e8d2e3a24c56b16dcd24ba80515d2de29a) Thanks [@karrui](https://github.com/karrui)! - fix(modal): actually prevent dismiss on escape keypress
+
+- Updated dependencies [[`6330888`](https://github.com/opengovsg/oui-design-system/commit/6330888f8ef5a102b031257b0b71d42ce9c66ab9), [`8ada2c6`](https://github.com/opengovsg/oui-design-system/commit/8ada2c68648f1dcca6731e52ca45eeb32156a179)]:
+  - @opengovsg/oui-theme@0.0.44
+
 ## 0.0.43
 
 ### Patch Changes

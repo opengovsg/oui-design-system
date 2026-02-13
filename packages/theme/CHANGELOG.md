@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.44
+
+### Patch Changes
+
+- [#217](https://github.com/opengovsg/oui-design-system/pull/217) [`6330888`](https://github.com/opengovsg/oui-design-system/commit/6330888f8ef5a102b031257b0b71d42ce9c66ab9) Thanks [@karrui](https://github.com/karrui)! - feat(theme): add custom animations that can be overridden with variables
+
+- [#218](https://github.com/opengovsg/oui-design-system/pull/218) [`8ada2c6`](https://github.com/opengovsg/oui-design-system/commit/8ada2c68648f1dcca6731e52ca45eeb32156a179) Thanks [@karrui](https://github.com/karrui)! - feat(modal): add slide-end and slide-start animations
+
 ## 0.0.43
 
 ### Patch Changes
