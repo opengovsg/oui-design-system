@@ -22,6 +22,8 @@ export const modalStyles = tv({
       none: {},
       fade: {},
       zoom: {},
+      "slide-end": {},
+      "slide-start": {},
     },
     placement: {
       auto: {
@@ -41,6 +43,12 @@ export const modalStyles = tv({
       },
       "bottom-center": {
         overlay: "items-end sm:items-center",
+      },
+      end: {
+        overlay: "justify-end sm:justify-end",
+      },
+      start: {
+        overlay: "justify-start sm:justify-start",
       },
     },
     radius: {
@@ -99,12 +107,12 @@ export const modalStyles = tv({
         base: "max-w-5xl",
       },
       desktop: {
-        base: "max-w-[680px]",
+        base: "max-w-170",
         header: "prose-h4",
         body: "prose-body-2",
       },
       mobile: {
-        base: "max-w-[312px]",
+        base: "max-w-78",
         header: "prose-h5",
         body: "prose-body-2",
       },
@@ -112,7 +120,7 @@ export const modalStyles = tv({
         header: "prose-h4",
         body: "prose-body-2",
         dialog: "flex-1",
-        base: "mx-0 my-0 min-h-[100dvh] max-w-full !rounded-none sm:mx-0 sm:my-0",
+        base: "mx-0 my-0 min-h-dvh max-w-full rounded-none! sm:mx-0 sm:my-0",
       },
     },
     scrollBehavior: {
@@ -121,7 +129,7 @@ export const modalStyles = tv({
         dialog: "overflow-y-hidden",
       },
       inside: {
-        base: "max-h-[calc(100%_-_8rem)]",
+        base: "max-h-[calc(100%-8rem)]",
         body: "overflow-y-auto",
         dialog: "overflow-y-hidden",
       },
@@ -141,6 +149,7 @@ export const modalStyles = tv({
       },
     },
     // Animations
+    // Zoom base
     {
       isEntering: true,
       animation: "zoom",
@@ -155,9 +164,39 @@ export const modalStyles = tv({
         base: "motion-safe:animate-out motion-safe:zoom-out-105 duration-200 ease-out",
       },
     },
+    // Slide base
     {
       isEntering: true,
-      animation: ["fade", "zoom"],
+      animation: "slide-end",
+      class: {
+        base: "animate-slide-end",
+      },
+    },
+    {
+      isExiting: true,
+      animation: "slide-end",
+      class: {
+        base: "animate-slide-end direction-reverse ease-in",
+      },
+    },
+    {
+      isEntering: true,
+      animation: "slide-start",
+      class: {
+        base: "animate-slide-start duration-initial",
+      },
+    },
+    {
+      isExiting: true,
+      animation: "slide-start",
+      class: {
+        base: "animate-slide-start direction-reverse ease-in",
+      },
+    },
+    // Overlay
+    {
+      isEntering: true,
+      animation: ["fade", "zoom", "slide-start", "slide-end"],
       class: {
         overlay:
           "motion-safe:animate-in motion-safe:fade-in duration-200 ease-out",
@@ -165,7 +204,7 @@ export const modalStyles = tv({
     },
     {
       isExiting: true,
-      animation: ["fade", "zoom"],
+      animation: ["fade", "zoom", "slide-start", "slide-end"],
       class: {
         overlay:
           "motion-safe:animate-out motion-safe:fade-out duration-200 ease-in",
