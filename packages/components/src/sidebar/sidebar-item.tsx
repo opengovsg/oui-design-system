@@ -21,7 +21,8 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
   ) => {
     const { slots, classNames } = useSidebarStyleContext()
     const { isNested, isExpanded } = useSidebarNestContext() ?? {}
-    const { isCollapsed } = useSidebarCollapseContext() ?? {}
+    const { isCollapsed, tooltipProps, tooltipTriggerProps } =
+      useSidebarCollapseContext() ?? {}
 
     const dataSelected = useMemo(() => {
       if (typeof isSelected === "function") {
@@ -40,7 +41,7 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
         })}
         ref={ref}
       >
-        <TooltipTrigger delay={0}>
+        <TooltipTrigger delay={0} {...tooltipTriggerProps}>
           <Link
             aria-label={isCollapsed ? tooltip : undefined}
             {...props}
@@ -60,7 +61,7 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
           </Link>
           {/* TODO: Style tooltip and move to theme */}
           {isCollapsed && (
-            <Tooltip offset={4} placement="right">
+            <Tooltip offset={4} placement="right" {...tooltipProps}>
               {tooltip}
             </Tooltip>
           )}

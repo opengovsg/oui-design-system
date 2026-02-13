@@ -1,6 +1,10 @@
 "use client"
 
 import type { PropsWithChildren } from "react"
+import type {
+  TooltipProps,
+  TooltipTriggerComponentProps,
+} from "react-aria-components"
 import { useControlledState } from "@react-stately/utils"
 import { Provider } from "react-aria-components"
 
@@ -25,6 +29,9 @@ export interface SidebarRootProps
   defaultCollapsed?: boolean
   /** Handler that is called when the sidebar's collapsed state changes. */
   onCollapsedChange?: (isCollapsed: boolean) => void
+
+  tooltipProps?: Partial<TooltipProps>
+  tooltipTriggerProps?: Partial<TooltipTriggerComponentProps>
 }
 
 export const SidebarRoot = ({
@@ -32,6 +39,8 @@ export const SidebarRoot = ({
   classNames,
   defaultCollapsed,
   onCollapsedChange,
+  tooltipProps,
+  tooltipTriggerProps,
   ...originalProps
 }: SidebarRootProps) => {
   const [props, variantProps] = mapPropsVariants(
@@ -51,7 +60,10 @@ export const SidebarRoot = ({
     <Provider
       values={[
         [SidebarStyleContext, { slots, classNames }],
-        [SidebarCollapseContext, { isCollapsed, setCollapsed }],
+        [
+          SidebarCollapseContext,
+          { isCollapsed, setCollapsed, tooltipProps, tooltipTriggerProps },
+        ],
       ]}
     >
       <nav

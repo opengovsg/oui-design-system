@@ -1,6 +1,11 @@
 "use client"
 
 import type {
+  TooltipProps,
+  TooltipTriggerComponentProps,
+} from "react-aria-components"
+
+import type {
   SidebarSlots,
   sidebarStyles,
   SlotsToClasses,
@@ -21,6 +26,9 @@ export const [SidebarStyleContext, useSidebarStyleContext] =
 export interface SidebarCollapseContextProps {
   isCollapsed: boolean
   setCollapsed?: (collapsed: boolean) => void
+
+  tooltipProps?: Partial<TooltipProps>
+  tooltipTriggerProps?: Partial<TooltipTriggerComponentProps>
 }
 
 export type SidebarCollapseContextReturn = SidebarCollapseContextProps
