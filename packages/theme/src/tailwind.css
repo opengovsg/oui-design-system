@@ -28,9 +28,7 @@
   --shadow-md: 0px 0px 20px 0px rgba(104, 104, 104, 0.3);
 
   --text-xs--line-height: 1rem;
-
-  --animate-spinner-ease-spin: spinner-spin 0.8s ease infinite;
-  --animate-spinner-linear-spin: spinner-spin 0.8s linear infinite;
+  --ease-default: cubic-bezier(0.25, 0.1, 0.25, 1);
 
   @keyframes spinner-spin {
     0% {
@@ -40,4 +38,44 @@
       transform: rotate(360deg);
     }
   }
+
+  @keyframes slide-end {
+    from {
+      transform: translateX(100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slide-start {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+@utility animate-slide-start {
+  animation: slide-start var(--tw-animation-duration, var(--tw-duration, 0.2s))
+    var(--tw-ease, ease-out) var(--tw-animation-delay, 0s)
+    var(--tw-animation-iteration-count, 1) var(--tw-animation-direction, normal)
+    var(--tw-animation-fill-mode, none);
+}
+@utility animate-slide-end {
+  animation: slide-end var(--tw-animation-duration, var(--tw-duration, 0.2s))
+    var(--tw-ease, ease-out) var(--tw-animation-delay, 0s)
+    var(--tw-animation-iteration-count, 1) var(--tw-animation-direction, normal)
+    var(--tw-animation-fill-mode, none);
+}
+
+@utility animate-spinner {
+  animation: spinner-spin var(--tw-animation-duration, var(--tw-duration, 0.8s))
+    var(--tw-ease, ease) var(--tw-animation-delay, 0s)
+    var(--tw-animation-iteration-count, infinite)
+    var(--tw-animation-direction, normal) var(--tw-animation-fill-mode, none);
 }
