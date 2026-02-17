@@ -6,11 +6,9 @@ import { tv } from "../utils/tv"
 
 export const radioStyles = tv({
   slots: {
-    circle: cn(
+    circle:
       "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 bg-white transition",
-      racFocusRing.base,
-    ),
-    base: "group grid grid-cols-[auto_1fr]",
+    base: cn("group grid grid-cols-[auto_1fr]", racFocusRing.base),
     icon: "rounded-full transition",
     label: "col-start-2 row-start-1",
     description: "col-start-2 row-start-2 text-gray-600",
@@ -35,10 +33,10 @@ export const radioStyles = tv({
     },
     isFocusVisible: {
       true: {
-        circle: racFocusRing.variants.isFocusVisible.true,
+        base: racFocusRing.variants.isFocusVisible.true,
       },
       false: {
-        circle: racFocusRing.variants.isFocusVisible.false,
+        base: racFocusRing.variants.isFocusVisible.false,
       },
     },
     isDisabled: {
