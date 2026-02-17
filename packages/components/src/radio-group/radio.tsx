@@ -158,9 +158,11 @@ export const RadioGroup = ({
 
         {props.children}
 
-        <FieldError size={size} className={classNames?.error?.text}>
-          {errorMessage}
-        </FieldError>
+        {props.isInvalid && errorMessage && (
+          <FieldError size={size} className={classNames?.error?.text}>
+            {errorMessage}
+          </FieldError>
+        )}
       </AriaRadioGroup>
     </Provider>
   )

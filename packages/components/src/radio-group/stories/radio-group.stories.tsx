@@ -22,6 +22,8 @@ export default {
     label: "Select a city",
     isDisabled: false,
     isRequired: false,
+    isInvalid: false,
+    errorMessage: "",
   },
   render: (args) => (
     <RadioGroup {...args}>
@@ -39,64 +41,117 @@ export const Default: Story = {
   args: {},
 }
 
-export const Sizes: Story = {
-  render: (args) => (
+/**
+ * Displays all visual states of the RadioGroup component.
+ * Tab through the groups to see the focus state (rectangular outline around the entire radio item).
+ */
+export const States: Story = {
+  render: () => (
     <div className="flex flex-row gap-8">
-      <RadioGroup {...args} label="Cities (xs)" size="xs">
-        <Radio value="sf">San Francisco</Radio>
-        <Radio value="ny">New York</Radio>
-        <Radio value="tokyo">Tokyo</Radio>
+      <RadioGroup label="Unselected">
+        <Radio value="a">Option A</Radio>
+        <Radio value="b">Option B</Radio>
       </RadioGroup>
-      <RadioGroup {...args} label="Cities (sm)" size="sm">
-        <Radio value="sf">San Francisco</Radio>
-        <Radio value="ny">New York</Radio>
-        <Radio value="tokyo">Tokyo</Radio>
+
+      <RadioGroup label="Selected" defaultValue="a">
+        <Radio value="a">Option A</Radio>
+        <Radio value="b">Option B</Radio>
       </RadioGroup>
-      <RadioGroup {...args} label="Cities (md)" size="md">
-        <Radio value="sf">San Francisco</Radio>
-        <Radio value="ny">New York</Radio>
-        <Radio value="tokyo">Tokyo</Radio>
+
+      <RadioGroup label="Disabled (group)" isDisabled defaultValue="a">
+        <Radio value="a">Selected</Radio>
+        <Radio value="b">Unselected</Radio>
+      </RadioGroup>
+
+      <RadioGroup label="Disabled (individual)" defaultValue="a">
+        <Radio value="a" isDisabled>
+          Disabled selected
+        </Radio>
+        <Radio value="b" isDisabled>
+          Disabled unselected
+        </Radio>
+        <Radio value="c">Enabled</Radio>
+      </RadioGroup>
+
+      <RadioGroup
+        label="Invalid"
+        isInvalid
+        isRequired
+        errorMessage="Please select an option."
+      >
+        <Radio value="a">Option A</Radio>
+        <Radio value="b">Option B</Radio>
       </RadioGroup>
     </div>
   ),
-  args: {
-    defaultValue: "tokyo",
-  },
 }
 
-export const IsInvalid: Story = {
-  args: {
-    isRequired: true,
-    isInvalid: true,
-    errorMessage: "Please select a city.",
-  },
+/**
+ * All size variants (xs, sm, md) with descriptions.
+ */
+export const Sizes: Story = {
+  render: () => (
+    <div className="flex flex-row gap-8">
+      <RadioGroup label="Size xs" size="xs" defaultValue="card">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+        <Radio value="bank" description="Processing may take 2-3 business days">
+          Bank Transfer
+        </Radio>
+      </RadioGroup>
+
+      <RadioGroup label="Size sm" size="sm" defaultValue="card">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+        <Radio value="bank" description="Processing may take 2-3 business days">
+          Bank Transfer
+        </Radio>
+      </RadioGroup>
+
+      <RadioGroup label="Size md" size="md" defaultValue="card">
+        <Radio
+          value="card"
+          description="Pay securely with credit or debit card"
+        >
+          Credit Card
+        </Radio>
+        <Radio
+          value="paypal"
+          description="Fast checkout with your PayPal account"
+        >
+          PayPal
+        </Radio>
+        <Radio value="bank" description="Processing may take 2-3 business days">
+          Bank Transfer
+        </Radio>
+      </RadioGroup>
+    </div>
+  ),
 }
 
-export const IsDisabled: Story = {
-  args: {
-    isDisabled: true,
-    defaultValue: "ny",
-  },
-}
-
-export const IsRequired: Story = {
-  args: {
-    isRequired: true,
-  },
-}
-
-export const WithDefaultValue: Story = {
-  args: {
-    defaultValue: "tokyo",
-  },
-}
-
-export const WithoutLabel: Story = {
-  args: {
-    label: undefined,
-  },
-}
-
+/**
+ * Demonstrates text wrapping behavior with long labels.
+ */
 export const LongLabels: Story = {
   render: (args) => (
     <div className="max-w-md">
@@ -110,79 +165,6 @@ export const LongLabels: Story = {
           behavior
         </Radio>
         <Radio value="option3">Short option</Radio>
-      </RadioGroup>
-    </div>
-  ),
-  args: {},
-}
-
-export const WithDescription: Story = {
-  render: (args) => (
-    <RadioGroup {...args} label="Select a payment method">
-      <Radio value="card" description="Pay securely with credit or debit card">
-        Credit Card
-      </Radio>
-      <Radio
-        value="paypal"
-        description="Fast checkout with your PayPal account"
-      >
-        PayPal
-      </Radio>
-      <Radio
-        value="bank"
-        description="Direct bank transfer (processing may take 2-3 business days)"
-      >
-        Bank Transfer
-      </Radio>
-    </RadioGroup>
-  ),
-  args: {},
-}
-
-export const WithDescriptionSizes: Story = {
-  render: (args) => (
-    <div className="flex flex-col gap-8">
-      <RadioGroup {...args} label="Payment method (xs)" size="xs">
-        <Radio
-          value="card"
-          description="Pay securely with credit or debit card"
-        >
-          Credit Card
-        </Radio>
-        <Radio
-          value="paypal"
-          description="Fast checkout with your PayPal account"
-        >
-          PayPal
-        </Radio>
-      </RadioGroup>
-      <RadioGroup {...args} label="Payment method (sm)" size="sm">
-        <Radio
-          value="card"
-          description="Pay securely with credit or debit card"
-        >
-          Credit Card
-        </Radio>
-        <Radio
-          value="paypal"
-          description="Fast checkout with your PayPal account"
-        >
-          PayPal
-        </Radio>
-      </RadioGroup>
-      <RadioGroup {...args} label="Payment method (md)" size="md">
-        <Radio
-          value="card"
-          description="Pay securely with credit or debit card"
-        >
-          Credit Card
-        </Radio>
-        <Radio
-          value="paypal"
-          description="Fast checkout with your PayPal account"
-        >
-          PayPal
-        </Radio>
       </RadioGroup>
     </div>
   ),

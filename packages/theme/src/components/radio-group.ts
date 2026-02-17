@@ -7,7 +7,7 @@ import { tv } from "../utils/tv"
 export const radioStyles = tv({
   slots: {
     circle:
-      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 bg-white transition",
+      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
     base: cn("group grid grid-cols-[auto_1fr]", racFocusRing.base),
     icon: "rounded-full transition",
     label: "col-start-2 row-start-1",
@@ -45,12 +45,13 @@ export const radioStyles = tv({
       },
       true: {
         base: "text-interaction-support-disabled-content forced-colors:text-[GrayText]",
-        box: "[--color:var(--color-gray-200)] forced-colors:[--color:GrayText]!",
+        circle:
+          "[--color:var(--color-gray-200)] forced-colors:[--color:GrayText]!",
       },
     },
     isSelected: {
       true: {
-        circle: "border-interaction-main-default",
+        circle: "[--color:var(--color-interaction-main-default)]",
         icon: "bg-interaction-main-default scale-100",
       },
       false: {
@@ -58,6 +59,17 @@ export const radioStyles = tv({
       },
     },
   },
+  compoundVariants: [
+    {
+      isDisabled: true,
+      isSelected: true,
+      className: {
+        circle:
+          "[--color:var(--color-interaction-support-disabled-content)]",
+        icon: "bg-interaction-support-disabled-content",
+      },
+    },
+  ],
   defaultVariants: {
     size: "md",
   },
