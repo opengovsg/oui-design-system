@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const linkStyles = tv({
   extend: racFocusRing,
-  base: "inline cursor-pointer *:inline",
+  base: "inline cursor-pointer outline-offset-4 transition [-webkit-tap-highlight-color:transparent] *:inline hover:underline disabled:cursor-default disabled:no-underline",
   variants: {
     color: {
       unstyled: "",
@@ -30,8 +30,7 @@ export const linkStyles = tv({
   compoundVariants: [
     {
       color: ["default", "neutral"],
-      className:
-        "disabled:text-interaction-support-disabled-content outline-offset-4 transition [-webkit-tap-highlight-color:transparent] hover:underline disabled:cursor-default disabled:no-underline",
+      className: "disabled:text-interaction-support-disabled-content",
     },
   ],
 })
