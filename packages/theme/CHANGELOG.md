@@ -1,5 +1,15 @@
 # @opengovsg/oui-theme
 
+## 0.0.45
+
+### Patch Changes
+
+- [#223](https://github.com/opengovsg/oui-design-system/pull/223) [`e11680f`](https://github.com/opengovsg/oui-design-system/commit/e11680fa55220229f8bb32378eb34fa94e7f2284) Thanks [@karrui](https://github.com/karrui)! - feat(link): move some styles to base instead of on color variant
+
+- [#219](https://github.com/opengovsg/oui-design-system/pull/219) [`f98ea58`](https://github.com/opengovsg/oui-design-system/commit/f98ea58ffd6064d955296ce337305ea4324ea208) Thanks [@karrui](https://github.com/karrui)! - feat: add Sidebar component
+
+- [#224](https://github.com/opengovsg/oui-design-system/pull/224) [`412b10b`](https://github.com/opengovsg/oui-design-system/commit/412b10b21d6fecb8333d01af190ae002cec36758) Thanks [@karrui](https://github.com/karrui)! - feat: add Tooltip component
+
 ## 0.0.44
 
 ### Patch Changes
