@@ -93,7 +93,7 @@ const docsLinks: NavItem = {
             { title: "TimeField", url: "time-field", status: "new" },
             { title: "Toast", url: "toast" },
             { title: "Toggle", url: "toggle" },
-            { title: "Tooltip", url: "tooltip", status: "wip" },
+            { title: "Tooltip", url: "tooltip", status: "new" },
           ].sort((a, b) => a.title.localeCompare(b.title)),
         },
       ],

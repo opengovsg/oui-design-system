@@ -3292,4 +3292,74 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/toggle-demo.tsx")),
   },
+  "tooltip-controlled": {
+    name: "tooltip-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tooltip-controlled.tsx")),
+  },
+  "tooltip-custom-styles": {
+    name: "tooltip-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/tooltip-custom-styles.tsx"),
+    ),
+  },
+  "tooltip-demo": {
+    name: "tooltip-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tooltip-demo.tsx")),
+  },
+  "tooltip-offset": {
+    name: "tooltip-offset",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-offset.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tooltip-offset.tsx")),
+  },
+  "tooltip-placement": {
+    name: "tooltip-placement",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-placement.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tooltip-placement.tsx")),
+  },
+  "tooltip-without-arrow": {
+    name: "tooltip-without-arrow",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tooltip-without-arrow.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/tooltip-without-arrow.tsx"),
+    ),
+  },
 }

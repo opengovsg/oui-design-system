@@ -1,12 +1,109 @@
 ---
 title: Tooltip
-description: A tooltip is a floating element activated upon click, hover, or focus. It provides contextual and non-essential information about the element they are adjacent to.
+description: A tooltip displays a brief description of an element on hover or focus.
 toc:
   visible: true
 links:
   source: tooltip
   storybook: components-tooltip--default
   theme: tooltip
+  reactaria: Tooltip
 ---
 
-# Not yet implemented
+<ComponentPreview name="tooltip-demo" />
+
+## Usage
+
+```tsx
+import { Button, Tooltip, TooltipTrigger } from "@opengovsg/oui"
+```
+
+```tsx
+<TooltipTrigger>
+  <Button>Hover me</Button>
+  <Tooltip>This is a tooltip</Tooltip>
+</TooltipTrigger>
+```
+
+OUI exports 2 tooltip-related components:
+
+- **TooltipTrigger**: Wraps a trigger element and a `Tooltip`. Handles showing and hiding the tooltip on hover, focus, and keyboard interactions.
+- **Tooltip**: The tooltip overlay that displays the content.
+
+> **Note:** Tooltips are not shown on touch screen interactions. Ensure that your UI is usable without tooltips, or use an alternative component such as a Popover to show information in an adjacent element.
+
+## Examples
+
+### Placement
+
+Use the `placement` prop on `Tooltip` to control the position of the tooltip relative to its trigger. Supported values include `top`, `bottom`, `start`, `end`, and their combinations (e.g., `top start`, `bottom end`).
+
+Defaults to `top`.
+
+<ComponentPreview name="tooltip-placement" />
+
+### Without Arrow
+
+Set `showArrow={false}` to hide the arrow indicator on the tooltip.
+
+<ComponentPreview name="tooltip-without-arrow" />
+
+### Offset
+
+Use the `offset` prop to control the distance between the tooltip and the trigger element. The default offset is `10`.
+
+<ComponentPreview name="tooltip-offset" />
+
+### Controlled
+
+You can control the tooltip's open state using the `isOpen` and `onOpenChange` props on `TooltipTrigger`.
+
+<ComponentPreview name="tooltip-controlled" />
+
+## Slots
+
+- **base**: The main container of the tooltip.
+- **arrow**: The arrow indicator pointing to the trigger element.
+
+### Custom Styles
+
+You can customize the `Tooltip` component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+<ComponentPreview name="tooltip-custom-styles" />
+
+## Accessibility
+
+- Tooltip is shown on hover and keyboard focus of the trigger element.
+- Tooltips have a warmup delay (300ms) before appearing. Once a tooltip is shown, subsequent tooltips in the same group appear instantly.
+- Content outside the tooltip is not blocked — tooltips are non-modal.
+- The trigger element must have a proper ARIA role or use a semantic HTML element (e.g., `<button>`) so that screen readers can announce the tooltip.
+- Press the <Kbd>Esc</Kbd> key to dismiss the tooltip.
+
+## Props
+
+### Tooltip
+
+| Prop               | Type                                                    | Default     | Description                                                               |
+| ------------------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------------------------- |
+| `children`         | `React.ReactNode`                                       | -           | The content of the tooltip                                                |
+| `placement`        | `Placement`                                             | `"top"`     | The placement of the tooltip relative to the trigger                      |
+| `offset`           | `number`                                                | `10`        | The additional offset along the main axis from the trigger                |
+| `crossOffset`      | `number`                                                | `0`         | The additional offset along the cross axis                                |
+| `shouldFlip`       | `boolean`                                               | `true`      | Whether the tooltip flips when insufficient space is available            |
+| `containerPadding` | `number`                                                | `12`        | The spacing between the tooltip and the edge of the surrounding container |
+| `showArrow`        | `boolean`                                               | `true`      | Whether to show the arrow pointing to the trigger element                 |
+| `variant`          | `"default" \| "unstyled"`                               | `"default"` | The visual variant of the tooltip                                         |
+| `radius`           | `"none" \| "sm" \| "default" \| "md" \| "lg" \| "full"` | `"sm"`      | The border radius of the tooltip                                          |
+| `classNames`       | `SlotsToClasses<TooltipSlots>`                          | -           | Custom CSS classes for component slots                                    |
+
+### TooltipTrigger
+
+| Prop           | Type                        | Default | Description                                           |
+| -------------- | --------------------------- | ------- | ----------------------------------------------------- |
+| `children`     | `React.ReactNode`           | -       | The trigger element and tooltip                       |
+| `delay`        | `number`                    | `300`   | The delay (in ms) before the tooltip opens on hover   |
+| `closeDelay`   | `number`                    | `0`     | The delay (in ms) before the tooltip closes           |
+| `isOpen`       | `boolean`                   | -       | Whether the tooltip is open (controlled)              |
+| `defaultOpen`  | `boolean`                   | -       | Whether the tooltip is open by default (uncontrolled) |
+| `isDisabled`   | `boolean`                   | -       | Whether the tooltip trigger is disabled               |
+| `onOpenChange` | `(isOpen: boolean) => void` | -       | Callback when the tooltip open state changes          |
