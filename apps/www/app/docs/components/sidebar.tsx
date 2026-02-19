@@ -36,6 +36,22 @@ const WipBadge = () => {
   )
 }
 
+const UpdatedBadge = () => {
+  return (
+    <Badge
+      classNames={{
+        base: "bg-linear-to-br from-brand-primary-200 to-brand-primary-400 border-small border-white/50 shadow-blue-500/30",
+        content: "drop-shadow shadow-black text-white",
+      }}
+      variant="solid"
+      radius="full"
+      size="xs"
+    >
+      Updated
+    </Badge>
+  )
+}
+
 const RedirectBadge = () => {
   return (
     <Badge
@@ -51,10 +67,18 @@ const RedirectBadge = () => {
 }
 
 const StatusBadge = ({ status }: { status?: string }) => {
-  if (status === "new") return <NewBadge />
-  if (status === "wip") return <WipBadge />
-  if (status === "redirect") return <RedirectBadge />
-  return null
+  switch (status) {
+    case "new":
+      return <NewBadge />
+    case "updated":
+      return <UpdatedBadge />
+    case "wip":
+      return <WipBadge />
+    case "redirect":
+      return <RedirectBadge />
+    default:
+      return null
+  }
 }
 
 export const DocsSidebar = () => {

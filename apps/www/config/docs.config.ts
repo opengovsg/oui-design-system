@@ -80,7 +80,7 @@ const docsLinks: NavItem = {
             { title: "RangeCalendar", url: "range-calendar" },
             { title: "SingleSelect", url: "single-select", status: "redirect" },
             { title: "SearchField", url: "search-field", status: "new" },
-            { title: "Select", url: "select" },
+            { title: "Select", url: "select", status: "updated" },
             { title: "Sidebar", url: "sidebar", status: "new" },
             { title: "Skeleton", url: "skeleton", status: "wip" },
             { title: "Table", url: "table", status: "wip" },
