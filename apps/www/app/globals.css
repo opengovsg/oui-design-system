@@ -14,7 +14,7 @@
 
   .step:before {
     @apply absolute inline-flex size-6 items-center justify-center rounded-full bg-black text-center -indent-px font-mono text-base font-medium text-white;
-    @apply mt-[2px] ml-[-45px];
+    @apply mt-0.5 -ml-11.25;
     content: counter(step);
   }
 

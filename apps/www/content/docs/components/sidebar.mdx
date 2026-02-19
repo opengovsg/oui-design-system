@@ -9,4 +9,323 @@ links:
   theme: sidebar
 ---
 
-# Not yet implemented
+<ComponentPreview name="sidebar-demo" />
+
+## Usage
+
+OUI exports 5 sidebar-related components:
+
+- **Sidebar**: A high-level convenience component that auto-generates items from a data array.
+- **SidebarRoot**: The base container component that provides context and styling to all children.
+- **SidebarItem**: An individual navigation item rendered as a link.
+- **SidebarList**: A collapsible section that can contain nested items.
+- **SidebarHeader**: A non-interactive header element used for section titles.
+
+```tsx
+import { Sidebar } from "@opengovsg/oui"
+```
+
+```tsx
+<Sidebar
+  items={[
+    { type: "header", children: "Section" },
+    {
+      startContent: <MailIcon />,
+      onPress: () => alert("Inbox clicked"),
+      children: "Inbox",
+      tooltip: "Inbox",
+    },
+    {
+      label: "Settings",
+      startContent: <Wrench />,
+      subItems: [
+        {
+          children: "Profile",
+          onPress: () => alert("Profile clicked"),
+          tooltip: "Profile",
+        },
+      ],
+    },
+  ]}
+/>
+```
+
+There are two ways to use the sidebar:
+
+1. **Data-driven** (recommended): Pass an `items` array to the `Sidebar` component. This handles rendering and nesting automatically.
+2. **Composition**: Use `SidebarRoot`, `SidebarItem`, `SidebarList`, and `SidebarHeader` directly for full control over the structure.
+
+## Features
+
+- **Accessible** – Built on [React Aria](https://react-aria.adobe.com/) primitives (`Link`, `Disclosure`, `Tooltip`) with proper ARIA labels and keyboard navigation.
+- **Collapsible** – The entire sidebar can collapse to show only icons, with tooltips appearing on hover for accessibility.
+- **Expandable sections** – `SidebarList` sections can independently expand and collapse, with support for both controlled and uncontrolled state.
+- **Flexible** – Use the high-level `Sidebar` component for quick setup, or compose individual components for custom layouts.
+- **Internationalized** – Expand/collapse labels are localized for supported locales.
+
+## Examples
+
+### Navigation
+
+Each `SidebarItem` is built on React Aria's [Link](https://react-aria.adobe.com/Link.html) component, so it accepts all `Link` props for navigation. Use `href` for standard URL navigation, or `onPress` for custom click handling.
+
+```tsx
+// URL navigation
+<SidebarItem href="/inbox" startContent={<MailIcon />}>
+  Inbox
+</SidebarItem>
+
+// Custom press handler
+<SidebarItem onPress={() => alert("Inbox clicked")} startContent={<MailIcon />}>
+  Inbox
+</SidebarItem>
+```
+
+When using the data-driven `Sidebar` component, pass these props directly in the items array:
+
+```tsx
+const items = [
+  { children: "Inbox", href: "/inbox", startContent: <MailIcon /> },
+  {
+    children: "Starred",
+    onPress: () => navigate("/starred"),
+    startContent: <Star />,
+  },
+]
+```
+
+### Sizes
+
+Use the `size` prop to change the density of the sidebar. The default size is `md`.
+
+<ComponentPreview name="sidebar-sizes" />
+
+### Composition
+
+For full control over the sidebar structure, use the individual components directly instead of the `items` array.
+
+```tsx
+import {
+  SidebarHeader,
+  SidebarItem,
+  SidebarList,
+  SidebarRoot,
+} from "@opengovsg/oui"
+```
+
+<ComponentPreview name="sidebar-composition" />
+
+### Collapsible Sections
+
+Use `SidebarList` items (or objects with `subItems` in the items array) to create expandable sections. Set `defaultIsExpanded` to control the initial expansion state.
+
+<ComponentPreview name="sidebar-collapsible-sections" />
+
+### Only Caret Toggle
+
+By default, clicking anywhere on a `SidebarList` item toggles its expansion. Set `onlyCaretToggle` to `true` to restrict toggling to only the caret icon. This is useful when the section label itself should act as a navigable link.
+
+> When using `onlyCaretToggle`, pass navigation props (such as `href`) directly to the `SidebarList` component. The label becomes a `Link` element while the caret remains a separate toggle button.
+
+<ComponentPreview name="sidebar-only-caret-toggle" />
+
+### Selected State
+
+Use the `isSelected` prop on items to indicate the currently active navigation item. Top-level selected items receive a background highlight, while nested selected items display a left border accent instead.
+
+`isSelected` accepts either a `boolean` or a `() => boolean` function, which is useful for dynamic route matching.
+
+```tsx
+// Static
+<SidebarItem isSelected>Active item</SidebarItem>
+
+// Dynamic
+<SidebarItem isSelected={() => pathname === "/inbox"}>Inbox</SidebarItem>
+```
+
+<ComponentPreview name="sidebar-selected" />
+
+### Collapsed
+
+Set `isCollapsed` to `true` to collapse the sidebar to show only icons. When collapsed:
+
+- Text labels and `endContent` are hidden.
+- Headers are hidden.
+- Section expand/collapse is disabled.
+- Tooltips appear on hover using each item's `tooltip` prop for accessibility.
+
+> Every item should have a `tooltip` prop set when the sidebar supports collapsing. This ensures users can still identify each item when labels are hidden.
+
+<ComponentPreview name="sidebar-collapsed" />
+
+#### Customizing Tooltips
+
+Use the `tooltipProps` and `tooltipTriggerProps` props on `SidebarRoot` (or `Sidebar`) to customise tooltip behavior globally for all items. These props are spread onto the underlying React Aria [Tooltip](https://react-aria.adobe.com/Tooltip.html) and [TooltipTrigger](https://react-aria.adobe.com/TooltipTrigger.html) components respectively.
+
+By default, collapsed sidebar tooltips use `placement="right"`, `offset={4}`, and `delay={0}`.
+
+<ComponentPreview name="sidebar-custom-tooltip" />
+
+### Controlled Collapse
+
+Use `isCollapsed` and `onCollapsedChange` together for controlled collapse state. This lets you manage the collapsed state externally, for example with a toggle button.
+
+<ComponentPreview name="sidebar-controlled" />
+
+### Sidebar in a Drawer
+
+On mobile layouts, you can render the sidebar inside a [Modal](/docs/components/modal) to create a drawer-style navigation panel. Use `classNames` to override the modal's positioning so it slides in from the side.
+
+<ComponentPreview name="sidebar-in-drawer" />
+
+## Slots
+
+### SidebarRoot / Sidebar
+
+- **base**: The root `<nav>` element.
+- **ul**: The `<ul>` list container.
+
+### SidebarItem
+
+- **item**: The `<li>` element wrapping each item.
+- **label**: The `<Link>` element containing the item content.
+
+### SidebarList
+
+- **list**: The `<li>` element wrapping the section.
+- **section**: The `Disclosure` wrapper.
+- **item**: The trigger element for expand/collapse.
+- **label**: The label content area.
+- **chevron**: The chevron icon.
+- **chevronContainer**: The wrapper around the chevron button.
+- **nestedPanel**: The `DisclosurePanel` containing nested items.
+
+### SidebarHeader
+
+- **headerLi**: The `<li>` element wrapping the header.
+- **header**: The `<h2>` element.
+
+All components accept a `classNames` prop (via `SidebarRoot`) to override styles for specific slots:
+
+```tsx
+<SidebarRoot
+  classNames={{
+    base: "custom-nav",
+    item: "custom-item",
+    label: "custom-label",
+  }}
+>
+  {/* ... */}
+</SidebarRoot>
+```
+
+## API Reference
+
+### Sidebar
+
+The `Sidebar` component is a high-level wrapper that generates items from a data array. It accepts all `SidebarRoot` props plus the following:
+
+| Prop    | Type                     | Default | Description                          |
+| ------- | ------------------------ | ------- | ------------------------------------ |
+| `items` | `GeneratedSidebarItem[]` | -       | Array of item definitions to render. |
+
+Each item in the array can be one of three types:
+
+**Regular item** – Rendered as `SidebarItem`:
+
+| Prop           | Type                       | Default | Description                                   |
+| -------------- | -------------------------- | ------- | --------------------------------------------- |
+| `children`     | `ReactNode`                | -       | The item label.                               |
+| `startContent` | `ReactNode`                | -       | Content before the label (typically an icon). |
+| `endContent`   | `ReactNode`                | -       | Content after the label.                      |
+| `tooltip`      | `string`                   | -       | Tooltip shown when the sidebar is collapsed.  |
+| `isSelected`   | `boolean \| () => boolean` | -       | Whether the item is currently selected.       |
+| `href`         | `string`                   | -       | Navigation URL (from React Aria `LinkProps`). |
+| `onPress`      | `() => void`               | -       | Press handler (from React Aria `LinkProps`).  |
+
+**Header item** – Rendered as `SidebarHeader`:
+
+| Prop           | Type        | Default | Description                              |
+| -------------- | ----------- | ------- | ---------------------------------------- |
+| `type`         | `"header"`  | -       | Discriminator to indicate a header item. |
+| `children`     | `ReactNode` | -       | The header text.                         |
+| `startContent` | `ReactNode` | -       | Content before the header text.          |
+| `endContent`   | `ReactNode` | -       | Content after the header text.           |
+
+**List item** – Rendered as `SidebarList`:
+
+| Prop                | Type                            | Default | Description                                                     |
+| ------------------- | ------------------------------- | ------- | --------------------------------------------------------------- |
+| `label`             | `ReactNode`                     | -       | The section label.                                              |
+| `subItems`          | `GeneratedSidebarItem[]`        | -       | Nested items (can contain any item type, including more lists). |
+| `startContent`      | `ReactNode`                     | -       | Content before the label.                                       |
+| `endContent`        | `ReactNode`                     | -       | Content after the label.                                        |
+| `tooltip`           | `string`                        | -       | Tooltip shown when the sidebar is collapsed.                    |
+| `isSelected`        | `boolean \| () => boolean`      | -       | Whether the section is currently selected.                      |
+| `defaultIsExpanded` | `boolean`                       | `false` | Initial expansion state (uncontrolled).                         |
+| `isExpanded`        | `boolean`                       | -       | Expansion state (controlled).                                   |
+| `onExpand`          | `(isExpanded: boolean) => void` | -       | Handler called when expansion state changes.                    |
+| `onlyCaretToggle`   | `boolean`                       | `false` | Only allow toggling via the caret icon.                         |
+
+### SidebarRoot
+
+| Prop                  | Type                                    | Default | Description                                                                                                      |
+| --------------------- | --------------------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------- |
+| `size`                | `"sm" \| "md"`                          | `"md"`  | The size variant.                                                                                                |
+| `isCollapsed`         | `boolean`                               | -       | Whether the sidebar is collapsed (controlled).                                                                   |
+| `defaultCollapsed`    | `boolean`                               | `false` | Whether the sidebar is collapsed by default.                                                                     |
+| `onCollapsedChange`   | `(isCollapsed: boolean) => void`        | -       | Handler called when the collapsed state changes.                                                                 |
+| `tooltipProps`        | `Partial<TooltipProps>`                 | -       | Props spread onto each item's [Tooltip](https://react-aria.adobe.com/Tooltip.html) when collapsed.               |
+| `tooltipTriggerProps` | `Partial<TooltipTriggerComponentProps>` | -       | Props spread onto each item's [TooltipTrigger](https://react-aria.adobe.com/TooltipTrigger.html) when collapsed. |
+| `className`           | `string`                                | -       | Custom class for the root `<nav>` element.                                                                       |
+| `classNames`          | `SlotsToClasses<SidebarSlots>`          | -       | Custom classes for individual slots.                                                                             |
+| `children`            | `ReactNode`                             | -       | Sidebar content (items, headers, lists).                                                                         |
+
+### SidebarItem
+
+Extends React Aria's [Link](https://react-aria.adobe.com/Link.html) props.
+
+| Prop           | Type                       | Default | Description                                   |
+| -------------- | -------------------------- | ------- | --------------------------------------------- |
+| `children`     | `ReactNode`                | -       | The item label.                               |
+| `startContent` | `ReactNode`                | -       | Content before the label (typically an icon). |
+| `endContent`   | `ReactNode`                | -       | Content after the label.                      |
+| `tooltip`      | `string`                   | -       | Tooltip shown when the sidebar is collapsed.  |
+| `isSelected`   | `boolean \| () => boolean` | -       | Whether the item is currently selected.       |
+
+### SidebarList
+
+| Prop                | Type                            | Default | Description                                                    |
+| ------------------- | ------------------------------- | ------- | -------------------------------------------------------------- |
+| `label`             | `ReactNode`                     | -       | The section label displayed in the trigger.                    |
+| `children`          | `ReactNode`                     | -       | Nested items rendered inside the collapsible panel.            |
+| `startContent`      | `ReactNode`                     | -       | Content before the label.                                      |
+| `endContent`        | `ReactNode`                     | -       | Content after the label.                                       |
+| `tooltip`           | `string`                        | -       | Tooltip shown when the sidebar is collapsed.                   |
+| `isSelected`        | `boolean \| () => boolean`      | -       | Whether the section is currently selected.                     |
+| `defaultIsExpanded` | `boolean`                       | `false` | Initial expansion state (uncontrolled).                        |
+| `isExpanded`        | `boolean`                       | -       | Expansion state (controlled).                                  |
+| `onExpand`          | `(isExpanded: boolean) => void` | -       | Handler called when expansion state changes.                   |
+| `onlyCaretToggle`   | `boolean`                       | `false` | Restrict expand/collapse to only the caret icon.               |
+| `linkProps`         | `LinkProps`                     | -       | Props for the link element (only used with `onlyCaretToggle`). |
+
+### SidebarHeader
+
+| Prop           | Type        | Default | Description                     |
+| -------------- | ----------- | ------- | ------------------------------- |
+| `children`     | `ReactNode` | -       | The header text.                |
+| `startContent` | `ReactNode` | -       | Content before the header text. |
+| `endContent`   | `ReactNode` | -       | Content after the header text.  |
+
+## Accessibility
+
+The Sidebar component follows accessible navigation patterns:
+
+- Built on React Aria's `Link` and `Disclosure` components with proper ARIA semantics.
+- The root element renders as a `<nav>` for landmark navigation.
+- Collapsible sections use `aria-expanded` to communicate their state.
+- When collapsed, each item uses its `tooltip` prop as `aria-label` to maintain screen reader accessibility.
+- Keyboard navigation is fully supported:
+  - **Tab**: Move focus between sidebar items.
+  - **Enter** or **Space**: Activate links or toggle section expansion.
+- Expand/collapse labels are internationalized for supported locales (en-SG, zh-SG, ms-SG, ta-SG).

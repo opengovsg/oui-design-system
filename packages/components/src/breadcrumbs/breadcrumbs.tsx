@@ -6,8 +6,8 @@ import type {
   LinkProps,
 } from "react-aria-components"
 import { useMemo } from "react"
-import { useLocalizedStringFormatter } from "react-aria"
 import { ChevronRight } from "lucide-react"
+import { useLocalizedStringFormatter } from "react-aria"
 import {
   Breadcrumb as AriaBreadcrumb,
   Breadcrumbs as AriaBreadcrumbs,
