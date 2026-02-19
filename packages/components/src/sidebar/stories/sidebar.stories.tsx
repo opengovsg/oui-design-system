@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { withChromaticModes } from "@oui/chromatic"
 import {
   Calendar,
   Clock5,
@@ -100,6 +101,9 @@ const DEFAULT_ITEMS: SidebarProps["items"] = [
 export const Default: Story = {
   args: {
     items: DEFAULT_ITEMS,
+  },
+  parameters: {
+    chromatic: withChromaticModes(["desktop", "mobile"]),
   },
 }
 
