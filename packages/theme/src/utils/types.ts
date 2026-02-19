@@ -6,3 +6,7 @@ export type SlotsToClasses<S extends string> = {
 }
 
 export type ClassNameOrFunction<T> = string | ((values: T) => string)
+
+export type SlotsToClassesWithRenderProps<S extends string, T> = {
+  [key in S]?: ClassNameOrFunction<T>
+}
