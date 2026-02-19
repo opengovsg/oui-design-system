@@ -5,6 +5,7 @@ import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
   ListLayoutOptions,
+  SelectValueRenderProps,
   ValidationResult,
 } from "react-aria-components"
 import { cloneElement, isValidElement, useMemo } from "react"
@@ -31,6 +32,7 @@ import type {
 } from "@opengovsg/oui-theme"
 import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
+import type { ChildrenOrFunction } from "../system/react-utils/children"
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
 import { Popover } from "../popover"
@@ -94,6 +96,14 @@ export interface SelectProps<T>
    * Icon to display in the search field. If not provided, no icon will be displayed.
    */
   searchIcon?: React.ReactNode
+
+  /**
+   * Custom renderer for the selected value displayed in the trigger button.
+   * If not provided, the default renderer will display the selected option's text.
+   * The render prop function receives the same props as the children of SelectValue.
+   * You can use these props to conditionally render based on the selected option's state (e.g. isPlaceholder).
+   */
+  renderSelectValue?: ChildrenOrFunction<SelectValueRenderProps<T>>
 }
 
 const calculateEstimatedRowHeight = (
@@ -128,6 +138,7 @@ export function Select<T extends object>({
     enableSearch = false,
     searchPlaceholder,
     searchIcon,
+    renderSelectValue,
     ...props
   } = _props
   const styles = selectStyles(variantProps)
@@ -210,7 +221,9 @@ export function Select<T extends object>({
             className={styles.selectedText({
               className: classNames?.selectedText,
             })}
-          />
+          >
+            {renderSelectValue}
+          </SelectValue>
 
           <ChevronDownIcon
             className={styles.icon({
