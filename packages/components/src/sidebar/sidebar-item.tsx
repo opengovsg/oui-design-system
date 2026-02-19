@@ -1,13 +1,14 @@
 "use client"
 
 import { useMemo } from "react"
-import { Link, Tooltip, TooltipTrigger } from "react-aria-components"
+import { Link } from "react-aria-components"
 
 import { dataAttr } from "@opengovsg/oui-theme"
 
 import type { SidebarItemProps } from "./types"
 import { renderChildren } from "../system/react-utils/children"
 import { forwardRef } from "../system/utils"
+import { Tooltip, TooltipTrigger } from "../tooltip"
 import {
   useSidebarCollapseContext,
   useSidebarNestContext,
@@ -59,9 +60,8 @@ export const SidebarItem = forwardRef<"li", SidebarItemProps>(
               </>
             )}
           </Link>
-          {/* TODO: Style tooltip and move to theme */}
           {isCollapsed && (
-            <Tooltip offset={4} placement="right" {...tooltipProps}>
+            <Tooltip placement="end" {...tooltipProps}>
               {tooltip}
             </Tooltip>
           )}
