@@ -29,7 +29,7 @@ export const infoboxStyles = tv({
     size: {
       sm: {
         base: "prose-body-2 px-2.5 py-2",
-        icon: "size-4",
+        icon: "h-5 w-4",
       },
       md: {
         base: "prose-body-1 p-4",

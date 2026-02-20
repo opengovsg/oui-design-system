@@ -104,14 +104,14 @@ export const CustomIcon: Story = {
         variant="success"
         icon={<AlertTriangle className="text-blue-500" />}
       >
-        Icons auto-size: small infobox uses size-4 icon.
+        Custom icons need to be sized manually (e.g., size-4 for small).
       </Infobox>
       <Infobox
         size="md"
         variant="error"
         icon={<AlertTriangle className="text-green-500" />}
       >
-        Icons auto-size: medium infobox uses size-6 icon.
+        Custom icons need to be sized manually (e.g., size-6 for medium).
       </Infobox>
     </div>
   ),
