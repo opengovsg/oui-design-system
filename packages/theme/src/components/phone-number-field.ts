@@ -3,12 +3,51 @@ import type { VariantProps } from "tailwind-variants"
 import { tv } from "../utils/tv"
 
 export const phoneNumberFieldStyles = tv({
-  base: [],
+  slots: {
+    base: "flex flex-col gap-2",
+    group: "relative",
+    wrapper: "w-full",
+    label: "",
+    input: "border-base-divider-strong h-auto rounded-l-none border-l",
+    description: "",
+    error: "",
+    select: "w-fit",
+    selectTrigger:
+      "hover:bg-interaction-muted-main-hover focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active pressed:bg-interaction-muted-main-active h-auto min-w-auto rounded-r-none outline-offset-0 disabled:active:bg-inherit",
+    selectIcon: "",
+    selectText: "",
+    selectList: "",
+    selectPopover: "",
+  },
   variants: {
     variant: {},
-    size: {},
+    size: {
+      xs: {
+        input: "h-8.5",
+        selectTrigger: "h-8.5 px-2 py-2",
+      },
+      sm: {
+        input: "h-9.5",
+        selectTrigger: "h-9.5 px-2 py-2.5",
+      },
+      md: {
+        input: "h-10.5",
+        selectTrigger: "h-10.5 px-2 py-3",
+      },
+    },
+    isDisabled: {
+      true: {
+        input: "",
+      },
+    },
   },
   defaultVariants: {},
 })
 
-export type PhoneNumberFieldVariantProps = VariantProps<typeof phoneNumberFieldStyles>
+export type PhoneNumberFieldVariantProps = VariantProps<
+  typeof phoneNumberFieldStyles
+>
+
+export type PhoneNumberFieldSlots = keyof ReturnType<
+  typeof phoneNumberFieldStyles
+>
