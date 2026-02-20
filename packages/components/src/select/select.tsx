@@ -1,6 +1,5 @@
 "use client"
 
-import type { LocalizedStrings } from "react-aria"
 import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
@@ -32,31 +31,15 @@ import type {
 } from "@opengovsg/oui-theme"
 import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
 
+import type { PopoverProps } from "../popover"
 import type { ChildrenOrFunction } from "../system/react-utils/children"
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
 import { Popover } from "../popover"
+import { useElementWidth } from "../system/react-utils/sizing"
 import { mapPropsVariants } from "../system/utils"
+import { i18nStrings } from "./i18n"
 import { SelectVariantContext } from "./select-variant-context"
-
-const i18nStrings: LocalizedStrings = {
-  "en-SG": {
-    searchPlaceholder: "Search...",
-    searchAriaLabel: "Search options",
-  },
-  "zh-SG": {
-    searchPlaceholder: "搜索...",
-    searchAriaLabel: "搜索选项",
-  },
-  "ms-SG": {
-    searchPlaceholder: "Cari...",
-    searchAriaLabel: "Cari pilihan",
-  },
-  "ta-SG": {
-    searchPlaceholder: "தேடு...",
-    searchAriaLabel: "தேடல் விருப்பங்கள்",
-  },
-}
 
 export interface SelectProps<T>
   extends Omit<AriaSelectProps, "children">,
@@ -104,6 +87,8 @@ export interface SelectProps<T>
    * You can use these props to conditionally render based on the selected option's state (e.g. isPlaceholder).
    */
   renderSelectValue?: ChildrenOrFunction<SelectValueRenderProps<T>>
+
+  popoverProps?: Partial<PopoverProps>
 }
 
 const calculateEstimatedRowHeight = (
@@ -126,7 +111,7 @@ export function Select<T extends object>({
   errorMessage,
   ...originalProps
 }: SelectProps<T>) {
-  const formatter = useLocalizedStringFormatter(i18nStrings)
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
   const [_props, variantProps] = mapPropsVariants(
     originalProps,
     selectStyles.variantKeys,
@@ -139,9 +124,12 @@ export function Select<T extends object>({
     searchPlaceholder,
     searchIcon,
     renderSelectValue,
+    popoverProps,
     ...props
   } = _props
   const styles = selectStyles(variantProps)
+
+  const triggerWidth = useElementWidth(popoverProps?.triggerRef)
 
   const { contains } = useFilter({ sensitivity: "base" })
 
@@ -242,12 +230,22 @@ export function Select<T extends object>({
         <FieldError size={variantProps.size} className={classNames?.error}>
           {errorMessage}
         </FieldError>
-        <Popover className={styles.popover({ className: classNames?.popover })}>
+        <Popover
+          className={styles.popover({ className: classNames?.popover })}
+          {...(triggerWidth !== null
+            ? {
+                style: {
+                  "--trigger-width": triggerWidth,
+                } as React.CSSProperties,
+              }
+            : {})}
+          {...popoverProps}
+        >
           {enableSearch ? (
             <Autocomplete filter={contains}>
               <SearchField
                 autoFocus
-                aria-label={formatter.format("searchAriaLabel")}
+                aria-label={stringFormatter.format("Search options")}
                 className={styles.searchField({
                   className: classNames?.searchField,
                 })}
@@ -255,7 +253,7 @@ export function Select<T extends object>({
                 {renderedSearchIcon}
                 <Input
                   placeholder={
-                    searchPlaceholder ?? formatter.format("searchPlaceholder")
+                    searchPlaceholder ?? stringFormatter.format("Search...")
                   }
                   className={styles.searchInput({
                     className: classNames?.searchInput,
