@@ -68,6 +68,7 @@
   },
   "dependencies": {
     "@internationalized/date": "^3.10.1",
+    "@internationalized/string": "^3.2.7",
     "@react-aria/calendar": "^3.9.2",
     "@react-aria/focus": "^3.21.2",
     "@react-aria/i18n": "^3.12.13",
@@ -86,6 +87,7 @@
     "nanoid": "^5.1.5",
     "react-aria": "^3.41.1",
     "react-dropzone": "^14.3.8",
+    "react-phone-number-input": "^3.4.14",
     "react-stately": "^3.41.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "sonner": "^2.0.7",
