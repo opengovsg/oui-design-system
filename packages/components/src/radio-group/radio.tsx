@@ -23,6 +23,7 @@ import type {
 import { radioGroupStyles, radioStyles } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
+import { renderChildren } from "../system/react-utils/children"
 import { mapPropsVariants } from "../system/utils"
 import {
   RadioGroupVariantContext,
@@ -62,8 +63,6 @@ export const Radio = ({
       )}
     >
       {(renderProps) => {
-        const content =
-          typeof children === "function" ? children(renderProps) : children
         return (
           <>
             <span
@@ -80,7 +79,7 @@ export const Radio = ({
               />
             </span>
             <span className={styles.label({ className: classNames?.label })}>
-              {content}
+              {renderChildren(renderProps, children)}
             </span>
             {description && (
               <Description
@@ -157,12 +156,9 @@ export const RadioGroup = ({
         )}
 
         {props.children}
-
-        {props.isInvalid && errorMessage && (
-          <FieldError size={size} className={classNames?.error?.text}>
-            {errorMessage}
-          </FieldError>
-        )}
+        <FieldError size={size} className={classNames?.error?.text}>
+          {errorMessage}
+        </FieldError>
       </AriaRadioGroup>
     </Provider>
   )

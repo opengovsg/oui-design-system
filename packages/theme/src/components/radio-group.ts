@@ -1,6 +1,5 @@
 import type { VariantProps } from "tailwind-variants"
 
-import { cn } from "../utils"
 import { racFocusRing } from "../utils/classes"
 import { tv } from "../utils/tv"
 
@@ -8,7 +7,7 @@ export const radioStyles = tv({
   slots: {
     circle:
       "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
-    base: cn("group grid grid-cols-[auto_1fr]", racFocusRing.base),
+    base: ["group grid grid-cols-[auto_1fr]", ...racFocusRing.base],
     icon: "rounded-full transition",
     label: "col-start-2 row-start-1",
     description: "col-start-2 row-start-2 text-gray-600",
@@ -16,7 +15,7 @@ export const radioStyles = tv({
   variants: {
     size: {
       xs: {
-        circle: "h-4 w-4",
+        circle: "mt-0.5 h-4 w-4",
         base: "prose-body-2 gap-x-3 gap-y-1 px-1 py-2",
         icon: "h-2 w-2",
       },
@@ -64,8 +63,7 @@ export const radioStyles = tv({
       isDisabled: true,
       isSelected: true,
       className: {
-        circle:
-          "[--color:var(--color-interaction-support-disabled-content)]",
+        circle: "[--color:var(--color-interaction-support-disabled-content)]",
         icon: "bg-interaction-support-disabled-content",
       },
     },

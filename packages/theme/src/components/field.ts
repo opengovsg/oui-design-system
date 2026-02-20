@@ -37,7 +37,7 @@ export type DescriptionVariantProps = VariantProps<typeof descriptionStyles>
 export const fieldErrorStyles = tv({
   slots: {
     icon: "",
-    text: "text-utility-feedback-critical flex flex-row items-center gap-2",
+    text: "text-utility-feedback-critical flex flex-row flex-wrap items-center gap-2",
   },
   variants: {
     size: {
