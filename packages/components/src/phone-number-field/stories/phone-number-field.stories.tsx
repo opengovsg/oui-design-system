@@ -1,7 +1,9 @@
 import "react-phone-number-input/style.css"
 
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { useState } from "react"
 
+import { isValidPhoneNumber } from "../index"
 import { PhoneNumberField } from "../phone-number-field"
 
 export default {
@@ -29,22 +31,22 @@ export const WithPlaceholder: Story = {
 
 export const WithLabelAndDescription: Story = {
   args: {
-    label: "Date of issue",
-    description: "The date when the document was issued.",
+    label: "Contact number",
+    description: "The contact number of the individual.",
   },
 }
 
 export const WithError: Story = {
   args: {
-    label: "Date of issue",
-    errorMessage: "Please enter a valid date.",
+    label: "Contact number",
+    errorMessage: "Please enter a valid contact number.",
     isInvalid: true,
   },
 }
 
 export const Disabled: Story = {
   args: {
-    label: "Date of issue",
+    label: "Contact number",
     isDisabled: true,
   },
 }
@@ -60,6 +62,37 @@ export const Sizes: Story = {
     )
   },
   args: {
-    label: "Date of issue",
+    label: "Contact number",
+  },
+}
+
+export const WithValidation: Story = {
+  render: (args) => {
+    const [errorMessage, setErrorMessage] = useState<string>()
+
+    return (
+      <PhoneNumberField
+        {...args}
+        errorMessage={errorMessage}
+        isInvalid={!!errorMessage}
+        onChange={(value) => {
+          if (value && !isValidPhoneNumber(value)) {
+            setErrorMessage("Please enter a valid contact number.")
+          } else {
+            setErrorMessage(undefined)
+          }
+        }}
+      />
+    )
+  },
+  args: {
+    label: "Contact number",
+    defaultValue: "+659123456",
+  },
+  play: async ({ canvasElement, userEvent }) => {
+    const input = canvasElement.querySelector("input") as HTMLInputElement
+
+    // Simulate user input of an invalid phone number
+    await userEvent.type(input, "123")
   },
 }
