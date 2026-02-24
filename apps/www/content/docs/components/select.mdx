@@ -46,6 +46,12 @@ The `errorMessage` prop can be used to associate additional help text below the 
 
 <ComponentPreview name="select-error-slot" />
 
+## Custom Selected Value
+
+The `renderSelectValue` prop allows you to customize how the selected value is displayed in the trigger button. It accepts a render function that receives `SelectValueRenderProps`, which includes `isPlaceholder` (whether the placeholder is shown) and `selectedText` (the text of the selected item).
+
+<ComponentPreview name="select-custom-value" />
+
 ## Search
 
 The Select component supports search/autocomplete functionality through the `enableSearch` prop. When enabled, a search field appears in the dropdown that allows users to filter options by typing.

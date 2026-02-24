@@ -2732,6 +2732,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/select-content-example.tsx"),
     ),
   },
+  "select-custom-value": {
+    name: "select-custom-value",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-custom-value.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/select-custom-value.tsx"),
+    ),
+  },
   "select-demo": {
     name: "select-demo",
     description: "",
