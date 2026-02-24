@@ -13,7 +13,7 @@ export const selectSearchStyles = tv({
 
 export const selectItemStyles = tv({
   slots: {
-    base: "text-base-content-strong group flex cursor-default items-center gap-2 rounded-sm px-4 py-2 outline-hidden select-none",
+    base: "text-base-content-strong group flex cursor-default items-center gap-2 outline-hidden select-none",
     text: "line-clamp-1 flex-1 text-inherit",
   },
   variants: {
