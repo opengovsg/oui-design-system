@@ -55,6 +55,7 @@ export const LocalVariant: Story = {
   args: {
     label: "Contact number",
     variant: "local",
+    isDisabled: false,
   },
 }
 

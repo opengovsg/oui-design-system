@@ -2486,6 +2486,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/phone-number-field-disabled.tsx"),
     ),
   },
+  "phone-number-field-local-variant": {
+    name: "phone-number-field-local-variant",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-local-variant.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-local-variant.tsx"),
+    ),
+  },
   "phone-number-field-placeholder-modes": {
     name: "phone-number-field-placeholder-modes",
     description: "",
