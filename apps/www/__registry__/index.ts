@@ -2417,6 +2417,175 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/pagination-with-controls.tsx"),
     ),
   },
+  "phone-number-field-controlled": {
+    name: "phone-number-field-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-controlled.tsx"),
+    ),
+  },
+  "phone-number-field-country-options-order": {
+    name: "phone-number-field-country-options-order",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-country-options-order.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-country-options-order.tsx"
+        ),
+    ),
+  },
+  "phone-number-field-default-country": {
+    name: "phone-number-field-default-country",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-default-country.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-default-country.tsx"),
+    ),
+  },
+  "phone-number-field-demo": {
+    name: "phone-number-field-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-demo.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-demo.tsx"),
+    ),
+  },
+  "phone-number-field-disabled": {
+    name: "phone-number-field-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-disabled.tsx"),
+    ),
+  },
+  "phone-number-field-local-variant": {
+    name: "phone-number-field-local-variant",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-local-variant.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-local-variant.tsx"),
+    ),
+  },
+  "phone-number-field-placeholder-modes": {
+    name: "phone-number-field-placeholder-modes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-placeholder-modes.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-placeholder-modes.tsx"),
+    ),
+  },
+  "phone-number-field-sizes": {
+    name: "phone-number-field-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-sizes.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-sizes.tsx"),
+    ),
+  },
+  "phone-number-field-with-custom-placeholder": {
+    name: "phone-number-field-with-custom-placeholder",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-with-custom-placeholder.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-with-custom-placeholder.tsx"
+        ),
+    ),
+  },
+  "phone-number-field-with-error-message": {
+    name: "phone-number-field-with-error-message",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-with-error-message.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-with-error-message.tsx"),
+    ),
+  },
+  "phone-number-field-with-label-and-description": {
+    name: "phone-number-field-with-label-and-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-with-label-and-description.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-with-label-and-description.tsx"
+        ),
+    ),
+  },
+  "phone-number-field-with-validation": {
+    name: "phone-number-field-with-validation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/phone-number-field-with-validation.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-with-validation.tsx"),
+    ),
+  },
   "range-calendar-controlled": {
     name: "range-calendar-controlled",
     description: "",

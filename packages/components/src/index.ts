@@ -38,4 +38,5 @@ export * from "./link"
 export * from "./breadcrumbs"
 export * from "./sidebar"
 export * from "./tooltip"
+export * from "./phone-number-field"
 // Add new component exports here

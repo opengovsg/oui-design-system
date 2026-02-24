@@ -73,7 +73,7 @@ const docsLinks: NavItem = {
             {
               title: "PhoneNumberField",
               url: "phone-number-field",
-              status: "wip",
+              status: "new",
             },
             { title: "Progress", url: "progress", status: "wip" },
             { title: "RadioGroup", url: "radio-group", status: "wip" },
