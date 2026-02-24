@@ -2,7 +2,6 @@
 
 import type {
   RadioGroupProps as AriaRadioGroupProps,
-  // RadioGroupProps as AriaRadioGroupProps,
   RadioProps as AriaRadioProps,
   ValidationResult,
 } from "react-aria-components"
