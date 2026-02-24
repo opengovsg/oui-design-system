@@ -9,4 +9,180 @@ links:
   theme: phone-number-field
 ---
 
-# Not yet implemented
+<ComponentPreview name="phone-number-field-demo" />
+
+## Usage
+
+```tsx
+import { PhoneNumberField } from "@opengovsg/oui"
+```
+
+```tsx
+<PhoneNumberField label="Contact number" />
+```
+
+The PhoneNumberField component provides an accessible phone number input with a built-in country selector. It is built on top of [`react-phone-number-input`](https://catamphetamine.github.io/react-phone-number-input/) and stores values in [E.164](https://en.wikipedia.org/wiki/E.164) international format (e.g. `+6591234567`).
+
+By default, the country selector is set to Singapore (`SG`) and the input displays an example phone number as a placeholder for the selected country.
+
+If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label and Description
+
+Provide clear instructions to users with labels and descriptions.
+
+<ComponentPreview name="phone-number-field-with-label-and-description" />
+
+### Placeholder Modes
+
+The `placeholderMode` prop controls how the input placeholder behaves in relation to example phone numbers for the selected country.
+
+- **`"polite"` (default)**: Uses the example number as placeholder only if no custom `placeholder` prop is provided.
+- **`"aggressive"`**: Always replaces the placeholder with the example number for the selected country.
+- **`"off"`**: Never uses example numbers as placeholders.
+
+<ComponentPreview name="phone-number-field-placeholder-modes" />
+
+### With Custom Placeholder
+
+Use the `placeholder` prop to show custom placeholder text. In `"polite"` mode (the default), the custom placeholder takes precedence over the example number.
+
+<ComponentPreview name="phone-number-field-with-custom-placeholder" />
+
+### Default Country
+
+Use the `defaultCountry` prop to set the initially selected country. Defaults to `"SG"` (Singapore).
+The default country will also be ordered at the top of the country selector dropdown, unless overridden by the `countryOptionsOrder` prop.
+
+<ComponentPreview name="phone-number-field-default-country" />
+
+### Country Options Order
+
+Use the `countryOptionsOrder` prop to control which countries appear at the top of the country selector dropdown.
+
+<ComponentPreview name="phone-number-field-country-options-order" />
+
+### Controlled
+
+Use the `value` and `onChange` props to control the phone number value programmatically. The value is stored in E.164 format (e.g. `"+6591234567"`).
+
+<ComponentPreview name="phone-number-field-controlled" />
+
+### With Error Message
+
+Combine `isInvalid` and `errorMessage` props to show validation errors.
+
+<ComponentPreview name="phone-number-field-with-error-message" />
+
+### With Validation
+
+Use the `isPossiblePhoneNumber` utility function (re-exported from `react-phone-number-input`) to validate phone numbers on change.
+
+<ComponentPreview name="phone-number-field-with-validation" />
+
+### Sizes
+
+Use the `size` prop to change the size of the phone number field.
+
+<ComponentPreview name="phone-number-field-sizes" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the phone number field.
+
+<ComponentPreview name="phone-number-field-disabled" />
+
+## Utility Functions
+
+PhoneNumberField re-exports the following utility functions from `react-phone-number-input`:
+
+- **`formatPhoneNumber(value)`**: Formats an E.164 phone number to national format (e.g. `"8123 4567"`).
+- **`formatPhoneNumberIntl(value)`**: Formats an E.164 phone number to international format (e.g. `"+65 8123 4567"`).
+- **`parsePhoneNumber(value)`**: Parses an E.164 phone number string into a `PhoneNumber` object with properties like `country`, `nationalNumber`, and `number`.
+- **`isPossiblePhoneNumber(value)`**: Returns `true` if the phone number has a valid length for its country. This is the recommended validation approach.
+
+```tsx
+import {
+  formatPhoneNumber,
+  formatPhoneNumberIntl,
+  isPossiblePhoneNumber,
+  parsePhoneNumber,
+} from "@opengovsg/oui"
+```
+
+## Accessibility
+
+- Built with a native `<input type="tel">` element with `autocomplete="tel"`
+- Country selector is keyboard accessible with built-in search
+- Full keyboard support for country selection and phone number entry
+- Proper ARIA labeling and descriptions
+- Invalid and disabled states exposed to assistive technology
+- Country flags include accessible country name labels
+
+## Slots
+
+- **base**: The root container wrapper
+- **group**: The field group containing the country selector and input
+- **wrapper**: The wrapper around the phone input elements
+- **label**: The label text element
+- **input**: The phone number input element
+- **description**: The description text below the field
+- **error**: The error message text
+- **select**: The country selector wrapper
+- **selectTrigger**: The country selector button
+- **selectIcon**: The dropdown icon in the country selector
+- **selectItem**: Each item in the country dropdown list
+- **selectItemLabel**: The country name label in each dropdown item
+- **selectItemCountryCode**: The calling code text in each dropdown item (e.g. "+65")
+- **flag**: The country flag element
+- **selectList**: The country dropdown list container
+- **selectPopover**: The country dropdown popover container
+
+## Data Attributes
+
+`PhoneNumberField` has the following attributes on the base element, which you can use to style the component based on its state (e.g. `group-[data-invalid=true]:bg-red-500`):
+
+- **data-invalid**: When the input is invalid. Based on `isInvalid` prop.
+- **data-disabled**: When the input is disabled. Based on `isDisabled` prop.
+
+### Custom Styles
+
+You can customize the PhoneNumberField component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+```tsx
+<PhoneNumberField
+  label="Contact number"
+  classNames={{
+    base: "max-w-xs",
+    input: "text-right",
+    flag: "rounded-md",
+  }}
+/>
+```
+
+## Props
+
+### PhoneNumberField
+
+| Prop                     | Type                                                            | Default         | Description                                                      |
+| ------------------------ | --------------------------------------------------------------- | --------------- | ---------------------------------------------------------------- |
+| `label`                  | `React.ReactNode`                                               | -               | The label for the phone number field                             |
+| `description`            | `React.ReactNode`                                               | -               | The description text shown below the field                       |
+| `errorMessage`           | `React.ReactNode \| ((validation: ValidationResult) => string)` | -               | The error message to display when validation fails               |
+| `value`                  | `E164Number`                                                    | -               | The current value in E.164 format (controlled)                   |
+| `defaultValue`           | `E164Number`                                                    | -               | The default value in E.164 format (uncontrolled)                 |
+| `onChange`               | `(value: E164Number \| undefined) => void`                      | -               | Callback fired when the value changes                            |
+| `defaultCountry`         | `Country`                                                       | `"SG"`          | The initially selected country                                   |
+| `onCountryChange`        | `(country: Country) => void`                                    | -               | Callback fired when the selected country changes                 |
+| `placeholderMode`        | `"polite" \| "aggressive" \| "off"`                             | `"polite"`      | Controls how example number placeholders are shown               |
+| `placeholder`            | `string`                                                        | -               | Custom placeholder text for the input                            |
+| `examples`               | `Record<Country, string>`                                       | Mobile examples | Custom example phone numbers per country for placeholders        |
+| `international`          | `boolean`                                                       | `false`         | Whether to display numbers in international format               |
+| `addInternationalOption` | `boolean`                                                       | `false`         | Whether to add an "International" option to the country selector |
+| `countryOptionsOrder`    | `Country[]`                                                     | `["SG"]`        | Countries to display at the top of the selector                  |
+| `size`                   | `"xs" \| "sm" \| "md"`                                          | `"md"`          | The size of the component                                        |
+| `isDisabled`             | `boolean`                                                       | `false`         | Whether the field is disabled                                    |
+| `isInvalid`              | `boolean`                                                       | `false`         | Whether the field should display as invalid                      |
+| `classNames`             | `SlotsToClasses<PhoneNumberFieldSlots>`                         | -               | Custom CSS classes for component slots                           |
