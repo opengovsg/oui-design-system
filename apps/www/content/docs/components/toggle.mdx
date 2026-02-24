@@ -12,4 +12,112 @@ links:
 
 <ComponentPreview name="toggle-demo" />
 
-# Docs to be updated
+## Usage
+
+```tsx
+import { Toggle } from "@opengovsg/oui"
+```
+
+```tsx
+<Toggle>Enable notifications</Toggle>
+```
+
+The Toggle component allows users to switch between two states (on/off). It is built on [React Aria's Switch](https://react-aria.adobe.com/Switch).
+
+If the component does not have a visible label (by passing `children`), an `aria-label` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label
+
+Pass `children` to add a visible text label next to the toggle.
+
+<ComponentPreview name="toggle-with-label" />
+
+### Label Placement
+
+Use the `labelPlacement` prop to position the label before or after the toggle. Defaults to `"end"`.
+
+<ComponentPreview name="toggle-label-placement" />
+
+### Sizes
+
+Use the `size` prop to change the size of the toggle. Defaults to `"md"`.
+
+<ComponentPreview name="toggle-sizes" />
+
+### Thumb Icon
+
+Use the `thumbIcon` prop to display an icon inside the toggle thumb. The prop accepts a React element or a render function that receives `SwitchRenderProps` (including `isSelected` and `className`).
+
+<ComponentPreview name="toggle-with-thumb-icon" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the toggle.
+
+<ComponentPreview name="toggle-disabled" />
+
+### Controlled
+
+Use the `isSelected` and `onChange` props to control the toggle state programmatically.
+
+<ComponentPreview name="toggle-controlled" />
+
+## Events
+
+Toggle supports the following event handlers, inherited from [React Aria's Switch](https://react-aria.adobe.com/Switch):
+
+- `onChange` — Called when the selection state changes, receiving a boolean.
+- `onFocus` / `onBlur` — Called when the toggle gains or loses focus.
+- `onFocusChange` — Called when the focus state changes, receiving a boolean.
+- `onKeyDown` / `onKeyUp` — Called on keyboard events.
+- `onHoverStart` / `onHoverEnd` / `onHoverChange` — Called on hover events.
+
+## Accessibility
+
+- Built on the WAI-ARIA [switch role](https://www.w3.org/WAI/ARIA/apd/role/switch/), providing correct semantics for assistive technology.
+- Keyboard interaction: Press <Kbd>Space</Kbd> to toggle the switch state.
+- Label is automatically associated with the switch input.
+- Disabled and selected states are exposed to assistive technology.
+- If no visible label is provided via `children`, an `aria-label` prop must be set.
+
+## Slots
+
+- **base**: The root container wrapper with label.
+- **track**: The toggle track (background).
+- **thumb**: The toggle thumb (sliding circle).
+- **thumbIcon**: The icon inside the thumb.
+
+### Custom Styles
+
+You can customize the Toggle component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+<ComponentPreview name="toggle-custom-styles" />
+
+## Props
+
+### Toggle
+
+| Prop             | Type                                                                             | Default     | Description                                                         |
+| ---------------- | -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `children`       | `React.ReactNode`                                                                | -           | The label content. Required if `aria-label` is not set.             |
+| `aria-label`     | `string`                                                                         | -           | Accessible label. Required if `children` is not set.                |
+| `isSelected`     | `boolean`                                                                        | -           | The current selection state (controlled)                            |
+| `defaultSelected`| `boolean`                                                                        | -           | The default selection state (uncontrolled)                          |
+| `onChange`       | `(isSelected: boolean) => void`                                                  | -           | Callback fired when the selection state changes                     |
+| `thumbIcon`      | `React.ReactElement \| ((props: ToggleThumbIconProps) => React.ReactNode)`       | -           | Icon to display inside the thumb. Render function receives `isSelected` and `className`. |
+| `labelPlacement` | `"start" \| "end"`                                                               | `"end"`     | Where to place the label relative to the toggle                     |
+| `size`           | `"xs" \| "sm" \| "md"`                                                          | `"md"`      | The size of the toggle                                              |
+| `colorScheme`    | `"success"`                                                                      | `"success"` | The color scheme of the toggle                                      |
+| `isDisabled`     | `boolean`                                                                        | `false`     | Whether the toggle is disabled                                      |
+| `isReadOnly`     | `boolean`                                                                        | `false`     | Whether the toggle is read-only                                     |
+| `name`           | `string`                                                                         | -           | The name of the input, used when submitting a form                  |
+| `value`          | `string`                                                                         | -           | The value of the input, used when submitting a form                 |
+| `autoFocus`      | `boolean`                                                                        | `false`     | Whether the toggle should receive focus on render                   |
+| `onFocus`        | `(e: FocusEvent) => void`                                                        | -           | Called when the toggle receives focus                               |
+| `onBlur`         | `(e: FocusEvent) => void`                                                        | -           | Called when the toggle loses focus                                  |
+| `onFocusChange`  | `(isFocused: boolean) => void`                                                   | -           | Called when the focus state changes                                 |
+| `onKeyDown`      | `(e: KeyboardEvent) => void`                                                     | -           | Called when a key is pressed                                        |
+| `onKeyUp`        | `(e: KeyboardEvent) => void`                                                     | -           | Called when a key is released                                       |
+| `classNames`     | `SlotsToClasses<ToggleSlots>`                                                    | -           | Custom CSS classes for component slots                              |

@@ -1,11 +1,209 @@
 ---
 title: Field
-description: Utility components that helps to add proper DOM structures to forms and other input elements.
+description: Utility components for composing accessible form fields with labels, descriptions, error messages, and input grouping.
 toc:
   visible: true
 links:
   source: field
-  theme: field-group.ts
+  theme: field
+  reactaria: forms
 ---
 
-# Docs to be updated
+<ComponentPreview name="field-demo" />
+
+## Usage
+
+```tsx
+import {
+  Description,
+  FieldError,
+  FieldErrorIcon,
+  FieldGroup,
+  Label,
+} from "@opengovsg/oui"
+```
+
+```tsx
+<AriaTextField className="flex flex-col gap-2">
+  <Label>Full name</Label>
+  <Input placeholder="Enter your full name" />
+  <Description>As shown on your NRIC or FIN.</Description>
+  <FieldError />
+</AriaTextField>
+```
+
+The Field module provides low-level building blocks used internally by the higher-level field components in OUI. **In most cases, you should use one of these components instead of using Field primitives directly:**
+
+- [TextField](/docs/components/text-field) — Single-line text input
+- [TextAreaField](/docs/components/text-area-field) — Multi-line text input
+- [NumberField](/docs/components/number-field) — Numeric input with steppers
+- [SearchField](/docs/components/search-field) — Search input with clear button
+- [DateField](/docs/components/date-field) — Date input
+- [DatePicker](/docs/components/date-picker) — Date input with calendar popover
+- [TimeField](/docs/components/time-field) — Time input
+- [ComboBox](/docs/components/combo-box) — Autocomplete select input
+- [PhoneNumberField](/docs/components/phone-number-field) — Phone number input
+
+These higher-level components already compose the Field primitives with the correct structure, styling, and accessibility wiring.
+
+Only use the Field primitives directly if you need to build a custom form field that is not covered by the components above.
+
+OUI exports 5 field-related primitives:
+
+- **Label**: A label element that automatically associates with its parent form field via `for` and `aria-labelledby`. Built on [React Aria's Label](https://react-aria.adobe.com/TextField).
+- **Description**: A text element rendered with `slot="description"` that provides supplementary context for a form field, linked via `aria-describedby`. Built on [React Aria's Text](https://react-aria.adobe.com/TextField).
+- **FieldError**: Displays validation error messages with custom styling instead of browser defaults. Automatically shows a `CircleAlert` icon when given a string child. Supports a [render prop](#custom-error-messages) for custom error messages based on [ValidityState](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState). Built on [React Aria's FieldError](https://react-aria.adobe.com/forms).
+- **FieldErrorIcon**: The error icon used inside `FieldError`. Can be used standalone for custom error layouts.
+- **FieldGroup**: A styled group container for composing inputs with adornments (icons, prefixes, etc.). Provides [render props](#fieldgroup-render-props) for interactive state styling. Built on [React Aria's Group](https://react-aria.adobe.com/Group).
+
+> **Note:** These primitives must be placed inside a React Aria form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`) to function correctly. The wrapper provides the accessibility relationships between the label, description, error, and input elements. If you're not building a custom field, use one of the higher-level components listed above instead.
+
+## Examples
+
+### Sizes
+
+All field components accept a `size` prop (`"xs"`, `"sm"`, or `"md"`) to match the size of the parent field.
+
+<ComponentPreview name="field-label-sizes" />
+
+### FieldError
+
+When the parent form field has `isInvalid` set, `FieldError` becomes visible with the error message. String children automatically include an error icon.
+
+<ComponentPreview name="field-error" />
+
+### Custom Error Messages
+
+`FieldError` accepts a render prop function as children, receiving `validationErrors` (an array of error strings) and `validationDetails` (a [ValidityState](https://developer.mozilla.org/en-US/docs/Web/API/ValidityState) object). Use this to customize error messages based on the specific validation failure.
+
+When using the render prop, the error icon is not automatically included — use `FieldErrorIcon` to add it manually.
+
+<ComponentPreview name="field-error-render-prop" />
+
+### FieldGroup
+
+`FieldGroup` provides a styled container with border, focus ring, and invalid state styles. Use it to compose inputs with adornments like icons or text prefixes.
+
+When using `FieldGroup`, set the `Input` variant to `"unstyled"` to avoid double-styling the border and focus ring.
+
+<ComponentPreview name="field-group" />
+
+### Composing a Custom Form
+
+Combine field components with React Aria's `Form` and field wrappers to build custom forms with built-in validation.
+
+<ComponentPreview name="field-custom-form" />
+
+## Validation
+
+These field components work with [React Aria's form validation](https://react-aria.adobe.com/forms) system. Validation is configured on the parent form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`), and `FieldError` displays the resulting error messages.
+
+### Built-in Constraint Validation
+
+React Aria form field wrappers support native HTML constraint validation props such as `isRequired`, `minLength`, `maxLength`, `pattern`, and `type`. Errors are displayed after the user commits a value (on blur) or submits the form.
+
+```tsx
+<AriaTextField isRequired minLength={3} className="flex flex-col gap-2">
+  <Label>Username</Label>
+  <Input />
+  <FieldError />
+</AriaTextField>
+```
+
+### Custom Validation
+
+Use the `validate` prop on the parent field wrapper for custom validation logic. The function receives the current value and returns an error message string (or `null`/`true` if valid).
+
+```tsx
+<AriaTextField
+  validate={(value) =>
+    value.includes("@") ? null : "Username cannot contain @"
+  }
+  className="flex flex-col gap-2"
+>
+  <Label>Username</Label>
+  <Input />
+  <FieldError />
+</AriaTextField>
+```
+
+### Realtime Validation
+
+For immediate feedback as the user types (e.g., password strength), use the `isInvalid` prop with a controlled error message instead of the built-in validation system.
+
+```tsx
+<AriaTextField isInvalid={!isValid} className="flex flex-col gap-2">
+  <Label>Password</Label>
+  <Input />
+  <FieldError>Password must be at least 8 characters.</FieldError>
+</AriaTextField>
+```
+
+### Validation Behavior
+
+The `validationBehavior` prop on the parent field wrapper controls how validation is enforced:
+
+- `"native"` (default) — Uses native HTML form validation. Prevents form submission when fields are invalid.
+- `"aria"` — Only marks fields as invalid via ARIA attributes. Allows form submission regardless of validation state. Use this when integrating with external validation libraries such as React Hook Form or Zod.
+
+## Accessibility
+
+- `Label` is automatically associated with its parent form field input via `for` and `aria-labelledby`, managed by React Aria.
+- `Description` is announced by screen readers when the field receives focus, linked via `aria-describedby`.
+- `FieldError` is announced when the field enters an invalid state, providing immediate feedback to screen reader users via `aria-describedby`.
+- If a form field does not have a visible `Label`, an `aria-label` or `aria-labelledby` prop must be passed to the parent field wrapper to identify it to assistive technology.
+- All components inherit their accessibility semantics from their [React Aria](https://react-aria.adobe.com/forms) counterparts.
+
+## Props
+
+### Label
+
+| Prop        | Type                   | Default | Description                |
+| ----------- | ---------------------- | ------- | -------------------------- |
+| `children`  | `React.ReactNode`      | -       | The label content          |
+| `size`      | `"xs" \| "sm" \| "md"` | `"md"`  | The size of the label text |
+| `className` | `string`               | -       | Additional CSS classes     |
+
+### Description
+
+| Prop        | Type                   | Default | Description                      |
+| ----------- | ---------------------- | ------- | -------------------------------- |
+| `children`  | `React.ReactNode`      | -       | The description content          |
+| `size`      | `"xs" \| "sm" \| "md"` | `"md"`  | The size of the description text |
+| `className` | `string`               | -       | Additional CSS classes           |
+
+### FieldError
+
+| Prop         | Type                                                                                                                     | Default | Description                                                                                                                  |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------ | ------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| `children`   | `React.ReactNode \| ((validation: { validationErrors: string[], validationDetails: ValidityState }) => React.ReactNode)` | -       | The error message. Strings get an automatic icon. Accepts a render prop for [custom error messages](#custom-error-messages). |
+| `size`       | `"xs" \| "sm" \| "md"`                                                                                                   | `"md"`  | The size of the error text and icon                                                                                          |
+| `className`  | `string`                                                                                                                 | -       | Additional CSS classes for the text slot                                                                                     |
+| `classNames` | `SlotsToClasses<FieldErrorSlots>`                                                                                        | -       | Custom CSS classes for `icon` and `text` slots                                                                               |
+
+### FieldErrorIcon
+
+| Prop        | Type                   | Default | Description            |
+| ----------- | ---------------------- | ------- | ---------------------- |
+| `size`      | `"xs" \| "sm" \| "md"` | `"md"`  | The size of the icon   |
+| `className` | `string`               | -       | Additional CSS classes |
+
+### FieldGroup
+
+| Prop        | Type                                                                      | Default | Description                                                               |
+| ----------- | ------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
+| `children`  | `React.ReactNode \| ((renderProps: GroupRenderProps) => React.ReactNode)` | -       | The group content. Accepts a render prop for access to interactive state. |
+| `className` | `string`                                                                  | -       | Additional CSS classes                                                    |
+
+#### FieldGroup Render Props
+
+When passing a function as `children` to `FieldGroup`, it receives a `GroupRenderProps` object with the following properties:
+
+| Property         | Type      | Description                                         |
+| ---------------- | --------- | --------------------------------------------------- |
+| `isFocused`      | `boolean` | Whether the group or any of its children is focused |
+| `isFocusVisible` | `boolean` | Whether focus is visible (keyboard navigation)      |
+| `isHovered`      | `boolean` | Whether the group is being hovered                  |
+| `isDisabled`     | `boolean` | Whether the group is disabled                       |
+| `isInvalid`      | `boolean` | Whether the group is in an invalid state            |
+| `isReadOnly`     | `boolean` | Whether the group is read-only                      |
