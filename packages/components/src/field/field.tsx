@@ -6,7 +6,7 @@ import type {
   GroupProps,
   TextProps,
 } from "react-aria-components"
-import { useMemo } from "react"
+import { forwardRef, useMemo } from "react"
 import { CircleAlert } from "lucide-react"
 import {
   FieldError as AriaFieldError,
@@ -97,13 +97,18 @@ export function FieldError({
   )
 }
 
-export function FieldGroup(props: GroupProps) {
-  return (
-    <Group
-      {...props}
-      className={composeRenderProps(props.className, (className, renderProps) =>
-        fieldGroupStyles({ ...renderProps, className }),
-      )}
-    />
-  )
-}
+export const FieldGroup = forwardRef<HTMLDivElement, GroupProps>(
+  (props, ref) => {
+    return (
+      <Group
+        {...props}
+        ref={ref}
+        className={composeRenderProps(
+          props.className,
+          (className, renderProps) =>
+            fieldGroupStyles({ ...renderProps, className }),
+        )}
+      />
+    )
+  },
+)
