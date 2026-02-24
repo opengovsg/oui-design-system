@@ -6,7 +6,7 @@ export const phoneNumberFieldStyles = tv({
   slots: {
     base: "flex flex-col gap-2",
     group: "relative",
-    wrapper: "w-full",
+    wrapper: "inline-flex w-full",
     label: "",
     input: "border-base-divider-strong h-auto rounded-l-none border-l",
     description: "",
