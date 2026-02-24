@@ -18,6 +18,7 @@ import { useCallback, useMemo, useRef, useState } from "react"
 import { Provider, TextField } from "react-aria-components"
 import BasePhoneInput, { getCountryCallingCode } from "react-phone-number-input"
 import flags from "react-phone-number-input/flags"
+import NonInternationalBasePhoneInput from "react-phone-number-input/input"
 
 import type {
   PhoneNumberFieldSlots,
@@ -40,7 +41,7 @@ import { PhoneInputContext, usePhoneInputContext } from "./context"
 import { i18nStrings } from "./i18n"
 
 export interface PhoneInputProps extends InputProps {
-  onClear: () => void
+  onClear?: () => void
 }
 
 export const PhoneInput = ({
@@ -55,8 +56,8 @@ export const PhoneInput = ({
     styles,
     size,
     classNames,
+    stringFormatter,
   } = usePhoneInputContext()
-  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   const inputPlaceholder = useMemo(() => {
     const defaultPlaceholder = stringFormatter.format("Enter a phone number")
@@ -84,7 +85,7 @@ export const PhoneInput = ({
       if (event.metaKey && event.key === "Backspace") {
         // Prevent the default browser behavior (which is often also deleting the line, but react-phone-number-input doesn't handle this case by default)
         event.preventDefault()
-        onClear()
+        onClear?.()
       } else {
         onKeyDown?.(event)
       }
@@ -123,6 +124,12 @@ export interface PhoneNumberFieldProps
 
   classNames?: SlotsToClasses<PhoneNumberFieldSlots>
   defaultValue?: ExternalValue | E164Number
+
+  /**
+   * Whether to use the international phone input with country select (default) or a non-international phone input with a fixed country code.
+   * When the variant is `local`, the formatting of the phone number will be based on the `defaultCountry` prop.
+   */
+  variant?: PhoneNumberFieldVariantProps["variant"]
 }
 
 export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
@@ -137,8 +144,11 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
       isInvalid,
       ...props
     },
-    variantProps,
+    { variant = "international", ...variantProps },
   ] = mapPropsVariants(originalProps, phoneNumberFieldStyles.variantKeys)
+
+  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
+
   const defaultCountry = useMemo(
     () => props.defaultCountry ?? "SG",
     [props.defaultCountry],
@@ -158,6 +168,7 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
   const { size = "md", isDisabled } = variantProps
   const styles = phoneNumberFieldStyles({
     ...variantProps,
+    variant,
     isDisabled,
     size,
   })
@@ -186,8 +197,10 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
               selectedCountry,
               classNames,
               styles,
+              variant,
               ...variantProps,
               size,
+              stringFormatter,
             },
           ],
         ]}
@@ -197,24 +210,43 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
           className={styles.group({
             className: classNames?.group,
           })}
+          data-variant={variant}
         >
-          <BasePhoneInput
-            disabled={isDisabled}
-            className={styles.wrapper({
-              className: classNames?.wrapper,
-            })}
-            international={false}
-            addInternationalOption={false}
-            defaultCountry={selectedCountry}
-            countryOptionsOrder={[defaultCountry]}
-            onCountryChange={setSelectedCountry}
-            countrySelectComponent={CountrySelect}
-            inputComponent={PhoneInput}
-            onClear={() => setValue(undefined)}
-            {...props}
-            value={value}
-            onChange={(v) => setValue(v as E164Number)}
-          />
+          {variant === "international" ? (
+            <BasePhoneInput
+              disabled={isDisabled}
+              className={styles.wrapper({
+                className: classNames?.wrapper,
+              })}
+              international={false}
+              addInternationalOption={false}
+              defaultCountry={selectedCountry}
+              countryOptionsOrder={[defaultCountry]}
+              onCountryChange={setSelectedCountry}
+              countrySelectComponent={CountrySelect}
+              inputComponent={PhoneInput}
+              onClear={() => setValue(undefined)}
+              {...props}
+              value={value}
+              onChange={(v) => setValue(v as E164Number)}
+            />
+          ) : (
+            <div className={styles.wrapper({ className: classNames?.wrapper })}>
+              <NonInternationalBasePhoneInput
+                country={defaultCountry}
+                onClear={() => setValue(undefined)}
+                {...props}
+                inputComponent={PhoneInput}
+                value={value}
+                onChange={setValue}
+              />
+              <FlagComponent
+                className={styles.flag({ className: classNames?.flag })}
+                country={defaultCountry}
+                countryName={stringFormatter.format(defaultCountry)}
+              />
+            </div>
+          )}
         </FieldGroup>
       </Provider>
       {description && (
@@ -242,9 +274,8 @@ export interface CountrySelectProps
 export function CountrySelect(props: CountrySelectProps) {
   const { options, value, onChange, onBlur, onFocus } = props
 
-  const { triggerRef, classNames, styles, size, isDisabled } =
+  const { triggerRef, classNames, styles, size, isDisabled, stringFormatter } =
     usePhoneInputContext()
-  const stringFormatter = useLocalizedStringFormatter(i18nStrings)
 
   return (
     <Select

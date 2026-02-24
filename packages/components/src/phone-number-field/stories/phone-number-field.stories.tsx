@@ -51,6 +51,13 @@ export const Disabled: Story = {
   },
 }
 
+export const LocalVariant: Story = {
+  args: {
+    label: "Contact number",
+    variant: "local",
+  },
+}
+
 export const Sizes: Story = {
   render(args) {
     return (
@@ -58,6 +65,24 @@ export const Sizes: Story = {
         <PhoneNumberField {...args} label={`${args.label} (xs)`} size="xs" />
         <PhoneNumberField {...args} label={`${args.label} (sm)`} size="sm" />
         <PhoneNumberField {...args} label={`${args.label} (md)`} size="md" />
+        <PhoneNumberField
+          variant="local"
+          {...args}
+          label={`${args.label} (xs)`}
+          size="xs"
+        />
+        <PhoneNumberField
+          variant="local"
+          {...args}
+          label={`${args.label} (sm)`}
+          size="sm"
+        />
+        <PhoneNumberField
+          variant="local"
+          {...args}
+          label={`${args.label} (md)`}
+          size="md"
+        />
       </div>
     )
   },
