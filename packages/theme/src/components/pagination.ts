@@ -57,11 +57,12 @@ export const paginationStyles = tv({
     ],
     forwardIcon: [
       "hidden",
-      "group-hover:block",
-      "group-data-[focus-visible=true]:block",
+      "group-hover/ellipsis:block",
+      "group-data-[focus-visible=true]/ellipsis:block",
       "data-[before=true]:rotate-180",
     ],
-    ellipsis: "group-hover:hidden group-data-[focus-visible=true]:hidden",
+    ellipsis:
+      "group-hover/ellipsis:hidden group-data-[focus-visible=true]/ellipsis:hidden",
     chevronNext: "rotate-180",
   },
   variants: {
@@ -138,7 +139,7 @@ export const paginationStyles = tv({
           "!data-[moving=true]:duration-300",
           // this hides the cursor and only shows it once it has been moved to its initial position
           "opacity-0",
-          "data-[moving]:opacity-100",
+          "data-moving:opacity-100",
         ],
       },
     },

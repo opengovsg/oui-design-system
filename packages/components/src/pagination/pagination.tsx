@@ -203,7 +203,7 @@ export const Pagination = forwardRef<"nav", PaginationProps>((props, ref) => {
           <PaginationItem
             key={PaginationItemType.DOTS + isBefore}
             className={slots.item({
-              class: cn(classNames?.item, "group"),
+              class: cn(classNames?.item, "group/ellipsis"),
             })}
             isDisabled={props.isDisabled}
             data-slot="item"
