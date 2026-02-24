@@ -12,4 +12,127 @@ links:
 
 <ComponentPreview name="text-area-field-demo" />
 
-# Docs to be updated
+## Usage
+
+```tsx
+import { TextAreaField } from "@opengovsg/oui"
+```
+
+```tsx
+<TextAreaField label="Comments" />
+```
+
+The TextAreaField component provides a multi-line text input with built-in label, description, and error message support. It is built on [React Aria's TextField](https://react-aria.adobe.com/TextField) and renders a `<textarea>` element instead of an `<input>`.
+
+If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
+
+## Examples
+
+### With Label and Description
+
+Provide clear instructions to users with labels and descriptions.
+
+<ComponentPreview name="text-area-field-with-description" />
+
+### With Error Message
+
+Combine `isInvalid` and `errorMessage` props to show validation errors.
+
+<ComponentPreview name="text-area-field-with-error-message" />
+
+### Sizes
+
+Use the `size` prop to change the size of the text area field. Defaults to `"md"`.
+
+<ComponentPreview name="text-area-field-sizes" />
+
+### Controlled
+
+Use the `value` and `onChange` props to control the text area value programmatically.
+
+<ComponentPreview name="text-area-field-controlled" />
+
+### Disabled
+
+Use the `isDisabled` prop to disable the text area field.
+
+<ComponentPreview name="text-area-field-disabled" />
+
+### Read Only
+
+Use the `isReadOnly` prop to make the text area field read-only. The value can be selected but not modified.
+
+<ComponentPreview name="text-area-field-readonly" />
+
+## Validation
+
+TextAreaField supports React Aria's [form validation](https://react-aria.adobe.com/forms) system:
+
+- **Built-in constraints**: Use `isRequired`, `minLength`, or `maxLength` for native HTML validation. Errors display after the user commits a value or submits the form.
+- **Custom validation**: Use the `validate` prop to provide a function that returns an error message string, or `null`/`true` if valid.
+- **Realtime validation**: Use the `isInvalid` prop with `errorMessage` for immediate feedback as the user types.
+- **Validation behavior**: The `validationBehavior` prop controls enforcement — `"native"` (default) prevents form submission when invalid, while `"aria"` only marks the field via ARIA attributes and allows submission.
+
+## Events
+
+TextAreaField supports the following event handlers, inherited from [React Aria's TextField](https://react-aria.adobe.com/TextField):
+
+- `onFocus` / `onBlur` — Called when the textarea gains or loses focus.
+- `onFocusChange` — Called when the focus state changes, receiving a boolean.
+- `onChange` — Called when the text value changes, receiving the new string value.
+- `onCopy` / `onCut` / `onPaste` — Called on clipboard operations.
+- `onCompositionStart` / `onCompositionEnd` — Called during IME composition for internationalized text input.
+- `onKeyDown` / `onKeyUp` — Called on keyboard events.
+- `onSelect` — Called when text is selected within the textarea.
+
+## Accessibility
+
+- Built with a native `<textarea>` element for full browser and assistive technology support.
+- Label, description, and error message are automatically linked to the textarea via `aria-labelledby` and `aria-describedby`.
+- Required and invalid states are exposed to assistive technology.
+- Supports keyboard interaction: text entry, clipboard shortcuts, and standard textarea navigation.
+- If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be set.
+
+## Slots
+
+- **base**: The root container wrapper.
+- **label**: The label text element.
+- **input**: The textarea element.
+- **description**: The description text below the field.
+- **error**: The error message text.
+
+### Custom Styles
+
+You can customize the TextAreaField component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+<ComponentPreview name="text-area-field-custom-styles" />
+
+## Props
+
+### TextAreaField
+
+| Prop           | Type                                                                        | Default     | Description                                          |
+| -------------- | --------------------------------------------------------------------------- | ----------- | ---------------------------------------------------- |
+| `label`        | `React.ReactNode`                                                           | -           | The label for the text area field                    |
+| `description`  | `React.ReactNode`                                                           | -           | The description text shown below the field           |
+| `errorMessage` | `React.ReactNode \| ((validation: ValidationResult) => React.ReactNode)`    | -           | The error message to display when validation fails   |
+| `value`        | `string`                                                                    | -           | The current value (controlled)                       |
+| `defaultValue` | `string`                                                                    | -           | The default value (uncontrolled)                     |
+| `onChange`     | `(value: string) => void`                                                   | -           | Callback fired when the value changes                |
+| `size`         | `"xs" \| "sm" \| "md"`                                                     | `"md"`      | The size of the component                            |
+| `variant`      | `"outline" \| "unstyled"`                                                   | `"outline"` | The visual variant of the textarea                   |
+| `isDisabled`   | `boolean`                                                                   | `false`     | Whether the field is disabled                        |
+| `isReadOnly`   | `boolean`                                                                   | `false`     | Whether the field is read-only                       |
+| `isRequired`   | `boolean`                                                                   | `false`     | Whether the field is required                        |
+| `isInvalid`    | `boolean`                                                                   | `false`     | Whether the field should display as invalid          |
+| `minLength`    | `number`                                                                    | -           | The minimum number of characters required            |
+| `maxLength`    | `number`                                                                    | -           | The maximum number of characters allowed             |
+| `validate`     | `(value: string) => ValidationError \| true \| null \| undefined`           | -           | Custom validation function                           |
+| `autoComplete` | `string`                                                                    | -           | Hints for browser autocomplete                       |
+| `name`         | `string`                                                                    | -           | The name of the input, used when submitting a form   |
+| `validationBehavior` | `"native" \| "aria"`                                                  | `"native"`  | Whether to use native HTML form validation or ARIA-based validation |
+| `onFocus`      | `(e: FocusEvent) => void`                                                   | -           | Called when the textarea receives focus               |
+| `onBlur`       | `(e: FocusEvent) => void`                                                   | -           | Called when the textarea loses focus                  |
+| `onFocusChange` | `(isFocused: boolean) => void`                                             | -           | Called when the focus state changes                   |
+| `inputProps`   | `Partial<TextAreaProps>`                                                    | -           | Additional props to pass to the textarea element     |
+| `classNames`   | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">` | -           | Custom CSS classes for component slots               |
