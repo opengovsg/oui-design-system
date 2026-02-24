@@ -7,6 +7,73 @@ links:
   source: radio-group
   storybook: components-radiogroup--default
   theme: radio-group
+  reactaria: RadioGroup
 ---
 
-# Not yet implemented
+This component is built on top of `react-aria-components`'s [RadioGroup](https://react-aria.adobe.com/RadioGroup). You can refer to the official documentation for more details on the base API.
+
+<ComponentPreview name="radio-group-demo" />
+
+## Usage
+
+```tsx
+import { Radio, RadioGroup } from "@opengovsg/oui"
+```
+
+```tsx
+<RadioGroup label="Select a city" defaultValue="sf">
+  <Radio value="sf">San Francisco</Radio>
+  <Radio value="ny">New York</Radio>
+</RadioGroup>
+```
+
+## Examples
+
+### Sizes
+
+Use the `size` prop on `RadioGroup` to change the size of all radio items within the group. The size is propagated to all children via context.
+
+<ComponentPreview name="radio-group-sizes" />
+
+### With Description
+
+Use the `description` prop on individual `Radio` items to add helper text below the label.
+
+<ComponentPreview name="radio-group-with-description" />
+
+### Disabled
+
+Use the `isDisabled` prop on `RadioGroup` to disable the entire group, or on individual `Radio` items to disable specific options.
+
+<ComponentPreview name="radio-group-disabled" />
+
+### Invalid
+
+Use the `isInvalid` prop along with `errorMessage` to display a validation error.
+
+<ComponentPreview name="radio-group-invalid" />
+
+## Slots
+
+### RadioGroup
+
+- **base**: RadioGroup root wrapper.
+- **label**: RadioGroup label, placed before the radio items.
+- **description**: The description of the radio group.
+- **error**: [FieldError](./field) slots
+  - **icon**: The error icon.
+  - **text**: The error text.
+
+### Radio
+
+- **base**: Radio wrapper, handles alignment, placement, and focus ring.
+- **circle**: The circular indicator that represents the radio state.
+- **icon**: The inner filled circle shown when selected.
+- **label**: The label text next to the radio circle.
+- **description**: Optional descriptive text below the label.
+
+### Custom Styles
+
+You can customize the `Radio` and `RadioGroup` components by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
+
+<ComponentPreview name="radio-group-custom-styles" />
