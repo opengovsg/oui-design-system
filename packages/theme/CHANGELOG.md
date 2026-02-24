@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.46
+
+### Patch Changes
+
+- [#229](https://github.com/opengovsg/oui-design-system/pull/229) [`c57960b`](https://github.com/opengovsg/oui-design-system/commit/c57960b5bfdef8913c071aa1bda5309c03131ac2) Thanks [@karrui](https://github.com/karrui)! - fix(select): update default styles to fit design
+
+- [#230](https://github.com/opengovsg/oui-design-system/pull/230) [`f2ca7d1`](https://github.com/opengovsg/oui-design-system/commit/f2ca7d13530680b7f1b296807817e80bc1aeb6e0) Thanks [@karrui](https://github.com/karrui)! - feat: add PhoneNumberField component
+
 ## 0.0.45
 
 ### Patch Changes

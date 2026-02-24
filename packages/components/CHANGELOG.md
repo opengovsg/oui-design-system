@@ -1,5 +1,20 @@
 # @opengovsg/oui
 
+## 0.0.46
+
+### Patch Changes
+
+- [#226](https://github.com/opengovsg/oui-design-system/pull/226) [`00869e2`](https://github.com/opengovsg/oui-design-system/commit/00869e279fe3e4064e2a2c5164a9fb9ecfa60ef9) Thanks [@karrui](https://github.com/karrui)! - feat(select): allow custom rendering of select value
+
+- [#230](https://github.com/opengovsg/oui-design-system/pull/230) [`f2ca7d1`](https://github.com/opengovsg/oui-design-system/commit/f2ca7d13530680b7f1b296807817e80bc1aeb6e0) Thanks [@karrui](https://github.com/karrui)! - feat: add PhoneNumberField component
+
+- [#227](https://github.com/opengovsg/oui-design-system/pull/227) [`1095343`](https://github.com/opengovsg/oui-design-system/commit/1095343deb473d39a19317c0158c750cd99495d6) Thanks [@karrui](https://github.com/karrui)! - feat(select): pass popoverProps, recalculate trigger width for triggerRef
+
+- [#228](https://github.com/opengovsg/oui-design-system/pull/228) [`3d4ae3d`](https://github.com/opengovsg/oui-design-system/commit/3d4ae3d2fad44e1762b8626478d8b2891c1e7ddb) Thanks [@karrui](https://github.com/karrui)! - feat(Field): Allow ref to be forwarded to Field component
+
+- Updated dependencies [[`c57960b`](https://github.com/opengovsg/oui-design-system/commit/c57960b5bfdef8913c071aa1bda5309c03131ac2), [`f2ca7d1`](https://github.com/opengovsg/oui-design-system/commit/f2ca7d13530680b7f1b296807817e80bc1aeb6e0)]:
+  - @opengovsg/oui-theme@0.0.46
+
 ## 0.0.45
 
 ### Patch Changes
