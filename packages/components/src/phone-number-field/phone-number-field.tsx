@@ -37,11 +37,15 @@ import { MOBILE_EXAMPLES } from "./constants"
 import { PhoneInputContext, usePhoneInputContext } from "./context"
 import { i18nStrings } from "./i18n"
 
-interface PhoneNumberInputProps extends InputProps {
+export interface PhoneInputProps extends InputProps {
   onClear: () => void
 }
 
-const Input = ({ onClear, onKeyDown, ...props }: PhoneNumberInputProps) => {
+export const PhoneInput = ({
+  onClear,
+  onKeyDown,
+  ...props
+}: PhoneInputProps) => {
   const {
     placeholderMode,
     examples,
@@ -199,11 +203,11 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
             countryOptionsOrder={["SG"]}
             onCountryChange={setSelectedCountry}
             countrySelectComponent={CountrySelect}
-            inputComponent={Input}
+            inputComponent={PhoneInput}
+            onClear={() => setValue(undefined)}
             {...props}
             value={value}
             onChange={(v) => setValue(v as E164Number)}
-            onClear={() => setValue(undefined)}
           />
         </FieldGroup>
       </Provider>
@@ -221,14 +225,15 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
 
 type CountryItem = { label: string; value: Country | undefined }
 
-interface CountrySelectProps extends Pick<FocusEvents, "onBlur" | "onFocus"> {
+export interface CountrySelectProps
+  extends Pick<FocusEvents, "onBlur" | "onFocus"> {
   value: string
   options: CountryItem[]
   onChange: (country: Country) => void
   disabled?: boolean
 }
 
-function CountrySelect(props: CountrySelectProps) {
+export function CountrySelect(props: CountrySelectProps) {
   const { options, value, onChange, onBlur, onFocus } = props
 
   const { triggerRef, classNames, styles, size, isDisabled } =
@@ -248,7 +253,6 @@ function CountrySelect(props: CountrySelectProps) {
           className: classNames?.selectTrigger,
         }),
         icon: styles.selectIcon({ className: classNames?.selectIcon }), // Apply same styles as trigger for consistent sizing
-        selectedText: styles.selectText({ className: classNames?.selectText }),
         list: styles.selectList({ className: classNames?.selectList }),
         popover: styles.selectPopover({ className: classNames?.selectPopover }),
       }}
@@ -260,6 +264,7 @@ function CountrySelect(props: CountrySelectProps) {
       items={options}
       renderSelectValue={() => (
         <FlagComponent
+          className={styles.flag({ className: classNames?.flag })}
           country={value as Country}
           countryName={value && stringFormatter.format(value as Country)}
         />
@@ -274,15 +279,29 @@ function CountrySelect(props: CountrySelectProps) {
         return (
           <SelectItem
             classNames={{
-              text: "flex flex-row items-center gap-2",
+              text: styles.selectItem({ className: classNames?.selectItem }),
             }}
             textValue={`${l10nLabel} ${country.label}`} // Allow search by both localized and non-localized country names
             id={country.value}
           >
-            <FlagComponent country={country.value} countryName={l10nLabel} />
-            <span className="line-clamp-1 flex-1">{l10nLabel}</span>
+            <FlagComponent
+              className={styles.flag({ className: classNames?.flag })}
+              country={country.value}
+              countryName={l10nLabel}
+            />
+            <span
+              className={styles.selectItemLabel({
+                className: classNames?.selectItemLabel,
+              })}
+            >
+              {l10nLabel}
+            </span>
             {country.value && (
-              <span className="text-base-content-default/50 text-sm">{`+${getCountryCallingCode(country.value)}`}</span>
+              <span
+                className={styles.selectItemCountryCode({
+                  className: classNames?.selectItemCountryCode,
+                })}
+              >{`+${getCountryCallingCode(country.value)}`}</span>
             )}
           </SelectItem>
         )
@@ -291,15 +310,18 @@ function CountrySelect(props: CountrySelectProps) {
   )
 }
 
-const FlagComponent = ({
+export interface FlagComponentProps extends SetOptional<FlagProps, "country"> {
+  className?: string
+}
+
+export const FlagComponent = ({
   country,
   countryName,
-}: SetOptional<FlagProps, "country">) => {
+  className,
+}: FlagComponentProps) => {
   const Flag = country && flags[country]
 
   return (
-    <span className="bg-interaction-support-disabled flex h-4 w-6 overflow-hidden rounded-sm [&_svg:not([class*='size-'])]:size-full">
-      {Flag && <Flag title={countryName} />}
-    </span>
+    <span className={className}>{Flag && <Flag title={countryName} />}</span>
   )
 }

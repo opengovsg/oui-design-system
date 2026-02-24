@@ -1,5 +1,15 @@
-export { PhoneNumberField } from "./phone-number-field"
-export type { PhoneNumberFieldProps } from "./phone-number-field"
+export {
+  PhoneNumberField,
+  CountrySelect,
+  FlagComponent,
+  PhoneInput,
+} from "./phone-number-field"
+export type {
+  PhoneNumberFieldProps,
+  CountrySelectProps,
+  FlagComponentProps,
+  PhoneInputProps,
+} from "./phone-number-field"
 
 export {
   formatPhoneNumber,

@@ -15,7 +15,10 @@ export const phoneNumberFieldStyles = tv({
     selectTrigger:
       "hover:bg-interaction-muted-main-hover focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active pressed:bg-interaction-muted-main-active h-auto min-w-auto rounded-r-none outline-offset-0 disabled:active:bg-inherit",
     selectIcon: "",
-    selectText: "",
+    selectItem: "flex flex-row items-center gap-2",
+    selectItemLabel: "line-clamp-1 flex-1",
+    selectItemCountryCode: "text-base-content-default/50 prose-caption-1",
+    flag: "bg-interaction-support-disabled flex h-4 w-6 overflow-hidden rounded-sm [&_svg:not([class*='size-'])]:size-full",
     selectList: "",
     selectPopover: "",
   },
