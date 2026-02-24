@@ -206,11 +206,13 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
         ]}
       >
         <FieldGroup
+          isInvalid={isInvalid}
+          isDisabled={isDisabled}
+          data-variant={variant}
           ref={triggerRef}
           className={styles.group({
             className: classNames?.group,
           })}
-          data-variant={variant}
         >
           {variant === "international" ? (
             <BasePhoneInput
