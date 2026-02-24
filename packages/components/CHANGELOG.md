@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.47
+
+### Patch Changes
+
+- [#234](https://github.com/opengovsg/oui-design-system/pull/234) [`785ccba`](https://github.com/opengovsg/oui-design-system/commit/785ccba811cb091fc9f80a39efa0b02db10ff1f9) Thanks [@karrui](https://github.com/karrui)! - fix(pagination): scope ellipsis group styles to prevent parent leakage
+
+- Updated dependencies [[`da026ed`](https://github.com/opengovsg/oui-design-system/commit/da026ed48dc166e2dd4771368abf1c9e50da0bde), [`785ccba`](https://github.com/opengovsg/oui-design-system/commit/785ccba811cb091fc9f80a39efa0b02db10ff1f9)]:
+  - @opengovsg/oui-theme@0.0.47
+
 ## 0.0.46
 
 ### Patch Changes
