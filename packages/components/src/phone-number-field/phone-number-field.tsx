@@ -1,3 +1,5 @@
+"use client"
+
 import type { FocusEvents } from "react-aria"
 import type {
   InputProps as AriaInputProps,
@@ -137,8 +139,12 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
     },
     variantProps,
   ] = mapPropsVariants(originalProps, phoneNumberFieldStyles.variantKeys)
+  const defaultCountry = useMemo(
+    () => props.defaultCountry ?? "SG",
+    [props.defaultCountry],
+  )
   const [selectedCountry, setSelectedCountry] = useState<Country | undefined>(
-    props.defaultCountry ?? "SG",
+    defaultCountry,
   )
 
   const [value, setValue] = useControllableState<E164Number | undefined>({
@@ -200,7 +206,7 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
             international={false}
             addInternationalOption={false}
             defaultCountry={selectedCountry}
-            countryOptionsOrder={["SG"]}
+            countryOptionsOrder={[defaultCountry]}
             onCountryChange={setSelectedCountry}
             countrySelectComponent={CountrySelect}
             inputComponent={PhoneInput}

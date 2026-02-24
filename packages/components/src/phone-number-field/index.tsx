@@ -21,3 +21,5 @@ export {
    */
   isValidPhoneNumber,
 } from "react-phone-number-input"
+
+export type { Value as E164Number } from "react-phone-number-input"
