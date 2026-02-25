@@ -20,7 +20,6 @@
     "format:fix": "prettier --write . --ignore-path ../../.gitignore"
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.0",
     "@icons-pack/react-simple-icons": "^11.2.0",
     "@internationalized/date": "^3.10.1",
     "@opengovsg/oui": "workspace:*",
