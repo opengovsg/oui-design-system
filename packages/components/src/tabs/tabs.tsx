@@ -12,6 +12,7 @@ import {
   Tab as AriaTab,
   TabList as AriaTabList,
   TabPanel as AriaTabPanel,
+  TabPanels as AriaTabPanels,
   Tabs as AriaTabs,
   composeRenderProps,
   Provider,
@@ -138,3 +139,5 @@ export function TabPanel(props: TabPanelProps) {
     />
   )
 }
+
+export const TabPanels = AriaTabPanels
