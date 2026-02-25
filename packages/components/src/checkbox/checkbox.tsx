@@ -3,6 +3,7 @@
 import type {
   CheckboxGroupProps as AriaCheckboxGroupProps,
   CheckboxProps as AriaCheckboxProps,
+  CheckboxRenderProps,
   ValidationResult,
 } from "react-aria-components"
 import { Check, Minus } from "lucide-react"
@@ -17,11 +18,13 @@ import type {
   CheckboxSlots,
   FieldErrorSlots,
   SlotsToClasses,
+  SlotsToClassesWithRenderProps,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { checkboxGroupStyles, checkboxStyles } from "@opengovsg/oui-theme"
 
 import { Description, FieldError, Label } from "../field"
+import { renderChildren } from "../system/react-utils/children"
 import { mapPropsVariants } from "../system/utils"
 import {
   CheckboxGroupStyleContext,
@@ -31,7 +34,7 @@ import {
 export interface CheckboxProps
   extends AriaCheckboxProps,
     VariantProps<typeof checkboxStyles> {
-  classNames?: SlotsToClasses<CheckboxSlots>
+  classNames?: SlotsToClassesWithRenderProps<CheckboxSlots, CheckboxRenderProps>
 }
 
 export const Checkbox = ({
@@ -56,30 +59,37 @@ export const Checkbox = ({
         (className, renderProps) => styles.base({ ...renderProps, className }),
       )}
     >
-      {({ isSelected, isIndeterminate, ...renderProps }) => (
-        <>
-          <div
-            className={styles.box({
-              isSelected: isSelected || isIndeterminate,
-              ...renderProps,
-              className: classNames?.box,
-            })}
-          >
-            {isIndeterminate ? (
-              <Minus
-                aria-hidden
-                className={styles.icon({ className: classNames?.icon })}
-              />
-            ) : isSelected ? (
-              <Check
-                aria-hidden
-                className={styles.icon({ className: classNames?.icon })}
-              />
-            ) : null}
-          </div>
-          {props.children}
-        </>
-      )}
+      {(renderProps) => {
+        const { isSelected, isIndeterminate, ...restRenderProps } = renderProps
+        return (
+          <>
+            <div
+              className={styles.box({
+                isSelected: isSelected || isIndeterminate,
+                ...restRenderProps,
+                className: renderChildren(renderProps, classNames?.box),
+              })}
+            >
+              {isIndeterminate ? (
+                <Minus
+                  aria-hidden
+                  className={styles.icon({
+                    className: renderChildren(renderProps, classNames?.icon),
+                  })}
+                />
+              ) : isSelected ? (
+                <Check
+                  aria-hidden
+                  className={styles.icon({
+                    className: renderChildren(renderProps, classNames?.icon),
+                  })}
+                />
+              ) : null}
+            </div>
+            {props.children}
+          </>
+        )
+      }}
     </AriaCheckbox>
   )
 }
