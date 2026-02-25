@@ -30,6 +30,17 @@ Two variants of tabs are available: `underlined` and `bordered`.
 
 <ComponentPreview name="tabs-variants" />
 
+### Prominence
+
+The `prominence` prop controls the visual weight of the tab text. Two values are available: `strong` (default) and `normal`.
+
+- **Strong** – Tabs are displayed in uppercase with semi-bold weight, giving them more visual emphasis.
+- **Normal** – Tabs are displayed in regular case with a lighter weight, for a more subtle appearance.
+
+> Note: The `prominence` prop only has a visible effect with the `underlined` variant. When used with the `bordered` variant, the prominence setting will not produce a visual difference.
+
+<ComponentPreview name="tabs-prominence" />
+
 ## Features
 
 Tabs provide a list of tabs that a user can select from to switch between multiple tab panels. Tabs can be used to implement these in an accessible way.
@@ -98,3 +109,9 @@ An individual `Tab` can be disabled with the `isDisabled` prop. Disabled tabs ar
 In dynamic collections, it may be more convenient to use the `disabledKeys` prop at the `Tabs` level instead of `isDisabled` on individual tabs. Each key in this list corresponds with the `id` prop passed to the `Tab` component, or automatically derived from the values passed to the `items` prop (see [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html) for more details). A tab is considered disabled if its `id` exists in `disabledKeys` or if its `isDisabled` prop is true.
 
 <ComponentPreview name="tabs-with-disabled-keys" />
+
+## Custom Styles
+
+You can customize individual Tabs sub-components by passing Tailwind CSS classes via the `className` prop. The `className` prop also accepts a render function with access to component state (e.g. `isSelected`, `isHovered`, `isDisabled`), allowing you to style tabs based on their current state.
+
+<ComponentPreview name="tabs-custom-styles" />

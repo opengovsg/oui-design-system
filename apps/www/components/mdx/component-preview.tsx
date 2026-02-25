@@ -1,8 +1,8 @@
 import { Index } from "@/__registry__"
 import { readRegistryFile } from "@/lib/mdx"
 import { highlightCode } from "@/lib/shiki"
-import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react"
 
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 
 import { CopyButton } from "./copy-button"
@@ -47,7 +47,7 @@ const Code = async ({
   return (
     <>
       <div
-        className="code-highlight overflow-x-auto rounded-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
+        className="code-highlight overflow-x-auto rounded-tr-md rounded-b-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {showCopy && (
@@ -85,19 +85,17 @@ export function ComponentPreview({
       className={cn("group relative my-4 flex flex-col space-y-2", className)}
       {...props}
     >
-      <TabGroup defaultValue="preview" className="relative mr-auto w-full">
-        <div className="flex items-center justify-between pb-3">
-          <TabList className="w-full justify-start rounded-none border-b bg-transparent p-0">
-            <Tab
-              id="preview"
-              className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
-            >
+      <Tabs
+        variant="bordered"
+        defaultSelectedKey="preview"
+        className="relative mr-auto mb-4 w-full gap-0"
+      >
+        <div className="border-base-divider-strong z-11 flex w-full items-center justify-between">
+          <TabList className="-mb-px">
+            <Tab className="rounded-es-none!" id="preview">
               Preview
             </Tab>
-            <Tab
-              id="code"
-              className="text-muted-foreground data-[state=active]:border-b-primary data-[state=active]:text-foreground relative h-9 rounded-none border-b-2 border-b-transparent bg-transparent px-4 pt-2 pb-3 font-semibold shadow-none transition-none data-[state=active]:shadow-none"
-            >
+            <Tab className="rounded-ee-none!" id="code">
               Code
             </Tab>
           </TabList>
@@ -105,7 +103,10 @@ export function ComponentPreview({
         <TabPanels>
           <TabPanel
             id="preview"
-            className={cn("relative rounded-md", !asIframe && "border")}
+            className={cn(
+              "relative rounded-tr-md rounded-b-md",
+              !asIframe && "border-base-divider-strong border",
+            )}
           >
             <div
               className={cn(
@@ -118,7 +119,7 @@ export function ComponentPreview({
           </TabPanel>
           <TabPanel id="code">
             <div className="flex flex-col space-y-4">
-              <div className="relative w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-[350px] [&_pre]:overflow-auto">
+              <div className="relative w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-87.5 [&_pre]:overflow-auto">
                 <PreviewErrorBoundary>
                   <Code name={name} />
                 </PreviewErrorBoundary>
@@ -126,7 +127,7 @@ export function ComponentPreview({
             </div>
           </TabPanel>
         </TabPanels>
-      </TabGroup>
+      </Tabs>
     </div>
   )
 }
