@@ -47,7 +47,7 @@ const Code = async ({
   return (
     <>
       <div
-        className="code-highlight overflow-x-auto rounded-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
+        className="code-highlight overflow-x-auto rounded-tr-md rounded-b-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
         dangerouslySetInnerHTML={{ __html: html }}
       />
       {showCopy && (
@@ -86,20 +86,25 @@ export function ComponentPreview({
       {...props}
     >
       <Tabs
+        variant="bordered"
         defaultSelectedKey="preview"
-        className="relative mr-auto mb-4 w-full"
+        className="relative mr-auto mb-4 w-full gap-0"
       >
-        <div className="border-base-divider-strong flex w-full items-center justify-between border-b">
+        <div className="border-base-divider-strong z-11 flex w-full items-center justify-between">
           <TabList className="-mb-px">
-            <Tab id="preview">Preview</Tab>
-            <Tab id="code">Code</Tab>
+            <Tab className="rounded-es-none!" id="preview">
+              Preview
+            </Tab>
+            <Tab className="rounded-ee-none!" id="code">
+              Code
+            </Tab>
           </TabList>
         </div>
         <TabPanels>
           <TabPanel
             id="preview"
             className={cn(
-              "relative rounded-md",
+              "relative rounded-tr-md rounded-b-md",
               !asIframe && "border-base-divider-strong border",
             )}
           >

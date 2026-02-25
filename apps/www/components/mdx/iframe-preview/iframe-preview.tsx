@@ -9,14 +9,14 @@ import { tv } from "@opengovsg/oui-theme"
 
 const resizer = tv({
   slots: {
-    base: "xs:hidden absolute right-[5px] z-10 flex w-auto items-center justify-end",
+    base: "xs:hidden absolute right-1.25 z-10 flex w-auto items-center justify-end",
     main: "relative w-full",
     barWrapper:
-      "d-flex bg-grey-500 absolute flex h-auto w-[10px] cursor-ew-resize items-center justify-center rounded-sm select-none active:opacity-80",
+      "d-flex bg-grey-500 absolute flex h-auto w-2.5 cursor-ew-resize items-center justify-center rounded-sm select-none active:opacity-80",
     barInner: "relative z-10",
-    bar: "bg-default-400 h-[40px] w-[6px] rounded-full",
+    bar: "bg-default-400 h-10 w-1.5 rounded-full",
     iframeWrapper:
-      "border-default-200 dark:border-default-100 relative z-10 h-full w-full overflow-hidden rounded-lg border",
+      "border-base-divider-strong relative z-10 h-full w-full overflow-hidden rounded-tr-md rounded-b-md border",
     iframe: "z-10 h-full w-full overflow-scroll border-none",
   },
   variants: {
