@@ -2817,6 +2817,17 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/tabs-variants.tsx")),
   },
+  "tabs-custom-styles": {
+    name: "tabs-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-custom-styles.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-custom-styles.tsx")),
+  },
   "tabs-prominence": {
     name: "tabs-prominence",
     description: "",
