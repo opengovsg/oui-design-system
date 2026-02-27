@@ -43,7 +43,7 @@ export const Infobox = (props: InfoboxProps) => {
   return (
     <Component className={slots.base({ className: classNames?.base })}>
       {displayedIcon}
-      {children}
+      <div>{children}</div>
     </Component>
   )
 }
