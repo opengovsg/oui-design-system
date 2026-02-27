@@ -166,7 +166,7 @@ export const RadioGroup = ({
             {description}
           </Description>
         )}
-        <FieldError size={size} className={classNames?.error?.text}>
+        <FieldError size={size} classNames={classNames?.error}>
           {errorMessage}
         </FieldError>
       </AriaRadioGroup>
