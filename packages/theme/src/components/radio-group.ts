@@ -6,11 +6,11 @@ import { tv } from "../utils/tv"
 export const radioStyles = tv({
   slots: {
     circle:
-      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
+      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white dark:bg-zinc-900 transition [--color:var(--color-base-content-strong)] dark:[--color:var(--color-zinc-400)]",
     base: ["group grid grid-cols-[auto_1fr]", ...racFocusRing.base],
     icon: "rounded-full transition",
     label: "col-start-2 row-start-1",
-    description: "col-start-2 row-start-2 text-gray-600",
+    description: "col-start-2 row-start-2 text-gray-600 dark:text-zinc-400",
   },
   variants: {
     size: {
@@ -40,12 +40,12 @@ export const radioStyles = tv({
     },
     isDisabled: {
       false: {
-        base: "text-gray-800",
+        base: "text-gray-800 dark:text-zinc-200",
       },
       true: {
-        base: "text-interaction-support-disabled-content forced-colors:text-[GrayText]",
+        base: "text-interaction-support-disabled-content dark:text-zinc-600 forced-colors:text-[GrayText]",
         circle:
-          "[--color:var(--color-gray-200)] forced-colors:[--color:GrayText]!",
+          "[--color:var(--color-gray-200)] dark:[--color:var(--color-zinc-700)] forced-colors:[--color:GrayText]!",
       },
     },
     isSelected: {
