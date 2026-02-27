@@ -111,6 +111,11 @@ export interface RadioGroupProps
   children?: React.ReactNode
 
   /**
+   * Description text for the radio group
+   */
+  description?: string
+
+  /**
    * Error message - can be string or function for validation
    */
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -131,6 +136,7 @@ export interface RadioGroupProps
 
 export const RadioGroup = ({
   label,
+  description,
   errorMessage,
   classNames,
   size,
@@ -155,6 +161,11 @@ export const RadioGroup = ({
         )}
 
         {props.children}
+        {description && (
+          <Description size={size} className={classNames?.description}>
+            {description}
+          </Description>
+        )}
         <FieldError size={size} className={classNames?.error?.text}>
           {errorMessage}
         </FieldError>

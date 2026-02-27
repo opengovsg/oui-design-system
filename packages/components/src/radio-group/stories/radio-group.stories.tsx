@@ -20,6 +20,7 @@ export default {
   },
   args: {
     label: "Select a city",
+    description: "",
     isDisabled: false,
     isRequired: false,
     isInvalid: false,
