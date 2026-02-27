@@ -90,26 +90,26 @@ export const CustomIcon: Story = {
   },
   render: () => (
     <div className="flex flex-col gap-4">
-      <Infobox variant="info" icon={<AlertTriangle />}>
+      <Infobox variant="info" icon={<AlertTriangle className="shrink-0" />}>
         Custom icon replaces the default icon.
       </Infobox>
       <Infobox
         variant="warning"
-        icon={<AlertTriangle className="text-purple-500" />}
+        icon={<AlertTriangle className="shrink-0 text-purple-500" />}
       >
         Custom colors are preserved (purple, not default orange).
       </Infobox>
       <Infobox
         size="sm"
         variant="success"
-        icon={<AlertTriangle className="text-blue-500" />}
+        icon={<AlertTriangle className="size-4 shrink-0 text-blue-500" />}
       >
         Custom icons need to be sized manually (e.g., size-4 for small).
       </Infobox>
       <Infobox
         size="md"
         variant="error"
-        icon={<AlertTriangle className="text-green-500" />}
+        icon={<AlertTriangle className="size-6 shrink-0 text-green-500" />}
       >
         Custom icons need to be sized manually (e.g., size-6 for medium).
       </Infobox>
