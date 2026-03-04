@@ -99,25 +99,25 @@ You can customize the Toggle component by passing custom Tailwind CSS classes to
 
 ### Toggle
 
-| Prop             | Type                                                                             | Default     | Description                                                         |
-| ---------------- | -------------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
-| `children`       | `React.ReactNode`                                                                | -           | The label content. Required if `aria-label` is not set.             |
-| `aria-label`     | `string`                                                                         | -           | Accessible label. Required if `children` is not set.                |
-| `isSelected`     | `boolean`                                                                        | -           | The current selection state (controlled)                            |
-| `defaultSelected`| `boolean`                                                                        | -           | The default selection state (uncontrolled)                          |
-| `onChange`       | `(isSelected: boolean) => void`                                                  | -           | Callback fired when the selection state changes                     |
-| `thumbIcon`      | `React.ReactElement \| ((props: ToggleThumbIconProps) => React.ReactNode)`       | -           | Icon to display inside the thumb. Render function receives `isSelected` and `className`. |
-| `labelPlacement` | `"start" \| "end"`                                                               | `"end"`     | Where to place the label relative to the toggle                     |
-| `size`           | `"xs" \| "sm" \| "md"`                                                          | `"md"`      | The size of the toggle                                              |
-| `colorScheme`    | `"success"`                                                                      | `"success"` | The color scheme of the toggle                                      |
-| `isDisabled`     | `boolean`                                                                        | `false`     | Whether the toggle is disabled                                      |
-| `isReadOnly`     | `boolean`                                                                        | `false`     | Whether the toggle is read-only                                     |
-| `name`           | `string`                                                                         | -           | The name of the input, used when submitting a form                  |
-| `value`          | `string`                                                                         | -           | The value of the input, used when submitting a form                 |
-| `autoFocus`      | `boolean`                                                                        | `false`     | Whether the toggle should receive focus on render                   |
-| `onFocus`        | `(e: FocusEvent) => void`                                                        | -           | Called when the toggle receives focus                               |
-| `onBlur`         | `(e: FocusEvent) => void`                                                        | -           | Called when the toggle loses focus                                  |
-| `onFocusChange`  | `(isFocused: boolean) => void`                                                   | -           | Called when the focus state changes                                 |
-| `onKeyDown`      | `(e: KeyboardEvent) => void`                                                     | -           | Called when a key is pressed                                        |
-| `onKeyUp`        | `(e: KeyboardEvent) => void`                                                     | -           | Called when a key is released                                       |
-| `classNames`     | `SlotsToClasses<ToggleSlots>`                                                    | -           | Custom CSS classes for component slots                              |
+| Prop              | Type                                                                       | Default     | Description                                                                              |
+| ----------------- | -------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------------------- |
+| `children`        | `React.ReactNode`                                                          | -           | The label content. Required if `aria-label` is not set.                                  |
+| `aria-label`      | `string`                                                                   | -           | Accessible label. Required if `children` is not set.                                     |
+| `isSelected`      | `boolean`                                                                  | -           | The current selection state (controlled)                                                 |
+| `defaultSelected` | `boolean`                                                                  | -           | The default selection state (uncontrolled)                                               |
+| `onChange`        | `(isSelected: boolean) => void`                                            | -           | Callback fired when the selection state changes                                          |
+| `thumbIcon`       | `React.ReactElement \| ((props: ToggleThumbIconProps) => React.ReactNode)` | -           | Icon to display inside the thumb. Render function receives `isSelected` and `className`. |
+| `labelPlacement`  | `"start" \| "end"`                                                         | `"end"`     | Where to place the label relative to the toggle                                          |
+| `size`            | `"xs" \| "sm" \| "md"`                                                     | `"md"`      | The size of the toggle                                                                   |
+| `colorScheme`     | `"success"`                                                                | `"success"` | The color scheme of the toggle                                                           |
+| `isDisabled`      | `boolean`                                                                  | `false`     | Whether the toggle is disabled                                                           |
+| `isReadOnly`      | `boolean`                                                                  | `false`     | Whether the toggle is read-only                                                          |
+| `name`            | `string`                                                                   | -           | The name of the input, used when submitting a form                                       |
+| `value`           | `string`                                                                   | -           | The value of the input, used when submitting a form                                      |
+| `autoFocus`       | `boolean`                                                                  | `false`     | Whether the toggle should receive focus on render                                        |
+| `onFocus`         | `(e: FocusEvent) => void`                                                  | -           | Called when the toggle receives focus                                                    |
+| `onBlur`          | `(e: FocusEvent) => void`                                                  | -           | Called when the toggle loses focus                                                       |
+| `onFocusChange`   | `(isFocused: boolean) => void`                                             | -           | Called when the focus state changes                                                      |
+| `onKeyDown`       | `(e: KeyboardEvent) => void`                                               | -           | Called when a key is pressed                                                             |
+| `onKeyUp`         | `(e: KeyboardEvent) => void`                                               | -           | Called when a key is released                                                            |
+| `classNames`      | `SlotsToClasses<ToggleSlots>`                                              | -           | Custom CSS classes for component slots                                                   |

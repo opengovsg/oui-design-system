@@ -117,30 +117,30 @@ You can customize the TextField component by passing custom Tailwind CSS classes
 
 ### TextField
 
-| Prop           | Type                                                              | Default     | Description                                                        |
-| -------------- | ----------------------------------------------------------------- | ----------- | ------------------------------------------------------------------ |
-| `label`        | `React.ReactNode`                                                 | -           | The label for the text field                                       |
-| `description`  | `React.ReactNode`                                                 | -           | The description text shown below the field                         |
-| `errorMessage` | `React.ReactNode \| ((validation: ValidationResult) => string)`   | -           | The error message to display when validation fails                 |
-| `value`        | `string`                                                          | -           | The current value (controlled)                                     |
-| `defaultValue` | `string`                                                          | -           | The default value (uncontrolled)                                   |
-| `onChange`     | `(value: string) => void`                                         | -           | Callback fired when the value changes                              |
-| `type`         | `"text" \| "email" \| "password" \| "search" \| "tel" \| "url"`  | `"text"`    | The type of the input element                                      |
-| `size`         | `"xs" \| "sm" \| "md"`                                           | `"md"`      | The size of the component                                          |
-| `variant`      | `"outline" \| "unstyled"`                                         | `"outline"` | The visual variant of the input                                    |
-| `isDisabled`   | `boolean`                                                         | `false`     | Whether the field is disabled                                      |
-| `isReadOnly`   | `boolean`                                                         | `false`     | Whether the field is read-only                                     |
-| `isRequired`   | `boolean`                                                         | `false`     | Whether the field is required                                      |
-| `isInvalid`    | `boolean`                                                         | `false`     | Whether the field should display as invalid                        |
-| `minLength`    | `number`                                                          | -           | The minimum number of characters required                          |
-| `maxLength`    | `number`                                                          | -           | The maximum number of characters allowed                           |
-| `pattern`      | `string`                                                          | -           | A regular expression the value must match                          |
-| `validate`     | `(value: string) => ValidationError \| true \| null \| undefined` | -           | Custom validation function                                         |
-| `autoComplete` | `string`                                                          | -           | Hints for browser autocomplete                                     |
-| `validationBehavior` | `"native" \| "aria"`                                        | `"native"`  | Whether to use native HTML form validation or ARIA-based validation |
-| `name`         | `string`                                                          | -           | The name of the input, used when submitting a form                 |
-| `onFocus`      | `(e: FocusEvent) => void`                                         | -           | Called when the input receives focus                               |
-| `onBlur`       | `(e: FocusEvent) => void`                                         | -           | Called when the input loses focus                                  |
-| `onFocusChange` | `(isFocused: boolean) => void`                                   | -           | Called when the focus state changes                                |
-| `inputProps`   | `Partial<InputProps>`                                             | -           | Additional props to pass to the input element                      |
-| `classNames`   | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">` | - | Custom CSS classes for component slots                             |
+| Prop                 | Type                                                                       | Default     | Description                                                         |
+| -------------------- | -------------------------------------------------------------------------- | ----------- | ------------------------------------------------------------------- |
+| `label`              | `React.ReactNode`                                                          | -           | The label for the text field                                        |
+| `description`        | `React.ReactNode`                                                          | -           | The description text shown below the field                          |
+| `errorMessage`       | `React.ReactNode \| ((validation: ValidationResult) => string)`            | -           | The error message to display when validation fails                  |
+| `value`              | `string`                                                                   | -           | The current value (controlled)                                      |
+| `defaultValue`       | `string`                                                                   | -           | The default value (uncontrolled)                                    |
+| `onChange`           | `(value: string) => void`                                                  | -           | Callback fired when the value changes                               |
+| `type`               | `"text" \| "email" \| "password" \| "search" \| "tel" \| "url"`            | `"text"`    | The type of the input element                                       |
+| `size`               | `"xs" \| "sm" \| "md"`                                                     | `"md"`      | The size of the component                                           |
+| `variant`            | `"outline" \| "unstyled"`                                                  | `"outline"` | The visual variant of the input                                     |
+| `isDisabled`         | `boolean`                                                                  | `false`     | Whether the field is disabled                                       |
+| `isReadOnly`         | `boolean`                                                                  | `false`     | Whether the field is read-only                                      |
+| `isRequired`         | `boolean`                                                                  | `false`     | Whether the field is required                                       |
+| `isInvalid`          | `boolean`                                                                  | `false`     | Whether the field should display as invalid                         |
+| `minLength`          | `number`                                                                   | -           | The minimum number of characters required                           |
+| `maxLength`          | `number`                                                                   | -           | The maximum number of characters allowed                            |
+| `pattern`            | `string`                                                                   | -           | A regular expression the value must match                           |
+| `validate`           | `(value: string) => ValidationError \| true \| null \| undefined`          | -           | Custom validation function                                          |
+| `autoComplete`       | `string`                                                                   | -           | Hints for browser autocomplete                                      |
+| `validationBehavior` | `"native" \| "aria"`                                                       | `"native"`  | Whether to use native HTML form validation or ARIA-based validation |
+| `name`               | `string`                                                                   | -           | The name of the input, used when submitting a form                  |
+| `onFocus`            | `(e: FocusEvent) => void`                                                  | -           | Called when the input receives focus                                |
+| `onBlur`             | `(e: FocusEvent) => void`                                                  | -           | Called when the input loses focus                                   |
+| `onFocusChange`      | `(isFocused: boolean) => void`                                             | -           | Called when the focus state changes                                 |
+| `inputProps`         | `Partial<InputProps>`                                                      | -           | Additional props to pass to the input element                       |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">` | -           | Custom CSS classes for component slots                              |
