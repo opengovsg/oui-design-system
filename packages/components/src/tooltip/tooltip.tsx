@@ -18,6 +18,7 @@ import type {
 } from "@opengovsg/oui-theme"
 import { composeRenderProps, tooltipStyles } from "@opengovsg/oui-theme"
 
+import { renderChildren } from "../system/react-utils/children"
 import { mapPropsVariants } from "../system/utils"
 
 export interface TooltipProps
@@ -62,14 +63,10 @@ export function Tooltip(originalProps: TooltipProps) {
                 width={8}
                 height={8}
                 viewBox="0 0 8 8"
-                className={composeRenderProps(
-                  classNames?.arrow,
-                  (className, renderProps) =>
-                    styles.arrow({
-                      className,
-                      ...renderProps,
-                    }),
-                )(renderProps)}
+                className={styles.arrow({
+                  ...renderProps,
+                  className: renderChildren(renderProps, classNames?.arrow),
+                })}
               >
                 <path d="M0 0 L4 4 L8 0" />
               </svg>

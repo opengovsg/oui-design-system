@@ -37,9 +37,9 @@ export const pickChildren = <T = ReactNode>(
   return [withoutTargetChildren, targetChildren]
 }
 
-export const renderChildren = <T>(
+export const renderChildren = <T, S extends ReactNode>(
   renderProps: T,
-  children: ChildrenOrFunction<T>,
+  children: S | ((values: T) => S),
 ) => {
   if (typeof children === "function") {
     return children(renderProps)
