@@ -1,7 +1,7 @@
 "use client"
 
-import { TextField as AriaTextField } from "react-aria-components"
 import { Search } from "lucide-react"
+import { TextField as AriaTextField } from "react-aria-components"
 
 import { FieldGroup, Input, Label } from "@opengovsg/oui"
 
