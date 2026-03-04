@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.48
+
+### Patch Changes
+
+- [#240](https://github.com/opengovsg/oui-design-system/pull/240) [`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce) Thanks [@karrui](https://github.com/karrui)! - feat(checkbox): allow passing of renderProps into checkbox classnames
+
+- [#240](https://github.com/opengovsg/oui-design-system/pull/240) [`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce) Thanks [@karrui](https://github.com/karrui)! - refactor(tooltip): use renderChildren instead of composeRenderProps for class names
+
 ## 0.0.47
 
 ### Patch Changes
