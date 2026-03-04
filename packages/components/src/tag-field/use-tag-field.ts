@@ -70,6 +70,14 @@ export interface TagFieldAria<T> extends ValidationResult {
   rowVirtualizer: Virtualizer<HTMLElement, Element> | null
 }
 
+function useOptionalVirtualizer(
+  isVirtualized: boolean,
+  options: Parameters<typeof useVirtualizer<HTMLElement, Element>>[0],
+): Virtualizer<HTMLElement, Element> | null {
+  const virtualizer = useVirtualizer(options)
+  return isVirtualized ? virtualizer : null
+}
+
 /**
  * Provides the behavior and accessibility implementation for a tag field component.
  * A tag field combines a text input with a listbox, allowing users to filter a list of options to items matching a query.
@@ -133,18 +141,16 @@ export function useTagField<T>(
     return new Set(disabledKeys)
   }, [disabledKeys])
 
-  const rowVirtualizer = isVirtualized
-    ? useVirtualizer({
-        count: items.length,
-        getScrollElement: () => listBoxRef.current,
-        estimateSize: () => virtualRowHeight,
-        getItemKey: useCallback(
-          (index: number) => itemToKey(items[index]),
-          [itemToKey, items],
-        ),
-        overscan: 2,
-      })
-    : null
+  const rowVirtualizer = useOptionalVirtualizer(isVirtualized, {
+    count: items.length,
+    getScrollElement: () => listBoxRef.current,
+    estimateSize: () => virtualRowHeight,
+    getItemKey: useCallback(
+      (index: number) => itemToKey(items[index]),
+      [itemToKey, items],
+    ),
+    overscan: 2,
+  })
 
   const {
     isOpen,
