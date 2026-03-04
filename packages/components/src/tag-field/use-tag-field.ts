@@ -67,7 +67,7 @@ export interface TagFieldAria<T> extends ValidationResult {
   /** Props for the combo box error message element, if any. */
   errorMessageProps: DOMAttributes
 
-  rowVirtualizer: Virtualizer<HTMLElement, Element>
+  rowVirtualizer: Virtualizer<HTMLElement, Element> | null
 }
 
 /**
@@ -93,6 +93,7 @@ export function useTagField<T>(
     itemToText,
     label,
     virtualRowHeight = 40,
+    isVirtualized = true,
   } = props
 
   const backupBtnRef = useRef(null)
@@ -132,16 +133,18 @@ export function useTagField<T>(
     return new Set(disabledKeys)
   }, [disabledKeys])
 
-  const rowVirtualizer = useVirtualizer({
-    count: items.length,
-    getScrollElement: () => listBoxRef.current,
-    estimateSize: () => virtualRowHeight,
-    getItemKey: useCallback(
-      (index: number) => itemToKey(items[index]),
-      [itemToKey, items],
-    ),
-    overscan: 2,
-  })
+  const rowVirtualizer = isVirtualized
+    ? useVirtualizer({
+        count: items.length,
+        getScrollElement: () => listBoxRef.current,
+        estimateSize: () => virtualRowHeight,
+        getItemKey: useCallback(
+          (index: number) => itemToKey(items[index]),
+          [itemToKey, items],
+        ),
+        overscan: 2,
+      })
+    : null
 
   const {
     isOpen,
@@ -167,7 +170,7 @@ export function useTagField<T>(
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
       ) {
-        rowVirtualizer.scrollToIndex(highlightedIndex)
+        rowVirtualizer?.scrollToIndex(highlightedIndex)
       }
     },
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
