@@ -170,13 +170,20 @@ export function useTagField<T>(
     isItemDisabled: (item) =>
       isDisabled || isReadOnly || disabledKeysSet.has(itemToKey(item)),
     items,
-    scrollIntoView: () => {},
+    // Noop for scrollIntoView if virtualized, as we'll handle it in onHighlightedIndexChange
+    scrollIntoView: (node) => {
+      if (!isVirtualized) {
+        node.scrollIntoView({ block: "nearest" })
+      }
+    },
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       if (
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
       ) {
-        rowVirtualizer?.scrollToIndex(highlightedIndex)
+        if (rowVirtualizer) {
+          rowVirtualizer.scrollToIndex(highlightedIndex)
+        }
       }
     },
     defaultHighlightedIndex: 0, // after selection, highlight the first item.
