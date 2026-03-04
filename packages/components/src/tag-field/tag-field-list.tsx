@@ -16,7 +16,7 @@ import { TagFieldStateContext } from "./tag-field-state-context"
 export interface TagFieldListContextValue
   extends SlotProps,
     ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {
-  rowVirtualizer: Virtualizer<HTMLElement, Element>
+  rowVirtualizer: Virtualizer<HTMLElement, Element> | null
 }
 
 export const TagFieldListContext =
@@ -34,7 +34,7 @@ const TagFieldListInner = <T extends object>(
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
-  const { items, getItemProps, highlightedIndex } =
+  const { items, getItemProps, highlightedIndex, itemToKey } =
     useContext(TagFieldStateContext)!
 
   const { slot, rowVirtualizer, itemClassNames, ...rest } = props
@@ -43,14 +43,14 @@ const TagFieldListInner = <T extends object>(
     <ul slot={slot ?? undefined} ref={ref} {...rest}>
       {props.children !== undefined && typeof props.children !== "function" ? (
         props.children
-      ) : (
+      ) : rowVirtualizer ? (
         <>
           <li
             key="total-size"
             aria-hidden
-            style={{ height: rowVirtualizer?.getTotalSize() }}
+            style={{ height: rowVirtualizer.getTotalSize() }}
           />
-          {rowVirtualizer?.getVirtualItems().map((virtualRow) => {
+          {rowVirtualizer.getVirtualItems().map((virtualRow) => {
             const item = items[virtualRow.index]
             const itemProps = getItemProps({
               item,
@@ -82,6 +82,27 @@ const TagFieldListInner = <T extends object>(
             )
           })}
         </>
+      ) : (
+        items.map((item, index) => {
+          const itemProps = getItemProps({ item, index })
+          const key = itemToKey(item)
+          const childProps: Omit<TagFieldListRenderProps<T>, "itemProps"> = {
+            item,
+            isHighlighted: highlightedIndex === index,
+            key,
+            classNames: itemClassNames,
+          }
+          if (typeof props.children === "function") {
+            return props.children({ ...childProps, itemProps })
+          }
+          return (
+            <TagFieldItem
+              {...childProps}
+              {...itemProps}
+              key={key}
+            />
+          )
+        })
       )}
     </ul>
   )
