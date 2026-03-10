@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
-import { FilterIcon } from "lucide-react"
+import { FilterIcon, LoaderCircleIcon } from "lucide-react"
 import { expect } from "storybook/test"
 
 import { SearchField } from "../search-field"
@@ -137,5 +137,16 @@ export const Controlled: Story = {
     // Verify updated state
     await expect(inputValue).toHaveTextContent(TEST_SEARCH_TEXT)
     await expect(submittedValue).toHaveTextContent(TEST_SEARCH_TEXT)
+  },
+}
+
+export const AsyncSearch: Story = {
+  args: {
+    label: "Async search",
+    defaultValue: "Searching...",
+    isReadOnly: true,
+    clearIcon: (
+      <LoaderCircleIcon className="animate-spin" aria-label="Loading" />
+    ),
   },
 }

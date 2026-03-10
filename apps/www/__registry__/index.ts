@@ -2914,6 +2914,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/range-calendar-visible-duration.tsx"),
     ),
   },
+  "search-field-async-search": {
+    name: "search-field-async-search",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-async-search.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/search-field-async-search.tsx"),
+    ),
+  },
   "search-field-controlled": {
     name: "search-field-controlled",
     description: "",
