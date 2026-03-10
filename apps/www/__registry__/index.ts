@@ -2654,6 +2654,80 @@ export const Index: Record<string, RegistryComponent> = {
         import("@/registry/examples/phone-number-field-with-validation.tsx"),
     ),
   },
+  "radio-group-custom-styles": {
+    name: "radio-group-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-custom-styles.tsx"),
+    ),
+  },
+  "radio-group-demo": {
+    name: "radio-group-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/radio-group-demo.tsx")),
+  },
+  "radio-group-disabled": {
+    name: "radio-group-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-disabled.tsx"),
+    ),
+  },
+  "radio-group-invalid": {
+    name: "radio-group-invalid",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-invalid.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-invalid.tsx"),
+    ),
+  },
+  "radio-group-sizes": {
+    name: "radio-group-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/radio-group-sizes.tsx")),
+  },
+  "radio-group-with-description": {
+    name: "radio-group-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-with-description.tsx"),
+    ),
+  },
   "range-calendar-controlled": {
     name: "range-calendar-controlled",
     description: "",
