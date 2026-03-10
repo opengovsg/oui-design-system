@@ -76,7 +76,7 @@ const docsLinks: NavItem = {
               status: "new",
             },
             { title: "Progress", url: "progress", status: "wip" },
-            { title: "RadioGroup", url: "radio-group", status: "wip" },
+            { title: "RadioGroup", url: "radio-group", status: "new" },
             { title: "RangeCalendar", url: "range-calendar" },
             { title: "SingleSelect", url: "single-select", status: "redirect" },
             { title: "SearchField", url: "search-field", status: "new" },

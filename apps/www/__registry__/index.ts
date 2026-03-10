@@ -21,7 +21,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-controlled.tsx"),
+    ),
   },
   "accordion-custom-indicator": {
     name: "accordion-custom-indicator",
@@ -32,7 +34,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-custom-indicator.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-custom-indicator.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-custom-indicator.tsx"),
+    ),
   },
   "accordion-default-expanded": {
     name: "accordion-default-expanded",
@@ -43,7 +47,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-default-expanded.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-default-expanded.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-default-expanded.tsx"),
+    ),
   },
   "accordion-demo": {
     name: "accordion-demo",
@@ -76,7 +82,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-hide-indicator.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-hide-indicator.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-hide-indicator.tsx"),
+    ),
   },
   "accordion-multiple-expanded": {
     name: "accordion-multiple-expanded",
@@ -87,7 +95,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-multiple-expanded.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-multiple-expanded.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-multiple-expanded.tsx"),
+    ),
   },
   "accordion-sizes": {
     name: "accordion-sizes",
@@ -109,7 +119,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/accordion-with-start-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/accordion-with-start-content.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/accordion-with-start-content.tsx"),
+    ),
   },
   "avatar-colors": {
     name: "avatar-colors",
@@ -131,7 +143,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/avatar-custom-fallback.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/avatar-custom-fallback.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/avatar-custom-fallback.tsx"),
+    ),
   },
   "avatar-demo": {
     name: "avatar-demo",
@@ -164,7 +178,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/avatar-group-custom-count.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/avatar-group-custom-count.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/avatar-group-custom-count.tsx"),
+    ),
   },
   "avatar-group-demo": {
     name: "avatar-group-demo",
@@ -208,7 +224,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/avatar-menu-template.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/avatar-menu-template.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/avatar-menu-template.tsx"),
+    ),
   },
   "avatar-radius": {
     name: "avatar-radius",
@@ -241,7 +259,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/badge-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/badge-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/badge-custom-styles.tsx"),
+    ),
   },
   "badge-demo": {
     name: "badge-demo",
@@ -274,7 +294,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/badge-outline-colors.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/badge-outline-colors.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/badge-outline-colors.tsx"),
+    ),
   },
   "badge-radii": {
     name: "badge-radii",
@@ -318,7 +340,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/badge-start-end-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/badge-start-end-content.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/badge-start-end-content.tsx"),
+    ),
   },
   "badge-subtle-colors": {
     name: "badge-subtle-colors",
@@ -329,7 +353,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/badge-subtle-colors.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/badge-subtle-colors.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/badge-subtle-colors.tsx"),
+    ),
   },
   "badge-with-close-button": {
     name: "badge-with-close-button",
@@ -340,7 +366,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/badge-with-close-button.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/badge-with-close-button.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/badge-with-close-button.tsx"),
+    ),
   },
   "banner-demo": {
     name: "banner-demo",
@@ -373,7 +401,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/banner-with-controlled-visibility.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/banner-with-controlled-visibility.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/banner-with-controlled-visibility.tsx"),
+    ),
   },
   "banner-with-hidden-start-content": {
     name: "banner-with-hidden-start-content",
@@ -384,7 +414,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/banner-with-hidden-start-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/banner-with-hidden-start-content.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/banner-with-hidden-start-content.tsx"),
+    ),
   },
   "banner-with-sizes": {
     name: "banner-with-sizes",
@@ -406,7 +438,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/banner-with-start-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/banner-with-start-content.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/banner-with-start-content.tsx"),
+    ),
   },
   "breadcrumbs-collection": {
     name: "breadcrumbs-collection",
@@ -417,7 +451,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-collection.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-collection.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-collection.tsx"),
+    ),
   },
   "breadcrumbs-custom-breadcrumb": {
     name: "breadcrumbs-custom-breadcrumb",
@@ -428,7 +464,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-custom-breadcrumb.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-custom-breadcrumb.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-custom-breadcrumb.tsx"),
+    ),
   },
   "breadcrumbs-demo": {
     name: "breadcrumbs-demo",
@@ -450,7 +488,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-disabled.tsx"),
+    ),
   },
   "breadcrumbs-separator": {
     name: "breadcrumbs-separator",
@@ -461,7 +501,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-separator.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-separator.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-separator.tsx"),
+    ),
   },
   "breadcrumbs-truncated-custom": {
     name: "breadcrumbs-truncated-custom",
@@ -472,7 +514,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-truncated-custom.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-truncated-custom.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated-custom.tsx"),
+    ),
   },
   "breadcrumbs-truncated-no-dropdown": {
     name: "breadcrumbs-truncated-no-dropdown",
@@ -483,7 +527,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-truncated-no-dropdown.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-truncated-no-dropdown.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated-no-dropdown.tsx"),
+    ),
   },
   "breadcrumbs-truncated": {
     name: "breadcrumbs-truncated",
@@ -494,7 +540,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/breadcrumbs-truncated.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/breadcrumbs-truncated.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/breadcrumbs-truncated.tsx"),
+    ),
   },
   "button-demo": {
     name: "button-demo",
@@ -527,7 +575,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-custom-spinner.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/button-with-custom-spinner.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/button-with-custom-spinner.tsx"),
+    ),
   },
   "button-with-disabled": {
     name: "button-with-disabled",
@@ -538,7 +588,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/button-with-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/button-with-disabled.tsx"),
+    ),
   },
   "button-with-icons": {
     name: "button-with-icons",
@@ -560,7 +612,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-loading.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/button-with-loading.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/button-with-loading.tsx"),
+    ),
   },
   "button-with-radius": {
     name: "button-with-radius",
@@ -593,7 +647,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-spinner-placement.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/button-with-spinner-placement.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/button-with-spinner-placement.tsx"),
+    ),
   },
   "button-with-variants": {
     name: "button-with-variants",
@@ -604,7 +660,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/button-with-variants.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/button-with-variants.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/button-with-variants.tsx"),
+    ),
   },
   "calendar-controlled": {
     name: "calendar-controlled",
@@ -615,7 +673,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-controlled.tsx"),
+    ),
   },
   "calendar-demo": {
     name: "calendar-demo",
@@ -648,7 +708,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-first-day-of-week.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-first-day-of-week.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-first-day-of-week.tsx"),
+    ),
   },
   "calendar-hide-today-button": {
     name: "calendar-hide-today-button",
@@ -659,7 +721,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-hide-today-button.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-hide-today-button.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-hide-today-button.tsx"),
+    ),
   },
   "calendar-international": {
     name: "calendar-international",
@@ -670,7 +734,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-international.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-international.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-international.tsx"),
+    ),
   },
   "calendar-max-value": {
     name: "calendar-max-value",
@@ -703,7 +769,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-page-behaviour.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-page-behaviour.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-page-behaviour.tsx"),
+    ),
   },
   "calendar-select-date-on-today-button-click": {
     name: "calendar-select-date-on-today-button-click",
@@ -714,7 +782,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-select-date-on-today-button-click.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-select-date-on-today-button-click.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/calendar-select-date-on-today-button-click.tsx"
+        ),
+    ),
   },
   "calendar-unavailable-dates": {
     name: "calendar-unavailable-dates",
@@ -725,7 +798,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-unavailable-dates.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-unavailable-dates.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-unavailable-dates.tsx"),
+    ),
   },
   "calendar-visible-duration": {
     name: "calendar-visible-duration",
@@ -736,7 +811,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/calendar-visible-duration.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/calendar-visible-duration.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/calendar-visible-duration.tsx"),
+    ),
   },
   "checkbox-colours": {
     name: "checkbox-colours",
@@ -758,7 +835,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-custom-styles.tsx"),
+    ),
   },
   "checkbox-demo": {
     name: "checkbox-demo",
@@ -791,7 +870,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-group-demo.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-group-demo.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-demo.tsx"),
+    ),
   },
   "checkbox-group-disabled": {
     name: "checkbox-group-disabled",
@@ -802,7 +883,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-group-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-group-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-disabled.tsx"),
+    ),
   },
   "checkbox-group-invalid": {
     name: "checkbox-group-invalid",
@@ -813,7 +896,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-group-invalid.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-group-invalid.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-invalid.tsx"),
+    ),
   },
   "checkbox-group-with-input-example": {
     name: "checkbox-group-with-input-example",
@@ -824,7 +909,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-group-with-input-example.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-group-with-input-example.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-group-with-input-example.tsx"),
+    ),
   },
   "checkbox-indeterminate": {
     name: "checkbox-indeterminate",
@@ -835,7 +922,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/checkbox-indeterminate.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/checkbox-indeterminate.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/checkbox-indeterminate.tsx"),
+    ),
   },
   "checkbox-sizes": {
     name: "checkbox-sizes",
@@ -857,7 +946,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/combo-box-content-example.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/combo-box-content-example.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/combo-box-content-example.tsx"),
+    ),
   },
   "combo-box-demo": {
     name: "combo-box-demo",
@@ -879,7 +970,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/combo-box-text-slots.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/combo-box-text-slots.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/combo-box-text-slots.tsx"),
+    ),
   },
   "date-field-controlled": {
     name: "date-field-controlled",
@@ -890,7 +983,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-controlled.tsx"),
+    ),
   },
   "date-field-demo": {
     name: "date-field-demo",
@@ -912,7 +1007,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-disabled.tsx"),
+    ),
   },
   "date-field-hide-timezone": {
     name: "date-field-hide-timezone",
@@ -923,7 +1020,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-hide-timezone.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-hide-timezone.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-hide-timezone.tsx"),
+    ),
   },
   "date-field-hourly-cycle": {
     name: "date-field-hourly-cycle",
@@ -934,7 +1033,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-hourly-cycle.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-hourly-cycle.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-hourly-cycle.tsx"),
+    ),
   },
   "date-field-min-max": {
     name: "date-field-min-max",
@@ -956,7 +1057,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-readonly.tsx"),
+    ),
   },
   "date-field-sizes": {
     name: "date-field-sizes",
@@ -978,7 +1081,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-timezones.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-timezones.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-timezones.tsx"),
+    ),
   },
   "date-field-with-description": {
     name: "date-field-with-description",
@@ -989,7 +1094,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-with-description.tsx"),
+    ),
   },
   "date-field-with-error-message": {
     name: "date-field-with-error-message",
@@ -1000,7 +1107,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-field-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-field-with-error-message.tsx"),
+    ),
   },
   "date-picker-controlled": {
     name: "date-picker-controlled",
@@ -1011,7 +1120,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-controlled.tsx"),
+    ),
   },
   "date-picker-demo": {
     name: "date-picker-demo",
@@ -1033,7 +1144,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-disabled.tsx"),
+    ),
   },
   "date-picker-first-day-of-week": {
     name: "date-picker-first-day-of-week",
@@ -1044,7 +1157,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-first-day-of-week.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-first-day-of-week.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-first-day-of-week.tsx"),
+    ),
   },
   "date-picker-granularity": {
     name: "date-picker-granularity",
@@ -1055,7 +1170,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-granularity.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-granularity.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-granularity.tsx"),
+    ),
   },
   "date-picker-international-calendar": {
     name: "date-picker-international-calendar",
@@ -1066,7 +1183,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-international-calendar.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-international-calendar.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-picker-international-calendar.tsx"),
+    ),
   },
   "date-picker-min-max": {
     name: "date-picker-min-max",
@@ -1077,7 +1197,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-min-max.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-min-max.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-min-max.tsx"),
+    ),
   },
   "date-picker-page-behavior": {
     name: "date-picker-page-behavior",
@@ -1088,7 +1210,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-page-behavior.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-page-behavior.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-page-behavior.tsx"),
+    ),
   },
   "date-picker-readonly": {
     name: "date-picker-readonly",
@@ -1099,7 +1223,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-readonly.tsx"),
+    ),
   },
   "date-picker-required": {
     name: "date-picker-required",
@@ -1110,7 +1236,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-required.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-required.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-required.tsx"),
+    ),
   },
   "date-picker-timezones": {
     name: "date-picker-timezones",
@@ -1121,7 +1249,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-timezones.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-timezones.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-timezones.tsx"),
+    ),
   },
   "date-picker-unavailable-dates": {
     name: "date-picker-unavailable-dates",
@@ -1132,7 +1262,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-unavailable-dates.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-unavailable-dates.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-unavailable-dates.tsx"),
+    ),
   },
   "date-picker-visible-months": {
     name: "date-picker-visible-months",
@@ -1143,7 +1275,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-visible-months.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-visible-months.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-visible-months.tsx"),
+    ),
   },
   "date-picker-with-description": {
     name: "date-picker-with-description",
@@ -1154,7 +1288,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-description.tsx"),
+    ),
   },
   "date-picker-with-error-message": {
     name: "date-picker-with-error-message",
@@ -1165,7 +1301,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-error-message.tsx"),
+    ),
   },
   "date-picker-with-selector-icon": {
     name: "date-picker-with-selector-icon",
@@ -1176,7 +1314,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-with-selector-icon.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-with-selector-icon.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-selector-icon.tsx"),
+    ),
   },
   "date-picker-with-time-fields": {
     name: "date-picker-with-time-fields",
@@ -1187,7 +1327,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-picker-with-time-fields.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-picker-with-time-fields.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-picker-with-time-fields.tsx"),
+    ),
   },
   "date-range-picker-controlled": {
     name: "date-range-picker-controlled",
@@ -1198,7 +1340,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-controlled.tsx"),
+    ),
   },
   "date-range-picker-demo": {
     name: "date-range-picker-demo",
@@ -1209,7 +1353,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-demo.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-demo.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-demo.tsx"),
+    ),
   },
   "date-range-picker-disabled": {
     name: "date-range-picker-disabled",
@@ -1220,7 +1366,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-disabled.tsx"),
+    ),
   },
   "date-range-picker-first-day-of-week": {
     name: "date-range-picker-first-day-of-week",
@@ -1231,7 +1379,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-first-day-of-week.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-first-day-of-week.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-first-day-of-week.tsx"),
+    ),
   },
   "date-range-picker-granularity": {
     name: "date-range-picker-granularity",
@@ -1242,7 +1393,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-granularity.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-granularity.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-granularity.tsx"),
+    ),
   },
   "date-range-picker-international-calendar": {
     name: "date-range-picker-international-calendar",
@@ -1253,7 +1406,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-international-calendar.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-international-calendar.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/date-range-picker-international-calendar.tsx"
+        ),
+    ),
   },
   "date-range-picker-min-max": {
     name: "date-range-picker-min-max",
@@ -1264,7 +1422,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-min-max.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-min-max.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-min-max.tsx"),
+    ),
   },
   "date-range-picker-page-behavior": {
     name: "date-range-picker-page-behavior",
@@ -1275,7 +1435,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-page-behavior.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-page-behavior.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-page-behavior.tsx"),
+    ),
   },
   "date-range-picker-readonly": {
     name: "date-range-picker-readonly",
@@ -1286,7 +1448,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-readonly.tsx"),
+    ),
   },
   "date-range-picker-required": {
     name: "date-range-picker-required",
@@ -1297,7 +1461,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-required.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-required.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-required.tsx"),
+    ),
   },
   "date-range-picker-timezones": {
     name: "date-range-picker-timezones",
@@ -1308,7 +1474,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-timezones.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-timezones.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-timezones.tsx"),
+    ),
   },
   "date-range-picker-unavailable-dates": {
     name: "date-range-picker-unavailable-dates",
@@ -1319,7 +1487,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-unavailable-dates.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-unavailable-dates.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-unavailable-dates.tsx"),
+    ),
   },
   "date-range-picker-visible-months": {
     name: "date-range-picker-visible-months",
@@ -1330,7 +1501,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-visible-months.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-visible-months.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/date-range-picker-visible-months.tsx"),
+    ),
   },
   "date-range-picker-with-description": {
     name: "date-range-picker-with-description",
@@ -1341,7 +1514,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-with-description.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-description.tsx"),
+    ),
   },
   "date-range-picker-with-error-message": {
     name: "date-range-picker-with-error-message",
@@ -1352,7 +1528,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-with-error-message.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-error-message.tsx"),
+    ),
   },
   "date-range-picker-with-time-fields": {
     name: "date-range-picker-with-time-fields",
@@ -1363,7 +1542,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/date-range-picker-with-time-fields.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/date-range-picker-with-time-fields.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/date-range-picker-with-time-fields.tsx"),
+    ),
   },
   "field-custom-form": {
     name: "field-custom-form",
@@ -1396,7 +1578,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/field-error-render-prop.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/field-error-render-prop.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/field-error-render-prop.tsx"),
+    ),
   },
   "field-error": {
     name: "field-error",
@@ -1440,7 +1624,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-allowed-mime-types.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-allowed-mime-types.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-allowed-mime-types.tsx"),
+    ),
   },
   "file-dropzone-controlled": {
     name: "file-dropzone-controlled",
@@ -1451,7 +1637,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-controlled.tsx"),
+    ),
   },
   "file-dropzone-custom-rendering": {
     name: "file-dropzone-custom-rendering",
@@ -1462,7 +1650,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-custom-rendering.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-custom-rendering.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-custom-rendering.tsx"),
+    ),
   },
   "file-dropzone-demo": {
     name: "file-dropzone-demo",
@@ -1484,7 +1674,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-disabled.tsx"),
+    ),
   },
   "file-dropzone-file-size-limits": {
     name: "file-dropzone-file-size-limits",
@@ -1495,7 +1687,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-file-size-limits.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-file-size-limits.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-file-size-limits.tsx"),
+    ),
   },
   "file-dropzone-image-preview": {
     name: "file-dropzone-image-preview",
@@ -1506,7 +1700,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-image-preview.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-image-preview.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-image-preview.tsx"),
+    ),
   },
   "file-dropzone-multiple-files": {
     name: "file-dropzone-multiple-files",
@@ -1517,7 +1713,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-multiple-files.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-multiple-files.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-multiple-files.tsx"),
+    ),
   },
   "file-dropzone-readonly": {
     name: "file-dropzone-readonly",
@@ -1528,7 +1726,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-readonly.tsx"),
+    ),
   },
   "file-dropzone-show-rejected-files": {
     name: "file-dropzone-show-rejected-files",
@@ -1539,7 +1739,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-show-rejected-files.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-show-rejected-files.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-show-rejected-files.tsx"),
+    ),
   },
   "file-dropzone-sizes": {
     name: "file-dropzone-sizes",
@@ -1550,7 +1752,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-sizes.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-sizes.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-sizes.tsx"),
+    ),
   },
   "file-dropzone-with-error-message": {
     name: "file-dropzone-with-error-message",
@@ -1561,7 +1765,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/file-dropzone-with-error-message.tsx"),
+    ),
   },
   "file-dropzone-with-label-and-description": {
     name: "file-dropzone-with-label-and-description",
@@ -1572,7 +1778,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/file-dropzone-with-label-and-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/file-dropzone-with-label-and-description.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/file-dropzone-with-label-and-description.tsx"
+        ),
+    ),
   },
   "link-demo": {
     name: "link-demo",
@@ -1638,7 +1849,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/link-with-pseudo-elements.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/link-with-pseudo-elements.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/link-with-pseudo-elements.tsx"),
+    ),
   },
   "menu-demo": {
     name: "menu-demo",
@@ -1693,7 +1906,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-custom-backdrop.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-custom-backdrop.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-custom-backdrop.tsx"),
+    ),
   },
   "modal-demo": {
     name: "modal-demo",
@@ -1715,7 +1930,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-example-draggable-overflow.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-example-draggable-overflow.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-example-draggable-overflow.tsx"),
+    ),
   },
   "modal-example-draggable": {
     name: "modal-example-draggable",
@@ -1726,7 +1943,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-example-draggable.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-example-draggable.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-example-draggable.tsx"),
+    ),
   },
   "modal-example-feature-announcement": {
     name: "modal-example-feature-announcement",
@@ -1737,7 +1956,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-example-feature-announcement.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-example-feature-announcement.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/modal-example-feature-announcement.tsx"),
+    ),
   },
   "modal-example-responsive": {
     name: "modal-example-responsive",
@@ -1748,7 +1970,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-example-responsive.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-example-responsive.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-example-responsive.tsx"),
+    ),
   },
   "modal-non-dismissible": {
     name: "modal-non-dismissible",
@@ -1759,7 +1983,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-non-dismissible.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-non-dismissible.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-non-dismissible.tsx"),
+    ),
   },
   "modal-placement": {
     name: "modal-placement",
@@ -1781,7 +2007,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/modal-scroll-behavior.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/modal-scroll-behavior.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/modal-scroll-behavior.tsx"),
+    ),
   },
   "modal-sizes": {
     name: "modal-sizes",
@@ -1836,7 +2064,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/navbar-show-on-scroll-up.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/navbar-show-on-scroll-up.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/navbar-show-on-scroll-up.tsx"),
+    ),
   },
   "navbar-static": {
     name: "navbar-static",
@@ -1869,7 +2099,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/navbar-without-border.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/navbar-without-border.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/navbar-without-border.tsx"),
+    ),
   },
   "number-field-controlled": {
     name: "number-field-controlled",
@@ -1880,7 +2112,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-controlled.tsx"),
+    ),
   },
   "number-field-demo": {
     name: "number-field-demo",
@@ -1902,7 +2136,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-disabled.tsx"),
+    ),
   },
   "number-field-hide-steppers": {
     name: "number-field-hide-steppers",
@@ -1913,7 +2149,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-hide-steppers.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-hide-steppers.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-hide-steppers.tsx"),
+    ),
   },
   "number-field-min-max-values": {
     name: "number-field-min-max-values",
@@ -1924,7 +2162,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-min-max-values.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-min-max-values.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-min-max-values.tsx"),
+    ),
   },
   "number-field-readonly": {
     name: "number-field-readonly",
@@ -1935,7 +2175,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-readonly.tsx"),
+    ),
   },
   "number-field-required": {
     name: "number-field-required",
@@ -1946,7 +2188,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-required.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-required.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-required.tsx"),
+    ),
   },
   "number-field-sizes": {
     name: "number-field-sizes",
@@ -1968,7 +2212,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-wheel-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-wheel-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-wheel-disabled.tsx"),
+    ),
   },
   "number-field-with-error-message": {
     name: "number-field-with-error-message",
@@ -1979,7 +2225,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-error-message.tsx"),
+    ),
   },
   "number-field-with-format-options": {
     name: "number-field-with-format-options",
@@ -1990,7 +2238,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-format-options.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-format-options.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-format-options.tsx"),
+    ),
   },
   "number-field-with-label-and-description": {
     name: "number-field-with-label-and-description",
@@ -2001,7 +2251,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-label-and-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-label-and-description.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/number-field-with-label-and-description.tsx"
+        ),
+    ),
   },
   "number-field-with-placeholder": {
     name: "number-field-with-placeholder",
@@ -2012,7 +2267,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-placeholder.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-placeholder.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-placeholder.tsx"),
+    ),
   },
   "number-field-with-start-and-end-content": {
     name: "number-field-with-start-and-end-content",
@@ -2023,7 +2280,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-start-and-end-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-start-and-end-content.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/number-field-with-start-and-end-content.tsx"
+        ),
+    ),
   },
   "number-field-with-step": {
     name: "number-field-with-step",
@@ -2034,7 +2296,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/number-field-with-step.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/number-field-with-step.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/number-field-with-step.tsx"),
+    ),
   },
   "pagination-boundaries": {
     name: "pagination-boundaries",
@@ -2045,7 +2309,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-boundaries.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-boundaries.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-boundaries.tsx"),
+    ),
   },
   "pagination-colors": {
     name: "pagination-colors",
@@ -2078,7 +2344,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-controlled.tsx"),
+    ),
   },
   "pagination-custom-items": {
     name: "pagination-custom-items",
@@ -2089,7 +2357,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-custom-items.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-custom-items.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-custom-items.tsx"),
+    ),
   },
   "pagination-custom-styles": {
     name: "pagination-custom-styles",
@@ -2100,7 +2370,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-custom-styles.tsx"),
+    ),
   },
   "pagination-demo": {
     name: "pagination-demo",
@@ -2122,7 +2394,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-disabled.tsx"),
+    ),
   },
   "pagination-hook-implementation": {
     name: "pagination-hook-implementation",
@@ -2133,7 +2407,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-hook-implementation.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-hook-implementation.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-hook-implementation.tsx"),
+    ),
   },
   "pagination-initial-page": {
     name: "pagination-initial-page",
@@ -2144,7 +2420,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-initial-page.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-initial-page.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-initial-page.tsx"),
+    ),
   },
   "pagination-loop": {
     name: "pagination-loop",
@@ -2166,7 +2444,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-siblings.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-siblings.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-siblings.tsx"),
+    ),
   },
   "pagination-sizes": {
     name: "pagination-sizes",
@@ -2188,7 +2468,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-variants.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-variants.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-variants.tsx"),
+    ),
   },
   "pagination-with-controls": {
     name: "pagination-with-controls",
@@ -2199,7 +2481,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/pagination-with-controls.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/pagination-with-controls.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/pagination-with-controls.tsx"),
+    ),
   },
   "phone-number-field-controlled": {
     name: "phone-number-field-controlled",
@@ -2210,7 +2494,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-controlled.tsx"),
+    ),
   },
   "phone-number-field-country-options-order": {
     name: "phone-number-field-country-options-order",
@@ -2221,7 +2507,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-country-options-order.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-country-options-order.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-country-options-order.tsx"
+        ),
+    ),
   },
   "phone-number-field-default-country": {
     name: "phone-number-field-default-country",
@@ -2232,7 +2523,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-default-country.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-default-country.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-default-country.tsx"),
+    ),
   },
   "phone-number-field-demo": {
     name: "phone-number-field-demo",
@@ -2243,7 +2537,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-demo.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-demo.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-demo.tsx"),
+    ),
   },
   "phone-number-field-disabled": {
     name: "phone-number-field-disabled",
@@ -2254,7 +2550,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-disabled.tsx"),
+    ),
   },
   "phone-number-field-local-variant": {
     name: "phone-number-field-local-variant",
@@ -2265,7 +2563,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-local-variant.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-local-variant.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-local-variant.tsx"),
+    ),
   },
   "phone-number-field-placeholder-modes": {
     name: "phone-number-field-placeholder-modes",
@@ -2276,7 +2576,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-placeholder-modes.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-placeholder-modes.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-placeholder-modes.tsx"),
+    ),
   },
   "phone-number-field-sizes": {
     name: "phone-number-field-sizes",
@@ -2287,7 +2590,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-sizes.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-sizes.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/phone-number-field-sizes.tsx"),
+    ),
   },
   "phone-number-field-with-custom-placeholder": {
     name: "phone-number-field-with-custom-placeholder",
@@ -2298,7 +2603,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-with-custom-placeholder.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-with-custom-placeholder.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-with-custom-placeholder.tsx"
+        ),
+    ),
   },
   "phone-number-field-with-error-message": {
     name: "phone-number-field-with-error-message",
@@ -2309,7 +2619,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-with-error-message.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-with-error-message.tsx"),
+    ),
   },
   "phone-number-field-with-label-and-description": {
     name: "phone-number-field-with-label-and-description",
@@ -2320,7 +2633,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-with-label-and-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-with-label-and-description.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/phone-number-field-with-label-and-description.tsx"
+        ),
+    ),
   },
   "phone-number-field-with-validation": {
     name: "phone-number-field-with-validation",
@@ -2331,7 +2649,84 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/phone-number-field-with-validation.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/phone-number-field-with-validation.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/phone-number-field-with-validation.tsx"),
+    ),
+  },
+  "radio-group-custom-styles": {
+    name: "radio-group-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-custom-styles.tsx"),
+    ),
+  },
+  "radio-group-demo": {
+    name: "radio-group-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/radio-group-demo.tsx")),
+  },
+  "radio-group-disabled": {
+    name: "radio-group-disabled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-disabled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-disabled.tsx"),
+    ),
+  },
+  "radio-group-invalid": {
+    name: "radio-group-invalid",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-invalid.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-invalid.tsx"),
+    ),
+  },
+  "radio-group-sizes": {
+    name: "radio-group-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/radio-group-sizes.tsx")),
+  },
+  "radio-group-with-description": {
+    name: "radio-group-with-description",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/radio-group-with-description.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/radio-group-with-description.tsx"),
+    ),
   },
   "range-calendar-controlled": {
     name: "range-calendar-controlled",
@@ -2342,7 +2737,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-controlled.tsx"),
+    ),
   },
   "range-calendar-demo": {
     name: "range-calendar-demo",
@@ -2353,7 +2750,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-demo.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-demo.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-demo.tsx"),
+    ),
   },
   "range-calendar-disabled": {
     name: "range-calendar-disabled",
@@ -2364,7 +2763,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-disabled.tsx"),
+    ),
   },
   "range-calendar-first-day-of-week": {
     name: "range-calendar-first-day-of-week",
@@ -2375,7 +2776,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-first-day-of-week.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-first-day-of-week.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-first-day-of-week.tsx"),
+    ),
   },
   "range-calendar-hide-today-button": {
     name: "range-calendar-hide-today-button",
@@ -2386,7 +2789,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-hide-today-button.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-hide-today-button.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-hide-today-button.tsx"),
+    ),
   },
   "range-calendar-international": {
     name: "range-calendar-international",
@@ -2397,7 +2802,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-international.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-international.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-international.tsx"),
+    ),
   },
   "range-calendar-invalid-date": {
     name: "range-calendar-invalid-date",
@@ -2408,7 +2815,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-invalid-date.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-invalid-date.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-invalid-date.tsx"),
+    ),
   },
   "range-calendar-max-value": {
     name: "range-calendar-max-value",
@@ -2419,7 +2828,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-max-value.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-max-value.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-max-value.tsx"),
+    ),
   },
   "range-calendar-min-value": {
     name: "range-calendar-min-value",
@@ -2430,7 +2841,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-min-value.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-min-value.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-min-value.tsx"),
+    ),
   },
   "range-calendar-non-contiguous-ranges": {
     name: "range-calendar-non-contiguous-ranges",
@@ -2441,7 +2854,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-non-contiguous-ranges.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-non-contiguous-ranges.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/range-calendar-non-contiguous-ranges.tsx"),
+    ),
   },
   "range-calendar-page-behaviour": {
     name: "range-calendar-page-behaviour",
@@ -2452,7 +2868,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-page-behaviour.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-page-behaviour.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-page-behaviour.tsx"),
+    ),
   },
   "range-calendar-select-date-on-today-button-click": {
     name: "range-calendar-select-date-on-today-button-click",
@@ -2463,7 +2881,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-select-date-on-today-button-click.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-select-date-on-today-button-click.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/range-calendar-select-date-on-today-button-click.tsx"
+        ),
+    ),
   },
   "range-calendar-unavailable-dates": {
     name: "range-calendar-unavailable-dates",
@@ -2474,7 +2897,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-unavailable-dates.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-unavailable-dates.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-unavailable-dates.tsx"),
+    ),
   },
   "range-calendar-visible-duration": {
     name: "range-calendar-visible-duration",
@@ -2485,7 +2910,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/range-calendar-visible-duration.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/range-calendar-visible-duration.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/range-calendar-visible-duration.tsx"),
+    ),
   },
   "search-field-controlled": {
     name: "search-field-controlled",
@@ -2496,7 +2923,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-controlled.tsx"),
+    ),
   },
   "search-field-custom-icon": {
     name: "search-field-custom-icon",
@@ -2507,7 +2936,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-custom-icon.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-custom-icon.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-custom-icon.tsx"),
+    ),
   },
   "search-field-demo": {
     name: "search-field-demo",
@@ -2529,7 +2960,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-disabled.tsx"),
+    ),
   },
   "search-field-hidden-icon": {
     name: "search-field-hidden-icon",
@@ -2540,7 +2973,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-hidden-icon.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-hidden-icon.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-hidden-icon.tsx"),
+    ),
   },
   "search-field-sizes": {
     name: "search-field-sizes",
@@ -2562,7 +2997,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-with-error-message.tsx"),
+    ),
   },
   "search-field-with-label-and-description": {
     name: "search-field-with-label-and-description",
@@ -2573,7 +3010,12 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-with-label-and-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-with-label-and-description.tsx")),
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/search-field-with-label-and-description.tsx"
+        ),
+    ),
   },
   "search-field-with-placeholder": {
     name: "search-field-with-placeholder",
@@ -2584,7 +3026,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/search-field-with-placeholder.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/search-field-with-placeholder.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/search-field-with-placeholder.tsx"),
+    ),
   },
   "select-content-example": {
     name: "select-content-example",
@@ -2595,7 +3039,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/select-content-example.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/select-content-example.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/select-content-example.tsx"),
+    ),
   },
   "select-custom-value": {
     name: "select-custom-value",
@@ -2606,7 +3052,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/select-custom-value.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/select-custom-value.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/select-custom-value.tsx"),
+    ),
   },
   "select-demo": {
     name: "select-demo",
@@ -2628,7 +3076,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/select-description-slot.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/select-description-slot.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/select-description-slot.tsx"),
+    ),
   },
   "select-error-slot": {
     name: "select-error-slot",
@@ -2650,7 +3100,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/select-with-custom-search-icon.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/select-with-custom-search-icon.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/select-with-custom-search-icon.tsx"),
+    ),
   },
   "select-with-custom-search-placeholder": {
     name: "select-with-custom-search-placeholder",
@@ -2661,7 +3113,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/select-with-custom-search-placeholder.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/select-with-custom-search-placeholder.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/select-with-custom-search-placeholder.tsx"),
+    ),
   },
   "select-with-search": {
     name: "select-with-search",
@@ -2694,7 +3149,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/sidebar-collapsible-sections.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/sidebar-collapsible-sections.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/sidebar-collapsible-sections.tsx"),
+    ),
   },
   "sidebar-composition": {
     name: "sidebar-composition",
@@ -2705,7 +3162,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/sidebar-composition.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/sidebar-composition.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/sidebar-composition.tsx"),
+    ),
   },
   "sidebar-controlled": {
     name: "sidebar-controlled",
@@ -2727,7 +3186,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/sidebar-custom-tooltip.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/sidebar-custom-tooltip.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/sidebar-custom-tooltip.tsx"),
+    ),
   },
   "sidebar-demo": {
     name: "sidebar-demo",
@@ -2760,7 +3221,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/sidebar-only-caret-toggle.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/sidebar-only-caret-toggle.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/sidebar-only-caret-toggle.tsx"),
+    ),
   },
   "sidebar-selected": {
     name: "sidebar-selected",
@@ -2795,28 +3258,6 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/tabs-all-disabled.tsx")),
   },
-  "tabs-demo": {
-    name: "tabs-demo",
-    description: "",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/tabs-demo.tsx",
-      },
-    ],
-    component: lazy(() => import("@/registry/examples/tabs-demo.tsx")),
-  },
-  "tabs-variants": {
-    name: "tabs-variants",
-    description: "",
-    type: "registry:example",
-    files: [
-      {
-        path: "registry/examples/tabs-variants.tsx",
-      },
-    ],
-    component: lazy(() => import("@/registry/examples/tabs-variants.tsx")),
-  },
   "tabs-custom-styles": {
     name: "tabs-custom-styles",
     description: "",
@@ -2827,6 +3268,17 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/tabs-custom-styles.tsx")),
+  },
+  "tabs-demo": {
+    name: "tabs-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-demo.tsx")),
   },
   "tabs-prominence": {
     name: "tabs-prominence",
@@ -2839,6 +3291,17 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/tabs-prominence.tsx")),
   },
+  "tabs-variants": {
+    name: "tabs-variants",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-variants.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-variants.tsx")),
+  },
   "tabs-with-controlled-selection": {
     name: "tabs-with-controlled-selection",
     description: "",
@@ -2848,7 +3311,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-controlled-selection.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-controlled-selection.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-controlled-selection.tsx"),
+    ),
   },
   "tabs-with-default-selection": {
     name: "tabs-with-default-selection",
@@ -2859,7 +3324,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-default-selection.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-default-selection.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-default-selection.tsx"),
+    ),
   },
   "tabs-with-disabled-items": {
     name: "tabs-with-disabled-items",
@@ -2870,7 +3337,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-disabled-items.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-disabled-items.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-disabled-items.tsx"),
+    ),
   },
   "tabs-with-disabled-keys": {
     name: "tabs-with-disabled-keys",
@@ -2881,7 +3350,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-disabled-keys.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-disabled-keys.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-disabled-keys.tsx"),
+    ),
   },
   "tabs-with-dynamic-items": {
     name: "tabs-with-dynamic-items",
@@ -2892,7 +3363,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-dynamic-items.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-dynamic-items.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-dynamic-items.tsx"),
+    ),
   },
   "tabs-with-keyboard-activation": {
     name: "tabs-with-keyboard-activation",
@@ -2903,7 +3376,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-keyboard-activation.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-keyboard-activation.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-keyboard-activation.tsx"),
+    ),
   },
   "tabs-with-keyboard-focusable-content": {
     name: "tabs-with-keyboard-focusable-content",
@@ -2914,7 +3389,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-keyboard-focusable-content.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-keyboard-focusable-content.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/tabs-with-keyboard-focusable-content.tsx"),
+    ),
   },
   "tabs-with-vertical-orientation": {
     name: "tabs-with-vertical-orientation",
@@ -2925,7 +3403,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tabs-with-vertical-orientation.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tabs-with-vertical-orientation.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tabs-with-vertical-orientation.tsx"),
+    ),
   },
   "tag-field-content-example": {
     name: "tag-field-content-example",
@@ -2936,7 +3416,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-content-example.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-content-example.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-content-example.tsx"),
+    ),
   },
   "tag-field-custom-children": {
     name: "tag-field-custom-children",
@@ -2947,7 +3429,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-custom-children.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-custom-children.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-custom-children.tsx"),
+    ),
   },
   "tag-field-custom-content-example": {
     name: "tag-field-custom-content-example",
@@ -2958,7 +3442,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-custom-content-example.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-custom-content-example.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-custom-content-example.tsx"),
+    ),
   },
   "tag-field-demo": {
     name: "tag-field-demo",
@@ -2980,7 +3466,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-description.tsx"),
+    ),
   },
   "tag-field-disabled-options": {
     name: "tag-field-disabled-options",
@@ -2991,7 +3479,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-disabled-options.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-disabled-options.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-disabled-options.tsx"),
+    ),
   },
   "tag-field-disabled": {
     name: "tag-field-disabled",
@@ -3003,6 +3493,19 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/tag-field-disabled.tsx")),
+  },
+  "tag-field-non-virtualized": {
+    name: "tag-field-non-virtualized",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-non-virtualized.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/tag-field-non-virtualized.tsx"),
+    ),
   },
   "tag-field-sizes": {
     name: "tag-field-sizes",
@@ -3024,7 +3527,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tag-field-validation.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tag-field-validation.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tag-field-validation.tsx"),
+    ),
   },
   "text-area-field-controlled": {
     name: "text-area-field-controlled",
@@ -3035,7 +3540,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-controlled.tsx"),
+    ),
   },
   "text-area-field-custom-styles": {
     name: "text-area-field-custom-styles",
@@ -3046,7 +3553,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-custom-styles.tsx"),
+    ),
   },
   "text-area-field-demo": {
     name: "text-area-field-demo",
@@ -3057,7 +3566,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-demo.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-demo.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-demo.tsx"),
+    ),
   },
   "text-area-field-disabled": {
     name: "text-area-field-disabled",
@@ -3068,7 +3579,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-disabled.tsx"),
+    ),
   },
   "text-area-field-readonly": {
     name: "text-area-field-readonly",
@@ -3079,7 +3592,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-readonly.tsx"),
+    ),
   },
   "text-area-field-sizes": {
     name: "text-area-field-sizes",
@@ -3090,7 +3605,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-sizes.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-sizes.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-sizes.tsx"),
+    ),
   },
   "text-area-field-with-description": {
     name: "text-area-field-with-description",
@@ -3101,7 +3618,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-area-field-with-description.tsx"),
+    ),
   },
   "text-area-field-with-error-message": {
     name: "text-area-field-with-error-message",
@@ -3112,7 +3631,10 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-area-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-area-field-with-error-message.tsx")),
+    component: lazy(
+      () =>
+        import("@/registry/examples/text-area-field-with-error-message.tsx"),
+    ),
   },
   "text-field-controlled": {
     name: "text-field-controlled",
@@ -3123,7 +3645,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-controlled.tsx"),
+    ),
   },
   "text-field-custom-styles": {
     name: "text-field-custom-styles",
@@ -3134,7 +3658,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-custom-styles.tsx"),
+    ),
   },
   "text-field-demo": {
     name: "text-field-demo",
@@ -3156,7 +3682,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-disabled.tsx"),
+    ),
   },
   "text-field-readonly": {
     name: "text-field-readonly",
@@ -3167,7 +3695,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-readonly.tsx"),
+    ),
   },
   "text-field-sizes": {
     name: "text-field-sizes",
@@ -3189,7 +3719,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-with-description.tsx"),
+    ),
   },
   "text-field-with-error-message": {
     name: "text-field-with-error-message",
@@ -3200,7 +3732,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-with-error-message.tsx"),
+    ),
   },
   "text-field-with-placeholder": {
     name: "text-field-with-placeholder",
@@ -3211,7 +3745,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/text-field-with-placeholder.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/text-field-with-placeholder.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/text-field-with-placeholder.tsx"),
+    ),
   },
   "time-field-controlled": {
     name: "time-field-controlled",
@@ -3222,7 +3758,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-controlled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-controlled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-controlled.tsx"),
+    ),
   },
   "time-field-demo": {
     name: "time-field-demo",
@@ -3244,7 +3782,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-disabled.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-disabled.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-disabled.tsx"),
+    ),
   },
   "time-field-granularity": {
     name: "time-field-granularity",
@@ -3255,7 +3795,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-granularity.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-granularity.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-granularity.tsx"),
+    ),
   },
   "time-field-hourly-cycle": {
     name: "time-field-hourly-cycle",
@@ -3266,7 +3808,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-hourly-cycle.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-hourly-cycle.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-hourly-cycle.tsx"),
+    ),
   },
   "time-field-min-max": {
     name: "time-field-min-max",
@@ -3288,7 +3832,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-readonly.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-readonly.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-readonly.tsx"),
+    ),
   },
   "time-field-sizes": {
     name: "time-field-sizes",
@@ -3310,7 +3856,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-with-description.tsx"),
+    ),
   },
   "time-field-with-error-message": {
     name: "time-field-with-error-message",
@@ -3321,7 +3869,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/time-field-with-error-message.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/time-field-with-error-message.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/time-field-with-error-message.tsx"),
+    ),
   },
   "toast-actions": {
     name: "toast-actions",
@@ -3398,7 +3948,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/toast-with-description.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/toast-with-description.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/toast-with-description.tsx"),
+    ),
   },
   "toggle-controlled": {
     name: "toggle-controlled",
@@ -3420,7 +3972,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/toggle-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/toggle-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/toggle-custom-styles.tsx"),
+    ),
   },
   "toggle-demo": {
     name: "toggle-demo",
@@ -3453,7 +4007,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/toggle-label-placement.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/toggle-label-placement.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/toggle-label-placement.tsx"),
+    ),
   },
   "toggle-sizes": {
     name: "toggle-sizes",
@@ -3486,7 +4042,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/toggle-with-thumb-icon.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/toggle-with-thumb-icon.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/toggle-with-thumb-icon.tsx"),
+    ),
   },
   "tooltip-controlled": {
     name: "tooltip-controlled",
@@ -3508,7 +4066,9 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tooltip-custom-styles.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tooltip-custom-styles.tsx")),
+    component: lazy(
+      () => import("@/registry/examples/tooltip-custom-styles.tsx"),
+    ),
   },
   "tooltip-demo": {
     name: "tooltip-demo",
@@ -3552,6 +4112,8 @@ export const Index: Record<string, RegistryComponent> = {
         path: "registry/examples/tooltip-without-arrow.tsx",
       },
     ],
-    component: lazy(() => import("@/registry/examples/tooltip-without-arrow.tsx")),
-  }
+    component: lazy(
+      () => import("@/registry/examples/tooltip-without-arrow.tsx"),
+    ),
+  },
 }

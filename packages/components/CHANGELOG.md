@@ -1,5 +1,20 @@
 # @opengovsg/oui
 
+## 0.0.48
+
+### Patch Changes
+
+- [#240](https://github.com/opengovsg/oui-design-system/pull/240) [`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce) Thanks [@karrui](https://github.com/karrui)! - feat(checkbox): allow passing of renderProps into checkbox classnames
+
+- [#236](https://github.com/opengovsg/oui-design-system/pull/236) [`92ffcce`](https://github.com/opengovsg/oui-design-system/commit/92ffcceea4f26783ec844f341a0b3b1dc7d908ee) Thanks [@karrui](https://github.com/karrui)! - feat(tab): reexport TabPanels from RAC
+
+- [#240](https://github.com/opengovsg/oui-design-system/pull/240) [`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce) Thanks [@karrui](https://github.com/karrui)! - refactor(tooltip): use renderChildren instead of composeRenderProps for class names
+
+- [#242](https://github.com/opengovsg/oui-design-system/pull/242) [`c0a1c7d`](https://github.com/opengovsg/oui-design-system/commit/c0a1c7db9f5f45e6dcfc75daad47774f583616c1) Thanks [@karrui](https://github.com/karrui)! - feat(tag-field): add isVirtualised flag to disable virtualisation
+
+- Updated dependencies [[`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce), [`cbd12e4`](https://github.com/opengovsg/oui-design-system/commit/cbd12e405bf209bd0fd4e65dc7ef9fe7766e61ce)]:
+  - @opengovsg/oui-theme@0.0.48
+
 ## 0.0.47
 
 ### Patch Changes

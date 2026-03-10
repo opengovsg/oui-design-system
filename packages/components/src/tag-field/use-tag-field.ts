@@ -67,7 +67,15 @@ export interface TagFieldAria<T> extends ValidationResult {
   /** Props for the combo box error message element, if any. */
   errorMessageProps: DOMAttributes
 
-  rowVirtualizer: Virtualizer<HTMLElement, Element>
+  rowVirtualizer: Virtualizer<HTMLElement, Element> | null
+}
+
+function useOptionalVirtualizer(
+  isVirtualized: boolean,
+  options: Parameters<typeof useVirtualizer<HTMLElement, Element>>[0],
+): Virtualizer<HTMLElement, Element> | null {
+  const virtualizer = useVirtualizer(options)
+  return isVirtualized ? virtualizer : null
 }
 
 /**
@@ -93,6 +101,7 @@ export function useTagField<T>(
     itemToText,
     label,
     virtualRowHeight = 40,
+    isVirtualized = true,
   } = props
 
   const backupBtnRef = useRef(null)
@@ -132,7 +141,7 @@ export function useTagField<T>(
     return new Set(disabledKeys)
   }, [disabledKeys])
 
-  const rowVirtualizer = useVirtualizer({
+  const rowVirtualizer = useOptionalVirtualizer(isVirtualized, {
     count: items.length,
     getScrollElement: () => listBoxRef.current,
     estimateSize: () => virtualRowHeight,
@@ -161,13 +170,20 @@ export function useTagField<T>(
     isItemDisabled: (item) =>
       isDisabled || isReadOnly || disabledKeysSet.has(itemToKey(item)),
     items,
-    scrollIntoView: () => {},
+    // Noop for scrollIntoView if virtualized, as we'll handle it in onHighlightedIndexChange
+    scrollIntoView: (node) => {
+      if (!isVirtualized) {
+        node.scrollIntoView({ block: "nearest" })
+      }
+    },
     onHighlightedIndexChange: ({ highlightedIndex, type }) => {
       if (
         type !== useCombobox.stateChangeTypes.MenuMouseLeave &&
         highlightedIndex >= 0
       ) {
-        rowVirtualizer.scrollToIndex(highlightedIndex)
+        if (rowVirtualizer) {
+          rowVirtualizer.scrollToIndex(highlightedIndex)
+        }
       }
     },
     defaultHighlightedIndex: 0, // after selection, highlight the first item.

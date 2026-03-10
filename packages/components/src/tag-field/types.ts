@@ -97,6 +97,13 @@ export interface TagFieldProps<T>
    */
   virtualRowHeight?: number
   /**
+   * Whether to virtualize the list items.
+   * Set to `false` to render items in normal DOM flow (useful for small lists
+   * or when absolute positioning conflicts with styling needs).
+   * @default true
+   */
+  isVirtualized?: boolean
+  /**
    * Whether the tag field menu should close on blur.
    * If not provided, the menu will close on blur when the user clicks outside the tag field.
    */

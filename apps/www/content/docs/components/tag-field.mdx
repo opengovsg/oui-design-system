@@ -7,6 +7,7 @@ links:
   source: tag-field
   storybook: components-tagfield--default
   theme: tag-field
+  downshift: https://www.downshift-js.com/
 ---
 
 ## Usage
@@ -52,6 +53,12 @@ Take note to use the `key` prop on the custom item due to virtualisation. Additi
 Due to virtualisation, if the custom item results in a taller height for each item, you will need to pass in a `virtualRowHeight` prop with the correct height to the TagField to ensure that the items are displayed correctly.
 
 <ComponentPreview name="tag-field-custom-children" />
+
+### Disabling virtualisation
+
+By default, TagField virtualises its list items for performance with large lists. For small lists or when virtualisation's absolute positioning conflicts with your styling needs (e.g., animations or variable-height items), you can disable it by setting `isVirtualized` to `false`. This renders items in normal DOM flow while keeping all other behaviour unchanged.
+
+<ComponentPreview name="tag-field-non-virtualized" />
 
 ## Disabled
 

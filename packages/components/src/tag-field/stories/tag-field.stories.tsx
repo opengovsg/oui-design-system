@@ -145,6 +145,20 @@ export const Virtualized: Story = {
   },
 }
 
+export const NonVirtualized: Story = {
+  args: {
+    isVirtualized: false,
+    defaultItems: [...Array(10)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+    })),
+  },
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
+  play: async ({ canvas }) => {
+    userEvent.click(canvas.getByLabelText("Tag Field"))
+  },
+}
+
 export const Sizes: Story = {
   render(args) {
     return (
