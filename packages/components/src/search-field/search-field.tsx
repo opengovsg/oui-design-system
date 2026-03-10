@@ -33,6 +33,12 @@ export interface SearchFieldProps
   searchIcon?: React.ReactNode | null
   inputProps?: Partial<InputProps>
   classNames?: SlotsToClasses<SearchFieldSlots>
+
+  /**
+   * The icon to show in the clear button. Defaults to an `XIcon`. Set to `null` to hide the clear button.
+   * @example Can also be used to provide a spinner icon while the search is loading.
+   */
+  clearIcon?: React.ReactNode
 }
 
 export function SearchField(originalProps: SearchFieldProps) {
@@ -44,6 +50,7 @@ export function SearchField(originalProps: SearchFieldProps) {
       searchIcon,
       inputProps,
       classNames,
+      clearIcon,
       ...props
     },
     variantProps,
@@ -90,16 +97,20 @@ export function SearchField(originalProps: SearchFieldProps) {
           className={styles.input({ className: classNames?.input })}
           {...inputProps}
         />
-        <Button
-          isIconOnly
-          isAttached
-          variant="clear"
-          color="sub"
-          size={variantProps.size}
-          className={styles.clearButton({ className: classNames?.clearButton })}
-        >
-          <XIcon aria-hidden />
-        </Button>
+        {clearIcon !== null && (
+          <Button
+            isIconOnly
+            isAttached
+            variant="clear"
+            color="sub"
+            size={variantProps.size}
+            className={styles.clearButton({
+              className: classNames?.clearButton,
+            })}
+          >
+            {clearIcon ?? <XIcon aria-hidden />}
+          </Button>
+        )}
       </FieldGroup>
       {description && (
         <Description size={variantProps.size}>{description}</Description>
