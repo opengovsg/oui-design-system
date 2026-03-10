@@ -39,13 +39,8 @@ export const radioStyles = tv({
       },
     },
     isDisabled: {
-      false: {
-        base: "text-gray-800 dark:text-zinc-200",
-      },
       true: {
-        base: "text-interaction-support-disabled-content dark:text-zinc-600 forced-colors:text-[GrayText]",
-        circle:
-          "[--color:var(--color-gray-200)] dark:[--color:var(--color-zinc-700)] forced-colors:[--color:GrayText]!",
+        base: "text-interaction-support-disabled-content forced-colors:text-[GrayText]",
       },
     },
     isSelected: {
