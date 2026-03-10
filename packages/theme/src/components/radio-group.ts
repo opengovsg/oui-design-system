@@ -62,6 +62,14 @@ export const radioStyles = tv({
         icon: "bg-interaction-support-disabled-content",
       },
     },
+    {
+      isDisabled: true,
+      isSelected: false,
+      className: {
+        circle: "[--color:var(--color-interaction-support-disabled-content)]",
+        icon: "bg-interaction-support-disabled-content",
+      },
+    },
   ],
   defaultVariants: {
     size: "md",
