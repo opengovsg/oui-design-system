@@ -6,6 +6,7 @@ export const infoboxStyles = tv({
   slots: {
     base: "flex items-start gap-2 rounded-sm",
     icon: "shrink-0",
+    wrapper: "",
   },
   variants: {
     variant: {

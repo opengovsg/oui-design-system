@@ -10,9 +10,8 @@ import { useInfobox } from "./use-infobox"
 export interface InfoboxProps extends UseInfoboxProps {}
 
 export const Infobox = (props: InfoboxProps) => {
-  const { Component, children, slots, classNames, icon, variant } = useInfobox({
-    ...props,
-  })
+  const { Component, children, slots, classNames, icon, variant } =
+    useInfobox(props)
 
   const displayedIcon = useMemo(() => {
     // Custom icon provided - pass through as-is
@@ -43,7 +42,9 @@ export const Infobox = (props: InfoboxProps) => {
   return (
     <Component className={slots.base({ className: classNames?.base })}>
       {displayedIcon}
-      <div>{children}</div>
+      <div className={slots.wrapper({ className: classNames?.wrapper })}>
+        {children}
+      </div>
     </Component>
   )
 }
