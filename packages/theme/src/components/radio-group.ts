@@ -6,11 +6,11 @@ import { tv } from "../utils/tv"
 export const radioStyles = tv({
   slots: {
     circle:
-      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white dark:bg-zinc-900 transition [--color:var(--color-base-content-strong)] dark:[--color:var(--color-zinc-400)]",
+      "col-start-1 row-start-1 flex w-full shrink-0 items-center justify-center rounded-full border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
     base: ["group grid grid-cols-[auto_1fr]", ...racFocusRing.base],
     icon: "rounded-full transition",
     label: "col-start-2 row-start-1",
-    description: "col-start-2 row-start-2 text-gray-600 dark:text-zinc-400",
+    description: "text-base-content-medium col-start-2 row-start-2",
   },
   variants: {
     size: {
