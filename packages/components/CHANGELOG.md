@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.50
+
+### Patch Changes
+
+- [#244](https://github.com/opengovsg/oui-design-system/pull/244) [`ed0fca5`](https://github.com/opengovsg/oui-design-system/commit/ed0fca582207d134641f5cefe3d3ff39a6bba7a1) Thanks [@karrui](https://github.com/karrui)! - feat(search-field): add clearIcon prop to override clear button icon
+
+- Updated dependencies [[`1e153fc`](https://github.com/opengovsg/oui-design-system/commit/1e153fc8c12e84f8079559081fa3b670b1e7beb9)]:
+  - @opengovsg/oui-theme@0.0.50
+
 ## 0.0.49
 
 ### Patch Changes
