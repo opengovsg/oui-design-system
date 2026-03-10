@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.49
+
+### Patch Changes
+
+- [#222](https://github.com/opengovsg/oui-design-system/pull/222) [`41d91bb`](https://github.com/opengovsg/oui-design-system/commit/41d91bb8e6875032c5f2c60431fdba36a678977b) Thanks [@KishenKumarrrrr](https://github.com/KishenKumarrrrr)! - Add RadioGroup component with three size variants and full accessibility support
+
+- [#184](https://github.com/opengovsg/oui-design-system/pull/184) [`aaf5635`](https://github.com/opengovsg/oui-design-system/commit/aaf56357c206f240c65f0ba62835bba774baecaa) Thanks [@KishenKumarrrrr](https://github.com/KishenKumarrrrr)! - Add InfoBox component for displaying info, warning, error, and success messages
+
+- Updated dependencies [[`41d91bb`](https://github.com/opengovsg/oui-design-system/commit/41d91bb8e6875032c5f2c60431fdba36a678977b), [`aaf5635`](https://github.com/opengovsg/oui-design-system/commit/aaf56357c206f240c65f0ba62835bba774baecaa)]:
+  - @opengovsg/oui-theme@0.0.49
+
 ## 0.0.48
 
 ### Patch Changes
