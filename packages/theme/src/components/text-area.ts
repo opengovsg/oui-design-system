@@ -5,7 +5,7 @@ import { inputStyles } from "./input"
 
 export const textAreaStyles = tv({
   extend: inputStyles,
-  base: [],
+  base: ["flex-none"],
   variants: {
     variant: {},
     size: {
