@@ -1,6 +1,6 @@
 {
   "name": "@opengovsg/oui",
-  "version": "0.0.48",
+  "version": "0.0.49",
   "sideEffects": false,
   "license": "SEE LICENSE IN LICENSE.md",
   "type": "module",
