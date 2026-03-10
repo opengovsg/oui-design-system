@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.50
+
+### Patch Changes
+
+- [`1e153fc`](https://github.com/opengovsg/oui-design-system/commit/1e153fc8c12e84f8079559081fa3b670b1e7beb9) Thanks [@karrui](https://github.com/karrui)! - fix(theme): allow TextAreaField textarea to be resizable
+
 ## 0.0.49
 
 ### Patch Changes
