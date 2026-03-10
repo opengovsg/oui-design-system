@@ -37,5 +37,6 @@ export * from "./breadcrumbs"
 export * from "./sidebar"
 export * from "./tooltip"
 export * from "./phone-number-field"
+export * from "./infobox"
 export * from "./radio-group"
 // Add new theme exports here

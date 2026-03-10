@@ -9,4 +9,61 @@ links:
   theme: infobox
 ---
 
-# Not yet implemented
+## Usage
+
+<ComponentPreview name="infobox-demo" />
+
+### Sizes
+
+Use the `size` prop to change the size of the infobox. Defaults to `md`.
+
+<ComponentPreview name="infobox-sizes" />
+
+### Variants
+
+Use the `variant` prop to change the visual style and semantic meaning of the Infobox. Defaults to `info`.
+
+- **info**: Informational messages with helpful tips or guidance
+- **warning**: Warning messages to alert users about potential issues
+- **error**: Error messages indicating something went wrong
+- **success**: Success messages confirming an action was completed
+
+<ComponentPreview name="infobox-variants" />
+
+### Custom icon
+
+By default, Infobox displays an appropriate icon based on the `variant` prop. You can override this by providing a custom icon using the `icon` prop.
+
+<ComponentPreview name="infobox-with-custom-icon" />
+
+### Hidden icon
+
+You can hide the icon by setting `icon` to `null`.
+
+<ComponentPreview name="infobox-with-hidden-icon" />
+
+### Multiline content
+
+Infobox supports rich content including formatted text, lists, and multiple paragraphs. The icon will stay aligned at the top while content wraps naturally.
+
+<ComponentPreview name="infobox-multiline-content" />
+
+## Slots
+
+Infobox has the following slots:
+
+- `base`: The main container element
+- `icon`: The icon element (default or custom)
+
+### Custom Styles
+
+You can customize the `Infobox` component by passing custom Tailwind CSS classes to the component slots using the `classNames` prop.
+
+<ComponentPreview name="infobox-custom-styles" />
+
+## Accessibility
+
+- The Infobox uses semantic colors to communicate meaning visually
+- Icons provide additional visual reinforcement of the message type
+- Ensure text content is clear and concise for all users
+- The component uses appropriate semantic HTML structure
