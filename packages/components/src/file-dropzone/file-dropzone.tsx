@@ -205,14 +205,20 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
   const fileSizeTextId = useId()
 
   const formatError = useCallback(
-    (error: FileError) =>
-      formatErrorMessage(error, {
+    (error: FileError) => {
+      // When per-type rules are active, the composed validator already
+      // produces the correct message for FileTooLarge errors.
+      if (maxFileSizeByType.length > 0 && error.code === ErrorCode.FileTooLarge) {
+        return error.message
+      }
+      return formatErrorMessage(error, {
         maxFileSize,
         minFileSize,
         maxFiles,
         fileSizeBase,
-      }),
-    [fileSizeBase, maxFileSize, maxFiles, minFileSize],
+      })
+    },
+    [fileSizeBase, maxFileSize, maxFileSizeByType, maxFiles, minFileSize],
   )
 
   const effectiveMaxSize = useMemo(() => {
@@ -305,12 +311,13 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
   })
 
   const fileSizeText = useMemo(() => {
+    if (!showFileSizeText) return null
+
     // Custom override takes priority
     if (fileSizeTextOverride) return fileSizeTextOverride
 
     // Per-type rules: generate "X for .label, Y for other accepted files"
     if (maxFileSizeByType.length > 0) {
-      if (!showFileSizeText) return null
 
       const parts: string[] = []
       for (const rule of maxFileSizeByType) {
