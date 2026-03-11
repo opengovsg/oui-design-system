@@ -14,7 +14,7 @@ export default function FileDropzonePerMimeTypeFileSize() {
       maxFileSizeByType={[
         {
           mimeTypes: ["application/zip", "application/x-zip-compressed"],
-          maxFileSize: 1 * 1000 * 1000 * 1000, // 1GB
+          maxFileSize: 200 * 1000, // 200KB
           label: ".zip files",
         },
       ]}
