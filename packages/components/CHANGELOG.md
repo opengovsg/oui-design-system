@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.51
+
+### Patch Changes
+
+- [#246](https://github.com/opengovsg/oui-design-system/pull/246) [`9807ab6`](https://github.com/opengovsg/oui-design-system/commit/9807ab60119114a96cec1638d83e723b524ef900) Thanks [@karrui](https://github.com/karrui)! - feat(file-dropzone): add per-MIME-type max file size support
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.51
+
 ## 0.0.50
 
 ### Patch Changes
