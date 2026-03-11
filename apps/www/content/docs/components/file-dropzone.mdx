@@ -55,6 +55,14 @@ Set `maxFileSize` and `minFileSize` to enforce file size restrictions. Sizes are
 
 <ComponentPreview name="file-dropzone-file-size-limits" />
 
+### Per-MIME-Type File Size Limits
+
+Use `maxFileSizeByType` to set different maximum file sizes for different MIME types. Rules are matched in order — first match wins. Unmatched types fall back to `maxFileSize`.
+
+You can also pass a custom `fileSizeText` string to override the auto-generated file size text.
+
+<ComponentPreview name="file-dropzone-per-mime-type-file-size" />
+
 ### Error Handling
 
 The FileDropzone automatically validates files against your constraints. Use the `onError` callback to handle validation errors and display error messages.
@@ -108,7 +116,7 @@ Use the `isReadOnly` prop to make the file dropzone read-only. Users can view up
 The FileDropzone component automatically validates files based on:
 
 - **MIME type**: Specified via `allowedMimeTypes`
-- **File size**: Controlled by `maxFileSize` and `minFileSize` (in bytes)
+- **File size**: Controlled by `maxFileSize` and `minFileSize` (in bytes), with optional per-type limits via `maxFileSizeByType`
 - **Number of files**: Limited by `maxFiles`
 
 When validation fails, the component will:
@@ -178,30 +186,32 @@ You can customize the FileDropzone component by passing custom Tailwind CSS clas
 
 ### FileDropzone
 
-| Prop                  | Type                                         | Default                    | Description                                                     |
-| --------------------- | -------------------------------------------- | -------------------------- | --------------------------------------------------------------- |
-| `label`               | `React.ReactNode`                            | -                          | The label for the file dropzone                                 |
-| `description`         | `React.ReactNode`                            | -                          | The description text shown below the dropzone                   |
-| `errorMessage`        | `React.ReactNode`                            | -                          | The error message to display when validation fails              |
-| `value`               | `FileItem[]`                                 | -                          | The currently selected files (controlled)                       |
-| `defaultValue`        | `FileItem[]`                                 | `[]`                       | The default files (uncontrolled)                                |
-| `onChange`            | `(files: FileItem[]) => void`                | -                          | Callback fired when the selected files change                   |
-| `onError`             | `(errorMessage: string) => void`             | -                          | Callback fired when file validation fails                       |
-| `onRejection`         | `(rejections: FileItem[]) => void`           | -                          | Callback fired when files are rejected                          |
-| `allowedMimeTypes`    | `string[]`                                   | `[]` (all types allowed)   | Array of allowed MIME types (supports wildcards like `image/*`) |
-| `maxFileSize`         | `number`                                     | `Number.POSITIVE_INFINITY` | Maximum file size in bytes                                      |
-| `minFileSize`         | `number`                                     | `0`                        | Minimum file size in bytes                                      |
-| `maxFiles`            | `number`                                     | `1`                        | Maximum number of files allowed                                 |
-| `showFileSizeText`    | `boolean`                                    | `true`                     | Whether to show file size information below the dropzone        |
-| `showRejectedFiles`   | `boolean`                                    | `false`                    | Whether to display rejected files in the component              |
-| `hideDropzoneOnValue` | `boolean`                                    | `true` if `maxFiles === 1` | Whether to hide the dropzone when files are uploaded            |
-| `imagePreview`        | `"small" \| "large" \| null`                 | `"small"`                  | Size of image preview, or `null` to disable previews            |
-| `size`                | `"sm" \| "md"`                               | `"md"`                     | The size of the component                                       |
-| `isDisabled`          | `boolean`                                    | `false`                    | Whether the component is disabled                               |
-| `isReadOnly`          | `boolean`                                    | `false`                    | Whether the component is read-only                              |
-| `isInvalid`           | `boolean`                                    | `false`                    | Whether the component should display as invalid                 |
-| `isRequired`          | `boolean`                                    | `false`                    | Whether the component is required                               |
-| `classNames`          | `SlotsToClasses<FileDropzoneSlots>`          | -                          | Custom CSS classes for component slots                          |
-| `itemClassNames`      | `SlotsToClasses<FileInfoDropzoneSlots>`      | -                          | Custom CSS classes for file info item slots                     |
-| `validator`           | `DropzoneOptions["validator"]`               | -                          | Custom file validator function                                  |
-| `children`            | `(props: FileItemsRenderProps) => ReactNode` | -                          | Render prop for custom file item rendering                      |
+| Prop                  | Type                                         | Default                    | Description                                                                       |
+| --------------------- | -------------------------------------------- | -------------------------- | --------------------------------------------------------------------------------- |
+| `label`               | `React.ReactNode`                            | -                          | The label for the file dropzone                                                   |
+| `description`         | `React.ReactNode`                            | -                          | The description text shown below the dropzone                                     |
+| `errorMessage`        | `React.ReactNode`                            | -                          | The error message to display when validation fails                                |
+| `value`               | `FileItem[]`                                 | -                          | The currently selected files (controlled)                                         |
+| `defaultValue`        | `FileItem[]`                                 | `[]`                       | The default files (uncontrolled)                                                  |
+| `onChange`            | `(files: FileItem[]) => void`                | -                          | Callback fired when the selected files change                                     |
+| `onError`             | `(errorMessage: string) => void`             | -                          | Callback fired when file validation fails                                         |
+| `onRejection`         | `(rejections: FileItem[]) => void`           | -                          | Callback fired when files are rejected                                            |
+| `allowedMimeTypes`    | `string[]`                                   | `[]` (all types allowed)   | Array of allowed MIME types (supports wildcards like `image/*`)                   |
+| `maxFileSize`         | `number`                                     | `Number.POSITIVE_INFINITY` | Maximum file size in bytes                                                        |
+| `maxFileSizeByType`   | `MaxFileSizeRule[]`                          | -                          | Per-MIME-type max file size rules (first match wins, falls back to `maxFileSize`) |
+| `fileSizeText`        | `string`                                     | -                          | Custom file size text override (replaces auto-generated text)                     |
+| `minFileSize`         | `number`                                     | `0`                        | Minimum file size in bytes                                                        |
+| `maxFiles`            | `number`                                     | `1`                        | Maximum number of files allowed                                                   |
+| `showFileSizeText`    | `boolean`                                    | `true`                     | Whether to show file size information below the dropzone                          |
+| `showRejectedFiles`   | `boolean`                                    | `false`                    | Whether to display rejected files in the component                                |
+| `hideDropzoneOnValue` | `boolean`                                    | `true` if `maxFiles === 1` | Whether to hide the dropzone when files are uploaded                              |
+| `imagePreview`        | `"small" \| "large" \| null`                 | `"small"`                  | Size of image preview, or `null` to disable previews                              |
+| `size`                | `"sm" \| "md"`                               | `"md"`                     | The size of the component                                                         |
+| `isDisabled`          | `boolean`                                    | `false`                    | Whether the component is disabled                                                 |
+| `isReadOnly`          | `boolean`                                    | `false`                    | Whether the component is read-only                                                |
+| `isInvalid`           | `boolean`                                    | `false`                    | Whether the component should display as invalid                                   |
+| `isRequired`          | `boolean`                                    | `false`                    | Whether the component is required                                                 |
+| `classNames`          | `SlotsToClasses<FileDropzoneSlots>`          | -                          | Custom CSS classes for component slots                                            |
+| `itemClassNames`      | `SlotsToClasses<FileInfoDropzoneSlots>`      | -                          | Custom CSS classes for file info item slots                                       |
+| `validator`           | `DropzoneOptions["validator"]`               | -                          | Custom file validator function                                                    |
+| `children`            | `(props: FileItemsRenderProps) => ReactNode` | -                          | Render prop for custom file item rendering                                        |
