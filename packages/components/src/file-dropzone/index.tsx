@@ -7,3 +7,5 @@ export type { FileDropzoneProps, FileItemsRenderProps } from "./file-dropzone"
 export type { FileItem } from "./types"
 
 export { formatBytes, formatErrorMessage } from "./utils"
+
+export type { MaxFileSizeRule } from "./utils"
