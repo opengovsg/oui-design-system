@@ -3,6 +3,7 @@
 import type { InputBase, Validation } from "@react-types/shared"
 import type { AriaFieldProps } from "react-aria"
 import type { DropzoneOptions, FileError, FileRejection } from "react-dropzone"
+import { ErrorCode } from "react-dropzone"
 import { useCallback, useEffect, useMemo } from "react"
 import { useFormValidationState } from "@react-stately/form"
 import { Upload } from "lucide-react"
@@ -36,7 +37,8 @@ import {
   useFileDropzoneStyleContext,
 } from "./contexts"
 import { FileInfo } from "./file-info"
-import { formatBytes, formatErrorMessage } from "./utils"
+import type { MaxFileSizeRule } from "./utils"
+import { formatBytes, formatErrorMessage, resolveMaxFileSize } from "./utils"
 
 export interface FileItemsRenderProps {
   file: FileItem
@@ -80,6 +82,17 @@ export interface FileDropzoneProps
    * @default Number.POSITIVE_INFINITY
    */
   maxFileSize?: number
+  /**
+   * Per-MIME-type maximum file size rules.
+   * Rules are matched in order; first match wins.
+   * Falls back to `maxFileSize` for unmatched types.
+   */
+  maxFileSizeByType?: MaxFileSizeRule[]
+  /**
+   * Custom file size text to display below the dropzone.
+   * If provided, overrides the auto-generated text.
+   */
+  fileSizeText?: string
   /**
    * Minimum upload size of each file allowed in bytes.
    * @default 0
@@ -142,6 +155,8 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     allowedMimeTypes = [],
     fileSizeBase = "binary",
     maxFileSize = Number.POSITIVE_INFINITY,
+    maxFileSizeByType = [],
+    fileSizeText: fileSizeTextOverride,
     minFileSize = 0,
     showFileSizeText = true,
     maxFiles = 1,
@@ -200,6 +215,41 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     [fileSizeBase, maxFileSize, maxFiles, minFileSize],
   )
 
+  const effectiveMaxSize = useMemo(() => {
+    if (maxFileSizeByType.length > 0) return Number.POSITIVE_INFINITY
+    return maxFileSize
+  }, [maxFileSize, maxFileSizeByType])
+
+  const composedValidator = useCallback(
+    (file: File) => {
+      const errors: FileError[] = []
+
+      if (maxFileSizeByType.length > 0) {
+        const limit = resolveMaxFileSize(file.type, maxFileSizeByType, maxFileSize)
+        if (limit !== Number.POSITIVE_INFINITY && file.size > limit) {
+          errors.push({
+            code: ErrorCode.FileTooLarge,
+            message: `You have exceeded the size limit, please upload a file below ${formatBytes(limit, 2, fileSizeBase)}`,
+          })
+        }
+      }
+
+      if (validator) {
+        const externalErrors = validator(file)
+        if (externalErrors) {
+          if (Array.isArray(externalErrors)) {
+            errors.push(...(externalErrors as FileError[]))
+          } else {
+            errors.push(externalErrors as FileError)
+          }
+        }
+      }
+
+      return errors.length > 0 ? errors : null
+    },
+    [maxFileSizeByType, maxFileSize, fileSizeBase, validator],
+  )
+
   const onDrop = useCallback(
     (acceptedFiles: File[], fileRejections: FileRejection[]) => {
       const files: FileItem[] = acceptedFiles
@@ -236,7 +286,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
   )
 
   const { getInputProps, ...dropzoneState } = useDropzone({
-    validator,
+    validator: composedValidator,
     accept: allowedMimeTypes.reduce(
       (acc, type) => ({ ...acc, [type]: [] }),
       {},
@@ -248,13 +298,39 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     // Prevent ref hijack when there is a label
     noClick: true,
     noKeyboard: true,
-    maxSize: maxFileSize,
+    maxSize: effectiveMaxSize,
     minSize: minFileSize,
     maxFiles,
     multiple: maxFiles !== 1,
   })
 
   const fileSizeText = useMemo(() => {
+    // Custom override takes priority
+    if (fileSizeTextOverride) return fileSizeTextOverride
+
+    // Per-type rules: generate "X for .label, Y for other accepted files"
+    if (maxFileSizeByType.length > 0) {
+      if (!showFileSizeText) return null
+
+      const parts: string[] = []
+      for (const rule of maxFileSizeByType) {
+        const sizeStr = formatBytes(rule.maxFileSize, 2, fileSizeBase)
+        const label = rule.label ?? rule.mimeTypes.join(", ")
+        parts.push(`${sizeStr} for ${label}`)
+      }
+
+      // Add default if maxFileSize is set
+      const notDefaultMaxFileSize = maxFileSize !== Number.POSITIVE_INFINITY
+      if (notDefaultMaxFileSize) {
+        parts.push(
+          `${formatBytes(maxFileSize, 2, fileSizeBase)} for other accepted files`,
+        )
+      }
+
+      return parts.length > 0 ? `Maximum file size: ${parts.join(", ")}` : null
+    }
+
+    // Original behavior when maxFileSizeByType is not used
     const notDefaultMaxFileSize = maxFileSize !== Number.POSITIVE_INFINITY
     const notDefaultMinFileSize = minFileSize !== 0
     const shouldShow =
@@ -274,7 +350,7 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       return `Minimum file size: ${formatBytes(minFileSize, 2, fileSizeBase)}`
     }
     return null
-  }, [maxFileSize, minFileSize, showFileSizeText, fileSizeBase])
+  }, [maxFileSize, maxFileSizeByType, minFileSize, showFileSizeText, fileSizeBase, fileSizeTextOverride])
 
   const triggerFileSelector = useCallback(() => {
     if (isDisabled || isReadOnly) return
