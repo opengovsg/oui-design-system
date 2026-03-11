@@ -1,6 +1,48 @@
 import type { FileRejection } from "react-dropzone"
 import { ErrorCode } from "react-dropzone"
 
+export interface MaxFileSizeRule {
+  /** MIME types this rule applies to (e.g. ["application/zip"]) */
+  mimeTypes: string[]
+  /** Max file size in bytes for these types */
+  maxFileSize: number
+  /** Display label for fileSizeText (e.g. ".zip files"). Falls back to raw mime type string. */
+  label?: string
+}
+
+/**
+ * Check if a file's MIME type matches a pattern.
+ * Supports exact matches ("application/zip") and wildcards ("image/*").
+ */
+export const matchesMimeType = (
+  fileType: string,
+  pattern: string,
+): boolean => {
+  if (pattern === "*" || pattern === "*/*") return true
+  if (pattern.endsWith("/*")) {
+    const prefix = pattern.slice(0, pattern.indexOf("/"))
+    return fileType.startsWith(prefix + "/")
+  }
+  return fileType === pattern
+}
+
+/**
+ * Resolve the effective max file size for a given file type.
+ * Iterates rules in order; first match wins. Falls back to defaultMaxSize.
+ */
+export const resolveMaxFileSize = (
+  fileType: string,
+  rules: MaxFileSizeRule[],
+  defaultMaxSize: number,
+): number => {
+  for (const rule of rules) {
+    if (rule.mimeTypes.some((pattern) => matchesMimeType(fileType, pattern))) {
+      return rule.maxFileSize
+    }
+  }
+  return defaultMaxSize
+}
+
 export const formatBytes = (
   bytes: number,
   decimals = 2,

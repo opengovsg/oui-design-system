@@ -94,6 +94,36 @@ export const WithCustomFileSizeLimit: Story = {
   render: Template,
 }
 
+export const WithPerMimeTypeFileSizeLimit: Story = {
+  args: {
+    allowedMimeTypes: [
+      "application/zip",
+      "application/x-zip-compressed",
+      "image/*",
+      "text/*",
+    ],
+    maxFileSize: 4.5 * 1000 * 1000, // 4.5MB default
+    maxFileSizeByType: [
+      {
+        mimeTypes: ["application/zip", "application/x-zip-compressed"],
+        maxFileSize: 1 * 1000 * 1000 * 1000, // 1GB
+        label: ".zip files",
+      },
+    ],
+    fileSizeBase: "decimal",
+    maxFiles: 5,
+  },
+  render: Template,
+}
+
+export const WithPerMimeTypeCustomText: Story = {
+  args: {
+    ...WithPerMimeTypeFileSizeLimit.args,
+    fileSizeText: "Upload .zip files up to 1 GB, all others up to 4.5 MB",
+  },
+  render: Template,
+}
+
 export const WithErrorMessage: Story = {
   args: {
     isInvalid: true,

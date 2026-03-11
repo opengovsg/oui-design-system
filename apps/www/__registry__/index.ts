@@ -1717,6 +1717,20 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/file-dropzone-multiple-files.tsx"),
     ),
   },
+  "file-dropzone-per-mime-type-file-size": {
+    name: "file-dropzone-per-mime-type-file-size",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/file-dropzone-per-mime-type-file-size.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/file-dropzone-per-mime-type-file-size.tsx"),
+    ),
+  },
   "file-dropzone-readonly": {
     name: "file-dropzone-readonly",
     description: "",
@@ -1783,6 +1797,91 @@ export const Index: Record<string, RegistryComponent> = {
         import(
           "@/registry/examples/file-dropzone-with-label-and-description.tsx"
         ),
+    ),
+  },
+  "infobox-custom-styles": {
+    name: "infobox-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/infobox-custom-styles.tsx"),
+    ),
+  },
+  "infobox-demo": {
+    name: "infobox-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/infobox-demo.tsx")),
+  },
+  "infobox-multiline-content": {
+    name: "infobox-multiline-content",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-multiline-content.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/infobox-multiline-content.tsx"),
+    ),
+  },
+  "infobox-sizes": {
+    name: "infobox-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/infobox-sizes.tsx")),
+  },
+  "infobox-variants": {
+    name: "infobox-variants",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-variants.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/infobox-variants.tsx")),
+  },
+  "infobox-with-custom-icon": {
+    name: "infobox-with-custom-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-with-custom-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/infobox-with-custom-icon.tsx"),
+    ),
+  },
+  "infobox-with-hidden-icon": {
+    name: "infobox-with-hidden-icon",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/infobox-with-hidden-icon.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/infobox-with-hidden-icon.tsx"),
     ),
   },
   "link-demo": {
