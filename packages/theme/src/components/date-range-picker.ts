@@ -7,7 +7,7 @@ export const dateRangePickerStyles = tv({
     dateWrapper: "inline-flex flex-1 items-center overflow-x-auto",
     startInput: "h-auto min-w-fit flex-0",
     endInput: "h-auto min-w-fit flex-0",
-    base: "group isolate flex flex-col gap-1",
+    base: "group isolate flex flex-col gap-2",
     group:
       "group-disabled:text-interaction-support-disabled-content text-base-content-default",
     dialog: "flex",
