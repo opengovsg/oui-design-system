@@ -18,13 +18,13 @@ catalogs:
     react: ^19.2.3
     react-dom: ^19.2.3
   storybook10:
-    "@storybook/addon-a11y": 10.1.10
-    "@storybook/addon-docs": 10.1.10
-    "@storybook/addon-links": 10.1.10
-    "@storybook/addon-themes": 10.1.10
-    "@storybook/addon-vitest": 10.1.10
-    "@storybook/nextjs": 10.1.10
-    "@storybook/react-vite": 10.1.10
+    "@storybook/addon-a11y": 10.2.10
+    "@storybook/addon-docs": 10.2.10
+    "@storybook/addon-links": 10.2.10
+    "@storybook/addon-themes": 10.2.10
+    "@storybook/addon-vitest": 10.2.10
+    "@storybook/nextjs": 10.2.10
+    "@storybook/react-vite": 10.2.10
     eslint-plugin-storybook: 10.2.10
     storybook: 10.2.10
   vitest:
