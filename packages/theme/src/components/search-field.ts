@@ -7,6 +7,7 @@ export const searchFieldStyles = tv({
     base: "group flex max-w-full min-w-10 flex-col gap-2 font-sans",
     label: "",
     group: "",
+    fieldWrapper: "flex max-w-full flex-row",
     input: "rounded-none bg-transparent [&::-webkit-search-cancel-button]:hidden",
     searchIcon:
       "text-base-content-medium group-disabled:text-interaction-support-disabled-content forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]",
