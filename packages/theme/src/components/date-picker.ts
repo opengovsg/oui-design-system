@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const datePickerStyles = tv({
   slots: {
-    base: "group isolate flex w-full flex-col gap-1",
+    base: "group isolate flex w-full flex-col gap-2",
     group: "",
     input: "h-auto flex-1",
     dialog: "flex",

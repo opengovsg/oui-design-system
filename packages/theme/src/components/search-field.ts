@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const searchFieldStyles = tv({
   slots: {
-    base: "group flex max-w-full min-w-10 flex-col gap-1 font-sans",
+    base: "group flex max-w-full min-w-10 flex-col gap-2 font-sans",
     label: "",
     group: "",
     input: "rounded-none bg-transparent [&::-webkit-search-cancel-button]:hidden",

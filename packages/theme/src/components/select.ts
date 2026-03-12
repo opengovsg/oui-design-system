@@ -57,7 +57,7 @@ export type SelectItemVariantSlots = keyof ReturnType<typeof selectItemStyles>
 
 export const selectStyles = tv({
   slots: {
-    base: "group/select flex w-full flex-col gap-1",
+    base: "group/select flex w-full flex-col gap-2",
     label: "",
     trigger: "w-full",
     icon: "size-4",

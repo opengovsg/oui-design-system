@@ -4,7 +4,7 @@ import { tv } from "../utils/tv"
 
 export const numberFieldStyles = tv({
   slots: {
-    base: "group text-base-content-default flex w-full flex-col gap-1",
+    base: "group text-base-content-default flex w-full flex-col gap-2",
     label: "",
     field: "",
     description: "",
