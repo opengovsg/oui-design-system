@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.52
+
+### Patch Changes
+
+- [#250](https://github.com/opengovsg/oui-design-system/pull/250) [`e97386f`](https://github.com/opengovsg/oui-design-system/commit/e97386f917e6312a9b981eda88eae6d6bfec7957) Thanks [@karrui](https://github.com/karrui)! - feat(search-field): allow adding of action element beside input group
+
+- [#248](https://github.com/opengovsg/oui-design-system/pull/248) [`cb8e69c`](https://github.com/opengovsg/oui-design-system/commit/cb8e69c663bcf827e131f81a75dbe1420e429c53) Thanks [@karrui](https://github.com/karrui)! - fix(button): set spinner on size xs to xs size too
+
+- Updated dependencies [[`e97386f`](https://github.com/opengovsg/oui-design-system/commit/e97386f917e6312a9b981eda88eae6d6bfec7957), [`5137b6d`](https://github.com/opengovsg/oui-design-system/commit/5137b6db2bc678b20228943da543536177aa0f1e), [`7d665b9`](https://github.com/opengovsg/oui-design-system/commit/7d665b9c94f47c5aabd895ded24d2640fccee2b5)]:
+  - @opengovsg/oui-theme@0.0.52
+
 ## 0.0.51
 
 ### Patch Changes
