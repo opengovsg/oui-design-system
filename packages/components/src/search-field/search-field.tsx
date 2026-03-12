@@ -4,7 +4,10 @@ import type {
 } from "react-aria-components"
 import { SearchIcon, XIcon } from "lucide-react"
 import { useLocalizedStringFormatter } from "react-aria"
-import { SearchField as AriaSearchField } from "react-aria-components"
+import {
+  SearchField as AriaSearchField,
+  ButtonContext,
+} from "react-aria-components"
 
 import type {
   SearchFieldSlots,
@@ -120,7 +123,13 @@ export function SearchField(originalProps: SearchFieldProps) {
             </Button>
           )}
         </FieldGroup>
-        {actionElement}
+        {/* Reset ButtonContext so that buttons in actionElement are not
+            treated as the clear button by React Aria's SearchField. */}
+        {actionElement && (
+          <ButtonContext.Provider value={{}}>
+            {actionElement}
+          </ButtonContext.Provider>
+        )}
       </div>
       {description && (
         <Description size={variantProps.size}>{description}</Description>
