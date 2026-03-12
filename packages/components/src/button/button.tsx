@@ -103,6 +103,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         return spinnerProp
       }
       const buttonSpinnerSizeMap: Record<string, SpinnerProps["size"]> = {
+        xs: "xs",
         sm: "sm",
         md: "sm",
         lg: "md",
