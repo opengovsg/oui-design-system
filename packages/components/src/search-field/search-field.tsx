@@ -4,7 +4,10 @@ import type {
 } from "react-aria-components"
 import { SearchIcon, XIcon } from "lucide-react"
 import { useLocalizedStringFormatter } from "react-aria"
-import { SearchField as AriaSearchField } from "react-aria-components"
+import {
+  SearchField as AriaSearchField,
+  ButtonContext,
+} from "react-aria-components"
 
 import type {
   SearchFieldSlots,
@@ -23,6 +26,10 @@ import { i18nStrings } from "./i18n"
 export interface SearchFieldProps
   extends AriaSearchFieldProps,
     SearchFieldVariantProps {
+  /**
+   * The element to display on the right side of the search field. This can be used to add a search button or filter button.
+   */
+  actionElement?: React.ReactNode
   label?: React.ReactNode
   description?: React.ReactNode
   errorMessage?:
@@ -51,6 +58,7 @@ export function SearchField(originalProps: SearchFieldProps) {
       inputProps,
       classNames,
       clearIcon,
+      actionElement,
       ...props
     },
     variantProps,
@@ -79,39 +87,50 @@ export function SearchField(originalProps: SearchFieldProps) {
           {label}
         </Label>
       )}
-      <FieldGroup className={styles.group({ className: classNames?.group })}>
-        {searchIcon !== null &&
-          (searchIcon === undefined ? (
-            <SearchIcon
-              aria-hidden
-              className={styles.searchIcon({
-                className: classNames?.searchIcon,
-              })}
-            />
-          ) : (
-            searchIcon
-          ))}
-        <Input
-          size={variantProps.size}
-          variant="unstyled"
-          className={styles.input({ className: classNames?.input })}
-          {...inputProps}
-        />
-        {clearIcon !== null && (
-          <Button
-            isIconOnly
-            isAttached
-            variant="clear"
-            color="sub"
+      <div
+        className={styles.fieldWrapper({ className: classNames?.fieldWrapper })}
+      >
+        <FieldGroup className={styles.group({ className: classNames?.group })}>
+          {searchIcon !== null &&
+            (searchIcon === undefined ? (
+              <SearchIcon
+                aria-hidden
+                className={styles.searchIcon({
+                  className: classNames?.searchIcon,
+                })}
+              />
+            ) : (
+              searchIcon
+            ))}
+          <Input
             size={variantProps.size}
-            className={styles.clearButton({
-              className: classNames?.clearButton,
-            })}
-          >
-            {clearIcon ?? <XIcon aria-hidden />}
-          </Button>
+            variant="unstyled"
+            className={styles.input({ className: classNames?.input })}
+            {...inputProps}
+          />
+          {clearIcon !== null && (
+            <Button
+              isIconOnly
+              isAttached
+              variant="clear"
+              color="sub"
+              size={variantProps.size}
+              className={styles.clearButton({
+                className: classNames?.clearButton,
+              })}
+            >
+              {clearIcon ?? <XIcon aria-hidden />}
+            </Button>
+          )}
+        </FieldGroup>
+        {/* Reset ButtonContext so that buttons in actionElement are not
+            treated as the clear button by React Aria's SearchField. */}
+        {actionElement && (
+          <ButtonContext.Provider value={{}}>
+            {actionElement}
+          </ButtonContext.Provider>
         )}
-      </FieldGroup>
+      </div>
       {description && (
         <Description size={variantProps.size}>{description}</Description>
       )}

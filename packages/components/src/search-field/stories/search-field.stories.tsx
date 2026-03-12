@@ -1,8 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
-import { FilterIcon, LoaderCircleIcon } from "lucide-react"
+import { FilterIcon, LoaderCircleIcon, SearchIcon } from "lucide-react"
 import { expect } from "storybook/test"
 
+import { Button } from "../../button"
 import { SearchField } from "../search-field"
 
 export default {
@@ -137,6 +138,18 @@ export const Controlled: Story = {
     // Verify updated state
     await expect(inputValue).toHaveTextContent(TEST_SEARCH_TEXT)
     await expect(submittedValue).toHaveTextContent(TEST_SEARCH_TEXT)
+  },
+}
+
+export const WithActionElement: Story = {
+  args: {
+    label: "Search",
+    actionElement: (
+      <Button size="md" aria-label="Search">
+        <SearchIcon />
+        Search
+      </Button>
+    ),
   },
 }
 

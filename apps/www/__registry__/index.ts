@@ -3063,6 +3063,20 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(() => import("@/registry/examples/search-field-demo.tsx")),
   },
+  "search-field-with-action-element": {
+    name: "search-field-with-action-element",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/search-field-with-action-element.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import("@/registry/examples/search-field-with-action-element.tsx"),
+    ),
+  },
   "search-field-disabled": {
     name: "search-field-disabled",
     description: "",

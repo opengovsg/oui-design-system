@@ -76,6 +76,12 @@ Use the `clearIcon` prop to replace the default clear (X) icon. This is useful f
 
 <ComponentPreview name="search-field-async-search" />
 
+### With Action Element
+
+Use the `actionElement` prop to render an element beside the input group, such as a search button or filter button.
+
+<ComponentPreview name="search-field-with-action-element" />
+
 ### Controlled
 
 Use the `value` and `onChange` props to control the input value. The `onSubmit` callback is invoked when the user presses Enter.
@@ -86,6 +92,7 @@ Use the `value` and `onChange` props to control the input value. The `onSubmit` 
 
 - **base**: The root container wrapper.
 - **label**: The label text element.
+- **fieldWrapper**: The wrapper around the field group and the action element.
 - **group**: The field group wrapper containing the search icon, input, and clear button.
 - **searchIcon**: The search icon displayed at the start of the input.
 - **input**: The input element.
