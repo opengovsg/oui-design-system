@@ -13,15 +13,10 @@ export const selectSearchStyles = tv({
 
 export const selectItemStyles = tv({
   slots: {
-    base: "text-base-content-strong group flex cursor-default items-center gap-2 outline-hidden select-none",
+    base: "text-base-content-strong group focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active selected:bg-interaction-muted-main-active flex cursor-default items-center gap-2 outline-hidden select-none",
     text: "line-clamp-1 flex-1 text-inherit",
   },
   variants: {
-    color: {
-      main: {
-        base: "focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active selected:bg-interaction-muted-main-active",
-      },
-    },
     size: {
       xs: {
         base: "prose-body-2 px-3 py-3",
@@ -47,7 +42,6 @@ export const selectItemStyles = tv({
     },
   },
   defaultVariants: {
-    color: "main",
     size: "md",
   },
 })
