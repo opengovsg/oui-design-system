@@ -28,6 +28,8 @@ const base = {
     sub: "border border-interaction-sub-default text-interaction-sub-default disabled:border-interaction-support-disabled-content disabled:text-interaction-support-disabled-content disabled:bg-utility-ui-clear",
     neutral:
       "border border-base-content-strong text-base-content-strong disabled:border-interaction-support-disabled-content disabled:text-interaction-support-disabled-content disabled:bg-utility-ui-clear",
+    success:
+      "border border-interaction-success-default text-interaction-success-default disabled:border-interaction-support-disabled-content disabled:text-interaction-support-disabled-content disabled:bg-utility-ui-clear",
     critical:
       "border border-interaction-critical-default text-interaction-critical-default disabled:border-interaction-support-disabled-content disabled:text-interaction-support-disabled-content disabled:bg-utility-ui-clear",
     warning:
@@ -73,6 +75,8 @@ const states = {
     sub: "hover:bg-interaction-tinted-sub-hover active:bg-interaction-tinted-sub-active pressed:bg-interaction-tinted-sub-active",
     neutral:
       "hover:bg-interaction-tinted-neutral-hover active:bg-interaction-tinted-neutral-active pressed:bg-interaction-tinted-neutral-active",
+    success:
+      "hover:bg-interaction-success-hover/4 active:bg-interaction-success-active/4 pressed:bg-interaction-success-active/4",
     critical:
       "hover:bg-interaction-tinted-critical-hover active:bg-interaction-tinted-critical-active pressed:bg-interaction-tinted-critical-active",
     inverse:
