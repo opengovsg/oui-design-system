@@ -99,7 +99,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     } = useRipple()
 
     const spinner = useMemo(() => {
-      if (spinnerProp) {
+      if (spinnerProp !== undefined) {
         return spinnerProp
       }
       const buttonSpinnerSizeMap: Record<string, SpinnerProps["size"]> = {
