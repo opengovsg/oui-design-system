@@ -8,7 +8,7 @@ export const govtBannerStyles = tv({
     banner: "bg-[#f0f0f0] px-4 text-xs text-[#474747] lg:text-base",
     mainContentContainer: "flex min-h-7 items-center gap-2 py-1",
     crest:
-      "h-5 w-4 flex-shrink-0 self-start align-top has-[path]:fill-[#ef3320] lg:h-5 lg:w-5",
+      "h-5 w-4 shrink-0 self-start align-top has-[path]:fill-[#ef3320] lg:h-5 lg:w-5",
     mainContent: "flex flex-wrap gap-x-1 text-xs lg:text-sm",
     link: "text-[#2f5fd0] underline hover:text-[#4371d6]",
     identifyButton: cn(
@@ -25,6 +25,13 @@ export const govtBannerStyles = tv({
       "h-4 w-4 in-aria-expanded:rotate-180 motion-safe:transition-transform",
     inlineIcon: "inline-block h-4 w-3 shrink-0 align-text-bottom lg:h-5 lg:w-4",
     panelHeader: "leading-4 font-bold md:leading-5 lg:leading-6",
+  },
+  variants: {
+    isExpanded: {
+      false: {
+        panel: "hidden",
+      },
+    },
   },
 })
 
