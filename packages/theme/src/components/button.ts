@@ -136,6 +136,11 @@ export const buttonStyles = tv({
     },
     {
       variant: "outline",
+      color: "success",
+      className: colorVariantsWithState.outline.success,
+    },
+    {
+      variant: "outline",
       color: "inverse",
       className: colorVariantsWithState.outline.inverse,
     },
