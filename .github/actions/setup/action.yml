@@ -13,18 +13,11 @@ runs:
       uses: pnpm/action-setup@v4
       with:
         run_install: false
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
-        node-version: 22
+        node-version: 24
         cache: "pnpm"
         registry-url: ${{ inputs.registry_url }}
-    - name: Upgrade npm for OIDC support
-      shell: bash
-      run: |
-        # npm trusted publishing requires npm CLI v11.5.1+
-        # Node.js 22 ships with npm 10.x, so we need to upgrade
-        npm install -g npm@latest
-        echo "✅ npm upgraded to $(npm --version)"
     - name: Get pnpm store directory
       id: pnpm-cache
       shell: bash
