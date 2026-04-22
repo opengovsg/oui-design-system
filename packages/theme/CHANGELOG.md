@@ -1,5 +1,15 @@
 # @opengovsg/oui-theme
 
+## 0.0.53
+
+### Patch Changes
+
+- [#258](https://github.com/opengovsg/oui-design-system/pull/258) [`7e09823`](https://github.com/opengovsg/oui-design-system/commit/7e09823e3ff1ea715ecaa931b6f56913b7e0d7e1) Thanks [@karrui](https://github.com/karrui)! - fix(govt-banner): hide panel using display:none if not expanded
+
+- [#256](https://github.com/opengovsg/oui-design-system/pull/256) [`b15d62d`](https://github.com/opengovsg/oui-design-system/commit/b15d62d1fb6ec3e41b88a1930df12660dfceb92e) Thanks [@karrui](https://github.com/karrui)! - feat(button): add outline-success color variant combination
+
+- [#254](https://github.com/opengovsg/oui-design-system/pull/254) [`0f4a04d`](https://github.com/opengovsg/oui-design-system/commit/0f4a04db3469a5ece9fb88f6325d642c47452a52) Thanks [@karrui](https://github.com/karrui)! - feat(select-item): item styles should apply regardless of color
+
 ## 0.0.52
 
 ### Patch Changes
