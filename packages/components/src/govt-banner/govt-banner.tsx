@@ -65,7 +65,9 @@ export function GovtBanner({
   const { buttonProps } = useButton(triggerProps, triggerRef)
   const { isFocusVisible, focusProps } = useFocusRing()
 
-  const slots = govtBannerStyles()
+  const slots = govtBannerStyles({
+    isExpanded: state.isExpanded,
+  })
 
   return (
     <div
