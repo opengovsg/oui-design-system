@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.53
+
+### Patch Changes
+
+- [#258](https://github.com/opengovsg/oui-design-system/pull/258) [`7e09823`](https://github.com/opengovsg/oui-design-system/commit/7e09823e3ff1ea715ecaa931b6f56913b7e0d7e1) Thanks [@karrui](https://github.com/karrui)! - fix(govt-banner): hide panel using display:none if not expanded
+
+- [#260](https://github.com/opengovsg/oui-design-system/pull/260) [`c283766`](https://github.com/opengovsg/oui-design-system/commit/c283766c58c4ffb7ca9c65ac196fcaf110757609) Thanks [@karrui](https://github.com/karrui)! - feat(spinner): render spinner prop as long as undefined
+
+- Updated dependencies [[`7e09823`](https://github.com/opengovsg/oui-design-system/commit/7e09823e3ff1ea715ecaa931b6f56913b7e0d7e1), [`b15d62d`](https://github.com/opengovsg/oui-design-system/commit/b15d62d1fb6ec3e41b88a1930df12660dfceb92e), [`0f4a04d`](https://github.com/opengovsg/oui-design-system/commit/0f4a04db3469a5ece9fb88f6325d642c47452a52)]:
+  - @opengovsg/oui-theme@0.0.53
+
 ## 0.0.52
 
 ### Patch Changes
