@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.54
+
+### Patch Changes
+
+- [#262](https://github.com/opengovsg/oui-design-system/pull/262) [`0c76a48`](https://github.com/opengovsg/oui-design-system/commit/0c76a48bd87571a85af884e4965e91f1e21df0d7) Thanks [@karrui](https://github.com/karrui)! - fix(modal): prevent className prop from overriding all classnames
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.54
+
 ## 0.0.53
 
 ### Patch Changes
