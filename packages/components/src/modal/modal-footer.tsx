@@ -21,10 +21,10 @@ export const ModalFooter = forwardRef(function ModalFooter(
   return (
     <Component
       ref={ref}
+      {...props}
       className={slots.footer({
         className: cn(classNames?.footer, props.className),
       })}
-      {...props}
     />
   )
 })
