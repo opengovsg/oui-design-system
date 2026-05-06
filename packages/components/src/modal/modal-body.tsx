@@ -22,10 +22,10 @@ export const ModalBody = forwardRef(function ModalBody(
   return (
     <Component
       ref={ref}
+      {...props}
       className={slots.body({
         className: cn(classNames?.body, props.className),
       })}
-      {...props}
     />
   )
 })
