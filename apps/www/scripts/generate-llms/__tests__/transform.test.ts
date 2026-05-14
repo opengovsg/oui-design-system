@@ -43,3 +43,21 @@ describe("applyTransforms — ComponentPreview", () => {
     ).rejects.toThrow(/does-not-exist/)
   })
 })
+
+describe("applyTransforms — Steps", () => {
+  it("unwraps <Steps>/<Step> while preserving inner content", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "installation-fixture.mdx"),
+      "getting-started",
+    )
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).not.toContain('"name":"Steps"')
+    expect(json).not.toContain('"name":"Step"')
+    // Inner content preserved
+    expect(json).toContain("Install the package")
+    expect(json).toContain("Add to your Tailwind file")
+  })
+})

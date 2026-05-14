@@ -70,8 +70,29 @@ async function transformComponentPreviews(
 }
 
 function unwrapSteps(tree: Root): void {
-  // Placeholder — implemented in Task 7
-  void tree
+  const targets = new Set(["Steps", "Step"])
+
+  // Iterate until no more unwraps happen (Steps wraps Step, so two passes minimum).
+  let changed = true
+  while (changed) {
+    changed = false
+    visit(tree, (node, index, parent) => {
+      if (!parent || index == null) return
+      if (
+        node.type !== "mdxJsxFlowElement" &&
+        node.type !== "mdxJsxTextElement"
+      ) {
+        return
+      }
+      const name = (node as AnyMdxJsx).name
+      if (!name || !targets.has(name)) return
+
+      const children = (node as AnyMdxJsx).children ?? []
+      ;(parent as Parent).children.splice(index, 1, ...children)
+      changed = true
+      return "skip"
+    })
+  }
 }
 
 function transformCardGroups(tree: Root): void {
