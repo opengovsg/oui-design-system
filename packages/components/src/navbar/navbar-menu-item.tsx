@@ -5,10 +5,10 @@ import { composeRenderProps, useRenderProps } from "react-aria-components"
 import type { ClassNameOrFunction } from "@opengovsg/oui-theme"
 import { cn, dataAttr, navbarMenuItemStyles } from "@opengovsg/oui-theme"
 
-import type { HtmlUiProps } from "../../system/types"
-import { useDomRef } from "../../system/react-utils"
-import { forwardRef } from "../../system/utils"
-import { useNavbarContext } from "../navbar-context"
+import type { HtmlUiProps } from "../system/types"
+import { useDomRef } from "../system/react-utils"
+import { forwardRef } from "../system/utils"
+import { useNavbarContext } from "./navbar-context"
 
 export interface NavbarMenuItemRenderProps {
   isActive: boolean

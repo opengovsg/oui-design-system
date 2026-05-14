@@ -8,9 +8,9 @@ import { Navbar } from "../navbar"
 import { NavbarBrand } from "../navbar-brand"
 import { NavbarContent } from "../navbar-content"
 import { NavbarItem } from "../navbar-item"
-import { NavbarMenuItem } from "../navbar-menu/item"
-import { NavbarMenu } from "../navbar-menu/menu"
-import { NavbarMenuToggle } from "../navbar-menu/toggle"
+import { NavbarMenuItem } from "../navbar-menu-item"
+import { NavbarMenu } from "../navbar-menu"
+import { NavbarMenuToggle } from "../navbar-menu-toggle"
 
 const storyMenuItems = [
   "Profile",

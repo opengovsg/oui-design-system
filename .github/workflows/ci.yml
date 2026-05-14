@@ -17,3 +17,18 @@ jobs:
       - uses: ./.github/actions/setup
       - name: Run Storybook tests
         run: pnpm test
+
+  registry-verify:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - name: Run registry unit tests
+        run: pnpm --filter @oui/www test
+      - name: Generate shadcn registry
+        run: pnpm --filter @oui/www generate:registry
+      - name: Verify registry in fixture consumer
+        run: pnpm --filter @oui/www verify:registry

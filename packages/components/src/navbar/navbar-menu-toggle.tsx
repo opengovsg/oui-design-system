@@ -9,8 +9,8 @@ import { ToggleButton } from "react-aria-components"
 import type { ButtonVariantProps, SlotsToClasses } from "@opengovsg/oui-theme"
 import { buttonStyles, cn, dataAttr } from "@opengovsg/oui-theme"
 
-import { useNavbarContext } from "../navbar-context"
-import { i18nStrings } from "./i18n"
+import { useNavbarContext } from "./navbar-context"
+import { i18nStrings } from "./navbar-menu-i18n"
 
 export interface NavbarMenuToggleProps
   extends ToggleButtonProps,

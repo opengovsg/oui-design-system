@@ -22,5 +22,8 @@ apps/www/public/llms.txt
 apps/www/public/llms-full.txt
 apps/www/public/llm/
 
+# Generated shadcn registry output
+apps/www/public/r/
+
 # Superpowers-generated specs and plans (kept locally, never committed)
 docs/superpowers/

@@ -15,7 +15,7 @@ import {
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 
 import type { HtmlUiProps, PropGetter } from "../system/types"
-import type { PaginationItemValue } from "./hooks/use-pagination"
+import type { PaginationItemValue } from "./use-pagination-base"
 import { filterDOMProps, useDomRef } from "../system/react-utils"
 
 interface Props extends Omit<HtmlUiProps<"li">, "onClick"> {

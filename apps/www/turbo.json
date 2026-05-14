@@ -2,13 +2,13 @@
   "$schema": "https://turbo.build/schema.json",
   "extends": ["//"],
   "tasks": {
-    "generate:registry": {},
+    "generate:examples": {},
     "generate:themes": {},
     "dev": {
       "dependsOn": ["generate:themes"]
     },
     "build": {
-      "dependsOn": ["^build", "generate:registry", "generate:themes"]
+      "dependsOn": ["^build", "generate:examples", "generate:themes"]
     }
   }
 }

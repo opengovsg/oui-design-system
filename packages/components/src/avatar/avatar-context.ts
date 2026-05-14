@@ -4,7 +4,7 @@ import type {
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 
-import type { ImageLoadingStatus } from "./hooks/use-img-loading-status"
+import type { ImageLoadingStatus } from "./use-img-loading-status"
 import { createContext } from "../system/react-utils"
 
 export interface UseAvatarContextReturn {

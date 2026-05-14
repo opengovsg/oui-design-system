@@ -1,0 +1,62 @@
+---
+title: Registry (shadcn-style)
+description: Install components as local source via the shadcn CLI for full customization.
+toc:
+  visible: true
+---
+
+OUI ships two distribution channels. The npm package (`@opengovsg/oui`) is canonical and governed. The **registry channel** lets you install any component as local source you fully own — useful when you need a one-off variant that can't be merged upstream.
+
+## When to use which
+
+- **Use the npm package** for everything by default. You get centralized fixes, smaller upgrades, and no surprise drift.
+- **Use the registry channel** for a specific component when you need to customize behavior or styling beyond what props expose. The trade-off: you own the local copy from that point on.
+
+## Installation
+
+You need [Tailwind CSS v4](https://tailwindcss.com) configured and `@opengovsg/oui-theme` installed.
+
+Set up `@opengovsg/oui-theme` and import the base CSS in your global stylesheet:
+
+```bash
+pnpm add @opengovsg/oui-theme
+```
+
+```css
+/* globals.css */
+@import "tailwindcss";
+@import "@opengovsg/oui-theme/base.css";
+```
+
+Then install any component:
+
+```bash
+npx shadcn@latest add https://oui.gov.sg/r/button.json
+```
+
+The CLI:
+- Writes the component file (and its variant slice) to your `components/oui/` directory.
+- Writes any shared utilities to your `lib/oui/` directory.
+- Installs the npm dependencies listed in the manifest.
+- Recursively pulls any registry dependencies (e.g., Button pulls Spinner, Ripple, plus the shared `cn`, `tv`, `variants` utilities).
+
+Configure your `components.json` aliases so `@/components/oui/*` and `@/lib/oui/*` resolve in your project.
+
+## Once installed, the code is yours
+
+The file lives in your repo. We do not push updates to it. When OUI ships a fix:
+
+1. We update the npm package and publish a release through Changesets.
+2. The `@opengovsg/oui` changelog records the change. Watch it for fixes that affect components you've pulled.
+3. To audit your local copy vs. current upstream, run `npx shadcn diff https://oui.gov.sg/r/<name>.json`.
+4. To re-pull (overwriting your local copy), run `shadcn add` again. The CLI will prompt before overwriting.
+
+We do **not** maintain backward-compatible manifests across major OUI versions. The registry URL is always current.
+
+## A note on changelog accuracy
+
+The changelog describes the npm package's behavior. Most fixes apply identically to the registry-installed copy, but some (e.g., changes to internal export shapes) won't matter because the transformer rewrites those away. When in doubt, `shadcn diff`.
+
+## Discovery
+
+A machine-readable index of every registry item is at <https://oui.gov.sg/r/index.json>.

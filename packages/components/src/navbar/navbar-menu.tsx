@@ -5,10 +5,10 @@ import { chain } from "react-aria"
 
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 
-import type { HtmlUiProps } from "../../system/types"
-import { useDomRef } from "../../system/react-utils"
-import { forwardRef } from "../../system/utils"
-import { useNavbarContext } from "../navbar-context"
+import type { HtmlUiProps } from "../system/types"
+import { useDomRef } from "../system/react-utils"
+import { forwardRef } from "../system/utils"
+import { useNavbarContext } from "./navbar-context"
 
 export interface NavbarMenuProps extends HtmlUiProps<"ul"> {
   children?: React.ReactNode

@@ -18,13 +18,13 @@ import type { HtmlUiProps, PropGetter } from "../system/types"
 import type {
   PaginationItemValue,
   UsePaginationProps as UseBasePaginationProps,
-} from "./hooks/use-pagination"
+} from "./use-pagination-base"
 import { useDomRef } from "../system/react-utils"
 import { mapPropsVariants } from "../system/utils"
 import {
   PaginationItemType,
   usePagination as useBasePagination,
-} from "./hooks/use-pagination"
+} from "./use-pagination-base"
 
 type Timer = ReturnType<typeof setTimeout>
 
