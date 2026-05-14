@@ -28,6 +28,7 @@ export async function applyTransforms(
   transformCardGroups(doc.body)
   removeBrElements(doc.body)
   transformKbdElements(doc.body)
+  removeToasterElements(doc.body)
 
   const stripped = stripUnknownJsx(doc.body)
   if (stripped.length > 0) {
@@ -144,6 +145,23 @@ function transformKbdElements(tree: Root): void {
       value: textContent,
     }
     ;(parent as Parent).children.splice(index, 1, textNode)
+  })
+}
+
+function removeToasterElements(tree: Root): void {
+  // <Toaster /> is a placement marker for the docs site, not content.
+  // Strip it silently — LLM markdown should not render or warn on it.
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "Toaster") return
+    ;(parent as Parent).children.splice(index, 1)
+    return "skip"
   })
 }
 

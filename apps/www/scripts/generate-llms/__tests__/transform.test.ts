@@ -115,3 +115,33 @@ describe("applyTransforms — unhandled JSX", () => {
     }
   })
 })
+
+describe("applyTransforms — Toaster", () => {
+  it("strips <Toaster /> silently (no warning)", async () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+    try {
+      const doc = await loadDoc(
+        path.join(FIXTURES, "button-fixture.mdx"),
+        "component",
+      )
+      doc.body.children.unshift({
+        type: "mdxJsxFlowElement",
+        name: "Toaster",
+        attributes: [],
+        children: [],
+      } as never)
+
+      await applyTransforms(doc, { examplesDir: FIXTURES })
+
+      const json = JSON.stringify(doc.body)
+      expect(json).not.toContain('"name":"Toaster"')
+      // No warning emitted for Toaster specifically
+      const toasterWarning = warnSpy.mock.calls.find((c) =>
+        String(c[0]).includes("Toaster"),
+      )
+      expect(toasterWarning).toBeUndefined()
+    } finally {
+      warnSpy.mockRestore()
+    }
+  })
+})
