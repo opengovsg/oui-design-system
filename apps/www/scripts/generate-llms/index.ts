@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url"
 import { mkdir, readdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 
@@ -10,6 +11,8 @@ import { loadDoc } from "./load-docs"
 import { applyTransforms } from "./transform"
 import type { ParsedDoc } from "./types"
 
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 const ROOT = path.resolve(__dirname, "..", "..")
 const CONTENT_DIR = path.join(ROOT, "content", "docs")
 const EXAMPLES_DIR = path.join(ROOT, "registry", "examples")

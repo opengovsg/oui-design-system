@@ -26,7 +26,9 @@ export async function applyTransforms(
   await transformComponentPreviews(doc.body, opts)
   unwrapSteps(doc.body)
   transformCardGroups(doc.body)
-  assertNoUnhandledJsx(doc)
+  removeBrElements(doc.body)
+  transformKbdElements(doc.body)
+  stripUnknownJsx(doc.body)
 }
 
 function assertNoUnhandledJsx(doc: ParsedDoc): void {
@@ -112,6 +114,74 @@ function unwrapSteps(tree: Root): void {
       changed = true
       return "skip"
     })
+  }
+}
+
+function removeBrElements(tree: Root): void {
+  // Remove <br /> elements as they're purely presentational and not needed for LLM output
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "br") return
+    ;(parent as Parent).children.splice(index, 1)
+    return "skip"
+  })
+}
+
+function transformKbdElements(tree: Root): void {
+  // Convert <Kbd>text</Kbd> into plain text, since keyboard notation is less relevant in LLM context
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    const jsxNode = node as AnyMdxJsx
+    if (jsxNode.name !== "Kbd") return
+
+    // Extract text content from children
+    const textContent = extractTextContent(jsxNode.children)
+
+    // Replace the Kbd node with a text node
+    const textNode: Text = {
+      type: "text",
+      value: textContent,
+    }
+    ;(parent as Parent).children.splice(index, 1, textNode)
+  })
+}
+
+function stripUnknownJsx(tree: Root): void {
+  // Remove any remaining JSX elements (like <Toaster />, etc) that aren't handled by transforms.
+  // For elements with children, preserve the children; for self-closing elements, just remove.
+  const toRemove: Array<{ parent: Parent; index: number }> = []
+
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    toRemove.push({ parent: parent as Parent, index })
+  })
+
+  // Process in reverse to keep indices valid
+  for (let i = toRemove.length - 1; i >= 0; i--) {
+    const { parent, index } = toRemove[i]
+    const jsxNode = parent.children[index] as AnyMdxJsx
+    const children = jsxNode.children ?? []
+
+    // Replace the JSX element with its children (or nothing if no children)
+    parent.children.splice(index, 1, ...children)
   }
 }
 
