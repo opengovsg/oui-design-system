@@ -61,3 +61,42 @@ describe("applyTransforms — Steps", () => {
     expect(json).toContain("Add to your Tailwind file")
   })
 })
+
+describe("applyTransforms — CardGroup/Card", () => {
+  it("converts Card elements into markdown bullets and removes CardGroup wrapping", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "installation-fixture.mdx"),
+      "getting-started",
+    )
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).not.toContain('"name":"CardGroup"')
+    expect(json).not.toContain('"name":"Card"')
+    // Both cards rendered as list items with link + description
+    expect(json).toContain("/docs/getting-started/next")
+    expect(json).toContain("Use OUI with Next.js apps")
+    expect(json).toContain("/docs/getting-started/vite")
+  })
+})
+
+describe("applyTransforms — unhandled JSX", () => {
+  it("throws if an MDX JSX element is left after transformation", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    // Inject a JSX element that no transform handles
+    doc.body.children.unshift({
+      type: "mdxJsxFlowElement",
+      name: "Toggle",
+      attributes: [],
+      children: [{ type: "text", value: "Enable notifications" }],
+    } as never)
+
+    await expect(
+      applyTransforms(doc, { examplesDir: FIXTURES }),
+    ).rejects.toThrow(/Unhandled MDX JSX nodes in "button-fixture": Toggle/)
+  })
+})

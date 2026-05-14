@@ -1,4 +1,4 @@
-import type { Code, Parent, Root } from "mdast"
+import type { Code, List, ListItem, Paragraph, Parent, Root, Text } from "mdast"
 import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx-jsx"
 import { visit } from "unist-util-visit"
 
@@ -26,6 +26,26 @@ export async function applyTransforms(
   await transformComponentPreviews(doc.body, opts)
   unwrapSteps(doc.body)
   transformCardGroups(doc.body)
+  assertNoUnhandledJsx(doc)
+}
+
+function assertNoUnhandledJsx(doc: ParsedDoc): void {
+  const unknown: string[] = []
+  visit(doc.body, (node) => {
+    if (
+      node.type === "mdxJsxFlowElement" ||
+      node.type === "mdxJsxTextElement"
+    ) {
+      unknown.push((node as AnyMdxJsx).name ?? "<anonymous>")
+    }
+  })
+  if (unknown.length > 0) {
+    const names = [...new Set(unknown)].join(", ")
+    throw new Error(
+      `Unhandled MDX JSX nodes in "${doc.slug}": ${names}. ` +
+        `Add a transform in transform.ts or remove the JSX from the MDX.`,
+    )
+  }
 }
 
 async function transformComponentPreviews(
@@ -96,6 +116,87 @@ function unwrapSteps(tree: Root): void {
 }
 
 function transformCardGroups(tree: Root): void {
-  // Placeholder — implemented in Task 8
-  void tree
+  // 1. Convert each <Card> into a ListItem with `[title](href) — description`.
+  // 2. Convert each <CardGroup> into a List wrapping its now-ListItem children.
+
+  // First: replace Card nodes with ListItems
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "Card") return
+
+    const title = getAttr(node as AnyMdxJsx, "title") ?? ""
+    const href = getAttr(node as AnyMdxJsx, "href") ?? ""
+    const description = extractTextContent((node as AnyMdxJsx).children).trim()
+
+    const paragraph: Paragraph = {
+      type: "paragraph",
+      children: [
+        {
+          type: "link",
+          url: href,
+          title: null,
+          children: [{ type: "text", value: title } satisfies Text],
+        },
+        ...(description
+          ? [{ type: "text", value: ` — ${description}` } satisfies Text]
+          : []),
+      ],
+    }
+
+    const listItem: ListItem = {
+      type: "listItem",
+      spread: false,
+      children: [paragraph],
+    }
+
+    ;(parent as Parent).children.splice(index, 1, listItem as unknown as Parent["children"][number])
+  })
+
+  // Second: replace CardGroup nodes with List nodes containing the ListItem siblings
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "CardGroup") return
+
+    const items = ((node as AnyMdxJsx).children ?? []).filter(
+      (c): c is ListItem => c.type === "listItem",
+    )
+
+    const list: List = {
+      type: "list",
+      ordered: false,
+      spread: false,
+      children: items,
+    }
+
+    ;(parent as Parent).children.splice(index, 1, list as unknown as Parent["children"][number])
+  })
+}
+
+function extractTextContent(nodes: AnyMdxJsx["children"] | undefined): string {
+  if (!nodes) return ""
+  let out = ""
+  for (const child of nodes) {
+    if (child.type === "text") out += child.value
+    else if (
+      "children" in child &&
+      Array.isArray((child as { children: unknown[] }).children)
+    ) {
+      out += extractTextContent(
+        (child as { children: AnyMdxJsx["children"] }).children,
+      )
+    }
+  }
+  return out
 }
