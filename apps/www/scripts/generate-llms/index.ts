@@ -70,23 +70,10 @@ async function main(): Promise<void> {
     contributingDocs.push(doc)
   }
 
-  // 2. Build the related-doc summary map (needed before rendering component .md).
-  const relatedMap = new Map<
-    string,
-    { title: string; description: string; url: string }
-  >()
-  for (const doc of components) {
-    relatedMap.set(doc.slug, {
-      title: doc.frontmatter.title,
-      description: doc.frontmatter.description,
-      url: `${SITE_URL}/llm/components/${doc.slug}.md`,
-    })
-  }
-
-  // 3. Render markdown for each doc.
+  // 2. Render markdown for each doc.
   const componentMarkdowns = new Map<string, string>()
   for (const doc of components) {
-    const md = renderComponentMarkdown(doc, { relatedDocs: relatedMap })
+    const md = renderComponentMarkdown(doc)
     componentMarkdowns.set(doc.slug, md)
   }
 
@@ -95,7 +82,7 @@ async function main(): Promise<void> {
     guideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
   }
 
-  // 4. Write per-doc files.
+  // 3. Write per-doc files.
   await mkdir(path.join(PUBLIC_DIR, "llm", "components"), { recursive: true })
   await mkdir(path.join(PUBLIC_DIR, "llm", "getting-started"), {
     recursive: true,
@@ -133,7 +120,7 @@ async function main(): Promise<void> {
     }
   }
 
-  // 5. Build entries for llms.txt.
+  // 4. Build entries for llms.txt.
   const componentEntries: ComponentEntry[] = components.map((doc) => ({
     slug: doc.slug,
     title: doc.frontmatter.title,
@@ -153,7 +140,7 @@ async function main(): Promise<void> {
   })
   await writeFile(path.join(PUBLIC_DIR, "llms.txt"), llmsTxt, "utf8")
 
-  // 6. Concatenate llms-full.txt in the same order: guides first, then components by category in canonical order, alphabetical within.
+  // 5. Concatenate llms-full.txt in the same order: guides first, then components by category in canonical order, alphabetical within.
   const orderedSections = [
     ...guides.map((doc) => guideMarkdowns.get(doc.slug)!),
     ...orderComponentsForFullTxt(components).map(
@@ -166,7 +153,7 @@ async function main(): Promise<void> {
     "utf8",
   )
 
-  // 7. Invariants.
+  // 6. Invariants.
   assertInvariants({ components, guides, llmsTxt })
 
   await writeCoverageReport(

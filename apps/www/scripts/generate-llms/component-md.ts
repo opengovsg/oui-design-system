@@ -9,20 +9,7 @@ const stringifier = unified()
   .use(remarkStringify, { bullet: "-", fences: true, listItemIndent: "one" })
   .use(remarkGfm)
 
-export interface RelatedDocSummary {
-  title: string
-  description: string
-  url: string
-}
-
-export interface RenderOptions {
-  relatedDocs: Map<string, RelatedDocSummary>
-}
-
-export function renderComponentMarkdown(
-  doc: ParsedDoc,
-  opts: RenderOptions,
-): string {
+export function renderComponentMarkdown(doc: ParsedDoc): string {
   const fm = doc.frontmatter
   const reactAriaUrl = fm.links?.reactaria
 
@@ -79,51 +66,8 @@ export function renderComponentMarkdown(
     })
   }
 
-  // 3. Optional "Related components" section.
+  // 3. "See also" footer (always present if any link is available).
   const tail: RootContent[] = []
-  if (fm.related && fm.related.length > 0) {
-    tail.push({
-      type: "heading",
-      depth: 2,
-      children: [{ type: "text", value: "Related components" }],
-    } satisfies Heading)
-
-    const listItems = fm.related.map((slug) => {
-      const summary = opts.relatedDocs.get(slug)
-      if (!summary) {
-        throw new Error(
-          `Component "${doc.slug}" has unresolved related slug: ${slug}`,
-        )
-      }
-      return {
-        type: "listItem" as const,
-        spread: false,
-        children: [
-          {
-            type: "paragraph" as const,
-            children: [
-              {
-                type: "link" as const,
-                url: summary.url,
-                title: null,
-                children: [{ type: "text" as const, value: summary.title }],
-              },
-              { type: "text" as const, value: ` — ${summary.description}` },
-            ],
-          },
-        ],
-      }
-    })
-
-    tail.push({
-      type: "list",
-      ordered: false,
-      spread: false,
-      children: listItems,
-    })
-  }
-
-  // 4. "See also" footer (always present if any link is available).
   const seeAlsoItems = buildSeeAlsoItems(fm)
   if (seeAlsoItems.length > 0) {
     tail.push({ type: "thematicBreak" })

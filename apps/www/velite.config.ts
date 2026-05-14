@@ -29,7 +29,6 @@ export const docs = defineCollection({
           "Misc",
         ])
         .default("Misc"),
-      related: s.array(s.string()).default([]),
       body: s.mdx({ copyLinkedFiles: false }),
       toc: s
         .object({

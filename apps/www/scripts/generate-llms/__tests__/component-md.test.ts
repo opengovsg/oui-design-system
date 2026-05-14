@@ -15,9 +15,7 @@ describe("renderComponentMarkdown", () => {
     )
     await applyTransforms(doc, { examplesDir: FIXTURES })
 
-    const md = renderComponentMarkdown(doc, {
-      relatedDocs: new Map(),
-    })
+    const md = renderComponentMarkdown(doc)
 
     // Frontmatter present
     expect(md.startsWith("---\n")).toBe(true)
@@ -39,44 +37,4 @@ describe("renderComponentMarkdown", () => {
     )
   })
 
-  it("renders a Related components section when related is set", async () => {
-    const doc = await loadDoc(
-      path.join(FIXTURES, "button-fixture.mdx"),
-      "component",
-    )
-    doc.frontmatter.related = ["accordion-fake"]
-    await applyTransforms(doc, { examplesDir: FIXTURES })
-
-    const relatedDocs = new Map([
-      [
-        "accordion-fake",
-        {
-          title: "AccordionFake",
-          description: "Fake accordion for testing.",
-          url: "https://oui.open.gov.sg/llm/components/accordion-fake.md",
-        },
-      ],
-    ])
-
-    const md = renderComponentMarkdown(doc, { relatedDocs })
-
-    expect(md).toContain("## Related components")
-    expect(md).toContain(
-      "[AccordionFake](https://oui.open.gov.sg/llm/components/accordion-fake.md)",
-    )
-    expect(md).toContain("Fake accordion for testing.")
-  })
-
-  it("throws on an unresolved related slug", async () => {
-    const doc = await loadDoc(
-      path.join(FIXTURES, "button-fixture.mdx"),
-      "component",
-    )
-    doc.frontmatter.related = ["does-not-exist"]
-    await applyTransforms(doc, { examplesDir: FIXTURES })
-
-    expect(() =>
-      renderComponentMarkdown(doc, { relatedDocs: new Map() }),
-    ).toThrow(/does-not-exist/)
-  })
 })

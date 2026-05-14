@@ -12,7 +12,6 @@ export interface DocFrontmatter {
   title: string
   description: string
   category?: Category
-  related?: string[]
   links?: {
     source?: string
     theme?: string
