@@ -19,6 +19,17 @@ export const docs = defineCollection({
       description: s.string(),
       published: s.boolean().default(true),
       label: s.enum(["New", "Updated"]).optional(),
+      category: s
+        .enum([
+          "Form & Input",
+          "Layout & Navigation",
+          "Overlays",
+          "Feedback",
+          "Display",
+          "Misc",
+        ])
+        .default("Misc"),
+      related: s.array(s.string()).default([]),
       body: s.mdx({ copyLinkedFiles: false }),
       toc: s
         .object({
