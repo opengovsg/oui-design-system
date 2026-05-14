@@ -4,6 +4,7 @@ import path from "node:path"
 
 import { docsConfig } from "../../config/docs.config"
 import { renderComponentMarkdown } from "./component-md"
+import { writeCoverageReport } from "./coverage"
 import { renderGettingStartedMarkdown } from "./getting-started-md"
 import { renderLlmsFullTxt } from "./llms-full-txt"
 import { renderLlmsTxt, type ComponentEntry, type GuideEntry } from "./llms-txt"
@@ -128,6 +129,12 @@ async function main(): Promise<void> {
 
   // 7. Invariants.
   assertInvariants({ components, guides, llmsTxt })
+
+  await writeCoverageReport(
+    components,
+    componentMarkdowns,
+    path.join(ROOT, ".velite", "llms-coverage.json"),
+  )
 
   console.log(
     `Generated llms.txt + llms-full.txt + ${components.length} components + ${guides.length} guides`,
