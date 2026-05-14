@@ -21,3 +21,6 @@ apps/www/public/themes/
 apps/www/public/llms.txt
 apps/www/public/llms-full.txt
 apps/www/public/llm/
+
+# Superpowers-generated specs and plans (kept locally, never committed)
+docs/superpowers/
