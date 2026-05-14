@@ -1,6 +1,6 @@
 ---
 title: Field
-description: Utility components for composing accessible form fields with labels, descriptions, error messages, and input grouping.
+description: Primitives for composing accessible form fields with labels, descriptions, errors, and input grouping. Most callers should use a higher-level component (TextField, etc.) instead.
 category: Form & Input
 toc:
   visible: true
@@ -35,15 +35,20 @@ import {
 
 The Field module provides low-level building blocks used internally by the higher-level field components in OUI. **In most cases, you should use one of these components instead of using Field primitives directly:**
 
-- [TextField](/docs/components/text-field) — Single-line text input
-- [TextAreaField](/docs/components/text-area-field) — Multi-line text input
-- [NumberField](/docs/components/number-field) — Numeric input with steppers
-- [SearchField](/docs/components/search-field) — Search input with clear button
-- [DateField](/docs/components/date-field) — Date input
+- [CheckboxGroup](/docs/components/checkbox-group) — Group of checkbox options
+- [ComboBox](/docs/components/combo-box) — Type-ahead filterable select input
+- [DateField](/docs/components/date-field) — Date input (keyboard only)
 - [DatePicker](/docs/components/date-picker) — Date input with calendar popover
-- [TimeField](/docs/components/time-field) — Time input
-- [ComboBox](/docs/components/combo-box) — Autocomplete select input
+- [DateRangePicker](/docs/components/date-range-picker) — Date range input with calendar popover
+- [NumberField](/docs/components/number-field) — Numeric input with steppers
 - [PhoneNumberField](/docs/components/phone-number-field) — Phone number input
+- [RadioGroup](/docs/components/radio-group) — Group of radio button options
+- [SearchField](/docs/components/search-field) — Search input with clear button
+- [Select](/docs/components/select) — Non-filterable dropdown for single selection
+- [TagField](/docs/components/tag-field) — Multi-select input with filtering
+- [TextAreaField](/docs/components/text-area-field) — Multi-line text input
+- [TextField](/docs/components/text-field) — Single-line text input
+- [TimeField](/docs/components/time-field) — Time input
 
 These higher-level components already compose the Field primitives with the correct structure, styling, and accessibility wiring.
 
