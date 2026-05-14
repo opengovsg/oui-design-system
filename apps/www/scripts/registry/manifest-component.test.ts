@@ -1,12 +1,18 @@
 // apps/www/scripts/registry/manifest-component.test.ts
-import { describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 
 import { buildCatalog } from "./catalog"
 import { buildComponentManifest } from "./manifest-component"
+import type { Catalog } from "./types"
+
+let catalog: Catalog
+
+beforeAll(() => {
+  catalog = buildCatalog()
+})
 
 describe("buildComponentManifest", () => {
   it("builds a manifest for the button component", () => {
-    const catalog = buildCatalog()
     const manifest = buildComponentManifest("button", catalog, {
       registryBaseUrl: "https://oui.gov.sg/r",
     })

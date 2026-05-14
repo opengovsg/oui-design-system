@@ -1,11 +1,17 @@
-import { describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 
 import { buildCatalog } from "./catalog"
 import { buildLibManifest } from "./manifest-lib"
+import type { Catalog } from "./types"
+
+let catalog: Catalog
+
+beforeAll(() => {
+  catalog = buildCatalog()
+})
 
 describe("buildLibManifest", () => {
   it("builds a manifest for the cn lib entry", () => {
-    const catalog = buildCatalog()
     const cn = catalog.libEntries.get("cn")!
     const manifest = buildLibManifest(cn, catalog, {
       registryBaseUrl: "https://oui.gov.sg/r",
@@ -21,7 +27,6 @@ describe("buildLibManifest", () => {
   })
 
   it("uses registry:hook type for hooks", () => {
-    const catalog = buildCatalog()
     const hook = catalog.libEntries.get("use-controllable-state")!
     const manifest = buildLibManifest(hook, catalog, {
       registryBaseUrl: "https://oui.gov.sg/r",

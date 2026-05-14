@@ -1,12 +1,18 @@
 // apps/www/scripts/registry/variant.test.ts
-import { describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 
 import { buildCatalog } from "./catalog"
+import type { Catalog } from "./types"
 import { transformVariantFile } from "./variant"
+
+let catalog: Catalog
+
+beforeAll(() => {
+  catalog = buildCatalog()
+})
 
 describe("transformVariantFile", () => {
   it("transforms button.ts variant imports to @/lib/oui paths", () => {
-    const catalog = buildCatalog()
     const buttonVariant = catalog.componentVariants.get("button")
     expect(buttonVariant).toBeDefined()
 

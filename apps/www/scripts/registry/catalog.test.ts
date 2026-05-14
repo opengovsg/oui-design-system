@@ -1,12 +1,17 @@
 // apps/www/scripts/registry/catalog.test.ts
-import { describe, expect, it } from "vitest"
+import { beforeAll, describe, expect, it } from "vitest"
 
 import { buildCatalog } from "./catalog"
+import type { Catalog } from "./types"
+
+let catalog: Catalog
+
+beforeAll(() => {
+  catalog = buildCatalog()
+})
 
 describe("buildCatalog", () => {
   it("discovers theme shared utilities as lib entries", () => {
-    const catalog = buildCatalog()
-
     // Sanity: well-known utilities are present
     expect(catalog.libEntries.has("cn")).toBe(true)
     expect(catalog.libEntries.has("tv")).toBe(true)
@@ -15,7 +20,6 @@ describe("buildCatalog", () => {
   })
 
   it("maps theme utility symbols to their lib entries", () => {
-    const catalog = buildCatalog()
     const cn = catalog.bySymbolToLib.get("cn")
     expect(cn?.name).toBe("cn")
     const focus = catalog.bySymbolToLib.get("focusVisibleClasses")
@@ -25,7 +29,6 @@ describe("buildCatalog", () => {
   })
 
   it("discovers component-package system utilities as lib entries", () => {
-    const catalog = buildCatalog()
     expect(catalog.libEntries.has("children")).toBe(true)
     expect(catalog.libEntries.has("refs")).toBe(true)
     // children.ts exports renderChildren, getValidChildren, pickChildren
@@ -34,13 +37,11 @@ describe("buildCatalog", () => {
   })
 
   it("discovers hooks as registry:hook entries", () => {
-    const catalog = buildCatalog()
     const hook = catalog.libEntries.get("use-controllable-state")
     expect(hook?.type).toBe("registry:hook")
   })
 
   it("discovers per-component theme variants", () => {
-    const catalog = buildCatalog()
     expect(catalog.componentVariants.has("button")).toBe(true)
     const buttonVariant = catalog.componentVariants.get("button")
     expect(buttonVariant?.exports).toContain("buttonStyles")
@@ -50,7 +51,6 @@ describe("buildCatalog", () => {
   })
 
   it("does not register the same symbol in both lib and variant maps", () => {
-    const catalog = buildCatalog()
     for (const sym of catalog.bySymbolToLib.keys()) {
       expect(catalog.bySymbolToVariant.has(sym)).toBe(false)
     }
