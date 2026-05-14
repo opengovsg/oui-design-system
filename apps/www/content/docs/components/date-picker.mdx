@@ -11,13 +11,25 @@ links:
   reactaria: DatePicker
 ---
 
-There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/DatePicker.html) for more details.
+<ComponentPreview name="date-picker-demo" />
 
 ## Usage
 
 Use **DatePicker** for a date input with a calendar popover. Use [DateField](/docs/components/date-field) for keyboard-only entry (no popover). Use [DateRangePicker](/docs/components/date-range-picker) for a date range with a calendar. Use [Calendar](/docs/components/calendar) for inline (non-popover) date selection.
 
-<ComponentPreview name="date-picker-demo" />
+```tsx
+import { DatePicker } from "@opengovsg/oui"
+```
+
+```tsx
+<DatePicker label="Appointment date" />
+```
+
+DatePicker combines a [DateField](/docs/components/date-field) keyboard input with a [Calendar](/docs/components/calendar) in a popover, built on [React Aria's DatePicker](https://react-aria.adobe.com/DatePicker). Date values use objects from the `@internationalized/date` package.
+
+If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be passed to identify the field to assistive technology.
+
+## Examples
 
 ### Disabled
 
@@ -173,7 +185,34 @@ This behavior can be changed to page by the visible months instead, by setting `
 
 <ComponentPreview name="date-picker-page-behavior" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — Marks the field as required; validation fires on form submit (native) or immediately (aria).
+- **`validate`** — A custom function `(value: DateValue | null) => ValidationError | true | null | undefined`. Return a string to show as the error.
+- **`isInvalid` + `errorMessage`** — Use together for realtime validation feedback. `errorMessage` accepts a string or a function `(validation: ValidationResult) => string`.
+- **`minValue` / `maxValue`** — Constrain the accepted date range.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` marks the field via ARIA attributes only (needed for React Hook Form).
+
+## Events
+
+- **`onChange`** — Called when the date value changes, receiving the new `DateValue` (or `null`).
+- **`onOpenChange`** — Called when the calendar popover opens or closes, receiving a boolean.
+- **`onFocus`** / **`onBlur`** — Called when the field receives or loses focus.
+- **`onFocusChange`** — Called when the focus state changes, receiving a boolean.
+
+## Accessibility
+
+- The date field segments use `role="spinbutton"` with appropriate ARIA labels for each part (year, month, day).
+- The calendar button opens the calendar popover; the popover is labelled via `aria-label` automatically.
+- Keyboard interaction: **Tab** to move between segments and the calendar button; type digits to update segments; **Arrow Up/Down** to increment/decrement; **Enter** on the calendar button opens the popover.
+- The label, description, and error message are linked via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby`.
+
 ## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
 - **base**: Input wrapper, it handles alignment, placement, and general appearance.
 - **group**: Wrapper for the input and calendar button.
@@ -195,3 +234,29 @@ Slots can be overridden via the `classNames.popover` prop or `popoverProps#class
 ### FieldError slots
 
 Slots can be overridden via the `classNames.error` prop.
+
+## Props
+
+### DatePicker
+
+| Prop                 | Type                                                                        | Default    | Description                                                                         |
+| -------------------- | --------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------- |
+| `label`              | `string`                                                                    | -          | The visible label for the field                                                     |
+| `description`        | `string`                                                                    | -          | Helper text shown below the field                                                   |
+| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`                      | -          | Error message displayed when the field is invalid                                   |
+| `value`              | `DateValue \| null`                                                         | -          | The current date value (controlled)                                                 |
+| `defaultValue`       | `DateValue \| null`                                                         | -          | The default date value (uncontrolled)                                               |
+| `onChange`           | `(value: DateValue \| null) => void`                                        | -          | Called when the date value changes                                                  |
+| `isDisabled`         | `boolean`                                                                   | `false`    | Whether the field is disabled                                                       |
+| `isReadOnly`         | `boolean`                                                                   | `false`    | Whether the field is read-only                                                      |
+| `isRequired`         | `boolean`                                                                   | `false`    | Whether the field is required                                                       |
+| `isInvalid`          | `boolean`                                                                   | `false`    | Whether the field should display as invalid                                         |
+| `validate`           | `(value: DateValue \| null) => ValidationError \| true \| null \| undefined`| -          | Custom validation function                                                          |
+| `validationBehavior` | `"native" \| "aria"`                                                        | `"native"` | Whether to use native HTML form validation or ARIA-only                             |
+| `selectorIcon`       | `ReactNode`                                                                 | -          | Custom icon for the calendar trigger button                                         |
+| `calendarProps`      | `CalendarProps<T>`                                                          | -          | Props forwarded to the internal Calendar component                                  |
+| `calendarButtonProps`| `ButtonProps`                                                               | -          | Additional props spread to the calendar trigger button (escape hatch)               |
+| `popoverProps`       | `PopoverProps`                                                              | -          | Props forwarded to the internal Popover component                                   |
+| `classNames`         | `SlotsToClasses<DatePickerSlots \| "description"> & { calendar?: ..., error?: ..., popover?: ... }` | - | Custom Tailwind classes for each slot, including nested Calendar, FieldError, and Popover slots |
+
+_Inherits all remaining props from React Aria's [DatePicker](https://react-aria.adobe.com/DatePicker). Notable ones: `autoFocus`, `granularity`, `hideTimeZone`, `hourCycle`, `pageBehavior`, `shouldCloseOnSelect`._
