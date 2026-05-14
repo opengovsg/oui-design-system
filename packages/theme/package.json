@@ -5,7 +5,8 @@
   "files": [
     "dist",
     "src/variants/*.css",
-    "src/tailwind.css"
+    "src/tailwind.css",
+    "AGENTS.md"
   ],
   "license": "SEE LICENSE IN LICENSE.md",
   "homepage": "https://github.com/opengovsg/oui-design-system",

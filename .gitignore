@@ -16,3 +16,11 @@ storybook-static/
 
 # Generated theme CSS for docs site
 apps/www/public/themes/
+
+# Generated agent-facing docs (output of scripts/generate-llms)
+apps/www/public/llms.txt
+apps/www/public/llms-full.txt
+apps/www/public/llm/
+
+# Superpowers-generated specs and plans (kept locally, never committed)
+docs/superpowers/
