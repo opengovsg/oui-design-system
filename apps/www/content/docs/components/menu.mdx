@@ -11,71 +11,228 @@ links:
   reactaria: Menu
 ---
 
+<ComponentPreview name="menu-demo" />
+
 ## Usage
 
 Use **Menu** for lists of actions (e.g., "Edit", "Delete", "Share"). Use [Select](/docs/components/select) when the user is choosing a value to submit. Use [ComboBox](/docs/components/combo-box) for value selection with filtering.
 
-OUI exports 5 menu-related components:
+```tsx
+import {
+  Menu,
+  MenuItem,
+  MenuSection,
+  MenuSeparator,
+  MenuTrigger,
+  SubmenuTrigger,
+} from "@opengovsg/oui"
+```
 
-- **Menu**: The main component that contains the menu items.
-- **MenuTrigger**: The component that triggers the menu to open. Re-exported from `react-aria-components`.
-- **SubmenuTrigger**: The component that triggers a nested menu to open. Re-exported from `react-aria-components`.
-- **MenuSection**: The component that contains a group of menu items.
-- **MenuItem**: The component that represents a menu item.
-- **MenuSeparator**: The component that represents a separator between menu items.
+```tsx
+<MenuTrigger>
+  <Button>Options</Button>
+  <Menu>
+    <MenuItem id="edit">Edit</MenuItem>
+    <MenuItem id="copy">Copy</MenuItem>
+    <MenuItem id="delete">Delete</MenuItem>
+  </Menu>
+</MenuTrigger>
+```
 
-<ComponentPreview name="menu-demo" />
+Menu renders a floating list of actions, built on [React Aria's Menu](https://react-aria.adobe.com/Menu). It handles keyboard navigation, focus management, selection state, and ARIA semantics automatically. The menu is opened and closed by a `MenuTrigger` wrapper (re-exported from `react-aria-components`).
 
-### Disabled Keys
+If the trigger element does not have a visible label, pass `aria-label` to the trigger element to identify it to assistive technology.
 
-Menu items can be disabled using the `disabledKeys` prop to the `Menu` component.
+## Anatomy
 
-> Note: It's important to have a unique key for each item, otherwise the disabled keys will not work.
+Menu consists of:
 
-### Action event
+- **MenuTrigger** (from `react-aria-components` — provides open/close state)
+  - Trigger element (e.g., `Button`)
+  - **Menu** — the floating list container
+    - **MenuItem** — one action per item
+    - **MenuSection** (optional) — groups items with a heading
+    - **MenuSeparator** (optional) — a visual divider between items
+    - **SubmenuTrigger** (optional, from `react-aria-components`) — wraps a `MenuItem` and a nested `Menu`
 
-You can use the onAction prop to get the key of the selected item.
+## Examples
 
 ### With Icons
 
-You can also add icons to the menu items using the `startContent` / `endContent` props.
+Use the `startContent` and `endContent` props on `MenuItem` to add icons or badges alongside the item label.
+
+<ComponentPreview name="menu-with-icons" />
+
+### Disabled Items
+
+Use `disabledKeys` on `Menu` to prevent specific items from being activated.
+
+> Each item must have a unique `id` for `disabledKeys` to work correctly.
+
+<ComponentPreview name="menu-disabled-items" />
 
 ### With Sections
 
-You can use the `MenuSection` component to group menu items.
+Use `MenuSection` to group related items under a shared heading. Pass `title` for a visible heading, or `aria-label` when a heading is not shown visually.
 
-### Custom Trigger
+<ComponentPreview name="menu-sections" />
 
-You can use any component as a trigger for the menu, just wrap it in the `MenuTrigger` component.
+### Selection
 
-### Nested menus
+`MenuSection` supports `selectionMode="single"` and `selectionMode="multiple"`. Use `selectedKeys` / `onSelectionChange` to control selection state. Selected items display a check icon by default.
 
-You can also nest submenus inside a a menu using the `SubmenuTrigger` and `Menu` components.
+<ComponentPreview name="menu-selection" />
 
-### Routing
+### Nested Menus
 
-The `<MenuItem>` component works with frameworks and client side routers like Next.js and React Router. See the [Routing](https://react-spectrum.adobe.com/react-aria/routing.html) guide to learn how to set this up.
+Use `SubmenuTrigger` to wrap a `MenuItem` and a nested `Menu` when an action has sub-actions.
+
+<ComponentPreview name="menu-demo" />
+
+### Sizes
+
+Use the `size` prop on `Menu` to change the density. Defaults to `"md"`.
+
+<ComponentPreview name="menu-sizes" />
+
+## Content
+
+Menu follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections.
+
+**Static collections** pass children directly when the list of items is known at render time:
+
+```tsx
+<MenuTrigger>
+  <Button>Actions</Button>
+  <Menu>
+    <MenuItem id="edit">Edit</MenuItem>
+    <MenuItem id="delete">Delete</MenuItem>
+  </Menu>
+</MenuTrigger>
+```
+
+**Dynamic collections** pass an iterable to the `items` prop and a render function as `children`. Each item object must have an `id` field (or provide a unique `id` prop on the rendered `MenuItem`).
+
+<ComponentPreview name="menu-content-example" />
+
+Use the `id` prop on each `MenuItem` — it is passed to `onAction` when the item is activated. Use `textValue` on an item when its `children` is not a plain string (e.g., when it contains icons), so keyboard typeahead works correctly.
+
+## Events
+
+- **`onAction`** (on `Menu`) — Called when any item is activated, receiving the item's `Key`. Use this as an alternative to putting `onAction` on individual `MenuItem`s.
+- **`onAction`** (on `MenuItem`) — Called when this specific item is activated (no argument).
+- **`onSelectionChange`** (on `MenuSection`) — Called when selection changes within a section in single or multiple selection mode, receiving a `Selection` set.
+- **`onOpenChange`** (on `MenuTrigger`) — Called when the menu opens or closes, receiving `(isOpen: boolean)`.
+- **`onClose`** (on `Menu`) — Called when the menu should close after an item is selected.
+- **`onFocus`** / **`onBlur`** — Called when the menu receives or loses focus.
+
+## Accessibility
+
+- Menu is built on React Aria's `useMenu` / `useMenuItem` hooks, which produce a native `role="menu"` / `role="menuitem"` ARIA tree automatically.
+- **Keyboard navigation**: **Up/Down** arrows move between items; **Enter** or **Space** activates the focused item; **Escape** closes the menu and returns focus to the trigger; **Tab** closes the menu.
+- **Submenu navigation**: **Right arrow** (or **Enter**) opens a submenu; **Left arrow** (or **Escape**) closes it and returns focus to the parent item.
+- The trigger element should have a visible label or an `aria-label` so screen-reader users know what the menu controls.
+- `MenuSection` requires either `title` (rendered as a visible heading) or `aria-label` to label the group for assistive technology.
+- `disabledKeys` marks items as `aria-disabled` — they remain visible but cannot be activated.
 
 ## Slots
 
-Menu has multiple components with slots; the `Menu`, `MenuItem`, and `MenuSection` components.
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+**Menu slots:**
+
+- **`base`**: The scrollable `<ul>` list element inside the popover.
+- **`popover`**: The floating popover container that wraps the menu.
+- **`separator`**: The `<hr>` element rendered by `MenuSeparator`.
+
+**MenuItem slots** (via `MenuItem`'s `classNames`):
+
+- **`container`**: The list item row — the full clickable area.
+- **`label`**: The primary text label inside the item.
+- **`description`**: Secondary descriptive text (inherited from `listBoxItemStyles`).
+- **`iconContainer`**: The fixed-width span that wraps the selection check icon.
+- **`icon`**: The selection check or submenu chevron icon element.
+
+**MenuSection slots** (via `MenuSection`'s `classNames`):
+
+- **`base`**: The `<section>` wrapper around the group.
+- **`header`**: The heading element rendered above the group's items when `title` is set.
+
+### Custom Styles
+
+<ComponentPreview name="menu-custom-styles" />
+
+## Props
 
 ### Menu
 
-- **base**: The slot for the menu component.
-- **popover**: The slot for the popover component.
-- **separator**: The slot for the separator component.
+| Prop            | Type                                         | Default  | Description                                                               |
+| --------------- | -------------------------------------------- | -------- | ------------------------------------------------------------------------- |
+| `children`      | `ReactNode \| ((item: T) => ReactNode)`      | -        | Static children or render function for dynamic items                      |
+| `items`         | `Iterable<T>`                                | -        | The list of items for a dynamic collection                                |
+| `disabledKeys`  | `Iterable<Key>`                              | -        | Keys of items that are disabled                                           |
+| `selectionMode` | `"none" \| "single" \| "multiple"`           | `"none"` | The selection mode for the menu (prefer per-section selection)            |
+| `selectedKeys`  | `Selection`                                  | -        | The currently selected keys (controlled)                                  |
+| `defaultSelectedKeys` | `Selection`                           | -        | The default selected keys (uncontrolled)                                  |
+| `onSelectionChange` | `(keys: Selection) => void`             | -        | Called when the selection changes                                         |
+| `onAction`      | `(key: Key) => void`                         | -        | Called when an item is activated, receiving its `Key`                     |
+| `onClose`       | `() => void`                                 | -        | Called when the menu should close after item selection                    |
+| `size`          | `"xs" \| "sm" \| "md"`                       | `"md"`   | The size (density) of the menu and its items                              |
+| `placement`     | `Placement`                                  | -        | The placement of the popover relative to the trigger                      |
+| `classNames`    | `SlotsToClasses<"base" \| "popover" \| "separator">` | -  | Custom Tailwind classes for menu slots                              |
+| `autoFocus`     | `boolean \| "first" \| "last"`               | -        | Where focus is placed when the menu opens                                 |
+
+_Inherits all remaining props from React Aria's [Menu](https://react-aria.adobe.com/Menu). Notable ones: `shouldFocusWrap`, `escapeKeyBehavior`, `aria-label`, `aria-labelledby`._
 
 ### MenuItem
 
-The slots extend from `ListboxItem` slots, but not all slots are used. Below are the slots used by `MenuItem`.
+| Prop                   | Type                                                                                | Default | Description                                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------- |
+| `children`             | `ReactNode \| ((renderProps: MenuItemRenderProps) => ReactNode)`                    | -       | The item content, or a render function receiving render props                             |
+| `id`                   | `Key`                                                                               | -       | A unique identifier for the item; passed to `onAction` and used by `disabledKeys`         |
+| `textValue`            | `string`                                                                            | -       | Plain-text value for typeahead; required when `children` is not a string                  |
+| `isDisabled`           | `boolean`                                                                           | `false` | Whether the item is disabled                                                              |
+| `startContent`         | `ReactNode`                                                                         | -       | Element rendered to the left of the item label (e.g., an icon)                           |
+| `endContent`           | `ReactNode`                                                                         | -       | Element rendered to the right of the item label (e.g., a badge or keyboard shortcut)     |
+| `multipleSelectionIcon` | `ReactNode \| null`                                                                | -       | Custom icon shown when the item is selected in `multiple` selection mode; `null` hides it |
+| `singleSelectionIcon`  | `ReactNode \| null`                                                                 | -       | Custom icon shown when the item is selected in `single` selection mode; `null` hides it   |
+| `onAction`             | `() => void`                                                                        | -       | Called when this specific item is activated                                               |
+| `classNames`           | `SlotsToClasses<"container" \| "label" \| "description" \| "iconContainer" \| "icon">` | -   | Custom Tailwind classes for item slots                                                    |
 
-- **container**: The slot for the container of the menu item.
-- **label**: The slot for the label of the menu item.
-- **iconContainer**: The slot for the wrapper for the selection icons.
-- **icon**: The slot for the selection and chevron icons displayed.
+_Inherits all remaining props from React Aria's [MenuItem](https://react-aria.adobe.com/Menu#item). Notable ones: `href`, `target`, `rel` (router link support), `aria-label`._
 
 ### MenuSection
 
-- **base**: The main slot for the menu section. It wraps all the other slots.
-- **header**: The title that is render on top of the section group.
+| Prop              | Type                                                     | Default | Description                                                                              |
+| ----------------- | -------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------------- |
+| `children`        | `ReactNode \| ((item: T) => ReactNode)`                  | -       | Static children or render function for dynamic items within this section                 |
+| `items`           | `T[]`                                                    | -       | The list of items for a dynamic collection in this section                               |
+| `title`           | `string`                                                 | -       | A visible heading rendered above the section's items; mutually exclusive with `aria-label` |
+| `selectionMode`   | `"none" \| "single" \| "multiple"`                       | `"none"` | The selection mode for items within this section                                        |
+| `selectedKeys`    | `Selection`                                              | -       | The currently selected keys within this section (controlled)                             |
+| `defaultSelectedKeys` | `Selection`                                          | -       | The default selected keys within this section (uncontrolled)                             |
+| `onSelectionChange` | `(keys: Selection) => void`                            | -       | Called when the selection within this section changes                                    |
+| `classNames`      | `SlotsToClasses<"base" \| "header">`                     | -       | Custom Tailwind classes for section slots                                                |
+
+_Inherits all remaining props from React Aria's [Section](https://react-aria.adobe.com/Menu#sections). Notable ones: `aria-label` (required when `title` is not provided)._
+
+### MenuTrigger
+
+| Prop           | Type                         | Default     | Description                                                    |
+| -------------- | ---------------------------- | ----------- | -------------------------------------------------------------- |
+| `children`     | `ReactNode`                  | -           | The trigger element and the `Menu` component                   |
+| `isOpen`       | `boolean`                    | -           | Whether the menu is open (controlled)                          |
+| `defaultOpen`  | `boolean`                    | `false`     | Whether the menu is initially open (uncontrolled)              |
+| `onOpenChange` | `(isOpen: boolean) => void`  | -           | Called when the menu opens or closes                           |
+| `trigger`      | `"press" \| "longPress"`     | `"press"`   | How the trigger opens the menu                                 |
+
+### MenuSeparator
+
+`MenuSeparator` accepts all standard HTML `<hr>` props (e.g., `className`).
+
+### SubmenuTrigger
+
+| Prop      | Type            | Default | Description                                                    |
+| --------- | --------------- | ------- | -------------------------------------------------------------- |
+| `children` | `ReactElement[]` | -      | The trigger `MenuItem` and the submenu `Menu`                  |
+| `delay`   | `number`         | `200`  | Delay in milliseconds before the submenu opens on hover        |
