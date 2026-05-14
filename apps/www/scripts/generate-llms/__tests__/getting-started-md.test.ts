@@ -25,6 +25,7 @@ describe("renderGettingStartedMarkdown", () => {
     expect(md).not.toContain("**See also:**")
     expect(md).not.toContain("## Related components")
     // Card content surfaced as bullets (from earlier transform)
-    expect(md).toContain("/docs/getting-started/next")
+    // URLs are rewritten to the /llm/ surface by the link-rewrite transform
+    expect(md).toContain("/llm/getting-started/next.md")
   })
 })

@@ -75,9 +75,10 @@ describe("applyTransforms — CardGroup/Card", () => {
     expect(json).not.toContain('"name":"CardGroup"')
     expect(json).not.toContain('"name":"Card"')
     // Both cards rendered as list items with link + description
-    expect(json).toContain("/docs/getting-started/next")
+    // URLs are rewritten to the /llm/ surface by the link-rewrite transform
+    expect(json).toContain("/llm/getting-started/next.md")
     expect(json).toContain("Use OUI with Next.js apps")
-    expect(json).toContain("/docs/getting-started/vite")
+    expect(json).toContain("/llm/getting-started/vite.md")
   })
 })
 
@@ -143,5 +144,69 @@ describe("applyTransforms — Toaster", () => {
     } finally {
       warnSpy.mockRestore()
     }
+  })
+})
+
+describe("applyTransforms — link rewriting", () => {
+  it("rewrites /docs/<kind>/<slug> links to /llm/<kind>/<slug>.md", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    // Inject a paragraph with links of each kind we care about
+    doc.body.children.push({
+      type: "paragraph",
+      children: [
+        {
+          type: "link",
+          url: "/docs/components/combo-box",
+          title: null,
+          children: [{ type: "text", value: "ComboBox" }],
+        },
+        {
+          type: "link",
+          url: "/docs/components/select#validation",
+          title: null,
+          children: [{ type: "text", value: "Select Validation" }],
+        },
+        {
+          type: "link",
+          url: "/docs/getting-started/installation",
+          title: null,
+          children: [{ type: "text", value: "Install" }],
+        },
+        {
+          type: "link",
+          url: "/docs/guides/forms#validation",
+          title: null,
+          children: [{ type: "text", value: "Forms Validation" }],
+        },
+        {
+          type: "link",
+          url: "https://react-aria.adobe.com/ComboBox",
+          title: null,
+          children: [{ type: "text", value: "External" }],
+        },
+        {
+          type: "link",
+          url: "#in-page",
+          title: null,
+          children: [{ type: "text", value: "In-page" }],
+        },
+      ],
+    } as never)
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).toContain("/llm/components/combo-box.md")
+    expect(json).toContain("/llm/components/select.md#validation")
+    expect(json).toContain("/llm/getting-started/installation.md")
+    expect(json).toContain("/llm/guides/forms.md#validation")
+    // External and in-page links untouched
+    expect(json).toContain("https://react-aria.adobe.com/ComboBox")
+    expect(json).toContain('"url":"#in-page"')
+    // No raw /docs/<kind>/<slug> survives
+    expect(json).not.toMatch(/"url":"\/docs\/(components|getting-started|guides)\//)
   })
 })

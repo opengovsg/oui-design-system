@@ -28,6 +28,7 @@ export async function applyTransforms(
   transformCardGroups(doc.body)
   removeBrElements(doc.body)
   transformKbdElements(doc.body)
+  rewriteInternalLinks(doc.body)
   removeToasterElements(doc.body)
 
   const stripped = stripUnknownJsx(doc.body)
@@ -145,6 +146,23 @@ function transformKbdElements(tree: Root): void {
       value: textContent,
     }
     ;(parent as Parent).children.splice(index, 1, textNode)
+  })
+}
+
+function rewriteInternalLinks(tree: Root): void {
+  // Rewrite cross-doc /docs/<kind>/<slug> links so agents traversing
+  // the LLM markdown surface stay inside the .md files instead of
+  // landing on the website's HTML pages.
+  const KIND_PATHS = ["components", "getting-started", "guides"]
+  const pattern = new RegExp(
+    `^/docs/(${KIND_PATHS.join("|")})/([^/#?]+)(#.*)?$`,
+  )
+  visit(tree, "link", (node) => {
+    if (typeof node.url !== "string") return
+    const match = node.url.match(pattern)
+    if (!match) return
+    const [, kind, slug, frag = ""] = match
+    node.url = `/llm/${kind}/${slug}.md${frag}`
   })
 }
 
