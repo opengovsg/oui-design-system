@@ -1,10 +1,10 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises"
+import { mkdir, readdir, rm, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
 import type { ComponentEntry, GuideEntry } from "./llms-txt"
 import type { ParsedDoc } from "./types"
-import { docsConfig } from "../../config/docs.config"
+import { docsConfig, type NavItem } from "../../config/docs.config"
 import { renderComponentMarkdown } from "./component-md"
 import { writeCoverageReport } from "./coverage"
 import { renderGettingStartedMarkdown } from "./getting-started-md"
@@ -37,10 +37,31 @@ async function listMdxFilesIfDirExists(dir: string): Promise<string[]> {
   }
 }
 
+function collectWipSlugs(nav: NavItem[]): Set<string> {
+  // Walk the docs nav tree and return slugs flagged status: "wip".
+  // WIP components are not yet shipped — exclude them from the agent-facing
+  // surface entirely (no per-doc .md, no llms.txt entry, no coverage entry).
+  const out = new Set<string>()
+  const walk = (items: NavItem[]): void => {
+    for (const item of items) {
+      if (item.status === "wip" && item.url) out.add(item.url)
+      if (item.items) walk(item.items)
+    }
+  }
+  walk(nav)
+  return out
+}
+
+const WIP_SLUGS = collectWipSlugs(docsConfig.navigation)
+
 async function main(): Promise<void> {
-  const componentFiles = await listMdxFiles(
+  const allComponentFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "components"),
   )
+  const componentFiles = allComponentFiles.filter((filePath) => {
+    const slug = path.basename(filePath, ".mdx")
+    return !WIP_SLUGS.has(slug)
+  })
   const guideFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "getting-started"),
   )
@@ -97,7 +118,9 @@ async function main(): Promise<void> {
     topicalGuideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
   }
 
-  // 3. Write per-doc files.
+  // 3. Write per-doc files. Clean the output tree first so renamed or
+  //    WIP-filtered slugs don't leave stale .md files behind.
+  await rm(path.join(PUBLIC_DIR, "llm"), { recursive: true, force: true })
   await mkdir(path.join(PUBLIC_DIR, "llm", "components"), { recursive: true })
   await mkdir(path.join(PUBLIC_DIR, "llm", "getting-started"), {
     recursive: true,
