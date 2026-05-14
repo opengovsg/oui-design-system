@@ -29,12 +29,23 @@ async function listMdxFiles(dir: string): Promise<string[]> {
     .sort()
 }
 
+async function listMdxFilesIfDirExists(dir: string): Promise<string[]> {
+  try {
+    return await listMdxFiles(dir)
+  } catch {
+    return []
+  }
+}
+
 async function main(): Promise<void> {
   const componentFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "components"),
   )
   const guideFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "getting-started"),
+  )
+  const contributingFiles = await listMdxFilesIfDirExists(
+    path.join(CONTENT_DIR, "contributing"),
   )
 
   // 1. Parse all docs and apply transforms.
@@ -50,6 +61,13 @@ async function main(): Promise<void> {
     const doc = await loadDoc(filePath, "getting-started")
     await applyTransforms(doc, { examplesDir: EXAMPLES_DIR })
     guides.push(doc)
+  }
+
+  const contributingDocs: ParsedDoc[] = []
+  for (const filePath of contributingFiles) {
+    const doc = await loadDoc(filePath, "getting-started")
+    await applyTransforms(doc, { examplesDir: EXAMPLES_DIR })
+    contributingDocs.push(doc)
   }
 
   // 2. Build the related-doc summary map (needed before rendering component .md).
@@ -96,6 +114,23 @@ async function main(): Promise<void> {
       md,
       "utf8",
     )
+  }
+
+  if (contributingDocs.length > 0) {
+    await mkdir(path.join(PUBLIC_DIR, "llm", "contributing"), {
+      recursive: true,
+    })
+    const contributingMarkdowns = new Map<string, string>()
+    for (const doc of contributingDocs) {
+      contributingMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
+    }
+    for (const [slug, md] of contributingMarkdowns) {
+      await writeFile(
+        path.join(PUBLIC_DIR, "llm", "contributing", `${slug}.md`),
+        md,
+        "utf8",
+      )
+    }
   }
 
   // 5. Build entries for llms.txt.
