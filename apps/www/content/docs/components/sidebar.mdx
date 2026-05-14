@@ -282,6 +282,8 @@ Each item in the array can be one of three types:
 | `classNames`          | `SlotsToClasses<SidebarSlots>`          | -       | Custom classes for individual slots.                                                                             |
 | `children`            | `ReactNode`                             | -       | Sidebar content (items, headers, lists).                                                                         |
 
+> `setCollapsed` and `isNested` are internal context values (`SidebarCollapseContext` and `SidebarNestContext`) used for cross-component communication. They are not public props on any component and are not intended for direct use.
+
 ### SidebarItem
 
 Extends React Aria's [Link](https://react-aria.adobe.com/Link.html) props.
