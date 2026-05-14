@@ -1,6 +1,6 @@
 ---
 title: Pagination
-description: Displays the active page and allows navigation between multiple pages.
+description: Displays a page range and lets users navigate between pages of content. For infinite scroll, consider a "Load more" button pattern instead.
 category: Layout & Navigation
 toc:
   visible: true
@@ -10,15 +10,31 @@ links:
   theme: pagination
 ---
 
+<ComponentPreview name="pagination-demo" />
+
 ## Usage
 
-OUI exports 3 pagination-related components:
+```tsx
+import { Pagination } from "@opengovsg/oui"
+```
 
-- **Pagination**: The main component to display a pagination.
-- **PaginationItem**: The internal component to display a pagination item.
-- **PaginationCursor**: The internal item component to display the current page.
+```tsx
+<Pagination total={10} onChange={setPage} />
+```
 
-<ComponentPreview name="pagination-demo" />
+Pagination renders a `<nav>` landmark with numbered page buttons, optional prev/next controls, and animated ellipsis items for large ranges. It is built on OUI's own `usePagination` hook (not a React Aria primitive), which manages active-page state and computes the visible page range from `total`, `siblings`, and `boundaries`.
+
+The root `<nav>` element gets `aria-label="pagination navigation"` by default; pass a custom `aria-label` to override it when multiple paginations appear on one page.
+
+## Anatomy
+
+Pagination consists of:
+
+- **Pagination** — the root `<nav>` container; manages all state
+  - **PaginationItem** — one interactive page button (number, prev, next, or dots)
+  - **PaginationCursor** — the animated highlight that slides to the active page (internal; hidden when `disableCursorAnimation` is true)
+
+## Examples
 
 ### Disabled
 
@@ -26,9 +42,13 @@ OUI exports 3 pagination-related components:
 
 ### Sizes
 
+Use the `size` prop to change button dimensions. Defaults to `"md"`.
+
 <ComponentPreview name="pagination-sizes" />
 
 ### Colors
+
+Use the `color` prop to change the cursor color. Defaults to `"neutral"`.
 
 <ComponentPreview name="pagination-colors" />
 
@@ -40,86 +60,154 @@ There is currently only a single `light` variant available.
 
 ### Show controls
 
-You can set the `showControls` prop to `true` to display the next and previous buttons.
+Set `showControls` to `true` to display prev/next arrow buttons at the edges.
 
 <ComponentPreview name="pagination-with-controls" />
 
 ### Pagination Loop
 
-In case you want to loop the pagination, you can set the `loop` property to `true`. The cursor will go back to the first page when it reaches the last page and vice versa.
+Set `loop` to `true` so the cursor wraps from the last page back to the first and vice versa.
 
 <ComponentPreview name="pagination-loop" />
 
 ### Initial page
 
-You can change the initial page by setting the `initialPage` property.
+Use `initialPage` to set the starting page for an uncontrolled pagination.
 
 <ComponentPreview name="pagination-initial-page" />
 
 ### Compact variant
 
-You can set the `isCompact` property to `true` to display a reduced version of the pagination.
+Set `isCompact` to `true` for a denser layout with less item padding.
 
 <ComponentPreview name="pagination-compact" />
 
 ### Controlled
 
+Use `page` and `onChange` together to drive pagination from external state.
+
 <ComponentPreview name="pagination-controlled" />
 
 ### Siblings
 
-You can control the number of pages to show before and after the current page by setting the `siblings` property.
+Use `siblings` to control how many page buttons appear on each side of the active page.
 
 <ComponentPreview name="pagination-siblings" />
 
 ### Boundaries
 
-You can control the number of pages to show at the beginning and end of the pagination by setting the `boundaries` property.
+Use `boundaries` to control how many page buttons appear at the start and end of the range.
 
 <ComponentPreview name="pagination-boundaries" />
 
 ### Custom items
 
-You can use the `renderItem` property to customize the pagination items.
+Use `renderItem` to fully replace the default page button rendering. The function receives a `PaginationItemRenderProps` object (see render-prop state table in Props below).
 
 <ComponentPreview name="pagination-custom-items" />
 
-## Slots
+### Custom hook implementation
 
-- **base**: The main pagination slot.
-- **wrapper**: The pagination wrapper slot. This wraps the pagination items.
-- **prev**: The previous button slot.
-- **next**: The next button slot.
-- **item**: The pagination item slot, applied to the middle items.
-- **cursor**: The current page slot. Available only when disableCursorAnimation is false and disableAnimation is false.
-- **forwardIcon**: The forward icon slot. The one that appears when hovering the ellipsis button.
-- **ellipsis**: The ellipsis slot.
-- **chevronNext**: The chevron next icon slot.
-
-### Custom Styles
-
-You can customize the `Pagination` component by passing custom Tailwind CSS classes to the component slots.
-
-<ComponentPreview name="pagination-custom-styles" />
-
-### Custom Implementation
-
-In case you need to customize the pagination even further, you can use the `usePagination` hook to create your own implementation.
+Use the exported `usePagination` hook to build a completely custom pagination UI while reusing OUI's range-calculation logic.
 
 <ComponentPreview name="pagination-hook-implementation" />
 
-## Data Attributes
+## Events
 
-`Pagination` has the following attributes on the base element:
-
-- **data-controls**: Indicates whether the pagination has controls. Based on `showControls` prop.
-- **data-loop**: When the pagination is looped. Based on `loop` prop.
-- **data-dots-jump**: Indicates whether the pagination has dots jump. Based on `dotsJump` prop.
-- **data-total**: The total number of pages. Based on `total` prop.
-- **data-active-page**: The active page. Based on `activePage` prop.
+- **`onChange`** — Called when the active page changes, receiving the new page number `(page: number) => void`. Use with `page` for controlled mode, or alone for uncontrolled.
+- **`onNext`** / **`onPrevious`** — Available on the `PaginationItemRenderProps` object passed to `renderItem`. Call these from custom prev/next buttons.
+- **`setPage`** — Also available in `PaginationItemRenderProps`. Programmatically jumps to any page number.
 
 ## Accessibility
 
-- The root node has a role of `navigation` by default.
-- The pagination items have an aria-label that identifies the item purpose ("next page button", "previous page button", etc.), you can override this label by using the `getItemAriaLabel` function.
-- The pagination items are in tab order, with a tabindex of "0".
+- The root element renders as `<nav role="navigation">` with `aria-label="pagination navigation"` (overridable via the `aria-label` prop).
+- Each page button receives an `aria-label` computed by `getItemAriaLabel`: `"pagination item 3"` for numbered pages, `"previous page button"`, `"next page button"`, `"dots element"`, etc. Override all labels via the `getItemAriaLabel` prop.
+- All buttons are in tab order (`tabindex="0"`) and follow standard focus-ring styles. Disabled pagination items get `aria-disabled` and `data-disabled` attributes.
+- Keyboard navigation uses standard button behavior: **Tab** / **Shift+Tab** moves between items, **Enter** or **Space** activates the focused item.
+- When multiple Pagination components appear on the same page, pass a unique descriptive `aria-label` to each so screen-reader users can distinguish them.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`base`**: The outer `<nav>` wrapper (handles horizontal scroll overflow).
+- **`wrapper`**: The inner flex row that contains all page items.
+- **`item`**: Each individual page-number button in the middle of the range.
+- **`prev`**: The previous-page control button (visible when `showControls` is true).
+- **`next`**: The next-page control button (visible when `showControls` is true).
+- **`cursor`**: The animated sliding highlight that sits behind the active page item.
+- **`forwardIcon`**: The forward-jump icon revealed on hover over an ellipsis button.
+- **`ellipsis`**: The `"..."` icon shown by default inside an ellipsis button.
+- **`chevronNext`**: The chevron icon inside the next-page control button.
+
+### Custom Styles
+
+<ComponentPreview name="pagination-custom-styles" />
+
+## Props
+
+### Pagination
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `total` | `number` | `1` | The total number of pages |
+| `page` | `number` | - | The controlled active page |
+| `initialPage` | `number` | `1` | The active page on initial render (uncontrolled) |
+| `onChange` | `(page: number) => void` | - | Called when the active page changes |
+| `siblings` | `number` | `1` | Number of page buttons shown on each side of the active page |
+| `boundaries` | `number` | `1` | Number of page buttons shown at the start and end of the range |
+| `dotsJump` | `number` | `5` | Pages added or subtracted when an ellipsis button is clicked |
+| `loop` | `boolean` | `false` | Whether the pagination wraps from last page to first and vice versa |
+| `showControls` | `boolean` | `false` | Whether to show prev and next arrow buttons |
+| `isCompact` | `boolean` | `false` | Whether to use a compact (less-padded) item layout |
+| `isDisabled` | `boolean` | `false` | Whether all pagination items are disabled |
+| `renderItem` | `(props: PaginationItemRenderProps) => ReactNode` | - | Render function for a custom item; receives render-prop state (see table below) |
+| `getItemAriaLabel` | `(page?: string \| PaginationItemValue) => string` | - | Override the default `aria-label` computed for each item |
+| `size` | `"sm" \| "md" \| "lg"` | `"md"` | The size of each page button |
+| `color` | `"main" \| "neutral" \| "critical" \| "warning" \| "success"` | `"neutral"` | The color of the animated cursor |
+| `radius` | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"sm"` | The border-radius of page buttons and the cursor |
+| `variant` | `"light"` | `"light"` | Visual variant (only `"light"` is available) |
+| `disableCursorAnimation` | `boolean` | `false` | Whether to hide the sliding cursor animation |
+| `disableAnimation` | `boolean` | `false` | Whether to disable all CSS transitions |
+| `classNames` | `SlotsToClasses<PaginationSlots>` | - | Custom Tailwind classes keyed by slot name |
+| `className` | `string` | - | Additional class added to the `base` slot |
+
+#### `renderItem` render-prop state (`PaginationItemRenderProps`)
+
+When using `renderItem`, the function is called once per item in the computed range with the following object:
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| `value` | `number \| "dots" \| "prev" \| "next"` | The item's logical value — a page number or a `PaginationItemType` sentinel |
+| `index` | `number` | Zero-based position of this item in the rendered range array |
+| `page` | `number` | Calculated page position (includes dots positions) |
+| `total` | `number` | Total number of pages |
+| `activePage` | `number` | Currently active page number |
+| `isActive` | `boolean` | Whether this item is the currently active page |
+| `isBefore` | `boolean` | Whether this item is positioned before the active page |
+| `isFirst` | `boolean` | Whether this item is the first in the range |
+| `isLast` | `boolean` | Whether this item is the last in the range |
+| `isNext` | `boolean` | Whether this item is the next-page control |
+| `isPrevious` | `boolean` | Whether this item is the prev-page control |
+| `dotsJump` | `number` | Pages added/subtracted when this item (if it is dots) is activated |
+| `className` | `string` | Pre-computed slot class string to apply to the rendered element |
+| `children` | `ReactNode` | Default content (the page number or icon) |
+| `onNext` | `() => void` | Callback to advance to the next page |
+| `onPrevious` | `() => void` | Callback to go to the previous page |
+| `setPage` | `(page: number) => void` | Callback to jump to a specific page |
+| `onPress` | `(e: PressEvent) => void \| undefined` | Press handler for the item |
+| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | Retrieves the `aria-label` for the item |
+
+### PaginationItem
+
+`PaginationItem` is used internally by `Pagination` and is rarely needed directly. Use it when building fully custom pagination with `usePagination`.
+
+| Prop | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| `value` | `number \| "dots" \| "prev" \| "next"` | - | The logical value of this item |
+| `isActive` | `boolean` | `false` | Whether this item is the currently active page |
+| `isDisabled` | `boolean` | `false` | Whether this item is disabled |
+| `onPress` | `(e: PressEvent) => void` | - | Called when the item is pressed |
+| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | - | Function that returns the `aria-label` for this item |
+
+_Accepts standard HTML `<li>` props (e.g., `className`, `aria-label`)._
