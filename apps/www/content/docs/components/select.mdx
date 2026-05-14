@@ -154,77 +154,77 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Select
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `children` | `ReactNode \| ((item: T) => ReactNode)` | - | Static children or render function for dynamic items |
-| `label` | `ReactNode` | - | The visible label for the field |
-| `items` | `Iterable<T>` | - | The list of items for a dynamic collection (controlled) |
-| `value` | `Key \| null` | - | The key of the selected item (controlled) |
-| `defaultValue` | `Key` | - | The default selected key (uncontrolled) |
-| `onChange` | `(key: Key \| null) => void` | - | Called when the selected value changes |
-| `isDisabled` | `boolean` | `false` | Whether the field is disabled |
-| `isReadOnly` | `boolean` | `false` | Whether the field is read-only |
-| `isRequired` | `boolean` | `false` | Whether the field is required |
-| `isInvalid` | `boolean` | `false` | Whether the field should display as invalid |
-| `validate` | `(value: Key \| null) => ValidationError \| true \| null \| undefined` | - | Custom validation function |
-| `errorMessage` | `ReactNode \| ((validation: ValidationResult) => ReactNode)` | - | Error message to display when invalid |
-| `validationBehavior` | `"native" \| "aria"` | `"native"` | Whether to use native HTML form validation or ARIA-only |
-| `size` | `"xs" \| "sm" \| "md"` | `"md"` | The size of the component |
-| `classNames` | `SlotsToClasses<SelectVariantSlots \| "error">` | - | Custom Tailwind classes for component slots |
-| `description` | `ReactNode \| null` | - | Helper text shown below the trigger |
-| `placeholder` | `string` | - | Placeholder text shown when no value is selected |
-| `enableSearch` | `boolean` | `false` | Render a search input inside the dropdown to filter options |
-| `searchPlaceholder` | `string` | - | Placeholder text for the search field; defaults to a localised "Search..." |
-| `searchIcon` | `ReactNode` | - | Icon to display in the search field |
-| `renderSelectValue` | `ReactNode \| ((props: SelectValueRenderProps<T>) => ReactNode)` | - | Custom renderer for the selected value in the trigger |
-| `listLayoutOptions` | `ListLayoutOptions` | - | Additional props spread to the list layout (virtualisation) |
-| `popoverProps` | `Partial<PopoverProps>` | - | Additional props spread to the Popover wrapper |
-| `onOpenChange` | `(isOpen: boolean) => void` | - | Called when the dropdown opens or closes |
-| `onFocus` | `(e: FocusEvent) => void` | - | Called when the trigger receives focus |
-| `onBlur` | `(e: FocusEvent) => void` | - | Called when the trigger loses focus |
-| `onFocusChange` | `(isFocused: boolean) => void` | - | Called when the focus state changes |
-| `onKeyDown` | `(e: KeyboardEvent) => void` | - | Called on key down within the trigger |
-| `onKeyUp` | `(e: KeyboardEvent) => void` | - | Called on key up within the trigger |
+| Prop                 | Type                                                                   | Default    | Description                                                                |
+| -------------------- | ---------------------------------------------------------------------- | ---------- | -------------------------------------------------------------------------- |
+| `children`           | `ReactNode \| ((item: T) => ReactNode)`                                | -          | Static children or render function for dynamic items                       |
+| `label`              | `ReactNode`                                                            | -          | The visible label for the field                                            |
+| `items`              | `Iterable<T>`                                                          | -          | The list of items for a dynamic collection (controlled)                    |
+| `value`              | `Key \| null`                                                          | -          | The key of the selected item (controlled)                                  |
+| `defaultValue`       | `Key`                                                                  | -          | The default selected key (uncontrolled)                                    |
+| `onChange`           | `(key: Key \| null) => void`                                           | -          | Called when the selected value changes                                     |
+| `isDisabled`         | `boolean`                                                              | `false`    | Whether the field is disabled                                              |
+| `isReadOnly`         | `boolean`                                                              | `false`    | Whether the field is read-only                                             |
+| `isRequired`         | `boolean`                                                              | `false`    | Whether the field is required                                              |
+| `isInvalid`          | `boolean`                                                              | `false`    | Whether the field should display as invalid                                |
+| `validate`           | `(value: Key \| null) => ValidationError \| true \| null \| undefined` | -          | Custom validation function                                                 |
+| `errorMessage`       | `ReactNode \| ((validation: ValidationResult) => ReactNode)`           | -          | Error message to display when invalid                                      |
+| `validationBehavior` | `"native" \| "aria"`                                                   | `"native"` | Whether to use native HTML form validation or ARIA-only                    |
+| `size`               | `"xs" \| "sm" \| "md"`                                                 | `"md"`     | The size of the component                                                  |
+| `classNames`         | `SlotsToClasses<SelectVariantSlots \| "error">`                        | -          | Custom Tailwind classes for component slots                                |
+| `description`        | `ReactNode \| null`                                                    | -          | Helper text shown below the trigger                                        |
+| `placeholder`        | `string`                                                               | -          | Placeholder text shown when no value is selected                           |
+| `enableSearch`       | `boolean`                                                              | `false`    | Render a search input inside the dropdown to filter options                |
+| `searchPlaceholder`  | `string`                                                               | -          | Placeholder text for the search field; defaults to a localised "Search..." |
+| `searchIcon`         | `ReactNode`                                                            | -          | Icon to display in the search field                                        |
+| `renderSelectValue`  | `ReactNode \| ((props: SelectValueRenderProps<T>) => ReactNode)`       | -          | Custom renderer for the selected value in the trigger                      |
+| `listLayoutOptions`  | `ListLayoutOptions`                                                    | -          | Additional props spread to the list layout (virtualisation)                |
+| `popoverProps`       | `Partial<PopoverProps>`                                                | -          | Additional props spread to the Popover wrapper                             |
+| `onOpenChange`       | `(isOpen: boolean) => void`                                            | -          | Called when the dropdown opens or closes                                   |
+| `onFocus`            | `(e: FocusEvent) => void`                                              | -          | Called when the trigger receives focus                                     |
+| `onBlur`             | `(e: FocusEvent) => void`                                              | -          | Called when the trigger loses focus                                        |
+| `onFocusChange`      | `(isFocused: boolean) => void`                                         | -          | Called when the focus state changes                                        |
+| `onKeyDown`          | `(e: KeyboardEvent) => void`                                           | -          | Called on key down within the trigger                                      |
+| `onKeyUp`            | `(e: KeyboardEvent) => void`                                           | -          | Called on key up within the trigger                                        |
 
 **Deprecated props** — still accepted for backwards compatibility but should not be used in new code:
 
-| Prop | Replacement |
-| --- | --- |
-| `selectedKey` | `value` |
+| Prop                 | Replacement    |
+| -------------------- | -------------- |
+| `selectedKey`        | `value`        |
 | `defaultSelectedKey` | `defaultValue` |
-| `onSelectionChange` | `onChange` |
+| `onSelectionChange`  | `onChange`     |
 
-*Inherits all remaining props from React Aria's [Select](https://react-aria.adobe.com/Select). Notable ones: `autoFocus`, `name`, `form`, `autoComplete`, `allowsEmptyCollection`, `excludeFromTabOrder`.*
+_Inherits all remaining props from React Aria's [Select](https://react-aria.adobe.com/Select). Notable ones: `autoFocus`, `name`, `form`, `autoComplete`, `allowsEmptyCollection`, `excludeFromTabOrder`._
 
 #### `renderSelectValue` render-prop argument
 
 When `renderSelectValue` is a function, it receives a `SelectValueRenderProps` object:
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `isPlaceholder` | `boolean` | Whether the placeholder is currently shown (no selection) |
-| `selectedText` | `string` | The text content of the selected item |
-| `selectedItem` | `T \| null` | The selected item object — **deprecated**, prefer `selectedItems` |
-| `selectedItems` | `(T \| null)[]` | Array of selected item objects |
+| Property        | Type            | Description                                                       |
+| --------------- | --------------- | ----------------------------------------------------------------- |
+| `isPlaceholder` | `boolean`       | Whether the placeholder is currently shown (no selection)         |
+| `selectedText`  | `string`        | The text content of the selected item                             |
+| `selectedItem`  | `T \| null`     | The selected item object — **deprecated**, prefer `selectedItems` |
+| `selectedItems` | `(T \| null)[]` | Array of selected item objects                                    |
 
 #### `errorMessage` render-prop argument
 
 When `errorMessage` is a function, it receives a `ValidationResult` object:
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `isInvalid` | `boolean` | Whether the field is currently invalid |
-| `validationErrors` | `string[]` | List of validation error strings |
+| Property            | Type            | Description                            |
+| ------------------- | --------------- | -------------------------------------- |
+| `isInvalid`         | `boolean`       | Whether the field is currently invalid |
+| `validationErrors`  | `string[]`      | List of validation error strings       |
 | `validationDetails` | `ValidityState` | The native HTML `ValidityState` object |
 
 ### SelectItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `children` | `ReactNode \| ((renderProps: ListBoxItemRenderProps) => ReactNode)` | - | The item content, or a render function |
-| `id` | `Key` | - | A unique identifier for the item; used as the value passed to `onChange` |
-| `textValue` | `string` | - | Plain-text value for filtering and accessibility; required when `children` is not a string |
-| `isDisabled` | `boolean` | `false` | Whether the item is disabled |
-| `classNames` | `SlotsToClasses<"base" \| "text">` | - | Custom Tailwind classes for item slots |
+| Prop         | Type                                                                | Default | Description                                                                                |
+| ------------ | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `children`   | `ReactNode \| ((renderProps: ListBoxItemRenderProps) => ReactNode)` | -       | The item content, or a render function                                                     |
+| `id`         | `Key`                                                               | -       | A unique identifier for the item; used as the value passed to `onChange`                   |
+| `textValue`  | `string`                                                            | -       | Plain-text value for filtering and accessibility; required when `children` is not a string |
+| `isDisabled` | `boolean`                                                           | `false` | Whether the item is disabled                                                               |
+| `classNames` | `SlotsToClasses<"base" \| "text">`                                  | -       | Custom Tailwind classes for item slots                                                     |
 
-*Inherits all remaining props from React Aria's [ListBoxItem](https://react-aria.adobe.com/ListBox#item).*
+_Inherits all remaining props from React Aria's [ListBoxItem](https://react-aria.adobe.com/ListBox#item)._

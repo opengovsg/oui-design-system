@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
+import { Form } from "react-aria-components"
 
 import { Button, TextField } from "@opengovsg/oui"
-import { Form } from "react-aria-components"
 
 export default function FormsControlledSubmit() {
   const [isSubmitting, setIsSubmitting] = useState(false)

@@ -1,6 +1,7 @@
-import { Description, FieldError, FieldGroup, Label } from "@opengovsg/oui"
-import { Input, TextField } from "react-aria-components"
 import { Search } from "lucide-react"
+import { Input, TextField } from "react-aria-components"
+
+import { Description, FieldError, FieldGroup, Label } from "@opengovsg/oui"
 
 export default function FormsFieldPrimitives() {
   return (
@@ -13,7 +14,9 @@ export default function FormsFieldPrimitives() {
           placeholder="Type to search…"
         />
       </FieldGroup>
-      <Description>Use Field primitives when you need an adornment.</Description>
+      <Description>
+        Use Field primitives when you need an adornment.
+      </Description>
       <FieldError />
     </TextField>
   )

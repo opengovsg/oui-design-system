@@ -36,5 +36,4 @@ describe("renderComponentMarkdown", () => {
       /github\.com\/opengovsg\/oui-design-system\/tree\/main\/packages\/components\/src\/button/,
     )
   })
-
 })

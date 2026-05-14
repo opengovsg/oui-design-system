@@ -207,6 +207,8 @@ describe("applyTransforms — link rewriting", () => {
     expect(json).toContain("https://react-aria.adobe.com/ComboBox")
     expect(json).toContain('"url":"#in-page"')
     // No raw /docs/<kind>/<slug> survives
-    expect(json).not.toMatch(/"url":"\/docs\/(components|getting-started|guides)\//)
+    expect(json).not.toMatch(
+      /"url":"\/docs\/(components|getting-started|guides)\//,
+    )
   })
 })

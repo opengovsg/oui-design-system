@@ -4,9 +4,7 @@ export default function ComboBoxEmptyStateExample() {
   return (
     <ComboBox
       label="Favourite animal"
-      renderEmptyState={() => (
-        <ComboBoxEmptyState className="text-red-500" />
-      )}
+      renderEmptyState={() => <ComboBoxEmptyState className="text-red-500" />}
     >
       <ComboBoxItem>Aardvark</ComboBoxItem>
       <ComboBoxItem>Cat</ComboBoxItem>

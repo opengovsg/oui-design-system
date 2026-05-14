@@ -50,8 +50,11 @@ export function renderLlmsTxt(input: RenderLlmsTxtInput): string {
 
   // Guides
   sections.push(
-    renderSection("Guides", input.guides, (g) =>
-      `- [${g.title}](${input.siteUrl}/llm/guides/${g.slug}.md): ${g.description}`,
+    renderSection(
+      "Guides",
+      input.guides,
+      (g) =>
+        `- [${g.title}](${input.siteUrl}/llm/guides/${g.slug}.md): ${g.description}`,
     ),
   )
 

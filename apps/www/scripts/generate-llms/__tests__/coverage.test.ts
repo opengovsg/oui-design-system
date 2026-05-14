@@ -21,9 +21,7 @@ describe("extractPropNames", () => {
 
   it("finds props in a type alias", async () => {
     const result = await extractPropNames(TYPES_DIR, "type-alias")
-    expect(result.propNames).toEqual(
-      expect.arrayContaining(["gamma", "delta"]),
-    )
+    expect(result.propNames).toEqual(expect.arrayContaining(["gamma", "delta"]))
   })
 
   it("emits an entry with 0 props for an empty interface body", async () => {

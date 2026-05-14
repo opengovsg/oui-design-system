@@ -16,19 +16,19 @@ The rubric serves two readers: human contributors writing or reviewing docs, and
 
 The table below is also the canonical section order — present sections appear top-to-bottom in this order:
 
-| Section | Required | When (if conditional) |
-| --- | --- | --- |
-| Frontmatter (complete) | always | — |
-| Inline demo preview | always | — |
-| `## Usage` | always | — |
-| `## Anatomy` | conditional | component exports sub-components |
-| `## Examples` | always | — |
-| `## Content` | conditional | Collection Component |
-| `## Validation` | conditional | accepts user input |
-| `## Events` | conditional | non-trivial event handlers |
-| `## Accessibility` | always | — |
-| `## Slots` (+ Custom Styles) | conditional | has `classNames` slots beyond `base` |
-| `## Props` (+ render-prop state tables, inherited footer) | always | render-prop tables required when relevant |
+| Section                                                   | Required    | When (if conditional)                     |
+| --------------------------------------------------------- | ----------- | ----------------------------------------- |
+| Frontmatter (complete)                                    | always      | —                                         |
+| Inline demo preview                                       | always      | —                                         |
+| `## Usage`                                                | always      | —                                         |
+| `## Anatomy`                                              | conditional | component exports sub-components          |
+| `## Examples`                                             | always      | —                                         |
+| `## Content`                                              | conditional | Collection Component                      |
+| `## Validation`                                           | conditional | accepts user input                        |
+| `## Events`                                               | conditional | non-trivial event handlers                |
+| `## Accessibility`                                        | always      | —                                         |
+| `## Slots` (+ Custom Styles)                              | conditional | has `classNames` slots beyond `base`      |
+| `## Props` (+ render-prop state tables, inherited footer) | always      | render-prop tables required when relevant |
 
 ## Frontmatter
 
@@ -108,7 +108,7 @@ One table per exported component (e.g., `Modal`, `ModalHeader`, `ModalBody`, …
 
 Include every prop an OUI user typically reaches for: control props (`value`, `defaultValue`, `onChange`), state props (`isDisabled`, `isReadOnly`, `isRequired`, `isInvalid`), validation props (`validate`, `errorMessage`, `minLength`, `maxLength`), `classNames`, `inputProps`. Don't enumerate every inherited React Aria prop — end the table with:
 
-> *Inherits all remaining props from React Aria's [ComponentName](https://react-aria.adobe.com/...). Notable ones: `autoFocus`, `excludeFromTabOrder`, `formValue`.*
+> _Inherits all remaining props from React Aria's [ComponentName](https://react-aria.adobe.com/...). Notable ones: `autoFocus`, `excludeFromTabOrder`, `formValue`._
 
 For any prop that accepts a function (`children`, `errorMessage`, `renderEmptyState`, `renderSelectValue`), document the argument with a small render-props table — **property / type / description**.
 

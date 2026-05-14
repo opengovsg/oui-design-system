@@ -17,11 +17,7 @@ export default function SelectControlled() {
 
   return (
     <div className="flex w-full max-w-xs flex-col gap-2">
-      <Select
-        label="Favourite animal"
-        value={value}
-        onChange={setValue}
-      >
+      <Select label="Favourite animal" value={value} onChange={setValue}>
         {animals.map((animal) => (
           <SelectItem key={animal.id} id={animal.id}>
             {animal.label}

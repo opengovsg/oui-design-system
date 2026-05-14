@@ -18,7 +18,7 @@ links:
 Use **ComboBox** when users need to filter a list by typing. Use [Select](/docs/components/select) for a non-filterable dropdown. Use [TagField](/docs/components/tag-field) for multi-select with filtering. Use [SearchField](/docs/components/search-field) for free-text search that's not constrained to a list.
 
 ```tsx
-import { ComboBox, ComboBoxItem, ComboBoxEmptyState } from "@opengovsg/oui"
+import { ComboBox, ComboBoxEmptyState, ComboBoxItem } from "@opengovsg/oui"
 ```
 
 ```tsx
@@ -150,81 +150,81 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### ComboBox
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `children` | `ReactNode \| ((item: T) => ReactNode)` | - | Static children or render function for dynamic items |
-| `label` | `ReactNode` | - | The visible label for the field |
-| `items` | `T[]` | - | The list of items (controlled dynamic collection) |
-| `defaultItems` | `T[]` | - | The default list of items (uncontrolled dynamic collection) |
-| `inputValue` | `string` | - | The current text input value (controlled) |
-| `defaultInputValue` | `string` | - | The default text input value (uncontrolled) |
-| `onInputChange` | `(value: string) => void` | - | Called when the input value changes |
-| `selectedKey` | `Key \| null` | - | The key of the selected item (controlled) |
-| `defaultSelectedKey` | `Key` | - | The default selected key (uncontrolled) |
-| `onSelectionChange` | `(key: Key \| null) => void` | - | Called when the selection changes |
-| `isDisabled` | `boolean` | `false` | Whether the field is disabled |
-| `isReadOnly` | `boolean` | `false` | Whether the field is read-only |
-| `isRequired` | `boolean` | `false` | Whether the field is required |
-| `isInvalid` | `boolean` | `false` | Whether the field should display as invalid |
-| `validate` | `(value: ComboBoxValidationValue) => ValidationError \| true \| null \| undefined` | - | Custom validation function |
-| `errorMessage` | `ReactNode \| ((validation: ValidationResult) => string)` | - | Error message to display when invalid |
-| `validationBehavior` | `"native" \| "aria"` | `"native"` | Whether to use native HTML form validation or ARIA-only |
-| `size` | `"xs" \| "sm" \| "md"` | `"md"` | The size of the component |
-| `classNames` | `SlotsToClasses<ComboBoxSlots & "clearButton" \| "emptyState">` | - | Custom Tailwind classes for component slots |
-| `description` | `ReactNode \| null` | - | Helper text shown below the field |
-| `dependencies` | `any[]` | - | Values that invalidate the item cache when using dynamic collections |
-| `listLayoutOptions` | `ListLayoutOptions` | - | Additional props spread to the list layout (virtualisation) |
-| `renderEmptyState` | `(props: ListBoxRenderProps) => ReactNode` | - | Custom renderer for the empty state when no items match |
-| `onClear` | `() => void` | - | If provided, renders a clear button; called when it is pressed. Requires fully controlled state. |
-| `onOpenChange` | `(isOpen: boolean, menuTrigger?: MenuTriggerAction) => void` | - | Called when the listbox opens or closes |
-| `onFocus` | `(e: FocusEvent) => void` | - | Called when the input receives focus |
-| `onBlur` | `(e: FocusEvent) => void` | - | Called when the input loses focus |
-| `onFocusChange` | `(isFocused: boolean) => void` | - | Called when the focus state changes |
-| `onKeyDown` | `(e: KeyboardEvent) => void` | - | Called on key down within the input |
-| `onKeyUp` | `(e: KeyboardEvent) => void` | - | Called on key up within the input |
-| `inputProps` | `Partial<InputProps>` | - | Additional props spread to the underlying `<input>` element |
+| Prop                 | Type                                                                               | Default    | Description                                                                                      |
+| -------------------- | ---------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------------ |
+| `children`           | `ReactNode \| ((item: T) => ReactNode)`                                            | -          | Static children or render function for dynamic items                                             |
+| `label`              | `ReactNode`                                                                        | -          | The visible label for the field                                                                  |
+| `items`              | `T[]`                                                                              | -          | The list of items (controlled dynamic collection)                                                |
+| `defaultItems`       | `T[]`                                                                              | -          | The default list of items (uncontrolled dynamic collection)                                      |
+| `inputValue`         | `string`                                                                           | -          | The current text input value (controlled)                                                        |
+| `defaultInputValue`  | `string`                                                                           | -          | The default text input value (uncontrolled)                                                      |
+| `onInputChange`      | `(value: string) => void`                                                          | -          | Called when the input value changes                                                              |
+| `selectedKey`        | `Key \| null`                                                                      | -          | The key of the selected item (controlled)                                                        |
+| `defaultSelectedKey` | `Key`                                                                              | -          | The default selected key (uncontrolled)                                                          |
+| `onSelectionChange`  | `(key: Key \| null) => void`                                                       | -          | Called when the selection changes                                                                |
+| `isDisabled`         | `boolean`                                                                          | `false`    | Whether the field is disabled                                                                    |
+| `isReadOnly`         | `boolean`                                                                          | `false`    | Whether the field is read-only                                                                   |
+| `isRequired`         | `boolean`                                                                          | `false`    | Whether the field is required                                                                    |
+| `isInvalid`          | `boolean`                                                                          | `false`    | Whether the field should display as invalid                                                      |
+| `validate`           | `(value: ComboBoxValidationValue) => ValidationError \| true \| null \| undefined` | -          | Custom validation function                                                                       |
+| `errorMessage`       | `ReactNode \| ((validation: ValidationResult) => string)`                          | -          | Error message to display when invalid                                                            |
+| `validationBehavior` | `"native" \| "aria"`                                                               | `"native"` | Whether to use native HTML form validation or ARIA-only                                          |
+| `size`               | `"xs" \| "sm" \| "md"`                                                             | `"md"`     | The size of the component                                                                        |
+| `classNames`         | `SlotsToClasses<ComboBoxSlots & "clearButton" \| "emptyState">`                    | -          | Custom Tailwind classes for component slots                                                      |
+| `description`        | `ReactNode \| null`                                                                | -          | Helper text shown below the field                                                                |
+| `dependencies`       | `any[]`                                                                            | -          | Values that invalidate the item cache when using dynamic collections                             |
+| `listLayoutOptions`  | `ListLayoutOptions`                                                                | -          | Additional props spread to the list layout (virtualisation)                                      |
+| `renderEmptyState`   | `(props: ListBoxRenderProps) => ReactNode`                                         | -          | Custom renderer for the empty state when no items match                                          |
+| `onClear`            | `() => void`                                                                       | -          | If provided, renders a clear button; called when it is pressed. Requires fully controlled state. |
+| `onOpenChange`       | `(isOpen: boolean, menuTrigger?: MenuTriggerAction) => void`                       | -          | Called when the listbox opens or closes                                                          |
+| `onFocus`            | `(e: FocusEvent) => void`                                                          | -          | Called when the input receives focus                                                             |
+| `onBlur`             | `(e: FocusEvent) => void`                                                          | -          | Called when the input loses focus                                                                |
+| `onFocusChange`      | `(isFocused: boolean) => void`                                                     | -          | Called when the focus state changes                                                              |
+| `onKeyDown`          | `(e: KeyboardEvent) => void`                                                       | -          | Called on key down within the input                                                              |
+| `onKeyUp`            | `(e: KeyboardEvent) => void`                                                       | -          | Called on key up within the input                                                                |
+| `inputProps`         | `Partial<InputProps>`                                                              | -          | Additional props spread to the underlying `<input>` element                                      |
 
-*Inherits all remaining props from React Aria's [ComboBox](https://react-aria.adobe.com/ComboBox). Notable ones: `autoFocus`, `allowsCustomValue`, `menuTrigger`, `formValue`, `excludeFromTabOrder`.*
+_Inherits all remaining props from React Aria's [ComboBox](https://react-aria.adobe.com/ComboBox). Notable ones: `autoFocus`, `allowsCustomValue`, `menuTrigger`, `formValue`, `excludeFromTabOrder`._
 
 #### `errorMessage` render-prop argument
 
 When `errorMessage` is a function, it receives a `ValidationResult` object:
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `isInvalid` | `boolean` | Whether the field is currently invalid |
-| `validationErrors` | `string[]` | List of validation error strings |
+| Property            | Type            | Description                            |
+| ------------------- | --------------- | -------------------------------------- |
+| `isInvalid`         | `boolean`       | Whether the field is currently invalid |
+| `validationErrors`  | `string[]`      | List of validation error strings       |
 | `validationDetails` | `ValidityState` | The native HTML `ValidityState` object |
 
 #### `renderEmptyState` render-prop argument
 
 When `renderEmptyState` is a function, it receives a `ListBoxRenderProps` object:
 
-| Property | Type | Description |
-| --- | --- | --- |
-| `isEmpty` | `boolean` | Whether the collection has no items |
-| `isFocused` | `boolean` | Whether the listbox is focused |
+| Property       | Type      | Description                                   |
+| -------------- | --------- | --------------------------------------------- |
+| `isEmpty`      | `boolean` | Whether the collection has no items           |
+| `isFocused`    | `boolean` | Whether the listbox is focused                |
 | `isDropTarget` | `boolean` | Whether the listbox is a drag-and-drop target |
 
 ### ComboBoxItem
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `children` | `ReactNode \| ((renderProps: ListBoxItemRenderProps) => ReactNode)` | - | The item content, or a render function |
-| `id` | `Key` | - | A unique identifier for the item; used as the value passed to `onSelectionChange` |
-| `textValue` | `string` | - | Plain-text value for filtering and accessibility; required when `children` is not a string |
-| `description` | `ReactNode` | - | Secondary descriptive text shown below the item label |
-| `isDisabled` | `boolean` | `false` | Whether the item is disabled |
-| `classNames` | `SlotsToClasses<"container" \| "label" \| "description">` | - | Custom Tailwind classes for item slots |
+| Prop          | Type                                                                | Default | Description                                                                                |
+| ------------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------ |
+| `children`    | `ReactNode \| ((renderProps: ListBoxItemRenderProps) => ReactNode)` | -       | The item content, or a render function                                                     |
+| `id`          | `Key`                                                               | -       | A unique identifier for the item; used as the value passed to `onSelectionChange`          |
+| `textValue`   | `string`                                                            | -       | Plain-text value for filtering and accessibility; required when `children` is not a string |
+| `description` | `ReactNode`                                                         | -       | Secondary descriptive text shown below the item label                                      |
+| `isDisabled`  | `boolean`                                                           | `false` | Whether the item is disabled                                                               |
+| `classNames`  | `SlotsToClasses<"container" \| "label" \| "description">`           | -       | Custom Tailwind classes for item slots                                                     |
 
-*Inherits all remaining props from React Aria's [ListBoxItem](https://react-aria.adobe.com/ListBox#item).*
+_Inherits all remaining props from React Aria's [ListBoxItem](https://react-aria.adobe.com/ListBox#item)._
 
 ### ComboBoxEmptyState
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `size` | `"xs" \| "sm" \| "md"` | - | Size variant; inherits from the parent ComboBox automatically |
-| `className` | `string` | - | Additional Tailwind classes applied to the empty-state container |
+| Prop        | Type                   | Default | Description                                                      |
+| ----------- | ---------------------- | ------- | ---------------------------------------------------------------- |
+| `size`      | `"xs" \| "sm" \| "md"` | -       | Size variant; inherits from the parent ComboBox automatically    |
+| `className` | `string`               | -       | Additional Tailwind classes applied to the empty-state container |
 
 ### ComboBoxFuzzy (deprecated)
 
