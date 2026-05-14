@@ -29,6 +29,18 @@ By default, the country selector is set to Singapore (`SG`) and the input displa
 
 If the component does not have a visible label (by passing a `label` prop), an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
 
+## Anatomy
+
+PhoneNumberField consists of:
+
+- **PhoneNumberField** — the root field container; manages value, country, and validation state
+  - **Label** — the visible label element
+  - **FieldGroup** — the bordered container wrapping the country selector and input
+    - **CountrySelect** — the flag + dropdown that selects the dialing country (international variant only)
+    - **PhoneInput** — the `<input type="tel">` element
+  - **Description** — helper text below the field
+  - **FieldError** — error message shown when invalid
+
 ## Examples
 
 ### With Label and Description
@@ -120,6 +132,20 @@ import {
 } from "@opengovsg/oui"
 ```
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isInvalid` + `errorMessage`** — use together for realtime validation feedback. `errorMessage` accepts a `ReactNode` or a function `(validation: ValidationResult) => string`.
+- **`isPossiblePhoneNumber`** — the recommended way to validate phone number values; checks whether the number has a valid length for the detected country.
+
+PhoneNumberField does not support native HTML constraint validation (`isRequired`, `minLength`, etc.) because the underlying `react-phone-number-input` library manages its own input — use controlled state and `isInvalid` instead.
+
+## Events
+
+- **`onChange`** — Called when the phone number value changes, receiving the new `E164Number | undefined`.
+- **`onCountryChange`** — Called when the selected country changes, receiving the new `Country` code.
+
 ## Accessibility
 
 - Built with a native `<input type="tel">` element with `autocomplete="tel"`
@@ -131,22 +157,24 @@ import {
 
 ## Slots
 
-- **base**: The root container wrapper
-- **group**: The field group containing the country selector and input
-- **wrapper**: The wrapper around the phone input elements
-- **label**: The label text element
-- **input**: The phone number input element
-- **description**: The description text below the field
-- **error**: The error message text
-- **select**: The country selector wrapper
-- **selectTrigger**: The country selector button
-- **selectIcon**: The dropdown icon in the country selector
-- **selectItem**: Each item in the country dropdown list
-- **selectItemLabel**: The country name label in each dropdown item
-- **selectItemCountryCode**: The calling code text in each dropdown item (e.g. "+65")
-- **flag**: The country flag element
-- **selectList**: The country dropdown list container
-- **selectPopover**: The country dropdown popover container
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`base`**: The root container wrapper
+- **`group`**: The field group containing the country selector and input
+- **`wrapper`**: The wrapper around the phone input elements
+- **`label`**: The label text element
+- **`input`**: The phone number input element
+- **`description`**: The description text below the field
+- **`error`**: The error message text
+- **`select`**: The country selector wrapper
+- **`selectTrigger`**: The country selector button
+- **`selectIcon`**: The dropdown icon in the country selector
+- **`selectItem`**: Each item in the country dropdown list
+- **`selectItemLabel`**: The country name label in each dropdown item
+- **`selectItemCountryCode`**: The calling code text in each dropdown item (e.g. "+65")
+- **`flag`**: The country flag element
+- **`selectList`**: The country dropdown list container
+- **`selectPopover`**: The country dropdown popover container
 
 ## Data Attributes
 
@@ -183,6 +211,8 @@ You can customize the PhoneNumberField component by passing custom Tailwind CSS 
 | `value`                  | `E164Number`                                                    | -                 | The current value in E.164 format (controlled)                                                                   |
 | `defaultValue`           | `E164Number`                                                    | -                 | The default value in E.164 format (uncontrolled)                                                                 |
 | `onChange`               | `(value: E164Number \| undefined) => void`                      | -                 | Callback fired when the value changes                                                                            |
+| `isDisabled`             | `boolean`                                                       | `false`           | Whether the field is disabled                                                                                    |
+| `isInvalid`              | `boolean`                                                       | `false`           | Whether the field should display as invalid                                                                      |
 | `defaultCountry`         | `Country`                                                       | `"SG"`            | The initially selected country                                                                                   |
 | `onCountryChange`        | `(country: Country) => void`                                    | -                 | Callback fired when the selected country changes                                                                 |
 | `placeholderMode`        | `"polite" \| "aggressive" \| "off"`                             | `"polite"`        | Controls how example number placeholders are shown                                                               |
@@ -193,6 +223,5 @@ You can customize the PhoneNumberField component by passing custom Tailwind CSS 
 | `countryOptionsOrder`    | `Country[]`                                                     | `["SG"]`          | Countries to display at the top of the selector                                                                  |
 | `variant`                | `"international" \| "local"`                                    | `"international"` | Whether to use the international phone input with country select or a local-only input with a fixed country flag |
 | `size`                   | `"xs" \| "sm" \| "md"`                                          | `"md"`            | The size of the component                                                                                        |
-| `isDisabled`             | `boolean`                                                       | `false`           | Whether the field is disabled                                                                                    |
-| `isInvalid`              | `boolean`                                                       | `false`           | Whether the field should display as invalid                                                                      |
 | `classNames`             | `SlotsToClasses<PhoneNumberFieldSlots>`                         | -                 | Custom CSS classes for component slots                                                                           |
+| `onClear`                | `() => void`                                                    | -                 | Called when the user clears the input (via the internal `PhoneInput` clear mechanism — **Cmd+Backspace** on macOS). Provided automatically by `PhoneNumberField`; only pass this if using `PhoneInput` directly. |
