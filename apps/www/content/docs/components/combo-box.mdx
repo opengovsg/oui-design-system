@@ -11,32 +11,221 @@ links:
   reactaria: ComboBox
 ---
 
-There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/ComboBox.html) for more details.
+<ComponentPreview name="combo-box-demo" />
 
 ## Usage
 
 Use **ComboBox** when users need to filter a list by typing. Use [Select](/docs/components/select) for a non-filterable dropdown. Use [TagField](/docs/components/tag-field) for multi-select with filtering. Use [SearchField](/docs/components/search-field) for free-text search that's not constrained to a list.
 
-OUI exports 3 combo-box related components:
+```tsx
+import { ComboBox, ComboBoxItem, ComboBoxEmptyState } from "@opengovsg/oui"
+```
 
-- **ComboBox**: The main component.
-- **ComboBoxItem**: The component that represents the combo-box menu item.
-- **ComboBoxEmptyState**: The component that gets rendered when there are no options available.
+```tsx
+<ComboBox label="Favourite animal">
+  <ComboBoxItem>Aardvark</ComboBoxItem>
+  <ComboBoxItem>Cat</ComboBoxItem>
+  <ComboBoxItem>Dog</ComboBoxItem>
+</ComboBox>
+```
 
-<ComponentPreview name="combo-box-demo" />
+ComboBox provides a text input that filters a list of options as the user types, built on [React Aria's ComboBox](https://react-aria.adobe.com/ComboBox). It handles keyboard navigation, focus management, and ARIA semantics automatically.
 
 If the combo-box does not have a visible label, an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
 
+## Anatomy
+
+ComboBox consists of:
+
+- **ComboBox** — the trigger input + listbox container; manages state
+  - **ComboBoxItem** — one option in the dropdown list
+  - **ComboBoxEmptyState** — rendered when the typed filter matches no items
+
+## Examples
+
+### Sizes
+
+Use the `size` prop to change the size of the combo-box. Defaults to `"md"`.
+
+<ComponentPreview name="combo-box-sizes" />
+
+### With Description and Text Slots
+
+Use `description` on ComboBox for helper text. Use the `description` prop on `ComboBoxItem` for per-item context.
+
+<ComponentPreview name="combo-box-text-slots" />
+
+### Controlled
+
+Use `inputValue` / `onInputChange` to control the text input and `selectedKey` / `onSelectionChange` to control the selected item programmatically.
+
+<ComponentPreview name="combo-box-controlled" />
+
+### Validation
+
+Use `isRequired` and `isInvalid` + `errorMessage` for form validation.
+
+<ComponentPreview name="combo-box-validation" />
+
+### Custom Empty State
+
+Use `renderEmptyState` to provide a custom message when no items match. The built-in `ComboBoxEmptyState` helper renders the localised "No matching results" string and accepts an optional `className`.
+
+<ComponentPreview name="combo-box-empty-state" />
+
 ## Content
 
-ComboBox follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections. The examples above show static collections, which can be used when the full list of options is known ahead of time. Dynamic collections, as shown below, can be used when the options come from an external data source such as an API call, or update over time.
+ComboBox follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections.
 
-As seen below, an iterable list of options is passed to the ComboBox using the `defaultItems` prop. Each item accepts an `id` prop, which is passed to the `onSelectionChange` handler to identify the selected item. Alternatively, if the item objects contain an `id` property, as shown in the example below, then this is used automatically and an `id` prop is not required.
+**Static collections** pass children directly when the full list is known up front:
+
+```tsx
+<ComboBox label="Animal">
+  <ComboBoxItem>Aardvark</ComboBoxItem>
+  <ComboBoxItem>Cat</ComboBoxItem>
+</ComboBox>
+```
+
+**Dynamic collections** pass an iterable to `defaultItems` (uncontrolled) or `items` (controlled), and a render function as `children`. Each item object must have an `id` property (or provide a unique `id` prop on the rendered `ComboBoxItem`).
 
 <ComponentPreview name="combo-box-content-example" />
 
-### Text slots
+Each item accepts an `id` prop which is passed to `onSelectionChange`. If the item objects have an `id` field, it is used automatically. Use `textValue` on the item object (or `ComboBoxItem`'s `textValue` prop) when the item's string value cannot be derived from its children — for example, when `children` is a render function or contains non-string nodes.
 
-By default, items in a ComboBox are labeled by their text contents for accessibility. ComboBoxItem exposes the `description` prop to allow for additional help text to be associated with each item. This can be used to provide additional context or information about each item.
+## Validation
 
-<ComponentPreview name="combo-box-text-slots" />
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — marks the field as required; validation fires on form submit (native) or immediately (aria).
+- **`validate`** — a custom function `(value: ComboBoxValidationValue) => ValidationError | true | null | undefined`. Return a string to show as the error, or `null`/`true` for valid.
+- **`isInvalid` + `errorMessage`** — use together for realtime validation feedback without waiting for a form submit. `errorMessage` accepts a `ReactNode` or a function `(validation: ValidationResult) => string`.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` only marks the field via ARIA attributes and allows submission — required for React Hook Form.
+
+## Events
+
+- **`onInputChange`** — Called when the text input value changes, receiving the new string.
+- **`onSelectionChange`** — Called when the user selects an item, receiving the item's `Key` (or `null` when cleared).
+- **`onOpenChange`** — Called when the listbox opens or closes, receiving `(isOpen: boolean, menuTrigger?: MenuTriggerAction)`.
+- **`onClear`** — Called when the clear button is pressed. Providing this prop renders a clear button next to the expand button; requires the component to be fully controlled (`inputValue`, `onInputChange`, `selectedKey`, `onSelectionChange`).
+- **`onFocus`** / **`onBlur`** — Called when the input receives or loses focus.
+- **`onFocusChange`** — Called when the focus state changes, receiving a boolean.
+- **`onKeyDown`** / **`onKeyUp`** — Called on keyboard events within the input.
+
+## Accessibility
+
+- The combo-box is built on native `<input>` with full ARIA combobox/listbox/option semantics managed by React Aria.
+- The label, description, and error message are automatically wired via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby` to the `ComboBox`.
+- Keyboard interaction: type to filter options; **Up/Down** arrows to navigate the list; **Enter** to select; **Escape** to close; **Alt+Down** to open without filtering.
+- Focus returns to the input after an item is selected or the listbox is dismissed.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+**ComboBox slots:**
+
+- **`base`**: The root flex-column container wrapping the entire field (label, input group, description, error).
+- **`label`**: The label element rendered above the input.
+- **`group`**: The input + expand-button wrapper (the visible bordered container).
+- **`field`**: The `<input>` element itself.
+- **`expandButton`**: The chevron button that opens and closes the listbox.
+- **`icon`**: The chevron/icon rendered inside the expand button (and clear button).
+- **`popover`**: The floating popover that contains the listbox.
+- **`list`**: The scrollable `<listbox>` element inside the popover.
+- **`clearButton`**: The clear button rendered when `onClear` is provided.
+- **`emptyState`**: The wrapper for the empty-state message (applied to `ComboBoxEmptyState`).
+
+**ComboBoxItem slots** (via `ComboBoxItem`'s `classNames`):
+
+- **`container`**: The list item row.
+- **`label`**: The primary text label inside the item.
+- **`description`**: The secondary description text inside the item.
+
+### Custom Styles
+
+<ComponentPreview name="combo-box-custom-styles" />
+
+## Props
+
+### ComboBox
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode \| ((item: T) => ReactNode)` | - | Static children or render function for dynamic items |
+| `label` | `ReactNode` | - | The visible label for the field |
+| `items` | `T[]` | - | The list of items (controlled dynamic collection) |
+| `defaultItems` | `T[]` | - | The default list of items (uncontrolled dynamic collection) |
+| `inputValue` | `string` | - | The current text input value (controlled) |
+| `defaultInputValue` | `string` | - | The default text input value (uncontrolled) |
+| `onInputChange` | `(value: string) => void` | - | Called when the input value changes |
+| `selectedKey` | `Key \| null` | - | The key of the selected item (controlled) |
+| `defaultSelectedKey` | `Key` | - | The default selected key (uncontrolled) |
+| `onSelectionChange` | `(key: Key \| null) => void` | - | Called when the selection changes |
+| `isDisabled` | `boolean` | `false` | Whether the field is disabled |
+| `isReadOnly` | `boolean` | `false` | Whether the field is read-only |
+| `isRequired` | `boolean` | `false` | Whether the field is required |
+| `isInvalid` | `boolean` | `false` | Whether the field should display as invalid |
+| `validate` | `(value: ComboBoxValidationValue) => ValidationError \| true \| null \| undefined` | - | Custom validation function |
+| `errorMessage` | `ReactNode \| ((validation: ValidationResult) => string)` | - | Error message to display when invalid |
+| `validationBehavior` | `"native" \| "aria"` | `"native"` | Whether to use native HTML form validation or ARIA-only |
+| `size` | `"xs" \| "sm" \| "md"` | `"md"` | The size of the component |
+| `classNames` | `SlotsToClasses<ComboBoxSlots & "clearButton" \| "emptyState">` | - | Custom Tailwind classes for component slots |
+| `description` | `ReactNode \| null` | - | Helper text shown below the field |
+| `dependencies` | `any[]` | - | Values that invalidate the item cache when using dynamic collections |
+| `listLayoutOptions` | `ListLayoutOptions` | - | Additional props spread to the list layout (virtualisation) |
+| `renderEmptyState` | `(props: ListBoxRenderProps) => ReactNode` | - | Custom renderer for the empty state when no items match |
+| `onClear` | `() => void` | - | If provided, renders a clear button; called when it is pressed. Requires fully controlled state. |
+| `onOpenChange` | `(isOpen: boolean, menuTrigger?: MenuTriggerAction) => void` | - | Called when the listbox opens or closes |
+| `onFocus` | `(e: FocusEvent) => void` | - | Called when the input receives focus |
+| `onBlur` | `(e: FocusEvent) => void` | - | Called when the input loses focus |
+| `onFocusChange` | `(isFocused: boolean) => void` | - | Called when the focus state changes |
+| `onKeyDown` | `(e: KeyboardEvent) => void` | - | Called on key down within the input |
+| `onKeyUp` | `(e: KeyboardEvent) => void` | - | Called on key up within the input |
+| `inputProps` | `Partial<InputProps>` | - | Additional props spread to the underlying `<input>` element |
+
+*Inherits all remaining props from React Aria's [ComboBox](https://react-aria.adobe.com/ComboBox). Notable ones: `autoFocus`, `allowsCustomValue`, `menuTrigger`, `formValue`, `excludeFromTabOrder`.*
+
+#### `errorMessage` render-prop argument
+
+When `errorMessage` is a function, it receives a `ValidationResult` object:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `isInvalid` | `boolean` | Whether the field is currently invalid |
+| `validationErrors` | `string[]` | List of validation error strings |
+| `validationDetails` | `ValidityState` | The native HTML `ValidityState` object |
+
+#### `renderEmptyState` render-prop argument
+
+When `renderEmptyState` is a function, it receives a `ListBoxRenderProps` object:
+
+| Property | Type | Description |
+| --- | --- | --- |
+| `isEmpty` | `boolean` | Whether the collection has no items |
+| `isFocused` | `boolean` | Whether the listbox is focused |
+| `isDropTarget` | `boolean` | Whether the listbox is a drag-and-drop target |
+
+### ComboBoxItem
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode \| ((renderProps: ListBoxItemRenderProps) => ReactNode)` | - | The item content, or a render function |
+| `id` | `Key` | - | A unique identifier for the item; used as the value passed to `onSelectionChange` |
+| `textValue` | `string` | - | Plain-text value for filtering and accessibility; required when `children` is not a string |
+| `description` | `ReactNode` | - | Secondary descriptive text shown below the item label |
+| `isDisabled` | `boolean` | `false` | Whether the item is disabled |
+| `classNames` | `SlotsToClasses<"container" \| "label" \| "description">` | - | Custom Tailwind classes for item slots |
+
+*Inherits all remaining props from React Aria's [ListBoxItem](https://react-aria.adobe.com/ListBox#item).*
+
+### ComboBoxEmptyState
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `size` | `"xs" \| "sm" \| "md"` | - | Size variant; inherits from the parent ComboBox automatically |
+| `className` | `string` | - | Additional Tailwind classes applied to the empty-state container |
+
+### ComboBoxFuzzy (deprecated)
+
+`ComboBoxFuzzy` is a deprecated controlled variant that provided built-in fuzzy search with match highlighting. **Use `ComboBox` instead** and supply your own filtering logic via `items` + `onInputChange`. The only notable additional prop it exposed was `itemClassNames`, which accepts `SlotsToClasses<"container" | "label" | "description" | "highlight">` to style the highlight span inside matched items.
