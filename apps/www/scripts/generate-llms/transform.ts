@@ -28,24 +28,13 @@ export async function applyTransforms(
   transformCardGroups(doc.body)
   removeBrElements(doc.body)
   transformKbdElements(doc.body)
-  stripUnknownJsx(doc.body)
-}
 
-function assertNoUnhandledJsx(doc: ParsedDoc): void {
-  const unknown: string[] = []
-  visit(doc.body, (node) => {
-    if (
-      node.type === "mdxJsxFlowElement" ||
-      node.type === "mdxJsxTextElement"
-    ) {
-      unknown.push((node as AnyMdxJsx).name ?? "<anonymous>")
-    }
-  })
-  if (unknown.length > 0) {
-    const names = [...new Set(unknown)].join(", ")
-    throw new Error(
-      `Unhandled MDX JSX nodes in "${doc.slug}": ${names}. ` +
-        `Add a transform in transform.ts or remove the JSX from the MDX.`,
+  const stripped = stripUnknownJsx(doc.body)
+  if (stripped.length > 0) {
+    const names = [...new Set(stripped)].sort().join(", ")
+    console.warn(
+      `[llms-generator] ${doc.slug}: stripped unhandled MDX JSX (children preserved): ${names}. ` +
+        `Add an explicit transform in transform.ts if these should be rendered differently.`,
     )
   }
 }
@@ -158,9 +147,12 @@ function transformKbdElements(tree: Root): void {
   })
 }
 
-function stripUnknownJsx(tree: Root): void {
-  // Remove any remaining JSX elements (like <Toaster />, etc) that aren't handled by transforms.
-  // For elements with children, preserve the children; for self-closing elements, just remove.
+function stripUnknownJsx(tree: Root): string[] {
+  // Real OUI docs use inline component JSX (e.g. <SearchField>, <Avatar>) as
+  // live demos. We strip the JSX wrapper and preserve children, but return
+  // the names so the caller can warn — silent stripping defeats discovery
+  // of cases that need a proper handler.
+  const stripped: string[] = []
   const toRemove: Array<{ parent: Parent; index: number }> = []
 
   visit(tree, (node, index, parent) => {
@@ -171,6 +163,8 @@ function stripUnknownJsx(tree: Root): void {
     ) {
       return
     }
+    const name = (node as AnyMdxJsx).name
+    stripped.push(name ?? "<anonymous>")
     toRemove.push({ parent: parent as Parent, index })
   })
 
@@ -179,10 +173,10 @@ function stripUnknownJsx(tree: Root): void {
     const { parent, index } = toRemove[i]
     const jsxNode = parent.children[index] as AnyMdxJsx
     const children = jsxNode.children ?? []
-
-    // Replace the JSX element with its children (or nothing if no children)
     parent.children.splice(index, 1, ...children)
   }
+
+  return stripped
 }
 
 function transformCardGroups(tree: Root): void {

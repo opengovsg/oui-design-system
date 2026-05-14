@@ -1,5 +1,5 @@
 import path from "node:path"
-import { describe, expect, it } from "vitest"
+import { describe, expect, it, vi } from "vitest"
 
 import { loadDoc } from "../load-docs"
 import { applyTransforms } from "../transform"
@@ -82,21 +82,36 @@ describe("applyTransforms — CardGroup/Card", () => {
 })
 
 describe("applyTransforms — unhandled JSX", () => {
-  it("throws if an MDX JSX element is left after transformation", async () => {
-    const doc = await loadDoc(
-      path.join(FIXTURES, "button-fixture.mdx"),
-      "component",
-    )
-    // Inject a JSX element that no transform handles
-    doc.body.children.unshift({
-      type: "mdxJsxFlowElement",
-      name: "Toggle",
-      attributes: [],
-      children: [{ type: "text", value: "Enable notifications" }],
-    } as never)
+  it("strips unknown JSX wrapping (preserving children) and warns to console", async () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
 
-    await expect(
-      applyTransforms(doc, { examplesDir: FIXTURES }),
-    ).rejects.toThrow(/Unhandled MDX JSX nodes in "button-fixture": Toggle/)
+    try {
+      const doc = await loadDoc(
+        path.join(FIXTURES, "button-fixture.mdx"),
+        "component",
+      )
+      // Inject a JSX element that no transform handles
+      doc.body.children.unshift({
+        type: "mdxJsxFlowElement",
+        name: "Toggle",
+        attributes: [],
+        children: [{ type: "text", value: "Enable notifications" }],
+      } as never)
+
+      await applyTransforms(doc, { examplesDir: FIXTURES })
+
+      const json = JSON.stringify(doc.body)
+      // Wrapper element is gone
+      expect(json).not.toContain('"name":"Toggle"')
+      // Children are preserved
+      expect(json).toContain("Enable notifications")
+      // Warning emitted with element name and slug
+      expect(warnSpy).toHaveBeenCalled()
+      const warning = warnSpy.mock.calls[0]?.[0] as string
+      expect(warning).toContain("button-fixture")
+      expect(warning).toContain("Toggle")
+    } finally {
+      warnSpy.mockRestore()
+    }
   })
 })
