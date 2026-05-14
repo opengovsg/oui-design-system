@@ -47,6 +47,9 @@ async function main(): Promise<void> {
   const contributingFiles = await listMdxFilesIfDirExists(
     path.join(CONTENT_DIR, "contributing"),
   )
+  const topicalGuideFiles = await listMdxFilesIfDirExists(
+    path.join(CONTENT_DIR, "guides"),
+  )
 
   // 1. Parse all docs and apply transforms.
   const components: ParsedDoc[] = []
@@ -70,6 +73,13 @@ async function main(): Promise<void> {
     contributingDocs.push(doc)
   }
 
+  const topicalGuides: ParsedDoc[] = []
+  for (const filePath of topicalGuideFiles) {
+    const doc = await loadDoc(filePath, "guide")
+    await applyTransforms(doc, { examplesDir: EXAMPLES_DIR })
+    topicalGuides.push(doc)
+  }
+
   // 2. Render markdown for each doc.
   const componentMarkdowns = new Map<string, string>()
   for (const doc of components) {
@@ -80,6 +90,11 @@ async function main(): Promise<void> {
   const guideMarkdowns = new Map<string, string>()
   for (const doc of guides) {
     guideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
+  }
+
+  const topicalGuideMarkdowns = new Map<string, string>()
+  for (const doc of topicalGuides) {
+    topicalGuideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
   }
 
   // 3. Write per-doc files.
@@ -120,6 +135,17 @@ async function main(): Promise<void> {
     }
   }
 
+  if (topicalGuides.length > 0) {
+    await mkdir(path.join(PUBLIC_DIR, "llm", "guides"), { recursive: true })
+    for (const [slug, md] of topicalGuideMarkdowns) {
+      await writeFile(
+        path.join(PUBLIC_DIR, "llm", "guides", `${slug}.md`),
+        md,
+        "utf8",
+      )
+    }
+  }
+
   // 4. Build entries for llms.txt.
   const componentEntries: ComponentEntry[] = components.map((doc) => ({
     slug: doc.slug,
@@ -132,10 +158,16 @@ async function main(): Promise<void> {
     title: doc.frontmatter.title,
     description: doc.frontmatter.description,
   }))
+  const topicalGuideEntries: GuideEntry[] = topicalGuides.map((doc) => ({
+    slug: doc.slug,
+    title: doc.frontmatter.title,
+    description: doc.frontmatter.description,
+  }))
 
   const llmsTxt = renderLlmsTxt({
     siteUrl: SITE_URL,
     gettingStarted: guideEntries,
+    guides: topicalGuideEntries,
     components: componentEntries,
   })
   await writeFile(path.join(PUBLIC_DIR, "llms.txt"), llmsTxt, "utf8")
@@ -143,6 +175,7 @@ async function main(): Promise<void> {
   // 5. Concatenate llms-full.txt in the same order: guides first, then components by category in canonical order, alphabetical within.
   const orderedSections = [
     ...guides.map((doc) => guideMarkdowns.get(doc.slug)!),
+    ...topicalGuides.map((doc) => topicalGuideMarkdowns.get(doc.slug)!),
     ...orderComponentsForFullTxt(components).map(
       (doc) => componentMarkdowns.get(doc.slug)!,
     ),

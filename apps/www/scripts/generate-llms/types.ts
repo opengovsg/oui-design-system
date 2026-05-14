@@ -22,7 +22,7 @@ export interface DocFrontmatter {
 
 export interface ParsedDoc {
   slug: string
-  kind: "component" | "getting-started"
+  kind: "component" | "getting-started" | "guide"
   frontmatter: DocFrontmatter
   body: Root
 }

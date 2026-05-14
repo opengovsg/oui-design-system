@@ -18,6 +18,7 @@ describe("renderLlmsTxt", () => {
           description: "Customize tokens and theme",
         },
       ],
+      guides: [],
       components: [
         {
           slug: "button",
@@ -62,6 +63,9 @@ describe("renderLlmsTxt", () => {
       "## Optional",
     ])
 
+    // Guides section shows (none yet) when empty
+    expect(txt).toMatch(/## Guides\n\n\(none yet\)/)
+
     // Each entry has a full URL
     expect(txt).toContain(
       "[Button](https://oui.open.gov.sg/llm/components/button.md): Used to trigger an action or event",
@@ -78,6 +82,7 @@ describe("renderLlmsTxt", () => {
     const txt = renderLlmsTxt({
       siteUrl: "https://oui.open.gov.sg",
       gettingStarted: [],
+      guides: [],
       components: [
         {
           slug: "button",
@@ -91,5 +96,23 @@ describe("renderLlmsTxt", () => {
     expect(txt).toMatch(/^## Form & Input$/m)
     expect(txt).not.toMatch(/^## Layout & Navigation$/m)
     expect(txt).not.toMatch(/^## Overlays$/m)
+  })
+
+  it("populates the Guides section when guides are provided", () => {
+    const txt = renderLlmsTxt({
+      siteUrl: "https://oui.open.gov.sg",
+      gettingStarted: [],
+      guides: [
+        {
+          slug: "forms",
+          title: "Forms",
+          description: "Building forms with OUI",
+        },
+      ],
+      components: [],
+    })
+    expect(txt).toContain(
+      "[Forms](https://oui.open.gov.sg/llm/guides/forms.md): Building forms with OUI",
+    )
   })
 })
