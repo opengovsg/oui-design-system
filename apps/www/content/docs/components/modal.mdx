@@ -135,15 +135,25 @@ Use the `animation` prop to control the opening and closing animation of the mod
 
 <ComponentPreview name="modal-animation" />
 
+## Accessibility
+
+- Content outside the modal is hidden from assistive technologies while it is open.
+- The modal optionally closes when interacting outside, or pressing the <Kbd>Esc</Kbd> key.
+- Focus is moved into the modal on mount, and restored to the trigger element on unmount.
+- While open, focus is contained within the modal, preventing the user from tabbing outside.
+- Scrolling the page behind the modal is prevented while it is open, including in mobile browsers.
+
 ## Slots
 
-- **overlay**: The backdrop/overlay slot, it is displayed behind the modal.
-- **base**: The main slot of the modal content.
-- **dialog**: The dialog wrapper inside the modal.
-- **header**: The header of the modal, it is displayed at the top of the modal.
-- **body**: The body of the modal, it is displayed in the middle of the modal.
-- **footer**: The footer of the modal, it is displayed at the bottom of the modal.
-- **closeButton**: The close button of the modal.
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`overlay`**: The backdrop/overlay element rendered behind the modal.
+- **`base`**: The main slot of the modal content.
+- **`dialog`**: The dialog wrapper inside the modal.
+- **`header`**: The header section rendered at the top of the modal.
+- **`body`**: The body section rendered in the middle of the modal.
+- **`footer`**: The footer section rendered at the bottom of the modal.
+- **`closeButton`**: The close button rendered in the top corner of the modal.
 
 ### Custom Styles
 
@@ -163,14 +173,6 @@ You can customize the `Modal` component by passing custom Tailwind CSS classes t
 </Modal>
 ```
 
-## Accessibility
-
-- Content outside the modal is hidden from assistive technologies while it is open.
-- The modal optionally closes when interacting outside, or pressing the <Kbd>Esc</Kbd> key.
-- Focus is moved into the modal on mount, and restored to the trigger element on unmount.
-- While open, focus is contained within the modal, preventing the user from tabbing outside.
-- Scrolling the page behind the modal is prevented while it is open, including in mobile browsers.
-
 ## Props
 
 ### Modal
@@ -189,12 +191,30 @@ You can customize the `Modal` component by passing custom Tailwind CSS classes t
 | `isDismissable`             | `boolean`                                                                                                     | `true`      | Whether clicking the overlay closes the modal       |
 | `isKeyboardDismissDisabled` | `boolean`                                                                                                     | `false`     | Whether pressing Esc closes the modal               |
 | `classNames`                | `SlotsToClasses<ModalSlots>`                                                                                  | -           | Custom CSS classes for component slots              |
+| `onOpenChange`              | `(isOpen: boolean) => void`                                                                                   | -           | Callback when the open state changes                |
 
-### Modal Events
+### ModalContent
 
-| Prop           | Type                        | Description                          |
-| -------------- | --------------------------- | ------------------------------------ |
-| `onOpenChange` | `(isOpen: boolean) => void` | Callback when the open state changes |
+| Prop                 | Type                                                                | Default | Description                                                                                      |
+| -------------------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
+| `children`           | `ReactNode \| ((onClose: () => void) => ReactNode)`                 | -       | The modal body, or a render function that receives an `onClose` callback                         |
+| `closeButtonContent` | `ReactNode`                                                         | -       | Custom content to replace the default close icon inside the close button                         |
+| `hideCloseButton`    | `boolean`                                                           | `false` | Whether to hide the close button entirely                                                        |
+| `closeButtonProps`   | `Omit<ButtonProps, "className" \| "slot">`                          | -       | Additional props spread onto the close button element                                            |
+
+_Inherits all remaining props from React Aria's [Dialog](https://react-aria.adobe.com/Dialog). Notable ones: `aria-label`, `aria-labelledby`, `aria-describedby`._
+
+### ModalHeader
+
+Accepts all `HeadingProps` from React Aria (`level`, `className`, `children`, etc.).
+
+### ModalBody
+
+Accepts all HTML `<div>` attributes (`className`, `children`, etc.).
+
+### ModalFooter
+
+Accepts all HTML `<div>` attributes (`className`, `children`, etc.).
 
 ## Examples
 
