@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs"
-import { mkdir, readFile, writeFile } from "node:fs/promises"
+import { mkdir, readdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -20,19 +20,83 @@ const COMPONENTS_TYPES_DIR = path.resolve(
   "types",
 )
 
+export interface ExtractedProps {
+  propNames: string[]
+  propsSource: string // relative file path, or "none"
+}
+
 interface CoverageEntry {
   component: string
   totalProps: number
   mentionedProps: string[]
   missingProps: string[]
+  propsSource: string
 }
 
 /**
- * Best-effort prop coverage: looks for `<Component>Props` interface members
- * in the corresponding .d.ts file, then checks if each prop name is
- * mentioned at least once in the markdown body.
- *
- * Skipped (with a warning) if the components package hasn't been built.
+ * Walks every .d.ts file in <typesDir>/<slug>/, finding all
+ * `interface \w+Props {...}` blocks and `type \w+Props = {...}` aliases.
+ * Returns the union of member names found and the relative path of the
+ * first file that produced any matches (for verifiability).
+ */
+export async function extractPropNames(
+  typesDir: string,
+  slug: string,
+): Promise<ExtractedProps> {
+  const slugDir = path.join(typesDir, slug)
+  if (!existsSync(slugDir)) {
+    return { propNames: [], propsSource: "none" }
+  }
+
+  const entries = await readdir(slugDir, { withFileTypes: true })
+  const dtsFiles = entries
+    .filter((e) => e.isFile() && e.name.endsWith(".d.ts"))
+    .map((e) => e.name)
+    .sort()
+
+  const allNames = new Set<string>()
+  let firstSource: string | null = null
+
+  for (const fileName of dtsFiles) {
+    const filePath = path.join(slugDir, fileName)
+    const content = await readFile(filePath, "utf8")
+
+    // 1. interface NameProps ... { body }  — body may be empty (single-line {})
+    const interfaceRe = /interface\s+\w+Props[^{]*\{([\s\S]*?)(?:\n\}|\})/g
+    // 2. type NameProps = { body }
+    const typeAliasRe = /type\s+\w+Props\s*=\s*\{([\s\S]*?)(?:\n\}|\})/g
+
+    let matchedHere = false
+    for (const m of content.matchAll(interfaceRe)) {
+      matchedHere = true
+      collectMemberNames(m[1], allNames)
+    }
+    for (const m of content.matchAll(typeAliasRe)) {
+      matchedHere = true
+      collectMemberNames(m[1], allNames)
+    }
+
+    if (matchedHere && firstSource === null) {
+      firstSource = path.relative(typesDir, filePath)
+    }
+  }
+
+  return {
+    propNames: [...allNames],
+    propsSource: firstSource ?? "none",
+  }
+}
+
+function collectMemberNames(body: string, into: Set<string>): void {
+  const memberRe = /^\s*(?:readonly\s+)?(\w+)\??:/gm
+  for (const m of body.matchAll(memberRe)) {
+    into.add(m[1])
+  }
+}
+
+/**
+ * Writes an exhaustive coverage report (one entry per input component).
+ * Skipped with a warning if the components package hasn't been built.
  */
 export async function writeCoverageReport(
   components: ParsedDoc[],
@@ -49,26 +113,10 @@ export async function writeCoverageReport(
   const entries: CoverageEntry[] = []
 
   for (const doc of components) {
-    // The index.d.ts only re-exports; the props interface lives in <slug>.d.ts.
-    // Fall back to index.d.ts if the slug-named file doesn't exist.
-    const slugDtsPath = path.join(
+    const { propNames, propsSource } = await extractPropNames(
       COMPONENTS_TYPES_DIR,
       doc.slug,
-      `${doc.slug}.d.ts`,
     )
-    const indexDtsPath = path.join(COMPONENTS_TYPES_DIR, doc.slug, "index.d.ts")
-    const dtsPath = existsSync(slugDtsPath) ? slugDtsPath : indexDtsPath
-    if (!existsSync(dtsPath)) continue
-
-    const dts = await readFile(dtsPath, "utf8")
-    const propsMatch = dts.match(/interface\s+\w+Props[^{]*\{([\s\S]*?)\n\}/)
-    if (!propsMatch) continue
-
-    const propNames = Array.from(
-      propsMatch[1].matchAll(/^\s*(?:readonly\s+)?(\w+)\??:/gm),
-      (m) => m[1],
-    )
-    if (propNames.length === 0) continue
 
     const md = componentMarkdowns.get(doc.slug) ?? ""
     const mentioned: string[] = []
@@ -84,6 +132,7 @@ export async function writeCoverageReport(
       totalProps: propNames.length,
       mentionedProps: mentioned,
       missingProps: missing,
+      propsSource,
     })
   }
 
