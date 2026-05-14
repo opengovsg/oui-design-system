@@ -64,6 +64,18 @@ OUI exports 5 field-related primitives:
 
 > **Note:** These primitives must be placed inside a React Aria form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`) to function correctly. The wrapper provides the accessibility relationships between the label, description, error, and input elements. If you're not building a custom field, use one of the higher-level components listed above instead.
 
+## Anatomy
+
+The field primitives compose as follows:
+
+- **React Aria field wrapper** (e.g., `AriaTextField`, `AriaNumberField`) — provides accessibility context
+  - **Label** — the `<label>` element; automatically associated with the field input
+  - **Input** — the form control (supplied by the caller or a higher-level component)
+  - **Description** — supplementary helper text; linked via `aria-describedby`
+  - **FieldError** — error message container; becomes visible when the field is invalid
+    - **FieldErrorIcon** — the alert circle icon; can be used standalone in custom error layouts
+  - **FieldGroup** — optional bordered container for inputs with adornments
+
 ## Examples
 
 ### Sizes
@@ -101,6 +113,8 @@ Combine field components with React Aria's `Form` and field wrappers to build cu
 <ComponentPreview name="field-custom-form" />
 
 ## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
 
 These field components work with [React Aria's form validation](https://react-aria.adobe.com/forms) system. Validation is configured on the parent form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`), and `FieldError` displays the resulting error messages.
 
@@ -160,6 +174,17 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 - If a form field does not have a visible `Label`, an `aria-label` or `aria-labelledby` prop must be passed to the parent field wrapper to identify it to assistive technology.
 - All components inherit their accessibility semantics from their [React Aria](https://react-aria.adobe.com/forms) counterparts.
 
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+Only `FieldError` exposes multiple named slots. The other primitives (`Label`, `Description`, `FieldErrorIcon`, `FieldGroup`) accept a single `className` string.
+
+**FieldError slots** (via `FieldError`'s `classNames`):
+
+- **`icon`**: The `CircleAlert` icon element rendered before the error text.
+- **`text`**: The error message text container element.
+
 ## Props
 
 ### Label
@@ -187,6 +212,15 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 | `className`  | `string`                                                                                                                 | -       | Additional CSS classes for the text slot                                                                                     |
 | `classNames` | `SlotsToClasses<FieldErrorSlots>`                                                                                        | -       | Custom CSS classes for `icon` and `text` slots                                                                               |
 
+#### FieldError render-prop argument
+
+When `children` is a function, it receives an object with:
+
+| Property            | Type            | Description                                          |
+| ------------------- | --------------- | ---------------------------------------------------- |
+| `validationErrors`  | `string[]`      | List of validation error strings from the field      |
+| `validationDetails` | `ValidityState` | The native HTML `ValidityState` object for the field |
+
 ### FieldErrorIcon
 
 | Prop        | Type                   | Default | Description            |
@@ -200,6 +234,8 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 | ----------- | ------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
 | `children`  | `React.ReactNode \| ((renderProps: GroupRenderProps) => React.ReactNode)` | -       | The group content. Accepts a render prop for access to interactive state. |
 | `className` | `string`                                                                  | -       | Additional CSS classes                                                    |
+
+_Inherits all remaining props from React Aria's [Group](https://react-aria.adobe.com/Group). Notable ones: `isDisabled`, `isInvalid`, `isReadOnly`, `aria-label`._
 
 #### FieldGroup Render Props
 
