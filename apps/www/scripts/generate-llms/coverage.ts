@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs"
-import { readFile, writeFile } from "node:fs/promises"
+import { mkdir, readFile, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -93,6 +93,7 @@ export async function writeCoverageReport(
     })
   }
 
+  await mkdir(path.dirname(outputPath), { recursive: true })
   await writeFile(outputPath, JSON.stringify(entries, null, 2), "utf8")
   console.log(`[llms-coverage] wrote ${entries.length} entries to ${outputPath}`)
 }

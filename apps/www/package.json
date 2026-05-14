@@ -5,11 +5,11 @@
   "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
   "scripts": {
-    "generate:themes": "pnpx tsx@4.20.6 scripts/generate-themes.ts",
+    "generate:themes": "tsx scripts/generate-themes.ts",
     "dev:content": "velite --watch",
     "dev:next": "next dev",
     "dev": "pnpm run /^dev:/",
-    "generate:registry": "pnpx tsx@4.20.6 scripts/generate-registry.ts && pnpm format:fix",
+    "generate:registry": "tsx scripts/generate-registry.ts && pnpm format:fix",
     "build:content": "velite --clean",
     "build:llms": "tsx scripts/generate-llms/index.ts",
     "build:next": "next build",
