@@ -1,6 +1,6 @@
 ---
 title: RadioGroup
-description: A radio group allows a user to select a single item from a list of mutually exclusive options.
+description: A radio group lets users select one option from a mutually exclusive list. For multi-select, use CheckboxGroup; for a dropdown, use Select.
 category: Form & Input
 toc:
   visible: true
@@ -11,11 +11,11 @@ links:
   reactaria: RadioGroup
 ---
 
-This component is built on top of `react-aria-components`'s [RadioGroup](https://react-aria.adobe.com/RadioGroup). You can refer to the official documentation for more details on the base API.
-
 <ComponentPreview name="radio-group-demo" />
 
 ## Usage
+
+Use **RadioGroup** when users must pick exactly one option from a short, static list rendered inline. Use [CheckboxGroup](/docs/components/checkbox-group) when multiple options can be selected. Use [Select](/docs/components/select) or [ComboBox](/docs/components/combo-box) for longer lists best shown in a dropdown.
 
 ```tsx
 import { Radio, RadioGroup } from "@opengovsg/oui"
@@ -27,6 +27,17 @@ import { Radio, RadioGroup } from "@opengovsg/oui"
   <Radio value="ny">New York</Radio>
 </RadioGroup>
 ```
+
+RadioGroup renders a group of mutually exclusive radio buttons, built on [React Aria's RadioGroup](https://react-aria.adobe.com/RadioGroup). It manages selection state, keyboard navigation, and ARIA semantics automatically. The `size` prop propagates to all child `Radio` items via context.
+
+If the radio group does not have a visible label, pass `aria-label` or `aria-labelledby` to `RadioGroup` to identify it to assistive technology.
+
+## Anatomy
+
+RadioGroup consists of:
+
+- **RadioGroup** — the group container; manages selection state, propagates size via context
+  - **Radio** — one selectable option; renders the circular indicator, label, and optional description
 
 ## Examples
 
@@ -54,27 +65,96 @@ Use the `isInvalid` prop along with `errorMessage` to display a validation error
 
 <ComponentPreview name="radio-group-invalid" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — marks the group as required; validation fires on form submit (native) or immediately (aria).
+- **`validate`** — a custom function `(value: string) => ValidationError | true | null | undefined`. Return a string to show as the error, or `null`/`true` for valid.
+- **`isInvalid` + `errorMessage`** — use together for realtime validation feedback without waiting for a form submit. `errorMessage` accepts a `string` or a function `(validation: ValidationResult) => string`.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` only marks the group via ARIA attributes and allows submission — required for React Hook Form.
+
+## Events
+
+- **`onChange`** — Called when the selected value changes, receiving the new `string` value.
+- **`onFocus`** / **`onBlur`** — Called when any radio button in the group receives or loses focus.
+- **`onFocusChange`** — Called when the focus state of the group changes, receiving a boolean.
+
+## Accessibility
+
+- RadioGroup is built on a `<div role="radiogroup">` with full ARIA semantics managed by React Aria.
+- The group label, description, and error message are automatically wired via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby` to `RadioGroup`.
+- Keyboard interaction: **Tab** to move focus to the group; **Up/Down** or **Left/Right** arrows to move between options; the focused option is automatically selected.
+- Individual radio items are not in the tab order once one is selected — only the selected (or first) item receives focus on Tab.
+
 ## Slots
 
-### RadioGroup
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
-- **base**: RadioGroup root wrapper.
-- **label**: RadioGroup label, placed before the radio items.
-- **description**: The description of the radio group.
-- **error**: [FieldError](./field) slots
-  - **icon**: The error icon.
-  - **text**: The error text.
+**RadioGroup slots:**
 
-### Radio
+- **`base`**: The root flex-column container wrapping the label, radio items, description, and error.
+- **`label`**: The label element rendered above the radio items.
+- **`description`**: The helper text rendered below the radio items.
+- **`error`**: Nested object of FieldError slots — pass `{ icon: "…", text: "…" }` to style the error icon and text independently.
 
-- **base**: Radio wrapper, handles alignment, placement, and focus ring.
-- **circle**: The circular indicator that represents the radio state.
-- **icon**: The inner filled circle shown when selected.
-- **label**: The label text next to the radio circle.
-- **description**: Optional descriptive text below the label.
+**Radio slots** (via `Radio`'s `classNames`):
+
+- **`base`**: The radio row wrapper; handles alignment, spacing, and focus ring.
+- **`circle`**: The circular border element that represents the radio button.
+- **`icon`**: The inner filled circle shown when the option is selected.
+- **`label`**: The label text next to the radio circle.
+- **`description`**: The optional descriptive text rendered below the label.
 
 ### Custom Styles
 
-You can customize the `Radio` and `RadioGroup` components by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
-
 <ComponentPreview name="radio-group-custom-styles" />
+
+## Props
+
+### RadioGroup
+
+| Prop                 | Type                                                        | Default    | Description                                                     |
+| -------------------- | ----------------------------------------------------------- | ---------- | --------------------------------------------------------------- |
+| `children`           | `ReactNode`                                                 | -          | The `Radio` items in the group                                  |
+| `label`              | `string`                                                    | -          | The visible label for the group                                 |
+| `value`              | `string`                                                    | -          | The currently selected value (controlled)                       |
+| `defaultValue`       | `string`                                                    | -          | The default selected value (uncontrolled)                       |
+| `onChange`           | `(value: string) => void`                                   | -          | Called when the selected value changes                          |
+| `isDisabled`         | `boolean`                                                   | `false`    | Whether the entire group is disabled                            |
+| `isReadOnly`         | `boolean`                                                   | `false`    | Whether the group is read-only                                  |
+| `isRequired`         | `boolean`                                                   | `false`    | Whether the group is required                                   |
+| `isInvalid`          | `boolean`                                                   | `false`    | Whether the group should display as invalid                     |
+| `validate`           | `(value: string) => ValidationError \| true \| null \| undefined` | -   | Custom validation function                                      |
+| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`      | -          | Error message to display when invalid                           |
+| `validationBehavior` | `"native" \| "aria"`                                        | `"native"` | Whether to use native HTML form validation or ARIA-only         |
+| `size`               | `"xs" \| "sm" \| "md"`                                      | `"md"`     | The size of all child Radio items                               |
+| `description`        | `string`                                                    | -          | Helper text shown below the radio items                         |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "description"> & { error?: SlotsToClasses<FieldErrorSlots> }` | - | Custom Tailwind classes for component slots |
+| `name`               | `string`                                                    | -          | The HTML `name` attribute; used for form submission             |
+| `orientation`        | `"horizontal" \| "vertical"`                               | `"vertical"` | The layout orientation of the radio items                     |
+
+_Inherits all remaining props from React Aria's [RadioGroup](https://react-aria.adobe.com/RadioGroup). Notable ones: `autoFocus`, `excludeFromTabOrder`, `form`._
+
+#### `errorMessage` render-prop argument
+
+When `errorMessage` is a function, it receives a `ValidationResult` object:
+
+| Property            | Type            | Description                            |
+| ------------------- | --------------- | -------------------------------------- |
+| `isInvalid`         | `boolean`       | Whether the field is currently invalid |
+| `validationErrors`  | `string[]`      | List of validation error strings       |
+| `validationDetails` | `ValidityState` | The native HTML `ValidityState` object |
+
+### Radio
+
+| Prop          | Type                                             | Default | Description                                                  |
+| ------------- | ------------------------------------------------ | ------- | ------------------------------------------------------------ |
+| `children`    | `ReactNode \| ((renderProps: RadioRenderProps) => ReactNode)` | - | The label content, or a render function               |
+| `value`       | `string`                                         | -       | The value submitted to the form and passed to `onChange`     |
+| `description` | `string`                                         | -       | Optional descriptive text rendered below the label           |
+| `isDisabled`  | `boolean`                                        | `false` | Whether this specific radio option is disabled               |
+| `classNames`  | `SlotsToClasses<"base" \| "circle" \| "icon" \| "label" \| "description">` | - | Custom Tailwind classes for radio slots  |
+
+_Inherits all remaining props from React Aria's [Radio](https://react-aria.adobe.com/RadioGroup#radio). Notable ones: `autoFocus`, `id`._
