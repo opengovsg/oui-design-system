@@ -12,3 +12,4 @@ In a monorepo, also add a `@source` directive pointing to this package's install
 
 Full setup and customization: https://oui.open.gov.sg/llm/getting-started/theming.md
 Component docs: https://oui.open.gov.sg/llms.txt
+Forms (cross-cutting guide): https://oui.open.gov.sg/llm/guides/forms.md

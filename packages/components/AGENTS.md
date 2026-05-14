@@ -36,8 +36,17 @@ Structured markdown is available at predictable URLs:
 - **Single-file dump**: https://oui.open.gov.sg/llms-full.txt — all docs concatenated
 - **Per-component**: `https://oui.open.gov.sg/llm/components/<name>.md` — e.g. `/llm/components/button.md`
 - **Setup guides**: `https://oui.open.gov.sg/llm/getting-started/<name>.md` — e.g. `/llm/getting-started/next.md`
+- **Topical guides**: `https://oui.open.gov.sg/llm/guides/<name>.md`
 
 Each component doc inlines runnable example source and links to the underlying React Aria primitive — consult those upstream docs for behavioral details (keyboard handling, ARIA semantics, advanced state) not covered by OUI's own docs.
+
+## Cross-cutting guides
+
+- **Forms**: https://oui.open.gov.sg/llm/guides/forms.md — composition with `<Form>`, validation patterns, React Hook Form + Zod integration, server errors, layout conventions.
+
+## Contributing to docs
+
+If you're editing component docs, follow the rubric: https://oui.open.gov.sg/llm/contributing/doc-quality-rubric.md
 
 ## Types
 
