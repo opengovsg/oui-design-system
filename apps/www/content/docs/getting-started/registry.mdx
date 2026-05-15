@@ -31,7 +31,7 @@ pnpm add @opengovsg/oui-theme
 Then install any component:
 
 ```bash
-npx shadcn@latest add https://oui.gov.sg/r/button.json
+npx shadcn@latest add https://oui.open.gov.sg/r/button.json
 ```
 
 The CLI:
@@ -49,7 +49,7 @@ The file lives in your repo. We do not push updates to it. When OUI ships a fix:
 
 1. We update the npm package and publish a release through Changesets.
 2. The `@opengovsg/oui` changelog records the change. Watch it for fixes that affect components you've pulled.
-3. To audit your local copy vs. current upstream, run `npx shadcn diff https://oui.gov.sg/r/<name>.json`.
+3. To audit your local copy vs. current upstream, run `npx shadcn diff https://oui.open.gov.sg/r/<name>.json`.
 4. To re-pull (overwriting your local copy), run `shadcn add` again. The CLI will prompt before overwriting.
 
 We do **not** maintain backward-compatible manifests across major OUI versions. The registry URL is always current.
@@ -60,4 +60,4 @@ The changelog describes the npm package's behavior. Most fixes apply identically
 
 ## Discovery
 
-A machine-readable index of every registry item is at [https://oui.gov.sg/r/index.json](https://oui.gov.sg/r/index.json).
+A machine-readable index of every registry item is at [https://oui.open.gov.sg/r/index.json](https://oui.open.gov.sg/r/index.json).

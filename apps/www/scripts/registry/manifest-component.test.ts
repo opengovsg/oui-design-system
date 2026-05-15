@@ -14,7 +14,7 @@ beforeAll(() => {
 describe("buildComponentManifest", () => {
   it("builds a manifest for the button component", () => {
     const manifest = buildComponentManifest("button", catalog, {
-      registryBaseUrl: "https://oui.gov.sg/r",
+      registryBaseUrl: "https://oui.open.gov.sg/r",
     })
 
     expect(manifest.name).toBe("button")
@@ -30,13 +30,13 @@ describe("buildComponentManifest", () => {
 
     // Sibling components and lib entries appear in registryDependencies as full URLs
     expect(manifest.registryDependencies).toContain(
-      "https://oui.gov.sg/r/spinner.json",
+      "https://oui.open.gov.sg/r/spinner.json",
     )
     expect(manifest.registryDependencies).toContain(
-      "https://oui.gov.sg/r/ripple.json",
+      "https://oui.open.gov.sg/r/ripple.json",
     )
     expect(manifest.registryDependencies).toContain(
-      "https://oui.gov.sg/r/cn.json",
+      "https://oui.open.gov.sg/r/cn.json",
     )
 
     // Files include the component .tsx and an inlined variants file

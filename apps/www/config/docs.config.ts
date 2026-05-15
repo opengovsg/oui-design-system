@@ -10,7 +10,10 @@ const docsLinks: NavItem = {
       items: [
         {
           title: "Overview",
-          items: [{ title: "Installation", url: "installation" }],
+          items: [
+            { title: "Installation", url: "installation" },
+            { title: "Registry", url: "registry", status: "new" },
+          ],
         },
         {
           title: "Frameworks",
