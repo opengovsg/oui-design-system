@@ -4,7 +4,11 @@
  * shadcn registry-item.json type values used in this codebase.
  * https://ui.shadcn.com/schema/registry-item.json
  */
-export type RegistryItemType = "registry:ui" | "registry:lib" | "registry:hook"
+export type RegistryItemType =
+  | "registry:ui"
+  | "registry:lib"
+  | "registry:hook"
+  | "registry:base"
 
 export interface RegistryFile {
   path: string
@@ -13,14 +17,46 @@ export interface RegistryFile {
   target: string
 }
 
+/**
+ * Partial shape of components.json that a `registry:base` item can ship.
+ * The shadcn CLI deep-merges this into the project's components.json during
+ * `shadcn init <url>`. Mirrors rawConfigSchema.deepPartial() in the CLI.
+ */
+export interface RegistryBaseConfig {
+  $schema?: string
+  style?: string
+  rsc?: boolean
+  tsx?: boolean
+  iconLibrary?: string
+  tailwind?: {
+    config?: string
+    css?: string
+    baseColor?: string
+    cssVariables?: boolean
+    prefix?: string
+  }
+  aliases?: {
+    components?: string
+    utils?: string
+    ui?: string
+    lib?: string
+    hooks?: string
+  }
+}
+
 export interface RegistryItem {
   $schema: "https://ui.shadcn.com/schema/registry-item.json"
   name: string
   type: RegistryItemType
   description?: string
+  /** Set to "none" on a registry:base to skip the shadcn default style index. */
+  extends?: "none" | string
   dependencies?: string[]
   registryDependencies?: string[]
-  files: RegistryFile[]
+  /** Only present on `registry:base` items. */
+  config?: RegistryBaseConfig
+  /** Optional — `registry:base` typically has no files. */
+  files?: RegistryFile[]
 }
 
 export interface RegistryIndexEntry {

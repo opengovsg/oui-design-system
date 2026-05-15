@@ -14,13 +14,19 @@ OUI ships two distribution channels. The npm package (`@opengovsg/oui`) is canon
 
 ## Installation
 
-You need [Tailwind CSS v4](https://tailwindcss.com) configured and `@opengovsg/oui-theme` installed.
+You need [Tailwind CSS v4](https://tailwindcss.com) configured.
 
-Set up `@opengovsg/oui-theme` and import the base CSS in your global stylesheet:
+### 1. Initialize with the OUI base
+
+In a fresh project (or any project without a `components.json`), run:
 
 ```bash
-pnpm add @opengovsg/oui-theme
+pnpm dlx shadcn@latest init https://oui.open.gov.sg/r/oui.json
 ```
+
+This writes a `components.json` configured for OUI — aliasing `ui` to `@/components/oui` and `utils` to `@/lib/oui/cn` — and installs `@opengovsg/oui-theme` plus the shared `cn` utility. Passing the URL as a positional argument bypasses shadcn's interactive base and preset prompts.
+
+Then import the OUI base CSS in your global stylesheet:
 
 ```css
 /* globals.css */
@@ -28,10 +34,10 @@ pnpm add @opengovsg/oui-theme
 @import "@opengovsg/oui-theme/base.css";
 ```
 
-Then install any component:
+### 2. Add components
 
 ```bash
-npx shadcn@latest add https://oui.open.gov.sg/r/button.json
+pnpm dlx shadcn@latest add https://oui.open.gov.sg/r/button.json
 ```
 
 The CLI:
@@ -41,7 +47,11 @@ The CLI:
 - Installs the npm dependencies listed in the manifest.
 - Recursively pulls any registry dependencies (e.g., Button pulls Spinner, Ripple, plus the shared `cn`, `tv`, `variants` utilities).
 
-Configure your `components.json` aliases so `@/components/oui/*` and `@/lib/oui/*` resolve in your project.
+You can chain the two steps in one command:
+
+```bash
+pnpm dlx shadcn@latest init https://oui.open.gov.sg/r/oui.json https://oui.open.gov.sg/r/button.json
+```
 
 ## Once installed, the code is yours
 
