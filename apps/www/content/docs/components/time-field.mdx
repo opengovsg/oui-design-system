@@ -25,6 +25,10 @@ import { TimeField } from "@opengovsg/oui"
 <TimeField label="Meeting time" />
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="time-field" />
+
 TimeField renders individually editable segments for each part of a time value (hour, minute, second), built on [React Aria's TimeField](https://react-aria.adobe.com/TimeField). Time values use `Time` objects from the `@internationalized/date` package.
 
 If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be passed to identify the field to assistive technology.

@@ -29,6 +29,10 @@ import { Checkbox, CheckboxGroup } from "@opengovsg/oui"
 </CheckboxGroup>
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="checkbox-group" />
+
 CheckboxGroup renders a group of checkboxes where multiple options can be selected, built on [React Aria's CheckboxGroup](https://react-aria.adobe.com/CheckboxGroup). It manages selection state, keyboard navigation, and ARIA semantics automatically. The `size` prop propagates to all child `Checkbox` items via context.
 
 If the checkbox group does not have a visible label, pass `aria-label` or `aria-labelledby` to `CheckboxGroup` to identify it to assistive technology.

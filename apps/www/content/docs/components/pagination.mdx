@@ -22,6 +22,10 @@ import { Pagination } from "@opengovsg/oui"
 <Pagination total={10} onChange={setPage} />
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="pagination" />
+
 Pagination renders a `<nav>` landmark with numbered page buttons, optional prev/next controls, and animated ellipsis items for large ranges. It is built on OUI's own `usePagination` hook (not a React Aria primitive), which manages active-page state and computes the visible page range from `total`, `siblings`, and `boundaries`.
 
 The root `<nav>` element gets `aria-label="pagination navigation"` by default; pass a custom `aria-label` to override it when multiple paginations appear on one page.

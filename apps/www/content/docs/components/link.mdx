@@ -23,6 +23,10 @@ import { Link } from "@opengovsg/oui"
 <Link href="/page">Navigate to page</Link>
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="link" />
+
 The `Link` component is built on top of [React Aria's Link](https://react-aria.adobe.com/Link). It supports navigation via the `href` prop, or custom press handling via the `onPress` prop.
 
 > To ensure the Link component uses your framework's client-side router (instead of full page navigations), you need to set up the `RouterProvider` from `react-aria-components`. See the [Next.js](/docs/getting-started/next#set-up-react-aria-components-link-provider) or [Vite](/docs/getting-started/vite#set-up-react-aria-components-link-provider) setup guides, or refer to the [React Aria frameworks guide](https://react-aria.adobe.com/frameworks) for other frameworks.
