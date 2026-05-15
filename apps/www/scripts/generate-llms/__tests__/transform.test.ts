@@ -117,6 +117,48 @@ describe("applyTransforms — unhandled JSX", () => {
   })
 })
 
+describe("applyTransforms — ShadcnInstall", () => {
+  it("replaces <ShadcnInstall name='X' /> with a bash code block using docsConfig.registryBaseUrl", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    doc.body.children.unshift({
+      type: "mdxJsxFlowElement",
+      name: "ShadcnInstall",
+      attributes: [
+        { type: "mdxJsxAttribute", name: "name", value: "combo-box" },
+      ],
+      children: [],
+    } as never)
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).not.toContain('"name":"ShadcnInstall"')
+    expect(json).toContain(
+      "npx shadcn@latest add https://oui.open.gov.sg/r/combo-box.json",
+    )
+  })
+
+  it("throws if a ShadcnInstall is missing the 'name' attribute", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    doc.body.children.unshift({
+      type: "mdxJsxFlowElement",
+      name: "ShadcnInstall",
+      attributes: [],
+      children: [],
+    } as never)
+
+    await expect(applyTransforms(doc, { examplesDir: FIXTURES })).rejects.toThrow(
+      /name/,
+    )
+  })
+})
+
 describe("applyTransforms — Toaster", () => {
   it("strips <Toaster /> silently (no warning)", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})

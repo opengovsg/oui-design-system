@@ -3,6 +3,7 @@ import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx-jsx"
 import { visit } from "unist-util-visit"
 
 import type { ParsedDoc } from "./types"
+import { docsConfig } from "../../config/docs.config"
 import { loadExample } from "./load-example"
 
 interface TransformOptions {
@@ -26,6 +27,7 @@ export async function applyTransforms(
   await transformComponentPreviews(doc.body, opts)
   unwrapSteps(doc.body)
   transformCardGroups(doc.body)
+  transformShadcnInstall(doc.body)
   removeBrElements(doc.body)
   transformKbdElements(doc.body)
   rewriteInternalLinks(doc.body)
@@ -106,6 +108,35 @@ function unwrapSteps(tree: Root): void {
       return "skip"
     })
   }
+}
+
+function transformShadcnInstall(tree: Root): void {
+  // <ShadcnInstall name="<slug>" /> → a fenced bash code block with the
+  // `npx shadcn@latest add <registryBaseUrl>/<slug>.json` command.
+  // Keeps the base URL centralised in `docsConfig.registryBaseUrl`.
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "ShadcnInstall") return
+    const name = getAttr(node as AnyMdxJsx, "name")
+    if (!name) {
+      throw new Error(
+        `<ShadcnInstall /> is missing a 'name' attribute`,
+      )
+    }
+    const codeBlock: Code = {
+      type: "code",
+      lang: "bash",
+      value: `npx shadcn@latest add ${docsConfig.registryBaseUrl}/${name}.json`,
+    }
+    ;(parent as Parent).children.splice(index, 1, codeBlock)
+    return "skip"
+  })
 }
 
 function removeBrElements(tree: Root): void {
