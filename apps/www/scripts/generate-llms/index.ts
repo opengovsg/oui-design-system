@@ -1,16 +1,17 @@
-import { fileURLToPath } from "node:url"
 import { mkdir, readdir, writeFile } from "node:fs/promises"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
+import type { ComponentEntry, GuideEntry } from "./llms-txt"
+import type { ParsedDoc } from "./types"
 import { docsConfig } from "../../config/docs.config"
 import { renderComponentMarkdown } from "./component-md"
 import { writeCoverageReport } from "./coverage"
 import { renderGettingStartedMarkdown } from "./getting-started-md"
 import { renderLlmsFullTxt } from "./llms-full-txt"
-import { renderLlmsTxt, type ComponentEntry, type GuideEntry } from "./llms-txt"
+import { renderLlmsTxt } from "./llms-txt"
 import { loadDoc } from "./load-docs"
 import { applyTransforms } from "./transform"
-import type { ParsedDoc } from "./types"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -52,7 +53,10 @@ async function main(): Promise<void> {
   }
 
   // 2. Build the related-doc summary map (needed before rendering component .md).
-  const relatedMap = new Map<string, { title: string; description: string; url: string }>()
+  const relatedMap = new Map<
+    string,
+    { title: string; description: string; url: string }
+  >()
   for (const doc of components) {
     relatedMap.set(doc.slug, {
       title: doc.frontmatter.title,

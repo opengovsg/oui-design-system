@@ -4,7 +4,7 @@ import type { CalendarState, RangeCalendarState } from "react-stately"
 import { useMemo } from "react"
 import { useDateFormatter } from "react-aria"
 
-import { useGenerateLocalizedMonths, useGenerateLocalizedYears } from "../utils"
+import { useGenerateLocalizedMonths, useGenerateLocalizedYears } from "./utils"
 
 export const useCalendarSelectors = (
   state: CalendarState | RangeCalendarState,

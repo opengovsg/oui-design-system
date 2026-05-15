@@ -27,7 +27,11 @@ export function renderComponentMarkdown(
   const reactAriaUrl = fm.links?.reactaria
 
   // 1. Build frontmatter YAML (we hand-write to keep field order predictable).
-  const fmLines: string[] = ["---", `title: ${fm.title}`, `description: ${fm.description}`]
+  const fmLines: string[] = [
+    "---",
+    `title: ${fm.title}`,
+    `description: ${fm.description}`,
+  ]
   if (fm.category) fmLines.push(`category: ${fm.category}`)
   if (fm.links?.source) fmLines.push(`source: ${fm.links.source}`)
   if (reactAriaUrl) fmLines.push(`reactAria: ${reactAriaUrl}`)
@@ -49,7 +53,8 @@ export function renderComponentMarkdown(
   ]
 
   if (reactAriaUrl) {
-    const primitiveName = reactAriaUrl.split("/").pop() ?? "the upstream primitive"
+    const primitiveName =
+      reactAriaUrl.split("/").pop() ?? "the upstream primitive"
     prelude.push({
       type: "blockquote",
       children: [
@@ -124,7 +129,9 @@ export function renderComponentMarkdown(
     tail.push({ type: "thematicBreak" })
     tail.push({
       type: "paragraph",
-      children: [{ type: "strong", children: [{ type: "text", value: "See also:" }] }],
+      children: [
+        { type: "strong", children: [{ type: "text", value: "See also:" }] },
+      ],
     })
     tail.push({
       type: "list",

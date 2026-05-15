@@ -34,7 +34,8 @@ describe("renderLlmsTxt", () => {
         {
           slug: "avatar",
           title: "Avatar",
-          description: "Displays a user's profile picture, initials, or fallback icon.",
+          description:
+            "Displays a user's profile picture, initials, or fallback icon.",
           category: "Display",
         },
         {

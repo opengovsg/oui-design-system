@@ -41,7 +41,11 @@ export function renderLlmsTxt(input: RenderLlmsTxtInput): string {
   const sections: string[] = [INTRO]
 
   // Getting started
-  sections.push(renderSection("Getting started", input.gettingStarted, (g) => guideBullet(g, input.siteUrl)))
+  sections.push(
+    renderSection("Getting started", input.gettingStarted, (g) =>
+      guideBullet(g, input.siteUrl),
+    ),
+  )
 
   // Guides (reserved)
   sections.push(
@@ -60,7 +64,9 @@ export function renderLlmsTxt(input: RenderLlmsTxtInput): string {
     const list = byCategory.get(cat)
     if (!list || list.length === 0) continue
     list.sort((a, b) => a.title.localeCompare(b.title))
-    sections.push(renderSection(cat, list, (c) => componentBullet(c, input.siteUrl)))
+    sections.push(
+      renderSection(cat, list, (c) => componentBullet(c, input.siteUrl)),
+    )
   }
 
   // Optional / full corpus pointer

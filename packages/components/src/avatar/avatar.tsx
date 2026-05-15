@@ -12,12 +12,12 @@ import type {
 } from "@opengovsg/oui-theme"
 import { avatarStyles, dataAttr } from "@opengovsg/oui-theme"
 
-import type { ImageLoadingStatus } from "./hooks/use-img-loading-status"
+import type { ImageLoadingStatus } from "./use-img-loading-status"
 import { useDomRef } from "../system/react-utils"
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { AvatarContext, useAvatarContext } from "./avatar-context"
 import { useAvatarGroupContext } from "./avatar-group-context"
-import { useImageLoadingStatus } from "./hooks/use-img-loading-status"
+import { useImageLoadingStatus } from "./use-img-loading-status"
 import { getInitialsFromText } from "./utils"
 
 export interface AvatarProps extends AvatarVariantProps, PropsWithChildren {

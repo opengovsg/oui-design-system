@@ -56,18 +56,12 @@ export async function writeCoverageReport(
       doc.slug,
       `${doc.slug}.d.ts`,
     )
-    const indexDtsPath = path.join(
-      COMPONENTS_TYPES_DIR,
-      doc.slug,
-      "index.d.ts",
-    )
+    const indexDtsPath = path.join(COMPONENTS_TYPES_DIR, doc.slug, "index.d.ts")
     const dtsPath = existsSync(slugDtsPath) ? slugDtsPath : indexDtsPath
     if (!existsSync(dtsPath)) continue
 
     const dts = await readFile(dtsPath, "utf8")
-    const propsMatch = dts.match(
-      /interface\s+\w+Props[^{]*\{([\s\S]*?)\n\}/,
-    )
+    const propsMatch = dts.match(/interface\s+\w+Props[^{]*\{([\s\S]*?)\n\}/)
     if (!propsMatch) continue
 
     const propNames = Array.from(
@@ -95,5 +89,7 @@ export async function writeCoverageReport(
 
   await mkdir(path.dirname(outputPath), { recursive: true })
   await writeFile(outputPath, JSON.stringify(entries, null, 2), "utf8")
-  console.log(`[llms-coverage] wrote ${entries.length} entries to ${outputPath}`)
+  console.log(
+    `[llms-coverage] wrote ${entries.length} entries to ${outputPath}`,
+  )
 }
