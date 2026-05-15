@@ -15,7 +15,7 @@ export function installManifest(
   manifest: RegistryItem,
   fixtureRoot: string,
 ): void {
-  for (const file of manifest.files) {
+  for (const file of manifest.files ?? []) {
     const destination = join(fixtureRoot, file.target)
     mkdirSync(dirname(destination), { recursive: true })
     writeFileSync(destination, file.content, "utf-8")

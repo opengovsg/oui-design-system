@@ -3,6 +3,7 @@ import type { RegistryItem } from "./registry/types"
 import { buildCatalog } from "./registry/catalog"
 import { COMPONENT_DESCRIPTIONS } from "./registry/descriptions"
 import { discoverComponents } from "./registry/discover"
+import { buildBaseManifest } from "./registry/manifest-base"
 import { buildComponentManifest } from "./registry/manifest-component"
 import { buildIndex } from "./registry/manifest-index"
 import { buildLibManifest } from "./registry/manifest-lib"
@@ -60,13 +61,19 @@ async function main() {
     }
   }
 
-  const allItems: RegistryItem[] = [...componentManifests, ...libManifests]
+  const baseManifest = buildBaseManifest(options)
+
+  const allItems: RegistryItem[] = [
+    baseManifest,
+    ...componentManifests,
+    ...libManifests,
+  ]
   const index = buildIndex(allItems, options)
 
   writeRegistry(allItems, index)
 
   console.log(
-    `[registry] Wrote ${componentManifests.length} components + ${libManifests.length} lib entries → apps/www/public/r/`,
+    `[registry] Wrote base + ${componentManifests.length} components + ${libManifests.length} lib entries → apps/www/public/r/`,
   )
 }
 
