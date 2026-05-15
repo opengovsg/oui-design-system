@@ -1,7 +1,7 @@
 "use client"
 
 import type { ForwardedRef } from "react"
-import type { ListBoxItemProps } from "react-aria-components"
+import type { ListBoxItemProps as AriaListBoxItemProps } from "react-aria-components"
 import { useMemo } from "react"
 import {
   composeRenderProps,
@@ -18,8 +18,8 @@ import { listBoxItemStyles } from "@opengovsg/oui-theme"
 
 import { forwardRef, mapPropsVariants } from "../system/utils"
 
-export interface OuiListBoxItemProps
-  extends ListBoxItemProps,
+export interface ListBoxItemProps
+  extends AriaListBoxItemProps,
     ListBoxItemVariantProps {
   /**
    * Description for the item, if any
@@ -28,8 +28,8 @@ export interface OuiListBoxItemProps
   classNames?: SlotsToClasses<ListBoxItemSlots>
 }
 
-export const OuiListBoxItem = forwardRef(function OuiListBoxItem(
-  originalProps: OuiListBoxItemProps,
+export const ListBoxItem = forwardRef(function ListBoxItem(
+  originalProps: ListBoxItemProps,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ref: ForwardedRef<any>,
 ) {

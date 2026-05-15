@@ -1,2 +1,2 @@
-export { OuiListBoxItem } from "./list-box"
-export type { OuiListBoxItemProps } from "./list-box"
+export { ListBoxItem } from "./list-box"
+export type { ListBoxItemProps } from "./list-box"

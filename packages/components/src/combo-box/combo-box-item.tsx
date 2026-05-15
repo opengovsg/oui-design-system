@@ -3,12 +3,12 @@
 import type { ForwardedRef } from "react"
 import { useContextProps } from "react-aria-components"
 
-import type { OuiListBoxItemProps } from "../list-box"
-import { OuiListBoxItem } from "../list-box"
+import type { ListBoxItemProps } from "../list-box"
+import { ListBoxItem } from "../list-box"
 import { forwardRef } from "../system/utils"
 import { ComboBoxVariantContext } from "./combo-box-variant-context"
 
-export type ComboBoxItemProps = OuiListBoxItemProps
+export type ComboBoxItemProps = ListBoxItemProps
 
 export const ComboBoxItem = forwardRef(function ComboBoxItem(
   originalProps: ComboBoxItemProps,
@@ -20,5 +20,5 @@ export const ComboBoxItem = forwardRef(function ComboBoxItem(
     ref,
     ComboBoxVariantContext,
   )
-  return <OuiListBoxItem ref={ref} {...originalProps} />
+  return <ListBoxItem ref={ref} {...originalProps} />
 })
