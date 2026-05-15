@@ -31,7 +31,6 @@ export interface RegistryIndexEntry {
 }
 
 export interface RegistryIndex {
-  $schema: "https://oui.open.gov.sg/r/index-schema.json"
   generatedAt: string
   items: RegistryIndexEntry[]
 }
