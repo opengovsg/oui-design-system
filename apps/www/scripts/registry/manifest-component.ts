@@ -1,17 +1,12 @@
 // apps/www/scripts/registry/manifest-component.ts
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { Project } from "ts-morph"
 
+import type { BuildOptions, Catalog, RegistryFile, RegistryItem } from "./types"
 import { transformSourceFile } from "./transform"
 import { transformVariantFile } from "./variant"
-import type {
-  BuildOptions,
-  Catalog,
-  RegistryFile,
-  RegistryItem,
-} from "./types"
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(HERE, "../../../..")
@@ -170,12 +165,12 @@ export function buildComponentManifest(
   }
 
   const registryDepsUrls = [
-    ...[...registryDeps].sort().map(
-      (name) => `${options.registryBaseUrl}/${name}.json`,
-    ),
-    ...[...libDeps].sort().map(
-      (name) => `${options.registryBaseUrl}/${name}.json`,
-    ),
+    ...[...registryDeps]
+      .sort()
+      .map((name) => `${options.registryBaseUrl}/${name}.json`),
+    ...[...libDeps]
+      .sort()
+      .map((name) => `${options.registryBaseUrl}/${name}.json`),
   ]
 
   return {

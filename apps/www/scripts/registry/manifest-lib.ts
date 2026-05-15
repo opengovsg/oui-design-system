@@ -1,12 +1,7 @@
 import { Project } from "ts-morph"
 
+import type { BuildOptions, Catalog, LibEntry, RegistryItem } from "./types"
 import { transformSourceFile } from "./transform"
-import type {
-  BuildOptions,
-  Catalog,
-  LibEntry,
-  RegistryItem,
-} from "./types"
 
 export function buildLibManifest(
   entry: LibEntry,
@@ -22,12 +17,12 @@ export function buildLibManifest(
 
   const targetPath = `lib/oui/${entry.name}.ts`
   const registryDepsUrls = [
-    ...[...result.registryDeps].sort().map(
-      (name) => `${options.registryBaseUrl}/${name}.json`,
-    ),
-    ...[...result.libDeps].sort().map(
-      (name) => `${options.registryBaseUrl}/${name}.json`,
-    ),
+    ...[...result.registryDeps]
+      .sort()
+      .map((name) => `${options.registryBaseUrl}/${name}.json`),
+    ...[...result.libDeps]
+      .sort()
+      .map((name) => `${options.registryBaseUrl}/${name}.json`),
   ]
 
   return {

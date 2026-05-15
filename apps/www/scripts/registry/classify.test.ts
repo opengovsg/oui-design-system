@@ -88,11 +88,7 @@ describe("classifyImport", () => {
   })
 
   it("classifies hooks barrel imports", () => {
-    const r = classifyImport(
-      "../hooks",
-      ["useControllableState"],
-      catalog,
-    )
+    const r = classifyImport("../hooks", ["useControllableState"], catalog)
     expect(r.kind).toBe("lib-barrel")
     if (r.kind === "lib-barrel") {
       expect(r.libBuckets.size).toBe(1)

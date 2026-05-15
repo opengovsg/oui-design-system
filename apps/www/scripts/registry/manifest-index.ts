@@ -1,9 +1,5 @@
 // apps/www/scripts/registry/manifest-index.ts
-import type {
-  BuildOptions,
-  RegistryIndex,
-  RegistryItem,
-} from "./types"
+import type { BuildOptions, RegistryIndex, RegistryItem } from "./types"
 
 export function buildIndex(
   items: RegistryItem[],

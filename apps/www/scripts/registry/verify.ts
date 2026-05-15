@@ -1,16 +1,11 @@
 // apps/www/scripts/registry/verify.ts
 import { execFileSync } from "node:child_process"
-import {
-  existsSync,
-  readFileSync,
-  readdirSync,
-  rmSync,
-} from "node:fs"
+import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import { installManifest } from "./install"
 import type { RegistryItem } from "./types"
+import { installManifest } from "./install"
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(HERE, "../../../..")
@@ -28,7 +23,8 @@ function readAllManifests(): RegistryItem[] {
     (f) => f.endsWith(".json") && f !== "index.json",
   )
   return files.map(
-    (f) => JSON.parse(readFileSync(join(REGISTRY_DIR, f), "utf-8")) as RegistryItem,
+    (f) =>
+      JSON.parse(readFileSync(join(REGISTRY_DIR, f), "utf-8")) as RegistryItem,
   )
 }
 
@@ -74,7 +70,10 @@ async function main() {
     const queue: string[] = [...(manifest.registryDependencies ?? [])]
     while (queue.length > 0) {
       const url = queue.shift()!
-      const depName = url.split("/").pop()!.replace(/\.json$/, "")
+      const depName = url
+        .split("/")
+        .pop()!
+        .replace(/\.json$/, "")
       if (installed.has(depName)) continue
       installed.add(depName)
       const depPath = join(REGISTRY_DIR, `${depName}.json`)

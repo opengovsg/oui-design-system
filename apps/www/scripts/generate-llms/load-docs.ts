@@ -1,16 +1,14 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
-
-import matter from "gray-matter"
 import type { Root } from "mdast"
+import matter from "gray-matter"
 import remarkGfm from "remark-gfm"
 import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
 import { unified } from "unified"
 
-import { docsConfig } from "../../config/docs.config"
-
 import type { DocFrontmatter, ParsedDoc } from "./types"
+import { docsConfig } from "../../config/docs.config"
 
 const processor = unified().use(remarkParse).use(remarkMdx).use(remarkGfm)
 

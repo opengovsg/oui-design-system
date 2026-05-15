@@ -18,7 +18,10 @@ export type ClassifiedImport =
   | {
       kind: "theme-mixed"
       /** One bucket per source variant file (keyed by variant component name). */
-      variantBuckets: Map<string, { variant: import("./types").ComponentVariant; symbols: string[] }>
+      variantBuckets: Map<
+        string,
+        { variant: import("./types").ComponentVariant; symbols: string[] }
+      >
       libBuckets: Map<string, { lib: LibEntry; symbols: string[] }>
       leftoverSymbols: string[] // symbols not in variant catalog nor lib catalog
     }
@@ -58,7 +61,10 @@ export function classifyImport(
   }
 
   if (moduleSpecifier === THEME_PKG) {
-    const variantBuckets = new Map<string, { variant: import("./types").ComponentVariant; symbols: string[] }>()
+    const variantBuckets = new Map<
+      string,
+      { variant: import("./types").ComponentVariant; symbols: string[] }
+    >()
     const libSymbols: string[] = []
     const leftoverSymbols: string[] = []
     for (const sym of symbols) {

@@ -4,11 +4,7 @@ import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { Project } from "ts-morph"
 
-import type {
-  Catalog,
-  ComponentVariant,
-  LibEntry,
-} from "./types"
+import type { Catalog, ComponentVariant, LibEntry } from "./types"
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(HERE, "../../../..")

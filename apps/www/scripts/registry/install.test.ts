@@ -4,8 +4,8 @@ import { tmpdir } from "node:os"
 import { join } from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 
-import { installManifest } from "./install"
 import type { RegistryItem } from "./types"
+import { installManifest } from "./install"
 
 let dirs: string[] = []
 afterEach(() => {
@@ -39,9 +39,9 @@ describe("installManifest", () => {
     dirs.push(root)
     installManifest(manifest, root)
 
-    expect(
-      readFileSync(join(root, "components/oui/button.tsx"), "utf-8"),
-    ).toBe("export const Button = () => null\n")
+    expect(readFileSync(join(root, "components/oui/button.tsx"), "utf-8")).toBe(
+      "export const Button = () => null\n",
+    )
     expect(readFileSync(join(root, "lib/oui/cn.ts"), "utf-8")).toBe(
       "export const cn = () => ''\n",
     )

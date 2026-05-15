@@ -1,9 +1,8 @@
 // apps/www/scripts/registry/transform.test.ts
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-
-import { describe, expect, it } from "vitest"
 import { Project } from "ts-morph"
+import { describe, expect, it } from "vitest"
 
 import { buildCatalog } from "./catalog"
 import { transformSourceFile } from "./transform"
@@ -34,9 +33,7 @@ describe("transformSourceFile", () => {
   })
 
   it("rewrites sibling component imports and records a registryDependency", () => {
-    const { code, registryDeps } = tx(
-      `import { Spinner } from "../spinner"\n`,
-    )
+    const { code, registryDeps } = tx(`import { Spinner } from "../spinner"\n`)
     expect(code).toContain(`from "@/components/oui/spinner"`)
     expect(registryDeps.has("spinner")).toBe(true)
   })

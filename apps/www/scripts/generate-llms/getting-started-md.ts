@@ -12,7 +12,13 @@ const stringifier = unified()
 export function renderGettingStartedMarkdown(doc: ParsedDoc): string {
   const fm = doc.frontmatter
 
-  const fmBlock = ["---", `title: ${fm.title}`, `description: ${fm.description}`, "---", ""].join("\n")
+  const fmBlock = [
+    "---",
+    `title: ${fm.title}`,
+    `description: ${fm.description}`,
+    "---",
+    "",
+  ].join("\n")
 
   const prelude: RootContent[] = [
     {

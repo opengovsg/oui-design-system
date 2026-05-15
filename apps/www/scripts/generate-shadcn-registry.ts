@@ -1,11 +1,11 @@
 // apps/www/scripts/generate-shadcn-registry.ts
+import type { RegistryItem } from "./registry/types"
 import { buildCatalog } from "./registry/catalog"
 import { COMPONENT_DESCRIPTIONS } from "./registry/descriptions"
 import { discoverComponents } from "./registry/discover"
 import { buildComponentManifest } from "./registry/manifest-component"
 import { buildIndex } from "./registry/manifest-index"
 import { buildLibManifest } from "./registry/manifest-lib"
-import type { RegistryItem } from "./registry/types"
 import { writeRegistry } from "./registry/write"
 
 const REGISTRY_BASE_URL = "https://oui.gov.sg/r"

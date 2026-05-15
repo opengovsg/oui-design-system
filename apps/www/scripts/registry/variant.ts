@@ -1,8 +1,8 @@
 // apps/www/scripts/registry/variant.ts
 import { Project } from "ts-morph"
 
-import { transformSourceFile } from "./transform"
 import type { Catalog } from "./types"
+import { transformSourceFile } from "./transform"
 
 export interface VariantTransformResult {
   code: string
@@ -14,7 +14,10 @@ export interface VariantTransformResult {
   transitiveVariants: Set<string>
 }
 
-export function transformVariantFile(sourcePath: string, catalog: Catalog): VariantTransformResult {
+export function transformVariantFile(
+  sourcePath: string,
+  catalog: Catalog,
+): VariantTransformResult {
   const project = new Project({
     skipAddingFilesFromTsConfig: true,
     compilerOptions: { allowJs: false },

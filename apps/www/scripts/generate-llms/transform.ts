@@ -2,8 +2,8 @@ import type { Code, List, ListItem, Paragraph, Parent, Root, Text } from "mdast"
 import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx-jsx"
 import { visit } from "unist-util-visit"
 
-import { loadExample } from "./load-example"
 import type { ParsedDoc } from "./types"
+import { loadExample } from "./load-example"
 
 interface TransformOptions {
   examplesDir: string
@@ -219,7 +219,11 @@ function transformCardGroups(tree: Root): void {
       children: [paragraph],
     }
 
-    ;(parent as Parent).children.splice(index, 1, listItem as unknown as Parent["children"][number])
+    ;(parent as Parent).children.splice(
+      index,
+      1,
+      listItem as unknown as Parent["children"][number],
+    )
   })
 
   // Second: replace CardGroup nodes with List nodes containing the ListItem siblings
@@ -244,7 +248,11 @@ function transformCardGroups(tree: Root): void {
       children: items,
     }
 
-    ;(parent as Parent).children.splice(index, 1, list as unknown as Parent["children"][number])
+    ;(parent as Parent).children.splice(
+      index,
+      1,
+      list as unknown as Parent["children"][number],
+    )
   })
 }
 

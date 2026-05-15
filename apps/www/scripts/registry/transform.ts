@@ -1,10 +1,9 @@
 // apps/www/scripts/registry/transform.ts
 import { join } from "node:path"
-
 import type { ImportDeclaration, SourceFile } from "ts-morph"
 
-import { classifyImport } from "./classify"
 import type { Catalog, LibEntry } from "./types"
+import { classifyImport } from "./classify"
 
 export interface TransformResult {
   /** Transformed source code (preserves "use client" pragma). */
@@ -28,11 +27,7 @@ function symbolsOfImport(decl: ImportDeclaration): string[] {
   const named = decl.getNamedImports().map((n) => n.getName())
   const def = decl.getDefaultImport()?.getText()
   const ns = decl.getNamespaceImport()?.getText()
-  return [
-    ...named,
-    ...(def ? [def] : []),
-    ...(ns ? [ns] : []),
-  ]
+  return [...named, ...(def ? [def] : []), ...(ns ? [ns] : [])]
 }
 
 export function transformSourceFile(
@@ -92,9 +87,7 @@ export function transformSourceFile(
       }
       case "sibling-component": {
         registryDeps.add(classified.componentName)
-        decl.setModuleSpecifier(
-          `@/components/oui/${classified.componentName}`,
-        )
+        decl.setModuleSpecifier(`@/components/oui/${classified.componentName}`)
         break
       }
       case "sibling-component-file": {
@@ -102,9 +95,7 @@ export function transformSourceFile(
         // Rewrite to the component's barrel (the deep path collapses to the flat
         // target in the registry layout — single-file or multi-file, the barrel
         // re-exports everything consumers need).
-        decl.setModuleSpecifier(
-          `@/components/oui/${classified.componentName}`,
-        )
+        decl.setModuleSpecifier(`@/components/oui/${classified.componentName}`)
         break
       }
       case "lib-direct": {
