@@ -20,6 +20,16 @@ bun add @opengovsg/oui @opengovsg/oui-theme tailwindcss react-aria-components mo
 
 Then add `@import "@opengovsg/oui-theme/tailwind.css"` to your Tailwind entrypoint. Full setup: https://oui.open.gov.sg/docs/getting-started/installation
 
+## Or install as local source via the shadcn CLI
+
+Each component is also distributed as a shadcn-CLI-compatible registry entry, so callers who need to customize beyond what props expose can take local ownership:
+
+```bash
+npx shadcn@latest add https://oui.open.gov.sg/r/<name>.json
+```
+
+Component files land in `components/oui/`, shared utilities in `lib/oui/`. From that point on, the file is yours — we don't push updates to it. Full guide: https://oui.open.gov.sg/llm/getting-started/registry.md
+
 ## Import
 
 ```tsx

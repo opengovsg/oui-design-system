@@ -46,6 +46,14 @@ For components with near-neighbors documented in OUI, include a "When to use" pa
 
 > Use **Select** for short lists where users pick one option from a dropdown. Use [ComboBox](/docs/components/combo-box) when users need type-ahead filtering. Use [Menu](/docs/components/menu) for action lists, not value selection.
 
+After the `import` block, expose the shadcn-CLI registry alternative so callers who want to own the source locally can find it. Use the `<ShadcnInstall>` MDX component — it reads the base URL from `docsConfig.registryBaseUrl`, so the URL is centralised. Substitute `<slug>` with the component's kebab-case slug (matches the MDX filename):
+
+```mdx
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="<slug>" />
+```
+
 ## Anatomy
 
 When the component exports sub-components, show the composition tree explicitly. Example for ComboBox:
