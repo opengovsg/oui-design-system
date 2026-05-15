@@ -14,7 +14,7 @@ describe("buildLibManifest", () => {
   it("builds a manifest for the cn lib entry", () => {
     const cn = catalog.libEntries.get("cn")!
     const manifest = buildLibManifest(cn, catalog, {
-      registryBaseUrl: "https://oui.gov.sg/r",
+      registryBaseUrl: "https://oui.open.gov.sg/r",
     })
 
     expect(manifest.name).toBe("cn")
@@ -29,7 +29,7 @@ describe("buildLibManifest", () => {
   it("uses registry:hook type for hooks", () => {
     const hook = catalog.libEntries.get("use-controllable-state")!
     const manifest = buildLibManifest(hook, catalog, {
-      registryBaseUrl: "https://oui.gov.sg/r",
+      registryBaseUrl: "https://oui.open.gov.sg/r",
     })
     expect(manifest.type).toBe("registry:hook")
     expect(manifest.files[0].type).toBe("registry:hook")

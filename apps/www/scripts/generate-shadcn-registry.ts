@@ -8,7 +8,7 @@ import { buildIndex } from "./registry/manifest-index"
 import { buildLibManifest } from "./registry/manifest-lib"
 import { writeRegistry } from "./registry/write"
 
-const REGISTRY_BASE_URL = "https://oui.gov.sg/r"
+const REGISTRY_BASE_URL = "https://oui.open.gov.sg/r"
 
 async function main() {
   const catalog = buildCatalog()

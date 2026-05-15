@@ -6,7 +6,6 @@ export function buildIndex(
   options: BuildOptions,
 ): RegistryIndex {
   return {
-    $schema: "https://oui.gov.sg/r/index-schema.json",
     generatedAt: new Date().toISOString(),
     items: items
       .map((item) => ({

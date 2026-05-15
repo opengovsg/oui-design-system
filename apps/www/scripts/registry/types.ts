@@ -31,13 +31,12 @@ export interface RegistryIndexEntry {
 }
 
 export interface RegistryIndex {
-  $schema: "https://oui.gov.sg/r/index-schema.json"
   generatedAt: string
   items: RegistryIndexEntry[]
 }
 
 export interface BuildOptions {
-  /** Base URL for registry items (e.g., "https://oui.gov.sg/r"). */
+  /** Base URL for registry items (e.g., "https://oui.open.gov.sg/r"). */
   registryBaseUrl: string
 }
 
