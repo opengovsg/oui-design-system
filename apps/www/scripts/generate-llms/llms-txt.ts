@@ -16,6 +16,7 @@ export interface GuideEntry {
 export interface RenderLlmsTxtInput {
   siteUrl: string
   gettingStarted: GuideEntry[]
+  guides: GuideEntry[]
   components: ComponentEntry[]
 }
 
@@ -47,9 +48,14 @@ export function renderLlmsTxt(input: RenderLlmsTxtInput): string {
     ),
   )
 
-  // Guides (reserved)
+  // Guides
   sections.push(
-    "## Guides\n\n(Reserved for future topical guides — form composition, validation patterns, accessibility expectations, theming customization. Content lands incrementally as it's written.)",
+    renderSection(
+      "Guides",
+      input.guides,
+      (g) =>
+        `- [${g.title}](${input.siteUrl}/llm/guides/${g.slug}.md): ${g.description}`,
+    ),
   )
 
   // One section per category that has at least one component, in CATEGORY_ORDER.

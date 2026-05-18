@@ -1,6 +1,6 @@
 ---
 title: Banner
-description: Communicates a prominent system-level message at the top of the screen, regardless of the user’s place in the application.
+description: Communicates a prominent system-level message at the top of the screen, regardless of the user's place in the application.
 category: Feedback
 toc:
   visible: true
@@ -12,7 +12,21 @@ links:
 
 ## Usage
 
+```tsx
+import { Banner } from "@opengovsg/oui"
+```
+
+```tsx
+<Banner>Your session will expire in 5 minutes.</Banner>
+```
+
 <ComponentPreview name="banner-demo" />
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="banner" />
+
+Banner communicates a prominent system-level message pinned at the top of the page. It supports an optional dismiss button and variant-based icons. For transient notifications, use [Toast](/docs/components/toast) instead.
 
 ### Sizes
 
@@ -51,13 +65,36 @@ You can control the banner visibility using the `isExpanded` and `onExpandedChan
 You can also set the initial visibility using the `defaultExpanded` prop.
 This defaults to `true` if unset.
 
+## Accessibility
+
+- Banner renders as a `<section>` element; provide an accessible name via `aria-label` or `aria-labelledby` when the page contains multiple banners.
+- When `isDismissable` is `true`, the dismiss button receives an accessible label. Ensure the surrounding context makes clear what is being dismissed.
+- Color alone is not used to convey meaning; each variant includes an icon to reinforce the message type.
+
 ## Slots
 
-Alert has the following slots:
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
-- `base`: The main banner container element
-- `content`: The content wrapper that contains the `startContent` and children
-- `startContentWrapper`: The wrapper around the `startContent` element
-- `childrenWrapper`: The wrapper around the children elements
-- `dismissButton`: The dismiss button element
-- `icon`: The icon element within startContent (if default icons are used)
+- **`base`**: The main banner container element.
+- **`content`**: The content wrapper that contains `startContent` and `children`.
+- **`startContentWrapper`**: The wrapper around the `startContent` element.
+- **`childrenWrapper`**: The wrapper around the `children` content.
+- **`dismissButton`**: The dismiss button element (visible when `isDismissable` is true).
+- **`icon`**: The icon element within the default `startContent` (when no custom `startContent` is provided).
+
+## Props
+
+### Banner
+
+| Prop               | Type                                           | Default  | Description                                                                                                       |
+| ------------------ | ---------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| `children`         | `ReactNode`                                    | -        | The banner message content                                                                                        |
+| `isExpanded`       | `boolean`                                      | -        | Whether the banner is visible (controlled)                                                                        |
+| `defaultExpanded`  | `boolean`                                      | `true`   | Whether the banner is visible by default (uncontrolled)                                                           |
+| `onExpandedChange` | `(isExpanded: boolean) => void`                | -        | Called when the banner's expanded state changes                                                                   |
+| `isDismissable`    | `boolean`                                      | -        | Whether to render a dismiss button that hides the banner when pressed                                             |
+| `startContent`     | `ReactNode \| null`                            | -        | Content rendered to the left of the message; defaults to a variant-appropriate icon; pass `null` to hide the icon |
+| `variant`          | `"info" \| "warning" \| "error" \| "unstyled"` | `"info"` | The visual style and color scheme of the banner                                                                   |
+| `size`             | `"sm" \| "md"`                                 | `"md"`   | The size of the banner                                                                                            |
+| `classNames`       | `SlotsToClasses<BannerSlots>`                  | -        | Custom Tailwind classes for component slots                                                                       |
+| `className`        | `string`                                       | -        | Additional class applied to the base element                                                                      |

@@ -15,6 +15,8 @@ links:
 
 ## Usage
 
+Use **NumberField** for numeric input with optional stepper buttons. Use [TextField](/docs/components/text-field) with `type="tel"` or a custom `pattern` if you need digit-only input without steppers.
+
 ```tsx
 import { NumberField } from "@opengovsg/oui"
 ```
@@ -22,6 +24,10 @@ import { NumberField } from "@opengovsg/oui"
 ```tsx
 <NumberField aria-label="Enter quantity" />
 ```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="number-field" />
 
 The NumberField component provides an accessible way for users to enter numeric values with optional stepper buttons for incrementing and decrementing the value.
 
@@ -114,6 +120,8 @@ By default, users can change the value using the mouse wheel. Use `isWheelDisabl
 <ComponentPreview name="number-field-wheel-disabled" />
 
 ## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
 
 The NumberField component supports built-in validation:
 

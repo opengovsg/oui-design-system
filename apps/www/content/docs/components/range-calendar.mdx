@@ -13,6 +13,12 @@ links:
 
 ## Usage
 
+Use **RangeCalendar** for inline date-range selection. Use [DateRangePicker](/docs/components/date-range-picker) when the range UI should appear in a popover. Use [Calendar](/docs/components/calendar) for a single date.
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="range-calendar" />
+
 A RangeCalendar has no selection by default. An initial, uncontrolled value can be provided to the RangeCalendar using the `defaultValue` prop. Alternatively, a controlled value can be provided using the `value` prop.
 
 Date values are provided using objects in the `@internationalized/date` package. This library handles correct international date manipulation across calendars, time zones, and other localization concerns.

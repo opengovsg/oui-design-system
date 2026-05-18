@@ -1,6 +1,6 @@
 ---
 title: Tabs
-description: Tabs organize content into multiple sections and allow users to navigate between them.
+description: Organizes content into multiple panels and lets users switch between them. For page-level navigation, use a nav element or breadcrumbs instead.
 category: Layout & Navigation
 toc:
   visible: true
@@ -15,104 +15,248 @@ links:
 
 ## Usage
 
-OUI exports 4 tabs-related components:
+```tsx
+import { Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
+```
 
-- **Tabs**: The main component to display a tab list.
-- **Tab**: The component to display a tab item.
-- **TabPanel**: The component that contains the content for each tab.
-- **TabList**: The component that wraps the Tab components.
+```tsx
+<Tabs>
+  <TabList aria-label="My sections">
+    <Tab id="one">Section One</Tab>
+    <Tab id="two">Section Two</Tab>
+  </TabList>
+  <TabPanel id="one">Content for section one.</TabPanel>
+  <TabPanel id="two">Content for section two.</TabPanel>
+</Tabs>
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="tabs" />
+
+Tabs renders a `role="tablist"` strip of tab triggers and associates each trigger with its `role="tabpanel"` via ARIA. It is built on [React Aria's Tabs](https://react-aria.adobe.com/Tabs) and handles keyboard navigation, focus management, selection state, and ARIA semantics automatically.
+
+`TabList` always needs an `aria-label` (or `aria-labelledby`) to identify the tab group for assistive technology.
+
+## Anatomy
+
+Tabs consists of:
+
+- **Tabs** (the root container; manages selection state and propagates variant context)
+  - **TabList** (the row of tab triggers; renders as `role="tablist"`)
+    - **Tab** (one per tab; renders as `role="tab"`)
+  - **TabPanel** (one per tab; renders as `role="tabpanel"` — shows content for the selected tab)
+
+## Examples
 
 ### Variants
 
-Two variants of tabs are available: `underlined` and `bordered`.
-
-- **Underlined** – Tabs are displayed with an underline to indicate the active tab.
-- **Bordered** – Tabs are displayed with a border around each tab, modeled like a button group.
+Two variants are available: `underlined` (default) and `bordered`.
 
 <ComponentPreview name="tabs-variants" />
 
 ### Prominence
 
-The `prominence` prop controls the visual weight of the tab text. Two values are available: `strong` (default) and `normal`.
+The `prominence` prop controls the visual weight of the tab text. Defaults to `"strong"` (uppercase, semi-bold). Use `"normal"` for a lighter appearance.
 
-- **Strong** – Tabs are displayed in uppercase with semi-bold weight, giving them more visual emphasis.
-- **Normal** – Tabs are displayed in regular case with a lighter weight, for a more subtle appearance.
-
-> Note: The `prominence` prop only has a visible effect with the `underlined` variant. When used with the `bordered` variant, the prominence setting will not produce a visual difference.
+> The `prominence` prop only has a visible effect with the `underlined` variant.
 
 <ComponentPreview name="tabs-prominence" />
 
-## Features
+### With Icons
 
-Tabs provide a list of tabs that a user can select from to switch between multiple tab panels. Tabs can be used to implement these in an accessible way.
+Use `startContent` or `endContent` on `Tab` to place an icon alongside the label.
 
-- **Flexible** – Support for both horizontal and vertical orientations, disabled tabs, customizable layout, and multiple keyboard activation modes.
-- **Accessible** – Follows the ARIA tabs pattern, automatically linking tabs and their associated tab panels semantically. The arrow keys can be used to navigate between tabs, and tab panels automatically become focusable when they don't contain any focusable children.
-- **International** – Keyboard navigation is automatically mirrored in right-to-left languages.
-- **Styleable** – Hover, press, keyboard focus, and selection states are provided for easy styling. These states only apply when interacting with an appropriate input device, unlike CSS pseudo classes.
+<ComponentPreview name="tabs-with-icons" />
 
-## Selection
+### Default Selection
 
-### Default selection
-
-A default selected tab can be provided using the `defaultSelectedKey` prop, which should correspond to the `id` prop provided to each item. When `Tabs` is used with dynamic items as described below, the key of each item is derived from the data. See the [Selection](https://react-spectrum.adobe.com/react-aria/selection.html) guide for more details.
+Use `defaultSelectedKey` to set the initially selected tab in an uncontrolled component.
 
 <ComponentPreview name="tabs-with-default-selection" />
 
-### Controlled selection
+### Controlled Selection
 
-Selection can be controlled using the `selectedKey` prop, paired with the `onSelectionChange` event. The `id` prop from the selected tab will be passed into the callback when the tab is selected, allowing you to update state accordingly.
+Use `selectedKey` and `onSelectionChange` together to drive selection from external state.
 
 <ComponentPreview name="tabs-with-controlled-selection" />
 
 ### Keyboard Activation
 
-By default, pressing the arrow keys while focus is on a Tab will switch selection to the adjacent Tab in that direction, updating the content displayed accordingly. If you would like to prevent selection change from happening automatically you can set the `keyboardActivation` prop to `"manual"`. This will prevent tab selection from changing on arrow key press, requiring a subsequent Enter or Space key press to confirm tab selection.
+By default, arrow keys immediately change the selected tab. Set `keyboardActivation="manual"` to require **Enter** or **Space** to confirm after navigating with arrows.
 
 <ComponentPreview name="tabs-with-keyboard-activation" />
 
-## Content
+### Dynamic Items
 
-### Focusable content
-
-When the tab panel doesn't contain any focusable content, the entire panel is given a `tabIndex=0` so that the content can be navigated to with the keyboard. When the tab panel contains focusable content, such as a textfield, then the `tabIndex` is omitted because the content itself can receive focus.
-
-This example uses the same `Tabs` component from above. Try navigating from the tabs to the content for each panel using the keyboard.
-
-<ComponentPreview name="tabs-with-keyboard-focusable-content" />
-
-### Dynamic items
-
-The above examples have shown tabs with static items. The items prop can be used when creating tabs from a dynamic collection, for example when the user can add and remove tabs, or the tabs come from an external data source. The function passed as the children of the TabList component is called for each item in the list, and returns an `<Tab>`. A function passed as the children of the Collection component returns a corresponding` <TabPanel>` for each tab.
-
-Each item accepts an `id` prop, which is passed to the `onSelectionChange` handler to identify the selected item. Alternatively, if the item objects contain an `id` property, as shown in the example below, then this is used automatically and an `id` prop is not required. See [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html) for more details.
+Use the `items` prop on `TabList` and a `Collection` wrapper around `TabPanel`s when the tab list comes from data.
 
 <ComponentPreview name="tabs-with-dynamic-items" />
 
-## Orientation
+### Orientation
 
-By default, tabs are horizontally oriented. The `orientation` prop can be set to `vertical` to change this. This does not affect keyboard navigation.
+Set `orientation="vertical"` to arrange tabs in a column.
 
 <ComponentPreview name="tabs-with-vertical-orientation" />
 
-## Disabled
+### Disabled
 
-All tabs can be disabled using the `isDisabled` prop.
+Set `isDisabled` on `Tabs` to disable all tabs, or on an individual `Tab` to disable a single tab.
 
 <ComponentPreview name="tabs-all-disabled" />
 
-### Disabled items
-
-An individual `Tab` can be disabled with the `isDisabled` prop. Disabled tabs are not focusable, selectable, or keyboard navigable.
-
 <ComponentPreview name="tabs-with-disabled-items" />
 
-In dynamic collections, it may be more convenient to use the `disabledKeys` prop at the `Tabs` level instead of `isDisabled` on individual tabs. Each key in this list corresponds with the `id` prop passed to the `Tab` component, or automatically derived from the values passed to the `items` prop (see [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html) for more details). A tab is considered disabled if its `id` exists in `disabledKeys` or if its `isDisabled` prop is true.
+Use `disabledKeys` on `Tabs` to disable a set of tabs by their `id` — convenient for dynamic collections.
 
 <ComponentPreview name="tabs-with-disabled-keys" />
 
-## Custom Styles
+### Focusable Content
 
-You can customize individual Tabs sub-components by passing Tailwind CSS classes via the `className` prop. The `className` prop also accepts a render function with access to component state (e.g. `isSelected`, `isHovered`, `isDisabled`), allowing you to style tabs based on their current state.
+When a `TabPanel` contains no focusable children, the panel itself receives `tabIndex=0` so keyboard users can reach it. When the panel contains focusable elements (e.g., an input), the panel is not made focusable — the focusable children handle it.
+
+<ComponentPreview name="tabs-with-keyboard-focusable-content" />
+
+## Content
+
+Tabs follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html). You can use static or dynamic collections.
+
+**Static collections** — pass `<Tab>` children directly when the list is known at render time:
+
+```tsx
+<Tabs>
+  <TabList aria-label="Settings">
+    <Tab id="general">General</Tab>
+    <Tab id="privacy">Privacy</Tab>
+  </TabList>
+  <TabPanel id="general">General settings.</TabPanel>
+  <TabPanel id="privacy">Privacy settings.</TabPanel>
+</Tabs>
+```
+
+**Dynamic collections** — pass an iterable to `items` on `TabList` and a render function as `children`. Wrap `TabPanel`s in a `Collection` with the same `items`. Each item object must have an `id` field (or provide a unique `id` prop on the rendered element).
+
+```tsx
+import { Collection } from "react-aria-components"
+import { Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
+
+const tabs = [
+  { id: "overview", title: "Overview", content: "Overview content." },
+  { id: "details", title: "Details", content: "Details content." },
+]
+
+<Tabs>
+  <TabList aria-label="Report sections" items={tabs}>
+    {(item) => <Tab>{item.title}</Tab>}
+  </TabList>
+  <Collection items={tabs}>
+    {(item) => <TabPanel>{item.content}</TabPanel>}
+  </Collection>
+</Tabs>
+```
+
+Use `textValue` on a `Tab` when its `children` is not a plain string (e.g., it contains icons) so that keyboard typeahead works correctly.
+
+## Events
+
+- **`onSelectionChange`** (on `Tabs`) — Called when the selected tab changes, receiving the `Key` of the newly selected tab. Use with `selectedKey` for controlled mode.
+- **`onFocus`** / **`onBlur`** (on `Tabs`) — Called when the tab group receives or loses focus.
+- **`onKeyDown`** / **`onKeyUp`** (on `Tabs`) — Called on keyboard events within the tab group.
+
+## Accessibility
+
+- Tabs produces `role="tablist"`, `role="tab"`, and `role="tabpanel"` elements. Each `Tab` is linked to its `TabPanel` via `aria-controls` and `aria-labelledby` automatically.
+- `TabList` must have an `aria-label` or `aria-labelledby` so screen readers announce what the tab group controls.
+- **Keyboard navigation**: **Left/Right** arrow keys (or **Up/Down** in vertical orientation) move focus between tabs; **Home** / **End** jump to the first/last tab. By default, selection follows focus; set `keyboardActivation="manual"` to require **Enter** or **Space** to select.
+- **Tab key**: pressing **Tab** from the tab strip moves focus to the active `TabPanel` (or its first focusable child). **Shift+Tab** returns to the active `Tab`.
+- Disabled tabs receive `aria-disabled` and are skipped during arrow-key navigation.
+- RTL languages are supported automatically — arrow-key directions are mirrored.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+Tabs uses `className` directly on each sub-component rather than a single top-level `classNames` bag, because each sub-component (`Tabs`, `TabList`, `Tab`, `TabPanel`) accepts its own `className` prop. `Tab`'s `className` also accepts a render function for state-based styling.
+
+**`Tabs` root:**
+
+- **`base`**: The outer flex container that wraps `TabList` and `TabPanel`(s) (rendered as a `<div>`).
+
+**`TabList`:**
+
+- **`base`**: The `<div role="tablist">` flex row (or column in vertical orientation) containing all `Tab` triggers.
+
+**`Tab`:**
+
+- **`base`**: The individual `<div role="tab">` trigger element. Receives state classes for `isSelected`, `isDisabled`, `isHovered`, `isFocusVisible`.
+
+**`TabPanel`:**
+
+- **`base`**: The `<div role="tabpanel">` content area for the currently selected tab.
+
+### Custom Styles
 
 <ComponentPreview name="tabs-custom-styles" />
+
+## Props
+
+### Tabs
+
+| Prop                 | Type                           | Default        | Description                                                                          |
+| -------------------- | ------------------------------ | -------------- | ------------------------------------------------------------------------------------ |
+| `children`           | `ReactNode`                    | -              | The `TabList` and `TabPanel` elements                                                |
+| `selectedKey`        | `Key \| null`                  | -              | The currently selected tab key (controlled)                                          |
+| `defaultSelectedKey` | `Key`                          | -              | The initially selected tab key (uncontrolled)                                        |
+| `onSelectionChange`  | `(key: Key) => void`           | -              | Called when the selected tab changes                                                 |
+| `isDisabled`         | `boolean`                      | `false`        | Whether all tabs are disabled                                                        |
+| `disabledKeys`       | `Iterable<Key>`                | -              | Keys of individual tabs to disable                                                   |
+| `keyboardActivation` | `"automatic" \| "manual"`      | `"automatic"`  | Whether selection follows focus (`"automatic"`) or requires Enter/Space (`"manual"`) |
+| `orientation`        | `"horizontal" \| "vertical"`   | `"horizontal"` | The layout direction of the tab list                                                 |
+| `variant`            | `"underlined" \| "bordered"`   | `"underlined"` | The visual style of tabs                                                             |
+| `prominence`         | `"strong" \| "normal"`         | `"strong"`     | The visual weight of tab text (underlined variant only)                              |
+| `size`               | `"xs" \| "sm" \| "md" \| "lg"` | `"md"`         | The size of the tabs                                                                 |
+| `className`          | `string`                       | -              | Additional class added to the root container                                         |
+
+_Inherits all remaining props from React Aria's [Tabs](https://react-aria.adobe.com/Tabs). Notable ones: `id`, `aria-label`, `aria-labelledby`, `autoFocus`._
+
+### TabList
+
+| Prop          | Type                                    | Default        | Description                                                                           |
+| ------------- | --------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode \| ((item: T) => ReactNode)` | -              | Static `Tab` children or a render function for dynamic items                          |
+| `items`       | `Iterable<T>`                           | -              | The list of items for a dynamic collection                                            |
+| `aria-label`  | `string`                                | -              | Labels the tab group for assistive technology (required when no visible label exists) |
+| `variant`     | `"underlined" \| "bordered"`            | `"underlined"` | Overrides the variant from `Tabs` context                                             |
+| `orientation` | `"horizontal" \| "vertical"`            | `"horizontal"` | Overrides the orientation from `Tabs` context                                         |
+| `size`        | `"xs" \| "sm" \| "md" \| "lg"`          | `"md"`         | Overrides the size from `Tabs` context                                                |
+| `className`   | `string`                                | -              | Additional class added to the tablist element                                         |
+
+_Inherits all remaining props from React Aria's [TabList](https://react-aria.adobe.com/Tabs#tablist). Notable ones: `aria-labelledby`, `dependencies`._
+
+### Tab
+
+| Prop           | Type                                                        | Default        | Description                                                                    |
+| -------------- | ----------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
+| `id`           | `Key`                                                       | -              | A unique identifier for the tab; links it to the matching `TabPanel`           |
+| `children`     | `ReactNode \| ((renderProps: TabRenderProps) => ReactNode)` | -              | The tab label content, or a render function receiving render props             |
+| `textValue`    | `string`                                                    | -              | Plain-text value for typeahead; required when `children` is not a plain string |
+| `isDisabled`   | `boolean`                                                   | `false`        | Whether this specific tab is disabled                                          |
+| `startContent` | `ReactNode`                                                 | -              | Element rendered to the left of the tab label (e.g., an icon)                  |
+| `endContent`   | `ReactNode`                                                 | -              | Element rendered to the right of the tab label (e.g., an icon or badge)        |
+| `variant`      | `"underlined" \| "bordered"`                                | `"underlined"` | Overrides the variant from `Tabs` context                                      |
+| `prominence`   | `"strong" \| "normal"`                                      | `"strong"`     | Overrides the prominence from `Tabs` context                                   |
+| `size`         | `"xs" \| "sm" \| "md" \| "lg"`                              | `"md"`         | Overrides the size from `Tabs` context                                         |
+| `className`    | `string \| ((renderProps: TabRenderProps) => string)`       | -              | Class or render function for state-based styling                               |
+
+_Inherits all remaining props from React Aria's [Tab](https://react-aria.adobe.com/Tabs#tab). Notable ones: `href`, `target`, `rel` (router link support)._
+
+### TabPanel
+
+| Prop               | Type                                                       | Default | Description                                                                          |
+| ------------------ | ---------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `id`               | `Key`                                                      | -       | Must match the `id` of the corresponding `Tab`                                       |
+| `children`         | `ReactNode`                                                | -       | The panel content                                                                    |
+| `shouldForceMount` | `boolean`                                                  | `false` | Whether to keep the panel in the DOM when not selected (useful for preserving state) |
+| `className`        | `string \| ((renderProps: TabPanelRenderProps) => string)` | -       | Class or render function for state-based styling                                     |
+
+_Inherits all remaining props from React Aria's [TabPanel](https://react-aria.adobe.com/Tabs#tabpanel). Notable ones: `aria-label`, `id`._

@@ -25,10 +25,22 @@ import { Avatar, AvatarGroup } from "@opengovsg/oui"
 </Avatar>
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="avatar" />
+
 OUI exports 2 avatar-related components:
 
 - **Avatar**: The main component to display an avatar. It has compound components `Avatar.Image` and `Avatar.Fallback`.
 - **AvatarGroup**: A wrapper component to display a group of avatars.
+
+## Anatomy
+
+Avatar consists of:
+
+- **Avatar** — the root container; manages size, color, and fallback state
+  - **Avatar.Image** — the `<img>` element; triggers fallback when the image fails to load
+  - **Avatar.Fallback** — rendered when the image is absent or fails; shows initials (from `name`) or a default user icon
 
 ## Examples
 
@@ -112,67 +124,80 @@ You can display the total number of avatars by passing the `total` prop to the `
 
 <ComponentPreview name="avatar-group-custom-count" />
 
+## Accessibility
+
+- Avatar is a presentational element; pass `aria-label` or use the `name` prop (used as `alt` text for the image) to identify it to assistive technology.
+- When used in an `AvatarGroup`, provide an accessible label on the group container via `aria-label` or `aria-labelledby`.
+- The overflow count avatar is informational; ensure surrounding context conveys the total number of members.
+- The `data-loaded` attribute on the root element reflects image load state for CSS targeting.
+
 ## Slots
 
-### Avatar Slots
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
-- **base**: Avatar wrapper, includes styles for position and general appearance.
-- **image**: Image element within the avatar, includes styles for opacity transition and size.
-- **fallback**: Fallback content when the image fails to load, includes styles for centering.
-- **icon**: Icon element within the avatar fallback.
+**Avatar slots:**
 
-### AvatarGroup Slots
+- **`base`**: Avatar wrapper — includes styles for position and general appearance.
+- **`image`**: The `<img>` element — includes styles for opacity transition and size.
+- **`fallback`**: The fallback content container shown when the image fails to load — includes styles for centering.
+- **`icon`**: The icon element rendered inside the fallback when no `name` is provided.
 
-- **base**: The wrapper for the avatar group.
-- **count**: The count avatar element.
+**AvatarGroup slots:**
+
+- **`base`**: The wrapper `<div>` for the avatar group.
+- **`count`**: The overflow count avatar element.
 
 ## Data Attributes
 
 `Avatar` has the following attributes on the `base` element:
 
-- **data-loaded**: When the avatar image has loaded successfully.
+- **data-loaded**: Set when the avatar image has loaded successfully.
 
-## API Reference
+## Props
 
-### Avatar Props
+### Avatar
 
-| Prop        | Type                                       | Default     | Description                                    |
-| ----------- | ------------------------------------------ | ----------- | ---------------------------------------------- |
-| children    | `ReactNode`                                | -           | The avatar content (Image and Fallback)        |
-| name        | `string`                                   | -           | The name used for initials and alt text        |
-| size        | `"2xs" \| "xs" \| "sm" \| "md"`            | `"md"`      | The size of the avatar                         |
-| radius      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"`    | The border radius of the avatar                |
-| prominence  | `"strong" \| "subtle"`                     | `"strong"`  | The visual prominence of the avatar            |
-| color       | `"primary" \| "white"`                     | `"primary"` | The color scheme of the avatar                 |
-| getInitials | `(name: string) => string`                 | -           | Custom function to generate initials from name |
-| classNames  | `Record<Slot, string>`                     | -           | Classes to apply to each slot                  |
+| Prop          | Type                                       | Default     | Description                                                |
+| ------------- | ------------------------------------------ | ----------- | ---------------------------------------------------------- |
+| `children`    | `ReactNode`                                | -           | The avatar content (`Avatar.Image` and `Avatar.Fallback`)  |
+| `name`        | `string`                                   | -           | The name used for initials generation and image `alt` text |
+| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | `"md"`      | The size of the avatar                                     |
+| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"`    | The border radius of the avatar                            |
+| `prominence`  | `"strong" \| "subtle"`                     | `"strong"`  | The visual prominence of the avatar                        |
+| `color`       | `"primary" \| "white"`                     | `"primary"` | The color scheme of the avatar                             |
+| `getInitials` | `(name: string) => string`                 | -           | Custom function to generate initials from `name`           |
+| `classNames`  | `SlotsToClasses<AvatarSlots>`              | -           | Custom Tailwind classes for component slots                |
+| `className`   | `string`                                   | -           | Additional class applied to the base element               |
 
-### Avatar.Image Props
+> `ref` is React's standard ref forwarding to the underlying `<span>` element; not surfaced as a separate doc-table prop.
 
-| Prop | Type     | Description               |
-| ---- | -------- | ------------------------- |
-| src  | `string` | The image source URL      |
-| ...  | -        | All native img attributes |
+### Avatar.Image
 
-### Avatar.Fallback Props
+| Prop  | Type     | Description                   |
+| ----- | -------- | ----------------------------- |
+| `src` | `string` | The image source URL          |
+| `...` | -        | All native `<img>` attributes |
 
-| Prop     | Type        | Description                                         |
-| -------- | ----------- | --------------------------------------------------- |
-| children | `ReactNode` | Custom fallback content (defaults to icon/initials) |
+### Avatar.Fallback
 
-### AvatarGroup Props
+| Prop       | Type        | Description                                         |
+| ---------- | ----------- | --------------------------------------------------- |
+| `children` | `ReactNode` | Custom fallback content (defaults to icon/initials) |
 
-| Prop        | Type                                       | Default | Description                               |
-| ----------- | ------------------------------------------ | ------- | ----------------------------------------- |
-| children    | `ReactNode`                                | -       | The avatars to display                    |
-| max         | `number`                                   | `5`     | Maximum number of visible avatars         |
-| total       | `number`                                   | -       | Total count (for calculating overflow)    |
-| size        | `"2xs" \| "xs" \| "sm" \| "md"`            | -       | Size applied to all avatars               |
-| color       | `"primary" \| "white"`                     | -       | Color applied to all avatars              |
-| prominence  | `"strong" \| "subtle"`                     | -       | Prominence applied to all avatars         |
-| radius      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | -       | Radius applied to all avatars             |
-| renderCount | `(count: number) => ReactNode`             | -       | Custom render function for overflow count |
-| classNames  | `Record<"base" \| "count", string>`        | -       | Classes to apply to each slot             |
+### AvatarGroup
+
+| Prop          | Type                                       | Default | Description                                                                          |
+| ------------- | ------------------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `children`    | `ReactNode`                                | -       | The `Avatar` components to display                                                   |
+| `max`         | `number`                                   | `5`     | Maximum number of visible avatars before overflow                                    |
+| `total`       | `number`                                   | -       | Total count used for calculating overflow (useful when not all avatars are rendered) |
+| `renderCount` | `(count: number) => ReactNode`             | -       | Custom render function for the overflow count element                                |
+| `countProps`  | `Partial<AvatarProps>`                     | -       | Props spread onto the overflow count avatar (e.g., custom `classNames` or `name`)    |
+| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | -       | Size applied to all child avatars                                                    |
+| `color`       | `"primary" \| "white"`                     | -       | Color applied to all child avatars                                                   |
+| `prominence`  | `"strong" \| "subtle"`                     | -       | Prominence applied to all child avatars                                              |
+| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | -       | Radius applied to all child avatars                                                  |
+| `classNames`  | `SlotsToClasses<"base" \| "count">`        | -       | Custom Tailwind classes for group slots                                              |
 
 ## Templates
 

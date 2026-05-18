@@ -75,9 +75,10 @@ describe("applyTransforms — CardGroup/Card", () => {
     expect(json).not.toContain('"name":"CardGroup"')
     expect(json).not.toContain('"name":"Card"')
     // Both cards rendered as list items with link + description
-    expect(json).toContain("/docs/getting-started/next")
+    // URLs are rewritten to the /llm/ surface by the link-rewrite transform
+    expect(json).toContain("/llm/getting-started/next.md")
     expect(json).toContain("Use OUI with Next.js apps")
-    expect(json).toContain("/docs/getting-started/vite")
+    expect(json).toContain("/llm/getting-started/vite.md")
   })
 })
 
@@ -113,5 +114,143 @@ describe("applyTransforms — unhandled JSX", () => {
     } finally {
       warnSpy.mockRestore()
     }
+  })
+})
+
+describe("applyTransforms — ShadcnInstall", () => {
+  it("replaces <ShadcnInstall name='X' /> with a bash code block using docsConfig.registryBaseUrl", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    doc.body.children.unshift({
+      type: "mdxJsxFlowElement",
+      name: "ShadcnInstall",
+      attributes: [
+        { type: "mdxJsxAttribute", name: "name", value: "combo-box" },
+      ],
+      children: [],
+    } as never)
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).not.toContain('"name":"ShadcnInstall"')
+    expect(json).toContain(
+      "npx shadcn@latest add https://oui.open.gov.sg/r/combo-box.json",
+    )
+  })
+
+  it("throws if a ShadcnInstall is missing the 'name' attribute", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    doc.body.children.unshift({
+      type: "mdxJsxFlowElement",
+      name: "ShadcnInstall",
+      attributes: [],
+      children: [],
+    } as never)
+
+    await expect(
+      applyTransforms(doc, { examplesDir: FIXTURES }),
+    ).rejects.toThrow(/name/)
+  })
+})
+
+describe("applyTransforms — Toaster", () => {
+  it("strips <Toaster /> silently (no warning)", async () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {})
+    try {
+      const doc = await loadDoc(
+        path.join(FIXTURES, "button-fixture.mdx"),
+        "component",
+      )
+      doc.body.children.unshift({
+        type: "mdxJsxFlowElement",
+        name: "Toaster",
+        attributes: [],
+        children: [],
+      } as never)
+
+      await applyTransforms(doc, { examplesDir: FIXTURES })
+
+      const json = JSON.stringify(doc.body)
+      expect(json).not.toContain('"name":"Toaster"')
+      // No warning emitted for Toaster specifically
+      const toasterWarning = warnSpy.mock.calls.find((c) =>
+        String(c[0]).includes("Toaster"),
+      )
+      expect(toasterWarning).toBeUndefined()
+    } finally {
+      warnSpy.mockRestore()
+    }
+  })
+})
+
+describe("applyTransforms — link rewriting", () => {
+  it("rewrites /docs/<kind>/<slug> links to /llm/<kind>/<slug>.md", async () => {
+    const doc = await loadDoc(
+      path.join(FIXTURES, "button-fixture.mdx"),
+      "component",
+    )
+    // Inject a paragraph with links of each kind we care about
+    doc.body.children.push({
+      type: "paragraph",
+      children: [
+        {
+          type: "link",
+          url: "/docs/components/combo-box",
+          title: null,
+          children: [{ type: "text", value: "ComboBox" }],
+        },
+        {
+          type: "link",
+          url: "/docs/components/select#validation",
+          title: null,
+          children: [{ type: "text", value: "Select Validation" }],
+        },
+        {
+          type: "link",
+          url: "/docs/getting-started/installation",
+          title: null,
+          children: [{ type: "text", value: "Install" }],
+        },
+        {
+          type: "link",
+          url: "/docs/guides/forms#validation",
+          title: null,
+          children: [{ type: "text", value: "Forms Validation" }],
+        },
+        {
+          type: "link",
+          url: "https://react-aria.adobe.com/ComboBox",
+          title: null,
+          children: [{ type: "text", value: "External" }],
+        },
+        {
+          type: "link",
+          url: "#in-page",
+          title: null,
+          children: [{ type: "text", value: "In-page" }],
+        },
+      ],
+    } as never)
+
+    await applyTransforms(doc, { examplesDir: FIXTURES })
+
+    const json = JSON.stringify(doc.body)
+    expect(json).toContain("/llm/components/combo-box.md")
+    expect(json).toContain("/llm/components/select.md#validation")
+    expect(json).toContain("/llm/getting-started/installation.md")
+    expect(json).toContain("/llm/guides/forms.md#validation")
+    // External and in-page links untouched
+    expect(json).toContain("https://react-aria.adobe.com/ComboBox")
+    expect(json).toContain('"url":"#in-page"')
+    // No raw /docs/<kind>/<slug> survives
+    expect(json).not.toMatch(
+      /"url":"\/docs\/(components|getting-started|guides)\//,
+    )
   })
 })

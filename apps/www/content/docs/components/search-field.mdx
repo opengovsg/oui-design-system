@@ -1,6 +1,6 @@
 ---
 title: SearchField
-description: Allows users to enter and clear a search query.
+description: Free-text search with a clear button. For selecting from a constrained list, use ComboBox.
 category: Form & Input
 toc:
   visible: true
@@ -15,6 +15,8 @@ links:
 
 ## Usage
 
+Use **SearchField** for free-text queries (filtering a results list, searching across multiple sources). Use [ComboBox](/docs/components/combo-box) when search results come from a known, constrained list.
+
 ```tsx
 import { SearchField } from "@opengovsg/oui"
 ```
@@ -22,6 +24,10 @@ import { SearchField } from "@opengovsg/oui"
 ```tsx
 <SearchField aria-label="Search" />
 ```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="search-field" />
 
 The SearchField component provides an accessible search input with a built-in search icon and clear button. The clear button automatically appears when the field has a value and hides when empty.
 
@@ -89,12 +95,76 @@ Use the `value` and `onChange` props to control the input value. The `onSubmit` 
 
 <ComponentPreview name="search-field-controlled" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+SearchField supports React Aria's [form validation](https://react-aria.adobe.com/forms) system:
+
+- **Built-in constraints**: Use `isRequired`, `minLength`, `maxLength`, or `pattern` for native HTML validation. Errors display after the user commits a value or submits the form.
+- **Custom validation**: Use the `validate` prop to provide a function that returns an error message string, or `null`/`true` if valid.
+- **Realtime validation**: Use the `isInvalid` prop with `errorMessage` for immediate feedback as the user types.
+- **Validation behavior**: The `validationBehavior` prop controls enforcement — `"native"` (default) prevents form submission when invalid, while `"aria"` only marks the field via ARIA attributes and allows submission.
+
+## Events
+
+SearchField supports the following event handlers, inherited from React Aria's [SearchField](https://react-aria.adobe.com/SearchField):
+
+- `onChange` — Called when the value changes, receiving the new string value.
+- `onSubmit` — Called when the user presses Enter, receiving the current value.
+- `onClear` — Called when the user clears the field (by pressing the clear button or Escape).
+- `onFocus` / `onBlur` — Called when the input gains or loses focus.
+- `onFocusChange` — Called when the focus state changes, receiving a boolean.
+- `onKeyDown` / `onKeyUp` — Called on keyboard events.
+
+## Accessibility
+
+- Built on a native `<input type="search">` element for full browser and assistive technology support.
+- Label, description, and error message are linked to the input via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be set.
+- The clear button is keyboard-accessible; pressing Escape while the field has a value clears it.
+- Required and invalid states are exposed to assistive technology.
+
 ## Slots
 
-- **base**: The root container wrapper.
-- **label**: The label text element.
-- **fieldWrapper**: The wrapper around the field group and the action element.
-- **group**: The field group wrapper containing the search icon, input, and clear button.
-- **searchIcon**: The search icon displayed at the start of the input.
-- **input**: The input element.
-- **clearButton**: The clear button displayed at the end of the input.
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`base`**: The root container wrapping the entire field (label, input group, description, error).
+- **`label`**: The label element rendered above the input.
+- **`fieldWrapper`**: The flex wrapper containing the input group and the optional action element.
+- **`group`**: The bordered input group containing the search icon, input, and clear button.
+- **`searchIcon`**: The leading search icon.
+- **`input`**: The native `<input type="search">` element.
+- **`clearButton`**: The trailing clear button.
+- **`description`**: The description text rendered below the input.
+- **`error`**: The error message text rendered below the input.
+
+## Props
+
+### SearchField
+
+| Prop                 | Type                                                              | Default          | Description                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `label`              | `ReactNode`                                                       | -                | The visible label for the field                                                                                                                       |
+| `description`        | `ReactNode`                                                       | -                | Description text rendered below the input                                                                                                             |
+| `errorMessage`       | `ReactNode \| ((v: ValidationResult) => ReactNode)`               | -                | The error to display when invalid; accepts a render prop for [custom error messages](https://react-aria.adobe.com/SearchField#advanced-customization) |
+| `value`              | `string`                                                          | -                | The current value (controlled)                                                                                                                        |
+| `defaultValue`       | `string`                                                          | -                | The default value (uncontrolled)                                                                                                                      |
+| `onChange`           | `(value: string) => void`                                         | -                | Called when the value changes                                                                                                                         |
+| `onSubmit`           | `(value: string) => void`                                         | -                | Called when the user presses Enter                                                                                                                    |
+| `onClear`            | `() => void`                                                      | -                | Called when the user clears the field                                                                                                                 |
+| `isDisabled`         | `boolean`                                                         | `false`          | Whether the field is disabled                                                                                                                         |
+| `isReadOnly`         | `boolean`                                                         | `false`          | Whether the field is read-only                                                                                                                        |
+| `isRequired`         | `boolean`                                                         | `false`          | Whether the field is required                                                                                                                         |
+| `isInvalid`          | `boolean`                                                         | `false`          | Whether the field should display as invalid                                                                                                           |
+| `validate`           | `(value: string) => ValidationError \| true \| null \| undefined` | -                | Custom validation function                                                                                                                            |
+| `validationBehavior` | `"native" \| "aria"`                                              | `"native"`       | Native HTML validation vs ARIA-only                                                                                                                   |
+| `size`               | `"xs" \| "sm" \| "md"`                                            | `"md"`           | The size of the field                                                                                                                                 |
+| `variant`            | `"outline" \| "unstyled"`                                         | `"outline"`      | The visual variant of the input                                                                                                                       |
+| `actionElement`      | `ReactNode`                                                       | -                | An element rendered beside the input group (e.g., a search button)                                                                                    |
+| `searchIcon`         | `ReactNode \| null`                                               | `<SearchIcon />` | Custom leading icon, or `null` to hide                                                                                                                |
+| `clearIcon`          | `ReactNode`                                                       | `<XIcon />`      | Custom clear-button icon (e.g., a spinner during async search)                                                                                        |
+| `inputProps`         | `Partial<InputProps>`                                             | -                | Additional props forwarded to the underlying `<input>` (e.g., `placeholder`)                                                                          |
+| `classNames`         | `SlotsToClasses<SearchFieldSlots>`                                | -                | Per-slot Tailwind classes for custom styling                                                                                                          |
+
+_Inherits all remaining props from React Aria's [SearchField](https://react-aria.adobe.com/SearchField). Notable ones: `autoFocus`, `excludeFromTabOrder`, `name`, `autoComplete`._

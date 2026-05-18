@@ -1,0 +1,151 @@
+---
+title: Forms
+description: How to compose, validate, and submit forms with OUI — including React Hook Form + Zod.
+category: Misc
+toc:
+  visible: true
+---
+
+# Forms
+
+This guide covers the cross-cutting patterns for building forms with OUI: composition with React Aria's `Form`, validation strategies, controlled vs uncontrolled state, React Hook Form + Zod integration, server-side errors, when to drop down to Field primitives, and layout conventions.
+
+For per-component details, see the individual component docs (e.g., [TextField](/docs/components/text-field), [Select](/docs/components/select)).
+
+## When to use which field component
+
+| You need…                                  | Use                                                                                      |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Single-line text                           | [TextField](/docs/components/text-field)                                                 |
+| Multi-line text                            | [TextAreaField](/docs/components/text-area-field)                                        |
+| Numbers with steppers                      | [NumberField](/docs/components/number-field)                                             |
+| Phone numbers                              | [PhoneNumberField](/docs/components/phone-number-field)                                  |
+| Search (with a clear button)               | [SearchField](/docs/components/search-field)                                             |
+| Dates (keyboard entry)                     | [DateField](/docs/components/date-field)                                                 |
+| Dates with a calendar popover              | [DatePicker](/docs/components/date-picker)                                               |
+| Date ranges                                | [DateRangePicker](/docs/components/date-range-picker)                                    |
+| Times                                      | [TimeField](/docs/components/time-field)                                                 |
+| Single choice from a short list (dropdown) | [Select](/docs/components/select)                                                        |
+| Single choice with type-ahead filtering    | [ComboBox](/docs/components/combo-box)                                                   |
+| Multiple choices with filtering            | [TagField](/docs/components/tag-field)                                                   |
+| Single choice from a small set (visible)   | [RadioGroup](/docs/components/radio-group)                                               |
+| Multiple toggles (visible)                 | [CheckboxGroup](/docs/components/checkbox-group) / [Checkbox](/docs/components/checkbox) |
+| On/off                                     | [Toggle](/docs/components/toggle)                                                        |
+| File uploads                               | [FileDropzone](/docs/components/file-dropzone)                                           |
+
+## Form composition basics
+
+OUI fields are designed to be wrapped by React Aria's `<Form>` element. Each field's `name` prop becomes a key in the submitted FormData. The `onSubmit` handler receives a standard form-submit event.
+
+<ComponentPreview name="forms-minimal-end-to-end" />
+
+Key points:
+
+- Each field needs a `name` to be included in submission.
+- `<Form>` triggers native HTML validation by default — invalid fields block submission and surface their constraint violations.
+- Layout is your own — the example uses `flex flex-col gap-6` for vertical stacking with consistent spacing.
+
+## Validation
+
+OUI inherits React Aria's validation model. There are three layers:
+
+### Built-in (native HTML) constraints
+
+Set `isRequired`, `minLength`, `maxLength`, `pattern`, or `type` on the field. Errors appear after the user commits a value (on blur) or submits the form.
+
+<ComponentPreview name="forms-validation-native" />
+
+### Custom per-field validation
+
+The `validate` prop accepts a function that returns an error message string when invalid, or `null` / `true` when valid.
+
+<ComponentPreview name="forms-validation-custom" />
+
+### Realtime validation
+
+For immediate feedback as the user types (e.g., password strength), use `isInvalid` + `errorMessage` with controlled state. This bypasses the commit-then-validate flow.
+
+<ComponentPreview name="forms-validation-realtime" />
+
+### Choosing `validationBehavior`
+
+The `validationBehavior` prop on `<Form>` (or on individual fields) controls enforcement:
+
+- **`"native"`** (default) — Uses native HTML form validation. Invalid fields prevent submission and show browser-default error styling unless `FieldError` is rendered.
+- **`"aria"`** — Marks invalid fields via ARIA attributes only. Submission is allowed regardless of validity.
+
+Use `"aria"` when you're integrating with React Hook Form, Zod, or any external validation library that needs to control the submission flow itself. Use `"native"` when OUI's built-in constraints are sufficient.
+
+## Reading and submitting values
+
+For uncontrolled forms, `onSubmit` receives the raw event; pull `FormData` from `e.currentTarget`:
+
+```tsx
+<Form
+  onSubmit={(e) => {
+    e.preventDefault()
+    const data = Object.fromEntries(new FormData(e.currentTarget))
+    submit(data)
+  }}
+>
+  ...
+</Form>
+```
+
+For async submissions, manage a submitting state and swap the submit button's children:
+
+<ComponentPreview name="forms-controlled-submit" />
+
+## React Hook Form + Zod
+
+For complex forms, most production OUI applications use React Hook Form with Zod for schema-driven validation. Set `validationBehavior="aria"` on `<Form>` so native validation doesn't interfere with RHF's submission flow.
+
+Wrap each OUI field in RHF's `Controller`, since OUI fields are controlled-friendly but their value shapes vary (string for TextField, key for Select, set of keys for TagField).
+
+<ComponentPreview name="forms-react-hook-form" />
+
+Notes:
+
+- `errorMessage` accepts a string OR a render prop. Here we pass `errors.<field>?.message` from RHF.
+- For Select, RHF treats the field as a string; OUI's Select uses `value` (a `Key | null`) and `onChange`. Coerce in both directions.
+- For TagField, RHF expects `string[]`; OUI's `selectedKeys` is `Set<Key>`. Convert at the boundary.
+
+## Server-side errors
+
+After submit, set `isInvalid` and `errorMessage` on the affected field with the server's response. Render-side error messages compose seamlessly with client-side validation.
+
+<ComponentPreview name="forms-server-errors" />
+
+For form-level errors (e.g., "Your session expired"), render an [Infobox](/docs/components/infobox) above the form. Screen readers announce it when it appears if the container has `role="alert"` or `aria-live="polite"`.
+
+## When to drop down to Field primitives
+
+Use the higher-level wrapper components (TextField, Select, etc.) whenever possible — they bundle label, description, error, and accessibility wiring. Drop down to [Field](/docs/components/field) primitives when you need:
+
+- An adornment (icon, prefix, suffix) inside the input.
+- A custom layout the wrapper doesn't support.
+- A field that combines multiple inputs (e.g., a search input next to a button).
+
+<ComponentPreview name="forms-field-primitives" />
+
+The Field docs cover the full set of primitives — `Label`, `Description`, `FieldError`, `FieldErrorIcon`, `FieldGroup`.
+
+## Layout and spacing
+
+OUI fields stack their internal parts (label, input, description, error) with built-in spacing. You're responsible for the spacing **between** fields.
+
+The convention used in OUI's own examples:
+
+```tsx
+<Form className="flex flex-col gap-6">...</Form>
+```
+
+`gap-6` (1.5rem) gives consistent vertical rhythm between fields without making the form feel sparse. Adjust for dense forms (try `gap-4`) or spacious ones (`gap-8`).
+
+For the submit button, place it at the bottom of the form, full-width on mobile, fixed-width on desktop:
+
+```tsx
+<Button type="submit" className="self-end sm:w-auto">
+  Submit
+</Button>
+```

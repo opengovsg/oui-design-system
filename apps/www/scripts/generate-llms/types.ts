@@ -12,7 +12,6 @@ export interface DocFrontmatter {
   title: string
   description: string
   category?: Category
-  related?: string[]
   links?: {
     source?: string
     theme?: string
@@ -23,7 +22,7 @@ export interface DocFrontmatter {
 
 export interface ParsedDoc {
   slug: string
-  kind: "component" | "getting-started"
+  kind: "component" | "getting-started" | "guide"
   frontmatter: DocFrontmatter
   body: Root
 }

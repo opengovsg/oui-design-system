@@ -1,7 +1,8 @@
-import { mkdir, readdir, writeFile } from "node:fs/promises"
+import { mkdir, readdir, rm, writeFile } from "node:fs/promises"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
+import type { NavItem } from "../../config/docs.config"
 import type { ComponentEntry, GuideEntry } from "./llms-txt"
 import type { ParsedDoc } from "./types"
 import { docsConfig } from "../../config/docs.config"
@@ -29,12 +30,47 @@ async function listMdxFiles(dir: string): Promise<string[]> {
     .sort()
 }
 
+async function listMdxFilesIfDirExists(dir: string): Promise<string[]> {
+  try {
+    return await listMdxFiles(dir)
+  } catch {
+    return []
+  }
+}
+
+function collectWipSlugs(nav: NavItem[]): Set<string> {
+  // Walk the docs nav tree and return slugs flagged status: "wip".
+  // WIP components are not yet shipped — exclude them from the agent-facing
+  // surface entirely (no per-doc .md, no llms.txt entry, no coverage entry).
+  const out = new Set<string>()
+  const walk = (items: NavItem[]): void => {
+    for (const item of items) {
+      if (item.status === "wip" && item.url) out.add(item.url)
+      if (item.items) walk(item.items)
+    }
+  }
+  walk(nav)
+  return out
+}
+
+const WIP_SLUGS = collectWipSlugs(docsConfig.navigation)
+
 async function main(): Promise<void> {
-  const componentFiles = await listMdxFiles(
+  const allComponentFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "components"),
   )
+  const componentFiles = allComponentFiles.filter((filePath) => {
+    const slug = path.basename(filePath, ".mdx")
+    return !WIP_SLUGS.has(slug)
+  })
   const guideFiles = await listMdxFiles(
     path.join(CONTENT_DIR, "getting-started"),
+  )
+  const contributingFiles = await listMdxFilesIfDirExists(
+    path.join(CONTENT_DIR, "contributing"),
+  )
+  const topicalGuideFiles = await listMdxFilesIfDirExists(
+    path.join(CONTENT_DIR, "guides"),
   )
 
   // 1. Parse all docs and apply transforms.
@@ -52,23 +88,24 @@ async function main(): Promise<void> {
     guides.push(doc)
   }
 
-  // 2. Build the related-doc summary map (needed before rendering component .md).
-  const relatedMap = new Map<
-    string,
-    { title: string; description: string; url: string }
-  >()
-  for (const doc of components) {
-    relatedMap.set(doc.slug, {
-      title: doc.frontmatter.title,
-      description: doc.frontmatter.description,
-      url: `${SITE_URL}/llm/components/${doc.slug}.md`,
-    })
+  const contributingDocs: ParsedDoc[] = []
+  for (const filePath of contributingFiles) {
+    const doc = await loadDoc(filePath, "getting-started")
+    await applyTransforms(doc, { examplesDir: EXAMPLES_DIR })
+    contributingDocs.push(doc)
   }
 
-  // 3. Render markdown for each doc.
+  const topicalGuides: ParsedDoc[] = []
+  for (const filePath of topicalGuideFiles) {
+    const doc = await loadDoc(filePath, "guide")
+    await applyTransforms(doc, { examplesDir: EXAMPLES_DIR })
+    topicalGuides.push(doc)
+  }
+
+  // 2. Render markdown for each doc.
   const componentMarkdowns = new Map<string, string>()
   for (const doc of components) {
-    const md = renderComponentMarkdown(doc, { relatedDocs: relatedMap })
+    const md = renderComponentMarkdown(doc)
     componentMarkdowns.set(doc.slug, md)
   }
 
@@ -77,7 +114,14 @@ async function main(): Promise<void> {
     guideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
   }
 
-  // 4. Write per-doc files.
+  const topicalGuideMarkdowns = new Map<string, string>()
+  for (const doc of topicalGuides) {
+    topicalGuideMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
+  }
+
+  // 3. Write per-doc files. Clean the output tree first so renamed or
+  //    WIP-filtered slugs don't leave stale .md files behind.
+  await rm(path.join(PUBLIC_DIR, "llm"), { recursive: true, force: true })
   await mkdir(path.join(PUBLIC_DIR, "llm", "components"), { recursive: true })
   await mkdir(path.join(PUBLIC_DIR, "llm", "getting-started"), {
     recursive: true,
@@ -98,7 +142,35 @@ async function main(): Promise<void> {
     )
   }
 
-  // 5. Build entries for llms.txt.
+  if (contributingDocs.length > 0) {
+    await mkdir(path.join(PUBLIC_DIR, "llm", "contributing"), {
+      recursive: true,
+    })
+    const contributingMarkdowns = new Map<string, string>()
+    for (const doc of contributingDocs) {
+      contributingMarkdowns.set(doc.slug, renderGettingStartedMarkdown(doc))
+    }
+    for (const [slug, md] of contributingMarkdowns) {
+      await writeFile(
+        path.join(PUBLIC_DIR, "llm", "contributing", `${slug}.md`),
+        md,
+        "utf8",
+      )
+    }
+  }
+
+  if (topicalGuides.length > 0) {
+    await mkdir(path.join(PUBLIC_DIR, "llm", "guides"), { recursive: true })
+    for (const [slug, md] of topicalGuideMarkdowns) {
+      await writeFile(
+        path.join(PUBLIC_DIR, "llm", "guides", `${slug}.md`),
+        md,
+        "utf8",
+      )
+    }
+  }
+
+  // 4. Build entries for llms.txt.
   const componentEntries: ComponentEntry[] = components.map((doc) => ({
     slug: doc.slug,
     title: doc.frontmatter.title,
@@ -110,17 +182,24 @@ async function main(): Promise<void> {
     title: doc.frontmatter.title,
     description: doc.frontmatter.description,
   }))
+  const topicalGuideEntries: GuideEntry[] = topicalGuides.map((doc) => ({
+    slug: doc.slug,
+    title: doc.frontmatter.title,
+    description: doc.frontmatter.description,
+  }))
 
   const llmsTxt = renderLlmsTxt({
     siteUrl: SITE_URL,
     gettingStarted: guideEntries,
+    guides: topicalGuideEntries,
     components: componentEntries,
   })
   await writeFile(path.join(PUBLIC_DIR, "llms.txt"), llmsTxt, "utf8")
 
-  // 6. Concatenate llms-full.txt in the same order: guides first, then components by category in canonical order, alphabetical within.
+  // 5. Concatenate llms-full.txt in the same order: guides first, then components by category in canonical order, alphabetical within.
   const orderedSections = [
     ...guides.map((doc) => guideMarkdowns.get(doc.slug)!),
+    ...topicalGuides.map((doc) => topicalGuideMarkdowns.get(doc.slug)!),
     ...orderComponentsForFullTxt(components).map(
       (doc) => componentMarkdowns.get(doc.slug)!,
     ),
@@ -131,7 +210,7 @@ async function main(): Promise<void> {
     "utf8",
   )
 
-  // 7. Invariants.
+  // 6. Invariants.
   assertInvariants({ components, guides, llmsTxt })
 
   await writeCoverageReport(

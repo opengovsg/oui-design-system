@@ -1,0 +1,132 @@
+---
+title: Component Doc Quality Rubric
+description: Editorial standard every component doc must meet, so agents reading any single doc get a consistent, complete picture.
+category: Misc
+toc:
+  visible: true
+---
+
+# Component Doc Quality Rubric
+
+This rubric is the single source of truth for what a component doc must contain. Every component doc under `apps/www/content/docs/components/` follows it. New components must conform before their docs are merged.
+
+The rubric serves two readers: human contributors writing or reviewing docs, and AI coding agents reading `/llm/components/<slug>.md` to generate code. Both rely on consistency.
+
+## Required sections (in order)
+
+The table below is also the canonical section order — present sections appear top-to-bottom in this order:
+
+| Section                                                   | Required    | When (if conditional)                     |
+| --------------------------------------------------------- | ----------- | ----------------------------------------- |
+| Frontmatter (complete)                                    | always      | —                                         |
+| Inline demo preview                                       | always      | —                                         |
+| `## Usage`                                                | always      | —                                         |
+| `## Anatomy`                                              | conditional | component exports sub-components          |
+| `## Examples`                                             | always      | —                                         |
+| `## Content`                                              | conditional | Collection Component                      |
+| `## Validation`                                           | conditional | accepts user input                        |
+| `## Events`                                               | conditional | non-trivial event handlers                |
+| `## Accessibility`                                        | always      | —                                         |
+| `## Slots` (+ Custom Styles)                              | conditional | has `classNames` slots beyond `base`      |
+| `## Props` (+ render-prop state tables, inherited footer) | always      | render-prop tables required when relevant |
+
+## Frontmatter
+
+Required fields: `title`, `description`, `category`, `toc.visible`, `links.source`, `links.storybook`. Add `links.reactaria` when the component wraps a React Aria primitive.
+
+The `description` is the one-sentence summary surfaced in `llms.txt`'s catalog and in the per-doc markdown. For components with documented near-neighbors, it must include a one-clause disambiguator (keep total ≤30 words). Example:
+
+> A select displays a collapsible dropdown for choosing one option. For type-ahead filtering, use ComboBox; for multi-select, use TagField.
+
+## Usage
+
+`import` code block + minimal JSX example + one paragraph stating what the component does and what it's built on (link the React Aria primitive). Include the "if there's no visible label, pass `aria-label` or `aria-labelledby`" note for any focusable input.
+
+For components with near-neighbors documented in OUI, include a "When to use" paragraph that cross-links them with relative `/docs/components/<slug>` paths. Pattern:
+
+> Use **Select** for short lists where users pick one option from a dropdown. Use [ComboBox](/docs/components/combo-box) when users need type-ahead filtering. Use [Menu](/docs/components/menu) for action lists, not value selection.
+
+After the `import` block, expose the shadcn-CLI registry alternative so callers who want to own the source locally can find it. Use the `<ShadcnInstall>` MDX component — it reads the base URL from `docsConfig.registryBaseUrl`, so the URL is centralised. Substitute `<slug>` with the component's kebab-case slug (matches the MDX filename):
+
+```mdx
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="<slug>" />
+```
+
+## Anatomy
+
+When the component exports sub-components, show the composition tree explicitly. Example for ComboBox:
+
+```
+ComboBox consists of:
+- ComboBox (the trigger input + listbox container; manages state)
+  - ComboBoxItem (one per option)
+  - ComboBoxEmptyState (rendered when the filter has no matches)
+```
+
+For components where the state-provider is upstream (e.g., react-aria-components' `DialogTrigger`), include it in the tree and note its origin.
+
+## Examples
+
+`<ComponentPreview>` per non-trivial behavior — sizes, controlled/uncontrolled, disabled/read-only, validation, render props.
+
+## Content (Collection Components only)
+
+A "Collection Component" is one that renders a list of items from a `children` render prop or an `items` / `defaultItems` prop. Examples: ComboBox, Select, TagField, RadioGroup, CheckboxGroup, TagGroup, Menu, Tabs.
+
+Cover static collections (children-based) vs dynamic collections (items-based), and item `id` / `textValue` requirements.
+
+## Validation
+
+Required for any component that accepts user input. Cover:
+
+- **Built-in constraints** — `isRequired`, `minLength`, `maxLength`, `pattern`, `type` (e.g., `"email"`, `"url"`).
+- **Custom validation** — the `validate` prop.
+- **Realtime validation** — `isInvalid` + `errorMessage` for immediate feedback.
+- **`validationBehavior`** — `"native"` (default; blocks form submission) vs `"aria"` (ARIA-only; needed for React Hook Form).
+
+Open the section with:
+
+> See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+## Events
+
+Required for interactive components with handlers beyond `onChange`. Bullet-list the supported handlers (focus, blur, keyboard, clipboard, etc.).
+
+## Accessibility
+
+3-5 bullets: label requirements, focus behavior, keyboard interaction, ARIA semantics.
+
+## Slots
+
+Required when the component has `classNames` slots beyond a single `base`. Three requirements:
+
+1. **One-sentence definition (verbatim):**
+
+   > Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+2. **Bulleted list** — `**slotName**: what the slot wraps in the rendered DOM` (describe the DOM element, not the visual role).
+
+3. **`### Custom Styles`** sub-section with a `<ComponentPreview>` that passes classes to at least two different slots.
+
+## Props
+
+One table per exported component (e.g., `Modal`, `ModalHeader`, `ModalBody`, …). Columns: **Prop / Type / Default / Description**.
+
+Include every prop an OUI user typically reaches for: control props (`value`, `defaultValue`, `onChange`), state props (`isDisabled`, `isReadOnly`, `isRequired`, `isInvalid`), validation props (`validate`, `errorMessage`, `minLength`, `maxLength`), `classNames`, `inputProps`. Don't enumerate every inherited React Aria prop — end the table with:
+
+> _Inherits all remaining props from React Aria's [ComponentName](https://react-aria.adobe.com/...). Notable ones: `autoFocus`, `excludeFromTabOrder`, `formValue`._
+
+For any prop that accepts a function (`children`, `errorMessage`, `renderEmptyState`, `renderSelectValue`), document the argument with a small render-props table — **property / type / description**.
+
+### Sort order inside a Props table
+
+Required content (`children`, `label`) → control (`value`/`defaultValue`/`onChange`) → state (`isDisabled`/`isReadOnly`/`isRequired`/`isInvalid`) → validation → styling (`size`/`variant`/`classNames`/`className`) → events → escape hatches (`inputProps`).
+
+### Style
+
+- Escape pipes in union types: `\|`.
+- Literal string defaults in backticks: `` `"md"` ``, `` `false` ``.
+- Use `-` for no default.
+- Description column: imperative, sentence case, no trailing period on short ones.

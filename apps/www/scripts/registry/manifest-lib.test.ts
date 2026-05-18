@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from "vitest"
 
+import type { Catalog } from "./types"
 import { buildCatalog } from "./catalog"
 import { buildLibManifest } from "./manifest-lib"
-import type { Catalog } from "./types"
 
 let catalog: Catalog
 

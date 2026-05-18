@@ -1,6 +1,6 @@
 ---
 title: Infobox
-description: An Infobox informs users of important information of a higher hierarchy. They are non-dismissable, and are not triggered by user action.
+description: A non-dismissable callout for important information surfaced at a higher hierarchy than inline help text. Not triggered by user action.
 category: Feedback
 toc:
   visible: true
@@ -10,61 +10,94 @@ links:
   theme: infobox
 ---
 
+<ComponentPreview name="infobox-demo" />
+
 ## Usage
 
-<ComponentPreview name="infobox-demo" />
+Use **Infobox** for prominent, non-dismissable information that should persist on the page (e.g., "Your account is pending verification"). Use [Banner](/docs/components/banner) for page-level announcements that may be dismissable. Use [Toast](/docs/components/toast) for transient, time-limited feedback triggered by user actions.
+
+```tsx
+import { Infobox } from "@opengovsg/oui"
+```
+
+```tsx
+<Infobox>This is an informational message to help guide your users.</Infobox>
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="infobox" />
+
+The Infobox component renders a styled callout with a leading icon chosen automatically by `variant`. It supports rich content (paragraphs, lists, inline elements) and stays visually balanced as content wraps.
+
+## Examples
 
 ### Sizes
 
-Use the `size` prop to change the size of the infobox. Defaults to `md`.
+Use the `size` prop to change the size of the infobox. Defaults to `"md"`.
 
 <ComponentPreview name="infobox-sizes" />
 
 ### Variants
 
-Use the `variant` prop to change the visual style and semantic meaning of the Infobox. Defaults to `info`.
+Use the `variant` prop to change the visual style and semantic meaning of the Infobox. Defaults to `"info"`.
 
-- **info**: Informational messages with helpful tips or guidance
-- **warning**: Warning messages to alert users about potential issues
-- **error**: Error messages indicating something went wrong
-- **success**: Success messages confirming an action was completed
+- **info**: Informational messages with helpful tips or guidance.
+- **warning**: Warning messages to alert users about potential issues.
+- **error**: Error messages indicating something went wrong.
+- **success**: Success messages confirming an action was completed.
 
 <ComponentPreview name="infobox-variants" />
 
 ### Custom icon
 
-By default, Infobox displays an appropriate icon based on the `variant` prop. You can override this by providing a custom icon using the `icon` prop.
+By default, Infobox displays an icon based on the `variant` prop. Override it with the `icon` prop.
 
 <ComponentPreview name="infobox-with-custom-icon" />
 
 ### Hidden icon
 
-You can hide the icon by setting `icon` to `null`.
+Hide the icon entirely by passing `icon={null}`.
 
 <ComponentPreview name="infobox-with-hidden-icon" />
 
 ### Multiline content
 
-Infobox supports rich content including formatted text, lists, and multiple paragraphs. The icon will stay aligned at the top while content wraps naturally.
+Infobox supports rich content including formatted text, lists, and multiple paragraphs. The icon stays aligned at the top while content wraps.
 
 <ComponentPreview name="infobox-multiline-content" />
 
+## Accessibility
+
+- Infoboxes are static, non-interactive elements — they receive no focus and do not announce on mount. If a message needs to be announced when it appears (e.g., a form-level error), wrap the Infobox in a container with `role="alert"` or `aria-live="polite"`.
+- The leading icon is decorative; meaning is carried by the text content. Don't rely on color or icon alone to communicate severity.
+- Variant choice should match the semantic meaning of the content (use `error` for actual errors, not as a visual emphasis device).
+
 ## Slots
 
-Infobox has the following slots:
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
-- `base`: The main container element
-- `icon`: The icon element (default or custom)
+- **`base`**: The root container wrapping the icon and content.
+- **`icon`**: The leading icon element (default or custom).
+- **`wrapper`**: The inner wrapper around the content text.
 
 ### Custom Styles
 
-You can customize the `Infobox` component by passing custom Tailwind CSS classes to the component slots using the `classNames` prop.
+You can customize the `Infobox` component by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
 
 <ComponentPreview name="infobox-custom-styles" />
 
-## Accessibility
+## Props
 
-- The Infobox uses semantic colors to communicate meaning visually
-- Icons provide additional visual reinforcement of the message type
-- Ensure text content is clear and concise for all users
-- The component uses appropriate semantic HTML structure
+### Infobox
+
+| Prop         | Type                                              | Default  | Description                                                                                                  |
+| ------------ | ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
+| `children`   | `ReactNode`                                       | -        | The message content. Supports rich children (paragraphs, lists, inline elements)                             |
+| `variant`    | `"info" \| "warning" \| "success" \| "error"`     | `"info"` | Semantic meaning + visual style                                                                              |
+| `size`       | `"sm" \| "md"`                                    | `"md"`   | Size variant                                                                                                 |
+| `icon`       | `ReactNode \| null`                               | -        | Override the default variant icon. Pass `null` to hide the icon                                              |
+| `classNames` | `SlotsToClasses<"base" \| "wrapper" \| "icon">`   | -        | Per-slot Tailwind classes for custom styling                                                                 |
+| `className`  | `string`                                          | -        | Additional Tailwind classes applied to the `base` slot                                                       |
+
+_Inherits standard HTML element props from `HtmlUiProps` (e.g., `id`, `role`, `aria-*`)._

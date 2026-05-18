@@ -101,6 +101,16 @@ const docsLinks: NavItem = {
         },
       ],
     },
+    {
+      title: "Guides",
+      url: "guides",
+      items: [
+        {
+          title: "Cross-cutting guides",
+          items: [{ title: "Forms", url: "forms", status: "new" }],
+        },
+      ],
+    },
   ],
 }
 
@@ -112,6 +122,7 @@ export const docsConfig: DocsConfig = {
   titleTemplate: "%s | Open UI",
   description: "Accessible UI components for React applications",
   url: "https://oui.open.gov.sg",
+  registryBaseUrl: "https://oui.open.gov.sg/r",
   repoUrl: "https://github.com/opengovsg/oui-design-system",
   repoBranch: "main",
   get editUrl() {
@@ -127,6 +138,7 @@ interface DocsConfig {
   storybookUrl: string
   copyright: string
   url: string
+  registryBaseUrl: string
   repoUrl: string
   editUrl: string
   navigation: NavItem[]

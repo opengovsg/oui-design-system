@@ -1,6 +1,6 @@
 ---
 title: Field
-description: Utility components for composing accessible form fields with labels, descriptions, error messages, and input grouping.
+description: Primitives for composing accessible form fields with labels, descriptions, errors, and input grouping. Most callers should use a higher-level component (TextField, etc.) instead.
 category: Form & Input
 toc:
   visible: true
@@ -33,17 +33,26 @@ import {
 </AriaTextField>
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="field" />
+
 The Field module provides low-level building blocks used internally by the higher-level field components in OUI. **In most cases, you should use one of these components instead of using Field primitives directly:**
 
-- [TextField](/docs/components/text-field) — Single-line text input
-- [TextAreaField](/docs/components/text-area-field) — Multi-line text input
-- [NumberField](/docs/components/number-field) — Numeric input with steppers
-- [SearchField](/docs/components/search-field) — Search input with clear button
-- [DateField](/docs/components/date-field) — Date input
+- [CheckboxGroup](/docs/components/checkbox-group) — Group of checkbox options
+- [ComboBox](/docs/components/combo-box) — Type-ahead filterable select input
+- [DateField](/docs/components/date-field) — Date input (keyboard only)
 - [DatePicker](/docs/components/date-picker) — Date input with calendar popover
-- [TimeField](/docs/components/time-field) — Time input
-- [ComboBox](/docs/components/combo-box) — Autocomplete select input
+- [DateRangePicker](/docs/components/date-range-picker) — Date range input with calendar popover
+- [NumberField](/docs/components/number-field) — Numeric input with steppers
 - [PhoneNumberField](/docs/components/phone-number-field) — Phone number input
+- [RadioGroup](/docs/components/radio-group) — Group of radio button options
+- [SearchField](/docs/components/search-field) — Search input with clear button
+- [Select](/docs/components/select) — Non-filterable dropdown for single selection
+- [TagField](/docs/components/tag-field) — Multi-select input with filtering
+- [TextAreaField](/docs/components/text-area-field) — Multi-line text input
+- [TextField](/docs/components/text-field) — Single-line text input
+- [TimeField](/docs/components/time-field) — Time input
 
 These higher-level components already compose the Field primitives with the correct structure, styling, and accessibility wiring.
 
@@ -58,6 +67,18 @@ OUI exports 5 field-related primitives:
 - **FieldGroup**: A styled group container for composing inputs with adornments (icons, prefixes, etc.). Provides [render props](#fieldgroup-render-props) for interactive state styling. Built on [React Aria's Group](https://react-aria.adobe.com/Group).
 
 > **Note:** These primitives must be placed inside a React Aria form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`) to function correctly. The wrapper provides the accessibility relationships between the label, description, error, and input elements. If you're not building a custom field, use one of the higher-level components listed above instead.
+
+## Anatomy
+
+The field primitives compose as follows:
+
+- **React Aria field wrapper** (e.g., `AriaTextField`, `AriaNumberField`) — provides accessibility context
+  - **Label** — the `<label>` element; automatically associated with the field input
+  - **Input** — the form control (supplied by the caller or a higher-level component)
+  - **Description** — supplementary helper text; linked via `aria-describedby`
+  - **FieldError** — error message container; becomes visible when the field is invalid
+    - **FieldErrorIcon** — the alert circle icon; can be used standalone in custom error layouts
+  - **FieldGroup** — optional bordered container for inputs with adornments
 
 ## Examples
 
@@ -96,6 +117,8 @@ Combine field components with React Aria's `Form` and field wrappers to build cu
 <ComponentPreview name="field-custom-form" />
 
 ## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
 
 These field components work with [React Aria's form validation](https://react-aria.adobe.com/forms) system. Validation is configured on the parent form field wrapper (e.g., `TextField`, `NumberField` from `react-aria-components`), and `FieldError` displays the resulting error messages.
 
@@ -155,6 +178,17 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 - If a form field does not have a visible `Label`, an `aria-label` or `aria-labelledby` prop must be passed to the parent field wrapper to identify it to assistive technology.
 - All components inherit their accessibility semantics from their [React Aria](https://react-aria.adobe.com/forms) counterparts.
 
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+Only `FieldError` exposes multiple named slots. The other primitives (`Label`, `Description`, `FieldErrorIcon`, `FieldGroup`) accept a single `className` string.
+
+**FieldError slots** (via `FieldError`'s `classNames`):
+
+- **`icon`**: The `CircleAlert` icon element rendered before the error text.
+- **`text`**: The error message text container element.
+
 ## Props
 
 ### Label
@@ -182,6 +216,15 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 | `className`  | `string`                                                                                                                 | -       | Additional CSS classes for the text slot                                                                                     |
 | `classNames` | `SlotsToClasses<FieldErrorSlots>`                                                                                        | -       | Custom CSS classes for `icon` and `text` slots                                                                               |
 
+#### FieldError render-prop argument
+
+When `children` is a function, it receives an object with:
+
+| Property            | Type            | Description                                          |
+| ------------------- | --------------- | ---------------------------------------------------- |
+| `validationErrors`  | `string[]`      | List of validation error strings from the field      |
+| `validationDetails` | `ValidityState` | The native HTML `ValidityState` object for the field |
+
 ### FieldErrorIcon
 
 | Prop        | Type                   | Default | Description            |
@@ -195,6 +238,8 @@ The `validationBehavior` prop on the parent field wrapper controls how validatio
 | ----------- | ------------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------- |
 | `children`  | `React.ReactNode \| ((renderProps: GroupRenderProps) => React.ReactNode)` | -       | The group content. Accepts a render prop for access to interactive state. |
 | `className` | `string`                                                                  | -       | Additional CSS classes                                                    |
+
+_Inherits all remaining props from React Aria's [Group](https://react-aria.adobe.com/Group). Notable ones: `isDisabled`, `isInvalid`, `isReadOnly`, `aria-label`._
 
 #### FieldGroup Render Props
 

@@ -950,6 +950,32 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/combo-box-content-example.tsx"),
     ),
   },
+  "combo-box-controlled": {
+    name: "combo-box-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-controlled.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/combo-box-controlled.tsx"),
+    ),
+  },
+  "combo-box-custom-styles": {
+    name: "combo-box-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/combo-box-custom-styles.tsx"),
+    ),
+  },
   "combo-box-demo": {
     name: "combo-box-demo",
     description: "",
@@ -960,6 +986,30 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/combo-box-demo.tsx")),
+  },
+  "combo-box-empty-state": {
+    name: "combo-box-empty-state",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-empty-state.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/combo-box-empty-state.tsx"),
+    ),
+  },
+  "combo-box-sizes": {
+    name: "combo-box-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/combo-box-sizes.tsx")),
   },
   "combo-box-text-slots": {
     name: "combo-box-text-slots",
@@ -972,6 +1022,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () => import("@/registry/examples/combo-box-text-slots.tsx"),
+    ),
+  },
+  "combo-box-validation": {
+    name: "combo-box-validation",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/combo-box-validation.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/combo-box-validation.tsx"),
     ),
   },
   "date-field-controlled": {
@@ -1799,6 +1862,110 @@ export const Index: Record<string, RegistryComponent> = {
         ),
     ),
   },
+  "forms-controlled-submit": {
+    name: "forms-controlled-submit",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-controlled-submit.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-controlled-submit.tsx"),
+    ),
+  },
+  "forms-field-primitives": {
+    name: "forms-field-primitives",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-field-primitives.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-field-primitives.tsx"),
+    ),
+  },
+  "forms-minimal-end-to-end": {
+    name: "forms-minimal-end-to-end",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-minimal-end-to-end.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-minimal-end-to-end.tsx"),
+    ),
+  },
+  "forms-react-hook-form": {
+    name: "forms-react-hook-form",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-react-hook-form.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-react-hook-form.tsx"),
+    ),
+  },
+  "forms-server-errors": {
+    name: "forms-server-errors",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-server-errors.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-server-errors.tsx"),
+    ),
+  },
+  "forms-validation-custom": {
+    name: "forms-validation-custom",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-validation-custom.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-validation-custom.tsx"),
+    ),
+  },
+  "forms-validation-native": {
+    name: "forms-validation-native",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-validation-native.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-validation-native.tsx"),
+    ),
+  },
+  "forms-validation-realtime": {
+    name: "forms-validation-realtime",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/forms-validation-realtime.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/forms-validation-realtime.tsx"),
+    ),
+  },
   "infobox-custom-styles": {
     name: "infobox-custom-styles",
     description: "",
@@ -1952,6 +2119,30 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/link-with-pseudo-elements.tsx"),
     ),
   },
+  "menu-content-example": {
+    name: "menu-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-content-example.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/menu-content-example.tsx"),
+    ),
+  },
+  "menu-custom-styles": {
+    name: "menu-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-custom-styles.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-custom-styles.tsx")),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",
@@ -1962,6 +2153,63 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
+  },
+  "menu-disabled-items": {
+    name: "menu-disabled-items",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-disabled-items.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/menu-disabled-items.tsx"),
+    ),
+  },
+  "menu-sections": {
+    name: "menu-sections",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-sections.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-sections.tsx")),
+  },
+  "menu-selection": {
+    name: "menu-selection",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-selection.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-selection.tsx")),
+  },
+  "menu-sizes": {
+    name: "menu-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-sizes.tsx")),
+  },
+  "menu-with-icons": {
+    name: "menu-with-icons",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-with-icons.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-with-icons.tsx")),
   },
   "modal-animation": {
     name: "modal-animation",
@@ -3168,6 +3416,30 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/select-content-example.tsx"),
     ),
   },
+  "select-controlled": {
+    name: "select-controlled",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-controlled.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/select-controlled.tsx")),
+  },
+  "select-custom-styles": {
+    name: "select-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/select-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/select-custom-styles.tsx"),
+    ),
+  },
   "select-custom-value": {
     name: "select-custom-value",
     description: "",
@@ -3492,6 +3764,17 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/tabs-with-dynamic-items.tsx"),
     ),
   },
+  "tabs-with-icons": {
+    name: "tabs-with-icons",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-icons.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-icons.tsx")),
+  },
   "tabs-with-keyboard-activation": {
     name: "tabs-with-keyboard-activation",
     description: "",
@@ -3569,6 +3852,19 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () => import("@/registry/examples/tag-field-custom-content-example.tsx"),
+    ),
+  },
+  "tag-field-custom-styles": {
+    name: "tag-field-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/tag-field-custom-styles.tsx"),
     ),
   },
   "tag-field-demo": {

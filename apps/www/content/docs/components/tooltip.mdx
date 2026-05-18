@@ -15,6 +15,8 @@ links:
 
 ## Usage
 
+Use **Tooltip** for short, non-blocking hints shown on hover or focus. Use [Modal](/docs/components/modal) when content requires interaction. Use the field's `description` prop for inline help text on form inputs.
+
 ```tsx
 import { Button, Tooltip, TooltipTrigger } from "@opengovsg/oui"
 ```
@@ -25,6 +27,10 @@ import { Button, Tooltip, TooltipTrigger } from "@opengovsg/oui"
   <Tooltip>This is a tooltip</Tooltip>
 </TooltipTrigger>
 ```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="tooltip" />
 
 OUI exports 2 tooltip-related components:
 

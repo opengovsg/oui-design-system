@@ -23,6 +23,12 @@ import { Button } from "@opengovsg/oui"
 <Button>Click me</Button>
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="button" />
+
+Button triggers an action or event when pressed, built on [React Aria's Button](https://react-aria.adobe.com/Button). It handles keyboard activation, focus management, pending state, and ARIA semantics automatically.
+
 ## Examples
 
 ### Sizes
@@ -79,3 +85,57 @@ Use the `spinner` prop to change the spinner.
 Use the `radius` prop to change the radius of the button.
 
 <ComponentPreview name="button-with-radius" />
+
+## Events
+
+- **`onPress`** — Called when the button is pressed (mouse, touch, or keyboard). Preferred over `onClick` for cross-platform consistency.
+- **`onPressStart`** — Called when a press interaction starts.
+- **`onPressEnd`** — Called when a press interaction ends, regardless of whether it was completed.
+- **`onPressChange`** — Called when the pressed state changes, receiving a boolean.
+- **`onPressUp`** — Called when a press is released over the button, regardless of where it started.
+- **`onFocus`** / **`onBlur`** — Called when the button receives or loses focus.
+- **`onFocusChange`** — Called when focus state changes, receiving a boolean.
+- **`onKeyDown`** / **`onKeyUp`** — Called on keyboard events while the button is focused.
+- **`onHoverStart`** / **`onHoverEnd`** / **`onHoverChange`** — Called on pointer hover events.
+
+## Accessibility
+
+- Button renders as a native `<button>` element with full keyboard and screen reader support managed by React Aria.
+- When used as an icon-only button (set `isIconOnly`), pass `aria-label` to identify the action to assistive technology.
+- Focus is visible via a focus ring on keyboard navigation, and suppressed on pointer press.
+- Disabled buttons are marked `aria-disabled` and excluded from tab order.
+- The pending state (when `isPending` is `true`) is communicated to assistive technology via `aria-busy`.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+Button is a single-element component; use `className` directly to style the root `<button>` element.
+
+## Props
+
+### Button
+
+| Prop               | Type                                                                | Default   | Description                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`         | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | The button label or content, or a render function                                                                                         |
+| `isDisabled`       | `boolean`                                                           | `false`   | Whether the button is disabled                                                                                                            |
+| `isPending`        | `boolean`                                                           | `false`   | Whether the button is in a pending/loading state                                                                                          |
+| `pendingElement`   | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Content to display while `isPending` is true; replaces `children` during the pending state. Prefer this over the deprecated `loadingText` |
+| `loadingText`      | `string`                                                            | -         | **Deprecated.** Text to show when pending. Use `pendingElement` instead                                                                   |
+| `spinner`          | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Custom spinner element to display while pending; defaults to OUI's `Spinner`                                                              |
+| `spinnerPlacement` | `"start" \| "end"`                                                  | `"start"` | Which side of the button content the spinner appears on                                                                                   |
+| `isIconOnly`       | `boolean`                                                           | `false`   | Whether the button contains only an icon. When `true`, pass `aria-label` for accessibility                                                |
+| `disableRipple`    | `boolean`                                                           | `false`   | Whether to disable the ripple animation on press                                                                                          |
+| `startContent`     | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Content placed before the button label                                                                                                    |
+| `endContent`       | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Content placed after the button label                                                                                                     |
+| `size`             | `"xs" \| "sm" \| "md" \| "lg"`                                      | `"md"`    | The size of the button                                                                                                                    |
+| `variant`          | `"solid" \| "outline" \| "ghost" \| "clear"`                        | `"solid"` | The visual style variant                                                                                                                  |
+| `color`            | `"main" \| "sub" \| "critical" \| "success" \| "warning" \| "none"` | `"main"`  | The color scheme                                                                                                                          |
+| `radius`           | `"none" \| "sm" \| "md" \| "lg" \| "full"`                          | `"md"`    | The border radius                                                                                                                         |
+| `className`        | `string`                                                            | -         | Additional Tailwind classes applied to the root button element                                                                            |
+| `onPress`          | `(e: PressEvent) => void`                                           | -         | Called when the button is pressed                                                                                                         |
+| `onPressStart`     | `(e: PressEvent) => void`                                           | -         | Called when a press interaction starts                                                                                                    |
+| `onPressEnd`       | `(e: PressEvent) => void`                                           | -         | Called when a press interaction ends                                                                                                      |
+
+_Inherits all remaining props from React Aria's [Button](https://react-aria.adobe.com/Button). Notable ones: `autoFocus`, `excludeFromTabOrder`, `aria-label`, `aria-labelledby`, `aria-describedby`._

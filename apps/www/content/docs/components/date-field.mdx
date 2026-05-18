@@ -11,11 +11,29 @@ links:
   reactaria: DateField
 ---
 
-There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/DateField.html) for more details.
+<ComponentPreview name="date-field-demo" />
 
 ## Usage
 
-<ComponentPreview name="date-field-demo" />
+Use **DateField** for keyboard date entry without a calendar UI. Use [DatePicker](/docs/components/date-picker) when users benefit from picking from a calendar. Use [DateRangePicker](/docs/components/date-range-picker) for ranges.
+
+```tsx
+import { DateField } from "@opengovsg/oui"
+```
+
+```tsx
+<DateField label="Start date" />
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="date-field" />
+
+DateField renders individual editable segments for each part of a date value (year, month, day), built on [React Aria's DateField](https://react-aria.adobe.com/DateField). Date values use objects from the `@internationalized/date` package.
+
+If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be passed to identify the field to assistive technology.
+
+## Examples
 
 ### Sizes
 
@@ -109,10 +127,63 @@ This example forces DateField to use 24-hour time, regardless of the locale.
 
 <ComponentPreview name="date-field-hourly-cycle" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — Marks the field as required; validation fires on form submit (native) or immediately (aria).
+- **`validate`** — A custom function `(value: DateValue | null) => ValidationError | true | null | undefined`. Return a string to show as the error.
+- **`isInvalid` + `errorMessage`** — Use together for realtime validation feedback. `errorMessage` accepts a string or a function `(validation: ValidationResult) => string`.
+- **`minValue` / `maxValue`** — Constrain the accepted date range; entering a date outside the range marks the field as invalid.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` marks the field via ARIA attributes only (needed for React Hook Form).
+
+## Events
+
+- **`onChange`** — Called when the date value changes, receiving the new `DateValue` (or `null`).
+- **`onFocus`** / **`onBlur`** — Called when the field receives or loses focus.
+- **`onFocusChange`** — Called when the focus state changes, receiving a boolean.
+- **`onKeyDown`** / **`onKeyUp`** — Called on keyboard events.
+
+## Accessibility
+
+- Each date segment is a focusable `<div role="spinbutton">` — assistive technologies announce the segment name and current value.
+- Navigating between segments uses **Tab** / **Shift+Tab**; digits increment the focused segment; **Arrow Up / Down** also increment or decrement.
+- The label, description, and error message are linked via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby`.
+
 ## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
 - **base**: Input wrapper, it handles alignment, placement, and general appearance.
 - **label**: Label of the date-input, it is the one that is displayed above, inside or left of the date-input.
 - **input**: The date-input element.
 - **description**: The description of the date-input.
 - **error**: The error message of the date-input.
+
+## Props
+
+### DateField
+
+| Prop                 | Type                                                                         | Default     | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `label`              | `string`                                                                     | -           | The visible label for the field                                              |
+| `description`        | `string`                                                                     | -           | Helper text shown below the field                                            |
+| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`                       | -           | Error message displayed when the field is invalid                            |
+| `value`              | `DateValue \| null`                                                          | -           | The current date value (controlled)                                          |
+| `defaultValue`       | `DateValue \| null`                                                          | -           | The default date value (uncontrolled)                                        |
+| `onChange`           | `(value: DateValue \| null) => void`                                         | -           | Called when the date value changes                                           |
+| `isDisabled`         | `boolean`                                                                    | `false`     | Whether the field is disabled                                                |
+| `isReadOnly`         | `boolean`                                                                    | `false`     | Whether the field is read-only                                               |
+| `isRequired`         | `boolean`                                                                    | `false`     | Whether the field is required                                                |
+| `isInvalid`          | `boolean`                                                                    | `false`     | Whether the field should display as invalid                                  |
+| `validate`           | `(value: DateValue \| null) => ValidationError \| true \| null \| undefined` | -           | Custom validation function                                                   |
+| `validationBehavior` | `"native" \| "aria"`                                                         | `"native"`  | Whether to use native HTML form validation or ARIA-only                      |
+| `minValue`           | `DateValue`                                                                  | -           | The minimum accepted date                                                    |
+| `maxValue`           | `DateValue`                                                                  | -           | The maximum accepted date                                                    |
+| `size`               | `"xs" \| "sm" \| "md"`                                                       | `"md"`      | The size of the field                                                        |
+| `variant`            | `"outline" \| "unstyled"`                                                    | `"outline"` | The visual variant of the input                                              |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">`   | -           | Custom Tailwind classes for each field slot                                  |
+| `inputProps`         | `Partial<DateInputProps>`                                                    | -           | Additional props spread to the underlying `DateInput` element (escape hatch) |
+
+_Inherits all remaining props from React Aria's [DateField](https://react-aria.adobe.com/DateField). Notable ones: `autoFocus`, `granularity`, `hideTimeZone`, `hourCycle`, `locale`, `placeholderValue`._

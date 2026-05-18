@@ -51,6 +51,10 @@ function MyComponent() {
 }
 ```
 
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="toast" />
+
 ## Examples
 
 ### With Description
@@ -96,6 +100,23 @@ The `Toaster` component renders the toast container. It should be placed once in
 | duration    | `number`                                                                                          | `4000`           | Default duration in milliseconds before a toast auto-dismisses |
 | closeButton | `boolean`                                                                                         | `true`           | Whether to show the close button on toasts                     |
 | richColors  | `boolean`                                                                                         | `false`          | Whether to use rich colors for toast types                     |
+| classNames  | `SlotsToClasses<ToastSlots>`                                                                      | -                | Custom Tailwind classes for individual toast slots             |
+| variant     | `"bordered"`                                                                                      | `"bordered"`     | The visual style variant applied to all toasts                 |
+
+**Toast slots** (via `classNames` on `Toaster`):
+
+Slots are named regions of the toast you can target with custom Tailwind classes via the `classNames` prop on `Toaster`. Each slot below corresponds to a key on the `classNames` object.
+
+- **`base`**: The outermost `Toaster` wrapper element.
+- **`toast`**: The individual toast item container.
+- **`title`**: The toast title text element.
+- **`description`**: The toast description text element.
+- **`content`**: The wrapper around the title and description.
+- **`icon`**: The type icon (success, error, info, warning) rendered to the left.
+- **`closeButton`**: The close button element on each toast.
+- **`actionButton`**: The primary action button element.
+- **`cancelButton`**: The cancel/secondary action button element.
+- **`loader`**: The progress loader element (used for `toast.loading` toasts).
 
 ### toast()
 

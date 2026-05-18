@@ -3,6 +3,7 @@ import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx-jsx"
 import { visit } from "unist-util-visit"
 
 import type { ParsedDoc } from "./types"
+import { docsConfig } from "../../config/docs.config"
 import { loadExample } from "./load-example"
 
 interface TransformOptions {
@@ -26,8 +27,11 @@ export async function applyTransforms(
   await transformComponentPreviews(doc.body, opts)
   unwrapSteps(doc.body)
   transformCardGroups(doc.body)
+  transformShadcnInstall(doc.body)
   removeBrElements(doc.body)
   transformKbdElements(doc.body)
+  rewriteInternalLinks(doc.body)
+  removeToasterElements(doc.body)
 
   const stripped = stripUnknownJsx(doc.body)
   if (stripped.length > 0) {
@@ -106,6 +110,33 @@ function unwrapSteps(tree: Root): void {
   }
 }
 
+function transformShadcnInstall(tree: Root): void {
+  // <ShadcnInstall name="<slug>" /> → a fenced bash code block with the
+  // `npx shadcn@latest add <registryBaseUrl>/<slug>.json` command.
+  // Keeps the base URL centralised in `docsConfig.registryBaseUrl`.
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "ShadcnInstall") return
+    const name = getAttr(node as AnyMdxJsx, "name")
+    if (!name) {
+      throw new Error(`<ShadcnInstall /> is missing a 'name' attribute`)
+    }
+    const codeBlock: Code = {
+      type: "code",
+      lang: "bash",
+      value: `npx shadcn@latest add ${docsConfig.registryBaseUrl}/${name}.json`,
+    }
+    ;(parent as Parent).children.splice(index, 1, codeBlock)
+    return "skip"
+  })
+}
+
 function removeBrElements(tree: Root): void {
   // Remove <br /> elements as they're purely presentational and not needed for LLM output
   visit(tree, (node, index, parent) => {
@@ -144,6 +175,40 @@ function transformKbdElements(tree: Root): void {
       value: textContent,
     }
     ;(parent as Parent).children.splice(index, 1, textNode)
+  })
+}
+
+function rewriteInternalLinks(tree: Root): void {
+  // Rewrite cross-doc /docs/<kind>/<slug> links so agents traversing
+  // the LLM markdown surface stay inside the .md files instead of
+  // landing on the website's HTML pages.
+  const KIND_PATHS = ["components", "getting-started", "guides"]
+  const pattern = new RegExp(
+    `^/docs/(${KIND_PATHS.join("|")})/([^/#?]+)(#.*)?$`,
+  )
+  visit(tree, "link", (node) => {
+    if (typeof node.url !== "string") return
+    const match = node.url.match(pattern)
+    if (!match) return
+    const [, kind, slug, frag = ""] = match
+    node.url = `/llm/${kind}/${slug}.md${frag}`
+  })
+}
+
+function removeToasterElements(tree: Root): void {
+  // <Toaster /> is a placement marker for the docs site, not content.
+  // Strip it silently — LLM markdown should not render or warn on it.
+  visit(tree, (node, index, parent) => {
+    if (!parent || index == null) return
+    if (
+      node.type !== "mdxJsxFlowElement" &&
+      node.type !== "mdxJsxTextElement"
+    ) {
+      return
+    }
+    if ((node as AnyMdxJsx).name !== "Toaster") return
+    ;(parent as Parent).children.splice(index, 1)
+    return "skip"
   })
 }
 

@@ -15,6 +15,8 @@ links:
 
 ## Usage
 
+Use **TextAreaField** for multi-line text (long-form input, comments, descriptions). Use [TextField](/docs/components/text-field) for single-line.
+
 ```tsx
 import { TextAreaField } from "@opengovsg/oui"
 ```
@@ -22,6 +24,10 @@ import { TextAreaField } from "@opengovsg/oui"
 ```tsx
 <TextAreaField label="Comments" />
 ```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="text-area-field" />
 
 The TextAreaField component provides a multi-line text input with built-in label, description, and error message support. It is built on [React Aria's TextField](https://react-aria.adobe.com/TextField) and renders a `<textarea>` element instead of an `<input>`.
 
@@ -66,6 +72,8 @@ Use the `isReadOnly` prop to make the text area field read-only. The value can b
 <ComponentPreview name="text-area-field-readonly" />
 
 ## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
 
 TextAreaField supports React Aria's [form validation](https://react-aria.adobe.com/forms) system:
 

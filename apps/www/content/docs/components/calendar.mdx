@@ -11,13 +11,29 @@ links:
   reactaria: Calendar
 ---
 
+<ComponentPreview name="calendar-demo" />
+
 ## Usage
 
-A Calendar has no selection by default. An initial, uncontrolled value can be provided to the Calendar using the `defaultValue` prop. Alternatively, a controlled value can be provided using the `value` prop.
+Use **Calendar** for inline single-date selection (no popover). Use [DatePicker](/docs/components/date-picker) when the calendar should appear in a popover. Use [RangeCalendar](/docs/components/range-calendar) for date ranges.
 
-Date values are provided using objects in the `@internationalized/date` package. This library handles correct international date manipulation across calendars, time zones, and other localization concerns.
+```tsx
+import { Calendar } from "@opengovsg/oui"
+```
 
-<ComponentPreview name="calendar-demo" />
+```tsx
+<Calendar label="Select a date" />
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="calendar" />
+
+Calendar provides an inline date grid that users can browse and select from. It is built on [React Aria's Calendar](https://react-aria.adobe.com/Calendar). Date values use objects from the `@internationalized/date` package, which handles correct international date manipulation across calendars, time zones, and localization concerns.
+
+If no visible label is rendered, pass `aria-label` or `aria-labelledby` to identify the calendar to assistive technology.
+
+## Examples
 
 ### Disabled
 
@@ -104,7 +120,30 @@ The "Today" button can be hidden by setting the `showTodayButton` prop to `false
 
 <ComponentPreview name="calendar-hide-today-button" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isInvalid` + `errorMessage`** — Use together to display an error state. Pass a string to `errorMessage` for a static message, or a function `(validation: ValidationResult) => string` for dynamic messages based on React Aria's validation result.
+- **`minValue` / `maxValue`** — Constrain the selectable date range; dates outside the range are displayed as disabled.
+- **`isDateUnavailable`** — A callback `(date: DateValue) => boolean` that marks individual dates as unavailable (focusable but not selectable).
+
+## Events
+
+- **`onChange`** — Called when the selected date changes, receiving the new `DateValue` (or `null` when cleared).
+- **`onFocusChange`** — Called when the focused date within the grid changes, receiving a `DateValue`.
+
+## Accessibility
+
+- Built on React Aria's Calendar with full ARIA `grid` / `gridcell` semantics for the date grid.
+- The grid is keyboard navigable: **Arrow keys** to move focus, **Enter** or **Space** to select, **Page Up / Page Down** to change months, **Home / End** to jump to the start or end of a week.
+- Unavailable and disabled cells remain focusable but cannot be selected, with `aria-disabled` or `aria-selected="false"` applied automatically.
+- If no visible label surrounds the calendar, pass `aria-label` or `aria-labelledby` to identify it to assistive technology.
+- The visible date range title is announced via a `<h2>` inside the calendar header.
+
 ## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
 - **base**: Calendar wrapper, it handles alignment, placement, and general appearance.
 - **prevButton**: The previous button of the calendar.
@@ -144,3 +183,30 @@ The "Today" button can be hidden by setting the `showTodayButton` prop to `false
 - **`data-selected-start`**: Whether the cell is the first date in a range selection.
 - **`data-selected-end`**: Whether the cell is the last date in a range selection.
 - **`data-invalid`**: Whether the cell is part of an invalid selection.
+
+## Props
+
+### Calendar
+
+| Prop                              | Type                                                          | Default | Description                                                                                        |
+| --------------------------------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `value`                           | `DateValue \| null`                                           | -       | The selected date (controlled)                                                                     |
+| `defaultValue`                    | `DateValue \| null`                                           | -       | The default selected date (uncontrolled)                                                           |
+| `onChange`                        | `(value: DateValue \| null) => void`                          | -       | Called when the selected date changes                                                              |
+| `isDisabled`                      | `boolean`                                                     | `false` | Whether the calendar is disabled                                                                   |
+| `isReadOnly`                      | `boolean`                                                     | `false` | Whether the calendar is read-only                                                                  |
+| `isInvalid`                       | `boolean`                                                     | `false` | Whether the calendar should display as invalid                                                     |
+| `errorMessage`                    | `string`                                                      | -       | Error message to display when the calendar is in an invalid state                                  |
+| `minValue`                        | `DateValue`                                                   | -       | The minimum selectable date; dates before this are disabled                                        |
+| `maxValue`                        | `DateValue`                                                   | -       | The maximum selectable date; dates after this are disabled                                         |
+| `isDateUnavailable`               | `(date: DateValue) => boolean`                                | -       | A function that returns `true` for dates that should be unavailable (focusable but not selectable) |
+| `visibleDuration`                 | `DateDuration`                                                | -       | The number of months (or days/weeks) displayed at once. Going above 3 months is not recommended    |
+| `pageBehavior`                    | `"single" \| "visible"`                                       | -       | Whether paginating advances by one month (`"single"`) or by the full visible range (`"visible"`)   |
+| `firstDayOfWeek`                  | `"sun" \| "mon" \| "tue" \| "wed" \| "thu" \| "fri" \| "sat"` | -       | Override the first day of the week (defaults to locale)                                            |
+| `offsetMonths`                    | `number`                                                      | `0`     | Month offset applied to the header of this grid pane when multiple months are displayed            |
+| `showTodayButton`                 | `boolean`                                                     | `true`  | Whether to show the "Today" button below the calendar grid                                         |
+| `shouldSetDateOnTodayButtonClick` | `boolean`                                                     | `false` | If `true`, clicking "Today" selects today's date; if `false`, it only moves focus to today         |
+| `bottomContent`                   | `ReactNode`                                                   | -       | Custom content rendered below the calendar grid, replaces the "Today" button when provided         |
+| `classNames`                      | `SlotsToClasses<CalendarSlots>`                               | -       | Custom Tailwind classes for each calendar slot                                                     |
+
+_Inherits all remaining props from React Aria's [Calendar](https://react-aria.adobe.com/Calendar). Notable ones: `autoFocus`, `focusedValue`, `onFocusChange`, `weekdayStyle`._

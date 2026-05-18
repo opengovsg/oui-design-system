@@ -11,6 +11,7 @@ import { Card, CardGroup } from "./card"
 import { CodeBlock } from "./code-block"
 import { CodeBlockCommand } from "./code-block-command"
 import { ComponentPreview } from "./component-preview"
+import { ShadcnInstall } from "./shadcn-install"
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.HTMLAttributes<HTMLHeadingElement>) => (
@@ -239,6 +240,7 @@ export const mdxComponents = {
   Card,
   CardGroup,
   ComponentPreview,
+  ShadcnInstall,
   Toaster,
   Kbd: ({ ...props }) => {
     // TODO: Change to kbd component when implemented

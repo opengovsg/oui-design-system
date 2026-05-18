@@ -11,11 +11,29 @@ links:
   reactaria: TimeField
 ---
 
-There is not much change in this component as compared to `react-aria-components`'s export. You can refer to the [official documentation](https://react-spectrum.adobe.com/react-aria/TimeField.html) for more details.
+<ComponentPreview name="time-field-demo" />
 
 ## Usage
 
-<ComponentPreview name="time-field-demo" />
+Use **TimeField** for time-only input. Use [DateField](/docs/components/date-field) or [DatePicker](/docs/components/date-picker) when you also need a date.
+
+```tsx
+import { TimeField } from "@opengovsg/oui"
+```
+
+```tsx
+<TimeField label="Meeting time" />
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="time-field" />
+
+TimeField renders individually editable segments for each part of a time value (hour, minute, second), built on [React Aria's TimeField](https://react-aria.adobe.com/TimeField). Time values use `Time` objects from the `@internationalized/date` package.
+
+If no visible label is provided, an `aria-label` or `aria-labelledby` prop must be passed to identify the field to assistive technology.
+
+## Examples
 
 ### Sizes
 
@@ -79,10 +97,63 @@ This example forces TimeField to use 24-hour time, regardless of the locale.
 
 <ComponentPreview name="time-field-hourly-cycle" />
 
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — Marks the field as required; validation fires on form submit (native) or immediately (aria).
+- **`validate`** — A custom function `(value: TimeValue | null) => ValidationError | true | null | undefined`. Return a string to show as the error.
+- **`isInvalid` + `errorMessage`** — Use together for realtime validation feedback. `errorMessage` accepts a `ReactNode` or a function `(validation: ValidationResult) => ReactNode`.
+- **`minValue` / `maxValue`** — Constrain the accepted time range; entering a time outside the range marks the field as invalid.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` marks the field via ARIA attributes only (needed for React Hook Form).
+
+## Events
+
+- **`onChange`** — Called when the time value changes, receiving the new `TimeValue` (or `null`).
+- **`onFocus`** / **`onBlur`** — Called when the field receives or loses focus.
+- **`onFocusChange`** — Called when the focus state changes, receiving a boolean.
+- **`onKeyDown`** / **`onKeyUp`** — Called on keyboard events.
+
+## Accessibility
+
+- Each time segment is a focusable `<div role="spinbutton">` — assistive technologies announce the segment name and current value.
+- Navigating between segments uses **Tab** / **Shift+Tab**; typing digits updates the focused segment; **Arrow Up / Down** increments or decrements.
+- The label, description, and error message are linked via `aria-labelledby` and `aria-describedby`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby`.
+
 ## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
 
 - **base**: Input wrapper, it handles alignment, placement, and general appearance.
 - **label**: Label of the time-field, it is the one that is displayed above, inside or left of the time-field.
 - **input**: The time-input element.
 - **description**: The description of the time-field.
 - **error**: The error message of the time-field.
+
+## Props
+
+### TimeField
+
+| Prop                 | Type                                                                         | Default     | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `label`              | `ReactNode`                                                                  | -           | The visible label for the field                                              |
+| `description`        | `ReactNode \| null`                                                          | -           | Helper text shown below the field                                            |
+| `errorMessage`       | `ReactNode \| ((validation: ValidationResult) => ReactNode)`                 | -           | Error message displayed when the field is invalid                            |
+| `value`              | `TimeValue \| null`                                                          | -           | The current time value (controlled)                                          |
+| `defaultValue`       | `TimeValue \| null`                                                          | -           | The default time value (uncontrolled)                                        |
+| `onChange`           | `(value: TimeValue \| null) => void`                                         | -           | Called when the time value changes                                           |
+| `isDisabled`         | `boolean`                                                                    | `false`     | Whether the field is disabled                                                |
+| `isReadOnly`         | `boolean`                                                                    | `false`     | Whether the field is read-only                                               |
+| `isRequired`         | `boolean`                                                                    | `false`     | Whether the field is required                                                |
+| `isInvalid`          | `boolean`                                                                    | `false`     | Whether the field should display as invalid                                  |
+| `validate`           | `(value: TimeValue \| null) => ValidationError \| true \| null \| undefined` | -           | Custom validation function                                                   |
+| `validationBehavior` | `"native" \| "aria"`                                                         | `"native"`  | Whether to use native HTML form validation or ARIA-only                      |
+| `minValue`           | `TimeValue`                                                                  | -           | The minimum accepted time                                                    |
+| `maxValue`           | `TimeValue`                                                                  | -           | The maximum accepted time                                                    |
+| `size`               | `"xs" \| "sm" \| "md"`                                                       | `"md"`      | The size of the field                                                        |
+| `variant`            | `"outline" \| "unstyled"`                                                    | `"outline"` | The visual variant of the input                                              |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">`   | -           | Custom Tailwind classes for each field slot                                  |
+| `inputProps`         | `Partial<DateInputProps>`                                                    | -           | Additional props spread to the underlying `DateInput` element (escape hatch) |
+
+_Inherits all remaining props from React Aria's [TimeField](https://react-aria.adobe.com/TimeField). Notable ones: `autoFocus`, `granularity`, `hourCycle`, `hideTimeZone`, `placeholderValue`._

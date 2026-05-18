@@ -1,6 +1,6 @@
 ---
 title: TagField
-description: Allows the user to search and select multiple items from a dropdown list of options.
+description: A type-ahead input for selecting multiple items from a list, rendering each as a removable tag. For single-select with filtering, use ComboBox.
 category: Form & Input
 toc:
   visible: true
@@ -11,70 +11,251 @@ links:
   downshift: https://www.downshift-js.com/
 ---
 
+<ComponentPreview name="tag-field-demo" />
+
 ## Usage
 
-OUI exports 2 tag-field-related components:
+Use **TagField** when users select multiple items from a known list. Use [ComboBox](/docs/components/combo-box) for single-select with filtering. Use [TagGroup](/docs/components/tag-group) when the tags are not interactive selections (display-only).
 
-- **TagField**: The main component.
-- **TagFieldItem**: The component that represents the tag field item. You most likely won't need to use this directly.
+```tsx
+import { TagField } from "@opengovsg/oui"
+```
 
-<ComponentPreview name="tag-field-demo" />
+```tsx
+<TagField
+  label="Engineering disciplines"
+  defaultItems={[
+    { id: 1, textValue: "Aerospace" },
+    { id: 2, textValue: "Mechanical" },
+    { id: 3, textValue: "Civil" },
+  ]}
+/>
+```
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="tag-field" />
+
+TagField combines a text input with a virtualised listbox to let users pick multiple items from a list. Each selected item is rendered as a removable tag. The component is built on [Downshift](https://www.downshift-js.com/) for combobox behaviour and uses React Aria utilities for label/description/error wiring.
 
 If the tag field does not have a visible label, an `aria-label` or `aria-labelledby` prop must be passed instead to identify it to assistive technology.
 
+## Anatomy
+
+TagField consists of:
+
+- **TagField** — the root component; manages state, the text input, and the dropdown
+  - **TagFieldItem** — one option row in the dropdown list (used internally by default; you can replace it via the `children` render prop)
+
+## Examples
+
 ### Sizes
 
-Defaults to `md` size.
+Use the `size` prop to change the size of the tag field. Defaults to `"md"`.
 
 <ComponentPreview name="tag-field-sizes" />
 
-## Content
+### Controlled
 
-Contrary to other [collection components](https://react-spectrum.adobe.com/react-aria/collections.html), TagField only accepts the "dynamic collection" method of populating its options.
-
-As seen below, an iterable list of options is passed to the ComboBox using the `defaultItems` (or `items`) prop. Each item accepts the `id` and `textValue` props, which are passed to the `onSelectionChange` handler to identify the selected items.
+Use `selectedKeys` and `onSelectionChange` to control the selection programmatically. `selectedKeys` is a `Set<Key>`; `onSelectionChange` receives the updated set after every change.
 
 <ComponentPreview name="tag-field-content-example" />
 
-If the item does not have the `id` prop, you will need to pass in a `itemToKey` function uniquely identify the selected item, and if the item does not have the `textValue` prop, you will need to pass in a `itemToText` function to display the selected item. The below example demonstrates this.
+### With Description
 
-<ComponentPreview name="tag-field-custom-content-example" />
-
-### Description
-
-The `description` prop can be used to associate additional help text below the input.
+Use the `description` prop for helper text below the input.
 
 <ComponentPreview name="tag-field-description" />
 
-### Custom item
+### Custom Item Rendering
 
-You can also pass a custom item renderer to the `children` prop. This allows you to customize the appearance of the items in the list.
-Take note to use the `key` prop on the custom item due to virtualisation. Additionally, the `itemProps` prop should be spread onto the custom item to ensure that the item is selectable.
-
-Due to virtualisation, if the custom item results in a taller height for each item, you will need to pass in a `virtualRowHeight` prop with the correct height to the TagField to ensure that the items are displayed correctly.
+Pass a render function to `children` to fully customise each option row. The function receives a `TagFieldRenderProps<T>` object — spread `itemProps` onto your root element and use `key` as the React key. Set `virtualRowHeight` to the actual row height when custom items are taller than the default.
 
 <ComponentPreview name="tag-field-custom-children" />
 
-### Disabling virtualisation
+### Disable Virtualisation
 
-By default, TagField virtualises its list items for performance with large lists. For small lists or when virtualisation's absolute positioning conflicts with your styling needs (e.g., animations or variable-height items), you can disable it by setting `isVirtualized` to `false`. This renders items in normal DOM flow while keeping all other behaviour unchanged.
+By default TagField virtualises its list items for performance. Set `isVirtualized={false}` to render items in normal DOM flow — useful for small lists or when absolute positioning conflicts with animations or variable-height items.
 
 <ComponentPreview name="tag-field-non-virtualized" />
 
-## Disabled
+### Disabled
 
-A TagField can be fully disabled using the `isDisabled` prop.
+Use `isDisabled` to disable the entire field.
 
 <ComponentPreview name="tag-field-disabled" />
 
-### Disabled options
+### Disabled Options
 
-You can disable specific options by providing an array of keys to TagField via the `disabledKeys` prop. This will prevent options with matching keys from being pressable and receiving keyboard focus as shown in the example below.
+Use `disabledKeys` to disable specific options by their key.
 
 <ComponentPreview name="tag-field-disabled-options" />
 
-## Validation
+### Validation
 
-To display validation errors, pass in both `isInvalid` and `errorMessage` props to TagField. This allows you to render error messages from all of the above sources with consistent custom styles. Additionally, ensure that the `errorMessage` prop is a string that describes the validation error clearly to the user.
+Use `isInvalid` and `errorMessage` together to show an error state.
 
 <ComponentPreview name="tag-field-validation" />
+
+## Content
+
+Unlike most [Collection Components](https://react-spectrum.adobe.com/react-aria/collections.html), TagField only accepts the **dynamic collection** method — you must pass an iterable of items via `defaultItems` (uncontrolled) or `items` (controlled). Static children are not supported.
+
+```tsx
+// Uncontrolled — items list never changes
+<TagField
+  label="Engineering"
+  defaultItems={[
+    { id: 1, textValue: "Aerospace" },
+    { id: 2, textValue: "Mechanical" },
+  ]}
+/>
+
+// Controlled — swap in a filtered list externally
+<TagField
+  label="Engineering"
+  items={filteredItems}
+  inputValue={inputValue}
+  onInputChange={setInputValue}
+/>
+```
+
+Each item object must satisfy one of:
+
+- **Has an `id` field** — used automatically as the item's key (value passed to `onSelectionChange`).
+- **Has a `textValue` field** — used as the display text and filter target.
+- **Neither** — provide `itemToKey` and `itemToText` functions to extract the key and display text from your item shape.
+
+<ComponentPreview name="tag-field-custom-content-example" />
+
+## Validation
+
+See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns including React Hook Form + Zod.
+
+- **`isRequired`** — marks the field as required; combined with native form submission or `"aria"` validation behaviour.
+- **`validate`** — a custom function `(value: TagFieldValidationValue) => ValidationError | true | null | undefined`. `TagFieldValidationValue` has `{ selectedKeys: Set<Key> | null, inputValue: string }`. Return a string to show as the error, or `null`/`true` for valid.
+- **`isInvalid` + `errorMessage`** — use together for realtime validation feedback without waiting for form submission. `errorMessage` accepts a `ReactNode` or a function `(validation: ValidationResult) => string`.
+- **`validationBehavior`** — `"native"` (default) blocks form submission when invalid; `"aria"` only marks the field via ARIA attributes and allows submission — required for React Hook Form.
+
+## Events
+
+- **`onSelectionChange`** — Called when the selection changes, receiving the full updated `Set<Key>`.
+- **`onInputChange`** — Called when the text input value changes, receiving the new string.
+- **`onOpenChange`** — Called when the dropdown opens or closes, receiving `isOpen: boolean`.
+- **`onFocus`** — Called when the input receives focus.
+- **`onBlur`** — Called when the input loses focus.
+- **`onFocusChange`** — Called when the focus state changes, receiving a boolean.
+
+## Accessibility
+
+- TagField uses a native `<input>` with ARIA combobox semantics (role `combobox`, `aria-haspopup`, `aria-expanded`) managed by Downshift.
+- The label, description, and error message are automatically wired via `aria-labelledby` and `aria-describedby` through React Aria's `useTextField`.
+- If no visible label is provided, pass `aria-label` or `aria-labelledby` to the `TagField`.
+- Keyboard interaction: type to filter options; **Up/Down** to navigate the list; **Enter** to select; **Backspace** on empty input removes the last tag; **Escape** closes the dropdown.
+- Each selected tag is a focusable element; **Backspace** or **Delete** on a focused tag removes it.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+**TagField slots:**
+
+- **`root`**: The outermost flex-column container wrapping the label, field group, description, and error.
+- **`label`**: The label element rendered above the field group.
+- **`group`**: The bordered input group that wraps the tags, text input, and trigger button.
+- **`tag`**: Each selected-item chip rendered inside the group.
+- **`tagText`**: The text span inside each tag chip.
+- **`tagIcon`**: The remove icon button inside each tag chip.
+- **`field`**: The `<input>` element used for filtering.
+- **`trigger`**: The chevron button that opens and closes the dropdown.
+- **`description`**: The helper text rendered below the group.
+- **`error`**: The error message rendered below the group when the field is invalid.
+- **`popover`**: The floating popover container.
+- **`list`**: The scrollable list inside the popover.
+
+**TagFieldItem slots** (via `TagFieldItem`'s `classNames` or the `itemClassNames` prop on `TagField`):
+
+- **`container`**: The list item row.
+- **`label`**: The primary text label inside the item row.
+- **`description`**: The secondary description text inside the item row (unused in the default renderer; available for custom item layouts).
+
+### Custom Styles
+
+<ComponentPreview name="tag-field-custom-styles" />
+
+## Props
+
+### TagField
+
+| Prop                  | Type                                                                               | Default                   | Description                                                                            |
+| --------------------- | ---------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------- |
+| `children`            | `(values: TagFieldRenderProps<T>) => ReactNode`                                    | -                         | Custom render function for each dropdown option; see render-prop table below           |
+| `label`               | `ReactNode`                                                                        | -                         | The visible label for the field                                                        |
+| `items`               | `T[]`                                                                              | -                         | Controlled list of items for the dropdown                                              |
+| `defaultItems`        | `T[]`                                                                              | -                         | Uncontrolled initial list of items for the dropdown                                    |
+| `inputValue`          | `string`                                                                           | -                         | The current text input value (controlled)                                              |
+| `defaultInputValue`   | `string`                                                                           | -                         | The default text input value (uncontrolled)                                            |
+| `onInputChange`       | `(value: string) => void`                                                          | -                         | Called when the input value changes                                                    |
+| `selectedKeys`        | `Set<Key>`                                                                         | -                         | The set of selected item keys (controlled)                                             |
+| `defaultSelectedKeys` | `Set<Key>`                                                                         | -                         | The default set of selected keys (uncontrolled)                                        |
+| `onSelectionChange`   | `(keys: Set<Key>) => void`                                                         | -                         | Called when the selection changes                                                      |
+| `isDisabled`          | `boolean`                                                                          | `false`                   | Whether the field is disabled                                                          |
+| `isReadOnly`          | `boolean`                                                                          | `false`                   | Whether the field is read-only                                                         |
+| `isRequired`          | `boolean`                                                                          | `false`                   | Whether the field is required                                                          |
+| `isInvalid`           | `boolean`                                                                          | `false`                   | Whether the field should display as invalid                                            |
+| `validate`            | `(value: TagFieldValidationValue) => ValidationError \| true \| null \| undefined` | -                         | Custom validation function                                                             |
+| `errorMessage`        | `ReactNode \| ((validation: ValidationResult) => string)`                          | -                         | Error message displayed when the field is invalid                                      |
+| `validationBehavior`  | `"native" \| "aria"`                                                               | `"native"`                | Whether to use native HTML form validation or ARIA-only                                |
+| `size`                | `"xs" \| "sm" \| "md"`                                                             | `"md"`                    | The size of the component                                                              |
+| `classNames`          | `SlotsToClasses<TagFieldSlots>`                                                    | -                         | Custom Tailwind classes for component slots                                            |
+| `itemClassNames`      | `SlotsToClasses<ListBoxItemSlots>`                                                 | -                         | Custom Tailwind classes applied to every default `TagFieldItem` row                    |
+| `itemToText`          | `(item: T) => string`                                                              | `item => item.textValue`  | Extracts the display text from an item; required when items lack a `textValue` field   |
+| `itemToKey`           | `(item: T) => Key`                                                                 | `item => item.id`         | Extracts the unique key from an item; required when items lack an `id` field           |
+| `defaultFilter`       | `(textValue: string, inputValue: string) => boolean`                               | case-insensitive contains | Filter function for uncontrolled collections; receives the item text and current input |
+| `virtualRowHeight`    | `number`                                                                           | size-dependent            | Override the estimated height of each virtualised row in pixels                        |
+| `isVirtualized`       | `boolean`                                                                          | `true`                    | Whether to virtualise the list; set `false` for small lists or variable-height items   |
+| `shouldCloseOnBlur`   | `boolean`                                                                          | `true`                    | Whether the dropdown closes when the input loses focus                                 |
+| `description`         | `ReactNode \| null`                                                                | -                         | Helper text shown below the field                                                      |
+| `placeholder`         | `string`                                                                           | -                         | Placeholder text for the text input                                                    |
+| `disabledKeys`        | `Iterable<Key>`                                                                    | -                         | Keys of items that cannot be selected                                                  |
+| `onOpenChange`        | `(isOpen: boolean) => void`                                                        | -                         | Called when the dropdown opens or closes                                               |
+| `onFocus`             | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input receives focus                                                   |
+| `onBlur`              | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input loses focus                                                      |
+| `onFocusChange`       | `(isFocused: boolean) => void`                                                     | -                         | Called when the focus state changes                                                    |
+
+_Inherits `autoFocus` and other focusable props from React Aria's [FocusableProps](https://react-spectrum.adobe.com/react-aria/FocusableProps)._
+
+#### `children` render-prop argument (`TagFieldRenderProps<T>`)
+
+When `children` is a function, it is called once per visible dropdown row with:
+
+| Property        | Type                               | Description                                                                                                   |
+| --------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `item`          | `T`                                | The item data object for this row                                                                             |
+| `key`           | `string \| number`                 | The React key for this row; must be passed as the `key` prop on the root element                              |
+| `isHighlighted` | `boolean`                          | Whether this row is currently keyboard-highlighted                                                            |
+| `itemProps`     | `TagFieldBaseItemProps<T>`         | ARIA and event props from Downshift; spread onto the root element of your custom row                          |
+| `classNames`    | `SlotsToClasses<ListBoxItemSlots>` | The resolved slot classes from `itemClassNames`; apply to `container`, `label`, `description` spans as needed |
+
+### TagFieldItem
+
+`TagFieldItem` is the default option renderer used internally. You can use it directly inside a custom `children` function when you only need partial customisation.
+
+| Prop            | Type                               | Default | Description                                                                  |
+| --------------- | ---------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `item`          | `T`                                | -       | The item data object                                                         |
+| `isHighlighted` | `boolean`                          | `false` | Whether the item is keyboard-highlighted                                     |
+| `classNames`    | `SlotsToClasses<ListBoxItemSlots>` | -       | Custom Tailwind classes for item slots (`container`, `label`, `description`) |
+| `style`         | `React.CSSProperties`              | -       | Inline styles (used internally by the virtualiser for positioning)           |
+
+Spread all remaining `TagFieldBaseItemProps<T>` (ARIA + event props from Downshift) onto the `<li>` element.
+
+### Internal: TagFieldRoot render-prop state
+
+`TagFieldRoot` is an internal (non-exported) primitive that `TagField` delegates to. Its `children` render-prop function receives additional state properties for advanced headless composition — these are not accessible through `TagField`'s public API but are listed here for completeness:
+
+| Property             | Type                  | Description                                                                                       |
+| -------------------- | --------------------- | ------------------------------------------------------------------------------------------------- |
+| `highlightedIndex`   | `number \| undefined` | The index of the currently keyboard-highlighted option in the dropdown list                       |
+| `selectedItems`      | `T[]`                 | Array of the currently selected item objects (mirrors the `selectedKeys` set resolved to objects) |
+| `removeSelectedItem` | `(item: T) => void`   | Imperatively removes an item from the selection                                                   |
