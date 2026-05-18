@@ -34,16 +34,6 @@ const docsLinks: NavItem = {
       ],
     },
     {
-      title: "Guides",
-      url: "guides",
-      items: [
-        {
-          title: "Cross-cutting guides",
-          items: [{ title: "Forms", url: "forms", status: "new" }],
-        },
-      ],
-    },
-    {
       title: "Components",
       url: "components",
       items: [
@@ -108,6 +98,16 @@ const docsLinks: NavItem = {
             { title: "Toggle", url: "toggle" },
             { title: "Tooltip", url: "tooltip", status: "new" },
           ].sort((a, b) => a.title.localeCompare(b.title)),
+        },
+      ],
+    },
+    {
+      title: "Guides",
+      url: "guides",
+      items: [
+        {
+          title: "Cross-cutting guides",
+          items: [{ title: "Forms", url: "forms", status: "new" }],
         },
       ],
     },
