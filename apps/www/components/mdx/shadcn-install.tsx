@@ -1,9 +1,6 @@
 import { docsConfig } from "@/config/docs.config"
-import { highlightCode } from "@/lib/shiki"
 
-import { cn } from "@opengovsg/oui-theme"
-
-import { CopyButton } from "./copy-button"
+import { CodeBlockCommand } from "./code-block-command"
 
 interface ShadcnInstallProps {
   /**
@@ -15,30 +12,21 @@ interface ShadcnInstallProps {
 }
 
 /**
- * Renders the shadcn-CLI install command for a single registry item.
+ * Renders the shadcn-CLI install command for a single registry item, as the
+ * same tabbed UI the `rehype-npm-command` plugin produces for an `npx ...`
+ * code block in MDX. The variants here mirror the plugin's "npx" branch
+ * (npx → pnpm dlx → bunx --bun; yarn keeps `npx`).
  *
  * Usage in MDX: `<ShadcnInstall name="combo-box" />`
- *
- * Mirrors the rendering shape of `<CodeBlockCommand>` for a single command —
- * the Shiki-produced HTML is server-rendered trusted output (no user input).
  */
-export async function ShadcnInstall({ name }: ShadcnInstallProps) {
-  const command = `npx shadcn@latest add ${docsConfig.registryBaseUrl}/${name}.json`
-  const html = await highlightCode(command, { lang: "bash" })
-
+export function ShadcnInstall({ name }: ShadcnInstallProps) {
+  const npxCommand = `npx shadcn@latest add ${docsConfig.registryBaseUrl}/${name}.json`
   return (
-    <div className="relative my-6 font-mono text-sm font-normal">
-      <div className="absolute top-3 right-3 z-10">
-        <CopyButton>{command}</CopyButton>
-      </div>
-      <div
-        className={cn(
-          "[&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:p-4 [&_pre]:font-mono",
-        )}
-        // Shiki output is server-rendered trusted HTML (the command is
-        // constructed from a known config constant and a static prop).
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </div>
+    <CodeBlockCommand
+      __npmCommand__={npxCommand}
+      __yarnCommand__={npxCommand}
+      __pnpmCommand__={npxCommand.replace("npx", "pnpm dlx")}
+      __bunCommand__={npxCommand.replace("npx", "bunx --bun")}
+    />
   )
 }
