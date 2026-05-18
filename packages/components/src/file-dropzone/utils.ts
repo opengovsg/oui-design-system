@@ -14,10 +14,7 @@ export interface MaxFileSizeRule {
  * Check if a file's MIME type matches a pattern.
  * Supports exact matches ("application/zip") and wildcards ("image/*").
  */
-export const matchesMimeType = (
-  fileType: string,
-  pattern: string,
-): boolean => {
+export const matchesMimeType = (fileType: string, pattern: string): boolean => {
   if (pattern === "*" || pattern === "*/*") return true
   if (pattern.endsWith("/*")) {
     const prefix = pattern.slice(0, pattern.indexOf("/"))

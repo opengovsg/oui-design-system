@@ -91,13 +91,13 @@ You can customize the `Infobox` component by passing custom Tailwind CSS classes
 
 ### Infobox
 
-| Prop         | Type                                              | Default  | Description                                                                                                  |
-| ------------ | ------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------ |
-| `children`   | `ReactNode`                                       | -        | The message content. Supports rich children (paragraphs, lists, inline elements)                             |
-| `variant`    | `"info" \| "warning" \| "success" \| "error"`     | `"info"` | Semantic meaning + visual style                                                                              |
-| `size`       | `"sm" \| "md"`                                    | `"md"`   | Size variant                                                                                                 |
-| `icon`       | `ReactNode \| null`                               | -        | Override the default variant icon. Pass `null` to hide the icon                                              |
-| `classNames` | `SlotsToClasses<"base" \| "wrapper" \| "icon">`   | -        | Per-slot Tailwind classes for custom styling                                                                 |
-| `className`  | `string`                                          | -        | Additional Tailwind classes applied to the `base` slot                                                       |
+| Prop         | Type                                            | Default  | Description                                                                      |
+| ------------ | ----------------------------------------------- | -------- | -------------------------------------------------------------------------------- |
+| `children`   | `ReactNode`                                     | -        | The message content. Supports rich children (paragraphs, lists, inline elements) |
+| `variant`    | `"info" \| "warning" \| "success" \| "error"`   | `"info"` | Semantic meaning + visual style                                                  |
+| `size`       | `"sm" \| "md"`                                  | `"md"`   | Size variant                                                                     |
+| `icon`       | `ReactNode \| null`                             | -        | Override the default variant icon. Pass `null` to hide the icon                  |
+| `classNames` | `SlotsToClasses<"base" \| "wrapper" \| "icon">` | -        | Per-slot Tailwind classes for custom styling                                     |
+| `className`  | `string`                                        | -        | Additional Tailwind classes applied to the `base` slot                           |
 
 _Inherits standard HTML element props from `HtmlUiProps` (e.g., `id`, `role`, `aria-*`)._
