@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.55
+
+### Patch Changes
+
+- [#266](https://github.com/opengovsg/oui-design-system/pull/266) [`66d621f`](https://github.com/opengovsg/oui-design-system/commit/66d621ff3b43648026ffc6e399cae40009f909aa) Thanks [@karrui](https://github.com/karrui)! - feat: ship AGENTS.md in package
+
+- [#268](https://github.com/opengovsg/oui-design-system/pull/268) [`95878f3`](https://github.com/opengovsg/oui-design-system/commit/95878f3d1bbad316f157dc71df14843837048bda) Thanks [@karrui](https://github.com/karrui)! - feat(theme): merge field-group into field
+
 ## 0.0.54
 
 ## 0.0.53
