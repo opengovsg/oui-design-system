@@ -27,9 +27,11 @@ export interface UseScrollPositionOptions {
    */
   isEnabled?: boolean
   /**
-   * The element to track the scroll position for.
+   * The element to track the scroll position for. Pass a `useState`-held
+   * element (via a callback ref) so the effect re-runs when the element
+   * mounts. Falls back to `window` when `null` or `undefined`.
    */
-  elementRef?: React.RefObject<HTMLElement> | null
+  element?: HTMLElement | null
   /**
    * The callback function to be called when the scroll position changes.
    */
@@ -45,16 +47,16 @@ export interface UseScrollPositionOptions {
 export const useScrollPosition = (
   props: UseScrollPositionOptions,
 ): ScrollValue => {
-  const { elementRef, delay = 30, callback, isEnabled } = props
+  const { element, delay = 30, callback, isEnabled } = props
 
   const position = useRef<ScrollValue>(
-    isEnabled ? getScrollPosition(elementRef?.current) : { x: 0, y: 0 },
+    isEnabled ? getScrollPosition(element) : { x: 0, y: 0 },
   )
 
   const throttleTimeout = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const handler = useCallback(() => {
-    const currPos = getScrollPosition(elementRef?.current)
+    const currPos = getScrollPosition(element)
 
     if (typeof callback === "function") {
       callback({ prevPos: position.current, currPos })
@@ -62,7 +64,7 @@ export const useScrollPosition = (
 
     position.current = currPos
     throttleTimeout.current = null
-  }, [callback, elementRef])
+  }, [callback, element])
 
   useEffect(() => {
     if (!isEnabled) return
@@ -79,7 +81,7 @@ export const useScrollPosition = (
       }
     }
 
-    const target = elementRef?.current || window
+    const target = element || window
 
     target.addEventListener("scroll", handleScroll)
 
@@ -90,7 +92,7 @@ export const useScrollPosition = (
         throttleTimeout.current = null
       }
     }
-  }, [elementRef, delay, handler, isEnabled])
+  }, [element, delay, handler, isEnabled])
 
   return position.current
 }
