@@ -34,6 +34,16 @@ const docsLinks: NavItem = {
       ],
     },
     {
+      title: "Guides",
+      url: "guides",
+      items: [
+        {
+          title: "Cross-cutting guides",
+          items: [{ title: "Forms", url: "forms", status: "new" }],
+        },
+      ],
+    },
+    {
       title: "Components",
       url: "components",
       items: [

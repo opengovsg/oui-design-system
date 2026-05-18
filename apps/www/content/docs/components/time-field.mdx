@@ -135,25 +135,25 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### TimeField
 
-| Prop                 | Type                                                                                       | Default     | Description                                                                         |
-| -------------------- | ------------------------------------------------------------------------------------------ | ----------- | ----------------------------------------------------------------------------------- |
-| `label`              | `ReactNode`                                                                                | -           | The visible label for the field                                                     |
-| `description`        | `ReactNode \| null`                                                                        | -           | Helper text shown below the field                                                   |
-| `errorMessage`       | `ReactNode \| ((validation: ValidationResult) => ReactNode)`                               | -           | Error message displayed when the field is invalid                                   |
-| `value`              | `TimeValue \| null`                                                                        | -           | The current time value (controlled)                                                 |
-| `defaultValue`       | `TimeValue \| null`                                                                        | -           | The default time value (uncontrolled)                                               |
-| `onChange`           | `(value: TimeValue \| null) => void`                                                       | -           | Called when the time value changes                                                  |
-| `isDisabled`         | `boolean`                                                                                  | `false`     | Whether the field is disabled                                                       |
-| `isReadOnly`         | `boolean`                                                                                  | `false`     | Whether the field is read-only                                                      |
-| `isRequired`         | `boolean`                                                                                  | `false`     | Whether the field is required                                                       |
-| `isInvalid`          | `boolean`                                                                                  | `false`     | Whether the field should display as invalid                                         |
-| `validate`           | `(value: TimeValue \| null) => ValidationError \| true \| null \| undefined`               | -           | Custom validation function                                                          |
-| `validationBehavior` | `"native" \| "aria"`                                                                       | `"native"`  | Whether to use native HTML form validation or ARIA-only                             |
-| `minValue`           | `TimeValue`                                                                                | -           | The minimum accepted time                                                           |
-| `maxValue`           | `TimeValue`                                                                                | -           | The maximum accepted time                                                           |
-| `size`               | `"xs" \| "sm" \| "md"`                                                                     | `"md"`      | The size of the field                                                               |
-| `variant`            | `"outline" \| "unstyled"`                                                                  | `"outline"` | The visual variant of the input                                                     |
-| `classNames`         | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">`                 | -           | Custom Tailwind classes for each field slot                                         |
-| `inputProps`         | `Partial<DateInputProps>`                                                                  | -           | Additional props spread to the underlying `DateInput` element (escape hatch)        |
+| Prop                 | Type                                                                         | Default     | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- | ----------- | ---------------------------------------------------------------------------- |
+| `label`              | `ReactNode`                                                                  | -           | The visible label for the field                                              |
+| `description`        | `ReactNode \| null`                                                          | -           | Helper text shown below the field                                            |
+| `errorMessage`       | `ReactNode \| ((validation: ValidationResult) => ReactNode)`                 | -           | Error message displayed when the field is invalid                            |
+| `value`              | `TimeValue \| null`                                                          | -           | The current time value (controlled)                                          |
+| `defaultValue`       | `TimeValue \| null`                                                          | -           | The default time value (uncontrolled)                                        |
+| `onChange`           | `(value: TimeValue \| null) => void`                                         | -           | Called when the time value changes                                           |
+| `isDisabled`         | `boolean`                                                                    | `false`     | Whether the field is disabled                                                |
+| `isReadOnly`         | `boolean`                                                                    | `false`     | Whether the field is read-only                                               |
+| `isRequired`         | `boolean`                                                                    | `false`     | Whether the field is required                                                |
+| `isInvalid`          | `boolean`                                                                    | `false`     | Whether the field should display as invalid                                  |
+| `validate`           | `(value: TimeValue \| null) => ValidationError \| true \| null \| undefined` | -           | Custom validation function                                                   |
+| `validationBehavior` | `"native" \| "aria"`                                                         | `"native"`  | Whether to use native HTML form validation or ARIA-only                      |
+| `minValue`           | `TimeValue`                                                                  | -           | The minimum accepted time                                                    |
+| `maxValue`           | `TimeValue`                                                                  | -           | The maximum accepted time                                                    |
+| `size`               | `"xs" \| "sm" \| "md"`                                                       | `"md"`      | The size of the field                                                        |
+| `variant`            | `"outline" \| "unstyled"`                                                    | `"outline"` | The visual variant of the input                                              |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "input" \| "description" \| "error">`   | -           | Custom Tailwind classes for each field slot                                  |
+| `inputProps`         | `Partial<DateInputProps>`                                                    | -           | Additional props spread to the underlying `DateInput` element (escape hatch) |
 
 _Inherits all remaining props from React Aria's [TimeField](https://react-aria.adobe.com/TimeField). Notable ones: `autoFocus`, `granularity`, `hourCycle`, `hideTimeZone`, `placeholderValue`._

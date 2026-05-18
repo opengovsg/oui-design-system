@@ -1,8 +1,8 @@
 // apps/www/scripts/registry/variant.test.ts
 import { beforeAll, describe, expect, it } from "vitest"
 
-import { buildCatalog } from "./catalog"
 import type { Catalog } from "./types"
+import { buildCatalog } from "./catalog"
 import { transformVariantFile } from "./variant"
 
 let catalog: Catalog

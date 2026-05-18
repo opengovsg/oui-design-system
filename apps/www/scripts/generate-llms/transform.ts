@@ -125,9 +125,7 @@ function transformShadcnInstall(tree: Root): void {
     if ((node as AnyMdxJsx).name !== "ShadcnInstall") return
     const name = getAttr(node as AnyMdxJsx, "name")
     if (!name) {
-      throw new Error(
-        `<ShadcnInstall /> is missing a 'name' attribute`,
-      )
+      throw new Error(`<ShadcnInstall /> is missing a 'name' attribute`)
     }
     const codeBlock: Code = {
       type: "code",

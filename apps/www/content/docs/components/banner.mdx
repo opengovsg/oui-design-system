@@ -86,15 +86,15 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Banner
 
-| Prop              | Type                                        | Default  | Description                                                                                           |
-| ----------------- | ------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------- |
-| `children`        | `ReactNode`                                 | -        | The banner message content                                                                            |
-| `isExpanded`      | `boolean`                                   | -        | Whether the banner is visible (controlled)                                                            |
-| `defaultExpanded` | `boolean`                                   | `true`   | Whether the banner is visible by default (uncontrolled)                                               |
-| `onExpandedChange` | `(isExpanded: boolean) => void`            | -        | Called when the banner's expanded state changes                                                       |
-| `isDismissable`   | `boolean`                                   | -        | Whether to render a dismiss button that hides the banner when pressed                                 |
-| `startContent`    | `ReactNode \| null`                         | -        | Content rendered to the left of the message; defaults to a variant-appropriate icon; pass `null` to hide the icon |
-| `variant`         | `"info" \| "warning" \| "error" \| "unstyled"` | `"info"` | The visual style and color scheme of the banner                                                    |
-| `size`            | `"sm" \| "md"`                              | `"md"`   | The size of the banner                                                                                |
-| `classNames`      | `SlotsToClasses<BannerSlots>`               | -        | Custom Tailwind classes for component slots                                                           |
-| `className`       | `string`                                    | -        | Additional class applied to the base element                                                          |
+| Prop               | Type                                           | Default  | Description                                                                                                       |
+| ------------------ | ---------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |
+| `children`         | `ReactNode`                                    | -        | The banner message content                                                                                        |
+| `isExpanded`       | `boolean`                                      | -        | Whether the banner is visible (controlled)                                                                        |
+| `defaultExpanded`  | `boolean`                                      | `true`   | Whether the banner is visible by default (uncontrolled)                                                           |
+| `onExpandedChange` | `(isExpanded: boolean) => void`                | -        | Called when the banner's expanded state changes                                                                   |
+| `isDismissable`    | `boolean`                                      | -        | Whether to render a dismiss button that hides the banner when pressed                                             |
+| `startContent`     | `ReactNode \| null`                            | -        | Content rendered to the left of the message; defaults to a variant-appropriate icon; pass `null` to hide the icon |
+| `variant`          | `"info" \| "warning" \| "error" \| "unstyled"` | `"info"` | The visual style and color scheme of the banner                                                                   |
+| `size`             | `"sm" \| "md"`                                 | `"md"`   | The size of the banner                                                                                            |
+| `classNames`       | `SlotsToClasses<BannerSlots>`                  | -        | Custom Tailwind classes for component slots                                                                       |
+| `className`        | `string`                                       | -        | Additional class applied to the base element                                                                      |

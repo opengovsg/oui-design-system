@@ -1,3 +1,5 @@
+"use client"
+
 import { ComboBox, ComboBoxEmptyState, ComboBoxItem } from "@opengovsg/oui"
 
 export default function ComboBoxEmptyStateExample() {

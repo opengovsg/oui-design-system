@@ -153,9 +153,9 @@ describe("applyTransforms — ShadcnInstall", () => {
       children: [],
     } as never)
 
-    await expect(applyTransforms(doc, { examplesDir: FIXTURES })).rejects.toThrow(
-      /name/,
-    )
+    await expect(
+      applyTransforms(doc, { examplesDir: FIXTURES }),
+    ).rejects.toThrow(/name/)
   })
 })
 

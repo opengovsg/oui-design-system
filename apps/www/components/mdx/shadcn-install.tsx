@@ -1,6 +1,6 @@
 import { docsConfig } from "@/config/docs.config"
-
 import { highlightCode } from "@/lib/shiki"
+
 import { cn } from "@opengovsg/oui-theme"
 
 import { CopyButton } from "./copy-button"

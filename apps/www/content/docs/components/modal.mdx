@@ -199,12 +199,12 @@ You can customize the `Modal` component by passing custom Tailwind CSS classes t
 
 ### ModalContent
 
-| Prop                 | Type                                                                | Default | Description                                                                                      |
-| -------------------- | ------------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------ |
-| `children`           | `ReactNode \| ((onClose: () => void) => ReactNode)`                 | -       | The modal body, or a render function that receives an `onClose` callback                         |
-| `closeButtonContent` | `ReactNode`                                                         | -       | Custom content to replace the default close icon inside the close button                         |
-| `hideCloseButton`    | `boolean`                                                           | `false` | Whether to hide the close button entirely                                                        |
-| `closeButtonProps`   | `Omit<ButtonProps, "className" \| "slot">`                          | -       | Additional props spread onto the close button element                                            |
+| Prop                 | Type                                                | Default | Description                                                              |
+| -------------------- | --------------------------------------------------- | ------- | ------------------------------------------------------------------------ |
+| `children`           | `ReactNode \| ((onClose: () => void) => ReactNode)` | -       | The modal body, or a render function that receives an `onClose` callback |
+| `closeButtonContent` | `ReactNode`                                         | -       | Custom content to replace the default close icon inside the close button |
+| `hideCloseButton`    | `boolean`                                           | `false` | Whether to hide the close button entirely                                |
+| `closeButtonProps`   | `Omit<ButtonProps, "className" \| "slot">`          | -       | Additional props spread onto the close button element                    |
 
 _Inherits all remaining props from React Aria's [Dialog](https://react-aria.adobe.com/Dialog). Notable ones: `aria-label`, `aria-labelledby`, `aria-describedby`._
 

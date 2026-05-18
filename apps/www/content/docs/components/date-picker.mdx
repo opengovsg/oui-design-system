@@ -243,24 +243,24 @@ Slots can be overridden via the `classNames.error` prop.
 
 ### DatePicker
 
-| Prop                 | Type                                                                        | Default    | Description                                                                         |
-| -------------------- | --------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------- |
-| `label`              | `string`                                                                    | -          | The visible label for the field                                                     |
-| `description`        | `string`                                                                    | -          | Helper text shown below the field                                                   |
-| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`                      | -          | Error message displayed when the field is invalid                                   |
-| `value`              | `DateValue \| null`                                                         | -          | The current date value (controlled)                                                 |
-| `defaultValue`       | `DateValue \| null`                                                         | -          | The default date value (uncontrolled)                                               |
-| `onChange`           | `(value: DateValue \| null) => void`                                        | -          | Called when the date value changes                                                  |
-| `isDisabled`         | `boolean`                                                                   | `false`    | Whether the field is disabled                                                       |
-| `isReadOnly`         | `boolean`                                                                   | `false`    | Whether the field is read-only                                                      |
-| `isRequired`         | `boolean`                                                                   | `false`    | Whether the field is required                                                       |
-| `isInvalid`          | `boolean`                                                                   | `false`    | Whether the field should display as invalid                                         |
-| `validate`           | `(value: DateValue \| null) => ValidationError \| true \| null \| undefined`| -          | Custom validation function                                                          |
-| `validationBehavior` | `"native" \| "aria"`                                                        | `"native"` | Whether to use native HTML form validation or ARIA-only                             |
-| `selectorIcon`       | `ReactNode`                                                                 | -          | Custom icon for the calendar trigger button                                         |
-| `calendarProps`      | `CalendarProps<T>`                                                          | -          | Props forwarded to the internal Calendar component                                  |
-| `calendarButtonProps`| `ButtonProps`                                                               | -          | Additional props spread to the calendar trigger button (escape hatch)               |
-| `popoverProps`       | `PopoverProps`                                                              | -          | Props forwarded to the internal Popover component                                   |
-| `classNames`         | `SlotsToClasses<DatePickerSlots \| "description"> & { calendar?: ..., error?: ..., popover?: ... }` | - | Custom Tailwind classes for each slot, including nested Calendar, FieldError, and Popover slots |
+| Prop                  | Type                                                                                                | Default    | Description                                                                                     |
+| --------------------- | --------------------------------------------------------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------- |
+| `label`               | `string`                                                                                            | -          | The visible label for the field                                                                 |
+| `description`         | `string`                                                                                            | -          | Helper text shown below the field                                                               |
+| `errorMessage`        | `string \| ((validation: ValidationResult) => string)`                                              | -          | Error message displayed when the field is invalid                                               |
+| `value`               | `DateValue \| null`                                                                                 | -          | The current date value (controlled)                                                             |
+| `defaultValue`        | `DateValue \| null`                                                                                 | -          | The default date value (uncontrolled)                                                           |
+| `onChange`            | `(value: DateValue \| null) => void`                                                                | -          | Called when the date value changes                                                              |
+| `isDisabled`          | `boolean`                                                                                           | `false`    | Whether the field is disabled                                                                   |
+| `isReadOnly`          | `boolean`                                                                                           | `false`    | Whether the field is read-only                                                                  |
+| `isRequired`          | `boolean`                                                                                           | `false`    | Whether the field is required                                                                   |
+| `isInvalid`           | `boolean`                                                                                           | `false`    | Whether the field should display as invalid                                                     |
+| `validate`            | `(value: DateValue \| null) => ValidationError \| true \| null \| undefined`                        | -          | Custom validation function                                                                      |
+| `validationBehavior`  | `"native" \| "aria"`                                                                                | `"native"` | Whether to use native HTML form validation or ARIA-only                                         |
+| `selectorIcon`        | `ReactNode`                                                                                         | -          | Custom icon for the calendar trigger button                                                     |
+| `calendarProps`       | `CalendarProps<T>`                                                                                  | -          | Props forwarded to the internal Calendar component                                              |
+| `calendarButtonProps` | `ButtonProps`                                                                                       | -          | Additional props spread to the calendar trigger button (escape hatch)                           |
+| `popoverProps`        | `PopoverProps`                                                                                      | -          | Props forwarded to the internal Popover component                                               |
+| `classNames`          | `SlotsToClasses<DatePickerSlots \| "description"> & { calendar?: ..., error?: ..., popover?: ... }` | -          | Custom Tailwind classes for each slot, including nested Calendar, FieldError, and Popover slots |
 
 _Inherits all remaining props from React Aria's [DatePicker](https://react-aria.adobe.com/DatePicker). Notable ones: `autoFocus`, `granularity`, `hideTimeZone`, `hourCycle`, `pageBehavior`, `shouldCloseOnSelect`._

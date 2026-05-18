@@ -239,23 +239,23 @@ Slots can be overridden via the `classNames.error` prop.
 
 ### DateRangePicker
 
-| Prop                 | Type                                                                                         | Default    | Description                                                                                 |
-| -------------------- | -------------------------------------------------------------------------------------------- | ---------- | ------------------------------------------------------------------------------------------- |
-| `label`              | `string`                                                                                     | -          | The visible label for the field                                                             |
-| `description`        | `string`                                                                                     | -          | Helper text shown below the field                                                           |
-| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`                                       | -          | Error message displayed when the field is invalid                                           |
-| `value`              | `RangeValue<DateValue> \| null`                                                              | -          | The current date range value (controlled)                                                   |
-| `defaultValue`       | `RangeValue<DateValue> \| null`                                                              | -          | The default date range value (uncontrolled)                                                 |
-| `onChange`           | `(value: RangeValue<DateValue> \| null) => void`                                             | -          | Called when the date range changes                                                          |
-| `isDisabled`         | `boolean`                                                                                    | `false`    | Whether the field is disabled                                                               |
-| `isReadOnly`         | `boolean`                                                                                    | `false`    | Whether the field is read-only                                                              |
-| `isRequired`         | `boolean`                                                                                    | `false`    | Whether the field is required                                                               |
-| `isInvalid`          | `boolean`                                                                                    | `false`    | Whether the field should display as invalid                                                 |
-| `validate`           | `(value: RangeValue<DateValue> \| null) => ValidationError \| true \| null \| undefined`     | -          | Custom validation function                                                                  |
-| `validationBehavior` | `"native" \| "aria"`                                                                         | `"native"` | Whether to use native HTML form validation or ARIA-only                                     |
-| `calendarProps`      | `RangeCalendarProps<T>`                                                                      | -          | Props forwarded to the internal RangeCalendar component                                     |
-| `calendarButtonProps`| `ButtonProps`                                                                                | -          | Additional props spread to the calendar trigger button (escape hatch)                       |
-| `popoverProps`       | `PopoverProps`                                                                               | -          | Props forwarded to the internal Popover component                                           |
-| `classNames`         | `SlotsToClasses<DateRangePickerSlots> & { calendar?: SlotsToClasses<CalendarSlots> }`        | -          | Custom Tailwind classes for each slot, including nested RangeCalendar slots                 |
+| Prop                  | Type                                                                                     | Default    | Description                                                                 |
+| --------------------- | ---------------------------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------- |
+| `label`               | `string`                                                                                 | -          | The visible label for the field                                             |
+| `description`         | `string`                                                                                 | -          | Helper text shown below the field                                           |
+| `errorMessage`        | `string \| ((validation: ValidationResult) => string)`                                   | -          | Error message displayed when the field is invalid                           |
+| `value`               | `RangeValue<DateValue> \| null`                                                          | -          | The current date range value (controlled)                                   |
+| `defaultValue`        | `RangeValue<DateValue> \| null`                                                          | -          | The default date range value (uncontrolled)                                 |
+| `onChange`            | `(value: RangeValue<DateValue> \| null) => void`                                         | -          | Called when the date range changes                                          |
+| `isDisabled`          | `boolean`                                                                                | `false`    | Whether the field is disabled                                               |
+| `isReadOnly`          | `boolean`                                                                                | `false`    | Whether the field is read-only                                              |
+| `isRequired`          | `boolean`                                                                                | `false`    | Whether the field is required                                               |
+| `isInvalid`           | `boolean`                                                                                | `false`    | Whether the field should display as invalid                                 |
+| `validate`            | `(value: RangeValue<DateValue> \| null) => ValidationError \| true \| null \| undefined` | -          | Custom validation function                                                  |
+| `validationBehavior`  | `"native" \| "aria"`                                                                     | `"native"` | Whether to use native HTML form validation or ARIA-only                     |
+| `calendarProps`       | `RangeCalendarProps<T>`                                                                  | -          | Props forwarded to the internal RangeCalendar component                     |
+| `calendarButtonProps` | `ButtonProps`                                                                            | -          | Additional props spread to the calendar trigger button (escape hatch)       |
+| `popoverProps`        | `PopoverProps`                                                                           | -          | Props forwarded to the internal Popover component                           |
+| `classNames`          | `SlotsToClasses<DateRangePickerSlots> & { calendar?: SlotsToClasses<CalendarSlots> }`    | -          | Custom Tailwind classes for each slot, including nested RangeCalendar slots |
 
 _Inherits all remaining props from React Aria's [DateRangePicker](https://react-aria.adobe.com/DateRangePicker). Notable ones: `autoFocus`, `granularity`, `hideTimeZone`, `hourCycle`, `pageBehavior`, `allowsNonContiguousRanges`._

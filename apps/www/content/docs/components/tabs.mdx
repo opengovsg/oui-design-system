@@ -202,61 +202,61 @@ Tabs uses `className` directly on each sub-component rather than a single top-le
 
 ### Tabs
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `children` | `ReactNode` | - | The `TabList` and `TabPanel` elements |
-| `selectedKey` | `Key \| null` | - | The currently selected tab key (controlled) |
-| `defaultSelectedKey` | `Key` | - | The initially selected tab key (uncontrolled) |
-| `onSelectionChange` | `(key: Key) => void` | - | Called when the selected tab changes |
-| `isDisabled` | `boolean` | `false` | Whether all tabs are disabled |
-| `disabledKeys` | `Iterable<Key>` | - | Keys of individual tabs to disable |
-| `keyboardActivation` | `"automatic" \| "manual"` | `"automatic"` | Whether selection follows focus (`"automatic"`) or requires Enter/Space (`"manual"`) |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | The layout direction of the tab list |
-| `variant` | `"underlined" \| "bordered"` | `"underlined"` | The visual style of tabs |
-| `prominence` | `"strong" \| "normal"` | `"strong"` | The visual weight of tab text (underlined variant only) |
-| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | The size of the tabs |
-| `className` | `string` | - | Additional class added to the root container |
+| Prop                 | Type                           | Default        | Description                                                                          |
+| -------------------- | ------------------------------ | -------------- | ------------------------------------------------------------------------------------ |
+| `children`           | `ReactNode`                    | -              | The `TabList` and `TabPanel` elements                                                |
+| `selectedKey`        | `Key \| null`                  | -              | The currently selected tab key (controlled)                                          |
+| `defaultSelectedKey` | `Key`                          | -              | The initially selected tab key (uncontrolled)                                        |
+| `onSelectionChange`  | `(key: Key) => void`           | -              | Called when the selected tab changes                                                 |
+| `isDisabled`         | `boolean`                      | `false`        | Whether all tabs are disabled                                                        |
+| `disabledKeys`       | `Iterable<Key>`                | -              | Keys of individual tabs to disable                                                   |
+| `keyboardActivation` | `"automatic" \| "manual"`      | `"automatic"`  | Whether selection follows focus (`"automatic"`) or requires Enter/Space (`"manual"`) |
+| `orientation`        | `"horizontal" \| "vertical"`   | `"horizontal"` | The layout direction of the tab list                                                 |
+| `variant`            | `"underlined" \| "bordered"`   | `"underlined"` | The visual style of tabs                                                             |
+| `prominence`         | `"strong" \| "normal"`         | `"strong"`     | The visual weight of tab text (underlined variant only)                              |
+| `size`               | `"xs" \| "sm" \| "md" \| "lg"` | `"md"`         | The size of the tabs                                                                 |
+| `className`          | `string`                       | -              | Additional class added to the root container                                         |
 
 _Inherits all remaining props from React Aria's [Tabs](https://react-aria.adobe.com/Tabs). Notable ones: `id`, `aria-label`, `aria-labelledby`, `autoFocus`._
 
 ### TabList
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `children` | `ReactNode \| ((item: T) => ReactNode)` | - | Static `Tab` children or a render function for dynamic items |
-| `items` | `Iterable<T>` | - | The list of items for a dynamic collection |
-| `aria-label` | `string` | - | Labels the tab group for assistive technology (required when no visible label exists) |
-| `variant` | `"underlined" \| "bordered"` | `"underlined"` | Overrides the variant from `Tabs` context |
-| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Overrides the orientation from `Tabs` context |
-| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | Overrides the size from `Tabs` context |
-| `className` | `string` | - | Additional class added to the tablist element |
+| Prop          | Type                                    | Default        | Description                                                                           |
+| ------------- | --------------------------------------- | -------------- | ------------------------------------------------------------------------------------- |
+| `children`    | `ReactNode \| ((item: T) => ReactNode)` | -              | Static `Tab` children or a render function for dynamic items                          |
+| `items`       | `Iterable<T>`                           | -              | The list of items for a dynamic collection                                            |
+| `aria-label`  | `string`                                | -              | Labels the tab group for assistive technology (required when no visible label exists) |
+| `variant`     | `"underlined" \| "bordered"`            | `"underlined"` | Overrides the variant from `Tabs` context                                             |
+| `orientation` | `"horizontal" \| "vertical"`            | `"horizontal"` | Overrides the orientation from `Tabs` context                                         |
+| `size`        | `"xs" \| "sm" \| "md" \| "lg"`          | `"md"`         | Overrides the size from `Tabs` context                                                |
+| `className`   | `string`                                | -              | Additional class added to the tablist element                                         |
 
 _Inherits all remaining props from React Aria's [TabList](https://react-aria.adobe.com/Tabs#tablist). Notable ones: `aria-labelledby`, `dependencies`._
 
 ### Tab
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `id` | `Key` | - | A unique identifier for the tab; links it to the matching `TabPanel` |
-| `children` | `ReactNode \| ((renderProps: TabRenderProps) => ReactNode)` | - | The tab label content, or a render function receiving render props |
-| `textValue` | `string` | - | Plain-text value for typeahead; required when `children` is not a plain string |
-| `isDisabled` | `boolean` | `false` | Whether this specific tab is disabled |
-| `startContent` | `ReactNode` | - | Element rendered to the left of the tab label (e.g., an icon) |
-| `endContent` | `ReactNode` | - | Element rendered to the right of the tab label (e.g., an icon or badge) |
-| `variant` | `"underlined" \| "bordered"` | `"underlined"` | Overrides the variant from `Tabs` context |
-| `prominence` | `"strong" \| "normal"` | `"strong"` | Overrides the prominence from `Tabs` context |
-| `size` | `"xs" \| "sm" \| "md" \| "lg"` | `"md"` | Overrides the size from `Tabs` context |
-| `className` | `string \| ((renderProps: TabRenderProps) => string)` | - | Class or render function for state-based styling |
+| Prop           | Type                                                        | Default        | Description                                                                    |
+| -------------- | ----------------------------------------------------------- | -------------- | ------------------------------------------------------------------------------ |
+| `id`           | `Key`                                                       | -              | A unique identifier for the tab; links it to the matching `TabPanel`           |
+| `children`     | `ReactNode \| ((renderProps: TabRenderProps) => ReactNode)` | -              | The tab label content, or a render function receiving render props             |
+| `textValue`    | `string`                                                    | -              | Plain-text value for typeahead; required when `children` is not a plain string |
+| `isDisabled`   | `boolean`                                                   | `false`        | Whether this specific tab is disabled                                          |
+| `startContent` | `ReactNode`                                                 | -              | Element rendered to the left of the tab label (e.g., an icon)                  |
+| `endContent`   | `ReactNode`                                                 | -              | Element rendered to the right of the tab label (e.g., an icon or badge)        |
+| `variant`      | `"underlined" \| "bordered"`                                | `"underlined"` | Overrides the variant from `Tabs` context                                      |
+| `prominence`   | `"strong" \| "normal"`                                      | `"strong"`     | Overrides the prominence from `Tabs` context                                   |
+| `size`         | `"xs" \| "sm" \| "md" \| "lg"`                              | `"md"`         | Overrides the size from `Tabs` context                                         |
+| `className`    | `string \| ((renderProps: TabRenderProps) => string)`       | -              | Class or render function for state-based styling                               |
 
 _Inherits all remaining props from React Aria's [Tab](https://react-aria.adobe.com/Tabs#tab). Notable ones: `href`, `target`, `rel` (router link support)._
 
 ### TabPanel
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `id` | `Key` | - | Must match the `id` of the corresponding `Tab` |
-| `children` | `ReactNode` | - | The panel content |
-| `shouldForceMount` | `boolean` | `false` | Whether to keep the panel in the DOM when not selected (useful for preserving state) |
-| `className` | `string \| ((renderProps: TabPanelRenderProps) => string)` | - | Class or render function for state-based styling |
+| Prop               | Type                                                       | Default | Description                                                                          |
+| ------------------ | ---------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------ |
+| `id`               | `Key`                                                      | -       | Must match the `id` of the corresponding `Tab`                                       |
+| `children`         | `ReactNode`                                                | -       | The panel content                                                                    |
+| `shouldForceMount` | `boolean`                                                  | `false` | Whether to keep the panel in the DOM when not selected (useful for preserving state) |
+| `className`        | `string \| ((renderProps: TabPanelRenderProps) => string)` | -       | Class or render function for state-based styling                                     |
 
 _Inherits all remaining props from React Aria's [TabPanel](https://react-aria.adobe.com/Tabs#tabpanel). Notable ones: `aria-label`, `id`._

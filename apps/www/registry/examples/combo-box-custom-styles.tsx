@@ -1,3 +1,5 @@
+"use client"
+
 import { ComboBox, ComboBoxItem } from "@opengovsg/oui"
 
 export default function ComboBoxCustomStyles() {

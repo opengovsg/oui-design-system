@@ -188,25 +188,25 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Calendar
 
-| Prop                              | Type                                                        | Default | Description                                                                                        |
-| --------------------------------- | ----------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
-| `value`                           | `DateValue \| null`                                         | -       | The selected date (controlled)                                                                     |
-| `defaultValue`                    | `DateValue \| null`                                         | -       | The default selected date (uncontrolled)                                                           |
-| `onChange`                        | `(value: DateValue \| null) => void`                        | -       | Called when the selected date changes                                                              |
-| `isDisabled`                      | `boolean`                                                   | `false` | Whether the calendar is disabled                                                                   |
-| `isReadOnly`                      | `boolean`                                                   | `false` | Whether the calendar is read-only                                                                  |
-| `isInvalid`                       | `boolean`                                                   | `false` | Whether the calendar should display as invalid                                                     |
-| `errorMessage`                    | `string`                                                    | -       | Error message to display when the calendar is in an invalid state                                  |
-| `minValue`                        | `DateValue`                                                 | -       | The minimum selectable date; dates before this are disabled                                        |
-| `maxValue`                        | `DateValue`                                                 | -       | The maximum selectable date; dates after this are disabled                                         |
-| `isDateUnavailable`               | `(date: DateValue) => boolean`                              | -       | A function that returns `true` for dates that should be unavailable (focusable but not selectable) |
-| `visibleDuration`                 | `DateDuration`                                              | -       | The number of months (or days/weeks) displayed at once. Going above 3 months is not recommended    |
-| `pageBehavior`                    | `"single" \| "visible"`                                     | -       | Whether paginating advances by one month (`"single"`) or by the full visible range (`"visible"`)   |
-| `firstDayOfWeek`                  | `"sun" \| "mon" \| "tue" \| "wed" \| "thu" \| "fri" \| "sat"` | -    | Override the first day of the week (defaults to locale)                                            |
-| `offsetMonths`                    | `number`                                                    | `0`     | Month offset applied to the header of this grid pane when multiple months are displayed            |
-| `showTodayButton`                 | `boolean`                                                   | `true`  | Whether to show the "Today" button below the calendar grid                                         |
-| `shouldSetDateOnTodayButtonClick` | `boolean`                                                   | `false` | If `true`, clicking "Today" selects today's date; if `false`, it only moves focus to today         |
-| `bottomContent`                   | `ReactNode`                                                 | -       | Custom content rendered below the calendar grid, replaces the "Today" button when provided         |
-| `classNames`                      | `SlotsToClasses<CalendarSlots>`                             | -       | Custom Tailwind classes for each calendar slot                                                     |
+| Prop                              | Type                                                          | Default | Description                                                                                        |
+| --------------------------------- | ------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `value`                           | `DateValue \| null`                                           | -       | The selected date (controlled)                                                                     |
+| `defaultValue`                    | `DateValue \| null`                                           | -       | The default selected date (uncontrolled)                                                           |
+| `onChange`                        | `(value: DateValue \| null) => void`                          | -       | Called when the selected date changes                                                              |
+| `isDisabled`                      | `boolean`                                                     | `false` | Whether the calendar is disabled                                                                   |
+| `isReadOnly`                      | `boolean`                                                     | `false` | Whether the calendar is read-only                                                                  |
+| `isInvalid`                       | `boolean`                                                     | `false` | Whether the calendar should display as invalid                                                     |
+| `errorMessage`                    | `string`                                                      | -       | Error message to display when the calendar is in an invalid state                                  |
+| `minValue`                        | `DateValue`                                                   | -       | The minimum selectable date; dates before this are disabled                                        |
+| `maxValue`                        | `DateValue`                                                   | -       | The maximum selectable date; dates after this are disabled                                         |
+| `isDateUnavailable`               | `(date: DateValue) => boolean`                                | -       | A function that returns `true` for dates that should be unavailable (focusable but not selectable) |
+| `visibleDuration`                 | `DateDuration`                                                | -       | The number of months (or days/weeks) displayed at once. Going above 3 months is not recommended    |
+| `pageBehavior`                    | `"single" \| "visible"`                                       | -       | Whether paginating advances by one month (`"single"`) or by the full visible range (`"visible"`)   |
+| `firstDayOfWeek`                  | `"sun" \| "mon" \| "tue" \| "wed" \| "thu" \| "fri" \| "sat"` | -       | Override the first day of the week (defaults to locale)                                            |
+| `offsetMonths`                    | `number`                                                      | `0`     | Month offset applied to the header of this grid pane when multiple months are displayed            |
+| `showTodayButton`                 | `boolean`                                                     | `true`  | Whether to show the "Today" button below the calendar grid                                         |
+| `shouldSetDateOnTodayButtonClick` | `boolean`                                                     | `false` | If `true`, clicking "Today" selects today's date; if `false`, it only moves focus to today         |
+| `bottomContent`                   | `ReactNode`                                                   | -       | Custom content rendered below the calendar grid, replaces the "Today" button when provided         |
+| `classNames`                      | `SlotsToClasses<CalendarSlots>`                               | -       | Custom Tailwind classes for each calendar slot                                                     |
 
 _Inherits all remaining props from React Aria's [Calendar](https://react-aria.adobe.com/Calendar). Notable ones: `autoFocus`, `focusedValue`, `onFocusChange`, `weekdayStyle`._

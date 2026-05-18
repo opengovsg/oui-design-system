@@ -152,66 +152,66 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Pagination
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `total` | `number` | `1` | The total number of pages |
-| `page` | `number` | - | The controlled active page |
-| `initialPage` | `number` | `1` | The active page on initial render (uncontrolled) |
-| `onChange` | `(page: number) => void` | - | Called when the active page changes |
-| `siblings` | `number` | `1` | Number of page buttons shown on each side of the active page |
-| `boundaries` | `number` | `1` | Number of page buttons shown at the start and end of the range |
-| `dotsJump` | `number` | `5` | Pages added or subtracted when an ellipsis button is clicked |
-| `loop` | `boolean` | `false` | Whether the pagination wraps from last page to first and vice versa |
-| `showControls` | `boolean` | `false` | Whether to show prev and next arrow buttons |
-| `isCompact` | `boolean` | `false` | Whether to use a compact (less-padded) item layout |
-| `isDisabled` | `boolean` | `false` | Whether all pagination items are disabled |
-| `renderItem` | `(props: PaginationItemRenderProps) => ReactNode` | - | Render function for a custom item; receives render-prop state (see table below) |
-| `getItemAriaLabel` | `(page?: string \| PaginationItemValue) => string` | - | Override the default `aria-label` computed for each item |
-| `size` | `"sm" \| "md" \| "lg"` | `"md"` | The size of each page button |
-| `color` | `"main" \| "neutral" \| "critical" \| "warning" \| "success"` | `"neutral"` | The color of the animated cursor |
-| `radius` | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"sm"` | The border-radius of page buttons and the cursor |
-| `variant` | `"light"` | `"light"` | Visual variant (only `"light"` is available) |
-| `disableCursorAnimation` | `boolean` | `false` | Whether to hide the sliding cursor animation |
-| `disableAnimation` | `boolean` | `false` | Whether to disable all CSS transitions |
-| `classNames` | `SlotsToClasses<PaginationSlots>` | - | Custom Tailwind classes keyed by slot name |
-| `className` | `string` | - | Additional class added to the `base` slot |
+| Prop                     | Type                                                          | Default     | Description                                                                     |
+| ------------------------ | ------------------------------------------------------------- | ----------- | ------------------------------------------------------------------------------- |
+| `total`                  | `number`                                                      | `1`         | The total number of pages                                                       |
+| `page`                   | `number`                                                      | -           | The controlled active page                                                      |
+| `initialPage`            | `number`                                                      | `1`         | The active page on initial render (uncontrolled)                                |
+| `onChange`               | `(page: number) => void`                                      | -           | Called when the active page changes                                             |
+| `siblings`               | `number`                                                      | `1`         | Number of page buttons shown on each side of the active page                    |
+| `boundaries`             | `number`                                                      | `1`         | Number of page buttons shown at the start and end of the range                  |
+| `dotsJump`               | `number`                                                      | `5`         | Pages added or subtracted when an ellipsis button is clicked                    |
+| `loop`                   | `boolean`                                                     | `false`     | Whether the pagination wraps from last page to first and vice versa             |
+| `showControls`           | `boolean`                                                     | `false`     | Whether to show prev and next arrow buttons                                     |
+| `isCompact`              | `boolean`                                                     | `false`     | Whether to use a compact (less-padded) item layout                              |
+| `isDisabled`             | `boolean`                                                     | `false`     | Whether all pagination items are disabled                                       |
+| `renderItem`             | `(props: PaginationItemRenderProps) => ReactNode`             | -           | Render function for a custom item; receives render-prop state (see table below) |
+| `getItemAriaLabel`       | `(page?: string \| PaginationItemValue) => string`            | -           | Override the default `aria-label` computed for each item                        |
+| `size`                   | `"sm" \| "md" \| "lg"`                                        | `"md"`      | The size of each page button                                                    |
+| `color`                  | `"main" \| "neutral" \| "critical" \| "warning" \| "success"` | `"neutral"` | The color of the animated cursor                                                |
+| `radius`                 | `"none" \| "sm" \| "md" \| "lg" \| "full"`                    | `"sm"`      | The border-radius of page buttons and the cursor                                |
+| `variant`                | `"light"`                                                     | `"light"`   | Visual variant (only `"light"` is available)                                    |
+| `disableCursorAnimation` | `boolean`                                                     | `false`     | Whether to hide the sliding cursor animation                                    |
+| `disableAnimation`       | `boolean`                                                     | `false`     | Whether to disable all CSS transitions                                          |
+| `classNames`             | `SlotsToClasses<PaginationSlots>`                             | -           | Custom Tailwind classes keyed by slot name                                      |
+| `className`              | `string`                                                      | -           | Additional class added to the `base` slot                                       |
 
 #### `renderItem` render-prop state (`PaginationItemRenderProps`)
 
 When using `renderItem`, the function is called once per item in the computed range with the following object:
 
-| Property | Type | Description |
-| -------- | ---- | ----------- |
-| `value` | `number \| "dots" \| "prev" \| "next"` | The item's logical value — a page number or a `PaginationItemType` sentinel |
-| `index` | `number` | Zero-based position of this item in the rendered range array |
-| `page` | `number` | Calculated page position (includes dots positions) |
-| `total` | `number` | Total number of pages |
-| `activePage` | `number` | Currently active page number |
-| `isActive` | `boolean` | Whether this item is the currently active page |
-| `isBefore` | `boolean` | Whether this item is positioned before the active page |
-| `isFirst` | `boolean` | Whether this item is the first in the range |
-| `isLast` | `boolean` | Whether this item is the last in the range |
-| `isNext` | `boolean` | Whether this item is the next-page control |
-| `isPrevious` | `boolean` | Whether this item is the prev-page control |
-| `dotsJump` | `number` | Pages added/subtracted when this item (if it is dots) is activated |
-| `className` | `string` | Pre-computed slot class string to apply to the rendered element |
-| `children` | `ReactNode` | Default content (the page number or icon) |
-| `onNext` | `() => void` | Callback to advance to the next page |
-| `onPrevious` | `() => void` | Callback to go to the previous page |
-| `setPage` | `(page: number) => void` | Callback to jump to a specific page |
-| `onPress` | `(e: PressEvent) => void \| undefined` | Press handler for the item |
-| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | Retrieves the `aria-label` for the item |
+| Property       | Type                                                  | Description                                                                 |
+| -------------- | ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| `value`        | `number \| "dots" \| "prev" \| "next"`                | The item's logical value — a page number or a `PaginationItemType` sentinel |
+| `index`        | `number`                                              | Zero-based position of this item in the rendered range array                |
+| `page`         | `number`                                              | Calculated page position (includes dots positions)                          |
+| `total`        | `number`                                              | Total number of pages                                                       |
+| `activePage`   | `number`                                              | Currently active page number                                                |
+| `isActive`     | `boolean`                                             | Whether this item is the currently active page                              |
+| `isBefore`     | `boolean`                                             | Whether this item is positioned before the active page                      |
+| `isFirst`      | `boolean`                                             | Whether this item is the first in the range                                 |
+| `isLast`       | `boolean`                                             | Whether this item is the last in the range                                  |
+| `isNext`       | `boolean`                                             | Whether this item is the next-page control                                  |
+| `isPrevious`   | `boolean`                                             | Whether this item is the prev-page control                                  |
+| `dotsJump`     | `number`                                              | Pages added/subtracted when this item (if it is dots) is activated          |
+| `className`    | `string`                                              | Pre-computed slot class string to apply to the rendered element             |
+| `children`     | `ReactNode`                                           | Default content (the page number or icon)                                   |
+| `onNext`       | `() => void`                                          | Callback to advance to the next page                                        |
+| `onPrevious`   | `() => void`                                          | Callback to go to the previous page                                         |
+| `setPage`      | `(page: number) => void`                              | Callback to jump to a specific page                                         |
+| `onPress`      | `(e: PressEvent) => void \| undefined`                | Press handler for the item                                                  |
+| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | Retrieves the `aria-label` for the item                                     |
 
 ### PaginationItem
 
 `PaginationItem` is used internally by `Pagination` and is rarely needed directly. Use it when building fully custom pagination with `usePagination`.
 
-| Prop | Type | Default | Description |
-| ---- | ---- | ------- | ----------- |
-| `value` | `number \| "dots" \| "prev" \| "next"` | - | The logical value of this item |
-| `isActive` | `boolean` | `false` | Whether this item is the currently active page |
-| `isDisabled` | `boolean` | `false` | Whether this item is disabled |
-| `onPress` | `(e: PressEvent) => void` | - | Called when the item is pressed |
-| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | - | Function that returns the `aria-label` for this item |
+| Prop           | Type                                                  | Default | Description                                          |
+| -------------- | ----------------------------------------------------- | ------- | ---------------------------------------------------- |
+| `value`        | `number \| "dots" \| "prev" \| "next"`                | -       | The logical value of this item                       |
+| `isActive`     | `boolean`                                             | `false` | Whether this item is the currently active page       |
+| `isDisabled`   | `boolean`                                             | `false` | Whether this item is disabled                        |
+| `onPress`      | `(e: PressEvent) => void`                             | -       | Called when the item is pressed                      |
+| `getAriaLabel` | `(page?: PaginationItemValue) => string \| undefined` | -       | Function that returns the `aria-label` for this item |
 
 _Accepts standard HTML `<li>` props (e.g., `className`, `aria-label`)._

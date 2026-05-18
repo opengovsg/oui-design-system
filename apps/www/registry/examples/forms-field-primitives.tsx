@@ -1,3 +1,5 @@
+"use client"
+
 import { Search } from "lucide-react"
 import { Input, TextField } from "react-aria-components"
 

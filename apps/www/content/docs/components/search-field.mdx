@@ -143,28 +143,28 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### SearchField
 
-| Prop | Type | Default | Description |
-| --- | --- | --- | --- |
-| `label` | `ReactNode` | - | The visible label for the field |
-| `description` | `ReactNode` | - | Description text rendered below the input |
-| `errorMessage` | `ReactNode \| ((v: ValidationResult) => ReactNode)` | - | The error to display when invalid; accepts a render prop for [custom error messages](https://react-aria.adobe.com/SearchField#advanced-customization) |
-| `value` | `string` | - | The current value (controlled) |
-| `defaultValue` | `string` | - | The default value (uncontrolled) |
-| `onChange` | `(value: string) => void` | - | Called when the value changes |
-| `onSubmit` | `(value: string) => void` | - | Called when the user presses Enter |
-| `onClear` | `() => void` | - | Called when the user clears the field |
-| `isDisabled` | `boolean` | `false` | Whether the field is disabled |
-| `isReadOnly` | `boolean` | `false` | Whether the field is read-only |
-| `isRequired` | `boolean` | `false` | Whether the field is required |
-| `isInvalid` | `boolean` | `false` | Whether the field should display as invalid |
-| `validate` | `(value: string) => ValidationError \| true \| null \| undefined` | - | Custom validation function |
-| `validationBehavior` | `"native" \| "aria"` | `"native"` | Native HTML validation vs ARIA-only |
-| `size` | `"xs" \| "sm" \| "md"` | `"md"` | The size of the field |
-| `variant` | `"outline" \| "unstyled"` | `"outline"` | The visual variant of the input |
-| `actionElement` | `ReactNode` | - | An element rendered beside the input group (e.g., a search button) |
-| `searchIcon` | `ReactNode \| null` | `<SearchIcon />` | Custom leading icon, or `null` to hide |
-| `clearIcon` | `ReactNode` | `<XIcon />` | Custom clear-button icon (e.g., a spinner during async search) |
-| `inputProps` | `Partial<InputProps>` | - | Additional props forwarded to the underlying `<input>` (e.g., `placeholder`) |
-| `classNames` | `SlotsToClasses<SearchFieldSlots>` | - | Per-slot Tailwind classes for custom styling |
+| Prop                 | Type                                                              | Default          | Description                                                                                                                                           |
+| -------------------- | ----------------------------------------------------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `label`              | `ReactNode`                                                       | -                | The visible label for the field                                                                                                                       |
+| `description`        | `ReactNode`                                                       | -                | Description text rendered below the input                                                                                                             |
+| `errorMessage`       | `ReactNode \| ((v: ValidationResult) => ReactNode)`               | -                | The error to display when invalid; accepts a render prop for [custom error messages](https://react-aria.adobe.com/SearchField#advanced-customization) |
+| `value`              | `string`                                                          | -                | The current value (controlled)                                                                                                                        |
+| `defaultValue`       | `string`                                                          | -                | The default value (uncontrolled)                                                                                                                      |
+| `onChange`           | `(value: string) => void`                                         | -                | Called when the value changes                                                                                                                         |
+| `onSubmit`           | `(value: string) => void`                                         | -                | Called when the user presses Enter                                                                                                                    |
+| `onClear`            | `() => void`                                                      | -                | Called when the user clears the field                                                                                                                 |
+| `isDisabled`         | `boolean`                                                         | `false`          | Whether the field is disabled                                                                                                                         |
+| `isReadOnly`         | `boolean`                                                         | `false`          | Whether the field is read-only                                                                                                                        |
+| `isRequired`         | `boolean`                                                         | `false`          | Whether the field is required                                                                                                                         |
+| `isInvalid`          | `boolean`                                                         | `false`          | Whether the field should display as invalid                                                                                                           |
+| `validate`           | `(value: string) => ValidationError \| true \| null \| undefined` | -                | Custom validation function                                                                                                                            |
+| `validationBehavior` | `"native" \| "aria"`                                              | `"native"`       | Native HTML validation vs ARIA-only                                                                                                                   |
+| `size`               | `"xs" \| "sm" \| "md"`                                            | `"md"`           | The size of the field                                                                                                                                 |
+| `variant`            | `"outline" \| "unstyled"`                                         | `"outline"`      | The visual variant of the input                                                                                                                       |
+| `actionElement`      | `ReactNode`                                                       | -                | An element rendered beside the input group (e.g., a search button)                                                                                    |
+| `searchIcon`         | `ReactNode \| null`                                               | `<SearchIcon />` | Custom leading icon, or `null` to hide                                                                                                                |
+| `clearIcon`          | `ReactNode`                                                       | `<XIcon />`      | Custom clear-button icon (e.g., a spinner during async search)                                                                                        |
+| `inputProps`         | `Partial<InputProps>`                                             | -                | Additional props forwarded to the underlying `<input>` (e.g., `placeholder`)                                                                          |
+| `classNames`         | `SlotsToClasses<SearchFieldSlots>`                                | -                | Per-slot Tailwind classes for custom styling                                                                                                          |
 
-*Inherits all remaining props from React Aria's [SearchField](https://react-aria.adobe.com/SearchField). Notable ones: `autoFocus`, `excludeFromTabOrder`, `name`, `autoComplete`.*
+_Inherits all remaining props from React Aria's [SearchField](https://react-aria.adobe.com/SearchField). Notable ones: `autoFocus`, `excludeFromTabOrder`, `name`, `autoComplete`._

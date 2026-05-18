@@ -103,18 +103,18 @@ You can customize the `Badge` component by passing custom Tailwind CSS classes t
 
 ### Badge
 
-| Prop           | Type                                                                           | Default   | Description                                                                         |
-| -------------- | ------------------------------------------------------------------------------ | --------- | ----------------------------------------------------------------------------------- |
-| `children`     | `ReactNode`                                                                    | -         | The badge label or content                                                          |
-| `startContent` | `ReactNode`                                                                    | -         | Content rendered to the left of the badge label                                     |
-| `endContent`   | `ReactNode`                                                                    | -         | Content rendered to the right of the badge label; replaces the close button icon when `onClose` is also provided |
-| `onClose`      | `(e: PressEvent) => void`                                                      | -         | If provided, renders a close button on the right side of the badge                  |
-| `variant`      | `"solid" \| "subtle" \| "outline" \| "dot"`                                   | `"solid"` | The visual style variant                                                            |
-| `color`        | `"main" \| "sub" \| "neutral" \| "critical" \| "warning" \| "success"`         | `"main"`  | The color scheme                                                                    |
-| `size`         | `"xs" \| "sm" \| "md"`                                                         | `"sm"`    | The size of the badge                                                               |
-| `radius`       | `"none" \| "sm" \| "md" \| "lg" \| "full"`                                    | `"sm"`    | The border radius                                                                   |
-| `isDisabled`   | `boolean`                                                                      | `false`   | Whether the badge is in a disabled state                                            |
-| `classNames`   | `SlotsToClasses<BadgeSlots \| "closeButton">`                                  | -         | Custom Tailwind classes for component slots                                         |
-| `className`    | `string`                                                                       | -         | Additional class applied to the base slot                                           |
+| Prop           | Type                                                                   | Default   | Description                                                                                                      |
+| -------------- | ---------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `children`     | `ReactNode`                                                            | -         | The badge label or content                                                                                       |
+| `startContent` | `ReactNode`                                                            | -         | Content rendered to the left of the badge label                                                                  |
+| `endContent`   | `ReactNode`                                                            | -         | Content rendered to the right of the badge label; replaces the close button icon when `onClose` is also provided |
+| `onClose`      | `(e: PressEvent) => void`                                              | -         | If provided, renders a close button on the right side of the badge                                               |
+| `variant`      | `"solid" \| "subtle" \| "outline" \| "dot"`                            | `"solid"` | The visual style variant                                                                                         |
+| `color`        | `"main" \| "sub" \| "neutral" \| "critical" \| "warning" \| "success"` | `"main"`  | The color scheme                                                                                                 |
+| `size`         | `"xs" \| "sm" \| "md"`                                                 | `"sm"`    | The size of the badge                                                                                            |
+| `radius`       | `"none" \| "sm" \| "md" \| "lg" \| "full"`                             | `"sm"`    | The border radius                                                                                                |
+| `isDisabled`   | `boolean`                                                              | `false`   | Whether the badge is in a disabled state                                                                         |
+| `classNames`   | `SlotsToClasses<BadgeSlots \| "closeButton">`                          | -         | Custom Tailwind classes for component slots                                                                      |
+| `className`    | `string`                                                               | -         | Additional class applied to the base slot                                                                        |
 
 > `ref` is React's standard ref forwarding to the underlying `<div>` element; not surfaced as a separate doc-table prop.

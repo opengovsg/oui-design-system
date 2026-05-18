@@ -1,3 +1,5 @@
+"use client"
+
 import { Form } from "react-aria-components"
 
 import { Button, TextField } from "@opengovsg/oui"

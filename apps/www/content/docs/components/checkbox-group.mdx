@@ -109,13 +109,12 @@ Slots are named regions of the component you can target with custom Tailwind cla
 You can customize the `Checkbox` and `CheckboxGroup` components by passing custom Tailwind CSS classes to the component slots via the `classNames` prop.
 
 ```tsx
-<CheckboxGroup
-  label="Select cities"
-  classNames={{ base: "gap-4" }}
->
+<CheckboxGroup label="Select cities" classNames={{ base: "gap-4" }}>
   <Checkbox
     value="sf"
-    classNames={{ base: "border rounded-lg border-gray-200 p-4 data-[selected]:border-interaction-main-default" }}
+    classNames={{
+      base: "border rounded-lg border-gray-200 p-4 data-[selected]:border-interaction-main-default",
+    }}
   >
     San Francisco
   </Checkbox>
@@ -126,25 +125,25 @@ You can customize the `Checkbox` and `CheckboxGroup` components by passing custo
 
 ### CheckboxGroup
 
-| Prop                 | Type                                                                 | Default    | Description                                                      |
-| -------------------- | -------------------------------------------------------------------- | ---------- | ---------------------------------------------------------------- |
-| `children`           | `ReactNode`                                                          | -          | The `Checkbox` items in the group                                |
-| `label`              | `string`                                                             | -          | The visible label for the group                                  |
-| `value`              | `string[]`                                                           | -          | The currently selected values (controlled)                       |
-| `defaultValue`       | `string[]`                                                           | -          | The default selected values (uncontrolled)                       |
-| `onChange`           | `(value: string[]) => void`                                          | -          | Called when the selected values change                           |
-| `isDisabled`         | `boolean`                                                            | `false`    | Whether the entire group is disabled                             |
-| `isReadOnly`         | `boolean`                                                            | `false`    | Whether the group is read-only                                   |
-| `isRequired`         | `boolean`                                                            | `false`    | Whether the group is required                                    |
-| `isInvalid`          | `boolean`                                                            | `false`    | Whether the group should display as invalid                      |
-| `validate`           | `(value: string[]) => ValidationError \| true \| null \| undefined`  | -          | Custom validation function                                       |
-| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`               | -          | Error message to display when invalid                            |
-| `validationBehavior` | `"native" \| "aria"`                                                 | `"native"` | Whether to use native HTML form validation or ARIA-only          |
-| `size`               | `"xs" \| "sm" \| "md"`                                               | `"md"`     | The size of all child Checkbox items                             |
-| `description`        | `string`                                                             | -          | Helper text shown below the checkbox items                       |
-| `classNames`         | `SlotsToClasses<"base" \| "label" \| "description"> & { error?: SlotsToClasses<FieldErrorSlots> }` | - | Custom Tailwind classes for component slots |
-| `name`               | `string`                                                             | -          | The HTML `name` attribute; used for form submission              |
-| `orientation`        | `"horizontal" \| "vertical"`                                        | `"vertical"` | The layout orientation of the checkbox items                   |
+| Prop                 | Type                                                                                               | Default      | Description                                             |
+| -------------------- | -------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------------------- |
+| `children`           | `ReactNode`                                                                                        | -            | The `Checkbox` items in the group                       |
+| `label`              | `string`                                                                                           | -            | The visible label for the group                         |
+| `value`              | `string[]`                                                                                         | -            | The currently selected values (controlled)              |
+| `defaultValue`       | `string[]`                                                                                         | -            | The default selected values (uncontrolled)              |
+| `onChange`           | `(value: string[]) => void`                                                                        | -            | Called when the selected values change                  |
+| `isDisabled`         | `boolean`                                                                                          | `false`      | Whether the entire group is disabled                    |
+| `isReadOnly`         | `boolean`                                                                                          | `false`      | Whether the group is read-only                          |
+| `isRequired`         | `boolean`                                                                                          | `false`      | Whether the group is required                           |
+| `isInvalid`          | `boolean`                                                                                          | `false`      | Whether the group should display as invalid             |
+| `validate`           | `(value: string[]) => ValidationError \| true \| null \| undefined`                                | -            | Custom validation function                              |
+| `errorMessage`       | `string \| ((validation: ValidationResult) => string)`                                             | -            | Error message to display when invalid                   |
+| `validationBehavior` | `"native" \| "aria"`                                                                               | `"native"`   | Whether to use native HTML form validation or ARIA-only |
+| `size`               | `"xs" \| "sm" \| "md"`                                                                             | `"md"`       | The size of all child Checkbox items                    |
+| `description`        | `string`                                                                                           | -            | Helper text shown below the checkbox items              |
+| `classNames`         | `SlotsToClasses<"base" \| "label" \| "description"> & { error?: SlotsToClasses<FieldErrorSlots> }` | -            | Custom Tailwind classes for component slots             |
+| `name`               | `string`                                                                                           | -            | The HTML `name` attribute; used for form submission     |
+| `orientation`        | `"horizontal" \| "vertical"`                                                                       | `"vertical"` | The layout orientation of the checkbox items            |
 
 _Inherits all remaining props from React Aria's [CheckboxGroup](https://react-aria.adobe.com/CheckboxGroup). Notable ones: `autoFocus`, `excludeFromTabOrder`, `form`._
 
@@ -160,18 +159,18 @@ When `errorMessage` is a function, it receives a `ValidationResult` object:
 
 ### Checkbox
 
-| Prop              | Type                                                                               | Default | Description                                                     |
-| ----------------- | ---------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------- |
-| `children`        | `ReactNode \| ((renderProps: CheckboxRenderProps) => ReactNode)`                   | -       | The label content, or a render function                         |
-| `value`           | `string`                                                                           | -       | The value included in the group's selected array when checked   |
-| `isDisabled`      | `boolean`                                                                          | `false` | Whether this specific checkbox is disabled                      |
-| `isReadOnly`      | `boolean`                                                                          | `false` | Whether this specific checkbox is read-only                     |
-| `isSelected`      | `boolean`                                                                          | -       | Whether the checkbox is checked (controlled, standalone use)    |
-| `defaultSelected` | `boolean`                                                                          | -       | Whether the checkbox is checked by default (uncontrolled, standalone) |
-| `isIndeterminate` | `boolean`                                                                          | `false` | Whether to show the indeterminate (minus) state                 |
-| `isInvalid`       | `boolean`                                                                          | `false` | Whether this specific checkbox is in an invalid state           |
-| `onChange`        | `(isSelected: boolean) => void`                                                    | -       | Called when the checkbox state changes (standalone use)         |
-| `classNames`      | `SlotsToClassesWithRenderProps<"base" \| "box" \| "icon", CheckboxRenderProps>`    | -       | Custom Tailwind classes for checkbox slots                      |
-| `inputRef`        | `RefObject<HTMLInputElement \| null>`                                              | -       | A ref for the underlying `<input type="checkbox">` element      |
+| Prop              | Type                                                                            | Default | Description                                                           |
+| ----------------- | ------------------------------------------------------------------------------- | ------- | --------------------------------------------------------------------- |
+| `children`        | `ReactNode \| ((renderProps: CheckboxRenderProps) => ReactNode)`                | -       | The label content, or a render function                               |
+| `value`           | `string`                                                                        | -       | The value included in the group's selected array when checked         |
+| `isDisabled`      | `boolean`                                                                       | `false` | Whether this specific checkbox is disabled                            |
+| `isReadOnly`      | `boolean`                                                                       | `false` | Whether this specific checkbox is read-only                           |
+| `isSelected`      | `boolean`                                                                       | -       | Whether the checkbox is checked (controlled, standalone use)          |
+| `defaultSelected` | `boolean`                                                                       | -       | Whether the checkbox is checked by default (uncontrolled, standalone) |
+| `isIndeterminate` | `boolean`                                                                       | `false` | Whether to show the indeterminate (minus) state                       |
+| `isInvalid`       | `boolean`                                                                       | `false` | Whether this specific checkbox is in an invalid state                 |
+| `onChange`        | `(isSelected: boolean) => void`                                                 | -       | Called when the checkbox state changes (standalone use)               |
+| `classNames`      | `SlotsToClassesWithRenderProps<"base" \| "box" \| "icon", CheckboxRenderProps>` | -       | Custom Tailwind classes for checkbox slots                            |
+| `inputRef`        | `RefObject<HTMLInputElement \| null>`                                           | -       | A ref for the underlying `<input type="checkbox">` element            |
 
 _Inherits all remaining props from React Aria's [Checkbox](https://react-aria.adobe.com/Checkbox). Notable ones: `autoFocus`, `id`, `name`, `form`._

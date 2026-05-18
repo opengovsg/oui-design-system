@@ -157,25 +157,25 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Avatar
 
-| Prop          | Type                                       | Default     | Description                                    |
-| ------------- | ------------------------------------------ | ----------- | ---------------------------------------------- |
-| `children`    | `ReactNode`                                | -           | The avatar content (`Avatar.Image` and `Avatar.Fallback`) |
+| Prop          | Type                                       | Default     | Description                                                |
+| ------------- | ------------------------------------------ | ----------- | ---------------------------------------------------------- |
+| `children`    | `ReactNode`                                | -           | The avatar content (`Avatar.Image` and `Avatar.Fallback`)  |
 | `name`        | `string`                                   | -           | The name used for initials generation and image `alt` text |
-| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | `"md"`      | The size of the avatar                         |
-| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"`    | The border radius of the avatar                |
-| `prominence`  | `"strong" \| "subtle"`                     | `"strong"`  | The visual prominence of the avatar            |
-| `color`       | `"primary" \| "white"`                     | `"primary"` | The color scheme of the avatar                 |
-| `getInitials` | `(name: string) => string`                 | -           | Custom function to generate initials from `name` |
-| `classNames`  | `SlotsToClasses<AvatarSlots>`              | -           | Custom Tailwind classes for component slots    |
-| `className`   | `string`                                   | -           | Additional class applied to the base element   |
+| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | `"md"`      | The size of the avatar                                     |
+| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | `"full"`    | The border radius of the avatar                            |
+| `prominence`  | `"strong" \| "subtle"`                     | `"strong"`  | The visual prominence of the avatar                        |
+| `color`       | `"primary" \| "white"`                     | `"primary"` | The color scheme of the avatar                             |
+| `getInitials` | `(name: string) => string`                 | -           | Custom function to generate initials from `name`           |
+| `classNames`  | `SlotsToClasses<AvatarSlots>`              | -           | Custom Tailwind classes for component slots                |
+| `className`   | `string`                                   | -           | Additional class applied to the base element               |
 
 > `ref` is React's standard ref forwarding to the underlying `<span>` element; not surfaced as a separate doc-table prop.
 
 ### Avatar.Image
 
-| Prop  | Type     | Description               |
-| ----- | -------- | ------------------------- |
-| `src` | `string` | The image source URL      |
+| Prop  | Type     | Description                   |
+| ----- | -------- | ----------------------------- |
+| `src` | `string` | The image source URL          |
 | `...` | -        | All native `<img>` attributes |
 
 ### Avatar.Fallback
@@ -186,18 +186,18 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### AvatarGroup
 
-| Prop          | Type                                       | Default | Description                                                                    |
-| ------------- | ------------------------------------------ | ------- | ------------------------------------------------------------------------------ |
-| `children`    | `ReactNode`                                | -       | The `Avatar` components to display                                             |
-| `max`         | `number`                                   | `5`     | Maximum number of visible avatars before overflow                              |
+| Prop          | Type                                       | Default | Description                                                                          |
+| ------------- | ------------------------------------------ | ------- | ------------------------------------------------------------------------------------ |
+| `children`    | `ReactNode`                                | -       | The `Avatar` components to display                                                   |
+| `max`         | `number`                                   | `5`     | Maximum number of visible avatars before overflow                                    |
 | `total`       | `number`                                   | -       | Total count used for calculating overflow (useful when not all avatars are rendered) |
-| `renderCount` | `(count: number) => ReactNode`             | -       | Custom render function for the overflow count element                          |
-| `countProps`  | `Partial<AvatarProps>`                     | -       | Props spread onto the overflow count avatar (e.g., custom `classNames` or `name`) |
-| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | -       | Size applied to all child avatars                                              |
-| `color`       | `"primary" \| "white"`                     | -       | Color applied to all child avatars                                             |
-| `prominence`  | `"strong" \| "subtle"`                     | -       | Prominence applied to all child avatars                                        |
-| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | -       | Radius applied to all child avatars                                            |
-| `classNames`  | `SlotsToClasses<"base" \| "count">`        | -       | Custom Tailwind classes for group slots                                        |
+| `renderCount` | `(count: number) => ReactNode`             | -       | Custom render function for the overflow count element                                |
+| `countProps`  | `Partial<AvatarProps>`                     | -       | Props spread onto the overflow count avatar (e.g., custom `classNames` or `name`)    |
+| `size`        | `"2xs" \| "xs" \| "sm" \| "md"`            | -       | Size applied to all child avatars                                                    |
+| `color`       | `"primary" \| "white"`                     | -       | Color applied to all child avatars                                                   |
+| `prominence`  | `"strong" \| "subtle"`                     | -       | Prominence applied to all child avatars                                              |
+| `radius`      | `"none" \| "sm" \| "md" \| "lg" \| "full"` | -       | Radius applied to all child avatars                                                  |
+| `classNames`  | `SlotsToClasses<"base" \| "count">`        | -       | Custom Tailwind classes for group slots                                              |
 
 ## Templates
 

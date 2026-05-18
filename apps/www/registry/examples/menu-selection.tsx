@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
 import type { Selection } from "react-aria-components"
+import { useState } from "react"
 
 import {
   Button,
   Menu,
-  MenuSection,
   MenuItem,
+  MenuSection,
   MenuTrigger,
 } from "@opengovsg/oui"
 

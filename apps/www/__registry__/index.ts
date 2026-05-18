@@ -2119,6 +2119,30 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/link-with-pseudo-elements.tsx"),
     ),
   },
+  "menu-content-example": {
+    name: "menu-content-example",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-content-example.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/menu-content-example.tsx"),
+    ),
+  },
+  "menu-custom-styles": {
+    name: "menu-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-custom-styles.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-custom-styles.tsx")),
+  },
   "menu-demo": {
     name: "menu-demo",
     description: "",
@@ -2129,6 +2153,63 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/menu-demo.tsx")),
+  },
+  "menu-disabled-items": {
+    name: "menu-disabled-items",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-disabled-items.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/menu-disabled-items.tsx"),
+    ),
+  },
+  "menu-sections": {
+    name: "menu-sections",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-sections.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-sections.tsx")),
+  },
+  "menu-selection": {
+    name: "menu-selection",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-selection.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-selection.tsx")),
+  },
+  "menu-sizes": {
+    name: "menu-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-sizes.tsx")),
+  },
+  "menu-with-icons": {
+    name: "menu-with-icons",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/menu-with-icons.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/menu-with-icons.tsx")),
   },
   "modal-animation": {
     name: "modal-animation",
@@ -3682,6 +3763,17 @@ export const Index: Record<string, RegistryComponent> = {
     component: lazy(
       () => import("@/registry/examples/tabs-with-dynamic-items.tsx"),
     ),
+  },
+  "tabs-with-icons": {
+    name: "tabs-with-icons",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tabs-with-icons.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/tabs-with-icons.tsx")),
   },
   "tabs-with-keyboard-activation": {
     name: "tabs-with-keyboard-activation",

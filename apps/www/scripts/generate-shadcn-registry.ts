@@ -1,7 +1,6 @@
 // apps/www/scripts/generate-shadcn-registry.ts
-import { docsConfig } from "../config/docs.config"
-
 import type { RegistryItem } from "./registry/types"
+import { docsConfig } from "../config/docs.config"
 import { buildCatalog } from "./registry/catalog"
 import { COMPONENT_DESCRIPTIONS } from "./registry/descriptions"
 import { discoverComponents } from "./registry/discover"
