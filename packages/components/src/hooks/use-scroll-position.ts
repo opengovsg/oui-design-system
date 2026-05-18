@@ -90,7 +90,7 @@ export const useScrollPosition = (
         throttleTimeout.current = null
       }
     }
-  }, [elementRef?.current, delay, handler, isEnabled])
+  }, [elementRef, delay, handler, isEnabled])
 
   return position.current
 }

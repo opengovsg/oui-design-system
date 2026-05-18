@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 import { FileDropzone } from "@opengovsg/oui"
 
 export default function FileDropzoneCustomRendering() {
@@ -14,9 +16,12 @@ export default function FileDropzoneCustomRendering() {
         return (
           <div key={file.name} className="mt-4 rounded-lg border p-4">
             <div className="flex items-center gap-4">
-              <img
+              <Image
                 src={objectUrl}
                 alt={file.name}
+                width={80}
+                height={80}
+                unoptimized
                 className="h-20 w-20 rounded object-cover"
                 onLoad={() => URL.revokeObjectURL(objectUrl)}
               />

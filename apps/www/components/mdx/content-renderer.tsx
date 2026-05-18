@@ -1,4 +1,4 @@
-import { useMemo } from "react"
+import { createElement, useMemo } from "react"
 import * as runtime from "react/jsx-runtime"
 import { LRUCache } from "lru-cache"
 
@@ -35,6 +35,8 @@ interface MdxProps {
 }
 
 export const MdxContentRenderer = ({ code, components }: MdxProps) => {
-  const Component = useMdxComponent(code)
-  return <Component components={{ ...mdxComponents, ...components }} />
+  const mdxComponent = useMdxComponent(code)
+  return createElement(mdxComponent, {
+    components: { ...mdxComponents, ...components },
+  })
 }

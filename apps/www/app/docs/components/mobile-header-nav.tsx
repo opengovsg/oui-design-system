@@ -1,4 +1,4 @@
-import { PropsWithChildren, useEffect, useRef, useState } from "react"
+import { PropsWithChildren, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useRoute } from "@/lib/use-route"
@@ -39,14 +39,11 @@ export const MobileHeaderNav = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const pathname = usePathname()
-  const pathnameRef = useRef(pathname)
-
-  useEffect(() => {
-    if (pathnameRef.current !== pathname) {
-      setIsOpen(false)
-    }
-    pathnameRef.current = pathname
-  }, [pathname, setIsOpen])
+  const [prevPathname, setPrevPathname] = useState(pathname)
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname)
+    setIsOpen(false)
+  }
 
   return (
     <DialogTrigger isOpen={isOpen} onOpenChange={setIsOpen}>
