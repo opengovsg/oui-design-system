@@ -1,6 +1,6 @@
 "use client"
 
-import { SVGProps } from "react"
+import type { SVGProps } from "react"
 
 import { PaginationItemType, usePagination } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"

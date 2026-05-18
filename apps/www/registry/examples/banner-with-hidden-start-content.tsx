@@ -1,5 +1,3 @@
-import { SVGProps } from "react"
-
 import { Banner } from "@opengovsg/oui"
 
 export default function BannerWithHiddenStartContent() {

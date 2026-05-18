@@ -1,7 +1,8 @@
 "use client"
 
+import type { DateValue } from "@internationalized/date"
 import { useState } from "react"
-import { DateValue, now } from "@internationalized/date"
+import { now } from "@internationalized/date"
 import { I18nProvider } from "@react-aria/i18n"
 
 import { DatePicker } from "@opengovsg/oui"

@@ -1,6 +1,6 @@
 "use client"
 
-import { now, parseZonedDateTime } from "@internationalized/date"
+import { parseZonedDateTime } from "@internationalized/date"
 
 import { DateRangePicker } from "@opengovsg/oui"
 

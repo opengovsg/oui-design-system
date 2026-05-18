@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react"
+import type { PropsWithChildren } from "react"
 import { X } from "lucide-react"
 import { Dialog, Modal, ModalOverlay } from "react-aria-components"
 

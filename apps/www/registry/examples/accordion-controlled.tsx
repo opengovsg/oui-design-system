@@ -1,7 +1,7 @@
 "use client"
 
+import type { Key } from "react-aria-components"
 import { useState } from "react"
-import { Key } from "react-aria-components"
 
 import {
   Accordion,

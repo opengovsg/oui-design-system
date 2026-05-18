@@ -20,7 +20,7 @@ type RegistryComponent = {
   files?: {
     path: string
   }[]
-  component: React.LazyExoticComponent<React.ComponentType<any>>
+  component: React.LazyExoticComponent<React.ComponentType>
 }
 
 export const Index: Record<string, RegistryComponent> = {

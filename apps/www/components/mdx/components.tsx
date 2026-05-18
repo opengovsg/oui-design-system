@@ -69,7 +69,7 @@ export const mdxComponents = {
     />
   ),
   figcaption: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => {
-    // @ts-ignore
+    // @ts-expect-error -- rehype-pretty-code adds this attribute at runtime
     const hasTitle = props["data-rehype-pretty-code-title"] !== undefined
     return (
       <figcaption
@@ -171,12 +171,12 @@ export const mdxComponents = {
     } & NpmCommands,
   ) => {
     const {
-      __rawString__,
+      __rawString__: _rawString__,
       __npmCommand__,
       __yarnCommand__,
       __pnpmCommand__,
       __bunCommand__,
-      __src__,
+      __src__: _src__,
       ...rest
     } = props
     const isNpmCommand =
@@ -198,7 +198,7 @@ export const mdxComponents = {
     <code
       className={cn(
         "rounded-md font-mono",
-        // @ts-ignore
+        // @ts-expect-error -- rehype-pretty-code adds this attribute at runtime
         !props["data-theme"] &&
           "text-[0.9em] font-semibold before:content-['`'] after:content-['`']",
         className,

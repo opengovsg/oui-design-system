@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { DateValue, now, parseAbsoluteToLocal } from "@internationalized/date"
+import { parseAbsoluteToLocal } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
 import { DatePicker } from "@opengovsg/oui"

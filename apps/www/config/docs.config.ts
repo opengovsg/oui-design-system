@@ -153,4 +153,4 @@ export interface NavItem {
   items?: NavItem[]
 }
 
-export interface FlattenNavItem extends Omit<NavItem, "items"> {}
+export type FlattenNavItem = Omit<NavItem, "items">

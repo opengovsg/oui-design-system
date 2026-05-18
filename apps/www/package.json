@@ -67,6 +67,8 @@
     "@vitest/coverage-v8": "catalog:vitest",
     "eslint": "catalog:",
     "eslint-config-next": "16.1.6",
+    "eslint-plugin-only-warn": "^1.1.0",
+    "eslint-plugin-turbo": "^2.5.4",
     "gray-matter": "^4.0.3",
     "postcss": "^8.5.2",
     "prettier": "catalog:",

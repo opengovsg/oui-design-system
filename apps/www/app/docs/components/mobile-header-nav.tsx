@@ -1,4 +1,5 @@
-import { PropsWithChildren, useState } from "react"
+import type { PropsWithChildren } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useRoute } from "@/lib/use-route"

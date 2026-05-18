@@ -1,5 +1,5 @@
 // apps/www/scripts/registry/classify.ts
-import type { Catalog, LibEntry } from "./types"
+import type { Catalog, ComponentVariant, LibEntry } from "./types"
 
 export type ClassifiedImport =
   | { kind: "external"; pkg: string }
@@ -20,7 +20,7 @@ export type ClassifiedImport =
       /** One bucket per source variant file (keyed by variant component name). */
       variantBuckets: Map<
         string,
-        { variant: import("./types").ComponentVariant; symbols: string[] }
+        { variant: ComponentVariant; symbols: string[] }
       >
       libBuckets: Map<string, { lib: LibEntry; symbols: string[] }>
       leftoverSymbols: string[] // symbols not in variant catalog nor lib catalog
@@ -63,7 +63,7 @@ export function classifyImport(
   if (moduleSpecifier === THEME_PKG) {
     const variantBuckets = new Map<
       string,
-      { variant: import("./types").ComponentVariant; symbols: string[] }
+      { variant: ComponentVariant; symbols: string[] }
     >()
     const libSymbols: string[] = []
     const leftoverSymbols: string[] = []

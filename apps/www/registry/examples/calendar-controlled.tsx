@@ -6,7 +6,7 @@ import { parseDate } from "@internationalized/date"
 import { Calendar } from "@opengovsg/oui"
 
 export default function CalendarControlled() {
-  let [value, setValue] = React.useState(parseDate("2025-03-20"))
+  const [value, setValue] = React.useState(parseDate("2025-03-20"))
 
   return (
     <div className="flex flex-col gap-4">

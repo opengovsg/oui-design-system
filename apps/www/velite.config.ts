@@ -1,5 +1,6 @@
+import type { Options } from "rehype-pretty-code"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypePrettyCode, { Options } from "rehype-pretty-code"
+import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
 import { createHighlighter } from "shiki"

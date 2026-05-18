@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { DialogTrigger } from "react-aria-components"
 
+import type { ModalProps } from "@opengovsg/oui"
 import {
   Button,
   Modal,
@@ -10,7 +11,6 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  ModalProps,
 } from "@opengovsg/oui"
 
 export default function ModalPlacement() {
