@@ -95,13 +95,7 @@ const TagFieldListInner = <T extends object>(
           if (typeof props.children === "function") {
             return props.children({ ...childProps, itemProps })
           }
-          return (
-            <TagFieldItem
-              {...childProps}
-              {...itemProps}
-              key={key}
-            />
-          )
+          return <TagFieldItem {...childProps} {...itemProps} key={key} />
         })
       )}
     </ul>

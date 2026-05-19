@@ -77,7 +77,7 @@ export default function ModalExampleFeatureAnnouncement() {
                 )}
                 {!hasNext && (
                   <Button color="main" onPress={onClose}>
-                    Let's go!
+                    Let&apos;s go!
                   </Button>
                 )}
               </ModalFooter>

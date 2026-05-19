@@ -1,7 +1,8 @@
 "use client"
 
+import type { ZonedDateTime } from "@internationalized/date"
 import { useState } from "react"
-import { parseAbsoluteToLocal, ZonedDateTime } from "@internationalized/date"
+import { parseAbsoluteToLocal } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
 import { DateRangePicker } from "@opengovsg/oui"

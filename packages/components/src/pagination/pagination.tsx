@@ -6,13 +6,13 @@ import { ChevronLeftIcon, ChevronsRightIcon, EllipsisIcon } from "lucide-react"
 
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 
-import type { PaginationItemValue } from "./use-pagination-base"
 import type { UsePaginationProps } from "./use-pagination"
+import type { PaginationItemValue } from "./use-pagination-base"
 import { forwardRef } from "../system/utils"
-import { PaginationItemType } from "./use-pagination-base"
 import { PaginationCursor } from "./pagination-cursor"
 import { PaginationItem } from "./pagination-item"
 import { usePagination } from "./use-pagination"
+import { PaginationItemType } from "./use-pagination-base"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface PaginationProps extends UsePaginationProps {}

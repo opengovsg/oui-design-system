@@ -33,7 +33,7 @@ Component files land in `components/oui/`, shared utilities in `lib/oui/`. From 
 ## Import
 
 ```tsx
-import { Button, Accordion, TextField } from "@opengovsg/oui"
+import { Accordion, Button, TextField } from "@opengovsg/oui"
 ```
 
 Subpath imports also work (e.g., `import { Button } from "@opengovsg/oui/button"`).

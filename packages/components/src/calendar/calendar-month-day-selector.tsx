@@ -8,8 +8,8 @@ import { Group } from "react-aria-components"
 import { Select, SelectItem } from "../select"
 import { AgnosticCalendarStateContext } from "./agnostic-calendar-state-context"
 import { useCalendarStyleContext } from "./calendar-style-context"
-import { useCalendarSelectors } from "./use-calendar-selectors"
 import { i18nStrings } from "./i18n"
+import { useCalendarSelectors } from "./use-calendar-selectors"
 
 export const CalendarMonthDaySelector = () => {
   const { slots, size, classNames } = useCalendarStyleContext()

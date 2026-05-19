@@ -1,11 +1,7 @@
 "use client"
 
-import {
-  DateValue,
-  getLocalTimeZone,
-  isWeekend,
-  today,
-} from "@internationalized/date"
+import type { DateValue } from "@internationalized/date"
+import { getLocalTimeZone, isWeekend, today } from "@internationalized/date"
 import { useLocale } from "@react-aria/i18n"
 
 import { RangeCalendar } from "@opengovsg/oui"

@@ -1,7 +1,13 @@
 "use client"
 
 import type { HTMLMotionProps } from "motion/react"
-import { useCallback, useEffect, useRef, useState } from "react"
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react"
 import { usePreventScroll } from "@react-aria/overlays"
 import { mergeProps, useResizeObserver } from "@react-aria/utils"
 import { useControlledState } from "@react-stately/utils"
@@ -157,8 +163,13 @@ export function useNavbar(originalProps: UseNavbarProps) {
     navHeight.current = domRef.current?.offsetHeight || 0
   }, [domRef])
 
+  const [scrollElement, setScrollElement] = useState<HTMLElement | null>(null)
+  useLayoutEffect(() => {
+    setScrollElement(parentRef?.current ?? null)
+  }, [parentRef])
+
   useScrollPosition({
-    elementRef: parentRef,
+    element: scrollElement,
     isEnabled: shouldShowOnScrollUp || !disableScrollHandler,
     callback: ({ prevPos, currPos }) => {
       onScrollPositionChange?.(currPos.y)

@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "next lint",
+    "lint": "eslint src --max-warnings 0",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf .turbo .next node_modules src/components/oui src/lib/oui",
     "format": "prettier --check . --ignore-path ../../.gitignore",

@@ -142,7 +142,8 @@ export const NoIcon: Story = {
 export const CustomWithClassNames: Story = {
   args: {
     variant: "info",
-    children: "Custom styled infobox using the classNames prop for slot customization.",
+    children:
+      "Custom styled infobox using the classNames prop for slot customization.",
     classNames: {
       base: "bg-gradient-to-r from-purple-100 to-pink-100 border-2 border-purple-300 rounded-lg",
       icon: "text-purple-600",
@@ -163,9 +164,9 @@ export const MultilineContent: Story = {
         preferences, and privacy controls.
       </Infobox>
       <Infobox variant="warning">
-        <strong>Action required:</strong> Your session will expire in 5
-        minutes. Please save your work to avoid losing any changes. You can
-        extend your session by clicking the "Stay logged in" button below.
+        <strong>Action required:</strong> Your session will expire in 5 minutes.
+        Please save your work to avoid losing any changes. You can extend your
+        session by clicking the "Stay logged in" button below.
       </Infobox>
       <Infobox variant="error">
         <strong>Error:</strong> Unable to save your changes due to a network

@@ -8,7 +8,8 @@ export const searchFieldStyles = tv({
     label: "",
     group: "min-w-0 flex-1",
     fieldWrapper: "flex max-w-full flex-row",
-    input: "rounded-none bg-transparent [&::-webkit-search-cancel-button]:hidden",
+    input:
+      "rounded-none bg-transparent [&::-webkit-search-cancel-button]:hidden",
     searchIcon:
       "text-base-content-medium group-disabled:text-interaction-support-disabled-content forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]",
     clearButton: "group-empty:invisible",

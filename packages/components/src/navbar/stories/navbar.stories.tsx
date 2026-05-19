@@ -8,8 +8,8 @@ import { Navbar } from "../navbar"
 import { NavbarBrand } from "../navbar-brand"
 import { NavbarContent } from "../navbar-content"
 import { NavbarItem } from "../navbar-item"
-import { NavbarMenuItem } from "../navbar-menu-item"
 import { NavbarMenu } from "../navbar-menu"
+import { NavbarMenuItem } from "../navbar-menu-item"
 import { NavbarMenuToggle } from "../navbar-menu-toggle"
 
 const storyMenuItems = [
@@ -26,7 +26,7 @@ const storyMenuItems = [
 ]
 
 const Template = (args: NavbarProps) => (
-  <div className="min-w-screen flex min-h-screen flex-col items-center justify-center">
+  <div className="flex min-h-screen min-w-screen flex-col items-center justify-center">
     <div className="relative border md:max-w-5xl">
       <Banner>test</Banner>
       <Navbar {...args}>

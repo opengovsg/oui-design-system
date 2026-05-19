@@ -2,23 +2,7 @@
 
 import { Link } from "react-aria-components"
 
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from "@opengovsg/oui"
-
-const menuItems = [
-  "Profile",
-  "Dashboard",
-  "Settings",
-  "Help & Feedback",
-  "Log Out",
-]
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@opengovsg/oui"
 
 export default function NavbarDemo() {
   return (

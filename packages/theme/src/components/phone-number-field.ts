@@ -13,7 +13,7 @@ export const phoneNumberFieldStyles = tv({
     error: "",
     select: "w-fit",
     selectTrigger:
-      "border-base-divider-strong hover:bg-interaction-muted-main-hover focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active pressed:bg-interaction-muted-main-active min-w-auto h-auto rounded-r-none border-r outline-offset-0 disabled:active:bg-inherit",
+      "border-base-divider-strong hover:bg-interaction-muted-main-hover focus:bg-interaction-muted-main-hover active:bg-interaction-muted-main-active pressed:bg-interaction-muted-main-active h-auto min-w-auto rounded-r-none border-r outline-offset-0 disabled:active:bg-inherit",
     selectIcon: "",
     selectItem: "flex flex-row items-center gap-2",
     selectItemLabel: "line-clamp-1 flex-1",
@@ -31,7 +31,7 @@ export const phoneNumberFieldStyles = tv({
       xs: {
         input: "h-8.5",
         selectTrigger: "h-8.5 px-2 py-2",
-        flag: "[&_svg]:w-4.5 [&_svg]:h-3",
+        flag: "[&_svg]:h-3 [&_svg]:w-4.5",
       },
       sm: {
         input: "h-9.5",

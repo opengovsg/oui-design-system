@@ -1,5 +1,6 @@
 "use client"
 
+import type { DateValue } from "@internationalized/date"
 import { getLocalTimeZone, isWeekend, today } from "@internationalized/date"
 import { useLocale } from "@react-aria/i18n"
 
@@ -14,7 +15,7 @@ export default function DateRangePickerUnavailableDates() {
     [now.add({ days: 23 }), now.add({ days: 24 })],
   ]
 
-  const isDateUnavailable = (date: any) =>
+  const isDateUnavailable = (date: DateValue) =>
     isWeekend(date, locale) ||
     disabledRanges.some(
       (interval) =>

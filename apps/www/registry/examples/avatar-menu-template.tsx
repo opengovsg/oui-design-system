@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, MoreHorizontal } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 import {
   Avatar,

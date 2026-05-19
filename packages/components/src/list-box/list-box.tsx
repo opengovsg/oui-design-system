@@ -4,8 +4,8 @@ import type { ForwardedRef } from "react"
 import type { ListBoxItemProps as AriaListBoxItemProps } from "react-aria-components"
 import { useMemo } from "react"
 import {
-  composeRenderProps,
   ListBoxItem as AriaListBoxItem,
+  composeRenderProps,
   Text,
 } from "react-aria-components"
 

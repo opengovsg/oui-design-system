@@ -3,7 +3,6 @@
 import type { InputBase, Validation } from "@react-types/shared"
 import type { AriaFieldProps } from "react-aria"
 import type { DropzoneOptions, FileError, FileRejection } from "react-dropzone"
-import { ErrorCode } from "react-dropzone"
 import { useCallback, useEffect, useMemo } from "react"
 import { useFormValidationState } from "@react-stately/form"
 import { Upload } from "lucide-react"
@@ -16,7 +15,7 @@ import {
   Provider,
   TextContext,
 } from "react-aria-components"
-import { useDropzone } from "react-dropzone"
+import { ErrorCode, useDropzone } from "react-dropzone"
 
 import type {
   FileDropzoneSlots,
@@ -27,6 +26,7 @@ import type {
 import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
 
 import type { FileItem } from "./types"
+import type { MaxFileSizeRule } from "./utils"
 import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
 import { mapPropsVariants } from "../system/utils"
@@ -37,7 +37,6 @@ import {
   useFileDropzoneStyleContext,
 } from "./contexts"
 import { FileInfo } from "./file-info"
-import type { MaxFileSizeRule } from "./utils"
 import { formatBytes, formatErrorMessage, resolveMaxFileSize } from "./utils"
 
 export interface FileItemsRenderProps {
@@ -208,7 +207,10 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
     (error: FileError) => {
       // When per-type rules are active, the composed validator already
       // produces the correct message for FileTooLarge errors.
-      if (maxFileSizeByType.length > 0 && error.code === ErrorCode.FileTooLarge) {
+      if (
+        maxFileSizeByType.length > 0 &&
+        error.code === ErrorCode.FileTooLarge
+      ) {
         return error.message
       }
       return formatErrorMessage(error, {
@@ -231,7 +233,11 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       const errors: FileError[] = []
 
       if (maxFileSizeByType.length > 0) {
-        const limit = resolveMaxFileSize(file.type, maxFileSizeByType, maxFileSize)
+        const limit = resolveMaxFileSize(
+          file.type,
+          maxFileSizeByType,
+          maxFileSize,
+        )
         if (limit !== Number.POSITIVE_INFINITY && file.size > limit) {
           errors.push({
             code: ErrorCode.FileTooLarge,
@@ -318,7 +324,6 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
 
     // Per-type rules: generate "X for .label, Y for other accepted files"
     if (maxFileSizeByType.length > 0) {
-
       const parts: string[] = []
       for (const rule of maxFileSizeByType) {
         const sizeStr = formatBytes(rule.maxFileSize, 2, fileSizeBase)
@@ -357,7 +362,14 @@ export const FileDropzone = (originalProps: FileDropzoneProps) => {
       return `Minimum file size: ${formatBytes(minFileSize, 2, fileSizeBase)}`
     }
     return null
-  }, [maxFileSize, maxFileSizeByType, minFileSize, showFileSizeText, fileSizeBase, fileSizeTextOverride])
+  }, [
+    maxFileSize,
+    maxFileSizeByType,
+    minFileSize,
+    showFileSizeText,
+    fileSizeBase,
+    fileSizeTextOverride,
+  ])
 
   const triggerFileSelector = useCallback(() => {
     if (isDisabled || isReadOnly) return

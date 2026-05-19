@@ -60,9 +60,9 @@ export interface IframePreviewProps {
 const MIN_WIDTH = 320
 
 const IframePreview: React.FC<IframePreviewProps> = (props) => {
-  let constraintsResizerRef = useRef<HTMLDivElement>(null)
-  let resizerRef = useRef<HTMLDivElement>(null)
-  let iframeRef = useRef<HTMLIFrameElement>(null)
+  const constraintsResizerRef = useRef<HTMLDivElement>(null)
+  const resizerRef = useRef<HTMLDivElement>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
   const [enablePointerEvents, setEnablePointerEvents] = useState(true)
 
   const isMobile = useIsMobile()
@@ -92,9 +92,9 @@ const IframePreview: React.FC<IframePreviewProps> = (props) => {
   )
 
   useIsomorphicLayoutEffect(() => {
-    let observer = new window.ResizeObserver(() => {
+    const observer = new window.ResizeObserver(() => {
       if (constraintsResizerRef.current && resizerRef.current) {
-        let width =
+        const width =
           constraintsResizerRef.current.offsetWidth -
           resizerRef.current.offsetWidth
 
@@ -104,8 +104,9 @@ const IframePreview: React.FC<IframePreviewProps> = (props) => {
       }
     })
 
-    constraintsResizerRef.current &&
+    if (constraintsResizerRef.current) {
       observer.observe(constraintsResizerRef.current)
+    }
 
     return () => {
       observer.disconnect()

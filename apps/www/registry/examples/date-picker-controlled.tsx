@@ -1,11 +1,8 @@
 "use client"
 
+import type { CalendarDate } from "@internationalized/date"
 import { useState } from "react"
-import {
-  CalendarDate,
-  getLocalTimeZone,
-  parseDate,
-} from "@internationalized/date"
+import { getLocalTimeZone, parseDate } from "@internationalized/date"
 import { useDateFormatter } from "@react-aria/i18n"
 
 import { DatePicker } from "@opengovsg/oui"
