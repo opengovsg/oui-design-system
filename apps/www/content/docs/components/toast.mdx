@@ -11,7 +11,9 @@ links:
   Sonner: https://sonner.emilkowal.ski/toast
 ---
 
-<Toaster />
+<div data-react-aria-top-layer="true">
+  <Toaster />
+</div>
 
 <ComponentPreview name="toast-demo" />
 
@@ -21,7 +23,7 @@ OUI's toast component is built on top of [Sonner](https://sonner.emilkowal.ski/)
 
 To use toasts in your application, you need to:
 
-1. Add the `Toaster` component to your app's layout (typically in your root layout)
+1. Add the `Toaster` component to your app's layout (typically in your root layout), wrapped in a `data-react-aria-top-layer="true"` element
 2. Use the `toast` function to trigger notifications
 
 ```tsx
@@ -34,12 +36,20 @@ export default function RootLayout({ children }) {
     <html>
       <body>
         {children}
-        <Toaster />
+        <div data-react-aria-top-layer="true">
+          <Toaster />
+        </div>
       </body>
     </html>
   )
 }
 ```
+
+#### Why the `data-react-aria-top-layer` wrapper?
+
+Many OUI components (`Modal`, `Dialog`, `Popover`, `Select`, etc.) are built on [React Aria Components](https://react-spectrum.adobe.com/react-aria/components.html). When one of these opens, React Aria calls [`ariaHideOutside`](https://react-spectrum.adobe.com/react-aria/ariaHideOutside.html) and sets `aria-hidden="true"` on every sibling of the overlay so that assistive technologies only announce content inside it.
+
+Sonner renders the `Toaster` as a sibling of your app root. Without opting out, any toast fired while a modal is open would be hidden from screen readers (and flagged by accessibility tooling such as axe). React Aria treats any ancestor element with `data-react-aria-top-layer="true"` as part of the top layer and skips it when hiding outside content, which keeps toasts announceable regardless of what overlay is open.
 
 ```tsx title="page.tsx"
 import { toast } from "@opengovsg/oui"
