@@ -146,8 +146,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       lodash-es:
-        specifier: '>=4.17.23'
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.2.3)
@@ -238,7 +238,7 @@ importers:
         version: 9.20.1(jiti@2.6.1)
       eslint-config-next:
         specifier: 16.1.6
-        version: 16.1.6(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3)
+        version: 16.1.6(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3)
       postcss:
         specifier: ^8.5.2
         version: 8.5.6
@@ -590,8 +590,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       lodash-es:
-        specifier: '>=4.17.23'
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
@@ -690,8 +690,8 @@ importers:
         specifier: ^2.1.1
         version: 2.1.1
       lodash-es:
-        specifier: '>=4.17.23'
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       tailwind-merge:
         specifier: ^3.3.1
         version: 3.3.1
@@ -757,8 +757,8 @@ importers:
         specifier: ^6.0.1
         version: 6.0.1
       lodash-es:
-        specifier: '>=4.17.23'
-        version: 4.17.23
+        specifier: ^4.18.1
+        version: 4.18.1
       sd-tailwindcss-transformer:
         specifier: ^2.2.1
         version: 2.2.1(style-dictionary@5.1.1)
@@ -6254,8 +6254,8 @@ packages:
     resolution: {integrity: sha512-iPZK6eYjbxRu3uB4/WZ3EsEIMJFMqAoopl3R+zuq0UjcAm/MO6KCweDgPfP3elTztoKP3KtnVHxTn2NHBSDVUw==}
     engines: {node: '>=10'}
 
-  lodash-es@4.17.23:
-    resolution: {integrity: sha512-kVI48u3PZr38HdYz98UmfPnXl2DXrpdctLrFLCd3kOx1xUkOmpFPx7gCWWM5MPkL/fD8zb+Ph0QzjGFs4+hHWg==}
+  lodash-es@4.18.1:
+    resolution: {integrity: sha512-J8xewKD/Gk22OZbhpOVSwcs60zhd95ESDwezOFuA3/099925PdHJ7OFHNTGtajL3AlZkykD32HykiMo+BIBI8A==}
 
   lodash.debounce@4.0.8:
     resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
@@ -13567,13 +13567,13 @@ snapshots:
       - eslint-plugin-import-x
       - supports-color
 
-  eslint-config-next@16.1.6(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3):
+  eslint-config-next@16.1.6(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3):
     dependencies:
       '@next/eslint-plugin-next': 16.1.6
       eslint: 9.20.1(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.8.6(eslint-plugin-import@2.32.0)(eslint@9.20.1(jiti@2.6.1))
-      eslint-plugin-import: 2.32.0(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint@9.20.1(jiti@2.6.1))
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.20.1(jiti@2.6.1))
       eslint-plugin-react: 7.37.5(eslint@9.20.1(jiti@2.6.1))
       eslint-plugin-react-hooks: 7.0.1(eslint@9.20.1(jiti@2.6.1))
@@ -13610,7 +13610,7 @@ snapshots:
       stable-hash: 0.0.4
       tinyglobby: 0.2.15
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1))
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint@9.20.1(jiti@2.6.1))
     transitivePeerDependencies:
       - supports-color
 
@@ -13619,6 +13619,17 @@ snapshots:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.34.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3)
+      eslint: 9.20.1(jiti@2.6.1)
+      eslint-import-resolver-node: 0.3.9
+      eslint-import-resolver-typescript: 3.8.6(eslint-plugin-import@2.32.0)(eslint@9.20.1(jiti@2.6.1))
+    transitivePeerDependencies:
+      - supports-color
+
+  eslint-module-utils@2.12.1(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1)):
+    dependencies:
+      debug: 3.2.7
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3)
       eslint: 9.20.1(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.8.6(eslint-plugin-import@2.32.0)(eslint@9.20.1(jiti@2.6.1))
@@ -13654,7 +13665,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-import@2.32.0(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1)):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint@9.20.1(jiti@2.6.1)):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -13665,7 +13676,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 9.20.1(jiti@2.6.1)
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.34.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1))
+      eslint-module-utils: 2.12.1(@typescript-eslint/parser@8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.8.6)(eslint@9.20.1(jiti@2.6.1))
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -13676,6 +13687,8 @@ snapshots:
       semver: 6.3.1
       string.prototype.trimend: 1.0.9
       tsconfig-paths: 3.15.0
+    optionalDependencies:
+      '@typescript-eslint/parser': 8.48.1(eslint@9.20.1(jiti@2.6.1))(typescript@5.7.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -14887,7 +14900,7 @@ snapshots:
     dependencies:
       p-locate: 5.0.0
 
-  lodash-es@4.17.23: {}
+  lodash-es@4.18.1: {}
 
   lodash.debounce@4.0.8: {}
 
