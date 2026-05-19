@@ -51,7 +51,7 @@ export const WithStartAndEndContent: Story = {
         </label>
         <select
           aria-label="Select currency"
-          className="text-interaction-main-default border-0 bg-transparent outline-transparent outline-solid"
+          className="text-interaction-main-default outline-solid border-0 bg-transparent outline-transparent"
           defaultValue="SGD"
           id="currency"
           name="currency"
