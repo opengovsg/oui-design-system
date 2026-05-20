@@ -26,7 +26,7 @@ const storyMenuItems = [
 ]
 
 const Template = (args: NavbarProps) => (
-  <div className="flex min-h-screen min-w-screen flex-col items-center justify-center">
+  <div className="min-w-screen flex min-h-screen flex-col items-center justify-center">
     <div className="relative border md:max-w-5xl">
       <Banner>test</Banner>
       <Navbar {...args}>
