@@ -4,7 +4,6 @@
   "version": "0.0.2",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
-  "bin": "./dist/cli.js",
   "files": [
     "dist",
     "raw",
@@ -39,7 +38,8 @@
     "style-dictionary": "^5.1.1"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "bin": "./dist/cli.js"
   },
   "repository": {
     "type": "git",
