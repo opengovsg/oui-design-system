@@ -1,5 +1,11 @@
 # @opengovsg/oui-token-gen
 
+## 0.0.3
+
+### Patch Changes
+
+- [#279](https://github.com/opengovsg/oui-design-system/pull/279) [`4081952`](https://github.com/opengovsg/oui-design-system/commit/408195214bb99264234ed3dea4ab27b5dd647eb4) Thanks [@karrui](https://github.com/karrui)! - chore: move bin config into publishConfig
+
 ## 0.0.2
 
 ### Patch Changes
