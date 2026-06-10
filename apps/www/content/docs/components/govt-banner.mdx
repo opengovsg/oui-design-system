@@ -1,0 +1,102 @@
+---
+title: GovtBanner
+description: The official Singapore Government masthead, pinned at the top of the page with an expandable "How to identify" panel. For system messages use Banner.
+category: Layout & Navigation
+toc:
+  visible: true
+links:
+  source: govt-banner
+  storybook: components-govtbanner--default
+  theme: govt-banner
+---
+
+## Usage
+
+```tsx
+import { GovtBanner } from "@opengovsg/oui"
+```
+
+```tsx
+<GovtBanner />
+```
+
+<ComponentPreview name="govt-banner-demo" />
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="govt-banner" />
+
+GovtBanner is the standardised "A Singapore Government Agency Website" masthead that identifies an application as an official government service. It renders with `role="banner"` and includes a collapsible "How to identify" panel built on React Aria's [useDisclosure](https://react-aria.adobe.com/useDisclosure.html), explaining how users can verify they are on a legitimate `.gov.sg` site. Place it as the first element on the page, above your own navigation.
+
+> **Do not restyle the GovtBanner.** It is a standardised government identifier, and consistency across all `.gov.sg` services is what lets citizens trust and recognise it. Do not change its colors, copy, crest, icons, or layout — even though `classNames` is exposed. Render it with its defaults. The `classNames` prop exists only for narrow integration needs such as aligning the banner's horizontal padding with your page container (see [Custom Styles](#custom-styles)); it must never be used to alter the banner's appearance or content.
+
+### When to use
+
+Use **GovtBanner** once per page, at the very top, to identify the site as an official government service. For prominent system-level messages such as maintenance notices or session warnings, use [Banner](/docs/components/banner) instead.
+
+## Examples
+
+### Environment
+
+Use the `environment` prop to display a note indicating a non-production environment. The value is uppercased and rendered as `[NOTE: THIS IS A {environment} WEBSITE]`.
+
+<ComponentPreview name="govt-banner-with-environment" />
+
+### Expanded by default
+
+Set `defaultExpanded` to render the "How to identify" panel open on first paint (uncontrolled).
+
+<ComponentPreview name="govt-banner-expanded" />
+
+### Controlled visibility
+
+Control the panel's open state with the `isExpanded` and `onExpandedChange` props.
+
+<ComponentPreview name="govt-banner-with-controlled-visibility" />
+
+## Accessibility
+
+- The component renders with `role="banner"` to identify it as a page-level landmark.
+- The "How to identify" trigger is a real `<button>` wired with React Aria's disclosure pattern; it exposes `aria-expanded` and toggles the panel on press and keyboard activation (Enter / Space).
+- The chevron rotation is purely decorative and is suppressed when reduced motion is preferred.
+- The "Trusted websites" link opens in a new tab; its external-link icon is marked `aria-hidden` so it is not announced.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`banner`**: The outermost `<div>` wrapper carrying the `banner` role.
+- **`mainContentContainer`**: The wrapper around the always-visible top row (crest + main content).
+- **`crest`**: The government crest `<svg>`.
+- **`mainContent`**: The wrapper around the masthead text and the "How to identify" button.
+- **`link`**: Anchor and link-styled text within the banner.
+- **`identifyButton`**: The "How to identify" trigger `<button>`.
+- **`chevron`**: The chevron `<svg>` icon beside the trigger.
+- **`panel`**: The wrapper for the expandable panel content.
+- **`panelGroup`**: The wrapper around an icon + section pairing inside the panel.
+- **`panelIcon`**: An icon (`<svg>`) within a panel group.
+- **`panelSection`**: The wrapper for a panel section's header and body.
+- **`panelHeader`**: A section header within the panel.
+- **`inlineIcon`**: An inline icon (`<svg>`) embedded in panel body text.
+
+### Custom Styles
+
+The slots above are exposed only to let you fit the banner into your page's layout — never to restyle it. The single sanctioned use is aligning the banner's horizontal padding with your page container so the masthead lines up with the content below it. The example below widens the gutters via the `banner` and `mainContentContainer` slots; the colors, copy, crest, and structure are left untouched.
+
+Do not use `classNames` to change colors, typography, copy, the crest, or the panel layout. See the [warning above](#usage).
+
+<ComponentPreview name="govt-banner-with-custom-styles" />
+
+## Props
+
+### GovtBanner
+
+| Prop               | Type                                                          | Default | Description                                                                        |
+| ------------------ | ------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------------- |
+| `environment`      | `"production" \| "staging" \| "uat" \| "preview" \| (string)` | -       | Displays a `[NOTE: THIS IS A {environment} WEBSITE]` note; the value is uppercased |
+| `isExpanded`       | `boolean`                                                     | -       | Whether the "How to identify" panel is open (controlled)                           |
+| `defaultExpanded`  | `boolean`                                                     | `false` | Whether the panel is open by default (uncontrolled)                                |
+| `onExpandedChange` | `(isExpanded: boolean) => void`                               | -       | Called when the panel's expanded state changes                                     |
+| `classNames`       | `SlotsToClasses<GovtBannerSlots>`                             | -       | Custom Tailwind classes for component slots                                        |
+
+_Inherits all remaining props from React Aria's [DisclosureProps](https://react-aria.adobe.com/useDisclosure.html)._

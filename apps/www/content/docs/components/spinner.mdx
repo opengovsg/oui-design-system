@@ -1,0 +1,84 @@
+---
+title: Spinner
+description: An animated indeterminate loading indicator. For a content-shaped placeholder use Skeleton; for a determinate task use Progress.
+category: Feedback
+toc:
+  visible: true
+links:
+  source: spinner
+  storybook: components-spinner--default
+  theme: spinner
+---
+
+## Usage
+
+```tsx
+import { Spinner } from "@opengovsg/oui"
+```
+
+```tsx
+<Spinner />
+```
+
+<ComponentPreview name="spinner-demo" />
+
+Alternatively, install the component as local source via the [shadcn CLI](/docs/getting-started/registry):
+
+<ShadcnInstall name="spinner" />
+
+Spinner is an indeterminate loading indicator: two animated rings that signal an ongoing operation of unknown duration. It renders with `role="progressbar"` and a default `aria-label` of `"Loading"`, so it announces itself to assistive technology out of the box.
+
+When the spinner has no visible label, leave the default `aria-label` in place or supply a more specific one describing what is loading.
+
+### When to use
+
+Use **Spinner** for short, indeterminate waits where the duration is unknown. Use [Skeleton](/docs/components/skeleton) when you can show the shape of the content that is loading. Use [Progress](/docs/components/progress) when the task has a measurable, determinate completion percentage. For an inline loading state on a button, prefer the Button `isPending` prop documented in [Button](/docs/components/button).
+
+## Examples
+
+### Sizes
+
+Use the `size` prop to change the size of the spinner.
+
+<ComponentPreview name="spinner-with-sizes" />
+
+### Colors
+
+Use the `color` prop to switch between the current text color and white. Use `white` when placing the spinner on a dark or colored background.
+
+<ComponentPreview name="spinner-with-colors" />
+
+## Accessibility
+
+- Spinner renders with `role="progressbar"` and a default `aria-label` of `"Loading"`; assistive technology announces it as an indeterminate progress indicator.
+- Pass a more specific `aria-label` (e.g. `"Loading results"`) when the default is not descriptive enough for the context.
+- Color is not used to convey state; the spinner only signals that something is loading.
+
+## Slots
+
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+
+- **`base`**: The outer `<div>` container that carries the `progressbar` role.
+- **`wrapper`**: The `<div>` that sizes the rings and positions them relative to each other.
+- **`circle1`**: The first (solid-border) animated ring `<i>`.
+- **`circle2`**: The second (dotted-border) animated ring `<i>`.
+
+### Custom Styles
+
+Pass classes to individual slots to recolor the rings. The example below tints each ring with a different brand color.
+
+<ComponentPreview name="spinner-with-custom-styles" />
+
+## Props
+
+### Spinner
+
+| Prop         | Type                           | Default     | Description                                                                |
+| ------------ | ------------------------------ | ----------- | -------------------------------------------------------------------------- |
+| `size`       | `"xs" \| "sm" \| "md" \| "lg"` | `"md"`      | The size of the spinner                                                    |
+| `color`      | `"current" \| "white"`         | `"current"` | The ring color; `current` follows text color, `white` for dark backgrounds |
+| `aria-label` | `string`                       | `"Loading"` | Accessible label announced by assistive technology                         |
+| `classNames` | `SlotsToClasses<SpinnerSlots>` | -           | Custom Tailwind classes for component slots                                |
+| `className`  | `string`                       | -           | Additional class applied to the base element                               |
+
+_Inherits all remaining props from the underlying `<div>` element (e.g. `id`, `style`, `data-*` attributes)._

@@ -1966,6 +1966,72 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/forms-validation-realtime.tsx"),
     ),
   },
+  "govt-banner-demo": {
+    name: "govt-banner-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/govt-banner-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/govt-banner-demo.tsx")),
+  },
+  "govt-banner-expanded": {
+    name: "govt-banner-expanded",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/govt-banner-expanded.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/govt-banner-expanded.tsx"),
+    ),
+  },
+  "govt-banner-with-controlled-visibility": {
+    name: "govt-banner-with-controlled-visibility",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/govt-banner-with-controlled-visibility.tsx",
+      },
+    ],
+    component: lazy(
+      () =>
+        import(
+          "@/registry/examples/govt-banner-with-controlled-visibility.tsx"
+        ),
+    ),
+  },
+  "govt-banner-with-custom-styles": {
+    name: "govt-banner-with-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/govt-banner-with-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/govt-banner-with-custom-styles.tsx"),
+    ),
+  },
+  "govt-banner-with-environment": {
+    name: "govt-banner-with-environment",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/govt-banner-with-environment.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/govt-banner-with-environment.tsx"),
+    ),
+  },
   "infobox-custom-styles": {
     name: "infobox-custom-styles",
     description: "",
@@ -3643,6 +3709,54 @@ export const Index: Record<string, RegistryComponent> = {
       },
     ],
     component: lazy(() => import("@/registry/examples/sidebar-sizes.tsx")),
+  },
+  "spinner-demo": {
+    name: "spinner-demo",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/spinner-demo.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/spinner-demo.tsx")),
+  },
+  "spinner-with-colors": {
+    name: "spinner-with-colors",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/spinner-with-colors.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/spinner-with-colors.tsx"),
+    ),
+  },
+  "spinner-with-custom-styles": {
+    name: "spinner-with-custom-styles",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/spinner-with-custom-styles.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/spinner-with-custom-styles.tsx"),
+    ),
+  },
+  "spinner-with-sizes": {
+    name: "spinner-with-sizes",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/spinner-with-sizes.tsx",
+      },
+    ],
+    component: lazy(() => import("@/registry/examples/spinner-with-sizes.tsx")),
   },
   "tabs-all-disabled": {
     name: "tabs-all-disabled",
