@@ -616,6 +616,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/button-with-loading.tsx"),
     ),
   },
+  "button-with-preserve-width": {
+    name: "button-with-preserve-width",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/button-with-preserve-width.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/button-with-preserve-width.tsx"),
+    ),
+  },
   "button-with-radius": {
     name: "button-with-radius",
     description: "",

@@ -59,6 +59,11 @@ export default {
         type: "boolean",
       },
     },
+    preserveWidth: {
+      control: {
+        type: "boolean",
+      },
+    },
     fullWidth: {
       control: {
         type: "boolean",
@@ -241,6 +246,43 @@ export const WithLoadingText: Story = {
     isPending: true,
     loadingText: "Loading",
   },
+}
+
+function PreserveWidthTemplate(args: ButtonProps) {
+  const [isPending, setIsPending] = useState(true)
+
+  return (
+    <div className="flex flex-col items-start gap-4">
+      <Button
+        size="xs"
+        variant="outline"
+        onPress={() => setIsPending((prev) => !prev)}
+      >
+        Toggle pending
+      </Button>
+      <div className="flex flex-row items-center gap-4">
+        <Button {...args} isPending={isPending}>
+          Submit form
+        </Button>
+        <Button {...args} isPending={isPending} preserveWidth>
+          Submit form
+        </Button>
+        <Button
+          {...args}
+          isPending={isPending}
+          preserveWidth
+          startContent={<User2Icon />}
+        >
+          Submit form
+        </Button>
+      </div>
+    </div>
+  )
+}
+
+export const PreserveWidth: Story = {
+  render: PreserveWidthTemplate,
+  args: {},
 }
 
 export const DisableRipple: Story = {

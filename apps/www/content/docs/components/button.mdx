@@ -68,6 +68,17 @@ loading spinner and add a loading text.
 
 <ComponentPreview name="button-with-loading" />
 
+### Preserve width while pending
+
+Pass the `preserveWidth` prop to keep the button's width constant while pending,
+preventing layout shift. The children are kept in the layout (visually hidden and
+hidden from assistive technology) and the spinner is overlaid on top of them.
+
+This only applies when no `loadingText` or `pendingElement` is provided, since
+those intentionally replace the children with content of a different width.
+
+<ComponentPreview name="button-with-preserve-width" />
+
 ### Spinner Placement
 
 Use the `spinnerPlacement` prop to change the placement of the spinner.
@@ -125,6 +136,7 @@ Button is a single-element component; use `className` directly to style the root
 | `loadingText`      | `string`                                                            | -         | **Deprecated.** Text to show when pending. Use `pendingElement` instead                                                                   |
 | `spinner`          | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Custom spinner element to display while pending; defaults to OUI's `Spinner`                                                              |
 | `spinnerPlacement` | `"start" \| "end"`                                                  | `"start"` | Which side of the button content the spinner appears on                                                                                   |
+| `preserveWidth`    | `boolean`                                                           | `false`   | Keep the button width constant while pending to prevent layout shift. Only applies when no `loadingText`/`pendingElement` is provided      |
 | `isIconOnly`       | `boolean`                                                           | `false`   | Whether the button contains only an icon. When `true`, pass `aria-label` for accessibility                                                |
 | `disableRipple`    | `boolean`                                                           | `false`   | Whether to disable the ripple animation on press                                                                                          |
 | `startContent`     | `ReactNode \| ((renderProps: ButtonRenderProps) => ReactNode)`      | -         | Content placed before the button label                                                                                                    |

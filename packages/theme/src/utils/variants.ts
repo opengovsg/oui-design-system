@@ -94,12 +94,36 @@ const states = {
   },
 }
 
+// Background applied while a button is in the pending state. React Aria sets
+// `data-pending` (the `pending:` variant) but does not mark the element as
+// `:disabled`, so the `disabled:` styles don't apply and the `hover:`/`active:`
+// states would otherwise still fire. Mirror the disabled background here and
+// override hover/active so a pending button reads as static/disabled.
+const pendingDisabledBg: Record<keyof typeof base, string> = {
+  solid: "bg-interaction-support-disabled",
+  reverse: "bg-utility-ui",
+  outline: "bg-utility-ui-clear",
+  clear: "bg-utility-ui-clear",
+}
+
+const pending = Object.fromEntries(
+  Object.entries(base).map(([variant, colors]) => {
+    const bg = pendingDisabledBg[variant as keyof typeof base]
+    const className = `pending:${bg} pending:hover:${bg} pending:active:${bg}`
+    return [
+      variant,
+      Object.fromEntries(Object.keys(colors).map((color) => [color, className])),
+    ]
+  }),
+) as Record<keyof typeof base, Record<string, string>>
+
 export const colorVariants = base
 
 export const colorVariantsWithState = mergeWith(
   {},
   base,
   states,
+  pending,
   (objValue, srcValue) => {
     if (typeof objValue === "string" && typeof srcValue === "string") {
       return cn(objValue, srcValue)
