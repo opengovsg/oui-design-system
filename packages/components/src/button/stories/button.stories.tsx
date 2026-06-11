@@ -261,9 +261,6 @@ function PreserveWidthTemplate(args: ButtonProps) {
         Toggle pending
       </Button>
       <div className="flex flex-row items-center gap-4">
-        <Button {...args} isPending={isPending}>
-          Submit form
-        </Button>
         <Button {...args} isPending={isPending} preserveWidth>
           Submit form
         </Button>

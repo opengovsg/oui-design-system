@@ -112,7 +112,9 @@ const pending = Object.fromEntries(
     const className = `pending:${bg} pending:hover:${bg} pending:active:${bg}`
     return [
       variant,
-      Object.fromEntries(Object.keys(colors).map((color) => [color, className])),
+      Object.fromEntries(
+        Object.keys(colors).map((color) => [color, className]),
+      ),
     ]
   }),
 ) as Record<keyof typeof base, Record<string, string>>
