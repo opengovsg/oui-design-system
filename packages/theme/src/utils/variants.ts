@@ -99,17 +99,23 @@ const states = {
 // `:disabled`, so the `disabled:` styles don't apply and the `hover:`/`active:`
 // states would otherwise still fire. Mirror the disabled background here and
 // override hover/active so a pending button reads as static/disabled.
-const pendingDisabledBg: Record<keyof typeof base, string> = {
-  solid: "bg-interaction-support-disabled",
-  reverse: "bg-utility-ui",
-  outline: "bg-utility-ui-clear",
-  clear: "bg-utility-ui-clear",
+//
+// NOTE: these must be written as full literal class strings (not built via
+// string interpolation) so Tailwind's scanner can detect and generate them.
+const pendingClassName: Record<keyof typeof base, string> = {
+  solid:
+    "pending:bg-interaction-support-disabled pending:hover:bg-interaction-support-disabled pending:active:bg-interaction-support-disabled",
+  reverse:
+    "pending:bg-utility-ui pending:hover:bg-utility-ui pending:active:bg-utility-ui",
+  outline:
+    "pending:bg-utility-ui-clear pending:hover:bg-utility-ui-clear pending:active:bg-utility-ui-clear",
+  clear:
+    "pending:bg-utility-ui-clear pending:hover:bg-utility-ui-clear pending:active:bg-utility-ui-clear",
 }
 
 const pending = Object.fromEntries(
   Object.entries(base).map(([variant, colors]) => {
-    const bg = pendingDisabledBg[variant as keyof typeof base]
-    const className = `pending:${bg} pending:hover:${bg} pending:active:${bg}`
+    const className = pendingClassName[variant as keyof typeof base]
     return [
       variant,
       Object.fromEntries(
