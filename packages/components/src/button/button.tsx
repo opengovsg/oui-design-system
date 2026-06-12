@@ -61,6 +61,17 @@ export interface ButtonProps extends AriaButtonProps, ButtonVariantProps {
    * If true, you must provide an `aria-label` for accessibility.
    */
   isIconOnly?: boolean
+
+  /**
+   * Whether to preserve the button's width while pending to prevent layout
+   * shift. When enabled, the children are kept in the layout (hidden via
+   * `opacity-0` and `aria-hidden`) and the spinner is overlaid on top.
+   *
+   * Only applies when no `loadingText` or `pendingElement` is provided, since
+   * those replace the children with content of a different width.
+   * @defaultValue false
+   */
+  preserveWidth?: boolean
 }
 
 /**
@@ -88,6 +99,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       spinner: spinnerProp,
       isIconOnly,
       isAttached,
+      preserveWidth,
       ...props
     },
     ref,
@@ -113,6 +125,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       return <Spinner size={spinnerSize} />
     }, [size, spinnerProp])
 
+    // Keep the children in the layout (hidden) and overlay the spinner so the
+    // button width doesn't collapse while pending. Only when no replacement
+    // content (loadingText/pendingElement) is supplied.
+    const shouldPreserveWidth =
+      isPending && preserveWidth && !loadingText && !pendingElement
+
     return (
       <AriaButton
         {...props}
@@ -136,15 +154,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {(renderProps) => (
           <>
             {renderChildren(renderProps, startContent)}
-            {isPending && spinnerPlacement === "start"
+            {isPending && !shouldPreserveWidth && spinnerPlacement === "start"
               ? renderChildren(renderProps, spinner)
               : null}
-            {isPending ? null : renderChildren(renderProps, children)}
+            {!isPending ? (
+              renderChildren(renderProps, children)
+            ) : shouldPreserveWidth ? (
+              <span className="relative inline-flex items-center justify-center">
+                <span aria-hidden className="opacity-0">
+                  {renderChildren(renderProps, children)}
+                </span>
+                <span className="absolute inset-0 flex items-center justify-center">
+                  {renderChildren(renderProps, spinner)}
+                </span>
+              </span>
+            ) : null}
             {isPending && loadingText ? loadingText : null}
             {isPending && pendingElement
               ? renderChildren(renderProps, pendingElement)
               : null}
-            {isPending && spinnerPlacement === "end"
+            {isPending && !shouldPreserveWidth && spinnerPlacement === "end"
               ? renderChildren(renderProps, spinner)
               : null}
             {renderChildren(renderProps, endContent)}

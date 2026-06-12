@@ -94,12 +94,53 @@ const states = {
   },
 }
 
+// Styles applied while a button is in the pending state. React Aria sets
+// `data-pending` (the `pending:` variant) but does not mark the element as
+// `:disabled`, so the `disabled:` styles don't apply and the `hover:`/`active:`
+// states would otherwise still fire. The surface (background, and the outline
+// border) mirrors each variant's disabled colors, overriding hover/active so a
+// pending button reads as static/disabled.
+//
+// NOTE: these must be written as full literal class strings (not built via
+// string interpolation) so Tailwind's scanner can detect and generate them.
+const pendingSurface: Record<keyof typeof base, string> = {
+  solid:
+    "pending:bg-interaction-support-disabled pending:hover:bg-interaction-support-disabled pending:active:bg-interaction-support-disabled",
+  reverse:
+    "pending:bg-utility-ui pending:hover:bg-utility-ui pending:active:bg-utility-ui",
+  outline:
+    "pending:bg-utility-ui-clear pending:hover:bg-utility-ui-clear pending:active:bg-utility-ui-clear pending:border-interaction-support-disabled-content",
+  clear:
+    "pending:bg-utility-ui-clear pending:hover:bg-utility-ui-clear pending:active:bg-utility-ui-clear",
+}
+
+// Pending text is the strong base content color for every color except
+// `inverse`, which keeps its light inverse text so it stays legible on dark
+// surfaces.
+const pendingText = "pending:text-base-content-strong"
+
+const pending = Object.fromEntries(
+  Object.entries(base).map(([variant, colors]) => {
+    const surface = pendingSurface[variant as keyof typeof base]
+    return [
+      variant,
+      Object.fromEntries(
+        Object.keys(colors).map((color) => [
+          color,
+          color === "inverse" ? surface : cn(surface, pendingText),
+        ]),
+      ),
+    ]
+  }),
+) as Record<keyof typeof base, Record<string, string>>
+
 export const colorVariants = base
 
 export const colorVariantsWithState = mergeWith(
   {},
   base,
   states,
+  pending,
   (objValue, srcValue) => {
     if (typeof objValue === "string" && typeof srcValue === "string") {
       return cn(objValue, srcValue)
