@@ -8,7 +8,7 @@ import { mergeProps, useButton, useDisclosure, useFocusRing } from "react-aria"
 import { useDisclosureState } from "react-stately"
 
 import type { GovtBannerSlots, SlotsToClasses } from "@opengovsg/oui-theme"
-import { dataAttr, govtBannerStyles, twMerge } from "@opengovsg/oui-theme"
+import { dataAttr, govtBannerStyles } from "@opengovsg/oui-theme"
 
 interface GovtBannerProps extends DisclosureProps {
   /**
@@ -23,29 +23,23 @@ interface GovtBannerProps extends DisclosureProps {
   >
 
   /**
-   * List of classes to change the className of the element.
+   * List of classes to change the className of the element. Only the outer
+   * container slots can be overridden; the internal layout and styling are
+   * fixed to keep the banner consistent across applications.
    *
    * @example
    * ```text
    * Component: GovtBanner
    *
    * Class names:
-   * - banner: the wrapper of the full government banner component,
+   * - banner: the wrapper of the full government banner component
    * - mainContentContainer: the wrapper of the main content of the banner
-   * - crest: the SVG of the government crest
-   * - mainContent: the main content of the banner
-   * - link: link stylings
-   * - identifyButton: for the "how to identify" button
-   * - chevron: the chevron icon beside the "how to identify" button
-   * - panel: the wrapper for the panel that appears when the "how to identify" button is clicked
-   * - panelGroup: the wrapper for the panel group containing the icon and the panel section
-   * - panelIcon: the icon in the panel group
-   * - panelSection: the wrapper for the panel section containing the header and content
-   * - panelHeader: the header in the panel section
-   * - inlineIcon: the icon in the panel content
    * ```
    */
-  classNames?: SlotsToClasses<GovtBannerSlots>
+  classNames?: Pick<
+    SlotsToClasses<GovtBannerSlots>,
+    "banner" | "mainContentContainer"
+  >
 }
 
 export function GovtBanner({
@@ -80,7 +74,7 @@ export function GovtBanner({
         })}
       >
         <svg
-          className={slots.crest({ className: classNames?.crest })}
+          className={slots.crest()}
           version="1.1"
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
@@ -92,59 +86,37 @@ export function GovtBanner({
           <path d="M16.093 6.845c8.005-0.24 10.863 9.357 5.693 13.676l-5.191 2.509c0 0-0.676-2.181 1.833-4.734 2.509-2.551 4.929-7.328-2.006-10.469 0 0 0.131-0.654-0.327-0.981z" />
           <path d="M15.678 9.004c0 0 0.393-0.371 0.524-0.676 5.954 2.486 5.017 6.697 1.461 10.23-2.181 2.246-1.505 4.668-1.505 4.668s-2.66 1.657-3.577 3.097c0 0-3.852-3.28 1.483-8.724 5.235-5.344 1.614-8.594 1.614-8.594z" />
         </svg>
-        <div
-          className={slots.mainContent({ className: classNames?.mainContent })}
-        >
+        <div className={slots.mainContent()}>
           <span>A Singapore Government Agency Website</span>
           {environment ? (
             <b>[NOTE: THIS IS A {environment.toUpperCase()} WEBSITE]</b>
           ) : null}
           <button
-            className={slots.identifyButton({
-              className: classNames?.identifyButton,
-            })}
+            className={slots.identifyButton()}
             data-focus-visible={dataAttr(isFocusVisible)}
             ref={triggerRef}
             type="button"
             {...mergeProps(buttonProps, focusProps)}
           >
-            <span className={slots.link({ className: classNames?.link })}>
-              How to identify
-            </span>
-            <ChevronDown
-              className={slots.chevron({ className: classNames?.chevron })}
-            />
+            <span className={slots.link()}>How to identify</span>
+            <ChevronDown className={slots.chevron()} />
           </button>
         </div>
       </div>
 
       <div ref={panelRef} {...panelProps}>
-        <div className={slots.panel({ className: classNames?.panel })}>
-          <div
-            className={slots.panelGroup({
-              className: classNames?.panelGroup,
-            })}
-          >
-            <Landmark
-              className={slots.panelIcon({ className: classNames?.panelIcon })}
-            />
-            <div
-              className={slots.panelSection({
-                className: classNames?.panelSection,
-              })}
-            >
-              <div
-                className={slots.panelHeader({
-                  className: classNames?.panelHeader,
-                })}
-              >
+        <div className={slots.panel()}>
+          <div className={slots.panelGroup()}>
+            <Landmark className={slots.panelIcon()} />
+            <div className={slots.panelSection()}>
+              <div className={slots.panelHeader()}>
                 Official website links end with .gov.sg
               </div>
               <article>
                 Government agencies communicate via <b>.gov.sg</b> websites
                 (e.g. go.gov.sg/open).{" "}
                 <a
-                  className={slots.link({ className: classNames?.link })}
+                  className={slots.link()}
                   href="https://www.gov.sg/trusted-sites#govsites"
                   rel="noreferrer"
                   target="_blank"
@@ -152,44 +124,21 @@ export function GovtBanner({
                   Trusted websites
                   <ExternalLink
                     aria-hidden
-                    className={slots.inlineIcon({
-                      className: twMerge("ml-0.5", classNames?.inlineIcon),
-                    })}
+                    className={slots.inlineIcon({ className: "ml-0.5" })}
                   />
                 </a>
               </article>
             </div>
           </div>
-          <div
-            className={slots.panelGroup({
-              className: classNames?.panelGroup,
-            })}
-          >
-            <Lock
-              className={slots.panelIcon({ className: classNames?.panelIcon })}
-            />
-            <div
-              className={slots.panelSection({
-                className: classNames?.panelSection,
-              })}
-            >
-              <p
-                className={slots.panelHeader({
-                  className: classNames?.panelHeader,
-                })}
-              >
-                Secure websites use HTTPS
-              </p>
+          <div className={slots.panelGroup()}>
+            <Lock className={slots.panelIcon()} />
+            <div className={slots.panelSection()}>
+              <p className={slots.panelHeader()}>Secure websites use HTTPS</p>
               <article>
                 Look for a <b>lock</b>{" "}
                 <span aria-hidden>
                   (
-                  <Lock
-                    className={slots.inlineIcon({
-                      className: classNames?.inlineIcon,
-                    })}
-                  />
-                  )
+                  <Lock className={slots.inlineIcon()} />)
                 </span>{" "}
                 or <b>https://</b> as an added precaution. Share sensitive
                 information only on official, secure websites.
