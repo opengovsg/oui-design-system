@@ -1,5 +1,7 @@
 # @opengovsg/oui-theme
 
+## 0.0.57
+
 ## 0.0.56
 
 ### Patch Changes
