@@ -69,7 +69,7 @@ export interface ButtonProps extends AriaButtonProps, ButtonVariantProps {
    *
    * Only applies when no `loadingText` or `pendingElement` is provided, since
    * those replace the children with content of a different width.
-   * @defaultValue false
+   * @defaultValue true
    */
   preserveWidth?: boolean
 }
@@ -99,7 +99,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       spinner: spinnerProp,
       isIconOnly,
       isAttached,
-      preserveWidth,
+      preserveWidth = true,
       ...props
     },
     ref,
