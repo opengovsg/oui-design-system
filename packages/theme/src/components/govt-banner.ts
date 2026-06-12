@@ -5,7 +5,7 @@ import { tv } from "../utils/tv"
 
 export const govtBannerStyles = tv({
   slots: {
-    banner: "bg-[#f0f0f0] px-4 text-xs text-[#474747] lg:text-base",
+    banner: "w-full bg-[#f0f0f0] px-4 text-xs text-[#474747] lg:text-base",
     mainContentContainer: "flex min-h-7 items-center gap-2 py-1",
     crest:
       "h-5 w-4 shrink-0 self-start align-top has-[path]:fill-[#ef3320] lg:h-5 lg:w-5",
