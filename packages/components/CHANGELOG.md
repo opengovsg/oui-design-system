@@ -1,5 +1,16 @@
 # @opengovsg/oui
 
+## 0.0.56
+
+### Patch Changes
+
+- [#284](https://github.com/opengovsg/oui-design-system/pull/284) [`ce810e9`](https://github.com/opengovsg/oui-design-system/commit/ce810e9319dee6b251571a949ada2289ef474924) Thanks [@karrui](https://github.com/karrui)! - Add `preserveWidth` prop to `Button` to prevent layout shift while pending by keeping the children in the layout (visually hidden) and overlaying the spinner over them.
+
+- [#287](https://github.com/opengovsg/oui-design-system/pull/287) [`e9f60f4`](https://github.com/opengovsg/oui-design-system/commit/e9f60f41fbaf705d68bae30ac0b19d26e577f47f) Thanks [@karrui](https://github.com/karrui)! - feat(govt-banner): restrict classNames to only the `banner` and `mainContentContainer` container slots
+
+- Updated dependencies [[`ce810e9`](https://github.com/opengovsg/oui-design-system/commit/ce810e9319dee6b251571a949ada2289ef474924), [`e9f60f4`](https://github.com/opengovsg/oui-design-system/commit/e9f60f41fbaf705d68bae30ac0b19d26e577f47f)]:
+  - @opengovsg/oui-theme@0.0.56
+
 ## 0.0.55
 
 ### Patch Changes
