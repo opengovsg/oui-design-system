@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.57
+
+### Patch Changes
+
+- [#288](https://github.com/opengovsg/oui-design-system/pull/288) [`71dfc1e`](https://github.com/opengovsg/oui-design-system/commit/71dfc1e4794e76e08b28b2f4ebc41b95f56c4807) Thanks [@karrui](https://github.com/karrui)! - `Button` now enables `preserveWidth` by default, keeping its width constant
+  while pending to prevent layout shift. Pass `preserveWidth={false}` to opt out.
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.57
+
 ## 0.0.56
 
 ### Patch Changes
