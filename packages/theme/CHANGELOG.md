@@ -1,5 +1,13 @@
 # @opengovsg/oui-theme
 
+## 0.0.56
+
+### Patch Changes
+
+- [#284](https://github.com/opengovsg/oui-design-system/pull/284) [`ce810e9`](https://github.com/opengovsg/oui-design-system/commit/ce810e9319dee6b251571a949ada2289ef474924) Thanks [@karrui](https://github.com/karrui)! - Make the `Button` pending state read as disabled for every variant: the background and outline border mirror the variant's disabled colors (overriding hover/active so it no longer highlights), and the text uses the strong base content color (except `inverse`, which keeps its light text).
+
+- [#287](https://github.com/opengovsg/oui-design-system/pull/287) [`e9f60f4`](https://github.com/opengovsg/oui-design-system/commit/e9f60f41fbaf705d68bae30ac0b19d26e577f47f) Thanks [@karrui](https://github.com/karrui)! - feat(govt-banner): default full-width
+
 ## 0.0.55
 
 ### Patch Changes
