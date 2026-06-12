@@ -6,26 +6,32 @@ import { User2Icon } from "lucide-react"
 import { Button } from "@opengovsg/oui"
 
 export default function ButtonWithPreserveWidth() {
-  const [isPending, setIsPending] = useState(true)
+  const [preserveWidth, setPreserveWidth] = useState(true)
 
   return (
     <div className="flex flex-col items-start gap-4">
       <Button
         size="xs"
         variant="outline"
-        onPress={() => setIsPending((prev) => !prev)}
+        onPress={() => setPreserveWidth((prev) => !prev)}
       >
-        Toggle pending
+        Toggle preserveWidth (currently {preserveWidth ? "true" : "false"})
       </Button>
       <div className="flex flex-row items-center gap-4">
-        <Button isPending={isPending} preserveWidth>
+        <Button isPending preserveWidth={preserveWidth}>
           Submit form
         </Button>
         <Button
-          isPending={isPending}
-          preserveWidth
+          isPending
+          preserveWidth={preserveWidth}
           startContent={<User2Icon />}
         >
+          Submit form
+        </Button>
+      </div>
+      <div className="flex flex-row items-center gap-4">
+        <Button preserveWidth={preserveWidth}>Submit form</Button>
+        <Button preserveWidth={preserveWidth} startContent={<User2Icon />}>
           Submit form
         </Button>
       </div>

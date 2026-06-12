@@ -249,29 +249,45 @@ export const WithLoadingText: Story = {
 }
 
 function PreserveWidthTemplate(args: ButtonProps) {
-  const [isPending, setIsPending] = useState(true)
+  const [preserveWidth, setPreserveWidth] = useState(true)
 
   return (
-    <div className="flex flex-col items-start gap-4">
-      <Button
-        size="xs"
-        variant="outline"
-        onPress={() => setIsPending((prev) => !prev)}
-      >
-        Toggle pending
-      </Button>
-      <div className="flex flex-row items-center gap-4">
-        <Button {...args} isPending={isPending} preserveWidth>
-          Submit form
-        </Button>
+    <div>
+      <div className="flex flex-col items-start gap-4">
         <Button
-          {...args}
-          isPending={isPending}
-          preserveWidth
-          startContent={<User2Icon />}
+          size="xs"
+          variant="outline"
+          onPress={() => setPreserveWidth((prev) => !prev)}
         >
-          Submit form
+          Toggle preserveWidth (currently {preserveWidth ? "true" : "false"})
         </Button>
+        <div className="flex flex-row items-center gap-4">
+          <Button {...args} isPending preserveWidth={preserveWidth}>
+            Submit form
+          </Button>
+          <Button
+            {...args}
+            isPending
+            preserveWidth={preserveWidth}
+            startContent={<User2Icon />}
+          >
+            Submit form
+          </Button>
+        </div>
+      </div>
+      <div className="flex flex-col items-start gap-4">
+        <div className="flex flex-row items-center gap-4">
+          <Button {...args} preserveWidth={preserveWidth}>
+            Submit form
+          </Button>
+          <Button
+            {...args}
+            preserveWidth={preserveWidth}
+            startContent={<User2Icon />}
+          >
+            Submit form
+          </Button>
+        </div>
       </div>
     </div>
   )
@@ -279,7 +295,9 @@ function PreserveWidthTemplate(args: ButtonProps) {
 
 export const PreserveWidth: Story = {
   render: PreserveWidthTemplate,
-  args: {},
+  args: {
+    preserveWidth: true,
+  },
 }
 
 export const DisableRipple: Story = {
@@ -299,7 +317,7 @@ export const CustomWithClassNames: Story = {
   args: {
     radius: "full",
     className:
-      "bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
+      "bg-linear-to-tr from-pink-500 to-yellow-500 text-white shadow-lg",
   },
   parameters: {
     // This option disables all automatic a11y checks on this story,
