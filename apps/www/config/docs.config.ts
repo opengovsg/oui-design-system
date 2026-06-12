@@ -64,6 +64,7 @@ const docsLinks: NavItem = {
             },
             { title: "FileDropzone", url: "file-dropzone" },
             { title: "Field", url: "field" },
+            { title: "GovtBanner", url: "govt-banner", status: "new" },
             { title: "Infobox", url: "infobox", status: "new" },
             { title: "Link", url: "link", status: "new" },
 
@@ -86,6 +87,7 @@ const docsLinks: NavItem = {
             { title: "Select", url: "select", status: "updated" },
             { title: "Sidebar", url: "sidebar", status: "new" },
             { title: "Skeleton", url: "skeleton", status: "wip" },
+            { title: "Spinner", url: "spinner", status: "new" },
             { title: "Table", url: "table", status: "wip" },
             { title: "Tabs", url: "tabs" },
             { title: "TagField", url: "tag-field" },
