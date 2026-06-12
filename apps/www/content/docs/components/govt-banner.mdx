@@ -28,7 +28,7 @@ Alternatively, install the component as local source via the [shadcn CLI](/docs/
 
 GovtBanner is the standardised "A Singapore Government Agency Website" masthead that identifies an application as an official government service. It renders with `role="banner"` and includes a collapsible "How to identify" panel built on React Aria's [useDisclosure](https://react-aria.adobe.com/useDisclosure.html), explaining how users can verify they are on a legitimate `.gov.sg` site. Place it as the first element on the page, above your own navigation.
 
-> **Do not restyle the GovtBanner.** It is a standardised government identifier, and consistency across all `.gov.sg` services is what lets citizens trust and recognise it. Do not change its colors, copy, crest, icons, or layout — even though `classNames` is exposed. Render it with its defaults. The `classNames` prop exists only for narrow integration needs such as aligning the banner's horizontal padding with your page container (see [Custom Styles](#custom-styles)); it must never be used to alter the banner's appearance or content.
+> **Do not restyle the GovtBanner.** It is a standardised government identifier, and consistency across all `.gov.sg` services is what lets citizens trust and recognise it. Its colors, copy, crest, icons, and internal layout are fixed and cannot be overridden. The `classNames` prop exposes only the outer `banner` and `mainContentContainer` slots, for narrow integration needs such as aligning the banner's horizontal padding with your page container (see [Custom Styles](#custom-styles)).
 
 ### When to use
 
@@ -63,27 +63,14 @@ Control the panel's open state with the `isExpanded` and `onExpandedChange` prop
 
 ## Slots
 
-Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Each slot below corresponds to a key on the `classNames` object.
+Slots are named regions of the component you can target with custom Tailwind classes via the `classNames` prop. Only the two outer container slots are exposed — the banner's internal layout and styling are fixed to keep it consistent across all `.gov.sg` services.
 
 - **`banner`**: The outermost `<div>` wrapper carrying the `banner` role.
 - **`mainContentContainer`**: The wrapper around the always-visible top row (crest + main content).
-- **`crest`**: The government crest `<svg>`.
-- **`mainContent`**: The wrapper around the masthead text and the "How to identify" button.
-- **`link`**: Anchor and link-styled text within the banner.
-- **`identifyButton`**: The "How to identify" trigger `<button>`.
-- **`chevron`**: The chevron `<svg>` icon beside the trigger.
-- **`panel`**: The wrapper for the expandable panel content.
-- **`panelGroup`**: The wrapper around an icon + section pairing inside the panel.
-- **`panelIcon`**: An icon (`<svg>`) within a panel group.
-- **`panelSection`**: The wrapper for a panel section's header and body.
-- **`panelHeader`**: A section header within the panel.
-- **`inlineIcon`**: An inline icon (`<svg>`) embedded in panel body text.
 
 ### Custom Styles
 
-The slots above are exposed only to let you fit the banner into your page's layout — never to restyle it. The single sanctioned use is aligning the banner's horizontal padding with your page container so the masthead lines up with the content below it. The example below widens the gutters via the `banner` and `mainContentContainer` slots; the colors, copy, crest, and structure are left untouched.
-
-Do not use `classNames` to change colors, typography, copy, the crest, or the panel layout. See the [warning above](#usage).
+The two container slots are exposed only to let you fit the banner into your page's layout. The intended use is aligning the banner's horizontal padding with your page container so the masthead lines up with the content below it. The example below widens the gutters via the `banner` and `mainContentContainer` slots.
 
 <ComponentPreview name="govt-banner-with-custom-styles" />
 
@@ -97,6 +84,6 @@ Do not use `classNames` to change colors, typography, copy, the crest, or the pa
 | `isExpanded`       | `boolean`                                                     | -       | Whether the "How to identify" panel is open (controlled)                           |
 | `defaultExpanded`  | `boolean`                                                     | `false` | Whether the panel is open by default (uncontrolled)                                |
 | `onExpandedChange` | `(isExpanded: boolean) => void`                               | -       | Called when the panel's expanded state changes                                     |
-| `classNames`       | `SlotsToClasses<GovtBannerSlots>`                             | -       | Custom Tailwind classes for component slots                                        |
+| `classNames`       | `{ banner?: string; mainContentContainer?: string }`          | -       | Custom Tailwind classes for the `banner` and `mainContentContainer` slots          |
 
 _Inherits all remaining props from React Aria's [DisclosureProps](https://react-aria.adobe.com/useDisclosure.html)._
