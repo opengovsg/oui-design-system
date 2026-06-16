@@ -5,7 +5,7 @@ import { tv } from "../utils"
 export const listBoxItemStyles = tv({
   slots: {
     container:
-      "text-base-content-strong flex cursor-pointer flex-col outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-solid focus-visible:outline-utility-focus-default",
+      "text-base-content-strong focus-visible:outline-utility-focus-default flex cursor-pointer flex-col outline-none focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-solid",
     label: "line-clamp-1",
     description: "text-base-content-medium",
   },
