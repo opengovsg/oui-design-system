@@ -69,7 +69,7 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
     const Component = as || "span"
 
     return (
-      <AvatarContext
+      <AvatarContext.Provider
         value={{
           imageLoadingStatus,
           setImageLoadingStatus,
@@ -86,7 +86,7 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
         >
           {children}
         </Component>
-      </AvatarContext>
+      </AvatarContext.Provider>
     )
   },
 )
