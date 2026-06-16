@@ -1,0 +1,58 @@
+# Dependabot version updates.
+#
+# Dependencies pinned through pnpm-workspace.yaml catalogs are bumped in that
+# file by Dependabot (GA support for pnpm catalogs). The `groups` below mirror
+# the catalogs one-to-one so every package in a catalog is updated together in
+# a single PR instead of one PR per package.
+#
+# Catalogs live at the repo root (pnpm-workspace.yaml), so the root directory is
+# what carries the catalog updates. The workspace globs pick up the remaining,
+# non-catalog dependencies declared directly in each workspace package.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directories:
+      - "/"
+      - "/apps/*"
+      - "/packages/*"
+      - "/tooling/*"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 10
+    groups:
+      # catalog: tailwind
+      tailwind:
+        patterns:
+          - "tailwindcss"
+          - "@tailwindcss/*"
+      # catalog: react
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "@types/react"
+          - "@types/react-dom"
+      # catalog: storybook10
+      storybook:
+        patterns:
+          - "storybook"
+          - "@storybook/*"
+          - "eslint-plugin-storybook"
+      # catalog: vitest
+      vitest:
+        patterns:
+          - "vitest"
+          - "@vitest/*"
+
+  # Keep GitHub Actions used in workflows/composite actions up to date, grouped
+  # into a single PR.
+  - package-ecosystem: github-actions
+    directories:
+      - "/"
+      - "/.github/actions/*"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
