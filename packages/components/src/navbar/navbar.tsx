@@ -47,7 +47,7 @@ export const Navbar = forwardRef<"div", NavbarProps>((props, ref) => {
   )
 
   return (
-    <NavbarProvider value={context}>
+    <NavbarProvider.Provider value={context}>
       <FocusScope contain={context.isMenuOpen}>
         {context.shouldShowOnScrollUp ? (
           <LazyMotion features={domAnimation}>
@@ -64,7 +64,7 @@ export const Navbar = forwardRef<"div", NavbarProps>((props, ref) => {
           <Component {...context.getBaseProps()}>{content}</Component>
         )}
       </FocusScope>
-    </NavbarProvider>
+    </NavbarProvider.Provider>
   )
 })
 

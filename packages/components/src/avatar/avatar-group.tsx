@@ -56,10 +56,10 @@ export const AvatarGroup = forwardRef<"div", AvatarGroupProps>((props, ref) => {
 
   return (
     <Component {...getAvatarGroupProps()}>
-      <AvatarGroupProvider value={context}>
+      <AvatarGroupProvider.Provider value={context}>
         {clones}
         {renderedCount}
-      </AvatarGroupProvider>
+      </AvatarGroupProvider.Provider>
     </Component>
   )
 })
