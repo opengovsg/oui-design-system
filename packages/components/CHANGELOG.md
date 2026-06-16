@@ -1,5 +1,18 @@
 # @opengovsg/oui
 
+## 0.0.58
+
+### Patch Changes
+
+- [#290](https://github.com/opengovsg/oui-design-system/pull/290) [`f04ff7b`](https://github.com/opengovsg/oui-design-system/commit/f04ff7b818bb50f3ede31929a2a22b9a5d1e36bc) Thanks [@karrui](https://github.com/karrui)! - `Menu`/`Popover` now flips above the trigger when opened near the bottom edge
+  of the viewport, instead of opening downwards and being clipped (or collapsing
+  to ~0 height). react-aria measures the popover before its collection content
+  has rendered, so near a viewport edge it pinned the overlay to `max-height: 0`
+  and never repositioned once the content populated; `Popover` now nudges
+  react-aria to re-measure until the overlay is positioned against real content.
+- Updated dependencies [[`7552f60`](https://github.com/opengovsg/oui-design-system/commit/7552f6056009265de720d28f30909a750e22f669)]:
+  - @opengovsg/oui-theme@0.0.58
+
 ## 0.0.57
 
 ### Patch Changes
