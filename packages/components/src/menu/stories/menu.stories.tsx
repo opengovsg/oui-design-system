@@ -3,7 +3,7 @@ import type { Selection } from "react-aria-components"
 import { useState } from "react"
 import { MoreHorizontal } from "lucide-react"
 import { MenuTrigger, SubmenuTrigger } from "react-aria-components"
-import { expect, userEvent, within } from "storybook/test"
+import { expect, userEvent, waitFor, within } from "storybook/test"
 
 import type { MenuProps } from "../menu"
 import { Button } from "../../button"
@@ -84,6 +84,64 @@ export const Example: Story = {
   render: Template,
   play: ({ canvas }) => {
     userEvent.click(canvas.getByRole("button", { name: /file options/i }))
+  },
+}
+
+/**
+ * A trigger pinned near the bottom edge of the viewport, with no room below for
+ * the menu. The menu must flip above the trigger and remain fully visible
+ * instead of opening downwards and being clipped by the viewport.
+ *
+ * react-aria does not flip on its own here because the menu collection populates
+ * only after the first positioning pass; OUI's `Popover` works around it. Note
+ * this regression reproduces in async-rendering environments (real browsers /
+ * Chromatic); test runners that flush effects synchronously can mask it.
+ */
+export const ViewportEdgeFlip: Story = {
+  render: (args) => (
+    <MenuTrigger>
+      <Button
+        isIconOnly
+        aria-label="File options"
+        variant="outline"
+        className="px-2"
+      >
+        <MoreHorizontal className="h-5 w-5" />
+      </Button>
+      <Menu {...args}>
+        <MenuItem id="new">New…</MenuItem>
+        <MenuItem id="open">Open…</MenuItem>
+        <MenuItem id="save">Save</MenuItem>
+      </Menu>
+    </MenuTrigger>
+  ),
+  play: async ({ canvasElement }) => {
+    const screen = canvasElement.parentElement!
+    const canvas = within(screen)
+
+    const trigger = canvas.getByRole("button", { name: /file options/i })
+    // Pin the trigger to the bottom edge of the viewport so there is no room
+    // below it for the menu — it must flip above.
+    const container = trigger.parentElement!
+    container.style.position = "fixed"
+    container.style.left = "16px"
+    container.style.top = `${window.innerHeight - 56}px`
+    await userEvent.click(trigger)
+
+    const menu = await canvas.findByRole("menu")
+
+    await waitFor(() => {
+      const menuRect = menu.getBoundingClientRect()
+      const triggerRect = trigger.getBoundingClientRect()
+
+      // The menu renders with its real content height (it does not collapse).
+      expect(menuRect.height).toBeGreaterThan(0)
+      // It flips above the trigger...
+      expect(menuRect.bottom).toBeLessThanOrEqual(triggerRect.top + 1)
+      // ...and stays fully within the viewport.
+      expect(menuRect.top).toBeGreaterThanOrEqual(0)
+      expect(menuRect.bottom).toBeLessThanOrEqual(window.innerHeight + 1)
+    })
   },
 }
 
