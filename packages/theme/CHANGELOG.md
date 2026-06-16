@@ -1,5 +1,11 @@
 # @opengovsg/oui-theme
 
+## 0.0.58
+
+### Patch Changes
+
+- [#292](https://github.com/opengovsg/oui-design-system/pull/292) [`7552f60`](https://github.com/opengovsg/oui-design-system/commit/7552f6056009265de720d28f30909a750e22f669) Thanks [@karrui](https://github.com/karrui)! - Suppress the default browser focus outline on menu and list box items so the focus-follows-mouse behaviour no longer shows a focus ring on hover. A focus ring now only appears on keyboard focus via `focus-visible`; mouse hover continues to use the background highlight.
+
 ## 0.0.57
 
 ## 0.0.56
