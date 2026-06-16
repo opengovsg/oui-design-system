@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import type { Selection } from "react-aria-components"
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { MoreHorizontal } from "lucide-react"
 import { MenuTrigger, SubmenuTrigger } from "react-aria-components"
 import { expect, userEvent, waitFor, within } from "storybook/test"
@@ -92,9 +92,12 @@ export const Example: Story = {
  * the menu. The menu must flip above the trigger and remain fully visible
  * instead of opening downwards and being clipped by the viewport.
  *
- * react-aria does not flip on its own here because the menu collection populates
- * only after the first positioning pass; OUI's `Popover` works around it. Note
- * this regression reproduces in async-rendering environments (real browsers /
+ * Regression test for a flip-on-open bug: the menu collection populates only
+ * after react-aria's first positioning pass, and animating the positioned
+ * overlay corrupted react-aria's re-measurement, so the menu stayed clamped
+ * below the trigger until a later resize. OUI's `Popover` animates an inner
+ * wrapper instead, leaving the measured overlay animation-free so it flips on
+ * open. Note this reproduces in async-rendering environments (real browsers /
  * Chromatic); test runners that flush effects synchronously can mask it.
  */
 export const ViewportEdgeFlip: Story = {
@@ -141,6 +144,75 @@ export const ViewportEdgeFlip: Story = {
       // ...and stays fully within the viewport.
       expect(menuRect.top).toBeGreaterThanOrEqual(0)
       expect(menuRect.bottom).toBeLessThanOrEqual(window.innerHeight + 1)
+    })
+  },
+}
+
+/**
+ * A trigger pinned near the bottom edge of a bounded scroll container (passed as
+ * `boundaryElement`/`scrollRef`). The menu must flip above the trigger and stay
+ * within the container on open — not render below, collapse to ~0 height, and
+ * only flip after a resize.
+ */
+export const BoundedContainerFlip: Story = {
+  render: function BoundedContainerFlipStory(args) {
+    const [boundary, setBoundary] = useState<HTMLElement | null>(null)
+    const scrollRef = useRef<HTMLDivElement | null>(null)
+    return (
+      <div
+        data-testid="scroll-container"
+        ref={(el) => {
+          scrollRef.current = el
+          setBoundary(el)
+        }}
+        style={{
+          height: 240,
+          width: 280,
+          overflowY: "auto",
+          border: "1px solid #ccc",
+          position: "relative",
+        }}
+      >
+        {/* Spacer to push the trigger near the bottom of the container */}
+        <div style={{ height: 200 }} />
+        <MenuTrigger>
+          <Button
+            isIconOnly
+            aria-label="File options"
+            variant="outline"
+            className="px-2"
+          >
+            <MoreHorizontal className="h-5 w-5" />
+          </Button>
+          {boundary && (
+            <Menu {...args} boundaryElement={boundary} scrollRef={scrollRef}>
+              <MenuItem id="new">New…</MenuItem>
+              <MenuItem id="open">Open…</MenuItem>
+              <MenuItem id="save">Save</MenuItem>
+            </Menu>
+          )}
+        </MenuTrigger>
+        {/* Spacer so the container is actually scrollable */}
+        <div style={{ height: 200 }} />
+      </div>
+    )
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement.parentElement!)
+
+    const trigger = canvas.getByRole("button", { name: /file options/i })
+    await userEvent.click(trigger)
+
+    const menu = await canvas.findByRole("menu")
+
+    await waitFor(() => {
+      const menuRect = menu.getBoundingClientRect()
+      const triggerRect = trigger.getBoundingClientRect()
+
+      // The menu renders at its real height and flips above the trigger on open
+      // rather than collapsing below it.
+      expect(menuRect.height).toBeGreaterThan(0)
+      expect(menuRect.bottom).toBeLessThanOrEqual(triggerRect.top + 1)
     })
   },
 }

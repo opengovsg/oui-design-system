@@ -99,6 +99,38 @@ Use the `size` prop on `Menu` to change the density. Defaults to `"md"`.
 
 <ComponentPreview name="menu-sizes" />
 
+### Flipping within a scroll container
+
+By default the menu flips to stay within the viewport. When the trigger lives inside a scrollable region, pass that region as `boundaryElement` (and `scrollRef`) so the menu flips to stay within the container instead of the viewport. Both should resolve to the same scroll container element.
+
+```tsx
+function ScrollableMenu() {
+  const scrollRef = useRef(null)
+  const [boundary, setBoundary] = useState(null)
+
+  return (
+    <div
+      ref={(el) => {
+        scrollRef.current = el
+        setBoundary(el)
+      }}
+      className="h-60 overflow-y-auto"
+    >
+      {/* …scrollable content… */}
+      <MenuTrigger>
+        <Button>Options</Button>
+        {boundary && (
+          <Menu boundaryElement={boundary} scrollRef={scrollRef}>
+            <MenuItem id="edit">Edit</MenuItem>
+            <MenuItem id="delete">Delete</MenuItem>
+          </Menu>
+        )}
+      </MenuTrigger>
+    </div>
+  )
+}
+```
+
 ## Content
 
 Menu follows the [Collection Components API](https://react-spectrum.adobe.com/react-aria/collections.html), accepting both static and dynamic collections.
@@ -170,23 +202,30 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### Menu
 
-| Prop                  | Type                                                 | Default  | Description                                                    |
-| --------------------- | ---------------------------------------------------- | -------- | -------------------------------------------------------------- |
-| `children`            | `ReactNode \| ((item: T) => ReactNode)`              | -        | Static children or render function for dynamic items           |
-| `items`               | `Iterable<T>`                                        | -        | The list of items for a dynamic collection                     |
-| `disabledKeys`        | `Iterable<Key>`                                      | -        | Keys of items that are disabled                                |
-| `selectionMode`       | `"none" \| "single" \| "multiple"`                   | `"none"` | The selection mode for the menu (prefer per-section selection) |
-| `selectedKeys`        | `Selection`                                          | -        | The currently selected keys (controlled)                       |
-| `defaultSelectedKeys` | `Selection`                                          | -        | The default selected keys (uncontrolled)                       |
-| `onSelectionChange`   | `(keys: Selection) => void`                          | -        | Called when the selection changes                              |
-| `onAction`            | `(key: Key) => void`                                 | -        | Called when an item is activated, receiving its `Key`          |
-| `onClose`             | `() => void`                                         | -        | Called when the menu should close after item selection         |
-| `size`                | `"xs" \| "sm" \| "md"`                               | `"md"`   | The size (density) of the menu and its items                   |
-| `placement`           | `Placement`                                          | -        | The placement of the popover relative to the trigger           |
-| `classNames`          | `SlotsToClasses<"base" \| "popover" \| "separator">` | -        | Custom Tailwind classes for menu slots                         |
-| `autoFocus`           | `boolean \| "first" \| "last"`                       | -        | Where focus is placed when the menu opens                      |
+| Prop                  | Type                                                 | Default  | Description                                                                                       |
+| --------------------- | ---------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------- |
+| `children`            | `ReactNode \| ((item: T) => ReactNode)`              | -        | Static children or render function for dynamic items                                              |
+| `items`               | `Iterable<T>`                                        | -        | The list of items for a dynamic collection                                                        |
+| `disabledKeys`        | `Iterable<Key>`                                      | -        | Keys of items that are disabled                                                                   |
+| `selectionMode`       | `"none" \| "single" \| "multiple"`                   | `"none"` | The selection mode for the menu (prefer per-section selection)                                    |
+| `selectedKeys`        | `Selection`                                          | -        | The currently selected keys (controlled)                                                          |
+| `defaultSelectedKeys` | `Selection`                                          | -        | The default selected keys (uncontrolled)                                                          |
+| `onSelectionChange`   | `(keys: Selection) => void`                          | -        | Called when the selection changes                                                                 |
+| `onAction`            | `(key: Key) => void`                                 | -        | Called when an item is activated, receiving its `Key`                                             |
+| `onClose`             | `() => void`                                         | -        | Called when the menu should close after item selection                                            |
+| `size`                | `"xs" \| "sm" \| "md"`                               | `"md"`   | The size (density) of the menu and its items                                                      |
+| `placement`           | `Placement`                                          | -        | The placement of the popover relative to the trigger                                              |
+| `boundaryElement`     | `Element`                                            | `body`   | Element the popover is positioned within — bounds where it flips (e.g. a scroll container)        |
+| `scrollRef`           | `RefObject<Element>`                                 | -        | The scrollable region the popover anchors to; pair with `boundaryElement` for a bounded container |
+| `shouldFlip`          | `boolean`                                            | `true`   | Whether the popover flips to the opposite side when it would overflow the boundary                |
+| `offset`              | `number`                                             | `8`      | Distance between the popover and the trigger                                                      |
+| `crossOffset`         | `number`                                             | `0`      | Offset along the cross axis                                                                       |
+| `containerPadding`    | `number`                                             | `12`     | Minimum padding between the popover and the boundary edges                                        |
+| `maxHeight`           | `number`                                             | -        | The maximum height of the popover                                                                 |
+| `classNames`          | `SlotsToClasses<"base" \| "popover" \| "separator">` | -        | Custom Tailwind classes for menu slots                                                            |
+| `autoFocus`           | `boolean \| "first" \| "last"`                       | -        | Where focus is placed when the menu opens                                                         |
 
-_Inherits all remaining props from React Aria's [Menu](https://react-aria.adobe.com/Menu). Notable ones: `shouldFocusWrap`, `escapeKeyBehavior`, `aria-label`, `aria-labelledby`._
+_`placement`, `boundaryElement`, `scrollRef`, `shouldFlip`, `offset`, `crossOffset`, `containerPadding`, and `maxHeight` are forwarded to the underlying [Popover](https://react-aria.adobe.com/Popover). All remaining props are inherited from React Aria's [Menu](https://react-aria.adobe.com/Menu) (notably `shouldFocusWrap`, `escapeKeyBehavior`, `aria-label`, `aria-labelledby`)._
 
 ### MenuItem
 
