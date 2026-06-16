@@ -36,7 +36,7 @@
     "@storybook/addon-themes": "catalog:storybook10",
     "@storybook/addon-vitest": "catalog:storybook10",
     "@storybook/react-vite": "catalog:storybook10",
-    "@tailwindcss/vite": "catalog:",
+    "@tailwindcss/vite": "catalog:tailwind",
     "@types/node": "^22.13.1",
     "@types/sinonjs__fake-timers": "^8.1.5",
     "@vitejs/plugin-react": "^5.0.0",
@@ -50,7 +50,7 @@
     "prettier": "catalog:",
     "serve": "^14.2.4",
     "storybook": "catalog:storybook10",
-    "tailwindcss": "catalog:",
+    "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:",
     "vite": "^7.1.2",
     "vitest": "catalog:vitest"

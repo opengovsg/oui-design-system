@@ -4,10 +4,8 @@ packages:
   - tooling/*
 
 catalog:
-  "@tailwindcss/vite": 4.1.18
   eslint: ^9.39.1
   prettier: ^3.5.3
-  tailwindcss: 4.1.18
   typescript: 5.7.3
   react-aria-components: ^1.14.0
 
@@ -27,6 +25,10 @@ catalogs:
     "@storybook/react-vite": 10.2.10
     eslint-plugin-storybook: 10.2.10
     storybook: 10.2.10
+  tailwind:
+    "@tailwindcss/postcss": 4.1.18
+    "@tailwindcss/vite": 4.1.18
+    tailwindcss: 4.1.18
   vitest:
     "@vitest/browser": 4.0.15
     "@vitest/browser-playwright": 4.0.15
