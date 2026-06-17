@@ -49,7 +49,7 @@ export const ThemeSelector = () => {
     return (
       <div
         aria-hidden
-        className="border-fd-border bg-fd-secondary h-7 w-28 animate-pulse rounded-md border"
+        className="border-fd-border bg-fd-secondary h-[30px] w-28 animate-pulse rounded-md border"
       />
     )
   }
