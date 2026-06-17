@@ -27,8 +27,8 @@ catalogs:
     storybook: 10.4.5
   tailwind:
     "@tailwindcss/postcss": 4.1.18
-    "@tailwindcss/vite": 4.1.18
-    tailwindcss: 4.1.18
+    "@tailwindcss/vite": 4.3.1
+    tailwindcss: 4.3.1
   vitest:
     "@vitest/browser": 4.0.15
     "@vitest/browser-playwright": 4.0.15

@@ -58,11 +58,11 @@ catalogs:
       specifier: 4.1.18
       version: 4.1.18
     '@tailwindcss/vite':
-      specifier: 4.1.18
-      version: 4.1.18
+      specifier: 4.3.1
+      version: 4.3.1
     tailwindcss:
-      specifier: 4.1.18
-      version: 4.1.18
+      specifier: 4.3.1
+      version: 4.3.1
   vitest:
     '@vitest/browser':
       specifier: 4.0.15
@@ -199,7 +199,7 @@ importers:
         version: 3.3.1
       tailwindcss-react-aria-components:
         specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@4.1.18)
+        version: 2.0.0(tailwindcss@4.3.1)
       tw-animate-css:
         specifier: ^1.2.0
         version: 1.3.4
@@ -251,7 +251,7 @@ importers:
         version: 3.7.3
       tailwindcss:
         specifier: catalog:tailwind
-        version: 4.1.18
+        version: 4.3.1
       typescript:
         specifier: 'catalog:'
         version: 5.7.3
@@ -315,7 +315,7 @@ importers:
         version: 10.4.5(@types/react-dom@19.2.3(@types/react@19.2.17))(@types/react@19.2.17)(esbuild@0.28.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(rollup@4.59.0)(storybook@10.4.5(@testing-library/dom@10.4.0)(@types/react@19.2.17)(prettier@3.5.3)(react-dom@19.2.7(react@19.2.7))(react@19.2.7))(typescript@5.7.3)(vite@8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0))
       '@tailwindcss/vite':
         specifier: catalog:tailwind
-        version: 4.1.18(vite@8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0))
+        version: 4.3.1(vite@8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0))
       '@types/node':
         specifier: ^22.13.1
         version: 22.15.32
@@ -357,7 +357,7 @@ importers:
         version: 10.4.5(@testing-library/dom@10.4.0)(@types/react@19.2.17)(prettier@3.5.3)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       tailwindcss:
         specifier: catalog:tailwind
-        version: 4.1.18
+        version: 4.3.1
       typescript:
         specifier: 'catalog:'
         version: 5.7.3
@@ -698,7 +698,7 @@ importers:
         version: 3.3.1
       tailwindcss-react-aria-components:
         specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@4.1.18)
+        version: 2.0.0(tailwindcss@4.3.1)
       tw-animate-css:
         specifier: ^1.2.0
         version: 1.3.4
@@ -732,10 +732,10 @@ importers:
         version: 19.2.7
       tailwind-variants:
         specifier: ^3.1.1
-        version: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.18)
+        version: 3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.3.1)
       tailwindcss:
         specifier: catalog:tailwind
-        version: 4.1.18
+        version: 4.3.1
       tsup:
         specifier: ^8.5.1
         version: 8.5.1(@swc/core@1.10.15(@swc/helpers@0.5.21))(jiti@2.7.0)(postcss@8.5.15)(tsx@4.21.0)(typescript@5.7.3)(yaml@2.7.0)
@@ -4500,8 +4500,8 @@ packages:
   '@tailwindcss/postcss@4.3.1':
     resolution: {integrity: sha512-dNJuNbdEJT/SWRuXTYP1WSamelsz3ztkUsdtWQPjrexysrTpaEPM40P/71knXiXLYEojqPOEGitVLLpPMS5T6A==}
 
-  '@tailwindcss/vite@4.1.18':
-    resolution: {integrity: sha512-jVA+/UpKL1vRLg6Hkao5jldawNmRo7mQYrZtNHMIVpLfLhDml5nMRUo/8MwoX2vNXvnaXNNMedrMfMugAVX1nA==}
+  '@tailwindcss/vite@4.3.1':
+    resolution: {integrity: sha512-hItDHuIIlEV61R+faXu66s1K36aTurO/Qw0e45Vskz57gXl9pWOT6eg3zmcEui6CZXddbN7zd41bwmvag4JGwQ==}
     peerDependencies:
       vite: '>=7.1.5'
 
@@ -13447,11 +13447,11 @@ snapshots:
       postcss: 8.5.15
       tailwindcss: 4.3.1
 
-  '@tailwindcss/vite@4.1.18(vite@8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0))':
+  '@tailwindcss/vite@4.3.1(vite@8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0))':
     dependencies:
-      '@tailwindcss/node': 4.1.18
-      '@tailwindcss/oxide': 4.1.18
-      tailwindcss: 4.1.18
+      '@tailwindcss/node': 4.3.1
+      '@tailwindcss/oxide': 4.3.1
+      tailwindcss: 4.3.1
       vite: 8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0)
 
   '@tanstack/react-virtual@3.13.10(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
@@ -18780,15 +18780,15 @@ snapshots:
 
   tailwind-merge@3.6.0: {}
 
-  tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.1.18):
+  tailwind-variants@3.1.1(tailwind-merge@3.3.1)(tailwindcss@4.3.1):
     dependencies:
-      tailwindcss: 4.1.18
+      tailwindcss: 4.3.1
     optionalDependencies:
       tailwind-merge: 3.3.1
 
-  tailwindcss-react-aria-components@2.0.0(tailwindcss@4.1.18):
+  tailwindcss-react-aria-components@2.0.0(tailwindcss@4.3.1):
     dependencies:
-      tailwindcss: 4.1.18
+      tailwindcss: 4.3.1
 
   tailwindcss@4.1.18: {}
 
