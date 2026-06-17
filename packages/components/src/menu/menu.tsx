@@ -55,8 +55,31 @@ export const [MenuVariantContext, useMenuVariantContext] = createContext<
   name: "MenuVariantContext",
   strict: false,
 })
-export interface MenuProps<T> extends AriaMenuProps<T>, MenuVariantProps {
-  placement?: PopoverProps["placement"]
+/**
+ * Popover positioning props forwarded from `Menu` to its underlying `Popover`.
+ * These let consumers bound where/how the menu flips — most importantly
+ * `boundaryElement`/`scrollRef`, which constrain flipping to a scroll container
+ * rather than the whole viewport.
+ */
+type ForwardedPopoverProps = Pick<
+  PopoverProps,
+  | "placement"
+  | "boundaryElement"
+  | "scrollRef"
+  | "shouldFlip"
+  | "maxHeight"
+  | "containerPadding"
+  | "offset"
+  | "crossOffset"
+  | "shouldUpdatePosition"
+  | "arrowBoundaryOffset"
+  | "triggerRef"
+>
+
+export interface MenuProps<T>
+  extends AriaMenuProps<T>,
+    MenuVariantProps,
+    ForwardedPopoverProps {
   classNames?: SlotsToClasses<MenuVariantSlots>
 }
 
@@ -76,13 +99,46 @@ function MenuInner<T extends object>(
     menuStyles.variantKeys,
   )
 
-  const { className, classNames, placement, ...rest } = props
+  // Pull popover-positioning props out so they reach `Popover` (where react-aria
+  // positions the overlay) instead of being spread onto the inner `AriaMenu`,
+  // where they have no effect.
+  const {
+    className,
+    classNames,
+    placement,
+    boundaryElement,
+    scrollRef,
+    shouldFlip,
+    maxHeight,
+    containerPadding,
+    offset,
+    crossOffset,
+    shouldUpdatePosition,
+    arrowBoundaryOffset,
+    triggerRef,
+    ...rest
+  } = props
+
+  const popoverProps: ForwardedPopoverProps = {
+    placement,
+    boundaryElement,
+    scrollRef,
+    shouldFlip,
+    maxHeight,
+    containerPadding,
+    offset,
+    crossOffset,
+    shouldUpdatePosition,
+    arrowBoundaryOffset,
+    triggerRef,
+  }
+
   const styles = menuStyles(variantProps)
 
   return (
     <Provider values={[[MenuVariantContext, variantProps]]}>
       <Popover
-        placement={placement}
+        {...popoverProps}
         className={styles.popover({ className: classNames?.popover })}
       >
         <AriaMenu
