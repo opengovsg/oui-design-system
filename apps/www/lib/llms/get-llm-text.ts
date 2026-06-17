@@ -1,8 +1,8 @@
 import path from "node:path"
 import type { RawDocLinks } from "@/lib/doc-links"
-import type { source } from "@/lib/source"
 import type { Heading, Paragraph, Root, RootContent } from "mdast"
 import { resolveDocLinks } from "@/lib/doc-links"
+import { source } from "@/lib/source"
 import matter from "gray-matter"
 import remarkGfm from "remark-gfm"
 import remarkMdx from "remark-mdx"
@@ -24,6 +24,15 @@ export function isLlmExposed(page: DocPage): boolean {
 
 const EXAMPLES_DIR = path.join(process.cwd(), "registry", "examples")
 
+// `<kind>/<slug>` of every doc that has an `.mdx` route, so cross-links to
+// WIP/unpublished docs aren't rewritten to a 404ing `/llms.mdx/...` path.
+const EXPOSED_SLUGS = new Set(
+  source
+    .getPages()
+    .filter(isLlmExposed)
+    .map((page) => page.slugs.join("/")),
+)
+
 const parser = unified().use(remarkParse).use(remarkMdx)
 const stringifier = unified()
   .use(remarkGfm)
@@ -42,7 +51,10 @@ export async function getLLMText(page: DocPage): Promise<string> {
 
   const tree = parser.parse(content) as Root
   await parser.run(tree)
-  await applyTransforms(tree, { examplesDir: EXAMPLES_DIR })
+  await applyTransforms(tree, {
+    examplesDir: EXAMPLES_DIR,
+    exposedSlugs: EXPOSED_SLUGS,
+  })
 
   const rawLinks = data.links as RawDocLinks | undefined
   const links = resolveDocLinks(rawLinks)
