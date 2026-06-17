@@ -58,13 +58,14 @@ export function ComponentPreview({
       {...props}
     >
       {/*
-        `not-prose` opts the live demo out of the `.prose` typography that
-        fumadocs' DocsBody applies to MDX content, so rendered OUI components
-        aren't restyled by the docs body (link colours, list markers, spacing).
+        `not-prose` opts the live demo out of the `.prose` typography fumadocs'
+        DocsBody applies to MDX content. `oui-preview` + an explicit light
+        background/`color-scheme` keep the demo in light mode regardless of the
+        docs site theme, since OUI has no dark mode (see globals.css).
       */}
       <div
         className={cn(
-          "not-prose flex w-full items-center justify-start overflow-auto",
+          "oui-preview not-prose flex w-full items-center justify-start overflow-auto bg-white text-zinc-950 [color-scheme:light]",
           !asIframe && "p-4 md:p-6 lg:p-10",
         )}
       >

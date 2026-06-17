@@ -13,6 +13,15 @@
 /* Generate the classes used by Fumadocs UI's own components. */
 @source "../node_modules/fumadocs-ui/dist/**/*.js";
 
+/*
+ * OUI has no dark mode. Redefine the `dark` variant (originally from
+ * @opengovsg/oui-theme) so `dark:` utilities never apply inside a `.oui-preview`
+ * subtree. Component previews therefore always render in light mode even when
+ * the docs site is in dark mode. (OUI only styles dark via `dark:` utilities —
+ * there are no `.dark` token overrides — so excluding the variant is enough.)
+ */
+@custom-variant dark (&:where(.dark, .dark *):not(:where(.oui-preview, .oui-preview *)));
+
 @utility scrollbar-hide {
   scrollbar-width: none;
   -ms-overflow-style: none;
