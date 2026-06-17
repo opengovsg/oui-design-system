@@ -57,9 +57,14 @@ export function ComponentPreview({
       )}
       {...props}
     >
+      {/*
+        `not-prose` opts the live demo out of the `.prose` typography that
+        fumadocs' DocsBody applies to MDX content, so rendered OUI components
+        aren't restyled by the docs body (link colours, list markers, spacing).
+      */}
       <div
         className={cn(
-          "flex w-full items-center justify-start overflow-auto",
+          "not-prose flex w-full items-center justify-start overflow-auto",
           !asIframe && "p-4 md:p-6 lg:p-10",
         )}
       >
