@@ -2,9 +2,9 @@ import { Index } from "@/__registry__"
 import { readRegistryFile } from "@/lib/mdx"
 import { highlightCode } from "@/lib/shiki"
 
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
 
+import { CodeCollapsible } from "./code-collapsible"
 import { CopyButton } from "./copy-button"
 import { IframePreviewNoSsr } from "./iframe-preview"
 import { PreviewErrorBoundary } from "./preview-error-boundary"
@@ -35,27 +35,21 @@ const RenderedComponent = ({ name }: { name: string }) => {
   return <Component />
 }
 
-const Code = async ({
-  name,
-  showCopy = true,
-}: {
-  name: string
-  showCopy?: boolean
-}) => {
+const Code = async ({ name }: { name: string }) => {
   const source = await readRegistryFile(name)
+  // `html` is produced by Shiki from a committed registry example file (trusted,
+  // not user input), so injecting it as markup is safe here.
   const html = await highlightCode(source)
   return (
-    <>
+    <div className="relative">
       <div
-        className="code-highlight overflow-x-auto rounded-tr-md rounded-b-md bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900"
+        className="code-highlight max-h-[31.25rem] overflow-auto bg-zinc-950 p-4 font-mono text-sm dark:bg-zinc-900 [&_pre]:my-0"
         dangerouslySetInnerHTML={{ __html: html }}
       />
-      {showCopy && (
-        <div className="absolute top-4 right-4 text-white">
-          <CopyButton className="text-inherit">{source}</CopyButton>
-        </div>
-      )}
-    </>
+      <div className="absolute top-4 right-4 text-white">
+        <CopyButton className="text-inherit">{source}</CopyButton>
+      </div>
+    </div>
   )
 }
 
@@ -82,52 +76,25 @@ export function ComponentPreview({
 
   return (
     <div
-      className={cn("group relative my-4 flex flex-col space-y-2", className)}
+      className={cn(
+        "border-base-divider-strong group relative my-6 overflow-hidden rounded-xl border",
+        className,
+      )}
       {...props}
     >
-      <Tabs
-        variant="bordered"
-        defaultSelectedKey="preview"
-        className="relative mr-auto mb-4 w-full gap-0"
+      <div
+        className={cn(
+          "flex w-full items-center justify-start overflow-auto",
+          !asIframe && "p-4 md:p-6 lg:p-10",
+        )}
       >
-        <div className="border-base-divider-strong z-11 flex w-full items-center justify-between">
-          <TabList className="-mb-px">
-            <Tab className="rounded-es-none!" id="preview">
-              Preview
-            </Tab>
-            <Tab className="rounded-ee-none!" id="code">
-              Code
-            </Tab>
-          </TabList>
-        </div>
-        <TabPanels>
-          <TabPanel
-            id="preview"
-            className={cn(
-              "relative rounded-tr-md rounded-b-md",
-              !asIframe && "border-base-divider-strong border",
-            )}
-          >
-            <div
-              className={cn(
-                "flex w-full items-center justify-start overflow-auto",
-                !asIframe && "p-4 md:p-6 lg:p-10",
-              )}
-            >
-              {content}
-            </div>
-          </TabPanel>
-          <TabPanel id="code">
-            <div className="flex flex-col space-y-4">
-              <div className="relative w-full rounded-md [&_pre]:my-0 [&_pre]:max-h-87.5 [&_pre]:overflow-auto">
-                <PreviewErrorBoundary>
-                  <Code name={name} />
-                </PreviewErrorBoundary>
-              </div>
-            </div>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+        {content}
+      </div>
+      <CodeCollapsible>
+        <PreviewErrorBoundary>
+          <Code name={name} />
+        </PreviewErrorBoundary>
+      </CodeCollapsible>
     </div>
   )
 }
