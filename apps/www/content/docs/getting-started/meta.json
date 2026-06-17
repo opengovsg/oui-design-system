@@ -1,0 +1,14 @@
+{
+  "title": "Getting Started",
+  "defaultOpen": true,
+  "pages": [
+    "---Overview---",
+    "installation",
+    "registry",
+    "---Frameworks---",
+    "next",
+    "vite",
+    "---Customization---",
+    "theming"
+  ]
+}
