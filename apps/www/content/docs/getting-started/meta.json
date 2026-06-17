@@ -1,6 +1,7 @@
 {
   "title": "Getting Started",
-  "defaultOpen": true,
+  "description": "Install, set up and theme OUI",
+  "root": true,
   "pages": [
     "---Overview---",
     "installation",

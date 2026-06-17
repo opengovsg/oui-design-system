@@ -1,5 +1,6 @@
 {
   "title": "Guides",
-  "defaultOpen": true,
+  "description": "Cross-cutting how-to guides",
+  "root": true,
   "pages": ["---Cross-cutting guides---", "forms"]
 }
