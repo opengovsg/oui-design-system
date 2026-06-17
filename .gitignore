@@ -12,15 +12,11 @@ server/dist
 public/dist
 storybook-static/
 
-.velite
+# Fumadocs MDX generated source
+.source/
 
 # Generated theme CSS for docs site
 apps/www/public/themes/
-
-# Generated agent-facing docs (output of scripts/generate-llms)
-apps/www/public/llms.txt
-apps/www/public/llms-full.txt
-apps/www/public/llm/
 
 # Generated shadcn registry output
 apps/www/public/r/

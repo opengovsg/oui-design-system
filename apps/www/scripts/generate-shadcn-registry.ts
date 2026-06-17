@@ -1,6 +1,6 @@
 // apps/www/scripts/generate-shadcn-registry.ts
 import type { RegistryItem } from "./registry/types"
-import { docsConfig } from "../config/docs.config"
+import { siteConfig } from "../config/site"
 import { buildCatalog } from "./registry/catalog"
 import { COMPONENT_DESCRIPTIONS } from "./registry/descriptions"
 import { discoverComponents } from "./registry/discover"
@@ -10,7 +10,7 @@ import { buildIndex } from "./registry/manifest-index"
 import { buildLibManifest } from "./registry/manifest-lib"
 import { writeRegistry } from "./registry/write"
 
-const REGISTRY_BASE_URL = docsConfig.registryBaseUrl
+const REGISTRY_BASE_URL = siteConfig.registryBaseUrl
 
 async function main() {
   const catalog = buildCatalog()

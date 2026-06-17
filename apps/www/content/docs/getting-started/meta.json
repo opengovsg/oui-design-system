@@ -1,0 +1,15 @@
+{
+  "title": "Getting Started",
+  "description": "Install, set up and theme OUI",
+  "root": true,
+  "pages": [
+    "---Overview---",
+    "installation",
+    "registry",
+    "---Frameworks---",
+    "next",
+    "vite",
+    "---Customization---",
+    "theming"
+  ]
+}

@@ -1,32 +1,39 @@
-import { docsConfig } from "@/config/docs.config"
-
-import { CodeBlockCommand } from "./code-block-command"
+import { siteConfig } from "@/config/site"
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock"
+import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 
 interface ShadcnInstallProps {
   /**
    * The kebab-case registry item name. The rendered command pulls
-   * `${docsConfig.registryBaseUrl}/<name>.json` so changing the base URL
-   * is a one-line edit in `config/docs.config.ts`.
+   * `${siteConfig.registryBaseUrl}/<name>.json`.
    */
   name: string
 }
 
+// Package-manager runner mapping for `npx ...` commands
+// (npx → pnpm dlx → bunx --bun; yarn keeps npx).
+const RUNNERS: { name: string; run: (cmd: string) => string }[] = [
+  { name: "npm", run: (cmd) => `npx ${cmd}` },
+  { name: "pnpm", run: (cmd) => `pnpm dlx ${cmd}` },
+  { name: "yarn", run: (cmd) => `npx ${cmd}` },
+  { name: "bun", run: (cmd) => `bunx --bun ${cmd}` },
+]
+
 /**
- * Renders the shadcn-CLI install command for a single registry item, as the
- * same tabbed UI the `rehype-npm-command` plugin produces for an `npx ...`
- * code block in MDX. The variants here mirror the plugin's "npx" branch
- * (npx → pnpm dlx → bunx --bun; yarn keeps `npx`).
+ * Renders the shadcn-CLI install command for a single registry item as the
+ * same tabbed UI Fumadocs produces for `package-install` code blocks.
  *
  * Usage in MDX: `<ShadcnInstall name="combo-box" />`
  */
 export function ShadcnInstall({ name }: ShadcnInstallProps) {
-  const npxCommand = `npx shadcn@latest add ${docsConfig.registryBaseUrl}/${name}.json`
+  const command = `shadcn@latest add ${siteConfig.registryBaseUrl}/${name}.json`
   return (
-    <CodeBlockCommand
-      __npmCommand__={npxCommand}
-      __yarnCommand__={npxCommand}
-      __pnpmCommand__={npxCommand.replace("npx", "pnpm dlx")}
-      __bunCommand__={npxCommand.replace("npx", "bunx --bun")}
-    />
+    <Tabs groupId="package-manager" persist items={RUNNERS.map((r) => r.name)}>
+      {RUNNERS.map((runner) => (
+        <Tab key={runner.name} value={runner.name}>
+          <DynamicCodeBlock lang="bash" code={runner.run(command)} />
+        </Tab>
+      ))}
+    </Tabs>
   )
 }
