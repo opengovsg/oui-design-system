@@ -10,7 +10,7 @@ runs:
   using: composite
   steps:
     - name: Install pnpm
-      uses: pnpm/action-setup@v4
+      uses: pnpm/action-setup@v6
       with:
         run_install: false
     - uses: actions/setup-node@v6
@@ -24,7 +24,7 @@ runs:
       run: |
         echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
     - name: Cache pnpm store
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
         key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -34,7 +34,7 @@ runs:
       shell: bash
       run: pnpm install --frozen-lockfile
     - name: Setup Turbo Cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: .turbo
         key: ${{ runner.os }}-turbo-${{ github.sha }}
