@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "#site/content": ["./.velite"],
+      "@/.source": ["./.source/server.ts"],
       "@/*": ["./*"]
     }
   },
