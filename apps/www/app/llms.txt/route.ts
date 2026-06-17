@@ -26,7 +26,7 @@ Import: \`import { Button } from "@opengovsg/oui"\``
 export async function GET() {
   const pages = source.getPages().filter(isLlmExposed)
 
-  const mdUrl = (slugs: string[]) => `${SITE}/llms.mdx/${slugs.join("/")}`
+  const mdUrl = (slugs: string[]) => `${SITE}/docs/${slugs.join("/")}.md`
   const bullet = (p: (typeof pages)[number]) =>
     `- [${p.data.title}](${mdUrl(p.slugs)})${
       p.data.description ? `: ${p.data.description}` : ""

@@ -1,7 +1,13 @@
 import type { NextConfig } from "next"
 import { createMDX } from "fumadocs-mdx/next"
 
-const config: NextConfig = {}
+const config: NextConfig = {
+  // Serve each doc's LLM markdown at the conventional `/docs/<path>.md` URL
+  // (handled by app/llms.mdx/[[...slug]]/route.ts).
+  async rewrites() {
+    return [{ source: "/docs/:path*.md", destination: "/llms.mdx/:path*" }]
+  },
+}
 
 const withMDX = createMDX()
 

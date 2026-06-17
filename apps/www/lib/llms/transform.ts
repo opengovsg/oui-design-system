@@ -168,10 +168,10 @@ function transformKbdElements(tree: Root): void {
 }
 
 function rewriteInternalLinks(tree: Root, exposedSlugs: Set<string>): void {
-  // Rewrite cross-doc /docs/<kind>/<slug> links so agents traversing the LLM
-  // markdown surface stay inside the markdown routes (`/llms.mdx/...`). Links to
-  // docs that aren't on the LLM surface (WIP/unpublished — no `.mdx` route) are
-  // left pointing at the canonical `/docs/...` HTML page so they don't 404.
+  // Point cross-doc /docs/<kind>/<slug> links at the markdown variant
+  // (`/docs/<kind>/<slug>.md`) so agents stay on the LLM surface. Links to docs
+  // that aren't exposed (WIP/unpublished — no markdown route) are left pointing
+  // at the canonical HTML page so they don't 404.
   const KIND_PATHS = ["components", "getting-started", "guides"]
   const pattern = new RegExp(
     `^/docs/(${KIND_PATHS.join("|")})/([^/#?]+)(#.*)?$`,
@@ -182,7 +182,7 @@ function rewriteInternalLinks(tree: Root, exposedSlugs: Set<string>): void {
     if (!match) return
     const [, kind, slug, frag = ""] = match
     if (!exposedSlugs.has(`${kind}/${slug}`)) return
-    node.url = `/llms.mdx/${kind}/${slug}${frag}`
+    node.url = `/docs/${kind}/${slug}.md${frag}`
   })
 }
 
