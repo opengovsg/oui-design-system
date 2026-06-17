@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
+import { RootProvider } from "fumadocs-ui/provider/next"
 
 import "./globals.css"
+// Shiki theme styles for the <ComponentPreview> "Code" tab (lib/shiki.ts).
 import "./shiki.css"
 
-import { docsConfig } from "@/config/docs.config"
+import { siteConfig } from "@/config/site"
 
 import { I18nProvider } from "./providers/i18n"
 import { RouterProvider } from "./providers/router"
@@ -21,13 +23,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    template: docsConfig.titleTemplate,
-    default: docsConfig.title,
+    template: siteConfig.titleTemplate,
+    default: siteConfig.title,
   },
-  description: docsConfig.description,
+  description: siteConfig.description,
+  metadataBase: new URL(siteConfig.url),
 }
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
@@ -35,11 +38,18 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-white text-black antialiased dark:bg-black dark:text-white`}
+        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col antialiased`}
       >
-        <RouterProvider>
-          <I18nProvider>{children}</I18nProvider>
-        </RouterProvider>
+        {/*
+          RootProvider supplies Fumadocs' theme + search context. The OUI
+          react-aria providers (router navigation + i18n) are nested inside so
+          live component demos rendered in MDX behave correctly.
+        */}
+        <RootProvider>
+          <RouterProvider>
+            <I18nProvider>{children}</I18nProvider>
+          </RouterProvider>
+        </RootProvider>
       </body>
     </html>
   )

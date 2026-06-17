@@ -1,4 +1,8 @@
 @import "@opengovsg/oui-theme/tailwind.css";
+/* Fumadocs UI theme: neutral colour palette + layout/component preset. */
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
 @source "../../../packages/components/src/**/*.{js,jsx,ts,tsx}";
 @source "../../../packages/components/stories/**/*.stories.{js,jsx,ts,tsx}";
 @source "../../../packages/theme/src/components/**/*.{js,jsx,ts,tsx}";
@@ -6,29 +10,8 @@
 @source "../../../packages/theme/stories/**/*.{js,jsx,ts,tsx}";
 @source "./examples/**/*.{js,jsx,ts,tsx}";
 @source "../**/*.{js,jsx,ts,tsx}";
-
-@layer utilities {
-  .step {
-    counter-increment: step;
-  }
-
-  .step:before {
-    @apply absolute inline-flex size-6 items-center justify-center rounded-full bg-black text-center -indent-px font-mono text-base font-medium text-white;
-    @apply mt-0.5 -ml-11.25;
-    content: counter(step);
-  }
-
-  .dark {
-    .step:before {
-      @apply bg-white text-black;
-    }
-  }
-}
-
-:root {
-  --header-height: 57px;
-  --content-height: calc(100dvh - var(--header-height));
-}
+/* Generate the classes used by Fumadocs UI's own components. */
+@source "../node_modules/fumadocs-ui/dist/**/*.js";
 
 @utility scrollbar-hide {
   scrollbar-width: none;
@@ -44,14 +27,6 @@
   &::-webkit-scrollbar {
     display: block;
   }
-}
-
-.mdx > .steps:first-child > h3:first-child {
-  @apply mt-0;
-}
-
-.steps > h3 {
-  @apply mt-8 mb-4 text-base font-semibold;
 }
 
 @theme {
