@@ -8,8 +8,7 @@ import { statusBadgesPlugin } from "fumadocs-core/source/plugins/status-badges"
  * The docs content source, backed by Fumadocs MDX (`content/docs/**`).
  *
  * `statusBadgesPlugin` reads each doc's `status` frontmatter and appends the
- * matching badge to its sidebar entry — the fumadocs-native replacement for
- * the old hand-maintained `status` field in `config/docs.config.ts`.
+ * matching badge to its sidebar entry.
  */
 export const source = loader({
   baseUrl: "/docs",

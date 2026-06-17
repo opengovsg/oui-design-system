@@ -16,7 +16,7 @@ type DocPage = ReturnType<typeof source.getPages>[number]
 
 /**
  * Whether a page is exposed on the agent-facing surface (llms.txt + markdown
- * routes). WIP and unpublished docs are excluded, mirroring the old generator.
+ * routes). WIP and unpublished docs are excluded.
  */
 export function isLlmExposed(page: DocPage): boolean {
   return page.data.status !== "wip" && page.data.published !== false
@@ -41,8 +41,7 @@ const stringifier = unified()
 /**
  * Render a docs page as plain Markdown for LLM consumption. Reuses the doc's
  * raw MDX, expands `<ComponentPreview>`/`<ShadcnInstall>` into source/commands,
- * and frames it with a title, React Aria note and a "See also" footer — the
- * fumadocs-native replacement for the old `scripts/generate-llms` pipeline.
+ * and frames it with a title, React Aria note and a "See also" footer.
  */
 export async function getLLMText(page: DocPage): Promise<string> {
   const data = page.data

@@ -6,8 +6,7 @@ const PILL =
   "ml-2 inline-flex items-center rounded-full px-1.5 py-px text-[0.625rem] leading-none font-medium align-middle"
 
 /**
- * Status badge rendered after a sidebar item's title. Mirrors the badges the
- * pre-fumadocs sidebar showed for the `status` field, now driven by each doc's
+ * Status badge rendered after a sidebar item's title, driven by each doc's
  * `status` frontmatter via `statusBadgesPlugin`.
  *
  * Rendered as an inline `<span>` (not the OUI `Badge`, which is a `<div>`)

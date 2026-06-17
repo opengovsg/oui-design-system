@@ -25,7 +25,7 @@ export default async function Page(props: PageProps) {
 
   if (!page) {
     // The `/docs` root and section folders have no page of their own — send
-    // them to their first child, matching the old router's behaviour.
+    // them to their first child.
     const firstChild = getFirstChildUrl(slug)
     if (firstChild) redirect(firstChild)
     notFound()

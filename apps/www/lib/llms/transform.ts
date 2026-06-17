@@ -24,8 +24,7 @@ const getAttr = (node: AnyMdxJsx, name: string): string | undefined => {
 /**
  * Rewrites the doc body MDAST into plain Markdown suitable for LLM consumption:
  * live `<ComponentPreview>` demos become the underlying example source, install
- * widgets become shell commands, and presentational JSX is unwrapped. Ported
- * from the old `scripts/generate-llms/transform.ts`.
+ * widgets become shell commands, and presentational JSX is unwrapped.
  */
 export async function applyTransforms(
   tree: Root,

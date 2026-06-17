@@ -1,9 +1,6 @@
 /**
- * Site-wide branding and external URLs for the docs site.
- *
- * This replaces the old `config/docs.config.ts`: the navigation tree it used to
- * hold now lives in `content/docs/**\/meta.json` (consumed by the Fumadocs
- * page tree), so only the static site metadata and external link bases remain.
+ * Site-wide branding and external URLs for the docs site. The navigation tree
+ * lives in `content/docs/**\/meta.json` (consumed by the Fumadocs page tree).
  */
 export const siteConfig = {
   title: "Open UI",

@@ -10,8 +10,8 @@ interface ShadcnInstallProps {
   name: string
 }
 
-// Mirrors the package-manager runner mapping the old rehype-npm-command plugin
-// used for `npx ...` blocks (npx → pnpm dlx → bunx --bun; yarn keeps npx).
+// Package-manager runner mapping for `npx ...` commands
+// (npx → pnpm dlx → bunx --bun; yarn keeps npx).
 const RUNNERS: { name: string; run: (cmd: string) => string }[] = [
   { name: "npm", run: (cmd) => `npx ${cmd}` },
   { name: "pnpm", run: (cmd) => `pnpm dlx ${cmd}` },

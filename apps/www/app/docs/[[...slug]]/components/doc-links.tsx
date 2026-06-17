@@ -27,8 +27,7 @@ const LinkIcon = ({ type }: { type: string }) => {
 
 /**
  * Row of external reference links (Source / Storybook / Theme / React Aria)
- * shown under the page title. Replaces the links portion of the old
- * PageHeader.
+ * shown under the page title.
  */
 export function DocLinks({ links }: { links: ResolvedDocLinks }) {
   const entries = Object.entries(links).filter(([, url]) => Boolean(url)) as [

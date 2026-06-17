@@ -17,8 +17,7 @@ function orderedPageUrls(nodes: PageTree.Node[]): string[] {
 
 /**
  * Resolve a slug that has no page of its own (the `/docs` root or a section
- * folder such as `/docs/getting-started`) to its first child page, preserving
- * the redirect behaviour the old custom router had.
+ * folder such as `/docs/getting-started`) to its first child page.
  */
 export function getFirstChildUrl(slug: string[]): string | undefined {
   const urls = orderedPageUrls(source.pageTree.children)

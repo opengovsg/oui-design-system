@@ -17,9 +17,8 @@ export interface ResolvedDocLinks {
 }
 
 /**
- * Expand the shorthand `links` frontmatter into absolute URLs. This used to
- * live in the Velite collection `transform`; it now runs at render time so the
- * frontmatter schema stays plain data.
+ * Expand the shorthand `links` frontmatter into absolute URLs at render time,
+ * keeping the frontmatter schema plain data.
  */
 export function resolveDocLinks(links?: RawDocLinks): ResolvedDocLinks {
   if (!links) return {}
