@@ -1,65 +1,66 @@
-import { Badge } from "@opengovsg/oui"
+import { cn } from "@opengovsg/oui-theme"
 
 export type NavStatus = "new" | "updated" | "wip" | "redirect"
 
+const PILL =
+  "ml-2 inline-flex items-center rounded-full px-1.5 py-px text-[0.625rem] leading-none font-medium align-middle"
+
 /**
  * Status badge rendered after a sidebar item's title. Mirrors the badges the
- * pre-fumadocs sidebar showed for the `status` field in docs.config.ts, now
- * driven by each doc's `label` frontmatter.
+ * pre-fumadocs sidebar showed for the `status` field, now driven by each doc's
+ * `status` frontmatter via `statusBadgesPlugin`.
+ *
+ * Rendered as an inline `<span>` (not the OUI `Badge`, which is a `<div>`)
+ * because fumadocs reuses the page-tree `name` inside `<p>` elements (e.g. the
+ * prev/next footer), where a block-level `<div>` would be invalid nesting and
+ * cause a hydration error.
  */
 export function NavBadge({ status }: { status?: NavStatus }) {
   switch (status) {
     case "new":
       return (
-        <Badge
-          classNames={{
-            base: "ml-2 bg-linear-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-            content: "drop-shadow shadow-black text-white",
-          }}
-          variant="solid"
-          radius="full"
-          size="xs"
+        <span
+          className={cn(
+            PILL,
+            "border border-white/50 bg-linear-to-br from-indigo-500 to-pink-500 text-white shadow-sm",
+          )}
         >
           New
-        </Badge>
+        </span>
       )
     case "updated":
       return (
-        <Badge
-          classNames={{
-            base: "ml-2 bg-linear-to-br from-brand-primary-200 to-brand-primary-400 border-small border-white/50 shadow-blue-500/30",
-            content: "drop-shadow shadow-black text-white",
-          }}
-          variant="solid"
-          radius="full"
-          size="xs"
+        <span
+          className={cn(
+            PILL,
+            "from-brand-primary-200 to-brand-primary-400 border border-white/50 bg-linear-to-br text-white shadow-sm",
+          )}
         >
           Updated
-        </Badge>
+        </span>
       )
     case "wip":
       return (
-        <Badge
-          variant="outline"
-          radius="full"
-          color="neutral"
-          className="ml-2 decoration-inherit"
-          size="xs"
+        <span
+          className={cn(
+            PILL,
+            "border-base-divider-strong text-fd-muted-foreground border",
+          )}
         >
           WIP
-        </Badge>
+        </span>
       )
     case "redirect":
       return (
-        <Badge
-          variant="outline"
-          radius="full"
-          color="neutral"
-          className="ml-2 bg-transparent decoration-inherit"
-          size="xs"
+        <span
+          className={cn(
+            PILL,
+            "border-base-divider-strong text-fd-muted-foreground border",
+          )}
+          aria-label="Redirects elsewhere"
         >
           ↗
-        </Badge>
+        </span>
       )
     default:
       return null

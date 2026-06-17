@@ -3,8 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { RootProvider } from "fumadocs-ui/provider/next"
 
 import "./globals.css"
-// Shiki theme styles for the <ComponentPreview> "Code" tab (lib/shiki.ts).
-import "./shiki.css"
 
 import { siteConfig } from "@/config/site"
 
