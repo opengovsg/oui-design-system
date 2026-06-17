@@ -1,5 +1,50 @@
 # @opengovsg/oui
 
+## 0.0.59
+
+### Patch Changes
+
+- [#299](https://github.com/opengovsg/oui-design-system/pull/299) [`a85a5b6`](https://github.com/opengovsg/oui-design-system/commit/a85a5b6152d61b42385b20d13ee5da4f645179a7) Thanks [@karrui](https://github.com/karrui)! - fix(avatar, navbar): render context providers via Context.Provider
+
+  `Avatar`, `AvatarGroup`, and `Navbar` now render their context providers
+  explicitly via `Context.Provider` instead of the React 19-only
+  `<Context value>` shorthand. On React 18 (declared in the `react: ">= 18"`
+  peer range) the shorthand logged `Warning: Rendering <Context> directly is not
+supported ...` and treated the element as a `Context.Consumer`, so the provided
+  value was not reliably delivered to descendants (e.g. `Avatar.Image` /
+  `Avatar.Fallback`). Rendering works on React 18 and 19 with no warning.
+
+- [#306](https://github.com/opengovsg/oui-design-system/pull/306) [`7b71c99`](https://github.com/opengovsg/oui-design-system/commit/7b71c99daccc5d2beb3a3ff99a07f47cbce0bd15) Thanks [@karrui](https://github.com/karrui)! - fix(popover, menu): flip above the trigger on open near a boundary edge
+
+  A `Menu`/`Popover` near the bottom edge of its boundary (viewport or a bounded
+  scroll container) opened below the trigger, collapsed to a clipped sliver, and
+  only flipped above after a later reposition (e.g. a window resize) — i.e. it
+  "flipped on resize but not on open".
+
+  RAC collections (e.g. `Menu`) populate in a second render pass, so react-aria's
+  first positioning pass measures an empty popover and re-measures once content
+  arrives. Because OUI applied the open animation to the same element react-aria
+  measures, that CSS animation started in the same commit the collection populated
+  and corrupted the re-measurement, so the popover never flipped on open — even
+  with ample room above the trigger.
+
+  The enter animation now runs on an inner wrapper, leaving the positioned overlay
+  (the element react-aria measures) animation-free, so react-aria measures the real
+  content and flips on open for any trigger position. The exit animation stays on
+  the overlay so react-aria's `useExitAnimation` still detects it and delays
+  unmount. A genuinely empty popover (e.g. a filtered-out menu) collapses to 0
+  height — no reserved-height sliver. A popover too tall for its boundary renders
+  at its final clamped (scrollable) height with no visible reflow. `Menu`
+  additionally forwards `boundaryElement`/`scrollRef` (and related positioning
+  props) to its `Popover`, so consumers can bound flipping to a scroll container.
+
+  The previous synthetic-resize workaround (#290) is removed; it only re-measured
+  when the overlay was exactly 0 height, so it did not help when the overlay was
+  clamped to a small non-zero height.
+
+- Updated dependencies [[`7b71c99`](https://github.com/opengovsg/oui-design-system/commit/7b71c99daccc5d2beb3a3ff99a07f47cbce0bd15)]:
+  - @opengovsg/oui-theme@0.0.59
+
 ## 0.0.58
 
 ### Patch Changes
