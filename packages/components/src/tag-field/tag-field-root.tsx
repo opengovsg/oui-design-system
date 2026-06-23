@@ -155,12 +155,14 @@ export function TagFieldRoot<T extends object>({
     () => ({
       isOpen: tagFieldProps.isOpen,
       isDisabled: props.isDisabled || false,
+      isReadOnly: props.isReadOnly || false,
       isInvalid: validation.isInvalid || false,
       isRequired: props.isRequired || false,
     }),
     [
       tagFieldProps.isOpen,
       props.isDisabled,
+      props.isReadOnly,
       props.isRequired,
       validation.isInvalid,
     ],

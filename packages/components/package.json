@@ -43,7 +43,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "format:fix": "prettier --write . --ignore-path ../../.gitignore",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
     "@opengovsg/oui-theme": "workspace:*",
@@ -75,7 +76,7 @@
     "@react-aria/i18n": "^3.12.13",
     "@react-aria/interactions": "^3.25.6",
     "@react-aria/utils": "^3.32.0",
-    "@react-stately/calendar": "^3.9.1",
+    "@react-stately/calendar": "^3.10.1",
     "@react-stately/collections": "^3.12.8",
     "@react-stately/form": "^3.2.2",
     "@react-stately/list": "^3.13.2",
@@ -89,7 +90,7 @@
     "react-aria": "^3.41.1",
     "react-dropzone": "^14.3.8",
     "react-phone-number-input": "^3.4.14",
-    "react-stately": "^3.41.0",
+    "react-stately": "^3.48.0",
     "scroll-into-view-if-needed": "^3.1.0",
     "sonner": "^2.0.7",
     "type-fest": "^4.41.0",

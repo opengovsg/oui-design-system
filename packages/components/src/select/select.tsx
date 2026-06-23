@@ -42,7 +42,7 @@ import { i18nStrings } from "./i18n"
 import { SelectVariantContext } from "./select-variant-context"
 
 export interface SelectProps<T>
-  extends Omit<AriaSelectProps, "children">,
+  extends Omit<AriaSelectProps<T>, "children">,
     VariantProps<typeof selectStyles> {
   classNames?: SlotsToClasses<SelectVariantSlots | "error">
 
