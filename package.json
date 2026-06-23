@@ -1,6 +1,9 @@
 {
   "name": "oui-design-system",
   "private": true,
+  "engines": {
+    "node": ">=24.13.0"
+  },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "build": "turbo run build",
