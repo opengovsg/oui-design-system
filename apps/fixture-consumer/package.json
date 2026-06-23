@@ -14,7 +14,7 @@
     "format:fix": "prettier --write . --ignore-path ../../.gitignore"
   },
   "dependencies": {
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "catalog:",
     "@internationalized/string": "^3.2.7",
     "@react-stately/form": "^3.2.2",
     "@react-stately/utils": "^3.11.0",

@@ -68,7 +68,7 @@
     "typescript": "catalog:"
   },
   "dependencies": {
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "catalog:",
     "@internationalized/string": "^3.2.7",
     "@react-aria/calendar": "^3.9.2",
     "@react-aria/focus": "^3.21.2",

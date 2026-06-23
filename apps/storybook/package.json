@@ -16,7 +16,7 @@
     "test": "vitest --project=storybook"
   },
   "dependencies": {
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "catalog:",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/prettier-config": "workspace:*",

@@ -25,7 +25,7 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@icons-pack/react-simple-icons": "^11.2.0",
-    "@internationalized/date": "^3.10.1",
+    "@internationalized/date": "catalog:",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/eslint-config": "workspace:*",
