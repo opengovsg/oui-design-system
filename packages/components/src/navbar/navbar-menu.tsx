@@ -1,7 +1,6 @@
 "use client"
 
-import { Overlay } from "@react-aria/overlays"
-import { chain } from "react-aria"
+import { chain, Overlay } from "react-aria"
 
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 

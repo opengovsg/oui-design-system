@@ -8,9 +8,9 @@ import {
   useRef,
   useState,
 } from "react"
-import { usePreventScroll } from "@react-aria/overlays"
 import { mergeProps, useResizeObserver } from "@react-aria/utils"
 import { useControlledState } from "@react-stately/utils"
+import { usePreventScroll } from "react-aria"
 
 import type {
   NavbarSlots,
