@@ -175,7 +175,11 @@ export const CustomItem: StoryObj<
   typeof TagField<{ id: string; textValue: string; description: string }>
 > = {
   args: {
-    defaultItems: [...Array(3000)].map((_, i) => ({
+    // Keep this list smaller than the other virtualised stories: this story's
+    // play function opens the popover, and rendering thousands of custom items
+    // is heavy enough to time out on CI's slower runner. A few hundred items
+    // still demonstrates virtualisation with a custom item renderer.
+    defaultItems: [...Array(300)].map((_, i) => ({
       id: String(i),
       textValue: `Item ${i}`,
       description: "This item has a description",
