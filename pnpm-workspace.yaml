@@ -7,9 +7,25 @@ catalog:
   eslint: ^9.39.1
   prettier: ^3.5.3
   typescript: 5.7.3
-  react-aria-components: ^1.14.0
 
 catalogs:
+  react-aria:
+    react-aria-components: ^1.19.0
+    react-aria: ^3.50.0
+    react-stately: ^3.48.0
+    "@react-aria/calendar": ^3.10.1
+    "@react-aria/focus": ^3.22.1
+    "@react-aria/i18n": ^3.13.1
+    "@react-aria/interactions": ^3.28.1
+    "@react-aria/utils": ^3.34.1
+    "@react-stately/calendar": ^3.10.1
+    "@react-stately/collections": ^3.13.1
+    "@react-stately/form": ^3.3.1
+    "@react-stately/list": ^3.14.1
+    "@react-stately/utils": ^3.12.1
+    "@react-types/shared": ^3.36.0
+    "@internationalized/date": ^3.12.2
+    "@internationalized/string": ^3.2.9
   react:
     "@types/react": ^19.2.17
     "@types/react-dom": ^19.2.3

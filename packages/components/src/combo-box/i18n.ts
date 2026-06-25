@@ -1,4 +1,4 @@
-import type { LocalizedStrings } from "react-aria"
+import type { LocalizedStrings } from "@react-aria/i18n"
 
 export const i18nStrings = {
   "en-SG": {

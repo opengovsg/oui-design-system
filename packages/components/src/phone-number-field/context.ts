@@ -22,7 +22,7 @@ export interface UseProvidePhoneInputContextReturn
   styles: ReturnType<typeof phoneNumberFieldStyles>
 
   stringFormatter: LocalizedStringFormatter<
-    keyof (typeof i18nStrings)[keyof typeof i18nStrings]
+    keyof (typeof i18nStrings)[keyof typeof i18nStrings] & string
   >
 }
 

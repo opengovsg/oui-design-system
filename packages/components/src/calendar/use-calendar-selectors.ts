@@ -1,5 +1,6 @@
 "use client"
 
+import type { CalendarSelectionMode } from "react-aria-components/Calendar"
 import type { CalendarState, RangeCalendarState } from "react-stately"
 import { useMemo } from "react"
 import { useDateFormatter } from "react-aria"
@@ -7,7 +8,7 @@ import { useDateFormatter } from "react-aria"
 import { useGenerateLocalizedMonths, useGenerateLocalizedYears } from "./utils"
 
 export const useCalendarSelectors = (
-  state: CalendarState | RangeCalendarState,
+  state: CalendarState<CalendarSelectionMode> | RangeCalendarState,
 ) => {
   const yearRange = useMemo(() => {
     const start = state.minValue!.year ?? 1900

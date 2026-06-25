@@ -1,4 +1,4 @@
-import type { LocalizedStrings } from "react-aria"
+import type { LocalizedStrings } from "@react-aria/i18n"
 
 // Using English strings for non-ZH locales as country names
 export const i18nStrings = {
