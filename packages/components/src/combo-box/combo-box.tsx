@@ -238,6 +238,10 @@ export function ComboBox<T extends object>(originalProps: ComboBoxProps<T>) {
             )}
             <FieldError size={variantProps.size}>{errorMessage}</FieldError>
             <Popover
+              // The popover anchors to the field group, which sits ~9px below the
+              // inner input, so the shared Popover's default 8px offset reads as a
+              // visible gap. Pin to 0 to keep the menu flush with the field.
+              offset={0}
               className={composeRenderProps(
                 classNames?.popover,
                 (className, renderProps) =>

@@ -29,6 +29,9 @@ export const CalendarBottomContent = <T extends CalendarDate>({
   const handleTodayClick = useCallback(() => {
     const todayDate = today(getLocalTimeZone())
     state.setFocusedDate(todayDate)
+    // `setFocusedDate` only updates the focused date, not the focused state, so
+    // move DOM focus into the grid to land on the today cell.
+    state.setFocused(true)
     if (shouldSetDateOnTodayButtonClick) {
       state.selectDate(todayDate)
     }
