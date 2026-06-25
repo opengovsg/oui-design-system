@@ -1,5 +1,31 @@
 # @opengovsg/oui
 
+## 0.0.60
+
+### Patch Changes
+
+- [#313](https://github.com/opengovsg/oui-design-system/pull/313) [`2cd7beb`](https://github.com/opengovsg/oui-design-system/commit/2cd7beb7088f83ed76262d85520c8ce07d81ff58) Thanks [@karrui](https://github.com/karrui)! - fix(combo-box, calendar): restore menu offset and Today button focus
+  - ComboBox: pin the popover offset to 0 so the menu sits flush with the
+    field group again, which react-aria-components now anchors the popover
+    to instead of the inner input.
+  - Calendar: move focus into the grid after the Today button is pressed,
+    since `setFocusedDate` alone no longer focuses the today cell.
+
+- [#304](https://github.com/opengovsg/oui-design-system/pull/304) [`0105379`](https://github.com/opengovsg/oui-design-system/commit/01053799c628d8349ed2d2dd984921984382177d) Thanks [@dependabot](https://github.com/apps/dependabot)! - chore: update react-aria ecosystem to latest
+
+  Update react-aria-components (1.19), react-aria (3.50), react-stately
+  (3.48) and the related @react-aria/_, @react-stately/_, @react-types/_
+  and @internationalized/_ packages to their latest versions, and adjust
+  the components to match the new type signatures:
+  - Calendar/RangeCalendar state types now carry a selection-mode generic.
+  - Select and tag field render props gained new required members.
+  - `LocalizedStrings` is imported from `@react-aria/i18n` and the navbar
+    overlay helpers from `react-aria`, since `react-aria` no longer
+    re-exports them.
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.60
+
 ## 0.0.59
 
 ### Patch Changes
