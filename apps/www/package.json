@@ -34,7 +34,7 @@
     "@tailwindcss/postcss": "^4.3.1",
     "fs-extra": "^11.3.0",
     "fumadocs-core": "^16.10.3",
-    "fumadocs-mdx": "^15.0.12",
+    "fumadocs-mdx": "^15.0.13",
     "fumadocs-ui": "^16.10.3",
     "inter-ui": "^4.1.0",
     "jotai": "^2.12.1",
