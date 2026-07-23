@@ -41,6 +41,26 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+
+      - name: Publish dev snapshot to GitHub Packages
+        run: |
+          for path in packages/*/; do
+            path="${path%/}"
+            name=$(node -p "require('./$path/package.json').name")
+            version=$(node -p "require('./$path/package.json').version")
+            if npm view "$name@$version" --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "$name@$version already published to GitHub Packages, skipping"
+            else
+              pnpm --filter "$name" publish --tag snapshot --no-git-checks
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -71,3 +91,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Use OIDC for npm authentication instead of NPM_TOKEN
           NPM_TOKEN: "" # https://github.com/changesets/changesets/issues/1152#issuecomment-3190884868
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          registry-url: https://npm.pkg.github.com
+
+      - name: Publish to GitHub Packages
+        run: |
+          for path in packages/*/; do
+            path="${path%/}"
+            name=$(node -p "require('./$path/package.json').name")
+            version=$(node -p "require('./$path/package.json').version")
+            if npm view "$name@$version" --registry=https://npm.pkg.github.com >/dev/null 2>&1; then
+              echo "$name@$version already published to GitHub Packages, skipping"
+            else
+              pnpm --filter "$name" publish --no-git-checks
+            fi
+          done
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
