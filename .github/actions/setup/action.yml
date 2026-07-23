@@ -17,7 +17,7 @@ runs:
       with:
         node-version: 24
         cache: "pnpm"
-        registry-url: ${{ inputs.registry_url }}
+        registry-url: ${{ inputs.registry-url }}
     - name: Get pnpm store directory
       id: pnpm-cache
       shell: bash
