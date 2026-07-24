@@ -41,7 +41,7 @@
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.475.0",
     "motion": "^12.42.0",
-    "next": "16.2.6",
+    "next": "16.2.11",
     "react": "catalog:react",
     "react-aria-components": "catalog:react-aria",
     "react-dom": "catalog:react",
