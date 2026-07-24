@@ -32,15 +32,15 @@ catalogs:
     react: ^19.2.7
     react-dom: ^19.2.7
   storybook10:
-    "@storybook/addon-a11y": 10.4.5
-    "@storybook/addon-docs": 10.4.5
-    "@storybook/addon-links": 10.4.5
-    "@storybook/addon-themes": 10.4.5
-    "@storybook/addon-vitest": 10.4.5
-    "@storybook/nextjs": 10.4.5
-    "@storybook/react-vite": 10.4.5
-    eslint-plugin-storybook: 10.4.5
-    storybook: 10.4.5
+    "@storybook/addon-a11y": 10.5.3
+    "@storybook/addon-docs": 10.5.3
+    "@storybook/addon-links": 10.5.3
+    "@storybook/addon-themes": 10.5.3
+    "@storybook/addon-vitest": 10.5.3
+    "@storybook/nextjs": 10.5.3
+    "@storybook/react-vite": 10.5.3
+    eslint-plugin-storybook: 10.5.3
+    storybook: 10.5.3
   tailwind:
     "@tailwindcss/postcss": 4.3.1
     "@tailwindcss/vite": 4.3.1
