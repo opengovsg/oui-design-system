@@ -20,7 +20,7 @@
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
     "@oui/prettier-config": "workspace:*",
-    "inter-ui": "^4.1.0",
+    "inter-ui": "^4.1.1",
     "react": "catalog:react",
     "react-aria-components": "catalog:react-aria",
     "react-dom": "catalog:react"
