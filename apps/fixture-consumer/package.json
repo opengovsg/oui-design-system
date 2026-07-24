@@ -22,7 +22,7 @@
     "@opengovsg/oui-theme": "workspace:*",
     "@react-aria/i18n": "catalog:react-aria",
     "@react-aria/utils": "catalog:react-aria",
-    "downshift": "^9.0.9",
+    "downshift": "^9.4.0",
     "fuzzysort": "^3.1.0",
     "lodash-es": "^4.18.1",
     "motion": "^12.42.0",
