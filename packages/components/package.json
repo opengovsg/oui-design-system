@@ -41,8 +41,8 @@
     "dev": "tsx ../../tooling/build-scripts/main.ts --watch",
     "lint": "eslint . --max-warnings 0",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --check . --ignore-path ../../.gitignore",
-    "format:fix": "prettier --write . --ignore-path ../../.gitignore",
+    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
+    "format:fix": "prettier --write . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "typecheck": "tsc --noEmit"
   },
