@@ -46,7 +46,7 @@ catalogs:
     "@tailwindcss/vite": 4.3.1
     tailwindcss: 4.3.1
   vitest:
-    "@vitest/browser": 4.1.9
+    "@vitest/browser": 4.1.10
     "@vitest/browser-playwright": 4.1.9
     "@vitest/coverage-v8": 4.1.9
     vitest: 4.1.9
