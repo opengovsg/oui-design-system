@@ -1,6 +1,5 @@
-import type { Meta } from "@storybook/react-vite"
-
 import { spinnerStyles } from "@opengovsg/oui-theme"
+import type { Meta } from "@storybook/react-vite"
 
 import { Spinner } from "../spinner"
 

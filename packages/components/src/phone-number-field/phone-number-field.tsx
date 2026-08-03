@@ -1,11 +1,19 @@
 "use client"
 
+import type {
+  PhoneNumberFieldSlots,
+  PhoneNumberFieldVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import { cn, phoneNumberFieldStyles } from "@opengovsg/oui-theme"
+import { useCallback, useMemo, useRef, useState } from "react"
 import type { FocusEvents } from "react-aria"
 import type {
   InputProps as AriaInputProps,
   TextFieldProps,
   ValidationResult,
 } from "react-aria-components"
+import { Provider, TextField } from "react-aria-components"
 import type {
   Props as ComponentPhoneInputProps,
   Country,
@@ -13,32 +21,22 @@ import type {
   ExternalValue,
   FlagProps,
 } from "react-phone-number-input"
-import type { SetOptional } from "type-fest"
-import { useCallback, useMemo, useRef, useState } from "react"
-import { Provider, TextField } from "react-aria-components"
 import BasePhoneInput, { getCountryCallingCode } from "react-phone-number-input"
 import flags from "react-phone-number-input/flags"
 import NonInternationalBasePhoneInput from "react-phone-number-input/input"
+import type { SetOptional } from "type-fest"
 
-import type {
-  PhoneNumberFieldSlots,
-  PhoneNumberFieldVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-import { cn, phoneNumberFieldStyles } from "@opengovsg/oui-theme"
-
-import type { InputProps } from "../input"
-import type { BasePhoneInputProps } from "./types"
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { useControllableState } from "../hooks"
+import type { InputProps } from "../input"
 import { Input as BaseInput } from "../input"
 import { Select, SelectItem } from "../select"
 import { useLocalizedStringFormatter } from "../system/l10n" // Imported from system as RPNI seems to not be properly retrieving locale otherwise
-
 import { mapPropsVariants } from "../system/utils"
 import { MOBILE_EXAMPLES } from "./constants"
 import { PhoneInputContext, usePhoneInputContext } from "./context"
 import { i18nStrings } from "./i18n"
+import type { BasePhoneInputProps } from "./types"
 
 export interface PhoneInputProps extends InputProps {
   onClear?: () => void
@@ -110,7 +108,8 @@ export const PhoneInput = ({
 }
 
 export interface PhoneNumberFieldProps
-  extends Omit<
+  extends
+    Omit<
       Partial<ComponentPhoneInputProps<Omit<AriaInputProps, "size">>>,
       "disabled"
     >,
@@ -265,8 +264,10 @@ export const PhoneNumberField = (originalProps: PhoneNumberFieldProps) => {
 
 type CountryItem = { label: string; value: Country | undefined }
 
-export interface CountrySelectProps
-  extends Pick<FocusEvents, "onBlur" | "onFocus"> {
+export interface CountrySelectProps extends Pick<
+  FocusEvents,
+  "onBlur" | "onFocus"
+> {
   value: string
   options: CountryItem[]
   onChange: (country: Country) => void

@@ -1,7 +1,7 @@
 "use client"
 
-import { useMemo } from "react"
 import { CircleAlert, CircleCheck, Info } from "lucide-react"
+import { useMemo } from "react"
 
 import type { UseInfoboxProps } from "./use-infobox"
 import { useInfobox } from "./use-infobox"

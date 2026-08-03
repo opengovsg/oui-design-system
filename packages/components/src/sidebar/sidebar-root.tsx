@@ -1,25 +1,23 @@
 "use client"
 
-import type { PropsWithChildren } from "react"
-import type {
-  TooltipProps,
-  TooltipTriggerComponentProps,
-} from "react-aria-components"
-import { useControlledState } from "@react-stately/utils"
-import { Provider } from "react-aria-components"
-
 import type {
   SidebarSlots,
   SidebarVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { dataAttr, sidebarStyles } from "@opengovsg/oui-theme"
+import { useControlledState } from "@react-stately/utils"
+import type { PropsWithChildren } from "react"
+import type {
+  TooltipProps,
+  TooltipTriggerComponentProps,
+} from "react-aria-components"
+import { Provider } from "react-aria-components"
 
 import { mapPropsVariants } from "../system/utils"
 import { SidebarCollapseContext, SidebarStyleContext } from "./context"
 
-export interface SidebarRootProps
-  extends PropsWithChildren<SidebarVariantProps> {
+export interface SidebarRootProps extends PropsWithChildren<SidebarVariantProps> {
   className?: string
   classNames?: SlotsToClasses<SidebarSlots>
 

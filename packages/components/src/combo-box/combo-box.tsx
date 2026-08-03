@@ -1,27 +1,6 @@
 "use client"
 
 import type {
-  ComboBoxProps as AriaComboBoxProps,
-  InputProps,
-  ListBoxProps,
-  ListBoxRenderProps,
-  ListLayoutOptions,
-  ValidationResult,
-} from "react-aria-components"
-import { useCallback, useMemo } from "react"
-import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
-import { useLocalizedStringFormatter } from "react-aria"
-import {
-  Button as AriaButton,
-  ComboBox as AriaComboBox,
-  Input,
-  ListBox,
-  ListLayout,
-  Provider,
-  Virtualizer,
-} from "react-aria-components"
-
-import type {
   ComboBoxSlots,
   ComboBoxVariantProps,
   SlotsToClasses,
@@ -34,6 +13,26 @@ import {
   composeTailwindRenderProps,
   listBoxItemStyles,
 } from "@opengovsg/oui-theme"
+import { ChevronDown, ChevronUp, XIcon } from "lucide-react"
+import { useCallback, useMemo } from "react"
+import { useLocalizedStringFormatter } from "react-aria"
+import type {
+  ComboBoxProps as AriaComboBoxProps,
+  InputProps,
+  ListBoxProps,
+  ListBoxRenderProps,
+  ListLayoutOptions,
+  ValidationResult,
+} from "react-aria-components"
+import {
+  Button as AriaButton,
+  ComboBox as AriaComboBox,
+  Input,
+  ListBox,
+  ListLayout,
+  Provider,
+  Virtualizer,
+} from "react-aria-components"
 
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Popover } from "../popover"
@@ -42,8 +41,7 @@ import { ComboBoxVariantContext } from "./combo-box-variant-context"
 import { i18nStrings } from "./i18n"
 
 export interface ComboBoxProps<T extends object>
-  extends ComboBoxVariantProps,
-    Omit<AriaComboBoxProps<T>, "children"> {
+  extends ComboBoxVariantProps, Omit<AriaComboBoxProps<T>, "children"> {
   label?: React.ReactNode
   /** The list of ComboBox items (uncontrolled). */
   defaultItems?: T[]

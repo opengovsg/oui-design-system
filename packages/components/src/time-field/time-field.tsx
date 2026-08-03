@@ -1,12 +1,4 @@
 import type {
-  TimeFieldProps as AriaTimeFieldProps,
-  TimeValue,
-  ValidationResult,
-} from "react-aria-components"
-import { useMemo } from "react"
-import { TimeField as AriaTimeField } from "react-aria-components"
-
-import type {
   DateInputVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
@@ -14,6 +6,13 @@ import {
   composeTailwindRenderProps,
   dateInputStyles,
 } from "@opengovsg/oui-theme"
+import { useMemo } from "react"
+import type {
+  TimeFieldProps as AriaTimeFieldProps,
+  TimeValue,
+  ValidationResult,
+} from "react-aria-components"
+import { TimeField as AriaTimeField } from "react-aria-components"
 
 import type { DateInputProps } from "../date-field"
 import { DateInput } from "../date-field"
@@ -21,8 +20,7 @@ import { Description, FieldError, Label } from "../field"
 import { mapPropsVariants } from "../system/utils"
 
 export interface TimeFieldProps<T extends TimeValue>
-  extends AriaTimeFieldProps<T>,
-    DateInputVariantProps {
+  extends AriaTimeFieldProps<T>, DateInputVariantProps {
   label?: React.ReactNode
   description?: React.ReactNode | null
   errorMessage?:

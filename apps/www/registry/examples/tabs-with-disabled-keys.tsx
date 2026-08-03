@@ -1,8 +1,7 @@
 "use client"
 
-import { Collection } from "react-aria-components"
-
 import { Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
+import { Collection } from "react-aria-components"
 
 export default function TabsWithDisabledItems() {
   const tabs = [

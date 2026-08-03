@@ -1,10 +1,9 @@
 "use client"
 
-import type { HeadingProps } from "react-aria-components"
-import { useContext } from "react"
-import { Heading } from "react-aria-components"
-
 import { cn } from "@opengovsg/oui-theme"
+import { useContext } from "react"
+import type { HeadingProps } from "react-aria-components"
+import { Heading } from "react-aria-components"
 
 import { ModalVariantContext } from "./modal-variant-context"
 

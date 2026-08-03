@@ -1,21 +1,6 @@
 "use client"
 
 import type {
-  FieldErrorProps as AriaFieldErrorProps,
-  LabelProps as AriaLabelProps,
-  GroupProps,
-  TextProps,
-} from "react-aria-components"
-import { forwardRef, useMemo } from "react"
-import { CircleAlert } from "lucide-react"
-import {
-  FieldError as AriaFieldError,
-  Label as AriaLabel,
-  Group,
-  Text,
-} from "react-aria-components"
-
-import type {
   DescriptionVariantProps,
   FieldErrorSlots,
   FieldErrorVariantProps,
@@ -29,6 +14,20 @@ import {
   fieldGroupStyles,
   labelStyles,
 } from "@opengovsg/oui-theme"
+import { CircleAlert } from "lucide-react"
+import { forwardRef, useMemo } from "react"
+import type {
+  FieldErrorProps as AriaFieldErrorProps,
+  LabelProps as AriaLabelProps,
+  GroupProps,
+  TextProps,
+} from "react-aria-components"
+import {
+  FieldError as AriaFieldError,
+  Label as AriaLabel,
+  Group,
+  Text,
+} from "react-aria-components"
 
 export interface LabelProps extends AriaLabelProps, LabelVariantProps {}
 
@@ -49,8 +48,7 @@ export function Description({ size, className, ...props }: DescriptionProps) {
 }
 
 export interface FieldErrorProps
-  extends AriaFieldErrorProps,
-    FieldErrorVariantProps {
+  extends AriaFieldErrorProps, FieldErrorVariantProps {
   classNames?: SlotsToClasses<FieldErrorSlots>
 }
 

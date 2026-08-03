@@ -1,9 +1,9 @@
 "use client"
 
-import type { SidebarHeaderProps } from "./types"
 import { renderChildren } from "../system/react-utils/children"
 import { forwardRef } from "../system/utils"
 import { useSidebarStyleContext } from "./context"
+import type { SidebarHeaderProps } from "./types"
 
 export const SidebarHeader = forwardRef<"div", SidebarHeaderProps>(
   ({ children, startContent, endContent, ...props }, ref) => {

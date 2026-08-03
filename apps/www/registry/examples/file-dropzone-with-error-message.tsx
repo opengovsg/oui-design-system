@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { FileDropzone } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function FileDropzoneWithErrorMessage() {
   const [error, setError] = useState<string>("")

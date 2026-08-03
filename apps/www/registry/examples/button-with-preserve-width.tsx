@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { User2Icon } from "lucide-react"
-
 import { Button } from "@opengovsg/oui"
+import { User2Icon } from "lucide-react"
+import { useState } from "react"
 
 export default function ButtonWithPreserveWidth() {
   const [preserveWidth, setPreserveWidth] = useState(true)

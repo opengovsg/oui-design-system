@@ -1,11 +1,9 @@
 "use client"
 
+import { dataAttr } from "@opengovsg/oui-theme"
 import { useMemo } from "react"
 import { Link } from "react-aria-components"
 
-import { dataAttr } from "@opengovsg/oui-theme"
-
-import type { SidebarItemProps } from "./types"
 import { renderChildren } from "../system/react-utils/children"
 import { forwardRef } from "../system/utils"
 import { Tooltip, TooltipTrigger } from "../tooltip"
@@ -14,6 +12,7 @@ import {
   useSidebarNestContext,
   useSidebarStyleContext,
 } from "./context"
+import type { SidebarItemProps } from "./types"
 
 export const SidebarItem = forwardRef<"li", SidebarItemProps>(
   (

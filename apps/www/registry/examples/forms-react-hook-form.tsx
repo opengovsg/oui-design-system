@@ -1,12 +1,11 @@
 "use client"
 
-import type { Key } from "react-aria-components"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Button, Select, SelectItem, TagField, TextField } from "@opengovsg/oui"
+import type { Key } from "react-aria-components"
 import { Form } from "react-aria-components"
 import { Controller, useForm } from "react-hook-form"
 import { z } from "zod"
-
-import { Button, Select, SelectItem, TagField, TextField } from "@opengovsg/oui"
 
 const schema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),

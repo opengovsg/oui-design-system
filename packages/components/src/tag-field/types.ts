@@ -1,4 +1,10 @@
 import type {
+  ListBoxItemSlots,
+  SlotsToClasses,
+  TagFieldSlots,
+  TagFieldVariantProps,
+} from "@opengovsg/oui-theme"
+import type {
   FocusableProps,
   HelpTextProps,
   InputBase,
@@ -12,13 +18,6 @@ import type { VirtualItem } from "@tanstack/react-virtual"
 import type { UseComboboxReturnValue } from "downshift"
 import type { ReactNode } from "react"
 
-import type {
-  ListBoxItemSlots,
-  SlotsToClasses,
-  TagFieldSlots,
-  TagFieldVariantProps,
-} from "@opengovsg/oui-theme"
-
 export interface TagFieldValidationValue {
   /** The selected key in the TagField. */
   selectedKeys: Set<Key> | null
@@ -26,8 +25,9 @@ export interface TagFieldValidationValue {
   inputValue: string
 }
 
-export interface TagFieldBaseItemProps<T>
-  extends ReturnType<UseComboboxReturnValue<T>["getItemProps"]> {
+export interface TagFieldBaseItemProps<T> extends ReturnType<
+  UseComboboxReturnValue<T>["getItemProps"]
+> {
   style?: React.CSSProperties
 }
 
@@ -43,7 +43,8 @@ export interface TagFieldListRenderProps<T> {
 export interface TagFieldRenderProps<T> extends TagFieldListRenderProps<T> {}
 
 export interface TagFieldProps<T>
-  extends Omit<
+  extends
+    Omit<
       MultipleSelection,
       | "disallowEmptySelection"
       | "onSelectionChange"

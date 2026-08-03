@@ -1,8 +1,5 @@
 "use client"
 
-import { useRef, useState } from "react"
-import { DialogTrigger } from "react-aria-components"
-
 import {
   Button,
   Modal,
@@ -12,6 +9,8 @@ import {
   ModalHeader,
   useDraggable,
 } from "@opengovsg/oui"
+import { useRef, useState } from "react"
+import { DialogTrigger } from "react-aria-components"
 
 export default function ModalExampleDraggable() {
   const [isOpen, onOpen] = useState(false)

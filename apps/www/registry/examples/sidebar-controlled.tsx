@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import type { SidebarProps } from "@opengovsg/oui"
+import { Button, Sidebar } from "@opengovsg/oui"
 import {
   Calendar,
   Link,
@@ -9,9 +10,7 @@ import {
   PanelLeftOpen,
   Star,
 } from "lucide-react"
-
-import type { SidebarProps } from "@opengovsg/oui"
-import { Button, Sidebar } from "@opengovsg/oui"
+import { useState } from "react"
 
 const items: SidebarProps["items"] = [
   {

@@ -4,11 +4,11 @@ import type { Variants } from "motion/react"
 import { domAnimation, LazyMotion, m } from "motion/react"
 import { FocusScope, mergeProps } from "react-aria"
 
-import type { UseNavbarProps } from "./use-navbar"
 import { pickChildren } from "../system/react-utils/children"
 import { forwardRef } from "../system/utils"
 import { NavbarProvider } from "./navbar-context"
 import { NavbarMenu } from "./navbar-menu"
+import type { UseNavbarProps } from "./use-navbar"
 import { useNavbar } from "./use-navbar"
 
 export interface NavbarProps extends UseNavbarProps {

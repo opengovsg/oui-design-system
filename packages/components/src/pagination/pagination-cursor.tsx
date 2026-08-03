@@ -1,7 +1,7 @@
 "use client"
 
-import type { HtmlUiProps } from "../system/types"
 import { useDomRef } from "../system/react-utils"
+import type { HtmlUiProps } from "../system/types"
 import { forwardRef } from "../system/utils"
 
 export interface PaginationCursorProps extends HtmlUiProps<"span"> {

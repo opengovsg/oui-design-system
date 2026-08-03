@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { Selection } from "react-aria-components"
-import { useRef, useState } from "react"
 import { MoreHorizontal } from "lucide-react"
+import { useRef, useState } from "react"
+import type { Selection } from "react-aria-components"
 import { MenuTrigger, SubmenuTrigger } from "react-aria-components"
 import { expect, userEvent, waitFor, within } from "storybook/test"
 
-import type { MenuProps } from "../menu"
 import { Button } from "../../button"
+import type { MenuProps } from "../menu"
 import { Menu, MenuItem, MenuSection, MenuSeparator } from "../menu"
 
 export default {

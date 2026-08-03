@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-
 import type { FileItem } from "@opengovsg/oui"
 import { FileDropzone } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function FileDropzoneControlled() {
   const [files, setFiles] = useState<FileItem[]>([])

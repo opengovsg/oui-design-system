@@ -1,9 +1,5 @@
 "use client"
 
-import type { Selection } from "react-aria-components"
-import { useState } from "react"
-import { MoreHorizontal } from "lucide-react"
-
 import {
   Button,
   Menu,
@@ -12,6 +8,9 @@ import {
   MenuTrigger,
   SubmenuTrigger,
 } from "@opengovsg/oui"
+import { MoreHorizontal } from "lucide-react"
+import { useState } from "react"
+import type { Selection } from "react-aria-components"
 
 export default function TagFieldDemo() {
   const [style, setStyle] = useState<Selection>(new Set(["bold", "italic"]))

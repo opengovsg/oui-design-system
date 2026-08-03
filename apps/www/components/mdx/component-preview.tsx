@@ -1,15 +1,17 @@
-import { readRegistryFile } from "@/lib/mdx"
+import { cn } from "@opengovsg/oui-theme"
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock"
 
-import { cn } from "@opengovsg/oui-theme"
+import { readRegistryFile } from "@/lib/mdx"
 
 import { CodeCollapsible } from "./code-collapsible"
 import { ComponentRenderer } from "./component-renderer"
 import { IframePreviewNoSsr } from "./iframe-preview"
 import { PreviewErrorBoundary } from "./preview-error-boundary"
 
-interface ComponentPreviewProps
-  extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
+interface ComponentPreviewProps extends Omit<
+  React.HTMLAttributes<HTMLDivElement>,
+  "children"
+> {
   name: string
   asIframe?: boolean
   iframeInitialWidth?: number

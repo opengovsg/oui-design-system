@@ -4,9 +4,9 @@ import type {
   LocalizedString,
   LocalizedStrings,
 } from "@internationalized/string"
-import { useMemo } from "react"
 import { LocalizedStringFormatter } from "@internationalized/string"
 import { useLocalizedStringDictionary } from "@react-aria/i18n"
+import { useMemo } from "react"
 import { useLocale } from "react-aria-components"
 
 /**

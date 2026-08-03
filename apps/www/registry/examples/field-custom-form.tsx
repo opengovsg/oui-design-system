@@ -1,7 +1,5 @@
 "use client"
 
-import { TextField as AriaTextField, Form } from "react-aria-components"
-
 import {
   Button,
   Description,
@@ -10,6 +8,7 @@ import {
   Input,
   Label,
 } from "@opengovsg/oui"
+import { TextField as AriaTextField, Form } from "react-aria-components"
 
 export default function FieldCustomForm() {
   return (

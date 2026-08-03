@@ -1,17 +1,17 @@
 "use client"
 
+import type { ListBoxItemSlots, SlotsToClasses } from "@opengovsg/oui-theme"
+import { dataAttr, listBoxItemStyles } from "@opengovsg/oui-theme"
 import type { ForwardedRef } from "react"
 import { useContext } from "react"
 
-import type { ListBoxItemSlots, SlotsToClasses } from "@opengovsg/oui-theme"
-import { dataAttr, listBoxItemStyles } from "@opengovsg/oui-theme"
-
-import type { TagFieldBaseItemProps, TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
 import { TagFieldStateContext } from "./tag-field-state-context"
+import type { TagFieldBaseItemProps, TagFieldListRenderProps } from "./types"
 
 export interface TagFieldItemProps<T extends object>
-  extends Omit<TagFieldListRenderProps<T>, "key" | "itemProps">,
+  extends
+    Omit<TagFieldListRenderProps<T>, "key" | "itemProps">,
     TagFieldBaseItemProps<T> {
   classNames?: SlotsToClasses<ListBoxItemSlots>
 }

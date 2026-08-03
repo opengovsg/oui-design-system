@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { Key } from "react-aria-components"
 import { useState } from "react"
+import type { Key } from "react-aria-components"
 import { ListBoxItem, useFilter } from "react-aria-components"
 import { expect, userEvent, within } from "storybook/test"
 

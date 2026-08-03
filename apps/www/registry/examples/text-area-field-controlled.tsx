@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { TextAreaField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function TextAreaFieldControlled() {
   const [value, setValue] = useState("")

@@ -1,8 +1,7 @@
 "use client"
 
-import { FilterIcon } from "lucide-react"
-
 import { SearchField } from "@opengovsg/oui"
+import { FilterIcon } from "lucide-react"
 
 export default function SearchFieldCustomIcon() {
   return (

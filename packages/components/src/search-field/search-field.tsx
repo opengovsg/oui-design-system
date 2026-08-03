@@ -1,31 +1,29 @@
 import type {
-  SearchFieldProps as AriaSearchFieldProps,
-  ValidationResult,
-} from "react-aria-components"
-import { SearchIcon, XIcon } from "lucide-react"
-import { useLocalizedStringFormatter } from "react-aria"
-import {
-  SearchField as AriaSearchField,
-  ButtonContext,
-} from "react-aria-components"
-
-import type {
   SearchFieldSlots,
   SearchFieldVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { composeRenderProps, searchFieldStyles } from "@opengovsg/oui-theme"
+import { SearchIcon, XIcon } from "lucide-react"
+import { useLocalizedStringFormatter } from "react-aria"
+import type {
+  SearchFieldProps as AriaSearchFieldProps,
+  ValidationResult,
+} from "react-aria-components"
+import {
+  SearchField as AriaSearchField,
+  ButtonContext,
+} from "react-aria-components"
 
-import type { InputProps } from "../input"
 import { Button } from "../button"
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import type { InputProps } from "../input"
 import { Input } from "../input"
 import { mapPropsVariants } from "../system/utils"
 import { i18nStrings } from "./i18n"
 
 export interface SearchFieldProps
-  extends AriaSearchFieldProps,
-    SearchFieldVariantProps {
+  extends AriaSearchFieldProps, SearchFieldVariantProps {
   /**
    * The element to display on the right side of the search field. This can be used to add a search button or filter button.
    */

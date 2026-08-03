@@ -1,6 +1,5 @@
-import { ArrowRightIcon, MailIcon } from "lucide-react"
-
 import { Button } from "@opengovsg/oui"
+import { ArrowRightIcon, MailIcon } from "lucide-react"
 
 export default function ButtonWithIcons() {
   return (

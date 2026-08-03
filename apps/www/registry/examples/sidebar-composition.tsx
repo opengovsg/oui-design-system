@@ -1,13 +1,12 @@
 "use client"
 
-import { Calendar, MailIcon, Star, Wrench } from "lucide-react"
-
 import {
   SidebarHeader,
   SidebarItem,
   SidebarList,
   SidebarRoot,
 } from "@opengovsg/oui"
+import { Calendar, MailIcon, Star, Wrench } from "lucide-react"
 
 export default function SidebarComposition() {
   return (

@@ -1,10 +1,10 @@
-import type { AnchorHTMLAttributes } from "react"
-
 import type { VariantProps } from "@opengovsg/oui-theme"
 import { skipNavLinkStyles } from "@opengovsg/oui-theme"
+import type { AnchorHTMLAttributes } from "react"
 
 interface SkipNavLinkProps
-  extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "id" | "href">,
+  extends
+    Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "id" | "href">,
     VariantProps<typeof skipNavLinkStyles> {
   /**
    * The id of the element to skip to

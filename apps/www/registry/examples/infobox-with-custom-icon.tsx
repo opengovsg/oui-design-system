@@ -1,6 +1,5 @@
-import { AlertTriangle, Lightbulb } from "lucide-react"
-
 import { Infobox } from "@opengovsg/oui"
+import { AlertTriangle, Lightbulb } from "lucide-react"
 
 export default function InfoboxWithCustomIcon() {
   return (

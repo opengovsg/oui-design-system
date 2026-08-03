@@ -1,8 +1,7 @@
 "use client"
 
-import { ArrowRightIcon, ExternalLinkIcon } from "lucide-react"
-
 import { Link } from "@opengovsg/oui"
+import { ArrowRightIcon, ExternalLinkIcon } from "lucide-react"
 
 export default function LinkWithIcons() {
   return (

@@ -2,9 +2,8 @@
 
 import type { DateValue } from "@internationalized/date"
 import { getLocalTimeZone, isWeekend, today } from "@internationalized/date"
-import { useLocale } from "@react-aria/i18n"
-
 import { Calendar } from "@opengovsg/oui"
+import { useLocale } from "@react-aria/i18n"
 
 export default function CalendarUnavailableDates() {
   const now = today(getLocalTimeZone())

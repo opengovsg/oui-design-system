@@ -1,8 +1,8 @@
 // apps/www/scripts/registry/variant.ts
 import { Project } from "ts-morph"
 
-import type { Catalog } from "./types"
 import { transformSourceFile } from "./transform"
+import type { Catalog } from "./types"
 
 export interface VariantTransformResult {
   code: string

@@ -2,6 +2,7 @@
 import { readdirSync, statSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+
 import { Project } from "ts-morph"
 
 import type { Catalog, ComponentVariant, LibEntry } from "./types"

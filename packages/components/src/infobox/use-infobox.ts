@@ -1,12 +1,11 @@
-import { useMemo } from "react"
-import { useDeepCompareMemo } from "use-deep-compare"
-
 import type {
   InfoboxSlots,
   InfoboxVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { infoboxStyles } from "@opengovsg/oui-theme"
+import { useMemo } from "react"
+import { useDeepCompareMemo } from "use-deep-compare"
 
 import type { HtmlUiProps } from "../system/types"
 import { mapPropsVariants } from "../system/utils"

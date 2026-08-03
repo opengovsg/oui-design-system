@@ -1,25 +1,5 @@
 "use client"
 
-import type React from "react"
-import type {
-  DisclosurePanelProps as AriaDisclosurePanelProps,
-  DisclosureProps as AriaDisclosureProps,
-  ButtonRenderProps,
-  DisclosureGroupProps,
-  RenderProps,
-} from "react-aria-components"
-import { useContext } from "react"
-import { ChevronDown } from "lucide-react"
-import {
-  Disclosure as AriaDisclosure,
-  DisclosurePanel as AriaDisclosurePanel,
-  Button,
-  composeRenderProps,
-  DisclosureGroup,
-  DisclosureStateContext,
-  Heading,
-} from "react-aria-components"
-
 import type {
   AccordionSlots,
   AccordionVariantProps,
@@ -30,6 +10,25 @@ import {
   cn,
   composeTailwindRenderProps,
 } from "@opengovsg/oui-theme"
+import { ChevronDown } from "lucide-react"
+import type React from "react"
+import { useContext } from "react"
+import type {
+  DisclosurePanelProps as AriaDisclosurePanelProps,
+  DisclosureProps as AriaDisclosureProps,
+  ButtonRenderProps,
+  DisclosureGroupProps,
+  RenderProps,
+} from "react-aria-components"
+import {
+  Disclosure as AriaDisclosure,
+  DisclosurePanel as AriaDisclosurePanel,
+  Button,
+  composeRenderProps,
+  DisclosureGroup,
+  DisclosureStateContext,
+  Heading,
+} from "react-aria-components"
 
 import { createContext } from "../system/react-utils"
 import { renderChildren } from "../system/react-utils/children"
@@ -46,11 +45,10 @@ export const [AccordionStyleContext, useAccordionStyleContext] =
     strict: true,
   })
 
-export interface AccordionItemProps
-  extends Omit<
-    AriaDisclosureProps,
-    "isExpanded" | "defaultExpanded" | "onExpandedChange"
-  > {
+export interface AccordionItemProps extends Omit<
+  AriaDisclosureProps,
+  "isExpanded" | "defaultExpanded" | "onExpandedChange"
+> {
   children: React.ReactNode
   classNames?: SlotsToClasses<AccordionSlots>
 }
@@ -80,8 +78,10 @@ export interface AccordionHeaderRenderProps extends ButtonRenderProps {
   isExpanded: boolean
 }
 
-export interface AccordionHeaderProps
-  extends Pick<RenderProps<AccordionHeaderRenderProps>, "children"> {
+export interface AccordionHeaderProps extends Pick<
+  RenderProps<AccordionHeaderRenderProps>,
+  "children"
+> {
   classNames?: SlotsToClasses<
     Extract<
       AccordionSlots,
@@ -236,8 +236,7 @@ export function AccordionContent({
 }
 
 export interface AccordionProps
-  extends DisclosureGroupProps,
-    AccordionVariantProps {
+  extends DisclosureGroupProps, AccordionVariantProps {
   children: React.ReactNode
   classNames?: SlotsToClasses<AccordionSlots>
 }

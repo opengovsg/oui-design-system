@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-
 import { Badge, Checkbox } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
+import { useState } from "react"
 
 export default function CheckboxCustomStyles() {
   const [isSelected, setIsSelected] = useState(false)

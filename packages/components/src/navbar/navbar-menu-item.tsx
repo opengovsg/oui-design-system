@@ -1,12 +1,11 @@
 "use client"
 
-import { composeRenderProps, useRenderProps } from "react-aria-components"
-
 import type { ClassNameOrFunction } from "@opengovsg/oui-theme"
 import { cn, dataAttr, navbarMenuItemStyles } from "@opengovsg/oui-theme"
+import { composeRenderProps, useRenderProps } from "react-aria-components"
 
-import type { HtmlUiProps } from "../system/types"
 import { useDomRef } from "../system/react-utils"
+import type { HtmlUiProps } from "../system/types"
 import { forwardRef } from "../system/utils"
 import { useNavbarContext } from "./navbar-context"
 
@@ -14,8 +13,10 @@ export interface NavbarMenuItemRenderProps {
   isActive: boolean
 }
 
-export interface NavbarMenuItemProps
-  extends Omit<HtmlUiProps<"li">, "className"> {
+export interface NavbarMenuItemProps extends Omit<
+  HtmlUiProps<"li">,
+  "className"
+> {
   /**
    * Whether the item is active or not.
    * @default false

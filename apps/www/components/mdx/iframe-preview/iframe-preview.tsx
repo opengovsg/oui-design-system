@@ -1,11 +1,11 @@
 "use client"
 
+import { tv } from "@opengovsg/oui-theme"
+import { motion, useMotionValue, useTransform } from "motion/react"
 import { useEffect, useRef, useState } from "react"
+
 import { useIsomorphicLayoutEffect } from "@/hooks/use-isomorphic-layout-effect"
 import { useIsMobile } from "@/hooks/use-media-query"
-import { motion, useMotionValue, useTransform } from "motion/react"
-
-import { tv } from "@opengovsg/oui-theme"
 
 const resizer = tv({
   slots: {

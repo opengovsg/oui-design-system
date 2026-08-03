@@ -1,9 +1,8 @@
 "use client"
 
-import React from "react"
 import { getLocalTimeZone, today } from "@internationalized/date"
-
 import { RangeCalendar } from "@opengovsg/oui"
+import React from "react"
 
 export default function RangeCalendarControlled() {
   const [value, setValue] = React.useState({

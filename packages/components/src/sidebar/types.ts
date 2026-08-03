@@ -39,15 +39,13 @@ export interface SidebarListProps extends SidebarItemProps {
 }
 
 interface GeneratedBase
-  extends BaseSidebarItemProps,
-    Pick<SidebarItemProps, "isSelected"> {}
+  extends BaseSidebarItemProps, Pick<SidebarItemProps, "isSelected"> {}
 export interface GeneratedItem extends GeneratedBase, SidebarItemProps {}
 export interface GeneratedHeader extends SidebarHeaderProps {
   type: "header"
 }
 export interface GeneratedList
-  extends Omit<GeneratedBase, "children">,
-    SidebarListProps {
+  extends Omit<GeneratedBase, "children">, SidebarListProps {
   subItems: (GeneratedList | GeneratedItem | GeneratedHeader)[]
 }
 

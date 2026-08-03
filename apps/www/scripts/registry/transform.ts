@@ -1,9 +1,10 @@
 // apps/www/scripts/registry/transform.ts
 import { join } from "node:path"
+
 import type { ImportDeclaration, SourceFile } from "ts-morph"
 
-import type { Catalog, LibEntry } from "./types"
 import { classifyImport } from "./classify"
+import type { Catalog, LibEntry } from "./types"
 
 export interface TransformResult {
   /** Transformed source code (preserves "use client" pragma). */

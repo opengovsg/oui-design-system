@@ -1,8 +1,7 @@
 "use client"
 
-import { I18nProvider } from "@react-aria/i18n"
-
 import { RangeCalendar } from "@opengovsg/oui"
+import { I18nProvider } from "@react-aria/i18n"
 
 export default function RangeCalendarInternational() {
   return (

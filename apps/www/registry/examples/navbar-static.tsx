@@ -1,8 +1,7 @@
 "use client"
 
-import { Link } from "react-aria-components"
-
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@opengovsg/oui"
+import { Link } from "react-aria-components"
 
 export default function NavbarStatic() {
   return (

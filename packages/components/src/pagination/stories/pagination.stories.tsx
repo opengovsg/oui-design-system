@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
-
 import { paginationStyles } from "@opengovsg/oui-theme"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Pagination } from "../pagination"
 

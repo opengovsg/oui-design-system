@@ -1,20 +1,16 @@
 {
   "name": "@oui/build-scripts",
   "version": "0.0.0",
-  "type": "module",
   "private": true,
-  "sideEffects": false,
   "license": "SEE LICENSE IN LICENSE.md",
+  "type": "module",
+  "sideEffects": false,
   "devDependencies": {
-    "@oui/eslint-config": "workspace:*",
-    "@oui/prettier-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-replace": "^6.0.2",
     "@types/node": "^22.13.1",
-    "eslint": "catalog:",
     "execa": "^9.5.2",
-    "prettier": "catalog:",
     "rollup": "^4.59.0",
     "rollup-plugin-delete": "^2.1.0",
     "rollup-plugin-esbuild": "^6.2.0",
@@ -23,6 +19,5 @@
     "tsup": "^8.5.1",
     "tsx": "^4.21.0",
     "typescript": "catalog:"
-  },
-  "prettier": "@oui/prettier-config"
+  }
 }

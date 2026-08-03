@@ -1,6 +1,12 @@
 "use client"
 
 import type {
+  SlotsToClassesWithRenderProps,
+  TooltipSlots,
+  TooltipVariantProps,
+} from "@opengovsg/oui-theme"
+import { composeRenderProps, tooltipStyles } from "@opengovsg/oui-theme"
+import type {
   TooltipProps as AriaTooltipProps,
   TooltipRenderProps,
   TooltipTriggerComponentProps,
@@ -11,19 +17,11 @@ import {
   OverlayArrow,
 } from "react-aria-components"
 
-import type {
-  SlotsToClassesWithRenderProps,
-  TooltipSlots,
-  TooltipVariantProps,
-} from "@opengovsg/oui-theme"
-import { composeRenderProps, tooltipStyles } from "@opengovsg/oui-theme"
-
 import { renderChildren } from "../system/react-utils/children"
 import { mapPropsVariants } from "../system/utils"
 
 export interface TooltipProps
-  extends Omit<AriaTooltipProps, "children">,
-    TooltipVariantProps {
+  extends Omit<AriaTooltipProps, "children">, TooltipVariantProps {
   children: React.ReactNode
   /**
    * Whether to show the arrow pointing to the trigger element.

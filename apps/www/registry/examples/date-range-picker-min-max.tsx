@@ -1,7 +1,6 @@
 "use client"
 
 import { getLocalTimeZone, parseDate, today } from "@internationalized/date"
-
 import { DateRangePicker } from "@opengovsg/oui"
 
 export default function DateRangePickerMinMax() {

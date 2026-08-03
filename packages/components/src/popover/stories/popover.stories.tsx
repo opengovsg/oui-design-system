@@ -3,8 +3,8 @@ import { HelpCircle } from "lucide-react"
 import { Dialog, DialogTrigger, Heading } from "react-aria-components"
 import { expect, userEvent, within } from "storybook/test"
 
-import type { PopoverProps } from "../popover"
 import { Button } from "../../button"
+import type { PopoverProps } from "../popover"
 import { Popover } from "../popover"
 
 export default {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { Key } from "react-aria-components"
 import { useState } from "react"
+import type { Key } from "react-aria-components"
 
 import type { ComboBoxFuzzyProps } from "../combo-box-fuzzy"
 import { ComboBoxFuzzy } from "../combo-box-fuzzy"

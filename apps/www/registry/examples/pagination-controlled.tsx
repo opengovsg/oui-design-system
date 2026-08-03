@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Button, Pagination } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function PaginationControlled() {
   const [currentPage, setCurrentPage] = useState(1)

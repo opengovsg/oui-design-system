@@ -1,5 +1,5 @@
-import type { UsePaginationItemProps } from "./use-pagination-item"
 import { forwardRef } from "../system/utils"
+import type { UsePaginationItemProps } from "./use-pagination-item"
 import { usePaginationItem } from "./use-pagination-item"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

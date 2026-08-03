@@ -1,9 +1,8 @@
 "use client"
 
 import { Time } from "@internationalized/date"
-import { Form } from "react-aria-components"
-
 import { Button, TimeField } from "@opengovsg/oui"
+import { Form } from "react-aria-components"
 
 export default function TimeFieldMinMax() {
   return (

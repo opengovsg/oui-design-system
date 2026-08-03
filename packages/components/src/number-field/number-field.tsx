@@ -1,13 +1,6 @@
 "use client"
 
 import type {
-  NumberFieldProps as AriaNumberFieldProps,
-  ValidationResult,
-} from "react-aria-components"
-import { Minus, Plus } from "lucide-react"
-import { NumberField as AriaNumberField } from "react-aria-components"
-
-import type {
   NumberFieldSlots,
   NumberFieldVariantProps,
   SlotsToClasses,
@@ -19,16 +12,21 @@ import {
   fieldBorderStyles,
   numberFieldStyles,
 } from "@opengovsg/oui-theme"
+import { Minus, Plus } from "lucide-react"
+import type {
+  NumberFieldProps as AriaNumberFieldProps,
+  ValidationResult,
+} from "react-aria-components"
+import { NumberField as AriaNumberField } from "react-aria-components"
 
-import type { InputProps } from "../input"
 import { Button } from "../button"
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import type { InputProps } from "../input"
 import { Input } from "../input"
 import { mapPropsVariants } from "../system/utils"
 
 export interface NumberFieldProps
-  extends AriaNumberFieldProps,
-    NumberFieldVariantProps {
+  extends AriaNumberFieldProps, NumberFieldVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)

@@ -1,5 +1,14 @@
 "use client"
 
+import type { SidebarProps } from "@opengovsg/oui"
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalHeader,
+  Sidebar,
+} from "@opengovsg/oui"
 import {
   Calendar,
   Link,
@@ -10,16 +19,6 @@ import {
   Wrench,
 } from "lucide-react"
 import { DialogTrigger } from "react-aria-components"
-
-import type { SidebarProps } from "@opengovsg/oui"
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  Sidebar,
-} from "@opengovsg/oui"
 
 const items: SidebarProps["items"] = [
   { type: "header", children: "Mail" },

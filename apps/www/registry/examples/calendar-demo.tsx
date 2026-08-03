@@ -1,7 +1,6 @@
 "use client"
 
 import { parseDate } from "@internationalized/date"
-
 import { Calendar } from "@opengovsg/oui"
 
 export default function CalendarDemo() {

@@ -1,6 +1,6 @@
+import { useResizeObserver } from "@react-aria/utils"
 import type { RefObject } from "react"
 import { useCallback, useState } from "react"
-import { useResizeObserver } from "@react-aria/utils"
 
 /**
  * Extracted from Select.tsx in react-aria-components. Used as a workaround for https://github.com/adobe/react-spectrum/issues/9451

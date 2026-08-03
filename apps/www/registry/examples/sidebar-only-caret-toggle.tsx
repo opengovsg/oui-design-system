@@ -1,8 +1,7 @@
 "use client"
 
-import { MailIcon, Star, Wrench } from "lucide-react"
-
 import { SidebarItem, SidebarList, SidebarRoot } from "@opengovsg/oui"
+import { MailIcon, Star, Wrench } from "lucide-react"
 
 export default function SidebarOnlyCaretToggle() {
   return (

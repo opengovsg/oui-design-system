@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
 import { withChromaticModes } from "@oui/chromatic"
+import type { Meta, StoryObj } from "@storybook/react-vite"
 
 import { Banner } from "../banner"
 

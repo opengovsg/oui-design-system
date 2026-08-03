@@ -1,7 +1,5 @@
 "use client"
 
-import { ChevronDown } from "lucide-react"
-
 import {
   Avatar,
   Button,
@@ -11,6 +9,7 @@ import {
   MenuTrigger,
   SubmenuTrigger,
 } from "@opengovsg/oui"
+import { ChevronDown } from "lucide-react"
 
 export default function AvatarMenuTemplate() {
   return (

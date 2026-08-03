@@ -1,19 +1,19 @@
 "use client"
 
-import type { ReactNode } from "react"
-import type { ToggleButtonProps } from "react-aria-components"
-import { useMemo } from "react"
-import { chain, useLocalizedStringFormatter } from "react-aria"
-import { ToggleButton } from "react-aria-components"
-
 import type { ButtonVariantProps, SlotsToClasses } from "@opengovsg/oui-theme"
 import { buttonStyles, cn, dataAttr } from "@opengovsg/oui-theme"
+import type { ReactNode } from "react"
+import { useMemo } from "react"
+import { chain, useLocalizedStringFormatter } from "react-aria"
+import type { ToggleButtonProps } from "react-aria-components"
+import { ToggleButton } from "react-aria-components"
 
 import { useNavbarContext } from "./navbar-context"
 import { i18nStrings } from "./navbar-menu-i18n"
 
 export interface NavbarMenuToggleProps
-  extends ToggleButtonProps,
+  extends
+    ToggleButtonProps,
     Pick<ButtonVariantProps, "size" | "radius" | "isIconOnly"> {
   /**
    * The icon to display.

@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Button, Tooltip, TooltipTrigger } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function TooltipControlled() {
   const [isOpen, setIsOpen] = useState(false)

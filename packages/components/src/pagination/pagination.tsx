@@ -1,17 +1,16 @@
 "use client"
 
-import { useCallback } from "react"
+import { cn, dataAttr } from "@opengovsg/oui-theme"
 import { useLocale } from "@react-aria/i18n"
 import { ChevronLeftIcon, ChevronsRightIcon, EllipsisIcon } from "lucide-react"
+import { useCallback } from "react"
 
-import { cn, dataAttr } from "@opengovsg/oui-theme"
-
-import type { UsePaginationProps } from "./use-pagination"
-import type { PaginationItemValue } from "./use-pagination-base"
 import { forwardRef } from "../system/utils"
 import { PaginationCursor } from "./pagination-cursor"
 import { PaginationItem } from "./pagination-item"
+import type { UsePaginationProps } from "./use-pagination"
 import { usePagination } from "./use-pagination"
+import type { PaginationItemValue } from "./use-pagination-base"
 import { PaginationItemType } from "./use-pagination-base"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

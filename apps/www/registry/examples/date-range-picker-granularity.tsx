@@ -1,11 +1,10 @@
 "use client"
 
 import type { ZonedDateTime } from "@internationalized/date"
-import { useState } from "react"
 import { parseAbsoluteToLocal } from "@internationalized/date"
-import { useDateFormatter } from "@react-aria/i18n"
-
 import { DateRangePicker } from "@opengovsg/oui"
+import { useDateFormatter } from "@react-aria/i18n"
+import { useState } from "react"
 
 export default function DateRangePickerGranularity() {
   const [value, setValue] = useState<{

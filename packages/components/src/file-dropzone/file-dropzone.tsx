@@ -1,11 +1,17 @@
 "use client"
 
-import type { InputBase, Validation } from "@react-types/shared"
-import type { AriaFieldProps } from "react-aria"
-import type { DropzoneOptions, FileError, FileRejection } from "react-dropzone"
-import { useCallback, useEffect, useMemo } from "react"
+import type {
+  FileDropzoneSlots,
+  FileInfoDropzoneSlots,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
+import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
 import { useFormValidationState } from "@react-stately/form"
+import type { InputBase, Validation } from "@react-types/shared"
 import { Upload } from "lucide-react"
+import { useCallback, useEffect, useMemo } from "react"
+import type { AriaFieldProps } from "react-aria"
 import { useField, useId } from "react-aria"
 import {
   FieldErrorContext,
@@ -15,18 +21,9 @@ import {
   Provider,
   TextContext,
 } from "react-aria-components"
+import type { DropzoneOptions, FileError, FileRejection } from "react-dropzone"
 import { ErrorCode, useDropzone } from "react-dropzone"
 
-import type {
-  FileDropzoneSlots,
-  FileInfoDropzoneSlots,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
-import { dataAttr, fileDropzoneStyles } from "@opengovsg/oui-theme"
-
-import type { FileItem } from "./types"
-import type { MaxFileSizeRule } from "./utils"
 import { Description, FieldError, Label } from "../field"
 import { useControllableState } from "../hooks"
 import { mapPropsVariants } from "../system/utils"
@@ -37,6 +34,8 @@ import {
   useFileDropzoneStyleContext,
 } from "./contexts"
 import { FileInfo } from "./file-info"
+import type { FileItem } from "./types"
+import type { MaxFileSizeRule } from "./utils"
 import { formatBytes, formatErrorMessage, resolveMaxFileSize } from "./utils"
 
 export interface FileItemsRenderProps {
@@ -45,7 +44,8 @@ export interface FileItemsRenderProps {
 }
 
 export interface FileDropzoneProps
-  extends Omit<AriaFieldProps, "validate">,
+  extends
+    Omit<AriaFieldProps, "validate">,
     InputBase,
     Validation<FileItem[]>,
     VariantProps<typeof fileDropzoneStyles> {

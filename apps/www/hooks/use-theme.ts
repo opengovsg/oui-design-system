@@ -1,8 +1,8 @@
 "use client"
 
-import { useCallback, useEffect, useRef } from "react"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
+import { useCallback, useEffect, useRef } from "react"
 
 const themeAtom = atomWithStorage<string>("www-theme", "Base")
 

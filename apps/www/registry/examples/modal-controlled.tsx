@@ -1,7 +1,5 @@
 "use client"
 
-import { useState } from "react"
-
 import {
   Button,
   Modal,
@@ -10,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function ModalControlled() {
   const [isOpen, setIsOpen] = useState(false)

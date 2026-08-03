@@ -1,9 +1,8 @@
 "use client"
 
-import { Clock5, Trash, User, Wrench } from "lucide-react"
-
 import type { SidebarProps } from "@opengovsg/oui"
 import { Sidebar } from "@opengovsg/oui"
+import { Clock5, Trash, User, Wrench } from "lucide-react"
 
 const items: SidebarProps["items"] = [
   {

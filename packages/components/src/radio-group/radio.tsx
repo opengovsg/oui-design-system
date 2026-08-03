@@ -1,6 +1,14 @@
 "use client"
 
 import type {
+  FieldErrorSlots,
+  RadioGroupVariantProps,
+  RadioSlots,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
+import { radioGroupStyles, radioStyles } from "@opengovsg/oui-theme"
+import type {
   RadioGroupProps as AriaRadioGroupProps,
   RadioProps as AriaRadioProps,
   ValidationResult,
@@ -12,15 +20,6 @@ import {
   Provider,
 } from "react-aria-components"
 
-import type {
-  FieldErrorSlots,
-  RadioGroupVariantProps,
-  RadioSlots,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
-import { radioGroupStyles, radioStyles } from "@opengovsg/oui-theme"
-
 import { Description, FieldError, Label } from "../field"
 import { renderChildren } from "../system/react-utils/children"
 import { mapPropsVariants } from "../system/utils"
@@ -30,8 +29,7 @@ import {
 } from "./radio-group-variant-context"
 
 export interface RadioProps
-  extends AriaRadioProps,
-    VariantProps<typeof radioStyles> {
+  extends AriaRadioProps, VariantProps<typeof radioStyles> {
   classNames?: SlotsToClasses<RadioSlots>
   description?: string
 }
@@ -98,8 +96,7 @@ export const Radio = ({
 }
 
 export interface RadioGroupProps
-  extends Omit<AriaRadioGroupProps, "children">,
-    RadioGroupVariantProps {
+  extends Omit<AriaRadioGroupProps, "children">, RadioGroupVariantProps {
   /**
    * Label for the radio group
    */

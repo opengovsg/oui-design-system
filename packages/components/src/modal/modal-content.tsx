@@ -1,12 +1,11 @@
 "use client"
 
-import type { DialogProps } from "react-aria-components"
-import { isValidElement, useContext } from "react"
-import { XIcon } from "lucide-react"
-import { useLocalizedStringFormatter } from "react-aria"
-import { Dialog } from "react-aria-components"
-
 import { cn } from "@opengovsg/oui-theme"
+import { XIcon } from "lucide-react"
+import { isValidElement, useContext } from "react"
+import { useLocalizedStringFormatter } from "react-aria"
+import type { DialogProps } from "react-aria-components"
+import { Dialog } from "react-aria-components"
 
 import type { ButtonProps } from "../button"
 import { Button } from "../button"

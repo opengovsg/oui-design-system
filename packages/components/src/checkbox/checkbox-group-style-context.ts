@@ -1,7 +1,7 @@
 "use client"
 
-import type { CheckboxProps } from "./checkbox"
 import { createContext } from "../system/react-utils"
+import type { CheckboxProps } from "./checkbox"
 
 export interface UseProvideCheckboxGroupStylesReturn {
   size: CheckboxProps["size"]

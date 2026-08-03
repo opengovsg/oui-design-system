@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-
 import type { E164Number } from "@opengovsg/oui"
 import { formatPhoneNumberIntl, PhoneNumberField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function PhoneNumberFieldControlled() {
   const [value, setValue] = useState<E164Number | undefined>()

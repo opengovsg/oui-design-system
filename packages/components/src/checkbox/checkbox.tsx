@@ -1,20 +1,6 @@
 "use client"
 
 import type {
-  CheckboxGroupProps as AriaCheckboxGroupProps,
-  CheckboxProps as AriaCheckboxProps,
-  CheckboxRenderProps,
-  ValidationResult,
-} from "react-aria-components"
-import { Check, Minus } from "lucide-react"
-import {
-  Checkbox as AriaCheckbox,
-  CheckboxGroup as AriaCheckboxGroup,
-  composeRenderProps,
-  Provider,
-} from "react-aria-components"
-
-import type {
   CheckboxSlots,
   FieldErrorSlots,
   SlotsToClasses,
@@ -22,6 +8,19 @@ import type {
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { checkboxGroupStyles, checkboxStyles } from "@opengovsg/oui-theme"
+import { Check, Minus } from "lucide-react"
+import type {
+  CheckboxGroupProps as AriaCheckboxGroupProps,
+  CheckboxProps as AriaCheckboxProps,
+  CheckboxRenderProps,
+  ValidationResult,
+} from "react-aria-components"
+import {
+  Checkbox as AriaCheckbox,
+  CheckboxGroup as AriaCheckboxGroup,
+  composeRenderProps,
+  Provider,
+} from "react-aria-components"
 
 import { Description, FieldError, Label } from "../field"
 import { renderChildren } from "../system/react-utils/children"
@@ -32,8 +31,7 @@ import {
 } from "./checkbox-group-style-context"
 
 export interface CheckboxProps
-  extends AriaCheckboxProps,
-    VariantProps<typeof checkboxStyles> {
+  extends AriaCheckboxProps, VariantProps<typeof checkboxStyles> {
   classNames?: SlotsToClassesWithRenderProps<CheckboxSlots, CheckboxRenderProps>
 }
 
@@ -93,8 +91,10 @@ export const Checkbox = ({
     </AriaCheckbox>
   )
 }
-export interface CheckboxGroupProps
-  extends Omit<AriaCheckboxGroupProps, "children"> {
+export interface CheckboxGroupProps extends Omit<
+  AriaCheckboxGroupProps,
+  "children"
+> {
   label?: string
   children?: React.ReactNode
   description?: string

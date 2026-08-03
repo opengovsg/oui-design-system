@@ -3,8 +3,8 @@ import { useState } from "react"
 import { ErrorCode } from "react-dropzone"
 
 import type { FileDropzoneProps } from "../file-dropzone"
-import type { FileItem } from "../types"
 import { FileDropzone } from "../file-dropzone"
+import type { FileItem } from "../types"
 
 function dataURLtoFile(dataurl: string, filename: string) {
   const arr = dataurl.split(",")

@@ -1,8 +1,7 @@
 "use client"
 
-import { LoaderCircleIcon } from "lucide-react"
-
 import { SearchField } from "@opengovsg/oui"
+import { LoaderCircleIcon } from "lucide-react"
 
 export default function SearchFieldAsyncSearch() {
   return (

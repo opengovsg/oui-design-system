@@ -1,18 +1,29 @@
 "use client"
 
-import type { ForwardedRef } from "react"
-import type {
-  RangeCalendarProps as AriaRangeCalendarProps,
-  CalendarGridProps,
-  DateValue,
-} from "react-aria-components"
-import { useContext, useMemo } from "react"
 import {
   CalendarDate,
   getDayOfWeek,
   getLocalTimeZone,
   today,
 } from "@internationalized/date"
+import type {
+  CalendarSlots,
+  CalendarVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import {
+  calendarStyles,
+  cn,
+  composeRenderProps,
+  dataAttr,
+} from "@opengovsg/oui-theme"
+import type { ForwardedRef } from "react"
+import { useContext, useMemo } from "react"
+import type {
+  RangeCalendarProps as AriaRangeCalendarProps,
+  CalendarGridProps,
+  DateValue,
+} from "react-aria-components"
 import {
   RangeCalendar as AriaRangeCalendar,
   CalendarCell,
@@ -25,18 +36,6 @@ import {
 } from "react-aria-components"
 import { useDeepCompareMemo } from "use-deep-compare"
 
-import type {
-  CalendarSlots,
-  CalendarVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-import {
-  calendarStyles,
-  cn,
-  composeRenderProps,
-  dataAttr,
-} from "@opengovsg/oui-theme"
-
 import { CalendarStyleContext, useCalendarStyleContext } from "../calendar"
 import { AgnosticCalendarStateContext } from "../calendar/agnostic-calendar-state-context"
 import { CalendarBottomContent } from "../calendar/calendar-bottom-content"
@@ -45,7 +44,8 @@ import { CalendarHeader } from "../calendar/calendar-header"
 import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
 
 export interface RangeCalendarProps<T extends DateValue>
-  extends CalendarVariantProps,
+  extends
+    CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle">,
     AriaRangeCalendarProps<T> {
   /**

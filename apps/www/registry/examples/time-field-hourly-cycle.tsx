@@ -1,7 +1,6 @@
 "use client"
 
 import { Time } from "@internationalized/date"
-
 import { TimeField } from "@opengovsg/oui"
 
 export default function TimeFieldHourlyCycle() {

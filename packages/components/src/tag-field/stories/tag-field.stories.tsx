@@ -1,10 +1,9 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { Key } from "react-aria"
-import { useState } from "react"
-import { withChromaticModes } from "@oui/chromatic"
-import { userEvent } from "storybook/test"
-
 import { cn } from "@opengovsg/oui-theme"
+import { withChromaticModes } from "@oui/chromatic"
+import type { Meta, StoryObj } from "@storybook/react-vite"
+import { useState } from "react"
+import type { Key } from "react-aria"
+import { userEvent } from "storybook/test"
 
 import { TagField } from "../tag-field"
 

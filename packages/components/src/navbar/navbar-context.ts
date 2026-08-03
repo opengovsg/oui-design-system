@@ -1,7 +1,7 @@
 "use client"
 
-import type { UseNavbarReturn } from "./use-navbar"
 import { createContext } from "../system/react-utils"
+import type { UseNavbarReturn } from "./use-navbar"
 
 export const [NavbarProvider, useNavbarContext] =
   createContext<UseNavbarReturn>({

@@ -1,8 +1,7 @@
-import type { UseMultipleSelectionReturnValue } from "downshift"
-import { useCallback, useContext } from "react"
-import { XIcon } from "lucide-react"
-
 import type { SlotsToClasses, TagFieldSlots } from "@opengovsg/oui-theme"
+import type { UseMultipleSelectionReturnValue } from "downshift"
+import { XIcon } from "lucide-react"
+import { useCallback, useContext } from "react"
 
 import type { TagFieldStateContextValue } from "./tag-field-state-context"
 import { TagFieldStateContext } from "./tag-field-state-context"

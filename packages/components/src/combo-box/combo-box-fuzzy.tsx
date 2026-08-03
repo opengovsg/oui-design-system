@@ -1,11 +1,5 @@
 "use client"
 
-import type { Key } from "react-aria"
-import type { SetRequired } from "type-fest"
-import { useCallback, useDeferredValue, useMemo, useState } from "react"
-import fuzzysort from "fuzzysort"
-import { Text } from "react-aria-components"
-
 import type {
   ComboBoxFuzzyVariantProps,
   ListBoxItemSlots,
@@ -16,9 +10,14 @@ import {
   comboBoxStyles,
   listBoxItemStyles,
 } from "@opengovsg/oui-theme"
+import fuzzysort from "fuzzysort"
+import { useCallback, useDeferredValue, useMemo, useState } from "react"
+import type { Key } from "react-aria"
+import { Text } from "react-aria-components"
+import type { SetRequired } from "type-fest"
 
-import type { ComboBoxProps } from "./combo-box"
 import { mapPropsVariants } from "../system/utils"
+import type { ComboBoxProps } from "./combo-box"
 import { ComboBox } from "./combo-box"
 import { ComboBoxItem } from "./combo-box-item"
 
@@ -56,15 +55,12 @@ function HighlightedText({
   ))
 }
 
-export interface ComboBoxFuzzyProps<T extends ComboBoxItem = ComboBoxItem>
-  extends SetRequired<
-    ComboBoxProps<T>,
-    | "inputValue"
-    | "onInputChange"
-    | "onSelectionChange"
-    | "selectedKey"
-    | "items"
-  > {
+export interface ComboBoxFuzzyProps<
+  T extends ComboBoxItem = ComboBoxItem,
+> extends SetRequired<
+  ComboBoxProps<T>,
+  "inputValue" | "onInputChange" | "onSelectionChange" | "selectedKey" | "items"
+> {
   itemClassNames?: SlotsToClasses<ListBoxItemSlots> &
     SlotsToClasses<"highlight">
 }

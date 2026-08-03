@@ -1,27 +1,25 @@
 "use client"
 
-import type { ModalOverlayProps } from "react-aria-components"
-import { forwardRef, useMemo } from "react"
-import {
-  Modal as AriaModal,
-  ModalOverlay,
-  Provider,
-} from "react-aria-components"
-
 import type {
   ModalSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { composeRenderProps, modalStyles } from "@opengovsg/oui-theme"
+import { forwardRef, useMemo } from "react"
+import type { ModalOverlayProps } from "react-aria-components"
+import {
+  Modal as AriaModal,
+  ModalOverlay,
+  Provider,
+} from "react-aria-components"
 
 import type { ButtonProps } from "../button"
 import { mapPropsVariants } from "../system/utils"
 import { ModalVariantContext } from "./modal-variant-context"
 
 export interface ModalProps
-  extends ModalOverlayProps,
-    VariantProps<typeof modalStyles> {
+  extends ModalOverlayProps, VariantProps<typeof modalStyles> {
   classNames?: SlotsToClasses<ModalSlots>
 }
 

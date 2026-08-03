@@ -1,8 +1,7 @@
 "use client"
 
-import { useContext } from "react"
-
 import { cn } from "@opengovsg/oui-theme"
+import { useContext } from "react"
 
 import type { HtmlUiProps } from "../system/types"
 import { forwardRef } from "../system/utils"

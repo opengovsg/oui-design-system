@@ -1,26 +1,24 @@
 "use client"
 
-import type { ForwardedRef } from "react"
-import type { ListBoxItemProps as AriaListBoxItemProps } from "react-aria-components"
-import { useMemo } from "react"
-import {
-  ListBoxItem as AriaListBoxItem,
-  composeRenderProps,
-  Text,
-} from "react-aria-components"
-
 import type {
   ListBoxItemSlots,
   ListBoxItemVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { listBoxItemStyles } from "@opengovsg/oui-theme"
+import type { ForwardedRef } from "react"
+import { useMemo } from "react"
+import type { ListBoxItemProps as AriaListBoxItemProps } from "react-aria-components"
+import {
+  ListBoxItem as AriaListBoxItem,
+  composeRenderProps,
+  Text,
+} from "react-aria-components"
 
 import { forwardRef, mapPropsVariants } from "../system/utils"
 
 export interface ListBoxItemProps
-  extends AriaListBoxItemProps,
-    ListBoxItemVariantProps {
+  extends AriaListBoxItemProps, ListBoxItemVariantProps {
   /**
    * Description for the item, if any
    */

@@ -1,9 +1,8 @@
 "use client"
 
-import type { Key } from "react-aria-components"
-import { useState } from "react"
-
 import { Select, SelectItem } from "@opengovsg/oui"
+import { useState } from "react"
+import type { Key } from "react-aria-components"
 
 export default function SelectContentExample() {
   const options = [

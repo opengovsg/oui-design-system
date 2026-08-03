@@ -1,7 +1,5 @@
 "use client"
 
-import { DialogTrigger } from "react-aria-components"
-
 import {
   Button,
   Modal,
@@ -10,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@opengovsg/oui"
+import { DialogTrigger } from "react-aria-components"
 
 const ANIMATIONS = [
   { value: "zoom", label: "Zoom (default)", description: "the default zoom" },

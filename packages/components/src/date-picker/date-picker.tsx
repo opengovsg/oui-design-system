@@ -1,15 +1,6 @@
 "use client"
 
 import type {
-  DatePickerProps as AriaDatePickerProps,
-  DateValue,
-  ValidationResult,
-} from "react-aria-components"
-import { useMemo } from "react"
-import { CalendarIcon } from "lucide-react"
-import { DatePicker as AriaDatePicker, Dialog } from "react-aria-components"
-
-import type {
   CalendarSlots,
   DatePickerSlots,
   FieldErrorSlots,
@@ -20,20 +11,27 @@ import {
   composeTailwindRenderProps,
   datePickerStyles,
 } from "@opengovsg/oui-theme"
+import { CalendarIcon } from "lucide-react"
+import { useMemo } from "react"
+import type {
+  DatePickerProps as AriaDatePickerProps,
+  DateValue,
+  ValidationResult,
+} from "react-aria-components"
+import { DatePicker as AriaDatePicker, Dialog } from "react-aria-components"
 
 import type { ButtonProps } from "../button"
-import type { CalendarProps } from "../calendar"
-import type { PopoverProps } from "../popover"
 import { Button } from "../button"
+import type { CalendarProps } from "../calendar"
 import { Calendar } from "../calendar"
 import { DateInput } from "../date-field"
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import type { PopoverProps } from "../popover"
 import { Popover } from "../popover"
 import { mapPropsVariants } from "../system/utils"
 
 interface DatePickerProps<T extends DateValue>
-  extends VariantProps<typeof datePickerStyles>,
-    AriaDatePickerProps<T> {
+  extends VariantProps<typeof datePickerStyles>, AriaDatePickerProps<T> {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)

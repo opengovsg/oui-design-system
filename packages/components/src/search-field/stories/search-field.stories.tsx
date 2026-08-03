@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { useState } from "react"
 import { FilterIcon, LoaderCircleIcon, SearchIcon } from "lucide-react"
+import { useState } from "react"
 import { expect } from "storybook/test"
 
 import { Button } from "../../button"

@@ -1,5 +1,3 @@
-import type { DropzoneState, FileError } from "react-dropzone"
-
 import type {
   FileDropzoneSlots,
   fileDropzoneStyles,
@@ -7,13 +5,16 @@ import type {
   FileInfoDropzoneSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
+import type { DropzoneState, FileError } from "react-dropzone"
 
 export interface FileItem extends File {
   errors?: readonly FileError[]
 }
 
-export interface FileDropzoneState
-  extends Omit<DropzoneState, "getInputProps"> {
+export interface FileDropzoneState extends Omit<
+  DropzoneState,
+  "getInputProps"
+> {
   isDisabled?: boolean
   isReadOnly?: boolean
   inputProps: ReturnType<DropzoneState["getInputProps"]>
@@ -28,8 +29,7 @@ export interface FileDropzoneState
   formatError: (error: FileError) => string
 }
 
-export interface FileDropzoneStyleContextReturn
-  extends FileDropzoneVariantProps {
+export interface FileDropzoneStyleContextReturn extends FileDropzoneVariantProps {
   slots: ReturnType<typeof fileDropzoneStyles>
   classNames?: SlotsToClasses<FileDropzoneSlots>
   itemClassNames?: SlotsToClasses<FileInfoDropzoneSlots>

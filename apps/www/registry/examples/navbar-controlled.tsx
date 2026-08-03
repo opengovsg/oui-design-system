@@ -1,8 +1,5 @@
 "use client"
 
-import { useState } from "react"
-import { Link } from "react-aria-components"
-
 import {
   Button,
   Navbar,
@@ -13,6 +10,8 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@opengovsg/oui"
+import { useState } from "react"
+import { Link } from "react-aria-components"
 
 const menuItems = ["Profile", "Dashboard", "Settings", "Log Out"]
 

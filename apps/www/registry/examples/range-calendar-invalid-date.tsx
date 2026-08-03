@@ -1,10 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { getLocalTimeZone, isWeekend, today } from "@internationalized/date"
-import { useLocale } from "@react-aria/i18n"
-
 import { RangeCalendar } from "@opengovsg/oui"
+import { useLocale } from "@react-aria/i18n"
+import { useState } from "react"
 
 export default function RangeCalendarInvalidDate() {
   const [date, setDate] = useState({

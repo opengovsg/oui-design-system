@@ -1,22 +1,20 @@
 "use client"
 
-import type { ForwardedRef, ReactElement } from "react"
-import type { ListBoxItemProps } from "react-aria-components"
-import { ListBoxItem, useContextProps } from "react-aria-components"
-
 import type {
   SelectItemVariantProps,
   SelectItemVariantSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { composeRenderProps, selectItemStyles } from "@opengovsg/oui-theme"
+import type { ForwardedRef, ReactElement } from "react"
+import type { ListBoxItemProps } from "react-aria-components"
+import { ListBoxItem, useContextProps } from "react-aria-components"
 
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { SelectVariantContext } from "./select-variant-context"
 
 export interface SelectItemProps<T extends object>
-  extends ListBoxItemProps<T>,
-    SelectItemVariantProps {
+  extends ListBoxItemProps<T>, SelectItemVariantProps {
   classNames?: SlotsToClasses<SelectItemVariantSlots>
 }
 

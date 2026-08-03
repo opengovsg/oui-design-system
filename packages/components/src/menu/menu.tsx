@@ -1,30 +1,5 @@
 "use client"
 
-import type { ForwardedRef } from "react"
-import type {
-  MenuItemProps as AriaMenuItemProps,
-  MenuProps as AriaMenuProps,
-  MenuSectionProps as AriaMenuSectionProps,
-  ContextValue,
-  SelectionMode,
-  SeparatorProps,
-} from "react-aria-components"
-import { forwardRef, useCallback, useMemo } from "react"
-import { Check, ChevronRight } from "lucide-react"
-import {
-  Menu as AriaMenu,
-  MenuItem as AriaMenuItem,
-  MenuSection as AriaMenuSection,
-  MenuTrigger as AriaMenuTrigger,
-  SubmenuTrigger as AriaSubmenuTrigger,
-  Collection,
-  composeRenderProps,
-  Header,
-  Provider,
-  Separator,
-  useContextProps,
-} from "react-aria-components"
-
 import type {
   ListBoxItemVariantProps,
   MenuItemVariantSlots,
@@ -41,6 +16,30 @@ import {
   menuSectionStyles,
   menuStyles,
 } from "@opengovsg/oui-theme"
+import { Check, ChevronRight } from "lucide-react"
+import type { ForwardedRef } from "react"
+import { forwardRef, useCallback, useMemo } from "react"
+import type {
+  MenuItemProps as AriaMenuItemProps,
+  MenuProps as AriaMenuProps,
+  MenuSectionProps as AriaMenuSectionProps,
+  ContextValue,
+  SelectionMode,
+  SeparatorProps,
+} from "react-aria-components"
+import {
+  Menu as AriaMenu,
+  MenuItem as AriaMenuItem,
+  MenuSection as AriaMenuSection,
+  MenuTrigger as AriaMenuTrigger,
+  SubmenuTrigger as AriaSubmenuTrigger,
+  Collection,
+  composeRenderProps,
+  Header,
+  Provider,
+  Separator,
+  useContextProps,
+} from "react-aria-components"
 
 import type { PopoverProps } from "../popover"
 import { Popover } from "../popover"
@@ -77,9 +76,7 @@ type ForwardedPopoverProps = Pick<
 >
 
 export interface MenuProps<T>
-  extends AriaMenuProps<T>,
-    MenuVariantProps,
-    ForwardedPopoverProps {
+  extends AriaMenuProps<T>, MenuVariantProps, ForwardedPopoverProps {
   classNames?: SlotsToClasses<MenuVariantSlots>
 }
 
@@ -161,8 +158,7 @@ function MenuInner<T extends object>(
 export const Menu = forwardRefGeneric(MenuInner)
 
 export interface MenuItemProps
-  extends AriaMenuItemProps,
-    ListBoxItemVariantProps {
+  extends AriaMenuItemProps, ListBoxItemVariantProps {
   classNames?: SlotsToClasses<MenuItemVariantSlots>
   multipleSelectionIcon?: React.ReactNode | null
   singleSelectionIcon?: React.ReactNode | null
@@ -318,8 +314,7 @@ export function MenuSeparator(props: SeparatorProps) {
 }
 
 export interface MenuSectionProps<T>
-  extends AriaMenuSectionProps<T>,
-    MenuSectionVariantProps {
+  extends AriaMenuSectionProps<T>, MenuSectionVariantProps {
   /**
    * The title of the section.\
    * If not provided, the `aria-label` prop must be provided for accessibility.

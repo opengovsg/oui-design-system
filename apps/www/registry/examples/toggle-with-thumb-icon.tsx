@@ -1,8 +1,7 @@
 "use client"
 
-import { Check, X } from "lucide-react"
-
 import { Toggle } from "@opengovsg/oui"
+import { Check, X } from "lucide-react"
 
 export default function ToggleWithThumbIcon() {
   return (

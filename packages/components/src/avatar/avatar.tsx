@@ -1,22 +1,21 @@
 "use client"
 
-import type { PropsWithChildren } from "react"
-import { useMemo, useState } from "react"
-import { useLayoutEffect } from "@react-aria/utils"
-import { UserIcon } from "lucide-react"
-
 import type {
   AvatarSlots,
   AvatarVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { avatarStyles, dataAttr } from "@opengovsg/oui-theme"
+import { useLayoutEffect } from "@react-aria/utils"
+import { UserIcon } from "lucide-react"
+import type { PropsWithChildren } from "react"
+import { useMemo, useState } from "react"
 
-import type { ImageLoadingStatus } from "./use-img-loading-status"
 import { useDomRef } from "../system/react-utils"
 import { forwardRef, mapPropsVariants } from "../system/utils"
 import { AvatarContext, useAvatarContext } from "./avatar-context"
 import { useAvatarGroupContext } from "./avatar-group-context"
+import type { ImageLoadingStatus } from "./use-img-loading-status"
 import { useImageLoadingStatus } from "./use-img-loading-status"
 import { getInitialsFromText } from "./utils"
 
@@ -91,8 +90,7 @@ export const AvatarRoot = forwardRef<"span", AvatarProps>(
   },
 )
 
-export interface AvatarImageProps
-  extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface AvatarImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   src?: string
 }
 

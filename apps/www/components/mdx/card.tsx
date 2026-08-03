@@ -1,11 +1,10 @@
+import { SiStackblitz } from "@icons-pack/react-simple-icons"
+import { cn } from "@opengovsg/oui-theme"
+import { ChevronRight } from "lucide-react"
 import type { LinkProps } from "next/link"
+import Link from "next/link"
 import type { HTMLAttributes } from "react"
 import type React from "react"
-import Link from "next/link"
-import { SiStackblitz } from "@icons-pack/react-simple-icons"
-import { ChevronRight } from "lucide-react"
-
-import { cn } from "@opengovsg/oui-theme"
 
 import { NextIcon, ViteIcon } from "../icons/framework-icons"
 

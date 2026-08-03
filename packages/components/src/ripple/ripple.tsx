@@ -1,9 +1,9 @@
 "use client"
 
-import type { CSSProperties } from "react"
 import { clamp } from "motion"
 import { AnimatePresence, domAnimation, LazyMotion } from "motion/react"
 import * as m from "motion/react-m"
+import type { CSSProperties } from "react"
 
 import type { RippleType, UseRippleReturn } from "./use-ripple"
 

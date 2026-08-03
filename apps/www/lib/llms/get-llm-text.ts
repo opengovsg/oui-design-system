@@ -1,14 +1,16 @@
 import path from "node:path"
-import type { RawDocLinks } from "@/lib/doc-links"
-import type { Heading, Paragraph, Root, RootContent } from "mdast"
-import { resolveDocLinks } from "@/lib/doc-links"
-import { source } from "@/lib/source"
+
 import matter from "gray-matter"
+import type { Heading, Paragraph, Root, RootContent } from "mdast"
 import remarkGfm from "remark-gfm"
 import remarkMdx from "remark-mdx"
 import remarkParse from "remark-parse"
 import remarkStringify from "remark-stringify"
 import { unified } from "unified"
+
+import type { RawDocLinks } from "@/lib/doc-links"
+import { resolveDocLinks } from "@/lib/doc-links"
+import { source } from "@/lib/source"
 
 import { applyTransforms } from "./transform"
 

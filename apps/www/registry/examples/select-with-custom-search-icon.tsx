@@ -1,10 +1,9 @@
 "use client"
 
-import type { Key } from "react-aria-components"
-import { useState } from "react"
-import { SearchIcon } from "lucide-react"
-
 import { Select, SelectItem } from "@opengovsg/oui"
+import { SearchIcon } from "lucide-react"
+import { useState } from "react"
+import type { Key } from "react-aria-components"
 
 export default function SelectWithCustomSearchIcon() {
   const countries = [

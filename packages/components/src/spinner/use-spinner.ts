@@ -1,22 +1,20 @@
 "use client"
 
-import type { Ref } from "react"
-import { useCallback, useMemo } from "react"
-import { useDeepCompareMemo } from "use-deep-compare"
-
 import type {
   SlotsToClasses,
   SpinnerSlots,
   SpinnerVariantProps,
 } from "@opengovsg/oui-theme"
 import { cn, spinnerStyles } from "@opengovsg/oui-theme"
+import type { Ref } from "react"
+import { useCallback, useMemo } from "react"
+import { useDeepCompareMemo } from "use-deep-compare"
 
 import type { HtmlUiProps, PropGetter } from "../system/types"
 import { mapPropsVariants } from "../system/utils"
 
 export interface UseSpinnerProps
-  extends Omit<HtmlUiProps, "children">,
-    SpinnerVariantProps {
+  extends Omit<HtmlUiProps, "children">, SpinnerVariantProps {
   /**
    * Ref to the DOM node.
    */

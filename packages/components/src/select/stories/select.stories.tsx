@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import type { Key } from "react-aria-components"
-import { useState } from "react"
 import { SearchIcon } from "lucide-react"
+import { useState } from "react"
+import type { Key } from "react-aria-components"
 import { ListBoxItem } from "react-aria-components"
 import { userEvent } from "storybook/test"
 

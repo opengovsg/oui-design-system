@@ -1,25 +1,6 @@
 "use client"
 
 import type {
-  TabListProps as AriaTabListProps,
-  TabProps as AriaTabProps,
-  TabsProps as AriaTabsProps,
-  ContextValue,
-  TabPanelProps,
-} from "react-aria-components"
-import { forwardRef } from "react"
-import {
-  Tab as AriaTab,
-  TabList as AriaTabList,
-  TabPanel as AriaTabPanel,
-  TabPanels as AriaTabPanels,
-  Tabs as AriaTabs,
-  composeRenderProps,
-  Provider,
-  useContextProps,
-} from "react-aria-components"
-
-import type {
   TabListVariantProps,
   TabsVariantProps,
   TabVariantProps,
@@ -30,6 +11,24 @@ import {
   tabsStyles,
   tabStyles,
 } from "@opengovsg/oui-theme"
+import { forwardRef } from "react"
+import type {
+  TabListProps as AriaTabListProps,
+  TabProps as AriaTabProps,
+  TabsProps as AriaTabsProps,
+  ContextValue,
+  TabPanelProps,
+} from "react-aria-components"
+import {
+  Tab as AriaTab,
+  TabList as AriaTabList,
+  TabPanel as AriaTabPanel,
+  TabPanels as AriaTabPanels,
+  Tabs as AriaTabs,
+  composeRenderProps,
+  Provider,
+  useContextProps,
+} from "react-aria-components"
 
 import { createContext } from "../system/react-utils"
 import { forwardRefGeneric, mapPropsVariants } from "../system/utils"
@@ -64,8 +63,7 @@ export function Tabs(originalProps: TabsProps) {
 }
 
 export interface TabListProps<T extends object>
-  extends AriaTabListProps<T>,
-    TabListVariantProps {}
+  extends AriaTabListProps<T>, TabListVariantProps {}
 
 export const TabList = forwardRefGeneric(function TabList<T extends object>(
   originalProps: TabListProps<T>,
