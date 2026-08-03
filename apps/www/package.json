@@ -31,7 +31,7 @@
     "fumadocs-mdx": "^15.0.13",
     "fumadocs-ui": "^16.10.3",
     "inter-ui": "^4.1.1",
-    "jotai": "^2.12.1",
+    "jotai": "^2.20.2",
     "lru-cache": "^11.1.0",
     "lucide-react": "^0.475.0",
     "motion": "^12.42.0",
