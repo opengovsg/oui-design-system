@@ -181,9 +181,14 @@ export const KeepOpenOnSelect: Story = {
     await expect(optionOne).toHaveAttribute("data-selected", "true")
     await expect(optionThree).toHaveAttribute("data-selected", "true")
 
+    // The clicked option stays highlighted instead of resetting to the
+    // first item in the list.
+    await expect(optionThree).toHaveAttribute("data-focused", "true")
+
     // Clicking a selected option again deselects it.
     await userEvent.click(optionOne)
     await expect(optionOne).not.toHaveAttribute("data-selected")
+    await expect(optionOne).toHaveAttribute("data-focused", "true")
   },
 }
 

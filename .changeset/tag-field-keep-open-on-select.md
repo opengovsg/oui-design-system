@@ -13,4 +13,5 @@ feat(tag-field): add shouldCloseOnSelect prop and selection checkboxes
   `itemClassNames.checkboxIcon`.
 - Add `shouldCloseOnSelect` prop (default `true`). When set to `false`,
   the dropdown stays open after selecting an option, allowing multiple
-  options to be selected (or deselected) in one go.
+  options to be selected (or deselected) in one go, with the just-picked
+  option staying highlighted instead of resetting to the first item.

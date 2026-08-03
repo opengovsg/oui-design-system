@@ -200,6 +200,13 @@ export function useTagField<T>(
               shouldCloseOnSelect === false || shouldCloseOnBlur === false
                 ? true
                 : changes.isOpen,
+            // Keep the current item highlighted instead of resetting to the
+            // first item, since the list stays open and visible after
+            // selecting/deselecting an option.
+            highlightedIndex:
+              shouldCloseOnSelect === false
+                ? _state.highlightedIndex
+                : changes.highlightedIndex,
           }
         }
         case useCombobox.stateChangeTypes.InputBlur: {
