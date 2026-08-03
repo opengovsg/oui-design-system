@@ -1,12 +1,7 @@
 "use client"
 
-import type { ListBoxItemSlots, SlotsToClasses } from "@opengovsg/oui-theme"
-import {
-  checkboxStyles,
-  cn,
-  dataAttr,
-  listBoxItemStyles,
-} from "@opengovsg/oui-theme"
+import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
+import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
 import { Check } from "lucide-react"
 import type { ForwardedRef } from "react"
 import { useContext } from "react"
@@ -19,7 +14,7 @@ export interface TagFieldItemProps<T extends object>
   extends
     Omit<TagFieldListRenderProps<T>, "key" | "itemProps">,
     TagFieldBaseItemProps<T> {
-  classNames?: SlotsToClasses<ListBoxItemSlots>
+  classNames?: SlotsToClasses<TagFieldItemSlots>
 }
 
 const TagFieldItemInner = <T extends object>(
@@ -33,15 +28,14 @@ const TagFieldItemInner = <T extends object>(
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
   const { itemToText, size } = useContext(TagFieldStateContext)!
-  const styles = listBoxItemStyles({ size })
-  const checkbox = checkboxStyles({ size, isSelected })
+  const styles = tagFieldItemStyles({ size, isSelected })
 
   return (
     <li
       ref={ref}
       {...itemProps}
       className={styles.container({
-        className: cn(classNames?.container, "flex-row items-center gap-2"),
+        className: classNames?.container,
         isFocused: isHighlighted,
         isDisabled: itemProps["aria-disabled"],
       })}
@@ -50,8 +44,17 @@ const TagFieldItemInner = <T extends object>(
       data-disabled={dataAttr(itemProps["aria-disabled"])}
       data-selected={dataAttr(isSelected)}
     >
-      <span aria-hidden className={checkbox.box({ className: "shrink-0" })}>
-        {isSelected && <Check className={checkbox.icon()} />}
+      <span
+        aria-hidden
+        className={styles.checkboxBox({ className: classNames?.checkboxBox })}
+      >
+        {isSelected && (
+          <Check
+            className={styles.checkboxIcon({
+              className: classNames?.checkboxIcon,
+            })}
+          />
+        )}
       </span>
       <span className={styles.label({ className: classNames?.label })}>
         {itemToText(item)}

@@ -3,7 +3,7 @@ import { withChromaticModes } from "@oui/chromatic"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 import type { Key } from "react-aria"
-import { expect, userEvent, within } from "storybook/test"
+import { expect, fn, userEvent, within } from "storybook/test"
 
 import { TagField } from "../tag-field"
 
@@ -161,6 +161,7 @@ export const NonVirtualized: Story = {
 export const KeepOpenOnSelect: Story = {
   args: {
     shouldCloseOnSelect: false,
+    onSelectionChange: fn(),
     defaultItems: [...Array(10)].map((_, i) => ({
       id: String(i),
       textValue: `Item ${i}`,

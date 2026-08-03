@@ -4,9 +4,13 @@
 
 feat(tag-field): add shouldCloseOnSelect prop and selection checkboxes
 
-- Add `shouldCloseOnSelect` prop (default `true`). When set to `false`,
-  the dropdown stays open after selecting an option, and selected
-  options remain in the list instead of being filtered out, so they can
-  be quickly deselected again.
+- Selected options are no longer filtered out of the dropdown list;
+  every option stays visible so its selected state can be seen and
+  toggled at any time.
 - Each `TagFieldItem` now always renders a checkbox indicating whether
-  the option is selected, regardless of `shouldCloseOnSelect`.
+  the option is selected, styled via the new `tagFieldItemStyles` theme
+  export and customizable through `itemClassNames.checkboxBox` /
+  `itemClassNames.checkboxIcon`.
+- Add `shouldCloseOnSelect` prop (default `true`). When set to `false`,
+  the dropdown stays open after selecting an option, allowing multiple
+  options to be selected (or deselected) in one go.
