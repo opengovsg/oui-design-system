@@ -8,7 +8,7 @@
   "devDependencies": {
     "@oui/typescript-config": "workspace:*",
     "@rollup/plugin-node-resolve": "^16.0.0",
-    "@rollup/plugin-replace": "^6.0.2",
+    "@rollup/plugin-replace": "^6.0.3",
     "@types/node": "^22.13.1",
     "execa": "^9.5.2",
     "rollup": "^4.59.0",
