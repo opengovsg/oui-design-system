@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
-    "@icons-pack/react-simple-icons": "^11.2.0",
+    "@icons-pack/react-simple-icons": "^13.13.0",
     "@internationalized/date": "catalog:react-aria",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
