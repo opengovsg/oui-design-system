@@ -118,6 +118,7 @@ export function useTagFieldState<T extends object>(
             itemToKey,
             selectedKeys: controlledSelectedKeys,
             filter: defaultFilter,
+            keepSelected: props.shouldCloseOnSelect === false,
           }),
     [
       props.items,
@@ -127,6 +128,7 @@ export function useTagFieldState<T extends object>(
       itemToText,
       itemToKey,
       controlledSelectedKeys,
+      props.shouldCloseOnSelect,
     ],
   )
 
@@ -150,6 +152,7 @@ function filterItems<T extends object>({
   itemToKey,
   filter,
   selectedKeys,
+  keepSelected,
 }: {
   items: T[]
   inputValue: string
@@ -157,10 +160,11 @@ function filterItems<T extends object>({
   itemToKey: (item: T) => Key
   filter: FilterFn
   selectedKeys?: Set<Key>
+  keepSelected: boolean
 }): T[] {
   return items.filter((item) => {
     const isSelected = selectedKeys ? selectedKeys.has(itemToKey(item)) : false
-    if (isSelected) return false
+    if (isSelected && !keepSelected) return false
     const matchesFilter = filter(itemToText(item), inputValue)
     return matchesFilter
   })

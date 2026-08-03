@@ -20,6 +20,7 @@ export interface TagFieldStateContextValue<T>
   isInvalid: boolean
   isDisabled: boolean
   isReadOnly: boolean
+  shouldCloseOnSelect?: boolean
 }
 
 export const TagFieldStateContext =

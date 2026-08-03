@@ -3,7 +3,7 @@ import { withChromaticModes } from "@oui/chromatic"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 import type { Key } from "react-aria"
-import { userEvent } from "storybook/test"
+import { expect, userEvent, within } from "storybook/test"
 
 import { TagField } from "../tag-field"
 
@@ -155,6 +155,34 @@ export const NonVirtualized: Story = {
   decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   play: async ({ canvas }) => {
     userEvent.click(canvas.getByLabelText("Tag Field"))
+  },
+}
+
+export const KeepOpenOnSelect: Story = {
+  args: {
+    shouldCloseOnSelect: false,
+    defaultItems: [...Array(10)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+    })),
+  },
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
+  play: async ({ canvasElement, canvas }) => {
+    const body = within(canvasElement.parentElement!)
+    await userEvent.click(canvas.getByLabelText("Tag Field"))
+    const optionOne = await body.findByRole("option", { name: "Item 1" })
+    const optionThree = body.getByRole("option", { name: "Item 3" })
+    await userEvent.click(optionOne)
+    await userEvent.click(optionThree)
+
+    // Menu stays open and both options remain in the list, checked.
+    await expect(optionOne).toBeVisible()
+    await expect(optionOne).toHaveAttribute("data-selected", "true")
+    await expect(optionThree).toHaveAttribute("data-selected", "true")
+
+    // Clicking a selected option again deselects it.
+    await userEvent.click(optionOne)
+    await expect(optionOne).not.toHaveAttribute("data-selected")
   },
 }
 

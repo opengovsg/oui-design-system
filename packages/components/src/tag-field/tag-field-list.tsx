@@ -3,7 +3,7 @@
 import type { Virtualizer } from "@tanstack/react-virtual"
 import type { UseComboboxPropGetters } from "downshift"
 import type { ForwardedRef, ReactNode } from "react"
-import { createContext, useContext } from "react"
+import { createContext, useContext, useMemo } from "react"
 import type { ContextValue, SlotProps } from "react-aria-components"
 import { useContextProps } from "react-aria-components"
 
@@ -36,8 +36,13 @@ const TagFieldListInner = <T extends object>(
   ref: ForwardedRef<HTMLUListElement>,
 ) => {
   ;[props, ref] = useContextProps(props, ref, TagFieldListContext)
-  const { items, getItemProps, highlightedIndex, itemToKey } =
+  const { items, getItemProps, highlightedIndex, itemToKey, selectedItems } =
     useContext(TagFieldStateContext)!
+
+  const selectedKeys = useMemo(
+    () => new Set(selectedItems.map(itemToKey)),
+    [selectedItems, itemToKey],
+  )
 
   const { slot, rowVirtualizer, itemClassNames, ...rest } = props
 
@@ -69,6 +74,7 @@ const TagFieldListInner = <T extends object>(
             const childProps: Omit<TagFieldListRenderProps<T>, "itemProps"> = {
               item,
               isHighlighted: highlightedIndex === virtualRow.index,
+              isSelected: selectedKeys.has(itemToKey(item)),
               key: virtualRow.key,
               classNames: itemClassNames,
             }
@@ -91,6 +97,7 @@ const TagFieldListInner = <T extends object>(
           const childProps: Omit<TagFieldListRenderProps<T>, "itemProps"> = {
             item,
             isHighlighted: highlightedIndex === index,
+            isSelected: selectedKeys.has(key),
             key,
             classNames: itemClassNames,
           }

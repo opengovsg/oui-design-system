@@ -35,6 +35,7 @@ export interface TagFieldListRenderProps<T> {
   item: T
   key: VirtualItem["key"]
   isHighlighted: boolean
+  isSelected: boolean
   classNames?: SlotsToClasses<ListBoxItemSlots>
   itemProps: TagFieldBaseItemProps<T>
 }
@@ -109,4 +110,11 @@ export interface TagFieldProps<T>
    * If not provided, the menu will close on blur when the user clicks outside the tag field.
    */
   shouldCloseOnBlur?: boolean
+  /**
+   * Whether the tag field menu should close when an option is selected.
+   * When `false`, the menu stays open and selected options remain in the
+   * list, so they can be quickly deselected again.
+   * @default true
+   */
+  shouldCloseOnSelect?: boolean
 }
