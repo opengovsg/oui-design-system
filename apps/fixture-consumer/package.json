@@ -34,7 +34,7 @@
     "react-aria": "catalog:react-aria",
     "react-aria-components": "catalog:react-aria",
     "react-dom": "catalog:react",
-    "react-dropzone": "^14.3.8",
+    "react-dropzone": "^19.1.1",
     "react-phone-number-input": "^3.4.14",
     "react-stately": "catalog:react-aria",
     "scroll-into-view-if-needed": "^3.1.0",

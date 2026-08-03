@@ -33,7 +33,7 @@
     "@tailwindcss/vite": "catalog:tailwind",
     "@types/node": "^22.13.1",
     "@types/sinonjs__fake-timers": "^8.1.5",
-    "@vitejs/plugin-react": "^5.0.0",
+    "@vitejs/plugin-react": "^6.0.5",
     "@vitest/browser": "catalog:vitest",
     "@vitest/browser-playwright": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",

@@ -31,19 +31,19 @@ catalogs:
     react-aria-components: ^1.19.0
     react-stately: ^3.48.0
   storybook10:
-    "@storybook/addon-a11y": 10.5.3
-    "@storybook/addon-docs": 10.5.3
-    "@storybook/addon-links": 10.5.3
-    "@storybook/addon-themes": 10.5.3
-    "@storybook/addon-vitest": 10.5.3
-    "@storybook/nextjs": 10.5.3
-    "@storybook/react-vite": 10.5.3
-    eslint-plugin-storybook: 10.5.3
-    storybook: 10.5.3
+    "@storybook/addon-a11y": 10.5.5
+    "@storybook/addon-docs": 10.5.5
+    "@storybook/addon-links": 10.5.5
+    "@storybook/addon-themes": 10.5.5
+    "@storybook/addon-vitest": 10.5.5
+    "@storybook/nextjs": 10.5.5
+    "@storybook/react-vite": 10.5.5
+    eslint-plugin-storybook: 10.5.5
+    storybook: 10.5.5
   tailwind:
     "@tailwindcss/postcss": 4.3.1
-    "@tailwindcss/vite": 4.3.1
-    tailwindcss: 4.3.1
+    "@tailwindcss/vite": 4.3.3
+    tailwindcss: 4.3.3
   vitest:
     "@vitest/browser": 4.1.10
     "@vitest/browser-playwright": 4.1.10
