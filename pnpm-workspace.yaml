@@ -44,8 +44,8 @@ catalogs:
     storybook: 10.5.3
   tailwind:
     "@tailwindcss/postcss": 4.3.1
-    "@tailwindcss/vite": 4.3.1
-    tailwindcss: 4.3.1
+    "@tailwindcss/vite": 4.3.3
+    tailwindcss: 4.3.3
   vitest:
     "@vitest/browser": 4.1.10
     "@vitest/browser-playwright": 4.1.10
