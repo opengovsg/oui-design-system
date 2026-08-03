@@ -67,7 +67,7 @@
     "gray-matter": "^4.0.3",
     "mdast-util-directive": "^3.1.0",
     "mdast-util-mdx-jsx": "^3.2.0",
-    "postcss": "^8.5.15",
+    "postcss": "catalog:",
     "prettier": "catalog:",
     "remark-gfm": "^4.0.0",
     "remark-mdx": "^3.1.0",
