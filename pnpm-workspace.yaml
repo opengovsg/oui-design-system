@@ -27,10 +27,10 @@ catalogs:
     "@internationalized/date": ^3.12.2
     "@internationalized/string": ^3.2.9
   react:
-    "@types/react": ^19.2.17
-    "@types/react-dom": ^19.2.3
-    react: ^19.2.7
-    react-dom: ^19.2.7
+    "@types/react": ^19.2.18
+    "@types/react-dom": ^19.2.4
+    react: ^19.2.8
+    react-dom: ^19.2.8
   storybook10:
     "@storybook/addon-a11y": 10.5.3
     "@storybook/addon-docs": 10.5.3
