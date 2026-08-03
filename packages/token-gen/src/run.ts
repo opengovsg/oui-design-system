@@ -1,22 +1,23 @@
-import { flatten } from "flat";
-import { cloneDeep, isObject, kebabCase, merge, omit, pick } from "lodash-es";
-import type { Config } from "style-dictionary";
-import StyleDictionary from "style-dictionary";
+import { readFile } from "fs/promises"
+import { dirname, resolve } from "path"
 
-import { permutateThemes, register } from "@tokens-studio/sd-transforms";
-import { readFile } from "fs/promises";
-import { transforms } from "style-dictionary/enums";
-import type { DesignToken, TransformedTokens } from "style-dictionary/types";
-import { fontWeightToNumber, percentToEm, pxToRem } from "./utils";
-import { dirname, resolve } from "path";
+import { permutateThemes, register } from "@tokens-studio/sd-transforms"
+import { flatten } from "flat"
+import { cloneDeep, isObject, kebabCase, merge, omit, pick } from "lodash-es"
+import type { Config } from "style-dictionary"
+import StyleDictionary from "style-dictionary"
+import { transforms } from "style-dictionary/enums"
+import type { DesignToken, TransformedTokens } from "style-dictionary/types"
 
-register(StyleDictionary);
+import { fontWeightToNumber, percentToEm, pxToRem } from "./utils"
+
+register(StyleDictionary)
 
 const transformTypographyToTailwindUtil = (
-  token: DesignToken
+  token: DesignToken,
 ): DesignToken["value"] => {
-  const val = token.$value ?? token.value;
-  if (val === undefined) return undefined;
+  const val = token.$value ?? token.value
+  if (val === undefined) return undefined
 
   const transformed = {
     fontFamily:
@@ -27,10 +28,10 @@ const transformTypographyToTailwindUtil = (
     fontWeight: fontWeightToNumber(val.fontWeight),
     lineHeight: pxToRem(val.lineHeight),
     letterSpacing: percentToEm(val.letterSpacing),
-  };
+  }
 
-  return transformed;
-};
+  return transformed
+}
 
 // Convert textStyles to css class.
 StyleDictionary.registerTransform({
@@ -39,25 +40,25 @@ StyleDictionary.registerTransform({
   transitive: true,
   filter: (token) => (token.$type ?? token.type) === "typography",
   transform: transformTypographyToTailwindUtil,
-});
+})
 
 StyleDictionary.registerFormat({
   name: "css/ogp",
   async format({ dictionary }) {
-    const css = [`@theme {`];
+    const css = [`@theme {`]
 
     for (const prop of dictionary.allTokens) {
       // Ignore specific categories
       if (!["color", "shadow"].includes(prop.attributes?.category as string)) {
-        continue;
+        continue
       }
       // Ignore objects, they are probably nested tokens that we do not need to process.
       if (!isObject(prop.value)) {
-        css.push(`  --${kebabCase(prop.path.join("-"))}: ${prop.value};`);
+        css.push(`  --${kebabCase(prop.path.join("-"))}: ${prop.value};`)
       }
     }
 
-    css.push("}\n");
+    css.push("}\n")
 
     // Special handling for nested styles, flatten them.
     const responsiveTypography = flatten(
@@ -68,8 +69,8 @@ StyleDictionary.registerFormat({
       {
         delimiter: "-",
         maxDepth: 2,
-      }
-    );
+      },
+    )
 
     const unneededTypographyKeys = [
       "fontFamilies",
@@ -83,41 +84,41 @@ StyleDictionary.registerFormat({
       // Already processed above
       "responsive-heading",
       "responsive-display",
-    ];
+    ]
     const typography = merge(
       cloneDeep(omit(dictionary.tokens.typography, unneededTypographyKeys)),
-      responsiveTypography
-    ) as TransformedTokens;
+      responsiveTypography,
+    ) as TransformedTokens
 
     // Add utility classes for typography
 
     for (const [key, value] of Object.entries(typography)) {
-      css.push(`@utility prose-${key} {`);
-      const cssValues = Object.entries(value.value);
+      css.push(`@utility prose-${key} {`)
+      const cssValues = Object.entries(value.value)
       cssValues.forEach(([cssKey, cssValue]) => {
-        css.push(`    ${kebabCase(cssKey)}: ${cssValue};`);
-      });
-      css.push("  }\n");
+        css.push(`    ${kebabCase(cssKey)}: ${cssValue};`)
+      })
+      css.push("  }\n")
     }
 
-    return css.join("\n");
+    return css.join("\n")
   },
-});
+})
 
 export async function run(theme: string, outputDirPath: string) {
   const rawTokensPath = resolve(
     dirname(new URL(import.meta.url).pathname),
-    "../raw/tokens.json"
-  );
-  const rawTokens = JSON.parse(await readFile(rawTokensPath, "utf-8"));
-  const { $themes, ...sets } = rawTokens;
+    "../raw/tokens.json",
+  )
+  const rawTokens = JSON.parse(await readFile(rawTokensPath, "utf-8"))
+  const { $themes, ...sets } = rawTokens
 
   const tokenPath = resolve(
     dirname(new URL(import.meta.url).pathname),
-    "../tokens"
-  );
+    "../tokens",
+  )
 
-  const themes = permutateThemes($themes, { separator: "_" });
+  const themes = permutateThemes($themes, { separator: "_" })
   const configs = Object.entries(themes)
     .filter(([name]) => name === theme)
     .map(([name, tokensets]) => ({
@@ -158,12 +159,12 @@ export async function run(theme: string, outputDirPath: string) {
           ],
         },
       },
-    })) satisfies Config[];
+    })) satisfies Config[]
 
   async function cleanAndBuild(cfg: Config) {
-    const sd = new StyleDictionary(cfg);
-    await sd.cleanAllPlatforms(); // optionally, cleanup files first..
-    await sd.buildAllPlatforms();
+    const sd = new StyleDictionary(cfg)
+    await sd.cleanAllPlatforms() // optionally, cleanup files first..
+    await sd.buildAllPlatforms()
   }
-  await Promise.all(configs.map(cleanAndBuild));
+  await Promise.all(configs.map(cleanAndBuild))
 }

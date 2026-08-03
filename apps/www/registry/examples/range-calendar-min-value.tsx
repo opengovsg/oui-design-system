@@ -1,7 +1,6 @@
 "use client"
 
 import { getLocalTimeZone, today } from "@internationalized/date"
-
 import { RangeCalendar } from "@opengovsg/oui"
 
 export default function RangeCalendarMinValue() {

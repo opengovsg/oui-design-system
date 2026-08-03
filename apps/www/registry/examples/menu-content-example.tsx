@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Button, Menu, MenuItem, MenuTrigger } from "@opengovsg/oui"
+import { useState } from "react"
 
 const actions = [
   { id: "view", label: "View details" },

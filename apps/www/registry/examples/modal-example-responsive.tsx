@@ -1,8 +1,5 @@
 "use client"
 
-import { DialogTrigger } from "react-aria-components"
-import { useMediaQuery } from "usehooks-ts"
-
 import {
   Button,
   Modal,
@@ -11,6 +8,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@opengovsg/oui"
+import { DialogTrigger } from "react-aria-components"
+import { useMediaQuery } from "usehooks-ts"
 
 export default function ModalExampleResponsive() {
   const isMobile = useMediaQuery("(max-width: 640px)")

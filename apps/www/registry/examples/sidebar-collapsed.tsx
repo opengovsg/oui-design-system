@@ -1,5 +1,7 @@
 "use client"
 
+import type { SidebarProps } from "@opengovsg/oui"
+import { Sidebar } from "@opengovsg/oui"
 import {
   Calendar,
   Clock5,
@@ -10,9 +12,6 @@ import {
   User,
   Wrench,
 } from "lucide-react"
-
-import type { SidebarProps } from "@opengovsg/oui"
-import { Sidebar } from "@opengovsg/oui"
 
 const items: SidebarProps["items"] = [
   { type: "header", children: "Mail" },

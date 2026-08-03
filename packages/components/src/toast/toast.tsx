@@ -1,22 +1,20 @@
 "use client"
 
-import type { ToasterProps as BaseToasterProps } from "sonner"
-import { X } from "lucide-react"
-import { Toaster as Sonner } from "sonner"
-
 import type {
   SlotsToClasses,
   ToastSlots,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { toastStyles } from "@opengovsg/oui-theme"
+import { X } from "lucide-react"
+import type { ToasterProps as BaseToasterProps } from "sonner"
+import { Toaster as Sonner } from "sonner"
 
 import { Spinner } from "../spinner"
 import { mapPropsVariants } from "../system/utils"
 
 export interface ToasterProps
-  extends BaseToasterProps,
-    VariantProps<typeof toastStyles> {
+  extends BaseToasterProps, VariantProps<typeof toastStyles> {
   classNames?: SlotsToClasses<ToastSlots>
 }
 

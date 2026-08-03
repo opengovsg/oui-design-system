@@ -1,10 +1,9 @@
+import type { AvatarVariantProps } from "@opengovsg/oui-theme"
 import { useMemo } from "react"
 
-import type { AvatarVariantProps } from "@opengovsg/oui-theme"
-
-import type { UseAvatarGroupProps } from "./avatar-group-context"
 import { forwardRef } from "../system/utils"
 import { AvatarFallback, AvatarRoot } from "./avatar"
+import type { UseAvatarGroupProps } from "./avatar-group-context"
 import { AvatarGroupProvider, useAvatarGroup } from "./avatar-group-context"
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type

@@ -1,9 +1,8 @@
 "use client"
 
 import { isWeekend } from "@internationalized/date"
-import { useLocale } from "@react-aria/i18n"
-
 import { RangeCalendar } from "@opengovsg/oui"
+import { useLocale } from "@react-aria/i18n"
 
 export default function RangeCalendarNonContiguousRanges() {
   const { locale } = useLocale()

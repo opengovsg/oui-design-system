@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
 import { Time } from "@internationalized/date"
-
 import { TimeField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function TimeFieldControlled() {
   const [value, setValue] = useState<Time | null>(new Time(11, 45))

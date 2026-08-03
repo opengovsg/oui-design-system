@@ -1,6 +1,7 @@
-import { siteConfig } from "@/config/site"
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock"
 import { Tab, Tabs } from "fumadocs-ui/components/tabs"
+
+import { siteConfig } from "@/config/site"
 
 interface ShadcnInstallProps {
   /**

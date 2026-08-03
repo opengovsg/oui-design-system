@@ -1,9 +1,9 @@
 // apps/www/scripts/registry/manifest-component.test.ts
 import { beforeAll, describe, expect, it } from "vitest"
 
-import type { Catalog } from "./types"
 import { buildCatalog } from "./catalog"
 import { buildComponentManifest } from "./manifest-component"
+import type { Catalog } from "./types"
 
 let catalog: Catalog
 

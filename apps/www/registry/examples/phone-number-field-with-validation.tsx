@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { isPossiblePhoneNumber, PhoneNumberField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function PhoneNumberFieldWithValidation() {
   const [errorMessage, setErrorMessage] = useState<string>()

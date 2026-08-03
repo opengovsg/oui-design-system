@@ -1,7 +1,5 @@
 "use client"
 
-import { Link } from "react-aria-components"
-
 import {
   Navbar,
   NavbarBrand,
@@ -11,6 +9,7 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from "@opengovsg/oui"
+import { Link } from "react-aria-components"
 
 const menuItems = ["Profile", "Dashboard", "Settings", "Log Out"]
 

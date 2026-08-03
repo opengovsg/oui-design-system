@@ -1,8 +1,7 @@
 "use client"
 
-import { Home } from "lucide-react"
-
 import { Breadcrumb, Breadcrumbs } from "@opengovsg/oui"
+import { Home } from "lucide-react"
 
 export default function BreadcrumbsDemo() {
   return (

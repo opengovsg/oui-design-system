@@ -10,8 +10,8 @@ This repository contains OGP's Unnamed Design System powered by:
 As well as a few others tools preconfigured:
 
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- [oxlint](https://oxc.rs/docs/guide/usage/linter) for code linting
+- [oxfmt](https://oxc.rs/docs/guide/usage/formatter) for code formatting
 - [Changesets](https://github.com/changesets/changesets) for managing versioning and changelogs
 - [GitHub Actions](https://github.com/changesets/action) for fully automated package publishing
 
@@ -37,7 +37,6 @@ This Turborepo includes the following packages and applications:
 - `packages/components`: Core React components
 - `packages/theme`: Theming config (using TailwindCSS) for components and design system
 - `tooling/typescript-config`: Shared `tsconfig.json`s used throughout the Turborepo
-- `tooling/eslint-config`: ESLint preset
 
 Each package and app is 100% [TypeScript](https://www.typescriptlang.org/). Workspaces enables us to "hoist" dependencies that are shared between packages to the root `package.json`. This means smaller `node_modules` folders and a better local dev experience. To install a dependency for the entire monorepo, use the `-w` workspaces flag with `pnpm add`.
 

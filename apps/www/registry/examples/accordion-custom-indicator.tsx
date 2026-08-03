@@ -1,13 +1,12 @@
 "use client"
 
-import { Plus } from "lucide-react"
-
 import {
   Accordion,
   AccordionContent,
   AccordionHeader,
   AccordionItem,
 } from "@opengovsg/oui"
+import { Plus } from "lucide-react"
 
 export default function AccordionCustomIndicator() {
   return (

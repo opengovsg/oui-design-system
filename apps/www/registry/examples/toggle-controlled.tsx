@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Toggle } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function ToggleControlled() {
   const [isSelected, setIsSelected] = useState(false)

@@ -1,8 +1,6 @@
 "use client"
 
-import type { LinkDOMProps, PressEvent } from "@react-types/shared"
-import type { Ref } from "react"
-import { useMemo } from "react"
+import { cn, dataAttr } from "@opengovsg/oui-theme"
 import { useFocusRing } from "@react-aria/focus"
 import { useHover, usePress } from "@react-aria/interactions"
 import {
@@ -11,12 +9,13 @@ import {
   shouldClientNavigate,
   useRouter,
 } from "@react-aria/utils"
+import type { LinkDOMProps, PressEvent } from "@react-types/shared"
+import type { Ref } from "react"
+import { useMemo } from "react"
 
-import { cn, dataAttr } from "@opengovsg/oui-theme"
-
+import { filterDOMProps, useDomRef } from "../system/react-utils"
 import type { HtmlUiProps, PropGetter } from "../system/types"
 import type { PaginationItemValue } from "./use-pagination-base"
-import { filterDOMProps, useDomRef } from "../system/react-utils"
 
 interface Props extends Omit<HtmlUiProps<"li">, "onClick"> {
   /**

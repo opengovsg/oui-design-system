@@ -1,11 +1,9 @@
 "use client"
 
+import { tagFieldStyles } from "@opengovsg/oui-theme"
 import { ChevronDown } from "lucide-react"
 import { composeRenderProps } from "react-aria-components"
 
-import { tagFieldStyles } from "@opengovsg/oui-theme"
-
-import type { TagFieldProps } from "./types"
 import { Description, FieldError, FieldGroup, Label } from "../field"
 import { Input } from "../input"
 import { Popover } from "../popover"
@@ -14,6 +12,7 @@ import { TagFieldList } from "./tag-field-list"
 import { TagFieldRoot } from "./tag-field-root"
 import { TagFieldTagList } from "./tag-field-tag-list"
 import { TagFieldTrigger } from "./tag-field-trigger"
+import type { TagFieldProps } from "./types"
 
 export function TagField<T extends object>({
   classNames,

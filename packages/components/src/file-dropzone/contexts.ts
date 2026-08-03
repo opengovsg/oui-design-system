@@ -1,5 +1,5 @@
-import type { FileDropzoneState, FileDropzoneStyleContextReturn } from "./types"
 import { createContext } from "../system/react-utils"
+import type { FileDropzoneState, FileDropzoneStyleContextReturn } from "./types"
 
 export const [FileDropzoneStateContext, useFileDropzoneStateContext] =
   createContext<FileDropzoneState>({

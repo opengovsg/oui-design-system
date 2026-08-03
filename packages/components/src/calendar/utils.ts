@@ -1,7 +1,7 @@
-import type { DateFormatterOptions } from "@react-aria/i18n"
-import { useMemo } from "react"
 import { CalendarDate } from "@internationalized/date"
+import type { DateFormatterOptions } from "@react-aria/i18n"
 import { useDateFormatter } from "@react-aria/i18n"
+import { useMemo } from "react"
 
 export function getEraFormat(
   date: CalendarDate | undefined,

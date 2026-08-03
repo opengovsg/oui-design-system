@@ -1,7 +1,8 @@
 import type { Code, List, ListItem, Paragraph, Parent, Root, Text } from "mdast"
 import type { MdxJsxFlowElement, MdxJsxTextElement } from "mdast-util-mdx-jsx"
-import { siteConfig } from "@/config/site"
 import { visit } from "unist-util-visit"
+
+import { siteConfig } from "@/config/site"
 
 import { loadExample } from "./load-example"
 

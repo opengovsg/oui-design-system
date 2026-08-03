@@ -1,15 +1,15 @@
+import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
 import type {
   UseComboboxReturnValue,
   UseMultipleSelectionReturnValue,
 } from "downshift"
 import { createContext } from "react"
 
-import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
-
 import type { TagFieldState } from "./use-tag-field-state"
 
 export interface TagFieldStateContextValue<T>
-  extends TagFieldState<T>,
+  extends
+    TagFieldState<T>,
     Pick<UseComboboxReturnValue<T>, "getItemProps" | "highlightedIndex">,
     Pick<
       UseMultipleSelectionReturnValue<T>,

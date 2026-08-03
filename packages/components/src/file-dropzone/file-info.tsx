@@ -1,20 +1,19 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { Trash2 } from "lucide-react"
-
 import type {
   FileInfoDropzoneSlots,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { cn, fileInfoDropzoneStyles } from "@opengovsg/oui-theme"
+import { Trash2 } from "lucide-react"
+import { useEffect, useState } from "react"
 
-import type { FileItem } from "./types"
 import { Button } from "../button"
 import {
   useFileDropzoneStateContext,
   useFileDropzoneStyleContext,
 } from "./contexts"
+import type { FileItem } from "./types"
 import { formatBytes } from "./utils"
 
 export interface FileInfoProps {

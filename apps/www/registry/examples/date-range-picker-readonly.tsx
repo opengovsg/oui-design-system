@@ -1,7 +1,6 @@
 "use client"
 
 import { CalendarDate } from "@internationalized/date"
-
 import { DateRangePicker } from "@opengovsg/oui"
 
 export default function DateRangePickerReadOnly() {

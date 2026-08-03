@@ -1,8 +1,7 @@
 "use client"
 
-import { SettingsIcon } from "lucide-react"
-
 import { Avatar } from "@opengovsg/oui"
+import { SettingsIcon } from "lucide-react"
 
 export default function AvatarCustomFallback() {
   return (

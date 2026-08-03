@@ -1,5 +1,11 @@
 "use client"
 
+import type {
+  PaginationSlots,
+  PaginationVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import { cn, dataAttr, paginationStyles } from "@opengovsg/oui-theme"
 import type { PressEvent } from "@react-types/shared"
 import type { Key, ReactNode, Ref } from "react"
 import { useCallback, useEffect, useRef } from "react"
@@ -7,20 +13,13 @@ import scrollIntoView from "scroll-into-view-if-needed"
 import { useDeepCompareMemo } from "use-deep-compare"
 import { useIntersectionObserver } from "usehooks-ts"
 
-import type {
-  PaginationSlots,
-  PaginationVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-import { cn, dataAttr, paginationStyles } from "@opengovsg/oui-theme"
-
+import { useDomRef } from "../system/react-utils"
 import type { HtmlUiProps, PropGetter } from "../system/types"
+import { mapPropsVariants } from "../system/utils"
 import type {
   PaginationItemValue,
   UsePaginationProps as UseBasePaginationProps,
 } from "./use-pagination-base"
-import { useDomRef } from "../system/react-utils"
-import { mapPropsVariants } from "../system/utils"
 import {
   PaginationItemType,
   usePagination as useBasePagination,

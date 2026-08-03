@@ -1,8 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react-vite"
-import { useState } from "react"
-import { AlertTriangle, HelpCircleIcon, User2Icon } from "lucide-react"
-
 import { cn } from "@opengovsg/oui-theme"
+import type { Meta, StoryObj } from "@storybook/react-vite"
+import { AlertTriangle, HelpCircleIcon, User2Icon } from "lucide-react"
+import { useState } from "react"
 
 import type { ButtonProps } from "../button"
 import { Button } from "../button"

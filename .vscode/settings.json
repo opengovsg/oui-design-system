@@ -1,9 +1,9 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.oxc": "explicit"
   },
   "tailwindCSS.experimental.configFile": {
     "apps/storybook/tailwind.css": [
@@ -16,7 +16,6 @@
     ],
     "apps/www/app/globals.css": ["apps/www/**/*"]
   },
-  "eslint.workingDirectories": [{ "mode": "auto" }],
   "tailwindCSS.experimental.classRegex": [
     ":\\s*?[\"'`]([^\"'`]*).*?,",
     [

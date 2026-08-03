@@ -1,7 +1,8 @@
 import { resolve } from "node:path"
+
 import { nodeResolve } from "@rollup/plugin-node-resolve"
 import replace from "@rollup/plugin-replace"
-import { Plugin, RollupOptions } from "rollup"
+import type { Plugin, RollupOptions } from "rollup"
 import del from "rollup-plugin-delete"
 import esbuild from "rollup-plugin-esbuild"
 import { preserveDirectives } from "rollup-plugin-preserve-directives"

@@ -1,8 +1,7 @@
 "use client"
 
-import { useRef } from "react"
-
 import { Checkbox, CheckboxGroup, Input } from "@opengovsg/oui"
+import { useRef } from "react"
 
 export default function CheckboxGroupDemo() {
   const checkboxRef = useRef<HTMLInputElement>(null)

@@ -1,9 +1,8 @@
 "use client"
 
 import { CalendarDate } from "@internationalized/date"
-import { CalendarDays } from "lucide-react"
-
 import { DatePicker } from "@opengovsg/oui"
+import { CalendarDays } from "lucide-react"
 
 export default function DatePickerWithSelectorIcon() {
   return (

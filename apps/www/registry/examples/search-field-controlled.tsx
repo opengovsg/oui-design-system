@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { SearchField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function SearchFieldControlled() {
   const [value, setValue] = useState("")

@@ -1,15 +1,14 @@
 "use client"
 
 import type {
-  TooltipProps,
-  TooltipTriggerComponentProps,
-} from "react-aria-components"
-
-import type {
   SidebarSlots,
   sidebarStyles,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
+import type {
+  TooltipProps,
+  TooltipTriggerComponentProps,
+} from "react-aria-components"
 
 import { createContext } from "../system/react-utils"
 

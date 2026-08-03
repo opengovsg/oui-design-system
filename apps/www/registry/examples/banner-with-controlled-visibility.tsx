@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Banner, Button } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function BannerWithControlledVisibility() {
   const [isExpanded, setIsExpanded] = useState(true)

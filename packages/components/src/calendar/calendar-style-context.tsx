@@ -1,12 +1,11 @@
 "use client"
 
 import type { CalendarDate } from "@internationalized/date"
+import type { calendarStyles } from "@opengovsg/oui-theme"
 import type { RangeCalendarProps } from "react-aria-components"
 
-import type { calendarStyles } from "@opengovsg/oui-theme"
-
-import type { CalendarProps } from "./types"
 import { createContext } from "../system/react-utils"
+import type { CalendarProps } from "./types"
 
 export interface UseProvideCalendarStylesReturn<T extends CalendarDate> {
   slots: ReturnType<typeof calendarStyles>

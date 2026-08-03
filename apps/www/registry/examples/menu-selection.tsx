@@ -1,8 +1,5 @@
 "use client"
 
-import type { Selection } from "react-aria-components"
-import { useState } from "react"
-
 import {
   Button,
   Menu,
@@ -10,6 +7,8 @@ import {
   MenuSection,
   MenuTrigger,
 } from "@opengovsg/oui"
+import { useState } from "react"
+import type { Selection } from "react-aria-components"
 
 export default function MenuSelection() {
   const [size, setSize] = useState<Selection>(new Set(["md"]))

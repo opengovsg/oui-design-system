@@ -1,8 +1,7 @@
 "use client"
 
-import { Copy, Edit, Share, Trash2 } from "lucide-react"
-
 import { Button, Menu, MenuItem, MenuTrigger } from "@opengovsg/oui"
+import { Copy, Edit, Share, Trash2 } from "lucide-react"
 
 export default function MenuWithIcons() {
   return (

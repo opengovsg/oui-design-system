@@ -1,12 +1,12 @@
 import type { FormValidationState } from "@react-stately/form"
-import type { Key } from "@react-types/shared"
-import type { SetRequired } from "type-fest"
-import { useCallback, useMemo } from "react"
 import { useFormValidationState } from "@react-stately/form"
 import { useControlledState } from "@react-stately/utils"
+import type { Key } from "@react-types/shared"
+import { useCallback, useMemo } from "react"
+import type { SetRequired } from "type-fest"
 
-import type { TagFieldProps } from "./types"
 import { useControllableState } from "../hooks"
+import type { TagFieldProps } from "./types"
 
 export interface TagFieldListState<T> {
   /** Sets the selected items. */
@@ -20,7 +20,8 @@ export interface TagFieldListState<T> {
 }
 
 export interface TagFieldState<T>
-  extends TagFieldListState<T>,
+  extends
+    TagFieldListState<T>,
     FormValidationState,
     Required<Pick<TagFieldStateOptions<T>, "itemToKey" | "itemToText">> {
   /** The current value of the tag field input. */
@@ -34,11 +35,10 @@ export interface TagFieldState<T>
 
 type FilterFn = (textValue: string, inputValue: string) => boolean
 
-export interface TagFieldStateOptions<T>
-  extends SetRequired<
-    Omit<TagFieldProps<T>, "children" | "onSelectionChange">,
-    "itemToKey" | "itemToText"
-  > {
+export interface TagFieldStateOptions<T> extends SetRequired<
+  Omit<TagFieldProps<T>, "children" | "onSelectionChange">,
+  "itemToKey" | "itemToText"
+> {
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: FilterFn
   /** Handler that is called when the selection changes. */

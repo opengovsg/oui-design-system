@@ -1,9 +1,8 @@
 "use client"
 
+import { Button, Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
 import { useState } from "react"
 import { Collection } from "react-aria-components"
-
-import { Button, Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
 
 export default function TabsWithDynamicItems() {
   const [tabs, setTabs] = useState([

@@ -1,9 +1,8 @@
 "use client"
 
-import { Calendar, MailIcon, Star } from "lucide-react"
-
 import type { SidebarProps } from "@opengovsg/oui"
 import { Sidebar } from "@opengovsg/oui"
+import { Calendar, MailIcon, Star } from "lucide-react"
 
 const items: SidebarProps["items"] = [
   {

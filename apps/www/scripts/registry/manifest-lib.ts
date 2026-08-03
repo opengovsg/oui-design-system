@@ -1,7 +1,7 @@
 import { Project } from "ts-morph"
 
-import type { BuildOptions, Catalog, LibEntry, RegistryItem } from "./types"
 import { transformSourceFile } from "./transform"
+import type { BuildOptions, Catalog, LibEntry, RegistryItem } from "./types"
 
 export function buildLibManifest(
   entry: LibEntry,

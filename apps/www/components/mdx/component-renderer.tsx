@@ -1,6 +1,7 @@
 "use client"
 
 import { useSyncExternalStore } from "react"
+
 import { Index } from "@/__registry__"
 
 const emptySubscribe = () => () => {}

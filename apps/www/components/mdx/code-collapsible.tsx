@@ -1,9 +1,8 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronDown } from "lucide-react"
-
 import { cn } from "@opengovsg/oui-theme"
+import { ChevronDown } from "lucide-react"
+import { useState } from "react"
 
 /**
  * Code section shown beneath a component preview, styled after the react-aria

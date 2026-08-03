@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { NumberField } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function NumberFieldControlled() {
   const [value, setValue] = useState(25)

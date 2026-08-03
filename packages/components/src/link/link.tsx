@@ -1,10 +1,9 @@
 "use client"
 
-import type { LinkProps as AriaLinkProps } from "react-aria-components"
-import { Link as AriaLink, composeRenderProps } from "react-aria-components"
-
 import type { LinkVariantProps } from "@opengovsg/oui-theme"
 import { linkStyles } from "@opengovsg/oui-theme"
+import type { LinkProps as AriaLinkProps } from "react-aria-components"
+import { Link as AriaLink, composeRenderProps } from "react-aria-components"
 
 import { mapPropsVariants } from "../system/utils"
 

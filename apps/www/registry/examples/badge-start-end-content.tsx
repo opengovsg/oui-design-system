@@ -1,6 +1,5 @@
-import { BellIcon, CheckIcon } from "lucide-react"
-
 import { Badge } from "@opengovsg/oui"
+import { BellIcon, CheckIcon } from "lucide-react"
 
 export default function BadgeStartEndContent() {
   return (

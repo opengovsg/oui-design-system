@@ -1,8 +1,8 @@
 "use client"
 
 import type { MoveMoveEvent, MoveResult } from "@react-aria/interactions"
-import { useCallback, useEffect, useRef } from "react"
 import { useMove } from "@react-aria/interactions"
+import { useCallback, useEffect, useRef } from "react"
 
 export interface UseDraggableProps {
   /**
@@ -84,6 +84,7 @@ export function useDraggable(props: UseDraggableProps): MoveResult {
         targetRef.current.style.transform = `translate(${moveX}px, ${moveY}px)`
       }
     },
+    // oxlint-disable-next-line react-hooks/exhaustive-deps
     [isDisabled, transform, boundary.current, canOverflow, targetRef?.current],
   )
 

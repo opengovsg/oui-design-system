@@ -797,9 +797,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/calendar-select-date-on-today-button-click.tsx"
-        ),
+        import("@/registry/examples/calendar-select-date-on-today-button-click.tsx"),
     ),
   },
   "calendar-unavailable-dates": {
@@ -1484,9 +1482,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/date-range-picker-international-calendar.tsx"
-        ),
+        import("@/registry/examples/date-range-picker-international-calendar.tsx"),
     ),
   },
   "date-range-picker-min-max": {
@@ -1870,9 +1866,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/file-dropzone-with-label-and-description.tsx"
-        ),
+        import("@/registry/examples/file-dropzone-with-label-and-description.tsx"),
     ),
   },
   "forms-controlled-submit": {
@@ -2014,9 +2008,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/govt-banner-with-controlled-visibility.tsx"
-        ),
+        import("@/registry/examples/govt-banner-with-controlled-visibility.tsx"),
     ),
   },
   "govt-banner-with-custom-styles": {
@@ -2679,9 +2671,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/number-field-with-label-and-description.tsx"
-        ),
+        import("@/registry/examples/number-field-with-label-and-description.tsx"),
     ),
   },
   "number-field-with-placeholder": {
@@ -2708,9 +2698,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/number-field-with-start-and-end-content.tsx"
-        ),
+        import("@/registry/examples/number-field-with-start-and-end-content.tsx"),
     ),
   },
   "number-field-with-step": {
@@ -2935,9 +2923,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/phone-number-field-country-options-order.tsx"
-        ),
+        import("@/registry/examples/phone-number-field-country-options-order.tsx"),
     ),
   },
   "phone-number-field-default-country": {
@@ -3031,9 +3017,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/phone-number-field-with-custom-placeholder.tsx"
-        ),
+        import("@/registry/examples/phone-number-field-with-custom-placeholder.tsx"),
     ),
   },
   "phone-number-field-with-error-message": {
@@ -3061,9 +3045,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/phone-number-field-with-label-and-description.tsx"
-        ),
+        import("@/registry/examples/phone-number-field-with-label-and-description.tsx"),
     ),
   },
   "phone-number-field-with-validation": {
@@ -3309,9 +3291,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/range-calendar-select-date-on-today-button-click.tsx"
-        ),
+        import("@/registry/examples/range-calendar-select-date-on-today-button-click.tsx"),
     ),
   },
   "range-calendar-unavailable-dates": {
@@ -3464,9 +3444,7 @@ export const Index: Record<string, RegistryComponent> = {
     ],
     component: lazy(
       () =>
-        import(
-          "@/registry/examples/search-field-with-label-and-description.tsx"
-        ),
+        import("@/registry/examples/search-field-with-label-and-description.tsx"),
     ),
   },
   "search-field-with-placeholder": {

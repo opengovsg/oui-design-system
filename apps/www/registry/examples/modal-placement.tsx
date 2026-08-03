@@ -1,8 +1,5 @@
 "use client"
 
-import { useState } from "react"
-import { DialogTrigger } from "react-aria-components"
-
 import type { ModalProps } from "@opengovsg/oui"
 import {
   Button,
@@ -12,6 +9,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@opengovsg/oui"
+import { useState } from "react"
+import { DialogTrigger } from "react-aria-components"
 
 export default function ModalPlacement() {
   const [modalPlacement, setModalPlacement] =

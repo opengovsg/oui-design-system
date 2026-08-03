@@ -1,9 +1,8 @@
 "use client"
 
 import { getLocalTimeZone, today } from "@internationalized/date"
-import { Form } from "react-aria-components"
-
 import { Button, DateField } from "@opengovsg/oui"
+import { Form } from "react-aria-components"
 
 export default function DateFieldMinMax() {
   return (

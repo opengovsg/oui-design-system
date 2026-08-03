@@ -1,5 +1,5 @@
-import type { NextConfig } from "next"
 import { createMDX } from "fumadocs-mdx/next"
+import type { NextConfig } from "next"
 
 const config: NextConfig = {
   // Serve each doc's LLM markdown at the conventional `/docs/<path>.md` URL

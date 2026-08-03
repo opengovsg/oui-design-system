@@ -4,8 +4,8 @@ import { existsSync, readdirSync, readFileSync, rmSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 
-import type { RegistryItem } from "./types"
 import { installManifest } from "./install"
+import type { RegistryItem } from "./types"
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const REPO_ROOT = resolve(HERE, "../../../..")

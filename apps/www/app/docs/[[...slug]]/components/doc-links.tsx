@@ -1,8 +1,9 @@
-import type { ResolvedDocLinks } from "@/lib/doc-links"
-import Link from "next/link"
-import { AdobeIcon } from "@/components/icons/brand-icons"
 import { SiGithub, SiStorybook } from "@icons-pack/react-simple-icons"
 import { ArrowUpRight, Package } from "lucide-react"
+import Link from "next/link"
+
+import { AdobeIcon } from "@/components/icons/brand-icons"
+import type { ResolvedDocLinks } from "@/lib/doc-links"
 
 const TYPE_TO_LABEL: Record<string, string> = {
   source: "Source",

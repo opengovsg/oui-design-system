@@ -2,10 +2,11 @@
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs"
 import { dirname, join, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+
 import { Project } from "ts-morph"
 
-import type { BuildOptions, Catalog, RegistryFile, RegistryItem } from "./types"
 import { transformSourceFile } from "./transform"
+import type { BuildOptions, Catalog, RegistryFile, RegistryItem } from "./types"
 import { transformVariantFile } from "./variant"
 
 const HERE = dirname(fileURLToPath(import.meta.url))

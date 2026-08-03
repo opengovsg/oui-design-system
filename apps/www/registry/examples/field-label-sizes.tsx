@@ -1,8 +1,7 @@
 "use client"
 
-import { TextField as AriaTextField } from "react-aria-components"
-
 import { Description, Input, Label } from "@opengovsg/oui"
+import { TextField as AriaTextField } from "react-aria-components"
 
 export default function FieldLabelSizes() {
   return (

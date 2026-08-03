@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState, useSyncExternalStore } from "react"
-import { useTheme } from "@/hooks/use-theme"
-import { ChevronsUpDown } from "lucide-react"
-
 import { cn } from "@opengovsg/oui-theme"
+import { ChevronsUpDown } from "lucide-react"
+import { useEffect, useState, useSyncExternalStore } from "react"
+
+import { useTheme } from "@/hooks/use-theme"
 
 type ThemeManifestEntry = {
   name: string

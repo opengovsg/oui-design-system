@@ -1,8 +1,7 @@
 "use client"
 
-import { I18nProvider } from "@react-aria/i18n"
-
 import { Calendar } from "@opengovsg/oui"
+import { I18nProvider } from "@react-aria/i18n"
 
 export default function CalendarInternational() {
   return (

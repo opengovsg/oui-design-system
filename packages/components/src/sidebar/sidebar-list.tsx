@@ -1,7 +1,8 @@
 "use client"
 
-import { useMemo } from "react"
+import { dataAttr } from "@opengovsg/oui-theme"
 import { ChevronDown } from "lucide-react"
+import { useMemo } from "react"
 import { useLocalizedStringFormatter } from "react-aria"
 import {
   Button as AriaButton,
@@ -12,9 +13,6 @@ import {
 } from "react-aria-components"
 import { useDisclosureState } from "react-stately"
 
-import { dataAttr } from "@opengovsg/oui-theme"
-
-import type { SidebarListProps } from "./types"
 import { Button } from "../button"
 import { forwardRef } from "../system/utils"
 import {
@@ -24,9 +22,12 @@ import {
   useSidebarStyleContext,
 } from "./context"
 import { i18nStrings } from "./i18n"
+import type { SidebarListProps } from "./types"
 
-interface SidebarListSectionProps
-  extends Pick<SidebarListProps, "isExpanded" | "linkProps" | "isSelected"> {
+interface SidebarListSectionProps extends Pick<
+  SidebarListProps,
+  "isExpanded" | "linkProps" | "isSelected"
+> {
   onlyCaretToggle?: boolean
   children: React.ReactNode
 }

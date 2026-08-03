@@ -10,5 +10,10 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@oui/storybook", "@oui/www", "@oui/build-scripts", "@oui/fixture-consumer"]
+  "ignore": [
+    "@oui/storybook",
+    "@oui/www",
+    "@oui/build-scripts",
+    "@oui/fixture-consumer"
+  ]
 }

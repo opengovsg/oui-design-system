@@ -1,9 +1,8 @@
 "use client"
 
-import React from "react"
 import { parseDate } from "@internationalized/date"
-
 import { Calendar } from "@opengovsg/oui"
+import React from "react"
 
 export default function CalendarControlled() {
   const [value, setValue] = React.useState(parseDate("2025-03-20"))

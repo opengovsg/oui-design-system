@@ -1,5 +1,13 @@
 "use client"
 
+import type {
+  NavbarSlots,
+  NavbarVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
+import { cn, dataAttr, navbarStyles } from "@opengovsg/oui-theme"
+import { mergeProps, useResizeObserver } from "@react-aria/utils"
+import { useControlledState } from "@react-stately/utils"
 import type { HTMLMotionProps } from "motion/react"
 import {
   useCallback,
@@ -8,21 +16,12 @@ import {
   useRef,
   useState,
 } from "react"
-import { mergeProps, useResizeObserver } from "@react-aria/utils"
-import { useControlledState } from "@react-stately/utils"
 import { usePreventScroll } from "react-aria"
 
-import type {
-  NavbarSlots,
-  NavbarVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-import { cn, dataAttr, navbarStyles } from "@opengovsg/oui-theme"
-
-import type { ReactRef } from "../system/react-utils"
-import type { HtmlUiProps, PropGetter } from "../system/types"
 import { useScrollPosition } from "../hooks/use-scroll-position"
+import type { ReactRef } from "../system/react-utils"
 import { useDomRef } from "../system/react-utils"
+import type { HtmlUiProps, PropGetter } from "../system/types"
 import { mapPropsVariants } from "../system/utils"
 
 // Add a buffer to prevent navbar display state change when scroll position is small

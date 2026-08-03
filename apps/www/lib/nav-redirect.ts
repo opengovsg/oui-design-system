@@ -1,4 +1,5 @@
 import type * as PageTree from "fumadocs-core/page-tree"
+
 import { source } from "@/lib/source"
 
 /** Page urls in page-tree (i.e. meta.json) order, depth-first. */

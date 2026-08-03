@@ -1,10 +1,3 @@
-import type { Metadata } from "next"
-import { notFound, redirect } from "next/navigation"
-import { getMDXComponents } from "@/components/mdx"
-import { siteConfig } from "@/config/site"
-import { resolveDocLinks } from "@/lib/doc-links"
-import { getFirstChildUrl } from "@/lib/nav-redirect"
-import { source } from "@/lib/source"
 import {
   DocsBody,
   DocsDescription,
@@ -12,6 +5,14 @@ import {
   DocsTitle,
   EditOnGitHub,
 } from "fumadocs-ui/layouts/docs/page"
+import type { Metadata } from "next"
+import { notFound, redirect } from "next/navigation"
+
+import { getMDXComponents } from "@/components/mdx"
+import { siteConfig } from "@/config/site"
+import { resolveDocLinks } from "@/lib/doc-links"
+import { getFirstChildUrl } from "@/lib/nav-redirect"
+import { source } from "@/lib/source"
 
 import { DocLinks } from "./components/doc-links"
 

@@ -1,8 +1,8 @@
 "use client"
 
 import type { UseComboboxPropGetters } from "downshift"
-import type { ContextValue, SlotProps } from "react-aria-components"
 import { createContext } from "react"
+import type { ContextValue, SlotProps } from "react-aria-components"
 import { useContextProps } from "react-aria-components"
 
 import { forwardRef } from "../system/utils"
@@ -10,7 +10,8 @@ import { forwardRef } from "../system/utils"
 export type TagFieldTriggerProps = SlotProps
 
 export interface TagFieldTriggerContextValue<T extends object>
-  extends TagFieldTriggerProps,
+  extends
+    TagFieldTriggerProps,
     ReturnType<UseComboboxPropGetters<T>["getToggleButtonProps"]> {}
 
 export const TagFieldTriggerContext = createContext<

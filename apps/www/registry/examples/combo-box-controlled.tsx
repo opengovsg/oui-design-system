@@ -1,9 +1,8 @@
 "use client"
 
-import type { Key } from "react-aria-components"
-import { useState } from "react"
-
 import { ComboBox, ComboBoxItem } from "@opengovsg/oui"
+import { useState } from "react"
+import type { Key } from "react-aria-components"
 
 const animals = [
   { id: "1", textValue: "Aardvark" },

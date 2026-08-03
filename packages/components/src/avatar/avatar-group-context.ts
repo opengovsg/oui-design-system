@@ -1,6 +1,3 @@
-import type { ReactNode } from "react"
-import { cloneElement, useMemo } from "react"
-
 import type {
   AvatarGroupSlots,
   AvatarGroupVariantProps,
@@ -8,12 +5,14 @@ import type {
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { avatarGroupStyles, cn } from "@opengovsg/oui-theme"
+import type { ReactNode } from "react"
+import { cloneElement, useMemo } from "react"
 
 import type { ReactRef } from "../system/react-utils"
-import type { HtmlUiProps, PropGetter } from "../system/types"
-import type { AvatarProps } from "./index"
 import { createContext, useDomRef } from "../system/react-utils"
 import { getValidChildren } from "../system/react-utils/children"
+import type { HtmlUiProps, PropGetter } from "../system/types"
+import type { AvatarProps } from "./index"
 
 export type UseAvatarGroupContextReturn = {
   size?: UseAvatarGroupProps["size"]
@@ -31,7 +30,8 @@ export const [AvatarGroupProvider, useAvatarGroupContext] = createContext<
 })
 
 export interface UseAvatarGroupProps
-  extends HtmlUiProps<"div">,
+  extends
+    HtmlUiProps<"div">,
     AvatarGroupVariantProps,
     Pick<AvatarVariantProps, "size" | "color" | "prominence" | "radius"> {
   /**

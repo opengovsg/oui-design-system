@@ -1,10 +1,9 @@
 "use client"
 
-import { useState } from "react"
 import { CalendarDate } from "@internationalized/date"
-import { useDateFormatter } from "@react-aria/i18n"
-
 import { DateRangePicker } from "@opengovsg/oui"
+import { useDateFormatter } from "@react-aria/i18n"
+import { useState } from "react"
 
 export default function DateRangePickerControlled() {
   const [value, setValue] = useState<{

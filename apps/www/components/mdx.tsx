@@ -1,12 +1,11 @@
-import type { MDXComponents } from "mdx/types"
-import type { ComponentProps } from "react"
-import Link from "next/link"
+import { Toaster } from "@opengovsg/oui"
+import { cn } from "@opengovsg/oui-theme"
 import { Step, Steps } from "fumadocs-ui/components/steps"
 import { Tab, Tabs } from "fumadocs-ui/components/tabs"
 import defaultMdxComponents from "fumadocs-ui/mdx"
-
-import { Toaster } from "@opengovsg/oui"
-import { cn } from "@opengovsg/oui-theme"
+import type { MDXComponents } from "mdx/types"
+import Link from "next/link"
+import type { ComponentProps } from "react"
 
 import { Card, CardGroup } from "./mdx/card"
 import { ComponentPreview } from "./mdx/component-preview"

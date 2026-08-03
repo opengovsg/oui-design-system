@@ -1,25 +1,23 @@
 "use client"
 
-import type { ReactNode } from "react"
-import type { AriaDisclosureProps } from "react-aria"
-import { useMemo, useRef } from "react"
-import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
-import { useDisclosure, useLocalizedStringFormatter } from "react-aria"
-import { useDisclosureState } from "react-stately"
-
 import type {
   BannerSlots,
   SlotsToClasses,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { bannerStyles } from "@opengovsg/oui-theme"
+import { AlertCircleIcon, InfoIcon, XIcon } from "lucide-react"
+import type { ReactNode } from "react"
+import { useMemo, useRef } from "react"
+import type { AriaDisclosureProps } from "react-aria"
+import { useDisclosure, useLocalizedStringFormatter } from "react-aria"
+import { useDisclosureState } from "react-stately"
 
 import { Button } from "../button"
 import { i18nStrings } from "./i18n"
 
 interface BannerProps
-  extends VariantProps<typeof bannerStyles>,
-    AriaDisclosureProps {
+  extends VariantProps<typeof bannerStyles>, AriaDisclosureProps {
   /**
    * The banner start content. Will default to the relevant icons based on the `variant` prop.
    */

@@ -1,8 +1,7 @@
 "use client"
 
-import type { ContextValue } from "react-aria-components"
-
 import type { ComboBoxVariantProps } from "@opengovsg/oui-theme"
+import type { ContextValue } from "react-aria-components"
 
 import { createContext } from "../system/react-utils"
 

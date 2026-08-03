@@ -1,8 +1,7 @@
 "use client"
 
-import { useState } from "react"
-
 import { Checkbox, CheckboxGroup } from "@opengovsg/oui"
+import { useState } from "react"
 
 export default function CheckboxGroupDisabled() {
   const [isInvalid, setIsInvalid] = useState(true)

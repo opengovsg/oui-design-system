@@ -1,9 +1,10 @@
-import type { UseMultipleSelectionReturnValue } from "downshift"
-import type { ComboBoxRenderProps } from "react-aria-components"
-import { useCallback, useMemo, useRef, useState } from "react"
+import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
 import { useResizeObserver } from "@react-aria/utils"
+import type { UseMultipleSelectionReturnValue } from "downshift"
 import { get } from "lodash-es"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { useFilter } from "react-aria"
+import type { ComboBoxRenderProps } from "react-aria-components"
 import {
   FieldErrorContext,
   FormContext,
@@ -16,19 +17,18 @@ import {
   useSlottedContext,
 } from "react-aria-components"
 
-import type { TagFieldVariantProps } from "@opengovsg/oui-theme"
-
 import type { RenderProps } from "../system/types"
-import type { TagFieldProps } from "./types"
 import { removeDataAttributes } from "../system/utils"
 import { TagFieldListContext } from "./tag-field-list"
 import { TagFieldStateContext } from "./tag-field-state-context"
 import { TagFieldTriggerContext } from "./tag-field-trigger"
+import type { TagFieldProps } from "./types"
 import { useTagField } from "./use-tag-field"
 import { useTagFieldState } from "./use-tag-field-state"
 
 interface TagFieldRootRenderProps<T extends object>
-  extends ComboBoxRenderProps,
+  extends
+    ComboBoxRenderProps,
     Pick<
       UseMultipleSelectionReturnValue<T>,
       "getSelectedItemProps" | "removeSelectedItem"
@@ -52,7 +52,8 @@ const calculateEstimatedRowHeight = (
 }
 
 export interface TagFieldRootProps<T extends object>
-  extends Omit<TagFieldProps<T>, "children">,
+  extends
+    Omit<TagFieldProps<T>, "children">,
     RenderProps<TagFieldRootRenderProps<T>> {}
 
 export function TagFieldRoot<T extends object>({

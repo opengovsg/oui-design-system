@@ -1,19 +1,6 @@
 "use client"
 
 import type {
-  DateFieldProps as AriaDateFieldProps,
-  DateInputProps as AriaDateInputProps,
-  DateValue,
-  ValidationResult,
-} from "react-aria-components"
-import { useMemo } from "react"
-import {
-  DateField as AriaDateField,
-  DateInput as AriaDateInput,
-  DateSegment,
-} from "react-aria-components"
-
-import type {
   DateInputVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
@@ -23,13 +10,24 @@ import {
   dateInputStyles,
   dateSegmentStyles,
 } from "@opengovsg/oui-theme"
+import { useMemo } from "react"
+import type {
+  DateFieldProps as AriaDateFieldProps,
+  DateInputProps as AriaDateInputProps,
+  DateValue,
+  ValidationResult,
+} from "react-aria-components"
+import {
+  DateField as AriaDateField,
+  DateInput as AriaDateInput,
+  DateSegment,
+} from "react-aria-components"
 
 import { Description, FieldError, Label } from "../field"
 import { mapPropsVariants } from "../system/utils"
 
 export interface DateFieldProps<T extends DateValue>
-  extends AriaDateFieldProps<T>,
-    DateInputVariantProps {
+  extends AriaDateFieldProps<T>, DateInputVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)
@@ -93,8 +91,7 @@ export function DateField<T extends DateValue>(
 }
 
 export interface DateInputProps
-  extends Omit<AriaDateInputProps, "children">,
-    DateInputVariantProps {
+  extends Omit<AriaDateInputProps, "children">, DateInputVariantProps {
   label?: string
   description?: string
   errorMessage?: string | ((validation: ValidationResult) => string)

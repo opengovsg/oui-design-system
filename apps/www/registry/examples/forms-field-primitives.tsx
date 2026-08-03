@@ -1,9 +1,8 @@
 "use client"
 
+import { Description, FieldError, FieldGroup, Label } from "@opengovsg/oui"
 import { Search } from "lucide-react"
 import { Input, TextField } from "react-aria-components"
-
-import { Description, FieldError, FieldGroup, Label } from "@opengovsg/oui"
 
 export default function FormsFieldPrimitives() {
   return (

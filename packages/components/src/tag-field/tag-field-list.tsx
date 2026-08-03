@@ -3,18 +3,19 @@
 import type { Virtualizer } from "@tanstack/react-virtual"
 import type { UseComboboxPropGetters } from "downshift"
 import type { ForwardedRef, ReactNode } from "react"
-import type { ContextValue, SlotProps } from "react-aria-components"
 import { createContext, useContext } from "react"
+import type { ContextValue, SlotProps } from "react-aria-components"
 import { useContextProps } from "react-aria-components"
 
-import type { TagFieldItemProps } from "./tag-field-item"
-import type { TagFieldListRenderProps } from "./types"
 import { forwardRefGeneric } from "../system/utils"
+import type { TagFieldItemProps } from "./tag-field-item"
 import { TagFieldItem } from "./tag-field-item"
 import { TagFieldStateContext } from "./tag-field-state-context"
+import type { TagFieldListRenderProps } from "./types"
 
 export interface TagFieldListContextValue
-  extends SlotProps,
+  extends
+    SlotProps,
     ReturnType<UseComboboxPropGetters<object>["getMenuProps"]> {
   rowVirtualizer: Virtualizer<HTMLElement, Element> | null
 }
@@ -22,8 +23,9 @@ export interface TagFieldListContextValue
 export const TagFieldListContext =
   createContext<ContextValue<TagFieldListContextValue, HTMLUListElement>>(null)
 
-interface TagFieldListProps<T extends object>
-  extends Partial<TagFieldListContextValue> {
+interface TagFieldListProps<
+  T extends object,
+> extends Partial<TagFieldListContextValue> {
   className?: string
   itemClassNames?: TagFieldItemProps<T>["classNames"]
   children?: ReactNode | ((values: TagFieldListRenderProps<T>) => ReactNode)

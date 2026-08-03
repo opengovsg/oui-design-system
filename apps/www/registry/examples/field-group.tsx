@@ -1,9 +1,8 @@
 "use client"
 
+import { FieldGroup, Input, Label } from "@opengovsg/oui"
 import { Search } from "lucide-react"
 import { TextField as AriaTextField } from "react-aria-components"
-
-import { FieldGroup, Input, Label } from "@opengovsg/oui"
 
 export default function FieldGroupExample() {
   return (

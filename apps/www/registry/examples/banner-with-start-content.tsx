@@ -1,6 +1,5 @@
-import type { SVGProps } from "react"
-
 import { Banner } from "@opengovsg/oui"
+import type { SVGProps } from "react"
 
 const UserIcon = ({ ...props }: SVGProps<SVGSVGElement>) => {
   return (

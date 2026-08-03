@@ -1,7 +1,7 @@
 "use client"
 
-import { useContext } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useContext } from "react"
 import { Group, Heading, useLocale } from "react-aria-components"
 
 import { Button } from "../button/button"

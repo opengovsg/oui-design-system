@@ -1,18 +1,17 @@
 "use client"
 
+import type { ButtonVariantProps } from "@opengovsg/oui-theme"
+import { buttonStyles } from "@opengovsg/oui-theme"
+import { chain } from "@react-aria/utils"
+import { forwardRef, useMemo } from "react"
 import type {
   ButtonProps as AriaButtonProps,
   RenderProps,
 } from "react-aria-components"
-import { forwardRef, useMemo } from "react"
-import { chain } from "@react-aria/utils"
 import { Button as AriaButton, composeRenderProps } from "react-aria-components"
 
-import type { ButtonVariantProps } from "@opengovsg/oui-theme"
-import { buttonStyles } from "@opengovsg/oui-theme"
-
-import type { SpinnerProps } from "../spinner"
 import { Ripple, useRipple } from "../ripple"
+import type { SpinnerProps } from "../spinner"
 import { Spinner } from "../spinner"
 import { renderChildren } from "../system/react-utils/children"
 

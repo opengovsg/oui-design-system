@@ -1,10 +1,9 @@
 "use client"
 
-import type { Key } from "react-aria-components"
-import { useState } from "react"
-
 import { TagField } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
+import { useState } from "react"
+import type { Key } from "react-aria-components"
 
 export default function TagFieldCustomChildren() {
   const options = [

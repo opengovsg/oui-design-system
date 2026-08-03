@@ -1,8 +1,7 @@
 "use client"
 
-import { FileText, Home, Settings } from "lucide-react"
-
 import { Tab, TabList, TabPanel, Tabs } from "@opengovsg/oui"
+import { FileText, Home, Settings } from "lucide-react"
 
 export default function TabsWithIcons() {
   return (

@@ -1,18 +1,6 @@
 "use client"
 
-import type {
-  DateRangePickerProps as AriaDateRangePickerProps,
-  DateValue,
-  ValidationResult,
-} from "react-aria-components"
-import { useMemo } from "react"
 import { CalendarDate } from "@internationalized/date"
-import { CalendarIcon } from "lucide-react"
-import {
-  DateRangePicker as AriaDateRangePicker,
-  Dialog,
-} from "react-aria-components"
-
 import type {
   CalendarSlots,
   DateRangePickerSlots,
@@ -23,19 +11,31 @@ import {
   composeTailwindRenderProps,
   dateRangePickerStyles,
 } from "@opengovsg/oui-theme"
+import { CalendarIcon } from "lucide-react"
+import { useMemo } from "react"
+import type {
+  DateRangePickerProps as AriaDateRangePickerProps,
+  DateValue,
+  ValidationResult,
+} from "react-aria-components"
+import {
+  DateRangePicker as AriaDateRangePicker,
+  Dialog,
+} from "react-aria-components"
 
 import type { ButtonProps } from "../button"
-import type { PopoverProps } from "../popover"
-import type { RangeCalendarProps } from "../range-calendar"
 import { Button } from "../button"
 import { DateInput } from "../date-field"
 import { Description, FieldError, FieldGroup, Label } from "../field"
+import type { PopoverProps } from "../popover"
 import { Popover } from "../popover"
+import type { RangeCalendarProps } from "../range-calendar"
 import { RangeCalendar } from "../range-calendar"
 import { mapPropsVariants } from "../system/utils"
 
 export interface DateRangePickerProps<T extends DateValue>
-  extends AriaDateRangePickerProps<T>,
+  extends
+    AriaDateRangePickerProps<T>,
     VariantProps<typeof dateRangePickerStyles> {
   label?: string
   description?: string

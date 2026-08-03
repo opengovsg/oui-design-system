@@ -1,3 +1,8 @@
+import type {
+  CalendarSlots,
+  CalendarVariantProps,
+  SlotsToClasses,
+} from "@opengovsg/oui-theme"
 import type { ReactNode } from "react"
 import type {
   CalendarProps as AriaCalendarProps,
@@ -5,14 +10,9 @@ import type {
   DateValue,
 } from "react-aria-components"
 
-import type {
-  CalendarSlots,
-  CalendarVariantProps,
-  SlotsToClasses,
-} from "@opengovsg/oui-theme"
-
 export interface CalendarProps<T extends DateValue>
-  extends AriaCalendarProps<T>,
+  extends
+    AriaCalendarProps<T>,
     CalendarVariantProps,
     Pick<CalendarGridProps, "weekdayStyle"> {
   errorMessage?: string

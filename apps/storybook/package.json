@@ -2,24 +2,19 @@
   "name": "@oui/storybook",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
+  "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "preview-storybook": "serve storybook-static",
-    "format": "prettier --check . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
-    "format:fix": "prettier --write . --ignore-path ../../.gitignore --ignore-path ../../.prettierignore",
     "clean": "rm -rf .turbo && rm -rf node_modules",
-    "lint": "eslint .storybook --max-warnings 0",
-    "lint:fix": "eslint . --fix",
     "test": "vitest --project=storybook"
   },
   "dependencies": {
     "@internationalized/date": "catalog:react-aria",
     "@opengovsg/oui": "workspace:*",
     "@opengovsg/oui-theme": "workspace:*",
-    "@oui/prettier-config": "workspace:*",
     "inter-ui": "^4.1.1",
     "react": "catalog:react",
     "react-aria-components": "catalog:react-aria",
@@ -27,7 +22,6 @@
   },
   "devDependencies": {
     "@oui/chromatic": "workspace:*",
-    "@oui/eslint-config": "workspace:*",
     "@oui/typescript-config": "workspace:*",
     "@sinonjs/fake-timers": "^14.0.0",
     "@storybook/addon-a11y": "catalog:storybook10",
@@ -45,15 +39,12 @@
     "@vitest/coverage-v8": "catalog:vitest",
     "autoprefixer": "^10.4.20",
     "chromatic": "^11.25.2",
-    "eslint": "catalog:",
     "playwright": "1.57.0",
-    "prettier": "catalog:",
     "serve": "^14.2.4",
     "storybook": "catalog:storybook10",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:",
     "vite": "^7.1.2",
     "vitest": "catalog:vitest"
-  },
-  "prettier": "@oui/prettier-config"
+  }
 }

@@ -1,7 +1,7 @@
 "use client"
 
-import { forwardRef, useMemo } from "react"
 import { XIcon } from "lucide-react"
+import { forwardRef, useMemo } from "react"
 
 import type { UseBadgeProps } from "./use-badge"
 import { useBadge } from "./use-badge"

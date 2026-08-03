@@ -1,9 +1,8 @@
 "use client"
 
-import type { SVGProps } from "react"
-
 import { PaginationItemType, usePagination } from "@opengovsg/oui"
 import { cn } from "@opengovsg/oui-theme"
+import type { SVGProps } from "react"
 
 const ChevronIcon = (props: SVGProps<SVGSVGElement>) => {
   return (

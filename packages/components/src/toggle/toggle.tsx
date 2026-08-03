@@ -1,19 +1,18 @@
 "use client"
 
 import type {
-  SwitchProps as AriaSwitchProps,
-  SwitchRenderProps,
-} from "react-aria-components"
-import { cloneElement, useCallback } from "react"
-import { mergeProps } from "react-aria"
-import { Switch as AriaSwitch } from "react-aria-components"
-
-import type {
   SlotsToClasses,
   ToggleSlots,
   VariantProps,
 } from "@opengovsg/oui-theme"
 import { composeTailwindRenderProps, toggleStyles } from "@opengovsg/oui-theme"
+import { cloneElement, useCallback } from "react"
+import { mergeProps } from "react-aria"
+import type {
+  SwitchProps as AriaSwitchProps,
+  SwitchRenderProps,
+} from "react-aria-components"
+import { Switch as AriaSwitch } from "react-aria-components"
 
 import { mapPropsVariants } from "../system/utils"
 
@@ -22,8 +21,7 @@ export interface ToggleThumbIconProps extends SwitchRenderProps {
 }
 
 interface _ToggleProps
-  extends Omit<AriaSwitchProps, "children">,
-    VariantProps<typeof toggleStyles> {
+  extends Omit<AriaSwitchProps, "children">, VariantProps<typeof toggleStyles> {
   classNames?: SlotsToClasses<ToggleSlots>
   /**
    * The icon to be displayed inside the thumb.

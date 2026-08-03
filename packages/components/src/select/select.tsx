@@ -1,15 +1,22 @@
 "use client"
 
 import type {
+  SelectVariantProps,
+  SelectVariantSlots,
+  SlotsToClasses,
+  VariantProps,
+} from "@opengovsg/oui-theme"
+import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
+import { ChevronDownIcon } from "lucide-react"
+import { cloneElement, isValidElement, useMemo } from "react"
+import { useLocalizedStringFormatter } from "react-aria"
+import type {
   SelectProps as AriaSelectProps,
   ListBoxProps,
   ListLayoutOptions,
   SelectValueRenderProps,
   ValidationResult,
 } from "react-aria-components"
-import { cloneElement, isValidElement, useMemo } from "react"
-import { ChevronDownIcon } from "lucide-react"
-import { useLocalizedStringFormatter } from "react-aria"
 import {
   Select as AriaSelect,
   Autocomplete,
@@ -23,26 +30,19 @@ import {
   Virtualizer,
 } from "react-aria-components"
 
-import type {
-  SelectVariantProps,
-  SelectVariantSlots,
-  SlotsToClasses,
-  VariantProps,
-} from "@opengovsg/oui-theme"
-import { cn, composeRenderProps, selectStyles } from "@opengovsg/oui-theme"
-
-import type { PopoverProps } from "../popover"
-import type { ChildrenOrFunction } from "../system/react-utils/children"
 import { Button } from "../button"
 import { Description, FieldError, Label } from "../field"
+import type { PopoverProps } from "../popover"
 import { Popover } from "../popover"
+import type { ChildrenOrFunction } from "../system/react-utils/children"
 import { useElementWidth } from "../system/react-utils/sizing"
 import { mapPropsVariants } from "../system/utils"
 import { i18nStrings } from "./i18n"
 import { SelectVariantContext } from "./select-variant-context"
 
 export interface SelectProps<T>
-  extends Omit<AriaSelectProps<T>, "children">,
+  extends
+    Omit<AriaSelectProps<T>, "children">,
     VariantProps<typeof selectStyles> {
   classNames?: SlotsToClasses<SelectVariantSlots | "error">
 

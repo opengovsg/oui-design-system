@@ -1,9 +1,8 @@
 "use client"
 
 import { parseAbsoluteToLocal } from "@internationalized/date"
-import { I18nProvider } from "@react-aria/i18n"
-
 import { DateRangePicker } from "@opengovsg/oui"
+import { I18nProvider } from "@react-aria/i18n"
 
 export default function DateRangePickerInternationalCalendar() {
   return (

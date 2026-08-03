@@ -1,8 +1,8 @@
 // apps/www/scripts/registry/catalog.test.ts
 import { beforeAll, describe, expect, it } from "vitest"
 
-import type { Catalog } from "./types"
 import { buildCatalog } from "./catalog"
+import type { Catalog } from "./types"
 
 let catalog: Catalog
 

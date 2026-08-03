@@ -1,13 +1,12 @@
 "use client"
 
-import { AlertCircle, HelpCircle, Info } from "lucide-react"
-
 import {
   Accordion,
   AccordionContent,
   AccordionHeader,
   AccordionItem,
 } from "@opengovsg/oui"
+import { AlertCircle, HelpCircle, Info } from "lucide-react"
 
 export default function AccordionWithStartContent() {
   return (

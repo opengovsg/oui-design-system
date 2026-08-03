@@ -2,12 +2,12 @@
 
 import { useMemo } from "react"
 
-import type { SidebarRootProps } from "./sidebar-root"
-import type { GeneratedSidebarItem } from "./types"
 import { SidebarHeader } from "./sidebar-header"
 import { SidebarItem } from "./sidebar-item"
 import { SidebarList } from "./sidebar-list"
+import type { SidebarRootProps } from "./sidebar-root"
 import { SidebarRoot } from "./sidebar-root"
+import type { GeneratedSidebarItem } from "./types"
 import { isHeaderItem, isNestableItem } from "./utils"
 
 // Generate recursive sidebar items if nested

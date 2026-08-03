@@ -1,5 +1,11 @@
 "use client"
 
+import type { SlotsToClasses, VariantProps } from "@opengovsg/oui-theme"
+import {
+  popoverArrowStyles,
+  popoverOverlayStyles,
+  popoverStyles,
+} from "@opengovsg/oui-theme"
 import type { PopoverProps as AriaPopoverProps } from "react-aria-components"
 import {
   Popover as AriaPopover,
@@ -9,15 +15,9 @@ import {
   useSlottedContext,
 } from "react-aria-components"
 
-import type { SlotsToClasses, VariantProps } from "@opengovsg/oui-theme"
-import {
-  popoverArrowStyles,
-  popoverOverlayStyles,
-  popoverStyles,
-} from "@opengovsg/oui-theme"
-
 export interface PopoverProps
-  extends Omit<AriaPopoverProps, "children">,
+  extends
+    Omit<AriaPopoverProps, "children">,
     VariantProps<typeof popoverStyles> {
   showArrow?: boolean
   children: React.ReactNode

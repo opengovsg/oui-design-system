@@ -1,8 +1,9 @@
-import type { NavStatus } from "@/app/docs/components/nav-badge"
-import { docs } from "@/.source"
-import { NavBadge } from "@/app/docs/components/nav-badge"
 import { loader } from "fumadocs-core/source"
 import { statusBadgesPlugin } from "fumadocs-core/source/plugins/status-badges"
+
+import { docs } from "@/.source"
+import type { NavStatus } from "@/app/docs/components/nav-badge"
+import { NavBadge } from "@/app/docs/components/nav-badge"
 
 /**
  * The docs content source, backed by Fumadocs MDX (`content/docs/**`).

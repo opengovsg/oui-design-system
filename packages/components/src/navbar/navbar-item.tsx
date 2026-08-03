@@ -2,8 +2,8 @@
 
 import { cn, dataAttr } from "@opengovsg/oui-theme"
 
-import type { HtmlUiProps } from "../system/types"
 import { useDomRef } from "../system/react-utils"
+import type { HtmlUiProps } from "../system/types"
 import { forwardRef } from "../system/utils"
 import { useNavbarContext } from "./navbar-context"
 

@@ -1,11 +1,10 @@
 "use client"
 
 import type { CalendarDate } from "@internationalized/date"
-import { useState } from "react"
 import { getLocalTimeZone, parseDate } from "@internationalized/date"
-import { useDateFormatter } from "@react-aria/i18n"
-
 import { DateField } from "@opengovsg/oui"
+import { useDateFormatter } from "@react-aria/i18n"
+import { useState } from "react"
 
 export default function DateFieldWithDescription() {
   const [value, setValue] = useState<CalendarDate | null>(

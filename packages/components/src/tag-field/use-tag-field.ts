@@ -1,31 +1,30 @@
+import { mergeProps } from "@react-aria/utils"
 import type {
   DOMAttributes,
   RefObject,
   ValidationResult,
 } from "@react-types/shared"
 import type { Virtualizer } from "@tanstack/react-virtual"
+import { useVirtualizer } from "@tanstack/react-virtual"
 import type {
   UseComboboxPropGetters,
   UseComboboxReturnValue,
   UseMultipleSelectionReturnValue,
 } from "downshift"
-import type { InputHTMLAttributes } from "react"
-import type { SetRequired } from "type-fest"
-import { useCallback, useMemo, useRef } from "react"
-import { mergeProps } from "@react-aria/utils"
-import { useVirtualizer } from "@tanstack/react-virtual"
 import { useCombobox, useMultipleSelection } from "downshift"
 import { omit } from "lodash-es"
+import type { InputHTMLAttributes } from "react"
+import { useCallback, useMemo, useRef } from "react"
 import { useTextField } from "react-aria"
+import type { SetRequired } from "type-fest"
 
 import type { TagFieldProps } from "./types"
 import type { TagFieldState } from "./use-tag-field-state"
 
-export interface AriaTagFieldOptions<T>
-  extends SetRequired<
-    Omit<TagFieldProps<T>, "children">,
-    "itemToKey" | "itemToText"
-  > {
+export interface AriaTagFieldOptions<T> extends SetRequired<
+  Omit<TagFieldProps<T>, "children">,
+  "itemToKey" | "itemToText"
+> {
   /** The ref for the optional label element. */
   labelRef?: RefObject<HTMLLabelElement | null>
   /** The ref for the input element. */

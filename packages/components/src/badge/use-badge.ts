@@ -1,20 +1,19 @@
-import type { PressEvent } from "@react-types/shared"
-import type { ReactNode } from "react"
-import { cloneElement, isValidElement, useCallback, useMemo } from "react"
-import { mergeProps } from "@react-aria/utils"
-import { useFocusRing, useLocalizedStringFormatter, usePress } from "react-aria"
-import { useDeepCompareMemo } from "use-deep-compare"
-
 import type {
   BadgeSlots,
   BadgeVariantProps,
   SlotsToClasses,
 } from "@opengovsg/oui-theme"
 import { badgeCloseButtonStyles, badgeStyles, cn } from "@opengovsg/oui-theme"
+import { mergeProps } from "@react-aria/utils"
+import type { PressEvent } from "@react-types/shared"
+import type { ReactNode } from "react"
+import { cloneElement, isValidElement, useCallback, useMemo } from "react"
+import { useFocusRing, useLocalizedStringFormatter, usePress } from "react-aria"
+import { useDeepCompareMemo } from "use-deep-compare"
 
 import type { ReactRef } from "../system/react-utils"
-import type { HtmlUiProps, PropGetter } from "../system/types"
 import { useDomRef } from "../system/react-utils"
+import type { HtmlUiProps, PropGetter } from "../system/types"
 import { mapPropsVariants } from "../system/utils"
 import { i18nStrings } from "./i18n"
 
