@@ -117,4 +117,11 @@ export interface TagFieldProps<T>
    * @default true
    */
   shouldCloseOnSelect?: boolean
+  /**
+   * Whether each option in the dropdown shows a checkbox indicating its
+   * selected state.
+   * @default false
+   * @remarks A future major version may change this default to `true`.
+   */
+  showCheckbox?: boolean
 }

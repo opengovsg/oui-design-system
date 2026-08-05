@@ -161,6 +161,7 @@ export const NonVirtualized: Story = {
 export const KeepOpenOnSelect: Story = {
   args: {
     shouldCloseOnSelect: false,
+    showCheckbox: true,
     onSelectionChange: fn(),
     defaultItems: [...Array(10)].map((_, i) => ({
       id: String(i),
@@ -189,6 +190,35 @@ export const KeepOpenOnSelect: Story = {
     await userEvent.click(optionOne)
     await expect(optionOne).not.toHaveAttribute("data-selected")
     await expect(optionOne).toHaveAttribute("data-focused", "true")
+  },
+}
+
+export const MultilineOptions: Story = {
+  args: {
+    isVirtualized: false,
+    showCheckbox: true,
+    // Stay open so the checked state's alignment can be inspected without
+    // reopening the menu.
+    shouldCloseOnSelect: false,
+    onSelectionChange: fn(),
+    // The default label class line-clamps to a single line; remove that so
+    // long option text actually wraps for this story.
+    itemClassNames: {
+      label: "line-clamp-none",
+    },
+    defaultItems: [
+      { id: "0", textValue: "Short option" },
+      {
+        id: "1",
+        textValue:
+          "A much longer option label that wraps across multiple lines, to check that the checkbox stays aligned to the first line instead of centering against the full height of the label",
+      },
+      { id: "2", textValue: "Another short option" },
+    ],
+  },
+  decorators: [(storyFn) => <div className="h-[500px] w-80">{storyFn()}</div>],
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByLabelText("Tag Field"))
   },
 }
 

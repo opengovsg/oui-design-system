@@ -27,7 +27,7 @@ const TagFieldItemInner = <T extends object>(
   }: TagFieldItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { itemToText, size } = useContext(TagFieldStateContext)!
+  const { itemToText, size, showCheckbox } = useContext(TagFieldStateContext)!
   const styles = tagFieldItemStyles({ size, isSelected })
 
   return (
@@ -44,18 +44,22 @@ const TagFieldItemInner = <T extends object>(
       data-disabled={dataAttr(itemProps["aria-disabled"])}
       data-selected={dataAttr(isSelected)}
     >
-      <span
-        aria-hidden
-        className={styles.checkboxBox({ className: classNames?.checkboxBox })}
-      >
-        {isSelected && (
-          <Check
-            className={styles.checkboxIcon({
-              className: classNames?.checkboxIcon,
-            })}
-          />
-        )}
-      </span>
+      {showCheckbox && (
+        <span
+          aria-hidden
+          className={styles.checkboxBox({
+            className: classNames?.checkboxBox,
+          })}
+        >
+          {isSelected && (
+            <Check
+              className={styles.checkboxIcon({
+                className: classNames?.checkboxIcon,
+              })}
+            />
+          )}
+        </span>
+      )}
       <span className={styles.label({ className: classNames?.label })}>
         {itemToText(item)}
       </span>

@@ -64,9 +64,11 @@ export type TagFieldSlots = keyof ReturnType<typeof tagFieldStyles>
 export const tagFieldItemStyles = tv({
   extend: listBoxItemStyles,
   slots: {
-    container: "flex-row items-center gap-2",
+    container: "flex-row items-start gap-2",
+    // mt-0.5 optically aligns the box with the cap-height of the label's
+    // first line, since multiline labels can wrap below it.
     checkboxBox:
-      "flex shrink-0 items-center justify-center rounded-sm border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
+      "mt-0.5 flex shrink-0 items-center justify-center rounded-sm border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
     checkboxIcon: "text-white",
   },
   variants: {
