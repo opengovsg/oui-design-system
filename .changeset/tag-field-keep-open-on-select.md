@@ -1,6 +1,6 @@
 ---
-"@opengovsg/oui": minor
-"@opengovsg/oui-theme": minor
+"@opengovsg/oui": patch
+"@opengovsg/oui-theme": patch
 ---
 
 feat(tag-field): add shouldCloseOnSelect prop and selection checkboxes
