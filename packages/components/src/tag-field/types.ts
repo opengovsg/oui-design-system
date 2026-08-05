@@ -1,6 +1,6 @@
 import type {
-  ListBoxItemSlots,
   SlotsToClasses,
+  TagFieldItemSlots,
   TagFieldSlots,
   TagFieldVariantProps,
 } from "@opengovsg/oui-theme"
@@ -35,7 +35,8 @@ export interface TagFieldListRenderProps<T> {
   item: T
   key: VirtualItem["key"]
   isHighlighted: boolean
-  classNames?: SlotsToClasses<ListBoxItemSlots>
+  isSelected: boolean
+  classNames?: SlotsToClasses<TagFieldItemSlots>
   itemProps: TagFieldBaseItemProps<T>
 }
 
@@ -60,7 +61,7 @@ export interface TagFieldProps<T>
     HelpTextProps,
     TagFieldVariantProps {
   classNames?: SlotsToClasses<TagFieldSlots>
-  itemClassNames?: SlotsToClasses<ListBoxItemSlots>
+  itemClassNames?: SlotsToClasses<TagFieldItemSlots>
   children?: (values: TagFieldRenderProps<T>) => ReactNode
   /** The filter function used to determine if a option should be included in the combo box list. */
   defaultFilter?: (textValue: string, inputValue: string) => boolean
@@ -109,4 +110,18 @@ export interface TagFieldProps<T>
    * If not provided, the menu will close on blur when the user clicks outside the tag field.
    */
   shouldCloseOnBlur?: boolean
+  /**
+   * Whether the tag field menu should close when an option is selected.
+   * When `false`, the menu stays open after selecting an option, allowing
+   * multiple options to be selected (or deselected) in one go.
+   * @default true
+   */
+  shouldCloseOnSelect?: boolean
+  /**
+   * Whether each option in the dropdown shows a checkbox indicating its
+   * selected state.
+   * @default false
+   * @remarks A future major version may change this default to `true`.
+   */
+  showCheckbox?: boolean
 }

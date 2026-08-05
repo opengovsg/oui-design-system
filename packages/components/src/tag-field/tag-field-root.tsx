@@ -179,6 +179,7 @@ export function TagFieldRoot<T extends object>({
             ...tagFieldProps,
             size: props.size,
             variant: props.variant,
+            showCheckbox: props.showCheckbox,
           },
         ],
         [LabelContext, labelProps],

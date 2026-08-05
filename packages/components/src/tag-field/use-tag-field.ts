@@ -93,6 +93,7 @@ export function useTagField<T>(
     listBoxRef,
     labelRef,
     shouldCloseOnBlur,
+    shouldCloseOnSelect = true,
     // TODO: Handle these states
     isReadOnly,
     isDisabled,
@@ -192,7 +193,22 @@ export function useTagField<T>(
       const { changes, type } = actionAndChanges
       switch (type) {
         case useCombobox.stateChangeTypes.ItemClick:
-        case useCombobox.stateChangeTypes.InputKeyDownEnter:
+        case useCombobox.stateChangeTypes.InputKeyDownEnter: {
+          return {
+            ...changes,
+            isOpen:
+              shouldCloseOnSelect === false || shouldCloseOnBlur === false
+                ? true
+                : changes.isOpen,
+            // Keep the current item highlighted instead of resetting to the
+            // first item, since the list stays open and visible after
+            // selecting/deselecting an option.
+            highlightedIndex:
+              shouldCloseOnSelect === false
+                ? _state.highlightedIndex
+                : changes.highlightedIndex,
+          }
+        }
         case useCombobox.stateChangeTypes.InputBlur: {
           return {
             ...changes,
@@ -213,7 +229,12 @@ export function useTagField<T>(
         case useCombobox.stateChangeTypes.InputKeyDownEnter:
         case useCombobox.stateChangeTypes.ItemClick: {
           if (newSelectedItem) {
-            setSelectedItems((prev) => [...new Set([...prev, newSelectedItem])])
+            const newSelectedKey = itemToKey(newSelectedItem)
+            setSelectedItems((prev) =>
+              prev.some((item) => itemToKey(item) === newSelectedKey)
+                ? prev.filter((item) => itemToKey(item) !== newSelectedKey)
+                : [...prev, newSelectedItem],
+            )
           }
           setInputValue("")
           break

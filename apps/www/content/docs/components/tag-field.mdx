@@ -59,6 +59,12 @@ Use `selectedKeys` and `onSelectionChange` to control the selection programmatic
 
 <ComponentPreview name="tag-field-content-example" />
 
+### Checklist
+
+Selected options always stay in the dropdown list instead of being filtered out, so clicking an already-selected option deselects it again. Set `shouldCloseOnSelect={false}` to also keep the dropdown open after each pick, letting users select several options in one visit without reopening the menu. Pair it with `showCheckbox` to render a checkbox on every option indicating its selected state — the checkbox stays aligned to an option's first line even when its label wraps across multiple lines.
+
+<ComponentPreview name="tag-field-checklist" />
+
 ### With Description
 
 Use the `description` prop for helper text below the input.
@@ -149,8 +155,9 @@ See the [Forms guide](/docs/guides/forms#validation) for end-to-end patterns inc
 - TagField uses a native `<input>` with ARIA combobox semantics (role `combobox`, `aria-haspopup`, `aria-expanded`) managed by Downshift.
 - The label, description, and error message are automatically wired via `aria-labelledby` and `aria-describedby` through React Aria's `useTextField`.
 - If no visible label is provided, pass `aria-label` or `aria-labelledby` to the `TagField`.
-- Keyboard interaction: type to filter options; **Up/Down** to navigate the list; **Enter** to select; **Backspace** on empty input removes the last tag; **Escape** closes the dropdown.
+- Keyboard interaction: type to filter options; **Up/Down** to navigate the list; **Enter** to select (or deselect, if already selected); **Backspace** on empty input removes the last tag; **Escape** closes the dropdown.
 - Each selected tag is a focusable element; **Backspace** or **Delete** on a focused tag removes it.
+- With `shouldCloseOnSelect={false}`, the highlighted option stays highlighted after selecting or deselecting it, instead of resetting to the first option in the list.
 
 ## Slots
 
@@ -176,6 +183,8 @@ Slots are named regions of the component you can target with custom Tailwind cla
 - **`container`**: The list item row.
 - **`label`**: The primary text label inside the item row.
 - **`description`**: The secondary description text inside the item row (unused in the default renderer; available for custom item layouts).
+- **`checkboxBox`**: The checkbox square rendered when `showCheckbox` is `true`. Vertically centered against the label's first line so it stays aligned when a label wraps across multiple lines.
+- **`checkboxIcon`**: The checkmark icon inside `checkboxBox`, shown when the option is selected.
 
 ### Custom Styles
 
@@ -185,41 +194,43 @@ Slots are named regions of the component you can target with custom Tailwind cla
 
 ### TagField
 
-| Prop                  | Type                                                                               | Default                   | Description                                                                            |
-| --------------------- | ---------------------------------------------------------------------------------- | ------------------------- | -------------------------------------------------------------------------------------- |
-| `children`            | `(values: TagFieldRenderProps<T>) => ReactNode`                                    | -                         | Custom render function for each dropdown option; see render-prop table below           |
-| `label`               | `ReactNode`                                                                        | -                         | The visible label for the field                                                        |
-| `items`               | `T[]`                                                                              | -                         | Controlled list of items for the dropdown                                              |
-| `defaultItems`        | `T[]`                                                                              | -                         | Uncontrolled initial list of items for the dropdown                                    |
-| `inputValue`          | `string`                                                                           | -                         | The current text input value (controlled)                                              |
-| `defaultInputValue`   | `string`                                                                           | -                         | The default text input value (uncontrolled)                                            |
-| `onInputChange`       | `(value: string) => void`                                                          | -                         | Called when the input value changes                                                    |
-| `selectedKeys`        | `Set<Key>`                                                                         | -                         | The set of selected item keys (controlled)                                             |
-| `defaultSelectedKeys` | `Set<Key>`                                                                         | -                         | The default set of selected keys (uncontrolled)                                        |
-| `onSelectionChange`   | `(keys: Set<Key>) => void`                                                         | -                         | Called when the selection changes                                                      |
-| `isDisabled`          | `boolean`                                                                          | `false`                   | Whether the field is disabled                                                          |
-| `isReadOnly`          | `boolean`                                                                          | `false`                   | Whether the field is read-only                                                         |
-| `isRequired`          | `boolean`                                                                          | `false`                   | Whether the field is required                                                          |
-| `isInvalid`           | `boolean`                                                                          | `false`                   | Whether the field should display as invalid                                            |
-| `validate`            | `(value: TagFieldValidationValue) => ValidationError \| true \| null \| undefined` | -                         | Custom validation function                                                             |
-| `errorMessage`        | `ReactNode \| ((validation: ValidationResult) => string)`                          | -                         | Error message displayed when the field is invalid                                      |
-| `validationBehavior`  | `"native" \| "aria"`                                                               | `"native"`                | Whether to use native HTML form validation or ARIA-only                                |
-| `size`                | `"xs" \| "sm" \| "md"`                                                             | `"md"`                    | The size of the component                                                              |
-| `classNames`          | `SlotsToClasses<TagFieldSlots>`                                                    | -                         | Custom Tailwind classes for component slots                                            |
-| `itemClassNames`      | `SlotsToClasses<ListBoxItemSlots>`                                                 | -                         | Custom Tailwind classes applied to every default `TagFieldItem` row                    |
-| `itemToText`          | `(item: T) => string`                                                              | `item => item.textValue`  | Extracts the display text from an item; required when items lack a `textValue` field   |
-| `itemToKey`           | `(item: T) => Key`                                                                 | `item => item.id`         | Extracts the unique key from an item; required when items lack an `id` field           |
-| `defaultFilter`       | `(textValue: string, inputValue: string) => boolean`                               | case-insensitive contains | Filter function for uncontrolled collections; receives the item text and current input |
-| `virtualRowHeight`    | `number`                                                                           | size-dependent            | Override the estimated height of each virtualised row in pixels                        |
-| `isVirtualized`       | `boolean`                                                                          | `true`                    | Whether to virtualise the list; set `false` for small lists or variable-height items   |
-| `shouldCloseOnBlur`   | `boolean`                                                                          | `true`                    | Whether the dropdown closes when the input loses focus                                 |
-| `description`         | `ReactNode \| null`                                                                | -                         | Helper text shown below the field                                                      |
-| `placeholder`         | `string`                                                                           | -                         | Placeholder text for the text input                                                    |
-| `disabledKeys`        | `Iterable<Key>`                                                                    | -                         | Keys of items that cannot be selected                                                  |
-| `onOpenChange`        | `(isOpen: boolean) => void`                                                        | -                         | Called when the dropdown opens or closes                                               |
-| `onFocus`             | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input receives focus                                                   |
-| `onBlur`              | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input loses focus                                                      |
-| `onFocusChange`       | `(isFocused: boolean) => void`                                                     | -                         | Called when the focus state changes                                                    |
+| Prop                  | Type                                                                               | Default                   | Description                                                                                                                                             |
+| --------------------- | ---------------------------------------------------------------------------------- | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `children`            | `(values: TagFieldRenderProps<T>) => ReactNode`                                    | -                         | Custom render function for each dropdown option; see render-prop table below                                                                            |
+| `label`               | `ReactNode`                                                                        | -                         | The visible label for the field                                                                                                                         |
+| `items`               | `T[]`                                                                              | -                         | Controlled list of items for the dropdown                                                                                                               |
+| `defaultItems`        | `T[]`                                                                              | -                         | Uncontrolled initial list of items for the dropdown                                                                                                     |
+| `inputValue`          | `string`                                                                           | -                         | The current text input value (controlled)                                                                                                               |
+| `defaultInputValue`   | `string`                                                                           | -                         | The default text input value (uncontrolled)                                                                                                             |
+| `onInputChange`       | `(value: string) => void`                                                          | -                         | Called when the input value changes                                                                                                                     |
+| `selectedKeys`        | `Set<Key>`                                                                         | -                         | The set of selected item keys (controlled)                                                                                                              |
+| `defaultSelectedKeys` | `Set<Key>`                                                                         | -                         | The default set of selected keys (uncontrolled)                                                                                                         |
+| `onSelectionChange`   | `(keys: Set<Key>) => void`                                                         | -                         | Called when the selection changes                                                                                                                       |
+| `isDisabled`          | `boolean`                                                                          | `false`                   | Whether the field is disabled                                                                                                                           |
+| `isReadOnly`          | `boolean`                                                                          | `false`                   | Whether the field is read-only                                                                                                                          |
+| `isRequired`          | `boolean`                                                                          | `false`                   | Whether the field is required                                                                                                                           |
+| `isInvalid`           | `boolean`                                                                          | `false`                   | Whether the field should display as invalid                                                                                                             |
+| `validate`            | `(value: TagFieldValidationValue) => ValidationError \| true \| null \| undefined` | -                         | Custom validation function                                                                                                                              |
+| `errorMessage`        | `ReactNode \| ((validation: ValidationResult) => string)`                          | -                         | Error message displayed when the field is invalid                                                                                                       |
+| `validationBehavior`  | `"native" \| "aria"`                                                               | `"native"`                | Whether to use native HTML form validation or ARIA-only                                                                                                 |
+| `size`                | `"xs" \| "sm" \| "md"`                                                             | `"md"`                    | The size of the component                                                                                                                               |
+| `classNames`          | `SlotsToClasses<TagFieldSlots>`                                                    | -                         | Custom Tailwind classes for component slots                                                                                                             |
+| `itemClassNames`      | `SlotsToClasses<TagFieldItemSlots>`                                                | -                         | Custom Tailwind classes applied to every default `TagFieldItem` row                                                                                     |
+| `itemToText`          | `(item: T) => string`                                                              | `item => item.textValue`  | Extracts the display text from an item; required when items lack a `textValue` field                                                                    |
+| `itemToKey`           | `(item: T) => Key`                                                                 | `item => item.id`         | Extracts the unique key from an item; required when items lack an `id` field                                                                            |
+| `defaultFilter`       | `(textValue: string, inputValue: string) => boolean`                               | case-insensitive contains | Filter function for uncontrolled collections; receives the item text and current input                                                                  |
+| `virtualRowHeight`    | `number`                                                                           | size-dependent            | Override the estimated height of each virtualised row in pixels                                                                                         |
+| `isVirtualized`       | `boolean`                                                                          | `true`                    | Whether to virtualise the list; set `false` for small lists or variable-height items                                                                    |
+| `shouldCloseOnBlur`   | `boolean`                                                                          | `true`                    | Whether the dropdown closes when the input loses focus                                                                                                  |
+| `shouldCloseOnSelect` | `boolean`                                                                          | `true`                    | Whether the dropdown closes when an option is selected; set `false` to select multiple options in one visit, with the picked option staying highlighted |
+| `showCheckbox`        | `boolean`                                                                          | `false`                   | Whether every option shows a checkbox indicating its selected state; a future major version may default this to `true`                                  |
+| `description`         | `ReactNode \| null`                                                                | -                         | Helper text shown below the field                                                                                                                       |
+| `placeholder`         | `string`                                                                           | -                         | Placeholder text for the text input                                                                                                                     |
+| `disabledKeys`        | `Iterable<Key>`                                                                    | -                         | Keys of items that cannot be selected                                                                                                                   |
+| `onOpenChange`        | `(isOpen: boolean) => void`                                                        | -                         | Called when the dropdown opens or closes                                                                                                                |
+| `onFocus`             | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input receives focus                                                                                                                    |
+| `onBlur`              | `(e: FocusEvent<HTMLInputElement>) => void`                                        | -                         | Called when the input loses focus                                                                                                                       |
+| `onFocusChange`       | `(isFocused: boolean) => void`                                                     | -                         | Called when the focus state changes                                                                                                                     |
 
 _Inherits `autoFocus` and other focusable props from React Aria's [FocusableProps](https://react-spectrum.adobe.com/react-aria/FocusableProps)._
 
@@ -227,24 +238,26 @@ _Inherits `autoFocus` and other focusable props from React Aria's [FocusableProp
 
 When `children` is a function, it is called once per visible dropdown row with:
 
-| Property        | Type                               | Description                                                                                                   |
-| --------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `item`          | `T`                                | The item data object for this row                                                                             |
-| `key`           | `string \| number`                 | The React key for this row; must be passed as the `key` prop on the root element                              |
-| `isHighlighted` | `boolean`                          | Whether this row is currently keyboard-highlighted                                                            |
-| `itemProps`     | `TagFieldBaseItemProps<T>`         | ARIA and event props from Downshift; spread onto the root element of your custom row                          |
-| `classNames`    | `SlotsToClasses<ListBoxItemSlots>` | The resolved slot classes from `itemClassNames`; apply to `container`, `label`, `description` spans as needed |
+| Property        | Type                                | Description                                                                                                                                  |
+| --------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `item`          | `T`                                 | The item data object for this row                                                                                                            |
+| `key`           | `string \| number`                  | The React key for this row; must be passed as the `key` prop on the root element                                                             |
+| `isHighlighted` | `boolean`                           | Whether this row is currently keyboard-highlighted                                                                                           |
+| `isSelected`    | `boolean`                           | Whether this row is currently selected                                                                                                       |
+| `itemProps`     | `TagFieldBaseItemProps<T>`          | ARIA and event props from Downshift; spread onto the root element of your custom row                                                         |
+| `classNames`    | `SlotsToClasses<TagFieldItemSlots>` | The resolved slot classes from `itemClassNames`; apply to `container`, `label`, `description`, `checkboxBox`, `checkboxIcon` spans as needed |
 
 ### TagFieldItem
 
 `TagFieldItem` is the default option renderer used internally. You can use it directly inside a custom `children` function when you only need partial customisation.
 
-| Prop            | Type                               | Default | Description                                                                  |
-| --------------- | ---------------------------------- | ------- | ---------------------------------------------------------------------------- |
-| `item`          | `T`                                | -       | The item data object                                                         |
-| `isHighlighted` | `boolean`                          | `false` | Whether the item is keyboard-highlighted                                     |
-| `classNames`    | `SlotsToClasses<ListBoxItemSlots>` | -       | Custom Tailwind classes for item slots (`container`, `label`, `description`) |
-| `style`         | `React.CSSProperties`              | -       | Inline styles (used internally by the virtualiser for positioning)           |
+| Prop            | Type                                | Default | Description                                                                                                 |
+| --------------- | ----------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------- |
+| `item`          | `T`                                 | -       | The item data object                                                                                        |
+| `isHighlighted` | `boolean`                           | `false` | Whether the item is keyboard-highlighted                                                                    |
+| `isSelected`    | `boolean`                           | `false` | Whether the item is currently selected; drives the checkbox's checked state when shown                      |
+| `classNames`    | `SlotsToClasses<TagFieldItemSlots>` | -       | Custom Tailwind classes for item slots (`container`, `label`, `description`, `checkboxBox`, `checkboxIcon`) |
+| `style`         | `React.CSSProperties`               | -       | Inline styles (used internally by the virtualiser for positioning)                                          |
 
 Spread all remaining `TagFieldBaseItemProps<T>` (ARIA + event props from Downshift) onto the `<li>` element.
 

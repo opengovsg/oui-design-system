@@ -1,7 +1,8 @@
 "use client"
 
-import type { ListBoxItemSlots, SlotsToClasses } from "@opengovsg/oui-theme"
-import { dataAttr, listBoxItemStyles } from "@opengovsg/oui-theme"
+import type { SlotsToClasses, TagFieldItemSlots } from "@opengovsg/oui-theme"
+import { dataAttr, tagFieldItemStyles } from "@opengovsg/oui-theme"
+import { Check } from "lucide-react"
 import type { ForwardedRef } from "react"
 import { useContext } from "react"
 
@@ -13,15 +14,21 @@ export interface TagFieldItemProps<T extends object>
   extends
     Omit<TagFieldListRenderProps<T>, "key" | "itemProps">,
     TagFieldBaseItemProps<T> {
-  classNames?: SlotsToClasses<ListBoxItemSlots>
+  classNames?: SlotsToClasses<TagFieldItemSlots>
 }
 
 const TagFieldItemInner = <T extends object>(
-  { item, isHighlighted, classNames, ...itemProps }: TagFieldItemProps<T>,
+  {
+    item,
+    isHighlighted,
+    isSelected,
+    classNames,
+    ...itemProps
+  }: TagFieldItemProps<T>,
   ref: ForwardedRef<HTMLLIElement>,
 ) => {
-  const { itemToText, size } = useContext(TagFieldStateContext)!
-  const styles = listBoxItemStyles({ size })
+  const { itemToText, size, showCheckbox } = useContext(TagFieldStateContext)!
+  const styles = tagFieldItemStyles({ size, isSelected })
 
   return (
     <li
@@ -35,7 +42,24 @@ const TagFieldItemInner = <T extends object>(
       data-rac
       data-focused={dataAttr(isHighlighted)}
       data-disabled={dataAttr(itemProps["aria-disabled"])}
+      data-selected={dataAttr(isSelected)}
     >
+      {showCheckbox && (
+        <span
+          aria-hidden
+          className={styles.checkboxBox({
+            className: classNames?.checkboxBox,
+          })}
+        >
+          {isSelected && (
+            <Check
+              className={styles.checkboxIcon({
+                className: classNames?.checkboxIcon,
+              })}
+            />
+          )}
+        </span>
+      )}
       <span className={styles.label({ className: classNames?.label })}>
         {itemToText(item)}
       </span>

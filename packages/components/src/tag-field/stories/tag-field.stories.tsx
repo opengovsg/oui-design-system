@@ -3,7 +3,7 @@ import { withChromaticModes } from "@oui/chromatic"
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 import type { Key } from "react-aria"
-import { userEvent } from "storybook/test"
+import { expect, fn, userEvent, within } from "storybook/test"
 
 import { TagField } from "../tag-field"
 
@@ -155,6 +155,90 @@ export const NonVirtualized: Story = {
   decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
   play: async ({ canvas }) => {
     userEvent.click(canvas.getByLabelText("Tag Field"))
+  },
+}
+
+export const KeepOpenOnSelect: Story = {
+  args: {
+    shouldCloseOnSelect: false,
+    showCheckbox: true,
+    onSelectionChange: fn(),
+    defaultItems: [...Array(10)].map((_, i) => ({
+      id: String(i),
+      textValue: `Item ${i}`,
+    })),
+  },
+  decorators: [(storyFn) => <div className="h-[500px]">{storyFn()}</div>],
+  play: async ({ canvasElement, canvas }) => {
+    const body = within(canvasElement.parentElement!)
+    await userEvent.click(canvas.getByLabelText("Tag Field"))
+    const optionOne = await body.findByRole("option", { name: "Item 1" })
+    const optionThree = body.getByRole("option", { name: "Item 3" })
+    await userEvent.click(optionOne)
+    await userEvent.click(optionThree)
+
+    // Menu stays open and both options remain in the list, checked.
+    await expect(optionOne).toBeVisible()
+    await expect(optionOne).toHaveAttribute("data-selected", "true")
+    await expect(optionThree).toHaveAttribute("data-selected", "true")
+
+    // The clicked option stays highlighted instead of resetting to the
+    // first item in the list.
+    await expect(optionThree).toHaveAttribute("data-focused", "true")
+
+    // Clicking a selected option again deselects it.
+    await userEvent.click(optionOne)
+    await expect(optionOne).not.toHaveAttribute("data-selected")
+    await expect(optionOne).toHaveAttribute("data-focused", "true")
+  },
+}
+
+export const MultilineOptions: Story = {
+  render(args) {
+    return (
+      <div className="flex gap-4">
+        {(["xs", "sm", "md"] as const).map((size) => (
+          <div key={size} className="w-72">
+            <TagField
+              {...args}
+              label={`${args?.label} (${size})`}
+              size={size}
+            />
+          </div>
+        ))}
+      </div>
+    )
+  },
+  args: {
+    isVirtualized: false,
+    showCheckbox: true,
+    // Stay open across sizes and selection so the checkbox's alignment can
+    // be inspected without reopening the menu.
+    shouldCloseOnSelect: false,
+    shouldCloseOnBlur: false,
+    onSelectionChange: fn(),
+    // The default label class line-clamps to a single line; remove that so
+    // long option text actually wraps for this story.
+    itemClassNames: {
+      label: "line-clamp-none",
+    },
+    defaultItems: [
+      { id: "0", textValue: "Short option" },
+      {
+        id: "1",
+        textValue:
+          "A much longer option label that wraps across multiple lines, to check that the checkbox stays aligned to the first line instead of centering against the full height of the label",
+      },
+      { id: "2", textValue: "Another short option" },
+    ],
+  },
+  decorators: [(storyFn) => <div className="h-[600px]">{storyFn()}</div>],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const fields = canvas.getAllByRole("combobox")
+    for (const field of fields) {
+      await userEvent.click(field)
+    }
   },
 }
 

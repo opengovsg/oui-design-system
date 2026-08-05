@@ -2,6 +2,7 @@ import type { VariantProps } from "tailwind-variants"
 
 import { focusVisibleClasses } from "../utils"
 import { tv } from "../utils/tv"
+import { listBoxItemStyles } from "./list-box"
 
 export const tagFieldStyles = tv({
   slots: {
@@ -59,3 +60,34 @@ export const tagFieldStyles = tv({
 
 export type TagFieldVariantProps = VariantProps<typeof tagFieldStyles>
 export type TagFieldSlots = keyof ReturnType<typeof tagFieldStyles>
+
+export const tagFieldItemStyles = tv({
+  extend: listBoxItemStyles,
+  slots: {
+    container: "flex-row items-start gap-2",
+    checkboxBox:
+      "flex shrink-0 items-center justify-center rounded-sm border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
+    checkboxIcon: "text-white",
+  },
+  variants: {
+    // xs needs a small margin-top to center the box against the label's
+    // first line; sm and md are already centered without one.
+    size: {
+      xs: { checkboxBox: "mt-0.5 h-4 w-4", checkboxIcon: "h-3 w-3" },
+      sm: { checkboxBox: "h-5 w-5", checkboxIcon: "h-3.5 w-3.5" },
+      md: { checkboxBox: "h-6 w-6", checkboxIcon: "h-4 w-4" },
+    },
+    isSelected: {
+      true: {
+        checkboxBox:
+          "border-(--color) bg-(--color) [--color:var(--color-interaction-main-default)]",
+      },
+    },
+  },
+  defaultVariants: {
+    size: "md",
+  },
+})
+
+export type TagFieldItemVariantProps = VariantProps<typeof tagFieldItemStyles>
+export type TagFieldItemSlots = keyof ReturnType<typeof tagFieldItemStyles>
