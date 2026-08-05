@@ -70,12 +70,14 @@ export const tagFieldItemStyles = tv({
     checkboxIcon: "text-white",
   },
   variants: {
-    // Each size's margin-top centers the box against the label's first
-    // line (rather than the label's full, possibly multiline, height).
+    // Each size's margin-top centers the box against the visual center of
+    // the label's first line (rather than its full, possibly multiline,
+    // height): the CSS line box is taller than the text's rendered glyphs,
+    // so centering against the line box alone sits ~2px too high.
     size: {
-      xs: { checkboxBox: "mt-0.5 h-4 w-4", checkboxIcon: "h-3 w-3" },
-      sm: { checkboxBox: "h-5 w-5", checkboxIcon: "h-3.5 w-3.5" },
-      md: { checkboxBox: "h-6 w-6", checkboxIcon: "h-4 w-4" },
+      xs: { checkboxBox: "mt-1 h-4 w-4", checkboxIcon: "h-3 w-3" },
+      sm: { checkboxBox: "mt-0.5 h-5 w-5", checkboxIcon: "h-3.5 w-3.5" },
+      md: { checkboxBox: "mt-0.5 h-6 w-6", checkboxIcon: "h-4 w-4" },
     },
     isSelected: {
       true: {
