@@ -3920,6 +3920,19 @@ export const Index: Record<string, RegistryComponent> = {
       () => import("@/registry/examples/tabs-with-vertical-orientation.tsx"),
     ),
   },
+  "tag-field-checklist": {
+    name: "tag-field-checklist",
+    description: "",
+    type: "registry:example",
+    files: [
+      {
+        path: "registry/examples/tag-field-checklist.tsx",
+      },
+    ],
+    component: lazy(
+      () => import("@/registry/examples/tag-field-checklist.tsx"),
+    ),
+  },
   "tag-field-content-example": {
     name: "tag-field-content-example",
     description: "",
