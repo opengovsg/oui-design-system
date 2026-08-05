@@ -194,12 +194,28 @@ export const KeepOpenOnSelect: Story = {
 }
 
 export const MultilineOptions: Story = {
+  render(args) {
+    return (
+      <div className="flex gap-4">
+        {(["xs", "sm", "md"] as const).map((size) => (
+          <div key={size} className="w-72">
+            <TagField
+              {...args}
+              label={`${args?.label} (${size})`}
+              size={size}
+            />
+          </div>
+        ))}
+      </div>
+    )
+  },
   args: {
     isVirtualized: false,
     showCheckbox: true,
-    // Stay open so the checked state's alignment can be inspected without
-    // reopening the menu.
+    // Stay open across sizes and selection so the checkbox's alignment can
+    // be inspected without reopening the menu.
     shouldCloseOnSelect: false,
+    shouldCloseOnBlur: false,
     onSelectionChange: fn(),
     // The default label class line-clamps to a single line; remove that so
     // long option text actually wraps for this story.
@@ -216,9 +232,13 @@ export const MultilineOptions: Story = {
       { id: "2", textValue: "Another short option" },
     ],
   },
-  decorators: [(storyFn) => <div className="h-[500px] w-80">{storyFn()}</div>],
-  play: async ({ canvas }) => {
-    await userEvent.click(canvas.getByLabelText("Tag Field"))
+  decorators: [(storyFn) => <div className="h-[600px]">{storyFn()}</div>],
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const fields = canvas.getAllByRole("combobox")
+    for (const field of fields) {
+      await userEvent.click(field)
+    }
   },
 }
 

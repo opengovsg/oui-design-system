@@ -65,15 +65,15 @@ export const tagFieldItemStyles = tv({
   extend: listBoxItemStyles,
   slots: {
     container: "flex-row items-start gap-2",
-    // mt-0.5 optically aligns the box with the cap-height of the label's
-    // first line, since multiline labels can wrap below it.
     checkboxBox:
-      "mt-0.5 flex shrink-0 items-center justify-center rounded-sm border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
+      "flex shrink-0 items-center justify-center rounded-sm border-2 border-(--color) bg-white transition [--color:var(--color-base-content-strong)]",
     checkboxIcon: "text-white",
   },
   variants: {
+    // Each size's margin-top centers the box against the label's first
+    // line (rather than the label's full, possibly multiline, height).
     size: {
-      xs: { checkboxBox: "h-4 w-4", checkboxIcon: "h-3 w-3" },
+      xs: { checkboxBox: "mt-0.5 h-4 w-4", checkboxIcon: "h-3 w-3" },
       sm: { checkboxBox: "h-5 w-5", checkboxIcon: "h-3.5 w-3.5" },
       md: { checkboxBox: "h-6 w-6", checkboxIcon: "h-4 w-4" },
     },
