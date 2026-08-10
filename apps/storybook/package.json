@@ -40,7 +40,7 @@
     "autoprefixer": "^10.4.20",
     "chromatic": "^11.25.2",
     "playwright": "1.57.0",
-    "serve": "^14.2.4",
+    "serve": "^14.2.6",
     "storybook": "catalog:storybook10",
     "tailwindcss": "catalog:tailwind",
     "typescript": "catalog:",
