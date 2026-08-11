@@ -14,8 +14,8 @@ catalogs:
     react: ^19.2.8
     react-dom: ^19.2.8
   react-aria:
-    "@internationalized/date": ^3.12.2
-    "@internationalized/string": ^3.2.9
+    "@internationalized/date": ^3.12.3
+    "@internationalized/string": ^3.2.10
     "@react-aria/calendar": ^3.10.1
     "@react-aria/focus": ^3.22.1
     "@react-aria/i18n": ^3.13.1
@@ -26,10 +26,10 @@ catalogs:
     "@react-stately/form": ^3.3.1
     "@react-stately/list": ^3.14.1
     "@react-stately/utils": ^3.12.1
-    "@react-types/shared": ^3.36.0
-    react-aria: ^3.50.0
-    react-aria-components: ^1.19.0
-    react-stately: ^3.48.0
+    "@react-types/shared": ^3.36.1
+    react-aria: ^3.51.0
+    react-aria-components: ^1.20.0
+    react-stately: ^3.49.0
   storybook10:
     "@storybook/addon-a11y": 10.5.7
     "@storybook/addon-docs": 10.5.7
