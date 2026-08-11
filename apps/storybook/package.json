@@ -37,7 +37,7 @@
     "@vitest/browser": "catalog:vitest",
     "@vitest/browser-playwright": "catalog:vitest",
     "@vitest/coverage-v8": "catalog:vitest",
-    "autoprefixer": "^10.4.20",
+    "autoprefixer": "^10.5.4",
     "chromatic": "^11.25.2",
     "playwright": "1.57.0",
     "serve": "^14.2.6",
