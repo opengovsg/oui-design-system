@@ -81,7 +81,7 @@
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
     "csstype": "^3.2.3",
-    "lucide-react": "^0.475.0",
+    "lucide-react": "^1.31.0",
     "motion": "^12.42.0",
     "react": "catalog:react",
     "react-aria-components": "catalog:react-aria",
