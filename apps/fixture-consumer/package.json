@@ -50,7 +50,7 @@
     "@oui/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "catalog:tailwind",
     "@types/lodash-es": "^4.17.12",
-    "@types/node": "^22.13.1",
+    "@types/node": "^26.2.0",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
     "postcss": "catalog:",
