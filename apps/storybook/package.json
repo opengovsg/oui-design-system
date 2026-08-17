@@ -23,7 +23,7 @@
   "devDependencies": {
     "@oui/chromatic": "workspace:*",
     "@oui/typescript-config": "workspace:*",
-    "@sinonjs/fake-timers": "^14.0.0",
+    "@sinonjs/fake-timers": "^15.4.0",
     "@storybook/addon-a11y": "catalog:storybook10",
     "@storybook/addon-docs": "catalog:storybook10",
     "@storybook/addon-links": "catalog:storybook10",
@@ -32,7 +32,7 @@
     "@storybook/react-vite": "catalog:storybook10",
     "@tailwindcss/vite": "catalog:tailwind",
     "@types/node": "^22.13.1",
-    "@types/sinonjs__fake-timers": "^8.1.5",
+    "@types/sinonjs__fake-timers": "^15.0.1",
     "@vitejs/plugin-react": "^6.0.5",
     "@vitest/browser": "catalog:vitest",
     "@vitest/browser-playwright": "catalog:vitest",
