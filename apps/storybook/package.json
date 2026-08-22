@@ -31,7 +31,7 @@
     "@storybook/addon-vitest": "catalog:storybook10",
     "@storybook/react-vite": "catalog:storybook10",
     "@tailwindcss/vite": "catalog:tailwind",
-    "@types/node": "^22.13.1",
+    "@types/node": "^26.2.0",
     "@types/sinonjs__fake-timers": "^15.0.1",
     "@vitejs/plugin-react": "^6.0.5",
     "@vitest/browser": "catalog:vitest",
