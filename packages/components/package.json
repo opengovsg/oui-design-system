@@ -56,7 +56,7 @@
     "@react-stately/list": "catalog:react-aria",
     "@react-stately/utils": "catalog:react-aria",
     "@react-types/shared": "catalog:react-aria",
-    "@tanstack/react-virtual": "^3.13.10",
+    "@tanstack/react-virtual": "^3.14.10",
     "downshift": "^9.4.0",
     "fuzzysort": "^3.1.0",
     "lodash-es": "^4.18.1",
