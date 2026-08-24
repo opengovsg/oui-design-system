@@ -31,15 +31,15 @@ catalogs:
     react-aria-components: ^1.20.0
     react-stately: ^3.49.0
   storybook10:
-    "@storybook/addon-a11y": 10.5.8
-    "@storybook/addon-docs": 10.5.8
-    "@storybook/addon-links": 10.5.8
-    "@storybook/addon-themes": 10.5.8
-    "@storybook/addon-vitest": 10.5.8
-    "@storybook/nextjs": 10.5.8
-    "@storybook/react-vite": 10.5.8
-    eslint-plugin-storybook: 10.5.8
-    storybook: 10.5.8
+    "@storybook/addon-a11y": 10.5.10
+    "@storybook/addon-docs": 10.5.10
+    "@storybook/addon-links": 10.5.10
+    "@storybook/addon-themes": 10.5.10
+    "@storybook/addon-vitest": 10.5.10
+    "@storybook/nextjs": 10.5.10
+    "@storybook/react-vite": 10.5.10
+    eslint-plugin-storybook: 10.5.10
+    storybook: 10.5.10
   tailwind:
     "@tailwindcss/postcss": 4.3.1
     "@tailwindcss/vite": 4.3.3
