@@ -1,10 +1,15 @@
 import type { LocalizedStrings } from "@react-aria/i18n"
 
+// Alias "en-US" to the English strings so react-aria's default locale
+// fallback works for unsupported locales instead of throwing.
+const enStrings = {
+  "Open navigation menu": "Open navigation menu",
+  "Close navigation menu": "Close navigation menu",
+}
+
 export const i18nStrings = {
-  "en-SG": {
-    "Open navigation menu": "Open navigation menu",
-    "Close navigation menu": "Close navigation menu",
-  },
+  "en-SG": enStrings,
+  "en-US": enStrings,
   "zh-SG": {
     "Open navigation menu": "打开导航菜单",
     "Close navigation menu": "关闭导航菜单",

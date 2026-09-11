@@ -1,5 +1,6 @@
 import { withChromaticModes } from "@oui/chromatic"
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { I18nProvider } from "react-aria-components"
 
 import { Banner } from "../banner"
 
@@ -23,6 +24,20 @@ export const IsDismissable: Story = {
     isDismissable: true,
     children: "This banner can be dismissed.",
   },
+}
+
+// Regression check: unsupported locales must fall back to English strings
+// instead of crashing on the Dismiss button translation.
+export const UnsupportedLocale: Story = {
+  args: {
+    isDismissable: true,
+    children: "This banner renders in an unsupported locale (de-DE).",
+  },
+  render: (args) => (
+    <I18nProvider locale="de-DE">
+      <Banner {...args} />
+    </I18nProvider>
+  ),
 }
 
 export const SizesAndVariants: Story = {
