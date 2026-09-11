@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.62
+
+### Patch Changes
+
+- [#428](https://github.com/opengovsg/oui-design-system/pull/428) [`8871866`](https://github.com/opengovsg/oui-design-system/commit/8871866101f66703878463f9f22cb4236b2dc819) Thanks [@karrui](https://github.com/karrui)! - Fall back to English strings for unsupported locales instead of crashing, by adding an en-US alias to every translation dictionary.
+  Component translations previously threw (e.g. on the Dismiss button) when rendered under a locale outside en/zh/ms/ta-SG, such as de-DE.
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.62
+
 ## 0.0.61
 
 ### Patch Changes
