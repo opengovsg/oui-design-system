@@ -276,8 +276,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       tailwindcss-react-aria-components:
-        specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@4.3.3)
+        specifier: ^2.2.0
+        version: 2.2.0(tailwindcss@4.3.3)
       tw-animate-css:
         specifier: ^1.2.0
         version: 1.3.4
@@ -709,8 +709,8 @@ importers:
         specifier: ^3.3.1
         version: 3.3.1
       tailwindcss-react-aria-components:
-        specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@4.3.3)
+        specifier: ^2.2.0
+        version: 2.2.0(tailwindcss@4.3.3)
       tw-animate-css:
         specifier: ^1.2.0
         version: 1.3.4
@@ -4711,6 +4711,7 @@ packages:
   eslint@9.20.1:
     resolution: {integrity: sha512-m1mM33o6dBUjxl2qb6wv6nGNwCAsns1eKtaQ4l/NPHeTvhiUPbtdfMyktxN4B3fgHIgsYh1VT3V9txblpQHq+g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -7116,8 +7117,8 @@ packages:
       tailwind-merge:
         optional: true
 
-  tailwindcss-react-aria-components@2.0.0:
-    resolution: {integrity: sha512-l8YdpXX//qx0Mz2bW3YKLjboTQxR3zLrFhlHniAIn+mTwVM1yvT0Jp7Pn3eFrqi+qtOMmcJzXaF2rsKezSr0SQ==}
+  tailwindcss-react-aria-components@2.2.0:
+    resolution: {integrity: sha512-iNVDSQd6haXWiu4RakjaYnCUnLw/nOEFSFHEelFeIkT/0f8HSrJ23fwt59F93yNw4FrjjHDXIGHgEtqProNcmQ==}
     peerDependencies:
       tailwindcss: ^4.0.0
 
@@ -14538,7 +14539,7 @@ snapshots:
     optionalDependencies:
       tailwind-merge: 3.3.1
 
-  tailwindcss-react-aria-components@2.0.0(tailwindcss@4.3.3):
+  tailwindcss-react-aria-components@2.2.0(tailwindcss@4.3.3):
     dependencies:
       tailwindcss: 4.3.3
 
