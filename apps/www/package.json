@@ -48,7 +48,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/mdast": "^4.0.4",
     "@types/mdx": "^2.0.14",
-    "@types/node": "^22.13.1",
+    "@types/node": "^26.2.0",
     "@types/react": "catalog:react",
     "@types/react-dom": "catalog:react",
     "@types/unist": "^3.0.3",
