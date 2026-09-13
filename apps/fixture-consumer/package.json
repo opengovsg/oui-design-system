@@ -19,7 +19,7 @@
     "@react-stately/form": "catalog:react-aria",
     "@react-stately/utils": "catalog:react-aria",
     "@react-types/shared": "catalog:react-aria",
-    "@tanstack/react-virtual": "^3.13.10",
+    "@tanstack/react-virtual": "^3.14.10",
     "clsx": "^2.1.1",
     "csstype": "^3.2.3",
     "downshift": "^9.4.0",

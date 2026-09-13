@@ -213,8 +213,8 @@ importers:
         specifier: catalog:react-aria
         version: 3.36.1(react@19.2.8)
       '@tanstack/react-virtual':
-        specifier: ^3.13.10
-        version: 3.13.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^3.14.10
+        version: 3.14.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -606,8 +606,8 @@ importers:
         specifier: catalog:react-aria
         version: 3.36.1(react@19.2.8)
       '@tanstack/react-virtual':
-        specifier: ^3.13.10
-        version: 3.13.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        specifier: ^3.14.10
+        version: 3.14.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       downshift:
         specifier: ^9.4.0
         version: 9.4.0(react@19.2.8)
@@ -3593,14 +3593,14 @@ packages:
     peerDependencies:
       vite: '>=7.1.5'
 
-  '@tanstack/react-virtual@3.13.10':
-    resolution: {integrity: sha512-nvrzk4E9mWB4124YdJ7/yzwou7IfHxlSef6ugCFcBfRmsnsma3heciiiV97sBNxyc3VuwtZvmwXd0aB5BpucVw==}
+  '@tanstack/react-virtual@3.14.10':
+    resolution: {integrity: sha512-SRyoUbdFMRHuYXMijV5H4ZarQWpXkj3iANq8OFre+pybeVap8ZJjZ3Nz9bVjx4d8PfobVUQUdKyyyHYk3E+djw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  '@tanstack/virtual-core@3.13.10':
-    resolution: {integrity: sha512-sPEDhXREou5HyZYqSWIqdU580rsF6FGeN7vpzijmP3KTiOGjOMZASz4Y6+QKjiFQwhWrR58OP8izYaNGVxvViA==}
+  '@tanstack/virtual-core@3.17.8':
+    resolution: {integrity: sha512-BfEvehNpOT75r5Ksc5xW6NZuXujTfb7nlSEyVu4XHG3gdxNg1KqXruWbDewXOUaUYIo4oRbSfkjIajz4MAT8tA==}
 
   '@testing-library/dom@10.4.1':
     resolution: {integrity: sha512-o4PXJQidqJl82ckFaXUeoAW+XysPLauYI43Abki5hABd853iMhitooc6znOnczgbTYmEP6U6/y1ZyKAIsvMKGg==}
@@ -4711,6 +4711,7 @@ packages:
   eslint@9.20.1:
     resolution: {integrity: sha512-m1mM33o6dBUjxl2qb6wv6nGNwCAsns1eKtaQ4l/NPHeTvhiUPbtdfMyktxN4B3fgHIgsYh1VT3V9txblpQHq+g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
     peerDependencies:
       jiti: '*'
@@ -10260,13 +10261,13 @@ snapshots:
       tailwindcss: 4.3.3
       vite: 8.0.16(@types/node@22.15.32)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.43.0)(tsx@4.21.0)(yaml@2.7.0)
 
-  '@tanstack/react-virtual@3.13.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@tanstack/react-virtual@3.14.10(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
-      '@tanstack/virtual-core': 3.13.10
+      '@tanstack/virtual-core': 3.17.8
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
 
-  '@tanstack/virtual-core@3.13.10': {}
+  '@tanstack/virtual-core@3.17.8': {}
 
   '@testing-library/dom@10.4.1':
     dependencies:
