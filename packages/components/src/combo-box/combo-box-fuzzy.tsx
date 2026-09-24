@@ -10,7 +10,7 @@ import {
   comboBoxStyles,
   listBoxItemStyles,
 } from "@opengovsg/oui-theme"
-import fuzzysort from "fuzzysort"
+import fuzzysort, { type Result } from "fuzzysort"
 import { useCallback, useDeferredValue, useMemo, useState } from "react"
 import type { Key } from "react-aria"
 import { Text } from "react-aria-components"
@@ -22,7 +22,7 @@ import { ComboBox } from "./combo-box"
 import { ComboBoxItem } from "./combo-box-item"
 
 interface HighlightedTextProps extends ComboBoxFuzzyVariantProps {
-  result?: Fuzzysort.Result
+  result?: Result
   originalText?: string
   className?: string
 }
@@ -115,6 +115,8 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
       const results = fuzzysort
         .go(value, preparedItems, {
           key: "prepared",
+          threshold: 0,
+          limit: 0,
         })
         .reduce(
           (acc, result) => {
@@ -122,7 +124,7 @@ export function ComboBoxFuzzy<T extends ComboBoxItem = ComboBoxItem>(
             acc.result[result.obj.textValue] = result
             return acc
           },
-          { items: [] as T[], result: {} as Record<string, Fuzzysort.Result> },
+          { items: [] as T[], result: {} as Record<string, Result> },
         )
       setFilteredResults(results)
     },
