@@ -1,5 +1,14 @@
 # @opengovsg/oui
 
+## 0.0.63
+
+### Patch Changes
+
+- [#432](https://github.com/opengovsg/oui-design-system/pull/432) [`961c593`](https://github.com/opengovsg/oui-design-system/commit/961c59382223073b32bdc0da399a4989de9de72f) Thanks [@karrui](https://github.com/karrui)! - Upgrade fuzzysort to v4 and adjust ComboBoxFuzzy for its breaking changes (removed global result type, new default threshold/limit)
+
+- Updated dependencies []:
+  - @opengovsg/oui-theme@0.0.63
+
 ## 0.0.62
 
 ### Patch Changes
