@@ -4,7 +4,7 @@ packages:
   - tooling/*
 
 catalog:
-  postcss: ^8.5.25
+  postcss: ^8.5.28
   typescript: 5.7.3
 
 catalogs:
