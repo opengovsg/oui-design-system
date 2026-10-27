@@ -22,7 +22,7 @@
     "eslint-plugin-turbo": "^2.10.8",
     "oxfmt": "^0.61.0",
     "oxlint": "^1.76.0",
-    "turbo": "^2.5.4"
+    "turbo": "^2.11.4"
   },
   "engines": {
     "node": ">=24.13.0"
